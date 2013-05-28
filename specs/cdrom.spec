@@ -48,6 +48,10 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/cdrom/cdrom.cmi
 %{_libdir}/ocaml/cdrom/cdrom.cmxa
 %{_libdir}/ocaml/cdrom/cdrom.mli
+%{_libdir}/ocaml/cdrom/cdrom.cmx
+%{_libdir}/ocaml/cdrom/cdrom.cmo
+%{_libdir}/ocaml/cdrom/cdrom.o
+%{_libdir}/ocaml/cdrom/cdrom_stubs.c.o
 %{_libdir}/ocaml/cdrom/dllstubs_cdrom.so
 %{_libdir}/ocaml/cdrom/libstubs_cdrom.a
 %{_libdir}/ocaml/cdrom/META
