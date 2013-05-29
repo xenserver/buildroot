@@ -1,0 +1,24 @@
+commit 5ad1e94482756d991e578aabb96d180e108564e7
+Author: David Scott <dave.scott@eu.citrix.com>
+Date:   Wed May 29 10:12:24 2013 +0000
+
+    When ocaml is installed in an unusual location, help cc find the headers
+    
+    The problem is triggered by using an OCaml compiler installed from OPAM
+    where <caml/mlvalues.h> needs to be looked up relative to something like
+    
+      $HOME/.opam/4.00.1/lib/ocaml
+
+diff --git a/Makefile b/Makefile
+index e2a0e14..b6d05c8 100644
+--- a/Makefile
++++ b/Makefile
+@@ -32,7 +32,7 @@ OCAMLC += $(OCAMLBFLAGS)
+ OCAMLOPT += $(OCAMLOFLAGS)
+ OCAMLDEP += $(OCAMLDEPFLAGS)
+ 
+-CFLAGS ?= -fPIC
++CFLAGS ?= -fPIC -I$(OCAMLLIBDIR)
+ CLIBS = rt pthread
+ # pthread seems necessary with some build of ocaml
+ 
