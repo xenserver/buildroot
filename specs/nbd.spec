@@ -43,7 +43,7 @@ rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root)
-%doc ChangeLog README.md
+%doc ChangeLog README.markdown
 
 %{_libdir}/ocaml/nbd/nbd_unix.cmti
 %{_libdir}/ocaml/nbd/nbd_unix.cmxa
