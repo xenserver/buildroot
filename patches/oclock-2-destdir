@@ -1,0 +1,40 @@
+commit 1d9cee605159e8479113db781f2e5fcf6d894490
+Author: David Scott <dave.scott@eu.citrix.com>
+Date:   Wed May 29 10:18:26 2013 +0000
+
+    make install now understands DESTDIR
+    
+    This helps make binary packaging (e.g. RPM, deb, ...) easier.
+
+diff --git a/Makefile b/Makefile
+index b6d05c8..89b6ba1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -26,6 +26,11 @@ OCAMLLIBDIR ?= $(shell ocamlc -where)
+ INSTALL_DIR ?= $(OCAMLLIBDIR)/oclock
+ STUBLIBS_DIR ?= $(OCAMLLIBDIR)/stublibs
+ 
++OCAMLFIND_DESTDIR ?=
++ifneq "$(DESTDIR)" ""
++OCAMLFIND_DESTDIR := -destdir $(DESTDIR)
++endif
++
+ ################################################################################
+ 
+ OCAMLC += $(OCAMLBFLAGS)
+@@ -82,11 +87,11 @@ distclean: clean
+ # (Un)Install
+ install: all
+ ifdef OCAMLFIND
+-	$(OCAMLFIND) install oclock oclock.cma oclock.cmxa liboclock.a oclock.cmi oclock.a META -dll dlloclock.so
++	$(OCAMLFIND) install oclock oclock.cma oclock.cmxa liboclock.a oclock.cmi oclock.a META -dll dlloclock.so $(OCAMLFIND_DESTDIR)
+ else
+-	install -d $(INSTALL_DIR)
+-	install -t $(INSTALL_DIR) oclock.cma oclock.cmxa liboclock.a oclock.cmi oclock.a META
+-	install -t $(STUBLIBS_DIR) dlloclock.so
++	install -d $(DESTDIR)$(INSTALL_DIR)
++	install -t $(DESTDIR)$(INSTALL_DIR) oclock.cma oclock.cmxa liboclock.a oclock.cmi oclock.a META
++	install -t $(DESTDIR)$(STUBLIBS_DIR) dlloclock.so
+ endif
+ 
+ uninstall:
