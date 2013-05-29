@@ -77,6 +77,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/nbd/nbd_unix.o
 %{_libdir}/ocaml/nbd/nbd_lwt.cmo
 %{_libdir}/ocaml/nbd/nbd_lwt.cmt
+%{_libdir}/ocaml/nbd/nbd_lwt.cmi
 
 %changelog
 * Wed May 29 2013 David Scott <dave.scott@eu.citrix.com>
