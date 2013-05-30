@@ -9,6 +9,10 @@ Source0:        message-switch-0.9.0.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib
 Requires:       ocaml ocaml-findlib
+Requires(post): chkconfig
+Requires(preun): chkconfig
+Requires(preun): initscripts
+
 #  "ocamlfind"
 #  "cohttp" {= "0.9.7"}
 #  "rpc"
@@ -49,6 +53,15 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{_sbindir}/message-switch
 %{_sysconfdir}/init.d/message-switch
+
+%post
+/sbin/chkconfig --add message-switch
+
+%preun
+if [$1 -eq 0 ]; then
+  /sbin/service message-switch stop > /dev/null 2>&1
+  /sbin/chkconfig --del message-switch
+fi
 
 %package        devel
 Summary:        Development files for %{name}
