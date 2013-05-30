@@ -1,11 +1,11 @@
 Name:           message-switch
-Version:        0.9.0
+Version:        0.9.1
 Release:        0
 Summary:        A store and forward message switch
 License:        FreeBSD
 Group:          Development/Other
-URL:            https://github.com/xen-org/message-switch/archive/message-switch-0.9.0.tar.gz
-Source0:        message-switch-0.9.0.tar.gz
+URL:            https://github.com/xen-org/message-switch/archive/message-switch-0.9.1.tar.gz
+Source0:        message-switch-0.9.1.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib
 Requires:       ocaml ocaml-findlib
@@ -58,7 +58,7 @@ rm -rf %{buildroot}
 /sbin/chkconfig --add message-switch
 
 %preun
-if [$1 -eq 0 ]; then
+if [ $1 -eq 0 ]; then
   /sbin/service message-switch stop > /dev/null 2>&1
   /sbin/chkconfig --del message-switch
 fi

@@ -25,7 +25,7 @@ RETVAL=0
 PIDFILE=/var/run/message-switch.pid
 
 prog=message-switch
-exec=/sbin/message-switch
+exec=/usr/sbin/message-switch
 lockfile=/var/lock/subsys/$prog
 
 # Source config
@@ -39,7 +39,7 @@ start() {
 	umask 077
 
         echo -n $"Starting message switch: "
-        daemon --pidfile="$PIDFILE" $exec -i "$PIDFILE" $MESSAGE_SWITCH_OPTIONS
+        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -daemon $MESSAGE_SWITCH_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
