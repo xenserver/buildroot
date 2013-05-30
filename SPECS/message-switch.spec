@@ -25,15 +25,6 @@ Requires:       ocaml ocaml-findlib
 %description
 A store and forward message switch for OCaml.
 
-%package        devel
-Summary:        Development files for %{name}
-Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
-
-%description    devel
-The %{name}-devel package contains libraries and signature files for
-developing applications that use %{name}.
-
 %prep
 %setup -q -n message-switch-message-switch-%{version}
 
@@ -46,9 +37,27 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
+mkdir -p %{buildroot}/%{_sbindir}
+install switch.native %{buildroot}/%{_sbindir}/message-switch
+mkdir -p %{buildroot}/%{_sysconfdir}/init.d
+install -m 0755 %{_sourcedir}/message-switch-init %{buildroot}%{_sysconfdir}/init.d/message-switch
 
 %clean
 rm -rf %{buildroot}
+
+%files
+%defattr(-,root,root)
+%{_sbindir}/message-switch
+%{_sysconfdir}/init.d/message-switch
+
+%package        devel
+Summary:        Development files for %{name}
+Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+The %{name}-devel package contains libraries and signature files for
+developing applications that use %{name}.
 
 %files devel
 %defattr(-,root,root)
