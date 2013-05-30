@@ -26,15 +26,14 @@ developing applications that use %{name}.
 %setup -q -n libvhd-libvhd-%{version}
 
 %build
-if [ -x ./configure ]; then
-  ./configure
-fi
-make
+ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -build
 
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
-make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -install
 
 %clean
 rm -rf %{buildroot}
