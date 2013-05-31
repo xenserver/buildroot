@@ -1,0 +1,73 @@
+Name:           forkexec
+Version:        0.9.0
+Release:        0
+Summary:        A subprocess management service
+License:        LGPL
+Group:          Development/Other
+URL:            https://github.com/xen-org/forkexecd/archive/forkexecd-0.9.0.tar.gz
+Source0:        forkexecd-0.9.0.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:  ocaml ocaml-findlib
+Requires:       ocaml ocaml-findlib
+Requires(post): chkconfig
+Requires(preun): chkconfig
+Requires(preun): initscripts
+
+%description
+A service which starts and manages subprocesses, avoiding the need to manually
+fork() and exec() in a multithreaded program.
+
+%prep
+%setup -q -n forkexecd-forkexecd-%{version}
+
+%build
+ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -build
+
+%install
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -install
+mkdir -p %{buildroot}/%{_sbindir}
+install fe_main.native %{buildroot}/%{_sbindir}/forkexecd
+install fe_cli.native %{buildroot}/%{_sbindir}/forkexecd-cli
+mkdir -p %{buildroot}/%{_sysconfdir}/init.d
+install -m 0755 %{_sourcedir}/forkexecd-init %{buildroot}%{_sysconfdir}/init.d/forkexecd
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(-,root,root)
+%{_sbindir}/forkexecd
+%{_sbindir}/forkexecd-cli
+%{_sysconfdir}/init.d/forkexecd
+
+%post
+/sbin/chkconfig --add forkexecd
+
+%preun
+if [ $1 -eq 0 ]; then
+  /sbin/service forkexecd stop > /dev/null 2>&1
+  /sbin/chkconfig --del forkexecd
+fi
+
+%package        devel
+Summary:        Development files for %{name}
+Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+The %{name}-devel package contains libraries and signature files for
+developing applications that use %{name}.
+
+%files devel
+%defattr(-,root,root)
+%doc LICENSE README.md ChangeLog MAINTAINERS
+%{_libdir}/ocaml/forkexec/*
+
+%changelog
+* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com>
+- Initial package
+
