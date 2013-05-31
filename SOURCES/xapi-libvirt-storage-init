@@ -37,7 +37,7 @@ start() {
 	umask 077
 
         echo -n $"Starting xapi-libvirt-storage: "
-        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $FFS_OPTIONS
+        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $XAPI_LIBVIRT_STORAGE_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
