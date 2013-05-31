@@ -8,3 +8,5 @@
 *.cmxs
 *.cmxa
 *.swp
+SOURCES/*.tar.gz
+SOURCES/*.tbz
