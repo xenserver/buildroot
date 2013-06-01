@@ -32,7 +32,8 @@ make
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-make install DESTDIR=%{buildroot}
+mkdir -p %{buildroot}/%{_bindir}
+make install DESTDIR=%{buildroot} BINDIR=%{buildroot}/%{_bindir}
 
 %clean
 rm -rf %{buildroot}
@@ -41,6 +42,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README.md LICENSE
 %{_libdir}/ocaml/yojson/*
+%{_bindir}/ydump
 
 %changelog
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
