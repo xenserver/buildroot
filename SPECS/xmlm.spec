@@ -7,7 +7,7 @@ Group:          Development/Other
 URL:            http://erratique.ch/software/xmlm
 Source0:        xmlm-1.1.1.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -22,7 +22,6 @@ arborescent data structures to/from XML documents.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

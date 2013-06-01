@@ -40,6 +40,7 @@ make
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
 %clean
