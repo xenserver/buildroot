@@ -45,4 +45,6 @@ mock -r xenserver --resultdir=./RPMS/%(target_arch)s/ SRPMS/ocaml-text-0.6-0.el6
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-cohttp-0.9.8-0.src.rpm 
 createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/xmlm-1.1.1-0.src.rpm 
+createrepo RPMS/x86_64
 
