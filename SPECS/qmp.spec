@@ -7,7 +7,7 @@ Group:          Development/Other
 URL:            http://github.com/xen-org/ocaml-qmp
 Source0:        ocaml-qmp-0.9.0.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-yojson-devel cmdliner-devel
+BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-yojson-devel cmdliner-devel ocaml-ounit-devel
 Requires:       ocaml ocaml-findlib
 
 %description

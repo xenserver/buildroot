@@ -7,7 +7,7 @@ Group:          Development/Other
 URL:            http://github.com/ocaml/ocaml-re/tarball/ocaml-re-1.2.1
 Source0:        ocaml-re-1.2.1.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -16,7 +16,6 @@ A regular expression library for OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
