@@ -21,4 +21,6 @@ mock -r xenserver --resultdir=./RPMS/%(target_arch)s/ SRPMS/biniou-1.0.6-0.src.r
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir=./RPMS/%(target_arch)s/ SRPMS/ocaml-yojson-1.1.6-0.src.rpm
 createrepo RPMS/x86_64
+mock -r xenserver --resultdir=./RPMS/%(target_arch)s/ SRPMS/cmdliner-0.9.3-0.src.rpm
+createrepo RPMS/x86_64
 
