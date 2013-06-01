@@ -7,8 +7,8 @@ Group:          Development/Other
 URL:            http://github.com/xen-org/nbd
 Source0:        https://github.com/xen-org/nbd/archive/nbd-0.9.0.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib bitstring lwt
-Requires:       ocaml ocaml-findlib bitstring lwt
+BuildRequires:  ocaml ocaml-findlib ocaml-bitstring-devel ocaml-lwt-devel ocaml-obuild ocaml-camlp4-devel ocaml-camlp4
+Requires:       ocaml ocaml-findlib
 
 %description
 An implementation of the Network Block Device protocol for both

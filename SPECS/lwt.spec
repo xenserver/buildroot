@@ -20,7 +20,7 @@ ExcludeArch:    sparc64 s390 s390x
 BuildRequires:  ocaml >= 3.10.0
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-react-devel >= 0.9.0
-BuildRequires:  libev-devel
+#BuildRequires:  libev-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-text-devel
 BuildRequires:  ocaml-camlp4 ocaml-camlp4-devel
@@ -51,7 +51,7 @@ iconv -f iso-8859-1 -t utf-8 < README.old > README
 
 %build
 export C_INCLUDE_PATH=/usr/include/libev
-./configure --enable-react --enable-text
+./configure --enable-react --enable-text --disable-libev
 make
 
 

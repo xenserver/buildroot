@@ -7,8 +7,7 @@ Group:          Development/Other
 URL:            https://github.com/mirage/ocaml-cohttp/archive/ocaml-cohttp-0.9.8.tar.gz
 Source0:        ocaml-cohttp-0.9.8.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
-# re uri cstruct lwt ounit
+BuildRequires:  ocaml ocaml-findlib ocaml-re-devel ocaml-uri-devel ocaml-cstruct-devel ocaml-lwt-devel ocaml-ounit-devel ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 
 %description
