@@ -7,8 +7,7 @@ Group:          Development/Other
 URL:            http://mjambon.com/releases/yojson/yojson-1.1.6.tar.gz
 Source0:        yojson-1.1.6.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
-# cpp easy-format biniou
+BuildRequires:  ocaml ocaml-findlib cppo easy-format biniou
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -33,7 +32,7 @@ make
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-make install DESTDIR=${buildroot}
+make install DESTDIR=%{buildroot}
 
 %clean
 rm -rf %{buildroot}
