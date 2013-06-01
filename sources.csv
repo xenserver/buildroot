@@ -34,3 +34,6 @@ easy-format.spec,http://mjambon.com/releases/easy-format/easy-format-1.0.1.tar.g
 biniou.spec,http://mjambon.com/releases/biniou/biniou-1.0.6.tar.gz,
 ocplib-endian.spec,https://github.com/OCamlPro/ocplib-endian/archive/0.3.tar.gz,ocplib-endian-0.3.tar.gz
 ounit.spec,http://forge.ocamlcore.org/frs/download.php/886/ounit-1.1.2.tar.gz,
+lwt.spec,http://ocsigen.org/download/lwt-2.4.3.tar.gz,
+react.spec,http://erratique.ch/software/react/releases/react-0.9.4.tbz,
+text.spec,http://forge.ocamlcore.org/frs/download.php/937/ocaml-text-0.6.tar.gz,
