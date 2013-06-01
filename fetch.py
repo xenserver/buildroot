@@ -4,12 +4,20 @@ import os.path, sys
 from subprocess import call
 
 SOURCES="./SOURCES"
+SPECS="./SPECS"
 
 number_skipped = 0
 number_fetched = 0
 
-def fetch(url, override):
+def fetch(spec, url, override):
 	global number_skipped, number_fetched
+
+	# check the .spec file exists
+	spec_path = os.path.join(SPECS, spec)
+	if not(os.path.exists(spec_path)):
+		print >>sys.stderr, "%s doesn't exist" % spec_path
+		exit(1)
+
 	final_name = url.split("/")[-1]
 	if override <> "":
 		final_name = override
@@ -20,6 +28,8 @@ def fetch(url, override):
 		print "fetching %s -> %s" % (url, final_path)
 		call(["curl", "-L", "-o", final_path, url])
 		number_fetched = number_fetched + 1
+		print "generating SRPM from %s" % spec_path
+		call(["rpmbuild", "-bs", spec_path])
 
 if __name__ == "__main__":
 	if not(os.path.exists(SOURCES)):
@@ -34,7 +44,7 @@ if __name__ == "__main__":
 			continue
 		if line.startswith('#'):
 			continue
-		url, override = line.split(",")
-		fetch(url, override)
+		spec, url, override = line.split(",")
+		fetch(spec, url, override)
 	print "number of packages skipped: %d" % number_skipped
 	print "number of packages fetched: %d" % number_fetched
