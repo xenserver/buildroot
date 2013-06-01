@@ -49,7 +49,7 @@ protocols, disk formats and binary files.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 # Upstream project used to be called ocaml-bitmatch.
 # Keep these until Fedora 12.
