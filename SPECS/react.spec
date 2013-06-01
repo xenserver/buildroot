@@ -17,6 +17,7 @@ Source1:        react-LICENSE
 
 BuildRequires:  ocaml >= 3.10.0
 BuildRequires:  ocaml-findlib-devel
+BuildRequires:  ocaml-ocamldoc
 
 %description
 React is an OCaml module for functional reactive programming (FRP). It
@@ -34,7 +35,6 @@ and provides time stamp events, delayed events and delayed signals.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
 
 
 %description    devel
@@ -45,57 +45,30 @@ developing applications that use %{name}.
 %prep
 %setup -q -n react-%{version}
 cp %{SOURCE1} LICENSE
-chmod +x build
-
 
 %build
-./build
-
+ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-export INSTALLDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml/react
-mkdir -p $INSTALLDIR
-./build install
-
-
-%check
-%if %opt
-./build test.native
-./_build/test/test.native
-./build clock.native
-#./_build/test/clock.native
-./build breakout.native
-#./_build/test/breakout.native
-%endif
-
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -install
 
 %clean
-rm -rf $RPM_BUILD_ROOT
-
-
-%files
-%defattr(-,root,root,-)
-%doc LICENSE
-%{_libdir}/ocaml/react
-%if %opt
-%exclude %{_libdir}/ocaml/react/*.cmx
-%endif
-%exclude %{_libdir}/ocaml/react/*.mli
-%exclude %{_libdir}/ocaml/react/*.ml
-
+rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root,-)
 %doc CHANGES README
-%if %opt
-%{_libdir}/ocaml/react/*.cmx
-%endif
-%{_libdir}/ocaml/react/*.mli
-%{_libdir}/ocaml/react/*.ml
+%{_libdir}/ocaml/react/*
 
 
 %changelog
+* Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com>
+- Update for 0.9.4
+
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
