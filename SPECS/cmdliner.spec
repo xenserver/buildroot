@@ -7,7 +7,7 @@ Group:          Development/Other
 URL:            http://erratique.ch/software/cmdliner
 Source0:        cmdliner-0.9.3.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -21,7 +21,6 @@ man page generation. It supports programs with single or multiple commands
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

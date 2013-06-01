@@ -7,8 +7,8 @@ Group:          Development/Other
 URL:            http://mjambon.com/releases/biniou/biniou-1.0.6.tar.gz
 Source0:        biniou-1.0.6.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml
-Requires:       ocaml
+BuildRequires:  ocaml ocaml-findlib easy-format
+Requires:       ocaml ocaml-findlib
 
 %description
 Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve.

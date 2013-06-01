@@ -7,8 +7,8 @@ Group:          Development/Other
 URL:            http://mjambon.com/releases/easy-format/easy-format-1.0.1.tar.gz
 Source0:        easy-format-1.0.1.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml
-Requires:       ocaml
+BuildRequires:  ocaml ocaml-findlib
+Requires:       ocaml ocaml-findlib
 
 %description
 Easy_format: indentation made easy.

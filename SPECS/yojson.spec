@@ -7,8 +7,7 @@ Group:          Development/Other
 URL:            http://mjambon.com/releases/yojson/yojson-1.1.6.tar.gz
 Source0:        yojson-1.1.6.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
-# cpp easy-format biniou
+BuildRequires:  ocaml ocaml-findlib cppo easy-format biniou
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -17,7 +16,6 @@ A JSON parser and printer for OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -33,7 +31,8 @@ make
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-make install DESTDIR=${buildroot}
+mkdir -p %{buildroot}/%{_bindir}
+make install DESTDIR=%{buildroot} BINDIR=%{buildroot}/%{_bindir}
 
 %clean
 rm -rf %{buildroot}
@@ -42,6 +41,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README.md LICENSE
 %{_libdir}/ocaml/yojson/*
+%{_bindir}/ydump
 
 %changelog
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
