@@ -7,7 +7,7 @@ Group:          Development/Other
 URL:            https://github.com/mirage/ocaml-uri/archive/ocaml-uri-1.3.8.tar.gz
 Source0:        ocaml-uri-1.3.8.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc ocaml-re-devel
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -16,7 +16,6 @@ A URI library for OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

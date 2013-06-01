@@ -7,7 +7,7 @@ Group:          Development/Other
 URL:            http://github.com/xen-org/ocaml
 Source0:        https://github.com/xen-org/cdrom/archive/cdrom-0.9.1.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib ocaml-obuild
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -17,7 +17,6 @@ inside) to be queried under Linux.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -35,6 +34,7 @@ make
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
 %clean

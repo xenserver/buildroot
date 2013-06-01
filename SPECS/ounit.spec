@@ -15,7 +15,7 @@ ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
 BuildRequires:  ocaml-findlib-devel
-BuildRequires:  ocaml-camlp4
+BuildRequires:  ocaml-camlp4 ocaml-camlp4-devel
 BuildRequires:  ocaml-ocamldoc
 
 %define _use_internal_dependency_generator 0
