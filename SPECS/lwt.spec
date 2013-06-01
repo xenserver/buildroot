@@ -19,8 +19,11 @@ ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
 BuildRequires:  ocaml-findlib-devel
-BuildRequires:  ocaml-react >= 0.9.0
+BuildRequires:  ocaml-react-devel >= 0.9.0
 BuildRequires:  libev-devel
+BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-text-devel
+BuildRequires:  ocaml-camlp4 ocaml-camlp4-devel
 
 %description
 Lwt is a lightweight thread library for Objective Caml.  This library
@@ -30,7 +33,6 @@ is part of the Ocsigen project.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
 
 
 %description    devel
@@ -49,7 +51,7 @@ iconv -f iso-8859-1 -t utf-8 < README.old > README
 
 %build
 export C_INCLUDE_PATH=/usr/include/libev
-./configure --enable-react --enable-text --enable-toplevel
+./configure --enable-react --enable-text
 make
 
 
@@ -60,7 +62,6 @@ export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
 make install
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
-install _build/src/top/lwt-toplevel $RPM_BUILD_ROOT%{_bindir}/lwt-toplevel
 
 strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 #chrpath --delete $OCAMLFIND_DESTDIR/stublibs/dll*.so
@@ -70,33 +71,17 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 rm -rf $RPM_BUILD_ROOT
 
 
-%files
-%defattr(-,root,root,-)
-%doc LICENSE COPYING
-%{_libdir}/ocaml/lwt
-%if %opt
-%exclude %{_libdir}/ocaml/lwt/*.a
-%exclude %{_libdir}/ocaml/lwt/*.cmxa
-#%exclude %{_libdir}/ocaml/lwt/*.cmx
-%endif
-%exclude %{_libdir}/ocaml/lwt/*.mli
-%{_libdir}/ocaml/stublibs/*.so
-%{_libdir}/ocaml/stublibs/*.so.owner
-%{_bindir}/lwt-toplevel
-
-
 %files devel
 %defattr(-,root,root,-)
 %doc LICENSE COPYING CHANGES README
-%if %opt
-%{_libdir}/ocaml/lwt/*.a
-%{_libdir}/ocaml/lwt/*.cmxa
-#%{_libdir}/ocaml/lwt/*.cmx
-%endif
-%{_libdir}/ocaml/lwt/*.mli
-
+%{_libdir}/ocaml/lwt/*
+%{_libdir}/ocaml/stublibs/*.so
+%{_libdir}/ocaml/stublibs/*.so.owner
 
 %changelog
+* Sat Jun  1 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 2.4.3
+
 * Wed Nov  2 2011 David Scott <dave.scott@eu.citrix.com> - 2.2.0-2
 - Rebuilt for XCP
 
