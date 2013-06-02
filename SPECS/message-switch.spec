@@ -1,11 +1,12 @@
 Name:           message-switch
-Version:        0.9.1
+Version:        0.9.2
 Release:        0
 Summary:        A store and forward message switch
 License:        FreeBSD
 Group:          Development/Other
-URL:            https://github.com/xen-org/message-switch/archive/message-switch-0.9.1.tar.gz
-Source0:        message-switch-0.9.1.tar.gz
+URL:            https://github.com/xen-org/message-switch/archive/message-switch-0.9.2.tar.gz
+Source0:        message-switch-0.9.2.tar.gz
+Source1:        message-switch-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 Requires:       ocaml ocaml-findlib
@@ -16,6 +17,7 @@ BuildRequires: ocaml-cohttp-devel ocaml-rpc-devel ocaml-xenstore-devel
 BuildRequires: ocaml-ounit-devel ocaml-syslog-devel ocaml-uri-devel
 BuildRequires: ocaml-re-devel ocaml-rpc-devel cmdliner-devel
 BuildRequires: ocaml-ssl-devel ocaml-oclock-devel
+BuildRequires: openssl openssl-devel
 #  "ocamlfind"
 #  "cohttp" {= "0.9.7"}
 #  "rpc"
@@ -46,6 +48,7 @@ export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
 mkdir -p %{buildroot}/%{_sbindir}
 install switch.native %{buildroot}/%{_sbindir}/message-switch
+install main.native %{buildroot}/%{_sbindir}/message-cli
 mkdir -p %{buildroot}/%{_sysconfdir}/init.d
 install -m 0755 %{_sourcedir}/message-switch-init %{buildroot}%{_sysconfdir}/init.d/message-switch
 
@@ -55,6 +58,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %{_sbindir}/message-switch
+%{_sbindir}/message-cli
 %{_sysconfdir}/init.d/message-switch
 
 %post
@@ -69,7 +73,7 @@ fi
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
+#Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
