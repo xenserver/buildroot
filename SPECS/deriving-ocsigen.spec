@@ -7,8 +7,7 @@ Group:          Development/Other
 URL:            http://ocsigen.org/download/deriving-ocsigen-0.3c.tar.gz
 Source0:        deriving-ocsigen-0.3c.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
-# re uri cstruct lwt ounit
+BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 Requires:       ocaml ocaml-findlib
 
 %description
