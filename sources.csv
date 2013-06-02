@@ -7,7 +7,7 @@ cstruct.spec,https://github.com/mirage/ocaml-cstruct/archive/ocaml-cstruct-0.7.1
 ffs.spec,https://github.com/xen-org/ffs/archive/ffs-0.9.0.tar.gz,
 forkexecd.spec,https://github.com/xen-org/forkexecd/archive/forkexecd-0.9.0.tar.gz,
 libvhd.spec,https://github.com/xen-org/libvhd/archive/libvhd-0.9.0.tar.gz,
-message-switch.spec,https://github.com/xen-org/message-switch/archive/message-switch-0.9.1.tar.gz,
+message-switch.spec,https://github.com/xen-org/message-switch/archive/message-switch-0.9.2.tar.gz,
 nbd.spec,https://github.com/xen-org/nbd/archive/nbd-0.9.0.tar.gz,
 netdev.spec,https://github.com/xen-org/netdev/archive/netdev-0.9.0.tar.gz,
 obuild.spec,https://github.com/vincenthz/obuild/archive/v0.0.2.tar.gz,obuild-0.0.2.tar.gz
