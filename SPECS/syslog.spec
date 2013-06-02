@@ -25,7 +25,7 @@ developing applications that use %{name}.
 %setup -q -n syslog-%{version}
 
 %build
-make
+make reallyall
 
 %install
 rm -rf %{buildroot}
