@@ -7,8 +7,12 @@ Group:          Development/Other
 URL:            https://github.com/xen-org/sm-cli/archive/sm-cli-0.9.0.tar.gz
 Source0:        sm-cli-0.9.0.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml
+BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
+BuildRequires:  ocaml-obuild ocaml-xcp-idl-devel cmdliner-devel ocaml-uuidm-devel
 Requires:       ocaml
+
+# XXX transitively required by message_switch
+BuildRequires:  ocaml-oclock-devel
 
 %description
 Command-line interface for xapi toolstack storage managers.

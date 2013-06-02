@@ -78,4 +78,5 @@ mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-uuidm-0.9.5-
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/xenops-cli-0.9.0-0.src.rpm 
 createrepo RPMS/x86_64
-
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/sm-cli-0.9.0-0.src.rpm 
+createrepo RPMS/x86_64
