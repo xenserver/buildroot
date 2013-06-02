@@ -16,7 +16,7 @@ Bindings to sendmsg/recvmsg for fd passing under Linux.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
+#Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -33,6 +33,7 @@ ocaml setup.ml -build
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
 
 %clean
