@@ -7,7 +7,7 @@ Group:          Development/Other
 URL:            http://erratique.ch/software/uuidm
 Source0:        uuidm-0.9.5.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -18,7 +18,7 @@ identifiers version 3, 5 (named based with MD5, SHA-1 hashing) and 4
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
+#Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
