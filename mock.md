@@ -54,4 +54,11 @@ mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-oclock-0.3-0
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-nbd-0.9.0-0.src.rpm 
 createrepo RPMS/x86_64
-
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/omake-0.9.8.6-0.src.rpm 
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-type-conv-109.20.00-0.src.rpm 
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/deriving-ocsigen-0.3c-0.src.rpm 
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/js_of_ocaml-1.3.2-0.src.rpm 
+createrepo RPMS/x86_64

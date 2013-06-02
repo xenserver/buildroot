@@ -7,8 +7,7 @@ Group:          Development/Other
 URL:            http://ocsigen.org/download/deriving-ocsigen-0.3c.tar.gz
 Source0:        deriving-ocsigen-0.3c.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
-# re uri cstruct lwt ounit
+BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -17,7 +16,7 @@ Extension to OCaml for deriving functions from type declarations
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
+#Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
