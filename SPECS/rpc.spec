@@ -7,9 +7,8 @@ Group:          Development/Other
 URL:            https://github.com/samoht/ocaml-rpc/archive/1.4.1.tar.gz
 Source0:        ocaml-rpc-1.4.1.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
-# type-conv, xmlm, js_of_ocaml
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib ocaml-type-conv xmlm-devel js_of_ocaml-devel ocaml-camlp4-devel
+Requires:       ocaml ocaml-findlib ocaml-type-conv ocaml-camlp4-devel
 
 %description
 Am RPC library for OCaml.
@@ -17,7 +16,7 @@ Am RPC library for OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
+#Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -33,6 +32,7 @@ make
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=${buildroot}
 
 %clean
