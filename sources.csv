@@ -38,3 +38,4 @@ lwt.spec,http://ocsigen.org/download/lwt-2.4.3.tar.gz,
 react.spec,http://erratique.ch/software/react/releases/react-0.9.4.tbz,
 text.spec,http://forge.ocamlcore.org/frs/download.php/937/ocaml-text-0.6.tar.gz,
 bitstring.spec,http://bitstring.googlecode.com/files/ocaml-bitstring-2.0.4.tar.gz,ocaml-bitstring-2.0.4.tar.gz
+omake.spec,http://omake.metaprl.org/downloads/omake-0.9.8.6-0.rc1.tar.gz,omake-0.9.8.6.tar.gz
