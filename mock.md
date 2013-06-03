@@ -4,12 +4,16 @@ Using mock to build these RPMs:
 (tidy this up later)
 
 ```
-useradd djs -G mock
-passwd djs
- 
-cp xenserver.cfg /etc/mock/
+useradd <user> -G mock
+passwd <user>
 
-su - djs
+git clone git://github.com/xen-org/xen-api-rpm-buildroot.git /home/<user>/rpmbuild
+mkdir -p /home/<user>/rpmbuild/RPMS/x86_64/
+createrepo /home/<user>/rpmbuild/RPMS/x86_64
+
+cp xenserver.cfg /etc/mock/ # edit so last repo points to file:///home/<user>/blah
+
+su - <user>
 
 mock -r xenserver --init
 mock -r xenserver --resultdir=./RPMS/%(target_arch)s/ SRPMS/ocaml-obuild-0.0.2-0.src.rpm
