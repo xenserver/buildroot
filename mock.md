@@ -84,4 +84,5 @@ mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-stdext-0.9.0
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/forkexec-0.9.0-0.src.rpm 
 createrepo RPMS/x86_64
-
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-xen-lowlevel-libs-0.9.0-0.src.rpm
+createrepo RPMS/x86_64
