@@ -94,4 +94,8 @@ mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-xen-lowlevel
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-libvirt-0.6.1.2-1.el6.src.rpm 
 createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/xapi-libvirt-storage-0.9.0-0.src.rpm
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ffs-0.9.0-0.src.rpm 
+createrepo RPMS/x86_64
 ```
