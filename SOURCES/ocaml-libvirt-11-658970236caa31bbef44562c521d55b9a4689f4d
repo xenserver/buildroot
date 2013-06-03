@@ -1,0 +1,214 @@
+commit 658970236caa31bbef44562c521d55b9a4689f4d
+Author: David Scott <scott.dj@gmail.com>
+Date:   Wed Apr 24 11:39:06 2013 +0100
+
+    Add a simple example to show how to receive event callbacks
+    
+    Signed-off-by: David Scott <dave.scott@eu.citrix.com>
+
+diff --git a/.gitignore b/.gitignore
+index 2b5e4fd..71a245e 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -26,6 +26,7 @@ core.*
+ *.exe
+ *~
+ libvirt/libvirt_version.ml
++examples/domain_events
+ examples/get_cpu_stats
+ examples/list_domains
+ examples/node_info
+diff --git a/Makefile.in b/Makefile.in
+index c0622cc..3b8b7ec 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -40,6 +40,7 @@ clean:
+ 	rm -f examples/list_domains
+ 	rm -f examples/node_info
+ 	rm -f examples/get_cpu_stats
++	rm -f examples/domain_events
+ 
+ distclean: clean
+ 	rm -f config.h config.log config.status configure
+diff --git a/examples/Makefile.in b/examples/Makefile.in
+index 2eb220a..041e382 100644
+--- a/examples/Makefile.in
++++ b/examples/Makefile.in
+@@ -27,7 +27,7 @@ OCAMLOPTLIBS	:= $(OCAMLCLIBS)
+ export LIBRARY_PATH=../libvirt
+ export LD_LIBRARY_PATH=../libvirt
+ 
+-BYTE_TARGETS	:= list_domains node_info get_cpu_stats
++BYTE_TARGETS	:= list_domains node_info get_cpu_stats domain_events
+ OPT_TARGETS	:= $(BYTE_TARGETS:%=%.opt)
+ 
+ all: $(BYTE_TARGETS)
+@@ -64,6 +64,17 @@ get_cpu_stats.opt: get_cpu_stats.cmx
+ 	  $(OCAMLOPTPACKAGES) $(OCAMLOPTFLAGS) $(OCAMLOPTLIBS) \
+ 	  ../libvirt/mllibvirt.cmxa -o $@ $<
+ 
++domain_events: domain_events.cmo
++	$(OCAMLFIND) ocamlc \
++	  $(OCAMLCPACKAGES) $(OCAMLCFLAGS) $(OCAMLCLIBS) \
++	  ../libvirt/mllibvirt.cma -o $@ $<
++
++domain_events.opt: domain_events.cmx
++	$(OCAMLFIND) ocamlopt \
++	  $(OCAMLOPTPACKAGES) $(OCAMLOPTFLAGS) $(OCAMLOPTLIBS) \
++	  ../libvirt/mllibvirt.cmxa -o $@ $<
++
++
+ install-opt install-byte:
+ 
+ include ../Make.rules
+diff --git a/examples/domain_events.ml b/examples/domain_events.ml
+new file mode 100644
+index 0000000..03cecd9
+--- /dev/null
++++ b/examples/domain_events.ml
+@@ -0,0 +1,145 @@
++(* Simple demo program showing how to receive domain events.
++   Usage: domain_events [URI]
++   (C) Copyright 2007 Richard W.M. Jones, Red Hat Inc.
++   (C) Copyright 2013 Citrix Inc
++   http://libvirt.org/
++ *)
++
++open Printf
++
++module C = Libvirt.Connect
++module D = Libvirt.Domain
++module E = Libvirt.Event
++module N = Libvirt.Network
++
++let string_of_state = function
++  | D.InfoNoState -> "no state"
++  | D.InfoRunning -> "running"
++  | D.InfoBlocked -> "blocked"
++  | D.InfoPaused -> "paused"
++  | D.InfoShutdown -> "shutdown"
++  | D.InfoShutoff -> "shutoff"
++  | D.InfoCrashed -> "crashed"
++
++let printd dom fmt =
++  let prefix dom =
++    let id = D.get_id dom in
++    try
++      let name = D.get_name dom in
++      let info = D.get_info dom in
++      let state = string_of_state info.D.state in
++      sprintf "%8d %-20s %s " id name state
++  with _ ->
++      sprintf "%8d " id in
++  let write x =
++    output_string stdout (prefix dom);
++    output_string stdout x;
++    output_string stdout "\n";
++    flush stdout in
++  Printf.ksprintf write fmt
++
++let string_option = function
++  | None -> "None"
++  | Some x -> "Some " ^ x
++
++let string_of_graphics_address (family, node, service) =
++  Printf.sprintf "{ family=%d; node=%s; service=%s }" family (string_option node) (string_option service)
++
++let string_of_graphics_subject_identity (ty, name) =
++  Printf.sprintf "{ type=%s; name=%s }" (string_option ty) (string_option name)
++
++let string_of_graphics_subject xs = String.concat "; " (List.map string_of_graphics_subject_identity (Array.to_list xs))
++
++let map_option f = function
++  | None -> None
++  | Some x -> Some (f x)
++
++let () =
++  try
++    E.register_default_impl ();
++    let name =
++      if Array.length Sys.argv >= 2 then
++	Some (Sys.argv.(1))
++      else
++	None in
++    let conn = C.connect_readonly ?name () in
++
++    let spinner = [| '|'; '/'; '-'; '\\' |] in
++
++    let timeouts = ref 0 in
++    (* Check add/remove works *)
++    let id = E.add_timeout conn 250 (fun () -> Printf.printf "This callback is immediately deregistered\n%!") in
++    E.remove_timeout conn id;
++
++    let (_: E.timer_id) = E.add_timeout conn 250 (* ms *)
++        (fun () ->
++            incr timeouts;
++            Printf.printf "\r%c  %d timeout callbacks%!" (spinner.(!timeouts mod (Array.length spinner))) !timeouts;
++            (* Check for GC errors: *)
++            Gc.compact ()
++        ) in
++
++    (* Check add/remove works *)
++    let id = E.register_any conn (E.Lifecycle (fun dom e ->
++        printd dom "Removed Lifecycle callback %s" (E.Lifecycle.to_string e)
++    )) in
++    E.deregister_any conn id;
++
++    let (_: E.callback_id) = E.register_any conn (E.Lifecycle (fun dom e ->
++        printd dom "Lifecycle %s" (E.Lifecycle.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.Reboot (fun dom e ->
++        printd dom "Reboot %s" (E.Reboot.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.RtcChange (fun dom e ->
++        printd dom "RtcChange %s" (E.Rtc_change.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.Watchdog (fun dom e ->
++        printd dom "Watchdog %s" (E.Watchdog.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.IOError (fun dom e ->
++        printd dom "IOError %s" (E.Io_error.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.IOErrorReason (fun dom e ->
++        printd dom "IOErrorReason %s" (E.Io_error.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.Graphics (fun dom e ->
++        printd dom "Graphics %s" (E.Graphics.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.ControlError (fun dom e ->
++        printd dom "ControlError %s" (E.Control_error.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.BlockJob (fun dom e ->
++        printd dom "BlockJob %s" (E.Block_job.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.DiskChange (fun dom e ->
++        printd dom "DiskChange %s" (E.Disk_change.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.TrayChange (fun dom e ->
++        printd dom "TrayChange %s" (E.Tray_change.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.PMWakeUp (fun dom e ->
++        printd dom "PMWakeup %s" (E.PM_wakeup.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.PMSuspend (fun dom e ->
++        printd dom "PMSuspend %s" (E.PM_suspend.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.BalloonChange (fun dom e ->
++        printd dom "BalloonChange %s" (E.Balloon_change.to_string e)
++    )) in
++    let (_: E.callback_id) = E.register_any conn (E.PMSuspendDisk (fun dom x ->
++        printd dom "PMSuspendDisk %s" (E.PM_suspend_disk.to_string x)
++    )) in
++    C.set_keep_alive conn 5 3;
++    while true do
++	E.run_default_impl ()
++    done
++  with
++    Libvirt.Virterror err ->
++      eprintf "error: %s\n" (Libvirt.Virterror.to_string err)
++
++let () =
++  (* Run the garbage collector which is a good way to check for
++   * memory corruption errors and reference counting issues in libvirt.
++   *)
++  Gc.compact ()
