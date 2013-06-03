@@ -43,3 +43,6 @@ type_conv.spec,https://ocaml.janestreet.com/ocaml-core/109.20.00/individual/type
 js_of_ocaml.spec,http://ocsigen.org/download/js_of_ocaml-1.3.2.tar.gz,
 ssl.spec,http://downloads.sourceforge.net/project/savonet/ocaml-ssl/0.4.6/ocaml-ssl-0.4.6.tar.gz,
 xenstore.spec,https://github.com/mirage/ocaml-xenstore/archive/ocaml-xenstore-1.2.1.tar.gz,
+stdext.spec,https://github.com/xen-org/stdext/archive/stdext-0.9.0.tar.gz,ocaml-stdext-0.9.0.tar.gz
+xen-lowlevel-libs.spec,https://github.com/xen-org/ocaml-xen-lowlevel-libs/archive/ocaml-xen-lowlevel-libs-0.9.0.tar.gz,
+libvirt.spec,http://libvirt.org/sources/ocaml/ocaml-libvirt-0.6.1.2.tar.gz,
