@@ -6,8 +6,12 @@ License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xen-org/xapi-libvirt-storage/archive/xapi-libvirt-storage-0.9.0.tar.gz
 Source0:        xapi-libvirt-storage-0.9.0.tar.gz
+Source1:        xapi-libvirt-storage-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml
+BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel ocaml-libvirt-devel libvirt-devel
+BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
+BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
+BuildRequires:  ocaml-oclock-devel
 Requires:       ocaml
 
 %description
