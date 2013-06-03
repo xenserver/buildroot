@@ -6,8 +6,10 @@ License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xen-org/forkexecd/archive/forkexecd-0.9.0.tar.gz
 Source0:        forkexecd-0.9.0.tar.gz
+Source1:        forkexecd-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
+BuildRequires:  ocaml-rpc-devel ocaml-fd-send-recv-devel ocaml-re-devel ocaml-syslog-devel ocaml-uuidm-devel ocaml-stdext-devel
 Requires:       ocaml ocaml-findlib
 Requires(post): chkconfig
 Requires(preun): chkconfig
