@@ -2,17 +2,17 @@
 %define debug_package %{nil}
 
 # Select what subpackages to build.
-%define build_mlvirsh                1
+%define build_mlvirsh                0
 
 Name:           ocaml-libvirt
-Version:        @PACKAGE_VERSION@
+Version:        0.6.1.2
 Release:        1%{?dist}%{?extra_release}
 Summary:        OCaml binding for libvirt
 
 Group:          Development/Libraries
 License:        LGPLv2+
 URL:            http://libvirt.org/ocaml/
-Source0:        http://libvirt.org/sources/ocaml/%{name}-%{version}.tar.gz
+Source0:        http://libvirt.org/sources/ocaml/ocaml-libvirt-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
