@@ -6,8 +6,12 @@ License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xen-org/ffs/archive/ffs-0.9.0.tar.gz
 Source0:        ffs-0.9.0.tar.gz
+Source1:        ffs-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml
+BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
+BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
+BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
+BuildRequires:  ocaml-oclock-devel
 Requires:       ocaml
 
 %description
