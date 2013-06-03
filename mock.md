@@ -3,6 +3,7 @@ Using mock to build these RPMs:
 
 (tidy this up later)
 
+```
 useradd djs -G mock
 passwd djs
  
@@ -50,6 +51,7 @@ createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-syslog-1.4-0.src.rpm 
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-bitstring-2.0.4-0.el6.src.rpm createrepo RPMS/x86_64
+createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-oclock-0.3-0.src.rpm 
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-nbd-0.9.0-0.src.rpm 
@@ -86,3 +88,4 @@ mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/forkexec-0.9.0-0.s
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-xen-lowlevel-libs-0.9.0-0.src.rpm
 createrepo RPMS/x86_64
+```
