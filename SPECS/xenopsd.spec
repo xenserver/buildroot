@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.1
-Release:        0
+Release:        2
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
@@ -18,7 +18,7 @@ BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
 BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
 BuildRequires:  xen-devel
-Requires:       ocaml
+Requires:       message-switch xenops-cli
 
 %description
 Simple VM manager for the xapi toolstack.
@@ -27,6 +27,7 @@ Simple VM manager for the xapi toolstack.
 Summary:        %{name} using libvirt
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+Requires:       libvirt
 
 %description    libvirt
 Simple VM manager for Xen and KVM using libvirt.
@@ -36,6 +37,7 @@ Simple VM manager for Xen and KVM using libvirt.
 Summary:        %{name} using xc
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+Requires:       xen-libs
 
 %description    xc
 Simple VM manager for Xen using libxc.

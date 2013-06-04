@@ -1,6 +1,6 @@
 Name:           message-switch
 Version:        0.9.2
-Release:        0
+Release:        1
 Summary:        A store and forward message switch
 License:        FreeBSD
 Group:          Development/Other
@@ -9,7 +9,6 @@ Source0:        message-switch-0.9.2.tar.gz
 Source1:        message-switch-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
-Requires:       ocaml ocaml-findlib
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
@@ -74,6 +73,7 @@ fi
 Summary:        Development files for %{name}
 Group:          Development/Other
 #Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml ocaml-findlib
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
