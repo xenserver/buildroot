@@ -1,0 +1,12 @@
+diff -r feee2b1d5a29 main.c
+--- a/main.c	Wed Oct 31 16:55:54 2012 +0000
++++ b/main.c	Tue Jun 04 17:44:46 2013 +0000
+@@ -47,7 +47,7 @@
+ #include <locale.h>
+ 
+ #ifndef NXENSTORE
+-#include <xs.h>
++#include <xenstore.h>
+ #endif
+ 
+ #if !defined(__APPLE__)

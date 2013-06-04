@@ -6,9 +6,9 @@
 # description: Manages xen domains via libxc
 ### BEGIN INIT INFO
 # Provides: xenopsd-xc
-# Required-Start: $local_fs $network $syslog message-switch
+# Required-Start: $local_fs $network $syslog message-switch forkexecd xenstored
 # Required-Stop: $local_fs $syslog
-# Should-Start: $syslog message-switch
+# Should-Start: $syslog message-switch forkexecd
 # Should-Stop: $network $syslog
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
@@ -37,7 +37,7 @@ start() {
 	umask 077
 
         echo -n $"Starting xenopsd-xc: "
-        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $XENOPSD_XC_OPTIONS
+        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -config /etc/xenopsd.conf -daemon true $XENOPSD_XC_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile

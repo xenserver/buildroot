@@ -1,14 +1,16 @@
 Name:           xenopsd
-Version:        0.9.1
+Version:        0.9.2
 Release:        0
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/xenopsd/archive/xenopsd-0.9.1.tar.gz
-Source0:        xenopsd-0.9.1.tar.gz
+URL:            https://github.com/xen-org/xenopsd/archive/xenopsd-0.9.2.tar.gz
+Source0:        xenopsd-0.9.2.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
 Source3:        xenopsd-libvirt-init
+Source4:        xenopsd-conf
+Source5:        xenopsd-network-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
@@ -18,7 +20,7 @@ BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
 BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
 BuildRequires:  xen-devel
-Requires:       ocaml
+Requires:       message-switch xenops-cli
 
 %description
 Simple VM manager for the xapi toolstack.
@@ -27,6 +29,7 @@ Simple VM manager for the xapi toolstack.
 Summary:        %{name} using libvirt
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+Requires:       libvirt
 
 %description    libvirt
 Simple VM manager for Xen and KVM using libvirt.
@@ -36,6 +39,7 @@ Simple VM manager for Xen and KVM using libvirt.
 Summary:        %{name} using xc
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+Requires:       xen-libs vncterm forkexec
 
 %description    xc
 Simple VM manager for Xen using libxc.
@@ -75,9 +79,9 @@ mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 %{_sourcedir}/xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
 install -m 0755 %{_sourcedir}/xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 %{_sourcedir}/xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
-
-mkdir -p %{buildroot}/etc
-DESTDIR=%{buildroot} ETCDIR=/etc SBINDIR=%{_sbindir} LIBEXECDIR=%{_libexecdir}/%{name} SCRIPTSDIR=%{_libexecdir}/%{name} scripts/make-custom-xenopsd.conf
+mkdir -p %{buildroot}/etc/xapi
+install -m 0644 %{_sourcedir}/xenopsd-conf %{buildroot}/etc/xenopsd.conf
+install -m 0644 %{_sourcedir}/xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 
 %clean
 rm -rf %{buildroot}
@@ -94,6 +98,7 @@ rm -rf %{buildroot}
 %{_libexecdir}/%{name}/common.pyo
 %{_libexecdir}/%{name}/common.pyc
 /etc/xenopsd.conf
+/etc/xapi/network.conf
 
 %files libvirt
 %defattr(-,root,root)
