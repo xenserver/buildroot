@@ -1,0 +1,13 @@
+[xapi]
+name=CentOS-$releasever - xapi 
+baseurl=http://www.uk.xensource.com/~dscott/xapi/$basearch/
+gpgcheck=0
+Priority=1
+enabled=1
+
+[xapi-source]
+name=CentOS-$releasever - xapi Source
+baseurl=http://www.uk.xensource.com/~dscott/xapi/SRPMS/
+gpgcheck=0
+Priority=1
+enabled=0
