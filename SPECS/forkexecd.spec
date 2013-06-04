@@ -1,6 +1,6 @@
 Name:           forkexec
 Version:        0.9.0
-Release:        0
+Release:        1
 Summary:        A subprocess management service
 License:        LGPL
 Group:          Development/Other
@@ -10,7 +10,6 @@ Source1:        forkexecd-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-rpc-devel ocaml-fd-send-recv-devel ocaml-re-devel ocaml-syslog-devel ocaml-uuidm-devel ocaml-stdext-devel
-Requires:       ocaml ocaml-findlib
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
@@ -59,6 +58,7 @@ fi
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml ocaml-findlib
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

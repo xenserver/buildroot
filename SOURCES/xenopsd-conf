@@ -1,0 +1,20 @@
+# Configuration file for xenopsd
+
+# Omit some sources of log-spam by default
+disable-logging-for=http
+
+xenguest=/usr/libexec/xenopsd/xenguest
+
+network-conf=/etc/xapi/network.conf
+
+vif-script=/usr/libexec/xenopsd/vif
+qemu-vif-script=/usr/libexec/xenopsd/qemu-vif-script
+qemu-dm-wrapper=/usr/libexec/xenopsd/qemu-dm-wrapper
+setup-vif-rules=/usr/libexec/xenopsd/setup-vif-rules
+
+hvmloader=/usr/lib/xen/boot/hvmloader
+pygrub=/usr/bin/pygrub
+sockets-group=wheel
+
+vncterm=/usr/bin/vncterm
+eliloader=/usr/bin/pygrub
