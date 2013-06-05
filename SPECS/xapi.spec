@@ -55,8 +55,8 @@ omake ocaml/xe-cli/xe
 %install
 rm -rf %{buildroot}
  
-mkdir -p %{buildroot}/%{_bindir}
-install -m 0755 ocaml/xapi/xapi.opt %{buildroot}/%{_bindir}/xapi
+mkdir -p %{buildroot}/%{_sbindir}
+install -m 0755 ocaml/xapi/xapi.opt %{buildroot}/%{_sbindir}/xapi
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 %{_sourcedir}/xen-api-init %{buildroot}%{_sysconfdir}/init.d/xapi
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
@@ -66,6 +66,7 @@ install -m 0644 %{_sourcedir}/xen-api-xapi-conf %{buildroot}/etc/xapi.conf
 install -m 0644 %{_sourcedir}/xen-api-db-conf %{buildroot}/etc/xapi/db.conf
 install -m 0644 %{_sourcedir}/xen-api-xapissl-conf %{buildroot}/etc/xapi/xapissl.conf
 
+mkdir -p %{buildroot}/%{_bindir}
 install -m 0755 ocaml/xe-cli/xe.opt %{buildroot}/%{_bindir}/xe
 mkdir -p %{buildroot}/etc/bash_completion.d
 install -m 0755 ocaml/xe-cli/bash-completion %{buildroot}/etc/bash_completion.d/xe
@@ -86,7 +87,7 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}/xapi
+%{_sbindir}/xapi
 /etc/init.d/xapi
 %config(noreplace) /etc/xapi.conf
 %config(noreplace) /etc/xapi/xapissl.conf
