@@ -54,4 +54,4 @@ squeezed.spec,https://github.com/xen-org/squeezed/archive/squeezed-0.9.0.tar.gz,
 xcp-networkd.spec,https://github.com/xen-org/xcp-networkd/archive/xcp-networkd-0.9.0.tar.gz,
 xcp-inventory.spec,https://github.com/xen-org/xcp-inventory/archive/xcp-inventory-0.9.0.tar.gz,
 xen-api-libs-transitional.spec,https://github.com/xen-org/xen-api-libs-transitional/archive/xen-api-libs-transitional-0.9.0.tar.gz,
-xapi.spec,https://github.com/djs55/xen-api/archive/1.9.0.tar.gz,xen-api-1.9.0.tar.gz
+xapi.spec,https://github.com/djs55/xen-api/archive/1.9.1.tar.gz,xen-api-1.9.1.tar.gz
