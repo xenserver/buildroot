@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.1
-Release: 0
+Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -24,7 +24,7 @@ BuildRequires: ocaml-ounit-devel ocaml-rpc-devel ocaml-ssl-devel ocaml-stdext-de
 BuildRequires: ocaml-syslog-devel ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-xcp-inventory-devel
 BuildRequires: ocaml-bitstring-devel libuuid-devel
-Requires: stunnel
+Requires: stunnel ocaml-xcp-inventory
 
 %description
 XCP toolstack.
@@ -44,7 +44,9 @@ The command-line interface for controlling XCP hosts.
 #%patch0 -p0 -b xapi-version.patch
 
 %build
-./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi
+./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi \
+            --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts
+
 export COMPILE_JAVA=no
 make version
 omake phase1
@@ -72,6 +74,7 @@ mkdir -p %{buildroot}/etc/bash_completion.d
 install -m 0755 ocaml/xe-cli/bash-completion %{buildroot}/etc/bash_completion.d/xe
 
 mkdir -p %{buildroot}/var/lib/xapi
+mkdir -p %{buildroot}/etc/xapi/hook-scripts
 
 %clean
 rm -rf %{buildroot}
@@ -93,6 +96,7 @@ fi
 %config(noreplace) /etc/xapi/xapissl.conf
 %{_libexecdir}/xapi/xapissl
 /etc/xapi/db.conf
+/etc/xapi/hook-scripts
 /var/lib/xapi
 
 %files xe
