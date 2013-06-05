@@ -1,5 +1,5 @@
 Name:           ocaml-xen-api-client
-Version:        0.9.2
+Version:        0.9.3
 Release:        0
 Summary:        XenServer XenAPI Client Library for OCaml
 License:        LGPLv2
@@ -7,7 +7,7 @@ Group:          Development/Libraries
 URL:            https://github.com/xen-org/xen-api-client
 Source0:        xen-api-client-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib ocaml-lwt ocaml-ssl ocaml-ounit ocaml-cohttp ocaml-uri ocaml-xmlm ocaml-rpc
+BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-lwt-devel ocaml-ssl-devel openssl openssl-devel ocaml-ounit-devel ocaml-cohttp-devel ocaml-uri-devel xmlm-devel ocaml-rpc-devel
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -18,7 +18,7 @@ virtualization hosts.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
+#Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 XenAPI Client is an OCaml library implementing XenServer's XenAPI.
@@ -36,6 +36,7 @@ ocaml setup.ml -doc
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_LDCONF=ignore
 OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml ocaml setup.ml -install
 
 %clean
@@ -48,5 +49,8 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.3
+
 * Wed May 29 2013 Mike McClurg <mike.mcclurg@citrix.com>
 - Initial package
