@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.1
-Release: 1
+Release: 2
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -63,6 +63,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 %{_sourcedir}/xen-api-init %{buildroot}%{_sysconfdir}/init.d/xapi
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
 install -m 0755 %{_sourcedir}/xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
+install -m 0755 %{_sourcedir}/scripts/pci-info %{buildroot}/%{_libexecdir}/xapi/pci-info
 mkdir -p %{buildroot}/etc/xapi
 install -m 0644 %{_sourcedir}/xen-api-xapi-conf %{buildroot}/etc/xapi.conf
 install -m 0644 %{_sourcedir}/xen-api-db-conf %{buildroot}/etc/xapi/db.conf
@@ -75,6 +76,8 @@ install -m 0755 ocaml/xe-cli/bash-completion %{buildroot}/etc/bash_completion.d/
 
 mkdir -p %{buildroot}/var/lib/xapi
 mkdir -p %{buildroot}/etc/xapi/hook-scripts
+
+echo master > %{buildroot}/etc/pool.conf
 
 %clean
 rm -rf %{buildroot}
@@ -94,7 +97,9 @@ fi
 /etc/init.d/xapi
 %config(noreplace) /etc/xapi.conf
 %config(noreplace) /etc/xapi/xapissl.conf
+%config(noreplace) /etc/pool.conf
 %{_libexecdir}/xapi/xapissl
+%{_libexecdir}/xapi/pci-info
 /etc/xapi/db.conf
 /etc/xapi/hook-scripts
 /var/lib/xapi
