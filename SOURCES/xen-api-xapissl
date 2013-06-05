@@ -1,0 +1,118 @@
+#! /bin/bash
+
+# start and stop stunnel for xapi
+
+# source function library
+. /etc/rc.d/init.d/functions
+
+ACCEPT=$2
+PEMFILE="/etc/xapi/ssl.pem"
+PIDFILE="/var/run/xapissl.pid"
+SSLCONFFILE="/etc/xapi/xapissl.conf"
+XAPISSL_LOCK="/var/lock/xapissl"
+
+# If stunnel4 exists, use it. Otherwise use stunnel.
+exec=$(which stunnel)
+
+generate_ssl_cert() {
+    local FILE=$1
+    local CN=$2
+    if [ ! -e "${FILE}" ]; then
+        DIR=$(mktemp -d)
+        pushd ${DIR}
+        cat <<EOF >config
+[req] # openssl req params
+prompt = no
+distinguished_name = dn-param
+[dn-param] # DN fields
+CN = ${CN}
+EOF
+        openssl genrsa 1024 > privkey.rsa
+        openssl req -batch -new -x509 -key privkey.rsa -days 3650 -config config -out cert.csr
+        openssl dhparam 512 > dh.pem
+
+        popd
+
+        (cat ${DIR}/privkey.rsa; echo ""; cat ${DIR}/cert.csr; echo ""; cat ${DIR}/dh.pem) > ${FILE}
+        chmod 400 ${FILE}
+
+        rm -rf ${DIR}
+   fi
+}
+
+start() {
+    echo -n $"Starting xapi SSL: "
+    if [ -e ${XAPISSL_LOCK} ]; then
+        if [ -e ${PIDFILE} ] && [ -e /proc/`cat ${PIDFILE}` ]; then
+            failure $"cannot start xapi SSL: xapi SSL already running.";
+            echo
+            return 1
+        fi
+    fi
+    if [ ! -f ${PEMFILE} ]; then
+        # generating a pem file
+        CN=`hostname -f`
+
+        case "${CN}" in
+            localhost*)
+                CN=127.0.0.1;;
+            *.*)
+                :;;
+            *)
+                CN=127.0.0.1;;
+        esac
+        generate_ssl_cert ${PEMFILE} ${CN}
+    fi
+    daemon --pidfile="$PIDFILE" $exec ${SSLCONFILE} $XAPISSL_OPTIONS
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $XAPISSL_LOCK
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping xapi SSL: "
+    killproc -p "$PIDFILE" $exec
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $XAPISSL_LOCK
+    return $RETVAL
+}
+
+rhstatus() {
+        status -p "$PIDFILE" -l $prog $exec
+}
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart)
+        restart
+        ;;
+  reload)
+        exit 3
+        ;;
+  force-reload)
+        restart
+        ;;
+  status)
+        rhstatus
+        ;;
+  condrestart|try-restart)
+        rhstatus >/dev/null 2>&1 || exit 0
+        restart
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|condrestart|try-restart|reload|force-reload|status}"
+        exit 3
+esac
+
+exit $?

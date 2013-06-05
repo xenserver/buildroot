@@ -1,6 +1,6 @@
 Name:           xapi-libvirt-storage
 Version:        0.9.0
-Release:        0
+Release:        1
 Summary:        Allows the manipulation of libvirt storage pools and volumes via xapi
 License:        LGPL
 Group:          Development/Other
@@ -12,7 +12,6 @@ BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel ocaml-libvir
 BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel
-Requires:       ocaml
 
 %description
 Allows the manipulation of libvirt storage pools and volumes via xapi.
