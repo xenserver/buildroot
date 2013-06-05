@@ -103,5 +103,7 @@ createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/vncterm-0.1-0.src.rpm 
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/squeezed-0.9.0-0.src.rpm 
-createrepo RPMX/x86_64
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-xcp-inventory-0.9.0-0.src.rpm 
+createrepo RPMS/x86_64
 ```
