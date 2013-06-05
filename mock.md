@@ -122,4 +122,8 @@ mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-libvhd-0.9.0
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-tapctl-0.9.0-0.src.rpm
 createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/xapi-1.9.1-0.src.rpm 
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/xenserver-0.9.0-0.src.rpm 
+createrepo RPMS/x86_64
 ```
