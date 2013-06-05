@@ -7,8 +7,10 @@ Group:          Development/Other
 URL:            https://github.com/xen-org/tapctl/archive/tapctl-0.9.0.tar.gz
 Source0:        tapctl-0.9.0.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
-# forkexec stdext
+BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
+BuildRequires:  forkexec-devel ocaml-stdext-devel ocaml-rpc-devel
+# required by forkexec
+BuildRequires:  ocaml-syslog-devel
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -17,7 +19,7 @@ Manipulate running tapdisk instances on a xen host.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
+#Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -34,6 +36,7 @@ ocaml setup.ml -build
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
 
 %clean

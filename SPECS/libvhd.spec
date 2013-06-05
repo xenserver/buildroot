@@ -7,7 +7,7 @@ Group:          Development/Other
 URL:            http://github.com/xen-org/libvhd
 Source0:        https://github.com/xen-org/libvhd/archive/libvhd-0.9.0.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
+BuildRequires:  ocaml ocaml-findlib xen-devel libuuid-devel
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -16,7 +16,7 @@ Simple C bindings which allow .vhd files to be manipulated.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-Requires:       %{name} = %{version}-%{release}
+#Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -33,6 +33,7 @@ ocaml setup.ml -build
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
 
 %clean
