@@ -106,4 +106,14 @@ mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/xenopsd-0.9.1-0.sr
 createrepo RPMS/x86_64
 mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/vncterm-0.1-0.src.rpm 
 createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/squeezed-0.9.0-0.src.rpm 
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-xcp-inventory-0.9.0-0.src.rpm 
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-xen-api-libs-transitional-0.9.0-0.src.rpm 
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/ocaml-xen-api-client-0.9.3-0.src.rpm 
+createrepo RPMS/x86_64
+mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" SRPMS/xcp-networkd-0.9.0-0.src.rpm 
+createrepo RPMS/x86_64
 ```
