@@ -1,6 +1,6 @@
 Name:           ffs
 Version:        0.9.0
-Release:        0
+Release:        1
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -12,7 +12,6 @@ BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel
-Requires:       ocaml
 
 %description
 Simple flat file storage manager for the xapi toolstack.
