@@ -63,7 +63,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 %{_sourcedir}/xen-api-init %{buildroot}%{_sysconfdir}/init.d/xapi
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
 install -m 0755 %{_sourcedir}/xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
-install -m 0755 %{_sourcedir}/scripts/pci-info %{buildroot}/%{_libexecdir}/xapi/pci-info
+install -m 0755 scripts/pci-info %{buildroot}/%{_libexecdir}/xapi/pci-info
 mkdir -p %{buildroot}/etc/xapi
 install -m 0644 %{_sourcedir}/xen-api-xapi-conf %{buildroot}/etc/xapi.conf
 install -m 0644 %{_sourcedir}/xen-api-db-conf %{buildroot}/etc/xapi/db.conf
