@@ -1,11 +1,11 @@
 Name:           message-switch
-Version:        0.9.2
-Release:        1
+Version:        0.9.3
+Release:        0
 Summary:        A store and forward message switch
 License:        FreeBSD
 Group:          Development/Other
-URL:            https://github.com/xen-org/message-switch/archive/message-switch-0.9.2.tar.gz
-Source0:        message-switch-0.9.2.tar.gz
+URL:            https://github.com/xen-org/message-switch/archive/message-switch-0.9.3.tar.gz
+Source0:        message-switch-0.9.3.tar.gz
 Source1:        message-switch-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
