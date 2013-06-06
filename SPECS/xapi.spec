@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.1
-Release: 2
+Release: 3
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -77,7 +77,8 @@ install -m 0755 ocaml/xe-cli/bash-completion %{buildroot}/etc/bash_completion.d/
 mkdir -p %{buildroot}/var/lib/xapi
 mkdir -p %{buildroot}/etc/xapi/hook-scripts
 
-echo master > %{buildroot}/etc/pool.conf
+mkdir -p %{buildroot}/etc/xcp
+echo master > %{buildroot}/etc/xcp/pool.conf
 
 %clean
 rm -rf %{buildroot}
@@ -97,7 +98,7 @@ fi
 /etc/init.d/xapi
 %config(noreplace) /etc/xapi.conf
 %config(noreplace) /etc/xapi/xapissl.conf
-%config(noreplace) /etc/pool.conf
+%config(noreplace) /etc/xcp/pool.conf
 %{_libexecdir}/xapi/xapissl
 %{_libexecdir}/xapi/pci-info
 /etc/xapi/db.conf
