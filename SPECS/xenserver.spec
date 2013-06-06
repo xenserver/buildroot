@@ -1,6 +1,6 @@
 Name:           xenserver
 Version:        0.9.0
-Release:        0
+Release:        1
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -12,6 +12,7 @@ Requires:       xenopsd-xc xenopsd-libvirt xenopsd-simulator
 Requires:       ffs xapi-libvirt-storage
 Requires:       xcp-networkd
 Requires:       squeezed
+Requires:       kernel >= 3.4.46 kernel-firmware
 Requires:       xen
 
 %description
