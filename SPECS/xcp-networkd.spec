@@ -45,8 +45,8 @@ rm -rf %{buildroot}
 %doc README.markdown LICENSE MAINTAINERS
 %{_sbindir}/xcp-networkd
 %{_sysconfdir}/init.d/xcp-networkd
-/etc/xcp/network.conf
-/etc/xcp-networkd.conf
+%config(noreplace) /etc/xcp/network.conf
+%config(noreplace) /etc/xcp-networkd.conf
 
 %post
 /sbin/chkconfig --add xcp-networkd
