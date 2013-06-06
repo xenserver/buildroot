@@ -1,14 +1,14 @@
 Name:           ocaml-xcp-idl
-Version:        0.9.1
+Version:        0.9.2
 Release:        0
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/xcp-idl/archive/xcp-idl-0.9.1.tar.gz
+URL:            https://github.com/xen-org/xcp-idl/archive/xcp-idl-%{version}.tar.gz
 Source0:        xcp-idl-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-cohttp-devel xmlm-devel ocaml-rpc-devel ocaml-syslog-devel message-switch-devel cmdliner-devel ocaml-fd-send-recv-devel
+BuildRequires:  ocaml-cohttp-devel xmlm-devel ocaml-rpc-devel ocaml-syslog-devel message-switch-devel cmdliner-devel ocaml-fd-send-recv-devel ocaml-xcp-rrd-devel
 
 # XXX transitive dependencies of message-switch-devel
 BuildRequires: ocaml-oclock-devel
