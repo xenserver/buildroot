@@ -1,0 +1,50 @@
+Name:           ocaml-zed
+Version:        1.2
+Release:        0
+Summary:        An abstract engine for text editing for OCaml
+License:        BSD3
+Group:          Development/Other
+URL:            http://forge.ocamlcore.org/frs/download.php/944/zed-1.2.tar.gz
+Source0:        zed-1.2.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc ocaml-camomile-devel ocaml-react-devel
+Requires:       ocaml ocaml-findlib
+
+%description
+Zed is an abstract engine for text edition. It can be used for writing text editors, edition widgets, readlines, ...
+
+%package        devel
+Summary:        Development files for %{name}
+Group:          Development/Other
+#Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+The %{name}-devel package contains libraries and signature files for
+developing applications that use %{name}.
+
+%prep
+%setup -q -n zed-%{version}
+
+%build
+ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -build
+
+%install
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_LDCONF=ignore
+ocaml setup.ml -install
+
+%clean
+rm -rf %{buildroot}
+
+%files devel
+%defattr(-,root,root)
+%doc LICENSE CHANGES
+%{_libdir}/ocaml/zed/*
+
+%changelog
+* Thu Jun  6 2013 David Scott <dave.scott@eu.citrix.com>
+- Initial package
+
