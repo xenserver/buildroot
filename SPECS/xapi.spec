@@ -2,8 +2,8 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.1
-Release: 3
+Version: 1.9.2
+Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -23,7 +23,7 @@ BuildRequires: ocaml-libvhd-devel ocaml-nbd-devel ocaml-oclock-devel
 BuildRequires: ocaml-ounit-devel ocaml-rpc-devel ocaml-ssl-devel ocaml-stdext-devel
 BuildRequires: ocaml-syslog-devel ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-xcp-inventory-devel
-BuildRequires: ocaml-bitstring-devel libuuid-devel make
+BuildRequires: ocaml-bitstring-devel libuuid-devel make utop
 Requires: stunnel ocaml-xcp-inventory
 
 %description
