@@ -1,6 +1,6 @@
 Name:           ocaml-stdext
 Version:        0.9.0
-Release:        0
+Release:        1
 Summary:        Deprecated misc library functions for OCaml
 License:        LGPL
 Group:          Development/Other
@@ -31,6 +31,7 @@ make
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=${buildroot}
@@ -42,6 +43,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README.md
 %{_libdir}/ocaml/stdext/*
+%{_libdir}/ocaml/stublibs/dllstdext_stubs.so
+%{_libdir}/ocaml/stublibs/dllstdext_stubs.so.owner
 
 %changelog
 * Mon Jun  3 2013 David Scott <dave.scott@eu.citrix.com>

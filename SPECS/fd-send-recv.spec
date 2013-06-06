@@ -1,6 +1,6 @@
 Name:           ocaml-fd-send-recv
 Version:        1.0.1
-Release:        0
+Release:        1
 Summary:        Bindings to sendmsg/recvmsg for fd passing under Linux
 License:        LGPL
 Group:          Development/Other
@@ -32,6 +32,7 @@ ocaml setup.ml -build
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
@@ -43,6 +44,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README.md LICENSE
 %{_libdir}/ocaml/fd-send-recv/*
+%{_libdir}/ocaml/stublibs/dllfd_send_recv_stubs.so
+%{_libdir}/ocaml/stublibs/dllfd_send_recv_stubs.so.owner
 
 %changelog
 * Fri May 31 2013 David Scott <dave.scott@eu.citrix.com>

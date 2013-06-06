@@ -1,6 +1,6 @@
 Name:           ocaml-xen-api-libs-transitional
 Version:        0.9.0
-Release:        0
+Release:        1
 Summary:        Deprecated standard library extension for OCaml.
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
@@ -36,6 +36,7 @@ make
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
@@ -59,6 +60,12 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xenstore-compat/*
 %{_libdir}/ocaml/xen-utils/*
 %{_libdir}/ocaml/xml-light2/*
+%{_libdir}/ocaml/stublibs/dllcpuid_stubs.so
+%{_libdir}/ocaml/stublibs/dllcpuid_stubs.so.owner
+%{_libdir}/ocaml/stublibs/dlllog_stubs.so
+%{_libdir}/ocaml/stublibs/dlllog_stubs.so.owner
+%{_libdir}/ocaml/stublibs/dllxenctrlext_stubs.so
+%{_libdir}/ocaml/stublibs/dllxenctrlext_stubs.so.owner
 
 %changelog
 * Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com>

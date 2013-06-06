@@ -1,6 +1,6 @@
 Name:           ocaml-lambda-term
 Version:        1.2
-Release:        0
+Release:        1
 Summary:        Lambda-Term is a cross-platform library for manipulating the terminal for Ocaml
 License:        BSD3
 Group:          Development/Other
@@ -32,6 +32,8 @@ ocaml setup.ml -build
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
+
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
@@ -44,6 +46,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc LICENSE CHANGES
 %{_libdir}/ocaml/lambda-term/*
+%{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so
+%{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so.owner
 
 %changelog
 * Thu Jun  6 2013 David Scott <dave.scott@eu.citrix.com>
