@@ -1,6 +1,6 @@
 Name:           ocaml-libvhd
 Version:        0.9.0
-Release:        0
+Release:        1
 Summary:        vhd manipulation via libvhd
 License:        BSD3
 Group:          Development/Other
@@ -32,6 +32,7 @@ ocaml setup.ml -build
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
@@ -43,6 +44,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc ChangeLog README.md
 %{_libdir}/ocaml/libvhd/*
+%{_libdir}/ocaml/stublibs/dlllibvhd_stubs.so
+%{_libdir}/ocaml/stublibs/dlllibvhd_stubs.so.owner
 
 %changelog
 * Wed May 29 2013 David Scott <dave.scott@eu.citrix.com>
