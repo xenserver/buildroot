@@ -1,6 +1,6 @@
 Name:           ocaml-cdrom
 Version:        0.9.1
-Release:        0
+Release:        2
 Summary:        Query the state of CDROM devices
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
@@ -34,6 +34,7 @@ make
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
@@ -43,18 +44,9 @@ rm -rf %{buildroot}
 %files devel
 %defattr(-,root,root)
 %doc ChangeLog README.md
-%{_libdir}/ocaml/cdrom/cdrom.a
-%{_libdir}/ocaml/cdrom/cdrom.cma
-%{_libdir}/ocaml/cdrom/cdrom.cmi
-%{_libdir}/ocaml/cdrom/cdrom.cmxa
-%{_libdir}/ocaml/cdrom/cdrom.mli
-%{_libdir}/ocaml/cdrom/cdrom.cmx
-%{_libdir}/ocaml/cdrom/cdrom.cmo
-%{_libdir}/ocaml/cdrom/cdrom.o
-%{_libdir}/ocaml/cdrom/cdrom_stubs.c.o
-%{_libdir}/ocaml/cdrom/dllstubs_cdrom.so
-%{_libdir}/ocaml/cdrom/libstubs_cdrom.a
-%{_libdir}/ocaml/cdrom/META
+%{_libdir}/ocaml/cdrom/*
+%{_libdir}/ocaml/stublibs/dllstubs_cdrom.so
+%{_libdir}/ocaml/stublibs/dllstubs_cdrom.so.owner
 
 %changelog
 * Tue May 28 2013 David Scott <dave.scott@eu.citrix.com>

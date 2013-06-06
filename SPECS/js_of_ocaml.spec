@@ -1,6 +1,6 @@
 Name:           js_of_ocaml
 Version:        1.3.2
-Release:        0
+Release:        1
 Summary:        Compile OCaml programs to javascript
 License:        LGPL and others
 Group:          Development/Other
@@ -31,6 +31,7 @@ make
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 mkdir -p %{buildroot}/%{_bindir}
@@ -43,6 +44,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc LICENSE README CHANGES
 %{_libdir}/ocaml/js_of_ocaml/*
+%{_libdir}/ocaml/stublibs/dlljs_of_ocaml.so
+%{_libdir}/ocaml/stublibs/dlljs_of_ocaml.so.owner
 %{_bindir}/js_of_ocaml
 
 %changelog

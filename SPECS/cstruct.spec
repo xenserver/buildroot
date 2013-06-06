@@ -1,6 +1,6 @@
 Name:           ocaml-cstruct
 Version:        0.7.1
-Release:        0
+Release:        1
 Summary:        Read and write low-level C-style structures in OCaml
 License:        ISC
 Group:          Development/Other
@@ -31,6 +31,8 @@ ocaml setup.ml -build
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
+
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install DESTDIR=%{buildroot}
@@ -42,6 +44,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README.md CHANGES
 %{_libdir}/ocaml/cstruct/*
+%{_libdir}/ocaml/stublibs/dllcstruct_stubs.so
+%{_libdir}/ocaml/stublibs/dllcstruct_stubs.so.owner
 
 %changelog
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>

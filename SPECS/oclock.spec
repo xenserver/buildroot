@@ -2,7 +2,7 @@
 
 Name:           ocaml-oclock
 Version:        0.3
-Release:        0
+Release:        2
 Summary:        POSIX monotonic clock for OCaml
 License:        ISC
 Group:          Development/Other
@@ -40,6 +40,7 @@ make
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
+mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
@@ -49,13 +50,9 @@ rm -rf %{buildroot}
 %files devel
 %defattr(-,root,root)
 %doc LICENSE README.markdown
-%{_libdir}/ocaml/oclock/oclock.a
-%{_libdir}/ocaml/oclock/oclock.cma
-%{_libdir}/ocaml/oclock/oclock.cmi
-%{_libdir}/ocaml/oclock/oclock.cmxa
-%{_libdir}/ocaml/oclock/liboclock.a
-%{_libdir}/ocaml/oclock/dlloclock.so
-%{_libdir}/ocaml/oclock/META
+%{_libdir}/ocaml/oclock/*
+%{_libdir}/ocaml/stublibs/dlloclock.so
+%{_libdir}/ocaml/stublibs/dlloclock.so.owner
 
 %changelog
 * Wed May 29 2013 David Scott <dave.scott@eu.citrix.com>
