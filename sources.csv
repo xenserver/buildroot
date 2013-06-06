@@ -57,3 +57,4 @@ xen-api-libs-transitional.spec,https://github.com/xen-org/xen-api-libs-transitio
 xapi.spec,https://github.com/djs55/xen-api/archive/1.9.1.tar.gz,xen-api-1.9.1.tar.gz
 camomile.spec,http://prdownloads.sourceforge.net/camomile/camomile-0.8.3.tar.bz2,
 zed.spec,http://forge.ocamlcore.org/frs/download.php/944/zed-1.2.tar.gz,
+lambda-term.spec,http://forge.ocamlcore.org/frs/download.php/945/lambda-term-1.2.tar.gz,
