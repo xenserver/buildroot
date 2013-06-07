@@ -52,7 +52,7 @@ xenopsd.spec,https://github.com/djs55/xenopsd/archive/xenopsd-0.9.2.tar.gz,
 sexplib.spec,https://ocaml.janestreet.com/ocaml-core/109.20.00/individual/sexplib-109.20.00.tar.gz,
 xenstore-clients.spec,https://github.com/xen-org/ocaml-xenstore-clients/archive/ocaml-xenstore-clients-0.9.0.tar.gz,
 squeezed.spec,https://github.com/xen-org/squeezed/archive/squeezed-0.9.0.tar.gz,
-xcp-networkd.spec,https://github.com/xen-org/xcp-networkd/archive/xcp-networkd-0.9.0.tar.gz,
+xcp-networkd.spec,https://github.com/xen-org/xcp-networkd/archive/xcp-networkd-0.9.1.tar.gz,
 xcp-inventory.spec,https://github.com/xen-org/xcp-inventory/archive/xcp-inventory-0.9.0.tar.gz,
 xen-api-libs-transitional.spec,https://github.com/xen-org/xen-api-libs-transitional/archive/xen-api-libs-transitional-0.9.0.tar.gz,
 xapi.spec,https://github.com/djs55/xen-api/archive/1.9.2.tar.gz,xen-api-1.9.2.tar.gz
