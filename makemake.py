@@ -90,7 +90,7 @@ def buildRequiresFromSpec( spec ):
 provides_to_rpm = {}
 for specname, spec in specs.iteritems():
     for package in spec.packages:
-        for provided in package.header['provides']:
+        for provided in (package.header['provides'] + [package.header['name']]):
             for rpmname in rpmNamesFromSpec( spec ):
                 provides_to_rpm[ provided ] = rpmname
 
