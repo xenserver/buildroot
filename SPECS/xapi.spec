@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.2
-Release: 5
+Release: 6
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -12,6 +12,7 @@ Source1: xen-api-xapi-conf
 Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
+Source5: xen-api-pam
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
 BuildRequires: pam-devel tetex-latex ocaml xen-devel zlib-devel
@@ -58,6 +59,8 @@ rm -rf %{buildroot}
  
 mkdir -p %{buildroot}/%{_sbindir}
 install -m 0755 ocaml/xapi/xapi.opt %{buildroot}/%{_sbindir}/xapi
+mkdir -p %{buildroot}/etc/pam.d
+install -m 0644 %{_sourcedir}/xen-api-pam %{buildroot}/etc/pam.d/xapi
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 %{_sourcedir}/xen-api-init %{buildroot}%{_sysconfdir}/init.d/xapi
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
@@ -106,6 +109,7 @@ fi
 /etc/xapi/hook-scripts
 /var/lib/xapi
 /usr/share/xapi/packages/iso
+/etc/pam.d/xapi
 
 %files xe
 %defattr(-,root,root,-)
