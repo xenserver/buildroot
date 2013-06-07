@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.2
-Release: 2
+Release: 3
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -46,7 +46,8 @@ The command-line interface for controlling XCP hosts.
 
 %build
 ./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi \
-            --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts
+            --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts        \
+            --sharedir=/usr/share/xapi
 
 export COMPILE_JAVA=no
 make version
@@ -82,6 +83,8 @@ mkdir -p %{buildroot}/etc/xapi/hook-scripts
 mkdir -p %{buildroot}/etc/xcp
 echo master > %{buildroot}/etc/xcp/pool.conf
 
+mkdir -p %{buildroot}/usr/share/xapi/packages/iso
+
 %clean
 rm -rf %{buildroot}
 
@@ -107,6 +110,7 @@ fi
 /etc/xapi/db.conf
 /etc/xapi/hook-scripts
 /var/lib/xapi
+/usr/share/xapi/packages/iso
 
 %files xe
 %defattr(-,root,root,-)
