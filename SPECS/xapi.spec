@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.2
-Release: 1
+Release: 2
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -65,6 +65,7 @@ install -m 0755 %{_sourcedir}/xen-api-init %{buildroot}%{_sysconfdir}/init.d/xap
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
 install -m 0755 %{_sourcedir}/xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
 install -m 0755 scripts/pci-info %{buildroot}/%{_libexecdir}/xapi/pci-info
+install -m 0755 scripts/update-mh-info %{buildroot}/%{_libexecdir}/xapi/update-mh-info
 mkdir -p %{buildroot}/etc/xapi
 install -m 0644 %{_sourcedir}/xen-api-xapi-conf %{buildroot}/etc/xapi.conf
 install -m 0644 %{_sourcedir}/xen-api-db-conf %{buildroot}/etc/xapi/db.conf
@@ -102,6 +103,7 @@ fi
 %config(noreplace) /etc/xcp/pool.conf
 %{_libexecdir}/xapi/xapissl
 %{_libexecdir}/xapi/pci-info
+%{_libexecdir}/xapi/update-mh-info
 /etc/xapi/db.conf
 /etc/xapi/hook-scripts
 /var/lib/xapi
