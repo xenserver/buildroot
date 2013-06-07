@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.2
-Release: 3
+Release: 5
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -11,8 +11,7 @@ Source0: xen-api-%{version}.tar.gz
 Source1: xen-api-xapi-conf
 Source2: xen-api-init
 Source3: xen-api-xapissl
-Source4: xen-api-xapissl-conf
-Source5: xen-api-db-conf
+Source4: xen-api-db-conf
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
 BuildRequires: pam-devel tetex-latex ocaml xen-devel zlib-devel
@@ -68,7 +67,6 @@ install -m 0755 scripts/update-mh-info %{buildroot}/%{_libexecdir}/xapi/update-m
 mkdir -p %{buildroot}/etc/xapi
 install -m 0644 %{_sourcedir}/xen-api-xapi-conf %{buildroot}/etc/xapi.conf
 install -m 0644 %{_sourcedir}/xen-api-db-conf %{buildroot}/etc/xapi/db.conf
-install -m 0644 %{_sourcedir}/xen-api-xapissl-conf %{buildroot}/etc/xapi/xapissl.conf
 
 mkdir -p %{buildroot}/%{_bindir}
 install -m 0755 ocaml/xe-cli/xe.opt %{buildroot}/%{_bindir}/xe
@@ -100,7 +98,6 @@ fi
 %{_sbindir}/xapi
 /etc/init.d/xapi
 %config(noreplace) /etc/xapi.conf
-%config(noreplace) /etc/xapi/xapissl.conf
 %config(noreplace) /etc/xcp/pool.conf
 %{_libexecdir}/xapi/xapissl
 %{_libexecdir}/xapi/pci-info
