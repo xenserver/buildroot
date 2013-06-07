@@ -1,11 +1,11 @@
 Name:           xcp-networkd
-Version:        0.9.0
-Release:        1
+Version:        0.9.1
+Release:        0
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/xcp-networkd/archive/xcp-networkd-0.9.0.tar.gz
-Source0:        xcp-networkd-0.9.0.tar.gz
+URL:            https://github.com/xen-org/xcp-networkd/archive/xcp-networkd-%{version}.tar.gz
+Source0:        xcp-networkd-%{version}.tar.gz
 Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
@@ -58,6 +58,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Fri Jun  7 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.1
+
 * Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
