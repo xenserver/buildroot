@@ -45,9 +45,7 @@ The command-line interface for controlling XCP hosts.
 #%patch0 -p0 -b xapi-version.patch
 
 %build
-./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi \
-            --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts        \
-            --sharedir=/usr/share/xapi
+./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi
 
 export COMPILE_JAVA=no
 make version
