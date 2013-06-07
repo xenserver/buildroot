@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.2
-Release: 0
+Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -35,6 +35,7 @@ This package contains the xapi toolstack.
 %package xe
 Summary: The xapi toolstack CLI
 Group: System/Hypervisor
+Requires: bash-completion
 
 %description xe
 The command-line interface for controlling XCP hosts.
