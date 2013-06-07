@@ -22,7 +22,9 @@ def specFromFile( spec ):
     return rpm.ts().parseSpec( spec )
 
 spec_names = os.listdir( spec_dir )
-specs = { s: specFromFile( os.path.join( spec_dir, s ) ) for s in spec_names }
+specs = {}
+for s in spec_names:
+    specs[s] = specFromFile( os.path.join( spec_dir, s ) )
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
@@ -108,7 +110,7 @@ all_srpms = [ os.path.join( srpm_dir, srpmNameFromSpec( s ) )
 
 all_rpms = []
 for rpms in [ rpmNamesFromSpec( s ) for s in specs.values() ]:
-    all_rpms += [ os.path.join( rpm_dir, rpm ) for rpm in rpms ]
+    all_rpms += map( (lambda rpm: os.path.join( rpm_dir, rpm )), rpms )
 
 
 print "rpms: " + " \\\n\t".join( all_rpms )
