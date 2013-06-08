@@ -45,6 +45,25 @@ start() {
 }
 stop() {
         echo -n $"Shutting down xapi: "
+
+        # Use the CLI to request a clean shutdown
+        RETRIES=60
+        while [ ${RETRIES} -ne 0 ]; do
+                xe host-shutdown-agent 2> /dev/null
+                # Finish if all xapis have gone 
+                xapi_pids=$(pidof $prog)
+                if [ -z "$xapi_pids" ]; then
+                        logger "xapi stopped successfully"
+                        rm -f $PIDFILE $lockfile
+                        success $"xapi stopped successfully"
+                        echo
+                        return 0
+                fi
+                sleep 1
+                echo -n .
+                RETRIES=$(( ${RETRIES} - 1 ))
+        done
+
         killproc -p "$PIDFILE" $exec
         RETVAL=$?
         echo
