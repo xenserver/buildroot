@@ -3,13 +3,13 @@
 Summary: a simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
 Version: 0.1.0
-Release: 0
+Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://github.com/djs55/xenserver-install-wizard
 Source0: xenserver-install-wizard-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-Requires: python whiptail xapi-python-devel
+Requires: python newt xapi-python-devel
 
 %description
 A simple wizard to configure a XenServer after install
