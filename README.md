@@ -11,13 +11,14 @@ Using mock to build these RPMs:
 useradd <user> -G mock
 passwd <user>
 
+su - <user>
+
 git clone git://github.com/xen-org/xen-api-rpm-buildroot.git /home/<user>/rpmbuild
 mkdir -p /home/<user>/rpmbuild/RPMS/x86_64/
 createrepo /home/<user>/rpmbuild/RPMS/x86_64
 
-cp xenserver.cfg /etc/mock/ # edit so last repo points to file:///home/<user>/blah
-
-su - <user>
+./configure.sh
+sudo cp xenserver.cfg /etc/mock/
 
 ./makemake.py > Makefile
 make
