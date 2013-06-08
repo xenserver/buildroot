@@ -2,8 +2,8 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.2
-Release: 6
+Version: 1.9.3
+Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -39,6 +39,14 @@ Requires: bash-completion
 
 %description xe
 The command-line interface for controlling XCP hosts.
+
+%package python-devel
+Summary: XenAPI client support in python
+Group: System/Hypervisor
+Requires: python
+
+%description python-devel
+Libraries for writing XenAPI clients in python.
 
 %prep 
 %setup -q -n xen-api-%{version}
@@ -84,6 +92,10 @@ echo master > %{buildroot}/etc/xcp/pool.conf
 
 mkdir -p %{buildroot}/usr/share/xapi/packages/iso
 
+mkdir -p %{buildroot}/usr/lib/python2.6/site-packages
+install -m 0644 scripts/examples/python/XenAPI.py %{buildroot}/usr/lib/python2.6/site-packages/
+install -m 0644 scripts/examples/python/XenAPIPlugin.py %{buildroot}/usr/lib/python2.6/site-packages/
+
 %clean
 rm -rf %{buildroot}
 
@@ -116,9 +128,22 @@ fi
 %{_bindir}/xe
 /etc/bash_completion.d/xe
 
+%files python-devel
+%defattr(-,root,root,-)
+/usr/lib/python2.6/site-packages/XenAPI.py
+/usr/lib/python2.6/site-packages/XenAPI.pyo
+/usr/lib/python2.6/site-packages/XenAPI.pyc
+
+/usr/lib/python2.6/site-packages/XenAPIPlugin.py
+/usr/lib/python2.6/site-packages/XenAPIPlugin.pyo
+/usr/lib/python2.6/site-packages/XenAPIPlugin.pyc
+
 %changelog
+* Sun Jun 8 2013 David Scott <dave.scott@eu.citrix.com>
+- Add python-devel for writing python clients
 
-
+* Wed Jun 5 2013 David Scott <dave.scott@eu.citrix.com>
+- Initial package
 
 
 
