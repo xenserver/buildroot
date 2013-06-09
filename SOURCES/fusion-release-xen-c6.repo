@@ -1,0 +1,13 @@
+[xen-c6]
+name=CentOS-$releasever - Xen
+baseurl=http://dev.centos.org/centos/6/xen-c6/$basearch/
+gpgcheck=0
+Priority=1
+enabled=1
+
+[xen-c6-source]
+name=CentOS-$releasever - Xen Source
+baseurl=http://dev.centos.org/centos/6/xen-c6/SRPMS/
+gpgcheck=0
+Priority=1
+enabled=0
