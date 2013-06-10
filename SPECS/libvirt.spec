@@ -344,7 +344,7 @@ Source: http://libvirt.org/sources/%{?mainturl}libvirt-%{version}.tar.gz
 
 # Fix qemu -> qemu-system-i386 (bz #857026).
 # keep: This patch is Fedora-specific and not upstream.
-Patch1: 0001-Use-qemu-system-i386-as-binary-instead-of-qemu.patch
+Patch1: libvirt-Use-qemu-system-i386-as-binary-instead-of-qemu.patch
 # Cleanly save session VMs on logout/shutdown (bz #872254)
 # keep: Fixed upstream, but using patches not suitable for stable
 Patch2: libvirt-dbus.patch
