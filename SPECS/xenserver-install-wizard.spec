@@ -2,7 +2,7 @@
 
 Summary: a simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
-Version: 0.2.2
+Version: 0.2.4
 Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -33,10 +33,13 @@ rm -rf %{buildroot}
 %{_bindir}/xenserver-install-wizard
 
 %changelog
-* Sun Jun 9 2013 David Scott <dave.scott@eu.citrix.com>
+* Mon Jun 10 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.2.4
+
+* Sun Jun  9 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.2.0, hopefully the first fully-working version
 
-* Sat Jun 8 2013 David Scott <dave.scott@eu.citrix.com>
+* Sat Jun  8 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
 
