@@ -1,0 +1,27 @@
+From 37865f1dead1fac2ee34af48f96d19d686296e04 Mon Sep 17 00:00:00 2001
+From: "Richard W.M. Jones" <rjones@redhat.com>
+Date: Thu, 13 Sep 2012 14:37:22 +0100
+Subject: [PATCH] Use 'qemu-system-i386' as binary instead of 'qemu'.
+
+---
+ src/qemu/qemu_capabilities.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/qemu/qemu_capabilities.c b/src/qemu/qemu_capabilities.c
+index af3b0b2..179b3d2 100644
+--- a/src/qemu/qemu_capabilities.c
++++ b/src/qemu/qemu_capabilities.c
+@@ -244,8 +244,8 @@ static const struct qemu_feature_flags const arch_info_x86_64_flags [] = {
+ 
+ /* The archicture tables for supported QEMU archs */
+ static const struct qemu_arch_info const arch_info_hvm[] = {
+-    {  "i686",   32, NULL, "qemu",
+-       "qemu-system-x86_64", arch_info_i686_flags, 4 },
++    {  "i686",   32, NULL, "qemu-system-i386",
++       NULL, arch_info_i686_flags, 4 },
+     {  "x86_64", 64, NULL, "qemu-system-x86_64",
+        NULL, arch_info_x86_64_flags, 2 },
+     {  "arm",    32, NULL, "qemu-system-arm",    NULL, NULL, 0 },
+-- 
+1.7.11.4
+
