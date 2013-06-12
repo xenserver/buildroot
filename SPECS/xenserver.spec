@@ -1,6 +1,6 @@
 Name:           xenserver
 Version:        0.9.0
-Release:        4
+Release:        5
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -8,7 +8,7 @@ URL:            http://www.xen.org/
 Source0:        xenserver-readme
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Requires:       xenserver-install-wizard
-Requires:       xapi xapi-xe xapi-python-devel
+Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
 Requires:       xenopsd-xc xenopsd-libvirt xenopsd-simulator xenops-cli
 Requires:       ffs xapi-libvirt-storage sm-cli
 Requires:       xcp-networkd
