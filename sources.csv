@@ -62,3 +62,4 @@ lambda-term.spec,http://forge.ocamlcore.org/frs/download.php/945/lambda-term-1.2
 utop.spec,https://forge.ocamlcore.org/frs/download.php/1122/utop-1.4.tar.gz,
 xenserver-install-wizard.spec,https://github.com/djs55/xenserver-install-wizard/archive/0.2.4.tar.gz,xenserver-install-wizard-0.2.4.tar.gz
 libvirt.spec,http://libvirt.org/sources/stable_updates/libvirt-0.10.2.4.tar.gz,
+xe-create-templates.spec,https://github.com/djs55/xcp-guest-templates/archive/0.9.0.tar.gz,xe-create-templates-0.9.0.tar.gz
