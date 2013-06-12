@@ -1,6 +1,6 @@
 Name:           fusion-release
 Version:        0.1.0
-Release:        0
+Release:        1
 Summary:        Yum repositories for xenserver
 License:        GPL
 Group:          Development/Other
@@ -26,8 +26,8 @@ A virtual package which installs the xenserver yum repos.
 %install
 mkdir -p %{buildroot}/etc/yum.repos.d
 install -m 0644 %{_sourcedir}/fusion-release-xapi.repo %{buildroot}/etc/yum.repos.d/xapi.repo
-install -m 0644 %{_sourcedir}/fusion-release-xen-c6.repo %{buildroot}/etc/yum.repos.d/xen-c6.repo
-install -m 0644 %{_sourcedir}/fusion-release-xen-c6-RC1.repo %{buildroot}/etc/yum.repos.d/xen-c6-RC1.repo
+#install -m 0644 %{_sourcedir}/fusion-release-xen-c6.repo %{buildroot}/etc/yum.repos.d/xen-c6.repo
+#install -m 0644 %{_sourcedir}/fusion-release-xen-c6-RC1.repo %{buildroot}/etc/yum.repos.d/xen-c6-RC1.repo
 install -m 0644 %{_sourcedir}/fusion-release-epel.repo %{buildroot}/etc/yum.repos.d/epel.repo
 install -m 0644 %{_sourcedir}/fusion-release-epel-testing.repo %{buildroot}/etc/yum.repos.d/epel-testing.repo
 install -m 0644 %{_sourcedir}/fusion-release-remi.repo %{buildroot}/etc/yum.repos.d/remi.repo
@@ -47,8 +47,8 @@ yum repolist
 %files
 %defattr(-,root,root)
 /etc/yum.repos.d/xapi.repo
-/etc/yum.repos.d/xen-c6.repo
-/etc/yum.repos.d/xen-c6-RC1.repo
+#/etc/yum.repos.d/xen-c6.repo
+#/etc/yum.repos.d/xen-c6-RC1.repo
 /etc/yum.repos.d/epel.repo
 /etc/yum.repos.d/epel-testing.repo
 /etc/yum.repos.d/remi.repo
