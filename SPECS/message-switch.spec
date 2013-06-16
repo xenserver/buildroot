@@ -1,5 +1,5 @@
 Name:           message-switch
-Version:        0.9.4
+Version:        0.9.7
 Release:        0
 Summary:        A store and forward message switch
 License:        FreeBSD
@@ -46,7 +46,7 @@ mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
 mkdir -p %{buildroot}/%{_sbindir}
-install switch.native %{buildroot}/%{_sbindir}/message-switch
+install switch_main.native %{buildroot}/%{_sbindir}/message-switch
 install main.native %{buildroot}/%{_sbindir}/message-cli
 mkdir -p %{buildroot}/%{_sysconfdir}/init.d
 install -m 0755 %{_sourcedir}/message-switch-init %{buildroot}%{_sysconfdir}/init.d/message-switch
