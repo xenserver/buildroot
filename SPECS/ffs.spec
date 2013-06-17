@@ -1,5 +1,5 @@
 Name:           ffs
-Version:        0.9.2
+Version:        0.9.3
 Release:        0
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
