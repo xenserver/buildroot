@@ -1,5 +1,5 @@
 Name:           ocaml-xen-api-client
-Version:        0.9.3
+Version:        0.9.4
 Release:        0
 Summary:        XenServer XenAPI Client Library for OCaml
 License:        LGPLv2

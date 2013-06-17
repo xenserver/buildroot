@@ -1,11 +1,11 @@
 Name:           xe-create-templates
-Version:        0.9.0
+Version:        0.9.1
 Release:        0
 Summary:        Creates default XenServer templates
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/djs55/xcp-guest-templates/0.9.0.tar.gz
-Source0:        xe-create-templates-0.9.0.tar.gz
+URL:            https://github.com/djs55/xcp-guest-templates/%{version}.tar.gz
+Source0:        xe-create-templates-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel 
 BuildRequires:  ocaml-lwt-devel xmlm-devel ocaml-stdext-devel
