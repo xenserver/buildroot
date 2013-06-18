@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.5
+Version: 1.9.6
 Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -139,6 +139,9 @@ fi
 /usr/lib/python2.6/site-packages/XenAPIPlugin.pyc
 
 %changelog
+* Tue Jun 18 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 1.9.6
+
 * Sun Jun 8 2013 David Scott <dave.scott@eu.citrix.com>
 - Add python-devel for writing python clients
 
