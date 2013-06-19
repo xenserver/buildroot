@@ -65,3 +65,4 @@ libvirt.spec,http://libvirt.org/sources/stable_updates/libvirt-0.10.2.4.tar.gz,
 xe-create-templates.spec,https://github.com/xen-org/xcp-guest-templates/archive/0.9.1.tar.gz,xe-create-templates-0.9.1.tar.gz
 xcp-rrdd.spec,https://github.com/xen-org/xcp-rrdd/archive/0.9.0.tar.gz,xcp-rrdd-0.9.0.tar.gz
 xenops.spec,https://github.com/xen-org/xenops/archive/0.9.0.tar.gz,ocaml-xenops-0.9.0.tar.gz
+xsiostat.spec,https://github.com/xenserver/xsiostat/archive/0.2.0.tar.gz,xsiostat-0.2.0.tar.gz
