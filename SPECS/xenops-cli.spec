@@ -1,11 +1,11 @@
 Name:           xenops-cli
-Version:        0.9.0
+Version:        0.9.1
 Release:        1
 Summary:        CLI for xenopsd, the xapi toolstack domain manager
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/xenops-cli/archive/xenops-cli-0.9.0.tar.gz
-Source0:        xenops-cli-0.9.0.tar.gz
+URL:            https://github.com/xen-org/xenops-cli/archive/xenops-cli-%{version}.tar.gz
+Source0:        xenops-cli-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-obuild ocaml-xcp-idl-devel cmdliner-devel ocaml-uuidm-devel

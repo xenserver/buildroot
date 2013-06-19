@@ -1,11 +1,11 @@
 Name:           xenopsd
-Version:        0.9.2
+Version:        0.9.4
 Release:        0
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/xenopsd/archive/xenopsd-0.9.2.tar.gz
-Source0:        xenopsd-0.9.2.tar.gz
+URL:            https://github.com/xen-org/xenopsd/archive/xenopsd-%{version}.tar.gz
+Source0:        xenopsd-%{version}.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
 Source3:        xenopsd-libvirt-init
@@ -19,7 +19,7 @@ BuildRequires:  ocaml-oclock-devel ocaml-uuidm-devel forkexec-devel
 BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
 BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
-BuildRequires:  xen-devel
+BuildRequires:  xen-devel ocaml-xcp-inventory-devel
 Requires:       message-switch xenops-cli
 
 %description
