@@ -1,6 +1,6 @@
 Name:           xenserver
 Version:        0.9.0
-Release:        5
+Release:        6
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -12,6 +12,7 @@ Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
 Requires:       xenopsd-xc xenopsd-libvirt xenopsd-simulator xenops-cli
 Requires:       ffs xapi-libvirt-storage sm-cli
 Requires:       xcp-networkd
+Requires:       xcp-rrdd
 Requires:       squeezed
 Requires:       kernel >= 3.4.46 kernel-firmware
 Requires:       xen
@@ -35,6 +36,9 @@ rm -rf %{buildroot}
 /usr/share/doc/xenserver/README
 
 %changelog
+* Tue Jun 18 2013 David Scott <dave.scott@eu.citrix.com>
+- add a dependency on xcp-rrdd
+
 * Sat Jun  8 2013 David Scott <dave.scott@eu.citrix.com>
 - add a xenserver-install-wizard
 - add dependency on xapi-python-devel for use by the install wizard

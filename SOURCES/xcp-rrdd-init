@@ -1,29 +1,29 @@
 #!/bin/bash
 #
-#  xapi        Startup script for xapi toolstack
+#  xcp-rrdd        Startup script for statistics gathering service
 #
 # chkconfig: 2345 13 88
-# description: Manages VMs and resource pools
+# description: Manages VM and Host statistics: sampling and archiving.
 ### BEGIN INIT INFO
-# Provides: xapi
-# Required-Start: $local_fs $network $syslog xcp-rrdd message-switch
+# Provides: xcp-rrdd
+# Required-Start: $local_fs $network $syslog message-switch
 # Required-Stop: $local_fs $syslog
 # Should-Start: $syslog message-switch
 # Should-Stop: $network $syslog
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
-# Short-Description: xapi toolstack
-# Description:       Manages VMs and resource pools
+# Short-Description: Statistics gathering service
+# Description:       Samples and archives statistics for VMs and Hosts.
 ### END INIT INFO
 
 # Source function library.
 . /etc/init.d/functions
 
 RETVAL=0
-PIDFILE=/var/run/xapi.pid
+PIDFILE=/var/run/xcp-rrdd.pid
 
-prog=xapi
-exec=/usr/sbin/xapi
+prog=xcp-rrdd
+exec=/usr/sbin/xcp-rrdd
 lockfile=/var/lock/subsys/$prog
 
 # Source config
@@ -36,34 +36,15 @@ start() {
 
 	umask 077
 
-        echo -n $"Starting xapi: "
-        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $XAPI_OPTIONS
+        echo -n $"Starting xcp-rrdd: "
+        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $XCP_RRDD_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
         return $RETVAL
 }
 stop() {
-        echo -n $"Shutting down xapi: "
-
-        # Use the CLI to request a clean shutdown
-        RETRIES=60
-        while [ ${RETRIES} -ne 0 ]; do
-                xe host-shutdown-agent 2> /dev/null
-                # Finish if all xapis have gone 
-                xapi_pids=$(pidof $prog)
-                if [ -z "$xapi_pids" ]; then
-                        logger "xapi stopped successfully"
-                        rm -f $PIDFILE $lockfile
-                        success $"xapi stopped successfully"
-                        echo
-                        return 0
-                fi
-                sleep 1
-                echo -n .
-                RETRIES=$(( ${RETRIES} - 1 ))
-        done
-
+        echo -n $"Shutting down xcp-rrdd: "
         killproc -p "$PIDFILE" $exec
         RETVAL=$?
         echo

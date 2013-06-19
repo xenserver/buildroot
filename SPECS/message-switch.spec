@@ -1,5 +1,5 @@
 Name:           message-switch
-Version:        0.9.7
+Version:        0.10.0
 Release:        0
 Summary:        A store and forward message switch
 License:        FreeBSD
