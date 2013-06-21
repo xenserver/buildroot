@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.4
+Version:        0.9.5
 Release:        0
 Summary:        Simple VM manager
 License:        LGPL
@@ -9,8 +9,9 @@ Source0:        xenopsd-%{version}.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
 Source3:        xenopsd-libvirt-init
-Source4:        xenopsd-conf
-Source5:        xenopsd-network-conf
+Source4:        xenopsd-xenlight-init
+Source5:        xenopsd-conf
+Source6:        xenopsd-network-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
@@ -52,6 +53,14 @@ Requires:       %{name} = %{version}-%{release}
 %description    simulator
 A synthetic VM manager for testing.
 
+%package        xenlight
+Summary:        %{name} using libxenlight
+Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
+
+%description    xenlight
+Simple VM manager for Xen using libxenlight
+
 %prep
 %setup -q -n %{name}-%{name}-%{version}
 
@@ -66,6 +75,7 @@ mkdir -p %{buildroot}/%{_sbindir}
 install -D dist/build/xenopsd_libvirt/xenopsd_libvirt %{buildroot}/%{_sbindir}/xenopsd-libvirt
 install -D dist/build/xenopsd/xenopsd %{buildroot}/%{_sbindir}/xenopsd-xc
 install -D dist/build/xenopsd_simulator/xenopsd_simulator %{buildroot}/%{_sbindir}/xenopsd-simulator
+install -D dist/build/xenopsd_xenlight/xenopsd_xenlight %{buildroot}/%{_sbindir}/xenopsd-xenlight
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
 install -D dist/build/xenguest/xenguest %{buildroot}/%{_libexecdir}/%{name}/xenguest
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
@@ -79,6 +89,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 %{_sourcedir}/xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
 install -m 0755 %{_sourcedir}/xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 %{_sourcedir}/xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
+install -m 0755 %{_sourcedir}/xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
 mkdir -p %{buildroot}/etc/xapi
 install -m 0644 %{_sourcedir}/xenopsd-conf %{buildroot}/etc/xenopsd.conf
 install -m 0644 %{_sourcedir}/xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
@@ -143,7 +154,24 @@ if [ $1 -eq 0 ]; then
   /sbin/chkconfig --del xenopsd-simulator
 fi
 
+%files xenlight
+%defattr(-,root,root)
+%{_sbindir}/xenopsd-xenlight
+%{_sysconfdir}/init.d/xenopsd-xenlight
+
+%post xenlight
+/sbin/chkconfig --add xenopsd-xenlight
+
+%preun xenlight
+if [ $1 -eq 0 ]; then
+  /sbin/service xenopsd-xenlight stop > /dev/null 2>&1
+  /sbin/chkconfig --del xenopsd-xenlight
+fi
+
 %changelog
+* Fri Jun 21 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.5, which includes xenopsd-xenlight
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
