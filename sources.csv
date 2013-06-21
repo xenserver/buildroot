@@ -59,7 +59,7 @@ xapi.spec,https://github.com/djs55/xen-api/archive/1.9.9.tar.gz,xen-api-1.9.9.ta
 camomile.spec,http://prdownloads.sourceforge.net/camomile/camomile-0.8.3.tar.bz2,
 zed.spec,http://forge.ocamlcore.org/frs/download.php/944/zed-1.2.tar.gz,
 lambda-term.spec,http://forge.ocamlcore.org/frs/download.php/945/lambda-term-1.2.tar.gz,
-utop.spec,https://forge.ocamlcore.org/frs/download.php/1122/utop-1.4.tar.gz,
+utop.spec,https://github.com/diml/utop/archive/1.5.tar.gz,utop-1.5.tar.gz
 xenserver-install-wizard.spec,https://github.com/djs55/xenserver-install-wizard/archive/0.2.9.tar.gz,xenserver-install-wizard-0.2.9.tar.gz
 libvirt.spec,http://libvirt.org/sources/stable_updates/libvirt-0.10.2.4.tar.gz,
 xe-create-templates.spec,https://github.com/xen-org/xcp-guest-templates/archive/0.9.1.tar.gz,xe-create-templates-0.9.1.tar.gz
