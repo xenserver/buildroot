@@ -1,6 +1,6 @@
 Summary: Bootloader for EL-based distros that support Xen
 Name: eliloader
-Version: 0.1
+Version: 0.2
 Release: 0
 Source: %{name}-%{version}.tar.gz
 License: GPL
@@ -19,7 +19,7 @@ Bootloader for EL-based distros that support Xen.
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p %{buildroot}/%{_sbindir}
-install -m 0755 eliloader %{buildroot}%{_sbindir}/eliloader
+install -m 0755 eliloader.py %{buildroot}%{_sbindir}/eliloader
 
 %clean
 rm -rf $RPM_BUILD_ROOT
