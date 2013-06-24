@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.7
+Version:        0.9.8
 Release:        0
 Summary:        Simple VM manager
 License:        LGPL
@@ -79,6 +79,7 @@ install -D dist/build/xenopsd_xenlight/xenopsd_xenlight %{buildroot}/%{_sbindir}
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
 install -D dist/build/xenguest/xenguest %{buildroot}/%{_libexecdir}/%{name}/xenguest
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
+install -D scripts/vif-xl %{buildroot}/%{_libexecdir}/%{name}/vif-xl
 install -D scripts/qemu-dm-wrapper %{buildroot}/%{_libexecdir}/%{name}/qemu-dm-wrapper
 install -D scripts/qemu-vif-script %{buildroot}/%{_libexecdir}/%{name}/qemu-vif-script
 install -D scripts/setup-vif-rules %{buildroot}/%{_libexecdir}/%{name}/setup-vif-rules
@@ -101,6 +102,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README.md LICENSE
 %{_libexecdir}/%{name}/vif
+%{_libexecdir}/%{name}/vif-xl
 %{_libexecdir}/%{name}/qemu-dm-wrapper
 %{_libexecdir}/%{name}/qemu-vif-script
 %{_libexecdir}/%{name}/setup-vif-rules
