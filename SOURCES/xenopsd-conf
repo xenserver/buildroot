@@ -8,6 +8,7 @@ xenguest=/usr/libexec/xenopsd/xenguest
 network-conf=/etc/xapi/network.conf
 
 vif-script=/usr/libexec/xenopsd/vif
+vif-xl-script=/usr/libexec/xenopsd/vif-xl
 qemu-vif-script=/usr/libexec/xenopsd/qemu-vif-script
 qemu-dm-wrapper=/usr/libexec/xenopsd/qemu-dm-wrapper
 setup-vif-rules=/usr/libexec/xenopsd/setup-vif-rules
