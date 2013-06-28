@@ -67,3 +67,4 @@ xcp-rrdd.spec,https://github.com/xen-org/xcp-rrdd/archive/0.9.0.tar.gz,xcp-rrdd-
 xenops.spec,https://github.com/xen-org/xenops/archive/0.9.0.tar.gz,ocaml-xenops-0.9.0.tar.gz
 xsiostat.spec,https://github.com/xenserver/xsiostat/archive/0.2.0.tar.gz,xsiostat-0.2.0.tar.gz
 eliloader.spec,https://github.com/djs55/xcp-eliloader/archive/master/0.3.tar.gz,eliloader-0.3.tar.gz
+openstack-xapi-plugins.spec,https://launchpad.net/nova/grizzly/2013.1.2/+download/nova-2013.1.2.tar.gz,nova-2013.1.2.tar.gz
