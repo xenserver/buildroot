@@ -69,7 +69,7 @@ enabled=0
 
 [mock]
 name=Mock output
-baseurl=file:///home/djs/rpmbuild/RPMS/x86_64
+baseurl=file://@HOME@/rpmbuild/RPMS/x86_64
 gpgcheck=0
 priority=1
 enabled=1

@@ -11,6 +11,7 @@ Requires:       xenserver-install-wizard
 Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
 Requires:       xenopsd-xc xenopsd-libvirt xenopsd-xenlight xenopsd-simulator
 Requires:       xenops-cli
+Requires:       openstack-xen-plugins
 Requires:       ffs xapi-libvirt-storage sm-cli
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
