@@ -1,4 +1,4 @@
-Name:           xenserver
+Name:           xenserver-core
 Version:        0.9.0
 Release:        8
 Summary:        A virtual package which installs the xapi toolstack
