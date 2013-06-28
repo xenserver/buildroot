@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.13
+Version:        0.9.14
 Release:        0
 Summary:        Simple VM manager
 License:        LGPL
