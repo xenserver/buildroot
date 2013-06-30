@@ -1,11 +1,11 @@
 Name:           sm-cli
-Version:        0.9.0
-Release:        1
+Version:        0.9.1
+Release:        0
 Summary:        CLI for xapi toolstack storage managers.
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/sm-cli/archive/sm-cli-0.9.0.tar.gz
-Source0:        sm-cli-0.9.0.tar.gz
+URL:            https://github.com/xen-org/sm-cli/archive/sm-cli-%{version}.tar.gz
+Source0:        sm-cli-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-obuild ocaml-xcp-idl-devel cmdliner-devel ocaml-uuidm-devel
