@@ -58,7 +58,7 @@ def rpmNamesFromSpec( spec ):
         rpm.addMacro( 'NAME', h['name'] )
         rpm.addMacro( 'VERSION', h['version'] )
         rpm.addMacro( 'RELEASE', h['release'] )
-        rpm.addMacro( 'ARCH', rpm.expandMacro( '%_arch' ) )
+        rpm.addMacro( 'ARCH', h['arch'] )
         rpmname = rpm.expandMacro( rpmfilenamepat )
         rpm.delMacro( 'NAME' )
         rpm.delMacro( 'VERSION' )
