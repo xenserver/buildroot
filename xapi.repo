@@ -1,6 +1,6 @@
 [xapi]
 name=CentOS-$releasever - xapi 
-baseurl=http://www.uk.xensource.com/~dscott/xapi/RPMS/$basearch/
+baseurl=http://www.uk.xensource.com/~dscott/xapi/RPMS/
 gpgcheck=0
 Priority=1
 enabled=1
