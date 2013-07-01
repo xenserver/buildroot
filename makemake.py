@@ -70,7 +70,6 @@ def rpmNamesFromSpec( spec ):
 
 # Rules to build RPMS from SRPMS (uses information from the SPECs to
 # get packages)
-rule_rpm_from_srpm = 'mock -r xenserver --resultdir="./RPMS/%(target_arch)s/" $< && createrepo RPMS/x86_64'
 for specname, spec in specs.iteritems():
     # This doesn't generate the right Makefile fragment for a multi-target
     # rule - we may end up building too often, or not rebuilding correctly
@@ -80,7 +79,8 @@ for specname, spec in specs.iteritems():
     for r in rpmnames: 
         print '%s: %s' % ( os.path.join( rpm_dir, r), 
                            os.path.join( srpm_dir, srpmname ))
-        print '\t%s' % rule_rpm_from_srpm
+        print '\tmock -r xenserver --resultdir="./RPMS/%(target_arch)s/" $<' 
+        print '\tcreaterepo --update RPMS/x86_64'
         
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
