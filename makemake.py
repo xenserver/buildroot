@@ -77,10 +77,12 @@ for specname, spec in specs.iteritems():
     rpmnames = rpmNamesFromSpec( spec )
     srpmname = srpmNameFromSpec( spec )
     for r in rpmnames: 
-        print '%s: %s' % ( os.path.join( rpm_dir, r), 
-                           os.path.join( srpm_dir, srpmname ))
-        print '\tmock -r xenserver --resultdir="./RPMS/%(target_arch)s/" $<' 
-        print '\tcreaterepo --update RPMS/x86_64'
+        rpm_path = os.path.join( rpm_dir, r )
+        srpm_path = os.path.join( srpm_dir, srpmname )
+        rpm_outdir = os.path.dirname( rpm_path )
+        print '%s: %s' % ( rpm_path, srpm_path )
+        print '\tmock -r xenserver --resultdir="%s" $<' % rpm_outdir
+        print '\tcreaterepo --update %s' % rpm_dir
         
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
