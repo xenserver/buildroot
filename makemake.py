@@ -11,6 +11,7 @@ rpm.addMacro( '_topdir', '.' )
 rpm_dir = rpm.expandMacro( '%_rpmdir' )
 spec_dir = rpm.expandMacro( '%_specdir' )
 srpm_dir = rpm.expandMacro( '%_srcrpmdir' )
+src_dir = rpm.expandMacro( '%_sourcedir' )
 
 print "all: rpms"
 
@@ -49,8 +50,13 @@ def srpmNameFromSpec( spec ):
 rule_spec_from_srpm = 'rpmbuild -bs $<'
 for specname, spec in specs.iteritems():
     srpmname = srpmNameFromSpec( spec )
-    print '%s: %s' % (os.path.join( srpm_dir, srpmname ), 
-                      os.path.join( spec_dir, specname ) )
+    sources = [ os.path.join( src_dir, p ) for p in spec.sourceHeader['source'] ]
+    patches = [ os.path.join( src_dir, p ) for p in spec.sourceHeader['patch'] ]
+
+    print '%s: %s %s %s' % (os.path.join( srpm_dir, srpmname ), 
+                         os.path.join( spec_dir, specname ),
+                         " ".join( sources ),
+                         " ".join( patches ) )
     print '\t%s' % rule_spec_from_srpm
 
 def rpmNamesFromSpec( spec ):
