@@ -9,5 +9,4 @@ mkdir -p debug/x86_64
 mv RPMS/x86_64/*-debuginfo-*rpm debug/x86_64
 createrepo RPMS/x86_64
 createrepo debug/x86_64
-
 rsync -avrz --delete xapi.repo RPMS debug SRPMS $URL

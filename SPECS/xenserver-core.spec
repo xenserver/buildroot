@@ -1,6 +1,6 @@
 Name:           xenserver-core
 Version:        0.9.0
-Release:        8
+Release:        9
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -11,7 +11,7 @@ Requires:       xenserver-install-wizard
 Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
 Requires:       xenopsd-xc xenopsd-libvirt xenopsd-xenlight xenopsd-simulator
 Requires:       xenops-cli
-Requires:       openstack-xen-plugins
+Requires:       openstack-xapi-plugins
 Requires:       ffs xapi-libvirt-storage sm-cli
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
