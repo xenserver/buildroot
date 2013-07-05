@@ -12,7 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Simple XenServer IO stat thingy
 
 %prep
-%setup -q -n xsiostat-%{version}
+%setup -q
 
 %build
 make

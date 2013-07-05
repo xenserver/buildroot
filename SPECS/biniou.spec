@@ -14,7 +14,7 @@ Requires:       ocaml ocaml-findlib
 Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve.
 
 %prep
-%setup -q -n biniou-%{version}
+%setup -q
 
 %build
 make

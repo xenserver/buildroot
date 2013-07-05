@@ -23,7 +23,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n js_of_ocaml-%{version}
+%setup -q
 
 %build
 make

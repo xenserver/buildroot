@@ -24,7 +24,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n ocaml-qmp-%{version}
+%setup -q
 
 %build
 if [ -x ./configure ]; then

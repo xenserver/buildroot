@@ -12,7 +12,7 @@ BuildRequires: xen-devel
 %description
 This package contains the vncterm utility
 %prep
-%setup -q -n vncterm-master-%{version}
+%setup -q -n %{name}-master-%{version}
 %patch0 -p1
 
 %build

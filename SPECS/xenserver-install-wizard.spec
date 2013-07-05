@@ -15,7 +15,7 @@ Requires: python newt xapi-python-devel
 A simple wizard to configure a XenServer after install
 
 %prep 
-%setup -q -n xenserver-install-wizard-%{version}
+%setup -q
 
 %build
 

@@ -18,7 +18,7 @@ BuildRequires:  ocaml-tapctl-devel
 Simple flat file storage manager for the xapi toolstack.
 
 %prep
-%setup -q -n ffs-ffs-%{version}
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 make

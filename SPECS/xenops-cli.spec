@@ -18,7 +18,7 @@ BuildRequires:  ocaml-oclock-devel
 Command-line interface for xenopsd, the xapi toolstack domain manager.
 
 %prep
-%setup -q -n xenops-cli-xenops-cli-%{version}
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 make

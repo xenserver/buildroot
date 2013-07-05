@@ -22,7 +22,7 @@ BuildRequires:  ocaml-oclock-devel
 Simple host networking management service for the xapi toolstack.
 
 %prep
-%setup -q -n xcp-networkd-xcp-networkd-%{version}
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 make

@@ -20,7 +20,7 @@ BuildRequires:  xen-devel
 Statistics gathering daemon for the xapi toolstack.
 
 %prep
-%setup -q -n xcp-rrdd-%{version}
+%setup -q
 
 %build
 make

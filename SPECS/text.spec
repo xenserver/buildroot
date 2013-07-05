@@ -38,7 +38,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q -n ocaml-text-%{version}
+%setup -q
 ocaml setup.ml -configure --destdir $RPM_BUILD_ROOT --prefix /usr
 
 %build

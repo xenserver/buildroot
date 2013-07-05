@@ -17,7 +17,7 @@ BuildRequires:  ocaml-oclock-devel
 Allows the manipulation of libvirt storage pools and volumes via xapi.
 
 %prep
-%setup -q -n xapi-libvirt-storage-xapi-libvirt-storage-%{version}
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 make

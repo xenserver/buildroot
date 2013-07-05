@@ -20,7 +20,7 @@ Requires:       xen-libs
 Memory ballooning daemon for the xapi toolstack.
 
 %prep
-%setup -q -n squeezed-squeezed-%{version}
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 make

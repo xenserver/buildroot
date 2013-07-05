@@ -12,7 +12,7 @@ BuildArch: noarch
 Bootloader for EL-based distros that support Xen.
 
 %prep
-%setup -q -n xcp-eliloader-master-%{version}
+%setup -q -n xcp-%{name}-master-%{version}
 
 %build
  

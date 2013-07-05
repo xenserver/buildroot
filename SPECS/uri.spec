@@ -22,7 +22,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n ocaml-uri-ocaml-uri-%{version}
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml

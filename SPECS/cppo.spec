@@ -14,7 +14,7 @@ Requires:       ocaml
 Equivalent of the C preprocessor for OCaml.
 
 %prep
-%setup -q -n cppo-%{version}
+%setup -q
 
 %build
 make

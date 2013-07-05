@@ -15,7 +15,7 @@ Requires: ocaml-camomile-data
 utop is a toplevel for OCaml which can run in a terminal or in emacs. It supports completion, colors, parenthesis matching, ...
 
 %prep
-%setup -q -n utop-%{version}
+%setup -q
 
 %build
 ocaml setup.ml -configure --prefix %{_prefix} --destdir %{buildroot}

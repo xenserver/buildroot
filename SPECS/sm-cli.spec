@@ -18,7 +18,7 @@ BuildRequires:  ocaml-oclock-devel
 Command-line interface for xapi toolstack storage managers.
 
 %prep
-%setup -q -n sm-cli-sm-cli-%{version}
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 make

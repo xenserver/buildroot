@@ -14,7 +14,7 @@ Requires:       ocaml
 Optional compilation with cpp-like directives.
 
 %prep
-%setup -q -n optcomp-%{version}
+%setup -q
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml

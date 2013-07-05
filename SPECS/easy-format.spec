@@ -14,7 +14,7 @@ Requires:       ocaml ocaml-findlib
 Easy_format: indentation made easy.
 
 %prep
-%setup -q -n easy-format-%{version}
+%setup -q
 
 %build
 make
