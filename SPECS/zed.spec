@@ -5,7 +5,7 @@ Summary:        An abstract engine for text editing for OCaml
 License:        BSD3
 Group:          Development/Other
 URL:            http://forge.ocamlcore.org/frs/download.php/944/zed-1.2.tar.gz
-Source0:        zed-1.2.tar.gz
+Source0:        http://forge.ocamlcore.org/frs/download.php/944/zed-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc ocaml-camomile-devel ocaml-react-devel
 Requires:       ocaml ocaml-findlib

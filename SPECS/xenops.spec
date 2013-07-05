@@ -5,7 +5,7 @@ Summary:        Low-level xen control operations OCaml
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xen-org/xenops/archive/xenops-%{version}.tar.gz
-Source0:        ocaml-xenops-%{version}.tar.gz
+Source0:        https://github.com/xen-org/xenops/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-stdext-devel ocaml-rpc-devel ocaml-camlp4-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel ocaml-xenstore-clients-devel

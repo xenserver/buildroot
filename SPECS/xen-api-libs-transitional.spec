@@ -5,7 +5,7 @@ Summary:        Deprecated standard library extension for OCaml.
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
 URL:            http://github.com/xen-org/xen-api-libs-transitional
-Source0:        xen-api-libs-transitional-0.9.0.tar.gz
+Source0:        https://github.com/xen-org/xen-api-libs-transitional/archive/xen-api-libs-transitional-%{version}/xen-api-libs-transitional-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-stdext-devel xmlm-devel forkexec-devel
 BuildRequires:  ocaml-rpc-devel ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel

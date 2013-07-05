@@ -7,7 +7,7 @@ Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://github.com/djs55/xenserver-install-wizard
-Source0: xenserver-install-wizard-%{version}.tar.gz
+Source0: https://github.com/djs55/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Requires: python newt xapi-python-devel
 
@@ -15,7 +15,7 @@ Requires: python newt xapi-python-devel
 A simple wizard to configure a XenServer after install
 
 %prep 
-%setup -q -n xenserver-install-wizard-%{version}
+%setup -q
 
 %build
 

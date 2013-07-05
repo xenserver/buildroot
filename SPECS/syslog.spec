@@ -5,7 +5,7 @@ Summary:        Syslog bindings for OCaml
 License:        LGPL
 Group:          Development/Other
 URL:            http://opam.ocamlpro.com/pkg/syslog.1.4.html
-Source0:        syslog-1.4.tar.gz
+Source0:        http://godi-backup2.camlcity.org/godi-backup/syslog-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib
 Requires:       ocaml ocaml-findlib

@@ -340,7 +340,7 @@ URL: http://libvirt.org/
 %if %(echo %{version} | grep -o \\. | wc -l) == 3
 %define mainturl stable_updates/
 %endif
-Source: http://libvirt.org/sources/%{?mainturl}libvirt-%{version}.tar.gz
+Source0: http://libvirt.org/sources/stable_updates/%{name}-%{version}.tar.gz
 
 # Fix qemu -> qemu-system-i386 (bz #857026).
 # keep: This patch is Fedora-specific and not upstream.

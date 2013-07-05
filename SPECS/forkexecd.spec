@@ -5,7 +5,7 @@ Summary:        A subprocess management service
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xen-org/forkexecd/archive/forkexecd-0.9.0.tar.gz
-Source0:        forkexecd-0.9.0.tar.gz
+Source0:        https://github.com/xen-org/forkexecd/archive/forkexecd-%{version}/forkexecd-%{version}.tar.gz
 Source1:        forkexecd-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel

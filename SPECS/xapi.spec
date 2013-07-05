@@ -7,7 +7,7 @@ Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
-Source0: xen-api-%{version}.tar.gz
+Source0: https://github.com/djs55/xen-api/archive/%{version}/xen-api-%{version}.tar.gz
 Source1: xen-api-xapi-conf
 Source2: xen-api-init
 Source3: xen-api-xapissl
