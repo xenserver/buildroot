@@ -5,7 +5,7 @@ Summary:        XenAPI plugins from OpenStack
 License:        ASL 2.0
 Group:          System/Hypervisor
 URL:            https://launchpad.net/nova/grizzly/%{version}/+download/nova-%{version}.tar.gz
-Source0:        nova-%{version}.tar.gz
+Source0:        https://launchpad.net/nova/grizzly/%{version}/+download/nova-%{version}.tar.gz
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/nova-%{version}-%{release}
 

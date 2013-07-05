@@ -5,7 +5,7 @@ Summary:        A JSON parser and priter for OCaml
 License:        BSD3
 Group:          Development/Other
 URL:            http://mjambon.com/releases/yojson/yojson-1.1.6.tar.gz
-Source0:        yojson-1.1.6.tar.gz
+Source0:        http://mjambon.com/releases/yojson/yojson-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib cppo easy-format biniou
 Requires:       ocaml ocaml-findlib

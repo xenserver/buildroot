@@ -5,7 +5,7 @@ Summary:        Declarative definition of commandline interfaces for OCaml
 License:        BSD3
 Group:          Development/Other
 URL:            http://erratique.ch/software/cmdliner
-Source0:        cmdliner-0.9.3.tbz
+Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
@@ -27,7 +27,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n cmdliner-%{version}
+%setup -q
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml

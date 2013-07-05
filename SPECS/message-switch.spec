@@ -5,7 +5,7 @@ Summary:        A store and forward message switch
 License:        FreeBSD
 Group:          Development/Other
 URL:            https://github.com/xen-org/message-switch/archive/message-switch-%{version}.tar.gz
-Source0:        message-switch-%{version}.tar.gz
+Source0:        https://github.com/xen-org/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        message-switch-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
@@ -34,7 +34,7 @@ BuildRequires: openssl openssl-devel
 A store and forward message switch for OCaml.
 
 %prep
-%setup -q -n message-switch-message-switch-%{version}
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml

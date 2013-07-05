@@ -5,7 +5,7 @@ Summary:        Compile OCaml programs to javascript
 License:        LGPL and others
 Group:          Development/Other
 URL:            http://ocsigen.org/download/js_of_ocaml-1.3.2.tar.gz
-Source0:        js_of_ocaml-%{version}.tar.gz
+Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-findlib-devel deriving-ocsigen-devel ocaml-lwt-devel ocaml-camlp4-devel ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib ocaml-findlib-devel deriving-ocsigen-devel ocaml-lwt-devel ocaml-camlp4-devel
@@ -23,7 +23,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n js_of_ocaml-%{version}
+%setup -q
 
 %build
 make

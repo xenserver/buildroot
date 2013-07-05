@@ -4,7 +4,7 @@ Version: 0.1
 Release: 1
 License: GPL
 Group: System/Hypervisor
-Source0: %{name}-%{version}.tar.gz
+Source0: https://github.com/xen-org/%{name}/archive/master/%{version}/%{name}-%{version}.tar.gz
 Patch0:  vncterm-1-fix-build
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: xen-devel
@@ -12,7 +12,7 @@ BuildRequires: xen-devel
 %description
 This package contains the vncterm utility
 %prep
-%setup -q -n vncterm-master-%{version}
+%setup -q -n %{name}-master-%{version}
 %patch0 -p1
 
 %build
