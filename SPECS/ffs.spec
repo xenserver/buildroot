@@ -5,7 +5,7 @@ Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xen-org/ffs/archive/ffs-%{version}.tar.gz
-Source0:        ffs-%{version}.tar.gz
+Source0:        https://github.com/xen-org/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        ffs-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel

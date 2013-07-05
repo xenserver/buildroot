@@ -5,7 +5,7 @@ Summary:        Use OpenSSL from OCaml
 License:        LGPL
 Group:          Development/Other
 URL:            http://downloads.sourceforge.net/project/savonet/ocaml-ssl/0.4.6/ocaml-ssl-0.4.6.tar.gz
-Source0:        %{name}-%{version}.tar.gz
+Source0:        http://downloads.sourceforge.net/project/savonet/%{name}/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib openssl-devel
 Requires:       ocaml ocaml-findlib openssl

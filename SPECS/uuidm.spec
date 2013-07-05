@@ -5,7 +5,7 @@ Summary:        Universally Unique IDentifiers (UUIDs) for OCaml
 License:        BSD3
 Group:          Development/Other
 URL:            http://erratique.ch/software/uuidm
-Source0:        uuidm-0.9.5.tbz
+Source0:        http://erratique.ch/software/uuidm/releases/uuidm-%{version}.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib

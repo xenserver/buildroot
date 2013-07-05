@@ -5,7 +5,7 @@ Summary:        XenServer XenAPI Client Library for OCaml
 License:        LGPLv2
 Group:          Development/Libraries
 URL:            https://github.com/xen-org/xen-api-client
-Source0:        xen-api-client-%{version}.tar.gz
+Source0:        https://github.com/xen-org/xen-api-client/archive/%{version}/xen-api-client-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-lwt-devel ocaml-ssl-devel openssl openssl-devel ocaml-ounit-devel ocaml-cohttp-devel ocaml-uri-devel xmlm-devel ocaml-rpc-devel
 Requires:       ocaml ocaml-findlib

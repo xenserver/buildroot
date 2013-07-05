@@ -12,7 +12,7 @@ Summary:        OCaml binding for libvirt
 Group:          Development/Libraries
 License:        LGPLv2+
 URL:            http://libvirt.org/ocaml/
-Source0:        http://libvirt.org/sources/ocaml/ocaml-libvirt-%{version}.tar.gz
+Source0:        http://libvirt.org/sources/ocaml/%{name}-%{version}.tar.gz
 Patch0:		ocaml-libvirt-1-252568550f9bf28b07f4e6d116485205e58afe4a
 Patch1:		ocaml-libvirt-2-c6c9c3fff5993056e0af7219f4fe67ab8db3cdf2
 Patch2:	 	ocaml-libvirt-3-34a472800ba1908e910318cc5d5ed9588174c1cf

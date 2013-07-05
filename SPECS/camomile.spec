@@ -13,7 +13,7 @@ Group:          Development/Libraries
 # https://www.redhat.com/archives/fedora-legal-list/2008-March/msg00005.html
 License:        LGPLv2+
 URL:            http://sourceforge.net/projects/camomile/
-Source0:        http://downloads.sourceforge.net/camomile/camomile-0.8.3.tar.bz2
+Source0:        http://prdownloads.sourceforge.net/camomile/camomile-%{version}.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    ppc64 sparc64 s390 s390x
 

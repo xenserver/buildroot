@@ -9,7 +9,7 @@ Summary:        OCaml-Text is a library for dealing with ``text'', i.e. sequence
 Group:          Development/Libraries
 License:        BSD
 URL:            http://forge.ocamlcore.org/projects/ocaml-text
-Source0:        http://forge.ocamlcore.org/frs/download.php/937/ocaml-text-%{version}.tar.gz
+Source0:        http://forge.ocamlcore.org/frs/download.php/937/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 

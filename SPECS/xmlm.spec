@@ -5,7 +5,7 @@ Summary:        Streaming XML input/output for OCaml
 License:        BSD3
 Group:          Development/Other
 URL:            http://erratique.ch/software/xmlm
-Source0:        xmlm-1.1.1.tbz
+Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib

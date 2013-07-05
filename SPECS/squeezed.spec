@@ -5,7 +5,7 @@ Summary:        Memory ballooning daemon for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xen-org/squeezed/archive/squeezed-0.9.0.tar.gz
-Source0:        squeezed-0.9.0.tar.gz
+Source0:        https://github.com/xen-org/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        squeezed-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel

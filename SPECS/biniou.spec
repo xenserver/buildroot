@@ -5,7 +5,7 @@ Summary:        Binary data format designed for speed, safety, ease of use and b
 License:        BSD3
 Group:          Development/Other
 URL:            http://mjambon.com/releases/biniou/biniou-1.0.6.tar.gz
-Source0:        biniou-1.0.6.tar.gz
+Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib easy-format
 Requires:       ocaml ocaml-findlib

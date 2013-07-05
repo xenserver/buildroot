@@ -5,7 +5,7 @@ Summary:        Pure OCaml implementation of the Qemu Message Protocol (QMP)
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
 URL:            http://github.com/xen-org/ocaml-qmp
-Source0:        ocaml-qmp-0.9.0.tar.gz
+Source0:        https://github.com/xen-org/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-yojson-devel cmdliner-devel ocaml-ounit-devel
 Requires:       ocaml ocaml-findlib

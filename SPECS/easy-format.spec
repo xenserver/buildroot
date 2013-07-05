@@ -5,7 +5,7 @@ Summary:        Indentation made easy
 License:        BSD3
 Group:          Development/Other
 URL:            http://mjambon.com/releases/easy-format/easy-format-1.0.1.tar.gz
-Source0:        easy-format-1.0.1.tar.gz
+Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib
 Requires:       ocaml ocaml-findlib
