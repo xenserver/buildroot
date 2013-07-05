@@ -4,6 +4,7 @@
 
 import rpm
 import os
+import urlparse
 
 # for debugging, make all paths relative to PWD
 rpm.addMacro( '_topdir', '.' )
@@ -72,6 +73,27 @@ def rpmNamesFromSpec( spec ):
         rpm.delMacro( 'ARCH' )
         return rpmname
     return [rpmNameFromHeader( p.header ) for p in spec.packages]
+    
+# Rules to download sources
+
+# Assumes each RPM only needs one download - we have some multi-source
+# packages but in all cases the additional sources are patches provided
+# in the Git repository
+for specname, spec in specs.iteritems():
+    # The RPM documentation says that RPM only cares about the basename
+    # of the path given in a Source: tag.   spec.sourceHeader['url'] 
+    # enforces this - even if we have a URL in the source tag, it 
+    # will only give us the basename.   However the full tag text is
+    # available in spec.sources.   It's not clear whether or not we
+    # can rely on this as part of the RPM library API.
+
+    for (source, _, _) in spec.sources:
+	url = urlparse.urlparse( source )
+	if url.scheme is not "":
+            print '%s: %s' % ( 
+		os.path.join( src_dir, os.path.basename( url.path ) ),
+		os.path.join( spec_dir, specname ) )
+            print '\tcurl -L -o $@ %s' % source
     
 
 # Rules to build RPMS from SRPMS (uses information from the SPECs to
