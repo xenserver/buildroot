@@ -1,6 +1,6 @@
-Name:           fusion-release
-Version:        0.1.0
-Release:        1
+Name:           xenserver-tech-preview-release
+Version:        0.2.0
+Release:        0
 Summary:        Yum repositories for xenserver
 License:        GPL
 Group:          Development/Other
