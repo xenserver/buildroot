@@ -1,5 +1,5 @@
 Name:           xenserver-tech-preview-release
-Version:        0.2.0
+Version:        0.3.0
 Release:        0
 Summary:        Yum repositories for xenserver
 License:        GPL
