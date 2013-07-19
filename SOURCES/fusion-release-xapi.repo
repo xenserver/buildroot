@@ -1,13 +1,13 @@
 [xapi]
-name=CentOS-$releasever - xapi 
-baseurl=http://www.uk.xensource.com/~dscott/xapi/RPMS/$basearch/
+name=CentOS-$releasever - xenserver tech preview
+baseurl=http://xenbits.xen.org/djs/xenserver-tech-preview.20130707.1/RPMS/
 gpgcheck=0
 Priority=1
 enabled=1
 
 [xapi-source]
-name=CentOS-$releasever - xapi Source
-baseurl=http://www.uk.xensource.com/~dscott/xapi/SRPMS/
+name=CentOS-$releasever - xenserver tech preview Source
+baseurl=http://xenbits.xen.org/djs/xenserver-tech-preview.20130707.1/SRPMS/
 gpgcheck=0
 Priority=1
 enabled=0

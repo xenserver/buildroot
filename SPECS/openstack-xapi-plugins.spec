@@ -1,6 +1,6 @@
 Name:           openstack-xapi-plugins
 Version:        2013.1.2
-Release:        1
+Release:        2
 Summary:        XenAPI plugins from OpenStack
 License:        ASL 2.0
 Group:          System/Hypervisor
@@ -19,17 +19,20 @@ XenAPI plugins used by OpenStack to control XenServer.
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/%{_sysconfdir}
-cp -r plugins/xenserver/xenapi/etc/xapi.d %{buildroot}/%{_sysconfdir}
+mkdir -p %{buildroot}/usr/lib/xapi/plugins
+cp -r plugins/xenserver/xenapi/etc/xapi.d/plugins/* %{buildroot}/usr/lib/xapi/plugins/
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(755,root,root,-)
-%{_sysconfdir}/xapi.d/
+/usr/lib/xapi/plugins/*
 
 %changelog
+* Wed Jul  3 2013 David Scott <dave.scott@eu.citrix.com>
+- Tweak plugins directory to match xapi
+
 * Fri Jun 28 2013 Euan Harris <euan.harris@citrix.com>
 - Initial package
 

@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.14
+Version: 1.9.17
 Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -53,7 +53,7 @@ Libraries for writing XenAPI clients in python.
 #%patch0 -p0 -b xapi-version.patch
 
 %build
-./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi
+./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=/usr/lib/xapi/plugins
 
 export COMPILE_JAVA=no
 make version

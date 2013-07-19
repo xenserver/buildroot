@@ -1,6 +1,6 @@
 Name:           xcp-networkd
 Version:        0.9.2
-Release:        0
+Release:        1
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
