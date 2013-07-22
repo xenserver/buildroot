@@ -9,10 +9,35 @@ import urlparse
 # for debugging, make all paths relative to PWD
 rpm.addMacro( '_topdir', '.' )
 
+# Directories where rpmbuild/mock expects to find inputs
+# and writes outputs
 rpm_dir = rpm.expandMacro( '%_rpmdir' )
 spec_dir = rpm.expandMacro( '%_specdir' )
 srpm_dir = rpm.expandMacro( '%_srcrpmdir' )
 src_dir = rpm.expandMacro( '%_sourcedir' )
+
+# Some RPMs include the value of '%dist' in the release part of the
+# filename.   In the mock chroot, %dist is set to a CentOS release
+# such as '.el6', so RPMs produced by mock will have that in their
+# names.   However if we generate the dependencies in a Fedora 'host',
+# the filenames will be generated with a %dist of '.fc18' instead.
+# We can override %dist so these dependencies are named correctly,
+# but we (currently) run rpmbuild directly in the host to build the
+# SRPMS, so we need to make sure those dependencies use the 
+# host value of %dist.   There should not be any problem with building
+# the SRPMs in a distribution that is different to the one in
+# which we build RPMs, as an SRPM is just a CPIO archive containing
+# the spec file and the source tarball.
+#
+# Annoyingly, the dist interpolation is done when we read the specfile,
+# so we either have to read it twice or rewrite the SRPM name appropriately.
+
+host_dist = rpm.expandMacro( '%dist' )
+# We could avoid hardcoding this by running 
+# "mock -r xenserver --chroot "rpm --eval '%dist'"
+chroot_dist = '.el6'
+rpm.addMacro( 'dist', chroot_dist )
+
 
 print "all: rpms"
 
@@ -41,11 +66,14 @@ def srpmNameFromSpec( spec ):
     # don't want, so we strip that off
 
     srpmname = os.path.basename( rpm.expandMacro( rpmfilenamepat ) )  
+
     rpm.delMacro( 'NAME' )
     rpm.delMacro( 'VERSION' )
     rpm.delMacro( 'RELEASE' )
     rpm.delMacro( 'ARCH' )
-    return srpmname
+
+    # HACK: rewrite %dist if it appears in the filename 
+    return srpmname.replace( chroot_dist, host_dist )
 
 # Rules to build SRPM from SPEC
 rule_spec_from_srpm = 'rpmbuild -bs $<'
