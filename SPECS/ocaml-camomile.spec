@@ -19,10 +19,6 @@ ExcludeArch:    ppc64 sparc64 s390 s390x
 
 BuildRequires:  ocaml, ocaml-findlib-devel, ocaml-ocamldoc, ocaml-camlp4-devel
 
-%define _use_internal_dependency_generator 0
-%define __find_requires /usr/lib/rpm/ocaml-find-requires.sh
-%define __find_provides /usr/lib/rpm/ocaml-find-provides.sh
-
 %description
 Camomile is a Unicode library for ocaml. Camomile provides Unicode
 character type, UTF-8, UTF-16, UTF-32 strings, conversion to/from
