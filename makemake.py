@@ -76,7 +76,6 @@ def srpmNameFromSpec( spec ):
     return srpmname.replace( chroot_dist, host_dist )
 
 # Rules to build SRPM from SPEC
-rule_spec_from_srpm = 'rpmbuild -bs $<'
 for specname, spec in specs.iteritems():
     srpmname = srpmNameFromSpec( spec )
     sources = [ os.path.join( src_dir, p ) for p in spec.sourceHeader['source'] ]
@@ -86,7 +85,8 @@ for specname, spec in specs.iteritems():
                          os.path.join( spec_dir, specname ),
                          " ".join( sources ),
                          " ".join( patches ) )
-    print '\t%s' % rule_spec_from_srpm
+    print '\t@echo [RPMBUILD] $@' 
+    print '\t@rpmbuild --quiet -bs $<'
 
 def rpmNamesFromSpec( spec ):
     def rpmNameFromHeader( h ):
@@ -121,7 +121,8 @@ for specname, spec in specs.iteritems():
             print '%s: %s' % ( 
 		os.path.join( src_dir, os.path.basename( url.path ) ),
 		os.path.join( spec_dir, specname ) )
-            print '\tcurl -L -o $@ %s' % source
+            print '\t@echo [CURL] $@' 
+            print '\t@curl --silent --show-error -L -o $@ %s' % source
     
 
 # Rules to build RPMS from SRPMS (uses information from the SPECs to
@@ -137,8 +138,10 @@ for specname, spec in specs.iteritems():
         srpm_path = os.path.join( srpm_dir, srpmname )
         rpm_outdir = os.path.dirname( rpm_path )
         print '%s: %s' % ( rpm_path, srpm_path )
-        print '\tmock -r xenserver --resultdir="%s" $<' % rpm_outdir
-        print '\tcreaterepo --update %s' % rpm_dir
+        print '\t@echo [MOCK] $@'
+        print '\t@mock --quiet -r xenserver --resultdir="%s" $<' % rpm_outdir
+        print '\t@echo [CREATEREPO] $@'
+        print '\t@createrepo --quiet --update %s' % rpm_dir
         
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
