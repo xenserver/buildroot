@@ -78,13 +78,11 @@ def srpmNameFromSpec( spec ):
 # Rules to build SRPM from SPEC
 for specname, spec in specs.iteritems():
     srpmname = srpmNameFromSpec( spec )
-    sources = [ os.path.join( src_dir, p ) for p in spec.sourceHeader['source'] ]
-    patches = [ os.path.join( src_dir, p ) for p in spec.sourceHeader['patch'] ]
+    sources = [ os.path.join( src_dir, os.path.basename( p[0] ) ) for p in spec.sources ]
 
-    print '%s: %s %s %s' % (os.path.join( srpm_dir, srpmname ), 
+    print '%s: %s %s' % (os.path.join( srpm_dir, srpmname ), 
                          os.path.join( spec_dir, specname ),
-                         " ".join( sources ),
-                         " ".join( patches ) )
+                         " ".join( sources ) )
     print '\t@echo [RPMBUILD] $@' 
     print '\t@rpmbuild --quiet -bs $<'
 
