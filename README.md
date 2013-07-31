@@ -14,12 +14,10 @@ passwd <user>
 su - <user>
 
 git clone git://github.com/xen-org/xen-api-rpm-buildroot.git /home/<user>/rpmbuild
-mkdir -p /home/<user>/rpmbuild/RPMS/x86_64/
-createrepo /home/<user>/rpmbuild/RPMS/x86_64
 
 ./configure.sh
-sudo cp xenserver.cfg /etc/mock/
 
 ./makemake.py > Makefile
+
 make
 ```
