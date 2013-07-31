@@ -13,7 +13,9 @@ passwd <user>
 
 su - <user>
 
-git clone git://github.com/xen-org/xen-api-rpm-buildroot.git /home/<user>/rpmbuild
+git clone git://github.com/xen-org/xen-api-rpm-buildroot.git rpmbuild
+
+cd rpmbuild
 
 ./configure.sh
 

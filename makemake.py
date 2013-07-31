@@ -84,7 +84,7 @@ for specname, spec in specs.iteritems():
                          os.path.join( spec_dir, specname ),
                          " ".join( sources ) )
     print '\t@echo [RPMBUILD] $@' 
-    print '\t@rpmbuild --quiet -bs $<'
+    print '\t@rpmbuild --quiet --define "_topdir ." -bs $<'
 
 def rpmNamesFromSpec( spec ):
     def rpmNameFromHeader( h ):
