@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir mock
+mkdir -p mock
 sed "s|@HOME@|$HOME|" xenserver.cfg.in > mock/xenserver.cfg
-ln -s /etc/mock/default.cfg mock/
-ln -s /etc/mock/site-defaults.cfg mock/
-ln -s /etc/mock/logging.ini mock/
+ln -fs /etc/mock/default.cfg mock/
+ln -fs /etc/mock/site-defaults.cfg mock/
+ln -fs /etc/mock/logging.ini mock/
