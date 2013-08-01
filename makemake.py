@@ -78,6 +78,11 @@ def srpmNameFromSpec( spec ):
 # Rules to build SRPM from SPEC
 for specname, spec in specs.iteritems():
     srpmname = srpmNameFromSpec( spec )
+
+    # spec.sourceHeader['sources'] and ['patches'] doesn't work 
+    # in RPM 4.8 on CentOS 6.4.   spec.sources contains both
+    # sources and patches, but with full paths which must be
+    # chopped.
     sources = [ os.path.join( src_dir, os.path.basename( p[0] ) ) for p in spec.sources ]
 
     print '%s: %s %s' % (os.path.join( srpm_dir, srpmname ), 
