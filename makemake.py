@@ -173,8 +173,11 @@ all_srpms = [ os.path.join( srpm_dir, srpmNameFromSpec( s ) )
               for s in specs.values() ]
 
 all_rpms = []
-for rpms in [ rpmNamesFromSpec( s ) for s in specs.values() ]:
-    all_rpms += map( (lambda rpm: os.path.join( rpm_dir, rpm )), rpms )
+for spec in specs.values():
+    rpms = rpmNamesFromSpec( spec )
+    rpm_paths = map( (lambda rpm: os.path.join( rpm_dir, rpm )), rpms )
+    all_rpms += rpm_paths
+    print "%s: %s" % ( spec.sourceHeader['name'], " ".join( rpm_paths ) )
 
 
 print "rpms: " + " \\\n\t".join( all_rpms )
