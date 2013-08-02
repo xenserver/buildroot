@@ -38,10 +38,6 @@ BuildRequires:  libvirt-devel >= 0.2.1
 BuildRequires:  perl
 BuildRequires:  gawk
 
-%define _use_internal_dependency_generator 0
-%define __find_requires /usr/lib/rpm/ocaml-find-requires.sh
-%define __find_provides /usr/lib/rpm/ocaml-find-provides.sh
-
 %description
 OCaml binding for libvirt.
 
