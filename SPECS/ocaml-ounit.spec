@@ -18,8 +18,6 @@ BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-camlp4 ocaml-camlp4-devel
 BuildRequires:  ocaml-ocamldoc
 
-%define _use_internal_dependency_generator 0
-
 
 %description
 OUnit is a unit test framework for OCaml. It allows one to easily
