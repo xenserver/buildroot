@@ -90,7 +90,21 @@ for specname, spec in specs.iteritems():
     # in RPM 4.8 on CentOS 6.4.   spec.sources contains both
     # sources and patches, but with full paths which must be
     # chopped.
-    sources = [ os.path.join( src_dir, os.path.basename( p[0] ) ) for p in spec.sources ]
+    sources = []
+    for (source, _, _) in spec.sources:
+        url = urlparse.urlparse( source )
+
+        # Source comes from a remote HTTP server
+        if url.scheme in ["http", "https"]:
+            sources.append( os.path.join( src_dir, os.path.basename( url.path ) ) )
+
+        # Source comes from a local file or directory
+        if url.scheme == "file":
+            sources.append( os.path.join( src_dir, os.path.basename( url.fragment ) ) )
+
+        # Source is an otherwise unqualified file, probably a patch
+        if url.scheme == "":
+            sources.append( os.path.join( src_dir, url.path ) )
 
     print '%s: %s %s' % (os.path.join( srpm_dir, srpmname ), 
                          os.path.join( spec_dir, specname ),
@@ -126,13 +140,27 @@ for specname, spec in specs.iteritems():
     # can rely on this as part of the RPM library API.
 
     for (source, _, _) in spec.sources:
-	url = urlparse.urlparse( source )
-	if url.scheme is not "":
+        url = urlparse.urlparse( source )
+
+        # Source comes from a remote HTTP server
+        if url.scheme in ["http", "https"]:
             print '%s: %s' % ( 
-		os.path.join( src_dir, os.path.basename( url.path ) ),
-		os.path.join( spec_dir, specname ) )
+                os.path.join( src_dir, os.path.basename( url.path ) ),
+                os.path.join( spec_dir, specname ) )
             print '\t@echo [CURL] $@' 
             print '\t@curl --silent --show-error -L -o $@ %s' % source
+
+        # Source comes from a local file or directory
+        if url.scheme == "file":
+            print '%s: %s $(shell find %s)' % ( 
+                os.path.join( src_dir, os.path.basename( url.fragment ) ),
+                os.path.join( spec_dir, specname ),
+                url.path )
+            print '\t@echo [TAR] $@' 
+            # assume that the directory name is already what's expected by the
+            # spec file, and tag it with the version number in the tarball
+            dirname = "%s-%s" % ( os.path.basename( url.path ), spec.sourceHeader['version'] )
+            print '\t@tar zcf $@ -C %s --transform "s,^\./,%s/," .' % ( url.path, dirname )
     
 
 # Rules to build RPMS from SRPMS (uses information from the SPECs to
