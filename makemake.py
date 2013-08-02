@@ -5,6 +5,7 @@
 import rpm
 import os
 import urlparse
+import sys
 
 # for debugging, make all paths relative to PWD
 rpm.addMacro( '_topdir', '.' )
@@ -50,8 +51,14 @@ def specFromFile( spec ):
 
 spec_names = os.listdir( spec_dir )
 specs = {}
-for s in spec_names:
-    specs[s] = specFromFile( os.path.join( spec_dir, s ) )
+for spec_name in spec_names:
+    spec = specFromFile( os.path.join( spec_dir, spec_name ) )
+    pkg_name = spec.sourceHeader['name']
+    if os.path.splitext( spec_name )[0] != pkg_name:
+        sys.stderr.write( "error: spec file name '%s' does not match package name '%s'\n" % ( spec_name, pkg_name ) )
+        sys.exit( 1 )
+        
+    specs[spec_name] = spec
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
