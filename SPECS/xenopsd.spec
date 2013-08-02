@@ -16,7 +16,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
-BuildRequires:  ocaml-oclock-devel ocaml-uuidm-devel forkexec-devel
+BuildRequires:  ocaml-oclock-devel ocaml-uuidm-devel forkexecd-devel
 BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
 BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
@@ -40,7 +40,7 @@ Simple VM manager for Xen and KVM using libvirt.
 Summary:        %{name} using xc
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
-Requires:       xen-libs vncterm forkexec
+Requires:       xen-libs vncterm forkexecd
 
 %description    xc
 Simple VM manager for Xen using libxc.
