@@ -7,8 +7,8 @@ Group:          Development/Other
 URL:            https://github.com/xen-org/netdev/archive/netdev-0.9.0.tar.gz
 Source0:        https://github.com/xen-org/netdev/archive/netdev-%{version}/netdev-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib forkexec-devel ocaml-stdext-devel
-#required by forkexec
+BuildRequires:  ocaml ocaml-findlib forkexecd-devel ocaml-stdext-devel
+#required by forkexecd
 BuildRequires:  ocaml-syslog-devel
 Requires:       ocaml ocaml-findlib
 
