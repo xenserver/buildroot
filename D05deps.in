@@ -1,0 +1,3 @@
+#!/bin/sh
+(cd @PWD@/RPMS; apt-ftparchive packages . > Packages)
+apt-get update
