@@ -4,8 +4,8 @@ Release:        2
 Summary:        CLI for xenopsd, the xapi toolstack domain manager
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/xenops-cli/archive/xenops-cli-%{version}.tar.gz
-Source0:        https://github.com/xen-org/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/xapi-project/xenops-cli/archive/xenops-cli-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-obuild ocaml-xcp-idl-devel cmdliner-devel ocaml-uuidm-devel

@@ -4,8 +4,8 @@ Release:        0
 Summary:        Manipulate running tapdisk instances
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/tapctl/archive/tapctl-0.9.0.tar.gz
-Source0:        https://github.com/xen-org/tapctl/archive/tapctl-%{version}/tapctl-%{version}.tar.gz
+URL:            https://github.com/xapi-project/tapctl/archive/tapctl-0.9.0.tar.gz
+Source0:        https://github.com/xapi-project/tapctl/archive/tapctl-%{version}/tapctl-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  forkexecd-devel ocaml-stdext-devel ocaml-rpc-devel

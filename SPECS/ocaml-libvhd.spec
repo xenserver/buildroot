@@ -4,8 +4,8 @@ Release:        0
 Summary:        vhd manipulation via libvhd
 License:        BSD3
 Group:          Development/Other
-URL:            http://github.com/xen-org/libvhd
-Source0:        https://github.com/xen-org/libvhd/archive/libvhd-%{version}/libvhd-%{version}.tar.gz
+URL:            http://github.com/xapi-project/libvhd
+Source0:        https://github.com/xapi-project/libvhd/archive/libvhd-%{version}/libvhd-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib xen-devel libuuid-devel
 Requires:       ocaml ocaml-findlib

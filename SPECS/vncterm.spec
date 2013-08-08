@@ -4,7 +4,7 @@ Version: 0.1
 Release: 1
 License: GPL
 Group: System/Hypervisor
-Source0: https://github.com/xen-org/%{name}/archive/master/%{version}/%{name}-%{version}.tar.gz
+Source0: https://github.com/xapi-project/%{name}/archive/master/%{version}/%{name}-%{version}.tar.gz
 Patch0:  vncterm-1-fix-build
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: xen-devel
