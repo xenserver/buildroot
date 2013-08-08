@@ -22,7 +22,7 @@ Using mock to build these RPMs:
 Mock will refuse to run as root. You must choose a non-privileged user to
 run mock as. Type the following as root:
 
-(Note select a "<user>" which isn't "mock" when typing the commands below)
+(Note select a `<user>` which isn't "mock" when typing the commands below)
 
 ```
 useradd <user> -G mock
