@@ -4,8 +4,8 @@ Release:        1
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xen-org/xcp-networkd/archive/xcp-networkd-%{version}.tar.gz
-Source0:        https://github.com/xen-org/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/xapi-project/xcp-networkd/archive/xcp-networkd-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
