@@ -4,8 +4,8 @@ Release:        2
 Summary:        Query the state of CDROM devices
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
-URL:            http://github.com/xen-org/ocaml
-Source0:        https://github.com/xen-org/cdrom/archive/cdrom-%{version}/cdrom-%{version}.tar.gz
+URL:            http://github.com/xapi-project/ocaml
+Source0:        https://github.com/xapi-project/cdrom/archive/cdrom-%{version}/cdrom-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-obuild
 Requires:       ocaml ocaml-findlib
