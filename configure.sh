@@ -9,6 +9,7 @@ ln -fs /etc/mock/logging.ini mock/
 echo " done"
 
 echo -n "Initializing repository..."
+mkdir -p RPMS
 createrepo --quiet RPMS
 echo " done"
 
