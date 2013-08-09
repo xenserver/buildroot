@@ -1,11 +1,11 @@
 Name:           xenopsd
-Version:        0.9.17
-Release:        1
+Version:        0.9.18
+Release:        0
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/xenopsd/archive/xenopsd-%{version}.tar.gz
-Source0:        https://github.com/djs55/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/xapi-project/xenopsd/archive/%{version}.tar.gz
+Source0:        https://github.com/djs55/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
 Source3:        xenopsd-libvirt-init
