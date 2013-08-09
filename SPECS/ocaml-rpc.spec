@@ -38,6 +38,9 @@ make install DESTDIR=${buildroot}
 %clean
 rm -rf %{buildroot}
 
+%files
+# This space intentionally left blank
+
 %files devel
 %defattr(-,root,root)
 %doc README.md

@@ -71,6 +71,8 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%files
+# This space intentionally left blank
 
 %files devel
 %defattr(-,root,root,-)

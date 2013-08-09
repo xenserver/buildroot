@@ -42,6 +42,9 @@ OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml ocaml setup.ml -install
 %clean
 rm -rf %{buildroot}
 
+%files
+#This space intentionally left blank
+
 %files devel
 %defattr(-,root,root)
 %doc README.md CHANGES

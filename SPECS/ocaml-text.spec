@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT/usr/local/share/doc
 rm -rf $RPM_BUILD_ROOT
 
 
+%files
+#This space intentionally left blank
+
 %files devel
 %defattr(-,root,root,-)
 %doc /usr/share/doc/ocaml-text/*
