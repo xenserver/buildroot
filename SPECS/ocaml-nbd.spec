@@ -41,6 +41,9 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 %clean
 rm -rf %{buildroot}
 
+%files
+# This space intentionally left blank
+
 %files devel
 %defattr(-,root,root)
 %doc ChangeLog README.markdown

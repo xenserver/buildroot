@@ -42,6 +42,9 @@ rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/lambda-term-actions
 %clean
 rm -rf %{buildroot}
 
+%files
+# This space intentionally left blank
+
 %files devel
 %defattr(-,root,root)
 %doc LICENSE CHANGES

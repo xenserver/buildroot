@@ -37,6 +37,9 @@ make install DESTDIR=%{buildroot} BINDIR=%{buildroot}/%{_bindir}
 %clean
 rm -rf %{buildroot}
 
+%files
+#This space intentionally left blank
+
 %files devel
 %defattr(-,root,root)
 %doc README.md LICENSE
