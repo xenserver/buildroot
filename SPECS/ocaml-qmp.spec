@@ -1,5 +1,5 @@
 Name:           ocaml-qmp
-Version:        0.9.0
+Version:        0.9.1
 Release:        0
 Summary:        Pure OCaml implementation of the Qemu Message Protocol (QMP)
 License:        LGPL2.1 + OCaml linking exception
