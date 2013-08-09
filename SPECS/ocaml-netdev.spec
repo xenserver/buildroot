@@ -42,6 +42,9 @@ ocaml setup.ml -install
 %clean
 rm -rf %{buildroot}
 
+%files
+# This space intentionally left blank
+
 %files devel
 %defattr(-,root,root)
 %doc LICENSE README.md ChangeLog MAINTAINERS
