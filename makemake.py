@@ -6,6 +6,7 @@ import rpm
 import os
 import urlparse
 import sys
+import makedeb
 
 # for debugging, make all paths relative to PWD
 rpm.addMacro( '_topdir', '.' )
@@ -37,12 +38,12 @@ host_dist = rpm.expandMacro( '%dist' )
 # We could avoid hardcoding this by running 
 # "mock -r xenserver --chroot "rpm --eval '%dist'"
 chroot_dist = '.el6'
-rpm.addMacro( 'dist', chroot_dist )
+rpm.addMacro( 'dist', "" )
 
 
 print "all: rpms"
 
-rpmfilenamepat = rpm.expandMacro( '%_build_name_fmt' )
+rpmfilenamepat = "%{NAME}_%{VERSION}_%{ARCH}.deb"
 
 ts = rpm.TransactionSet()
 
@@ -62,7 +63,7 @@ for spec_name in spec_names:
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
-    rpm.addMacro( 'NAME', h['name'] )
+    rpm.addMacro( 'NAME', makedeb.mapPackage(h['name']) )
     rpm.addMacro( 'VERSION', h['version'] )
     rpm.addMacro( 'RELEASE', h['release'] )
     rpm.addMacro( 'ARCH', 'src' )
@@ -72,7 +73,7 @@ def srpmNameFromSpec( spec ):
     # Unfortunately expanding that macro gives us a leading 'src' that we
     # don't want, so we strip that off
 
-    srpmname = os.path.basename( rpm.expandMacro( rpmfilenamepat ) )  
+    srpmname = os.path.basename( rpm.expandMacro( "%{NAME}_%{VERSION}.dsc" ) )  
 
     rpm.delMacro( 'NAME' )
     rpm.delMacro( 'VERSION' )
@@ -81,6 +82,20 @@ def srpmNameFromSpec( spec ):
 
     # HACK: rewrite %dist if it appears in the filename 
     return srpmname.replace( chroot_dist, host_dist )
+
+def rpmNamesFromSpec( spec ):
+    def rpmNameFromHeader( h ):
+        rpm.addMacro( 'NAME', makedeb.mapPackageName(h) )
+        rpm.addMacro( 'VERSION', h['version'] )
+        rpm.addMacro( 'RELEASE', h['release'] )
+        rpm.addMacro( 'ARCH', "amd64" if h['arch'] == "x86_64" else h['arch'])
+        rpmname = rpm.expandMacro( rpmfilenamepat )
+        rpm.delMacro( 'NAME' )
+        rpm.delMacro( 'VERSION' )
+        rpm.delMacro( 'RELEASE' )
+        rpm.delMacro( 'ARCH' )
+        return rpmname
+    return [rpmNameFromHeader( p.header ) for p in spec.packages]
 
 # Rules to build SRPM from SPEC
 for specname, spec in specs.iteritems():
@@ -109,23 +124,9 @@ for specname, spec in specs.iteritems():
     print '%s: %s %s' % (os.path.join( srpm_dir, srpmname ), 
                          os.path.join( spec_dir, specname ),
                          " ".join( sources ) )
-    print '\t@echo [RPMBUILD] $@' 
-    print '\t@rpmbuild --quiet --define "_topdir ." -bs $<'
+    print '\t@echo [MAKEDEB] $@'
+    print '\t./makedeb.py $<'
 
-def rpmNamesFromSpec( spec ):
-    def rpmNameFromHeader( h ):
-        rpm.addMacro( 'NAME', h['name'] )
-        rpm.addMacro( 'VERSION', h['version'] )
-        rpm.addMacro( 'RELEASE', h['release'] )
-        rpm.addMacro( 'ARCH', h['arch'] )
-        rpmname = rpm.expandMacro( rpmfilenamepat )
-        rpm.delMacro( 'NAME' )
-        rpm.delMacro( 'VERSION' )
-        rpm.delMacro( 'RELEASE' )
-        rpm.delMacro( 'ARCH' )
-        return rpmname
-    return [rpmNameFromHeader( p.header ) for p in spec.packages]
-    
 # Rules to download sources
 
 # Assumes each RPM only needs one download - we have some multi-source
@@ -176,10 +177,10 @@ for specname, spec in specs.iteritems():
         srpm_path = os.path.join( srpm_dir, srpmname )
         rpm_outdir = os.path.dirname( rpm_path )
         print '%s: %s' % ( rpm_path, srpm_path )
-        print '\t@echo [MOCK] $@'
-        print '\t@mock --configdir=mock --quiet -r xenserver --resultdir="%s" $<' % rpm_outdir
-        print '\t@echo [CREATEREPO] $@'
-        print '\t@createrepo --quiet --update %s' % rpm_dir
+        print '\t@echo [PBUILDER] $@'
+        print '\tsudo pbuilder --build --configfile pbuilder/pbuilderrc-amd64 --buildresult %s $<' % rpm_outdir 
+        #print '\t@echo [CREATEREPO] $@'
+        #print '\t@createrepo --quiet --update %s' % rpm_dir
         
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
