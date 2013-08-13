@@ -429,7 +429,7 @@ def debianChangelogFromSpec(spec):
             version = m.group(2)
         else:
             author = name
-            version = spec.sourceHeader['version']
+            version = "%s-%s" % (spec.sourceHeader['version'], spec.sourceHeader['release'])
 
         res += "%s (%s) UNRELEASED; urgency=low\n" % (mapPackage(hdr['name']), version)
         res += "\n"

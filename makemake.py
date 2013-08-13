@@ -43,7 +43,7 @@ rpm.addMacro( 'dist', "" )
 
 print "all: rpms"
 
-rpmfilenamepat = "%{NAME}_%{VERSION}_%{ARCH}.deb"
+rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
 
 ts = rpm.TransactionSet()
 
@@ -73,7 +73,7 @@ def srpmNameFromSpec( spec ):
     # Unfortunately expanding that macro gives us a leading 'src' that we
     # don't want, so we strip that off
 
-    srpmname = os.path.basename( rpm.expandMacro( "%{NAME}_%{VERSION}.dsc" ) )  
+    srpmname = os.path.basename( rpm.expandMacro( "%{NAME}_%{VERSION}-%{RELEASE}.dsc" ) )  
 
     rpm.delMacro( 'NAME' )
     rpm.delMacro( 'VERSION' )
