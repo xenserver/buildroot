@@ -379,7 +379,7 @@ def debianRulesBuildFromSpec(spec, path):
     with open(os.path.join(path, "debian/build.sh"), "w") as f:
         helper = "#!/bin/sh\n"
         helper += "unset CFLAGS\n" #XXX HACK for ocaml-oclock
-        helper += spec.build
+        helper += spec.build.replace("$RPM_BUILD_ROOT", "${DESTDIR}")
         f.write(helper)
     os.chmod(os.path.join(path, "debian/build.sh"), 0o755)
     return rule
@@ -391,7 +391,7 @@ def debianRulesInstallFromSpec(spec, path):
     rule += "\tdebian/install.sh\n"
     rule += "\n"
     with open(os.path.join(path, "debian/install.sh"), "w") as f:
-        f.write("#!/bin/sh\n" + spec.install)
+        f.write("#!/bin/sh\n" + spec.install.replace("$RPM_BUILD_ROOT", "${DESTDIR}"))
     os.chmod(os.path.join(path, "debian/install.sh"), 0o755)
     return rule
 
@@ -410,7 +410,7 @@ def debianRulesCleanFromSpec(spec, path):
     rule += re.sub("^", "\t", spec.clean.strip(), flags=re.MULTILINE)
     rule += "\n"
     with open(os.path.join(path, "debian/clean.sh"), "w") as f:
-        f.write("#!/bin/sh\n" + spec.clean)
+        f.write("#!/bin/sh\n" + spec.clean.replace("$RPM_BUILD_ROOT", "${DESTDIR}"))
     os.chmod(os.path.join(path, "debian/clean.sh"), 0o755)
     return rule
 
@@ -516,7 +516,7 @@ def principalSourceFile(spec):
     return os.path.basename([name for (name, seq, type) in spec.sources 
                              if seq == 0 and type == 1][0])
 
-def prepareBuildDir(spec):
+def prepareBuildDir(spec, build_subdir):
     # To prepare the build dir, RPM cds into $TOPDIR/BUILD
     # and expands all paths in the prep script with $TOPDIR.
     # It unpacks the tarball and then cds into the directory it
@@ -528,7 +528,8 @@ def prepareBuildDir(spec):
     # patches from ../SOURCES doesn't work when we have cd'ed into the
     # source tree.
 
-    subprocess.call(spec.prep, shell=True)
+    unpack_dir = os.path.join(build_dir, build_subdir)
+    subprocess.call(spec.prep.replace("$RPM_BUILD_ROOT", unpack_dir), shell=True)
     # could also just do: RPMBUILD_PREP = 1<<0; spec._doBuild()
 
     
