@@ -39,10 +39,10 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n ounit-%{version}
-sh ./configure --destdir $RPM_BUILD_ROOT
 
 
 %build
+sh ./configure --destdir $RPM_BUILD_ROOT
 make all
 make doc
 
@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Fri Sep 30 2011 Mike McClurg <mike.mcclurg@citrix.com> - 1.1.0-3
+* Fri Sep 30 2011 Mike McClurg <mike.mcclurg@citrix.com> - 1.1.2-3
 - Repackaged for XenSource build system
 
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.0-3

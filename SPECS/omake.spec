@@ -28,7 +28,7 @@ features, including:
 
 %prep
 %setup -q
-%patch0 -p4 -b ~omake-1-warnings
+%patch0 -p1 -b ~omake-1-warnings
 
 %build
 INSTALL_ROOT=$RPM_BUILD_ROOT\
