@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.17
+Version: 1.9.18
 Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
