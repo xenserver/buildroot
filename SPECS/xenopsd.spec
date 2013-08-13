@@ -62,7 +62,7 @@ Requires:       %{name} = %{version}-%{release}
 Simple VM manager for Xen using libxenlight
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 ./configure
