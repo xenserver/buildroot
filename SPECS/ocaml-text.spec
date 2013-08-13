@@ -62,4 +62,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/share/doc/ocaml-text/*
 %{_libdir}/ocaml/text/*
 %{_libdir}/ocaml/stublibs/*
+
 %changelog
+* Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com>
+- Initial package
+
