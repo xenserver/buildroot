@@ -1,12 +1,9 @@
 %global opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
 %global debug_package %{nil}
 
-# CIL tools are deprecated, don't build them on any platform.
-%global build_cil_tools 0
-
 Name:           ocaml-bitstring
 Version:        2.0.4
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        OCaml library for matching and constructing bitstrings
 
 Group:          Development/Libraries
@@ -15,19 +12,14 @@ License:        LGPLv2+ with exceptions and GPLv2+
 URL:            http://code.google.com/p/bitstring/
 Source0:        http://bitstring.googlecode.com/files/%{name}-%{version}.tar.gz
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.2
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-camlp4-devel
-%if %build_cil_tools
-BuildRequires:  ocaml-cil-devel
-BuildRequires:  ocaml-extlib-devel
-%endif
 
-#BuildRequires:  chrpath
+BuildRequires:  chrpath
 BuildRequires:  time
 
 %global __ocaml_requires_opts -i Asttypes -i Parsetree
@@ -62,24 +54,6 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 
-%if %build_cil_tools
-%package        c
-Summary:        Development files for %{name}
-Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
-
-# Upstream project used to be called ocaml-bitmatch.
-# Keep these until Fedora 12.
-Obsoletes:      ocaml-bitmatch-c <= 1.9.5
-Provides:       ocaml-bitmatch-c = %{version}-%{release}
-
-
-%description    c
-The %{name}-c package contains tools for importing structs
-from C code and header files into %{name}.
-%endif
-
-
 %prep
 %setup -q
 
@@ -89,15 +63,12 @@ cp -a examples bitstring-examples
 
 %build
 %configure
-make
+
+# Doesn't build correctly with parallel builds, or if MAKEFLAGS=-j<N> is set.
+make -j1
+
 make doc
 make examples
-
-%if %build_cil_tools
-%if %opt
-strip cil-tools/bitstring-import-c.opt
-%endif
-%endif
 
 
 %check
@@ -105,39 +76,21 @@ make check
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 export DESTDIR=$RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
 make install
 
 strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
-#chrpath --delete $OCAMLFIND_DESTDIR/stublibs/dll*.so
+chrpath --delete $OCAMLFIND_DESTDIR/stublibs/dll*.so
 
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
-
-%if %build_cil_tools
-# Install bitstring-import-c by hand for now.
-%if %opt
-install -m 0755 cil-tools/bitstring-import-c.opt $RPM_BUILD_ROOT%{_bindir}/bitstring-import-c
-%else
-install -m 0755 cil-tools/bitstring-import-c $RPM_BUILD_ROOT%{_bindir}/bitstring-import-c
-%endif
-
-# Install bitstring-import-prefix.h by hand for now.
-install -m 0644 cil-tools/bitstring-import-prefix.h $OCAMLFIND_DESTDIR/bitstring/
-%endif
 
 # Install bitstring-objinfo by hand for now.
 install -m 0755 bitstring-objinfo $RPM_BUILD_ROOT%{_bindir}
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
 %files
-%defattr(-,root,root,-)
 %doc COPYING.LIB
 %{_libdir}/ocaml/bitstring
 %if %opt
@@ -146,15 +99,11 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_libdir}/ocaml/bitstring/*.cmx
 %endif
 %exclude %{_libdir}/ocaml/bitstring/*.mli
-%if %build_cil_tools
-%exclude %{_libdir}/ocaml/bitstring/*.h
-%endif
 %{_libdir}/ocaml/stublibs/*.so
 %{_libdir}/ocaml/stublibs/*.so.owner
 
 
 %files devel
-%defattr(-,root,root,-)
 %doc COPYING.LIB README TODO html bitstring-examples
 %if %opt
 %{_libdir}/ocaml/bitstring/*.a
@@ -165,16 +114,28 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/bitstring-objinfo
 
 
-%if %build_cil_tools
-%files c
-%defattr(-,root,root,-)
-%doc COPYING.LIB cil-tools/ext3.c cil-tools/ext3.ml cil-tools/task_struct.c cil-tools/task_struct.ml
-%{_bindir}/bitstring-import-c
-%{_libdir}/ocaml/bitstring/*.h
-%endif
-
-
 %changelog
+* Tue May 14 2013 Richard W.M. Jones <rjones@redhat.com> - 2.0.4-1
+- New upstream version 2.0.4.
+- Remove upstream patch to META file.
+
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.3-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
+* Sun Dec 02 2012 Bruno Wolff III <bruno@wolff.to> - 2.0.3-5
+- Rebuild for ocaml 4.0.1.
+
+* Fri Jul 20 2012 Richard W.M. Jones <rjones@redhat.com> - 2.0.3-4
+- Remove defattr, clean etc for modern spec file.
+- Permanently remove obsolete CIL tools.
+- Add upstream patch to fix META file.
+
+* Fri Jul 20 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
+* Thu Jun  7 2012 Richard W.M. Jones <rjones@redhat.com> - 2.0.3-2
+- Rebuild for OCaml 4.00.0.
+
 * Tue Jan 17 2012 Richard W.M. Jones <rjones@redhat.com> - 2.0.3-1
 - New upstream version 2.0.3.
 
