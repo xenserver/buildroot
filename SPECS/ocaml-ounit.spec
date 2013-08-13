@@ -39,10 +39,10 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n ounit-%{version}
-sh ./configure --destdir $RPM_BUILD_ROOT
 
 
 %build
+sh ./configure --destdir $RPM_BUILD_ROOT
 make all
 make doc
 
