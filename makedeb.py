@@ -329,12 +329,13 @@ export DESTDIR=$(CURDIR)/debian/tmp
 """
 
 
-def debianRulesFromSpec(spec, path):
+def debianRulesFromSpec(spec, specpath, path):
     res = ""
     res += ocamlRulesPreamble()
     res += debianRulesConfigureFromSpec(spec)
     res += debianRulesBuildFromSpec(spec, path)
     res += debianRulesInstallFromSpec(spec, path)
+    res += debianRulesDhInstallFromSpec(spec, specpath, path)
     res += debianRulesCleanFromSpec(spec, path)
     res += debianRulesTestFromSpec(spec, path)
     return res
@@ -393,6 +394,19 @@ def debianRulesInstallFromSpec(spec, path):
     with open(os.path.join(path, "debian/install.sh"), "w") as f:
         f.write("#!/bin/sh\n" + spec.install.replace("$RPM_BUILD_ROOT", "${DESTDIR}"))
     os.chmod(os.path.join(path, "debian/install.sh"), 0o755)
+    return rule
+
+def debianRulesDhInstallFromSpec(spec, specpath, path):
+    rule = ".PHONY: override_dh_install\n"
+    rule += "override_dh_install:\n"
+    rule += "\tdh_install\n"
+    pkgname = mapPackageName(spec.sourceHeader)
+    files = filesFromSpec(pkgname, specpath)
+    if files.has_key( pkgname + "-%exclude" ):
+        for pat in files[pkgname + "-%exclude"]:
+            path = "\trm -f debian/%s/%s\n" % (pkgname, rpm.expandMacro(pat))
+ 	    rule += os.path.normpath(path)
+    rule += "\n"
     return rule
 
 
@@ -494,7 +508,7 @@ def debianDirFromSpec(spec, path, specpath):
         control.write(debianControlFromSpec(spec))
 
     with open( os.path.join(path, "debian/rules"), "w" ) as rules:
-        rules.write(debianRulesFromSpec(spec, path))
+        rules.write(debianRulesFromSpec(spec, specpath, path))
     os.chmod( os.path.join(path, "debian/rules"), 0o755 )
 
     with open( os.path.join(path, "debian/compat"), "w" ) as compat:
@@ -588,8 +602,8 @@ def filesFromSpec(basename, specpath):
         inFiles = False
         section = ""
         for line in spec:
-            tokens = line.lower().strip().split(" ")
-            if tokens and tokens[0] == "%files":
+            tokens = line.strip().split(" ")
+            if tokens and tokens[0].lower() == "%files":
                 section = basename
                 inFiles = True
                 if len(tokens) > 1:
@@ -600,11 +614,23 @@ def filesFromSpec(basename, specpath):
                 inFiles = False
 
             if inFiles:
-                if tokens[0].startswith("%defattr"):
+                if tokens[0].lower().startswith("%defattr"):
                     continue
-                if tokens[0] == "%doc":
+                if tokens[0].lower().startswith("%attr"):
+                    continue
+                if tokens[0].lower() == "%doc":
                     docsection = section + "-doc"
                     files[docsection] = files.get(docsection, []) + tokens[1:]
+                    continue
+                if tokens[0].lower() == "%if" or tokens[0].lower() == "%endif":
+                    # XXX evaluate the if condition and do the right thing here
+                    continue
+                if tokens[0].lower() == "%exclude":
+                    excludesection = section + "-%exclude"
+                    files[excludesection] = files.get(excludesection, []) + tokens[1:]
+                    continue
+                if tokens[0].lower().startswith("%config"):
+                    # XXX do the right thing here - should add to debian/configfiles
                     continue
                 if line.strip():
                     files[section] = files.get(section, []) + [line.strip()]
