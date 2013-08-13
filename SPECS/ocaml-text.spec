@@ -35,9 +35,9 @@ developing applications that use %{name}.
 
 %prep
 %setup -q
-ocaml setup.ml -configure --destdir $RPM_BUILD_ROOT --prefix /usr
 
 %build
+ocaml setup.ml -configure --destdir $RPM_BUILD_ROOT --prefix /usr
 ocaml setup.ml -build
 ocaml setup.ml -doc
 
@@ -62,4 +62,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc /usr/share/doc/ocaml-text/*
 %{_libdir}/ocaml/text/*
 %{_libdir}/ocaml/stublibs/*
+
 %changelog
+* Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com>
+- Initial package
+

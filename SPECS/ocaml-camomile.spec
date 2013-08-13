@@ -1,23 +1,24 @@
-#%define opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
-%define opt 0
-%define debug_package %{nil}
+%global opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
+%global debug_package %{nil}
 
 Name:           ocaml-camomile
 Version:        0.8.3
-Release:        0
+Release:        10%{?dist}
 Summary:        Unicode library for OCaml
 
-Group:          Development/Libraries
 # Several files are MIT and UCD licensed, but the overall work is LGPLv2+
 # and the LGPL/GPL supercedes compatible licenses.
 # https://www.redhat.com/archives/fedora-legal-list/2008-March/msg00005.html
 License:        LGPLv2+
 URL:            http://sourceforge.net/projects/camomile/
-Source0:        http://prdownloads.sourceforge.net/camomile/camomile-%{version}.tar.bz2
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-ExcludeArch:    ppc64 sparc64 s390 s390x
+Source0:        http://downloads.sourceforge.net/camomile/camomile-%{version}.tar.bz2
+ExcludeArch:    sparc64 s390 s390x
 
-BuildRequires:  ocaml, ocaml-findlib-devel, ocaml-ocamldoc, ocaml-camlp4-devel
+BuildRequires:  ocaml >= 3.12.1-12
+BuildRequires:  ocaml-findlib-devel
+BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-camlp4-devel
+
 
 %description
 Camomile is a Unicode library for ocaml. Camomile provides Unicode
@@ -28,7 +29,6 @@ more.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 
@@ -39,7 +39,6 @@ developing applications that use %{name}.
 
 %package        data
 Summary:        Data files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 
@@ -61,20 +60,15 @@ strip tools/*.opt
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 export DESTDIR=$RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 make install prefix=$RPM_BUILD_ROOT%{_prefix} DATADIR=$RPM_BUILD_ROOT%{_datadir}
 %if %opt
-mv $RPM_BUILD_ROOT%{_bindir}/camomilecharmap.opt $RPM_BUILD_ROOT%{_bindir}/camomilecharmap
-mv $RPM_BUILD_ROOT%{_bindir}/camomilelocaledef.opt $RPM_BUILD_ROOT%{_bindir}/camomilelocaledef
+cp tools/camomilecharmap.opt $RPM_BUILD_ROOT%{_bindir}/camomilecharmap
+cp tools/camomilelocaledef.opt $RPM_BUILD_ROOT%{_bindir}/camomilelocaledef
 %endif
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %files
@@ -111,6 +105,48 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Oct 19 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-10
+- Rebuild for OCaml 4.00.1.
+- Clean up the spec file.
+
+* Sat Jul 28 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-9
+- Bump and rebuild against new OCaml 4.00.0 official release.
+
+* Fri Jul 20 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.3-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
+* Sat Jun 09 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-7
+- Rebuild for OCaml 4.00.0.
+
+* Wed Jun  6 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-6
+- Remove sed hack which worked around segfault on ppc64.  Now fixed
+  in OCaml >= 3.12.1-12.
+
+* Sun Jun  3 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-5
+- Remove patch which worked around segfault on ARM.  Now fixed
+  in OCaml >= 3.12.1-9.
+
+* Wed May 30 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-4
+- Remove ExcludeArch ppc64.
+- Add sed hack to reduce size of long entry function which breaks
+  ppc64 code generator.  See comment in spec file for full details.
+
+* Sat May 19 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-2
+- Include workaround for segfault in gen_mappings.ml on ARM.
+- Bump release and rebuild for new OCaml on ARM.
+
+* Fri Jan  6 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-1
+- New upstream version 0.8.3.
+
+* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
+* Wed Jan  5 2011 Richard W.M. Jones <rjones@redhat.com> - 0.8.1-1
+- New upstream version 0.8.1.
+- Rebuild for OCaml 3.12.0.
+- camomilecharmap and camomilelocaledef no longer installed by default,
+  install them by hand instead.
+
 * Wed Dec 30 2009 Richard W.M. Jones <rjones@redhat.com> - 0.7.2-2
 - Rebuild for OCaml 3.11.2.
 

@@ -50,11 +50,11 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/qmp/*
 
 %changelog
-* Fri Aug 09 2013 Euan Harris <euan.harris@citrix.com> - 0.9.1
+* Fri Aug 09 2013 Euan Harris <euan.harris@citrix.com> - 0.9.1-0
 - Change representation of message timestamps from a tuple of ints to
   a float.  This avoids problems on 32-bit architectures and  follows
   the example of the OCaml standard library.
 
-* Wed May 29 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.0
+* Wed May 29 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.0-0
 - Initial package
 

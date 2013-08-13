@@ -37,3 +37,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE
 
 %changelog
+* Fri Jul 5 2013 James Bulpin <James.Bulpin@citrix.com> - 0.9.0-1
+- Initial package
+
