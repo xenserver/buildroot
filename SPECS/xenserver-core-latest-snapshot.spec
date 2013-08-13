@@ -1,5 +1,5 @@
-Name:           xenserver-tech-preview-release
-Version:        0.3.0
+Name:           xenserver-core-latest-snapshot
+Version:        0.1.0
 Release:        0
 Summary:        Yum repositories for xenserver
 License:        GPL
@@ -13,6 +13,7 @@ Source4:        fusion-release-epel-testing.repo
 Source5:        fusion-release-remi.repo
 Source6:        fusion-release-RPM-GPG-KEY-EPEL-6
 Source7:        fusion-release-RPM-GPG-KEY-remi
+Source8:        fusion-release-xen-c6-tweaked.repo
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
@@ -26,6 +27,7 @@ A virtual package which installs the xenserver yum repos.
 %install
 mkdir -p %{buildroot}/etc/yum.repos.d
 install -m 0644 %{_sourcedir}/fusion-release-xapi.repo %{buildroot}/etc/yum.repos.d/xapi.repo
+install -m 0644 %{_sourcedir}/fusion-release-xen-c6-tweaked.repo %{buildroot}/etc/yum.repos.d/xen-c6-tweaked.repo
 #install -m 0644 %{_sourcedir}/fusion-release-xen-c6.repo %{buildroot}/etc/yum.repos.d/xen-c6.repo
 #install -m 0644 %{_sourcedir}/fusion-release-xen-c6-RC1.repo %{buildroot}/etc/yum.repos.d/xen-c6-RC1.repo
 install -m 0644 %{_sourcedir}/fusion-release-epel.repo %{buildroot}/etc/yum.repos.d/epel.repo
@@ -47,6 +49,7 @@ yum repolist
 %files
 %defattr(-,root,root)
 /etc/yum.repos.d/xapi.repo
+/etc/yum.repos.d/xen-c6-tweaked.repo
 #/etc/yum.repos.d/xen-c6.repo
 #/etc/yum.repos.d/xen-c6-RC1.repo
 /etc/yum.repos.d/epel.repo
