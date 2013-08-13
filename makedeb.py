@@ -624,14 +624,16 @@ if __name__ == '__main__':
     # subdirectory of builddir in which the tarball is unpacked;  
     # set by RPM after processing the spec file
     build_subdir = rpm.expandMacro("%buildsubdir")  
-    prepareBuildDir(spec)
+    prepareBuildDir(spec, build_subdir)
+    if not os.path.isdir( os.path.join(build_dir, build_subdir, "debian") ):
 
-    tarball = principalSourceFile(spec)
+        tarball = principalSourceFile(spec)
 
-    # copy over the source, run the prep rule to unpack it, then rename it as deb expects
-    renameSource(spec) 
-    
-    debianDirFromSpec(spec, os.path.join(build_dir, build_subdir), sys.argv[1])
+        # copy over the source, run the prep rule to unpack it, then rename it as deb expects
+        # this should be based on the rewritten (or not) source name in the debian package - build the debian dir first and then rename the tarball as needed
+        renameSource(spec) 
+
+        debianDirFromSpec(spec, os.path.join(build_dir, build_subdir), sys.argv[1])
 
     # pdebuild gives us source debs as well as binaries
     res = subprocess.call( "cd %s\ndpkg-source -b --auto-commit %s" % (build_dir, build_subdir), shell=True )
