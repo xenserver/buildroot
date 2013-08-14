@@ -1,5 +1,5 @@
 OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb http://ppa.launchpad.net/mike-mcclurg/ocaml/ubuntu precise main"
-BINDMOUNTS="@PWD@/RPMS"
+BINDMOUNTS="@PWD@/RPMS @PWD@/SRPMS"
 HOOKDIR="@PWD@/pbuilder"
 EXTRAPACKAGES="apt-utils"
 ALLOWUNTRUSTED=yes
