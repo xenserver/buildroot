@@ -134,7 +134,7 @@ mapping = {
     "xapi": "xapi",
     "xapi-xe": "xapi-xe",
     "xcp-networkd": "xcp-networkd" ,
-    "xcp-rrdd": "libxcp-rrdd-ocaml",
+    "xcp-rrdd": "xcp-rrdd",
     "xe-create-templates": "xe-create-templates",
     "xenops-cli": "xenops-cli",
     "xenopsd-libvirt": "xenopsd-libvirt",
@@ -156,16 +156,16 @@ mapping = {
     "ocaml-ocamldoc": "ocaml-nox",
     "ocaml-compiler-libs":   # added to ocaml-uri - why does rpmbuild succeed?
                   "ocaml-compiler-libs",
-    "ocaml-camlp4": "camlp4",
+    "ocaml-camlp4": ["camlp4", "camlp4-extra"],
     "openssl": "libssl1.0.0",
     "xen": "xen-hypervisor",
-    "libuuid": "libuuid1",
+    "libuuid": "uuid",
     "libvirt": "libvirt",
     "xen-libs": "libxen",
     "make": "make",
-    "ncurses": "libncurses5-dev",
-    "chkconfig": "chkconfig",
-    "initscripts": "initscripts",
+    "ncurses": "libncurses5",
+    "chkconfig": [], # "chkconfig",
+    "initscripts": [], # "initscripts",
     "PyPAM": "python-pam",
     "perl": "perl",
     "gawk": "gawk",
@@ -187,7 +187,9 @@ mapping = {
 
     # this seems to come from packages like xcp-networkd, which don't have
     # any requirements
-    "/bin/sh": "/bin/sh"
+    "/bin/sh": "/bin/sh",
+    "xen-hypervisor-fixup": "xen-hypervisor-fixup",
+    "xen-utils": "xen-utils",
 }
 
 secondary_mapping = {
@@ -201,15 +203,36 @@ def mapPackage(name):
     if name.endswith( "-devel" ):
         isDevel = True
         name = name[ :-len("-devel") ]
-    res = mapping[name]
-    if isDevel:
-        res += "-dev"
-    if res == "camlp4-dev":
-        res = "camlp4"
-    if res == "ocaml-findlib-dev":
-        res = ["ocaml-findlib", "libfindlib-ocaml-dev"]
-    if res == "libssl1.0.0-dev":
-        res = "libssl-dev"
+    mapped = mapping[name]
+    if type(mapped) != list:
+       mapped = [mapped]
+    res = []
+    for m in mapped:
+        if isDevel:
+            m += "-dev"
+        if m == "camlp4-dev":
+            m = "camlp4"
+        if m == "camlp4-extra-dev":
+            m = "camlp4-extra"
+        if m == "libeasy-format-ocaml":  # packages with 'ocaml' or 'camlp4' must have a -dev...
+            m = "libeasy-format-ocaml-dev"
+        if m == "libbiniou-ocaml":  # packages with 'ocaml' or 'camlp4' must have a -dev...
+            m = "libbiniou-ocaml-dev"
+        if m == "libssl1.0.0-dev":
+            m = "libssl-dev"
+        if m == "libtype-conv-camlp4":
+            m = "libtype-conv-camlp4-dev"
+        if m == "libxapi-libvirt-storage-ocaml":
+            m = "libxapi-libvirt-storage-ocaml-dev"
+        if m == "libsexplib-camlp4":
+            m = "libsexplib-camlp4-dev"
+        if m == "ocaml-findlib-dev":
+            m = ["ocaml-findlib", "libfindlib-ocaml-dev"]
+        if m == "/bin/sh":
+            continue
+        if type(m) != list:
+           m = [m]
+        res += m
     return res
 
 
@@ -232,10 +255,14 @@ def mapPackageName(hdr):
     #    name = "lib" + name
 
     # Do this manually for now...
-    name = name.replace( name, mapPackage(name) )
+    name = name.replace( name, mapPackage(name)[0] )
 
     if isDevel:
         name += "-dev"
+
+    # hack for type-conv.   dh_ocaml insists that there must be a -dev package for anything with ocaml or camlp4 in the name...
+    if name == "libtype-conv-camlp4":
+        name = "libtype-conv-camlp4-dev"
     return name
 
 
@@ -257,7 +284,7 @@ def formatDescription(description):
 
 def sourceDebFromSpec(spec):
     res = ""
-    res += "Source: %s\n" % mapPackage(spec.sourceHeader['name']) #XXX should this be mapped?
+    res += "Source: %s\n" % mapPackage(spec.sourceHeader['name'])[0] #XXX should this be mapped?
     res += "Priority: %s\n" % "optional"
     res += "Maintainer: %s\n" % "Euan Harris <euan.harris@citrix.com>" #XXX
     res += "Section: %s\n" % mapSection(spec.sourceHeader['group'])
@@ -445,7 +472,7 @@ def debianChangelogFromSpec(spec):
             author = name
             version = "%s-%s" % (spec.sourceHeader['version'], spec.sourceHeader['release'])
 
-        res += "%s (%s) UNRELEASED; urgency=low\n" % (mapPackage(hdr['name']), version)
+        res += "%s (%s) UNRELEASED; urgency=low\n" % (mapPackage(hdr['name'])[0], version)
         res += "\n"
 	text = re.sub( "^-", "*", text, flags=re.MULTILINE )
 	text = re.sub( "^", "  ", text, flags=re.MULTILINE )
@@ -558,7 +585,7 @@ def renameSource(spec):
     if not m:
         print "error: could not parse filename %s" % filename
     basename, ext = m.groups()[:2]
-    baseFileName = "%s_%s.orig%s" % (mapPackage(spec.sourceHeader['name']), spec.sourceHeader['version'], ext)
+    baseFileName = "%s_%s.orig%s" % (mapPackage(spec.sourceHeader['name'])[0], spec.sourceHeader['version'], ext)
     shutil.copy(os.path.join(src_dir, origfilename), os.path.join(build_dir, baseFileName))
 
 
@@ -630,6 +657,9 @@ def filesFromSpec(basename, specpath):
                     files[excludesection] = files.get(excludesection, []) + tokens[1:]
                     continue
                 if tokens[0].lower().startswith("%config"):
+                    # XXX do the right thing here - should add to debian/configfiles
+                    continue
+                if tokens[0].startswith("%config"):
                     # XXX do the right thing here - should add to debian/configfiles
                     continue
                 if line.strip():

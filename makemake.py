@@ -63,7 +63,7 @@ for spec_name in spec_names:
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
-    rpm.addMacro( 'NAME', makedeb.mapPackage(h['name']) )
+    rpm.addMacro( 'NAME', makedeb.mapPackage(h['name'])[0] )
     rpm.addMacro( 'VERSION', h['version'] )
     rpm.addMacro( 'RELEASE', h['release'] )
     rpm.addMacro( 'ARCH', 'src' )
