@@ -178,7 +178,7 @@ for specname, spec in specs.iteritems():
         rpm_outdir = os.path.dirname( rpm_path )
         print '%s: %s' % ( rpm_path, srpm_path )
         print '\t@echo [PBUILDER] $@'
-        print '\tsudo pbuilder --build --configfile pbuilder/pbuilderrc-amd64 --buildresult %s $<' % rpm_outdir 
+        print '\tsudo pbuilder --build --configfile pbuilder/pbuilderrc-raring-amd64 --buildresult %s $<' % rpm_outdir 
         #print '\t@echo [CREATEREPO] $@'
         #print '\t@createrepo --quiet --update %s' % rpm_dir
         

@@ -1,8 +1,9 @@
-OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb http://ppa.launchpad.net/mike-mcclurg/ocaml/ubuntu precise main|deb http://gb.archive.ubuntu.com/ubuntu/ precise universe"
+OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb http://gb.archive.ubuntu.com/ubuntu/ raring universe|deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main "
 BINDMOUNTS="@PWD@/RPMS @PWD@/SRPMS"
 HOOKDIR="@PWD@/pbuilder"
 EXTRAPACKAGES="apt-utils"
 ALLOWUNTRUSTED=yes
+DISTRIBUTION=@DIST@
 
 # Architecture specific settings
 ARCHITECTURE=@ARCH@
