@@ -35,6 +35,7 @@ A store and forward message switch for OCaml.
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
+cp %{SOURCE1} message-switch-init
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
@@ -49,7 +50,7 @@ mkdir -p %{buildroot}/%{_sbindir}
 install switch_main.native %{buildroot}/%{_sbindir}/message-switch
 install main.native %{buildroot}/%{_sbindir}/message-cli
 mkdir -p %{buildroot}/%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/message-switch-init %{buildroot}%{_sysconfdir}/init.d/message-switch
+install -m 0755 message-switch-init %{buildroot}%{_sysconfdir}/init.d/message-switch
 
 %clean
 rm -rf %{buildroot}
