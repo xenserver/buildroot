@@ -20,6 +20,7 @@ fork() and exec() in a multithreaded program.
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
+cp %{SOURCE1} forkexecd-init
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
@@ -34,7 +35,7 @@ mkdir -p %{buildroot}/%{_sbindir}
 install fe_main.native %{buildroot}/%{_sbindir}/forkexecd
 install fe_cli.native %{buildroot}/%{_sbindir}/forkexecd-cli
 mkdir -p %{buildroot}/%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/forkexecd-init %{buildroot}%{_sysconfdir}/init.d/forkexecd
+install -m 0755 forkexecd-init %{buildroot}%{_sysconfdir}/init.d/forkexecd
 
 %clean
 rm -rf %{buildroot}
