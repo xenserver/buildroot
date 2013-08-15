@@ -34,7 +34,7 @@ BuildRequires: openssl openssl-devel
 A store and forward message switch for OCaml.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q
 cp %{SOURCE1} message-switch-init
 
 %build
