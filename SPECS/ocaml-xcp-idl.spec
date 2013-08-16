@@ -1,6 +1,6 @@
 Name:           ocaml-xcp-idl
 Version:        0.9.11
-Release:        0
+Release:        1
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 Group:          Development/Other

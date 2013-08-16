@@ -1,6 +1,6 @@
 Name:           ocaml-xenops
 Version:        0.9.0
-Release:        0
+Release:        1
 Summary:        Low-level xen control operations OCaml
 License:        LGPL
 Group:          Development/Other

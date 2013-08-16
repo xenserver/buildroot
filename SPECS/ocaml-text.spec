@@ -3,7 +3,7 @@
 
 Name:           ocaml-text
 Version:        0.6
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        OCaml-Text is a library for dealing with ``text'', i.e. sequence of unicode characters, in a convenient way.
 
 Group:          Development/Libraries

@@ -1,6 +1,6 @@
 Name:           xapi-libvirt-storage
 Version:        0.9.6
-Release:        0
+Release:        1
 Summary:        Allows the manipulation of libvirt storage pools and volumes via xapi
 License:        LGPL
 Group:          Development/Other

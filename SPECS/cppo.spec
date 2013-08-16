@@ -1,6 +1,6 @@
 Name:           cppo
 Version:        0.9.3
-Release:        0
+Release:        1
 Summary:        Equivalent of the C preprocessor for OCaml
 License:        BSD3
 Group:          Development/Other

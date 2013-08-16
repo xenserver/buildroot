@@ -1,7 +1,7 @@
 Summary: Bootloader for EL-based distros that support Xen
 Name: eliloader
 Version: 0.3
-Release: 0
+Release: 1
 Source0: https://github.com/djs55/xcp-%{name}/archive/master/%{version}/%{name}-%{version}.tar.gz
 License: GPL
 Group: Applications/System
