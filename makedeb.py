@@ -230,6 +230,8 @@ def mapPackage(name):
             m = ["ocaml-findlib", "libfindlib-ocaml-dev"]
         if m == "/bin/sh":
             continue
+        if m == "xen-hypervisor-dev":
+            m = ["libxen-dev", "xen-utils", "blktap-dev"]
         if type(m) != list:
            m = [m]
         res += m

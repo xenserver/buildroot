@@ -1,4 +1,4 @@
-OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb http://ppa.launchpad.net/mike-mcclurg/ocaml/ubuntu precise main"
+OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb http://ppa.launchpad.net/mike-mcclurg/ocaml/ubuntu precise main|deb http://gb.archive.ubuntu.com/ubuntu/ precise universe"
 BINDMOUNTS="@PWD@/RPMS @PWD@/SRPMS"
 HOOKDIR="@PWD@/pbuilder"
 EXTRAPACKAGES="apt-utils"
