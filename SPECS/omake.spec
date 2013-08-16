@@ -1,5 +1,5 @@
 Version: 0.9.8.6
-Release: 0
+Release: 1
 Summary: The omake build system.
 Name: omake
 URL: http://omake.metaprl.org/

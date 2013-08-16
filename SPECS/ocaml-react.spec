@@ -3,7 +3,7 @@
 
 Name:           ocaml-react
 Version:        0.9.4
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        OCaml framework for Functional Reactive Programming (FRP)
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

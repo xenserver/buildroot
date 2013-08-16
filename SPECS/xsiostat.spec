@@ -1,6 +1,6 @@
 Name:           xsiostat
 Version:        0.2.0
-Release:        0
+Release:        1
 Summary:        XenServer IO stat thingy
 License:        LGPL
 Group:          Development/Other

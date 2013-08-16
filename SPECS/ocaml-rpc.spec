@@ -1,6 +1,6 @@
 Name:           ocaml-rpc
 Version:        1.4.1
-Release:        0
+Release:        1
 Summary:        An RPC library for OCaml
 License:        LGPL
 Group:          Development/Other

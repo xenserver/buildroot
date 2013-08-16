@@ -1,6 +1,6 @@
 Name:           xe-create-templates
 Version:        0.9.1
-Release:        0
+Release:        1
 Summary:        Creates default XenServer templates
 License:        LGPL
 Group:          Development/Other

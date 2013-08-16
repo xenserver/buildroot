@@ -1,6 +1,6 @@
 Name:           deriving-ocsigen
 Version:        0.3c
-Release:        0
+Release:        1
 Summary:        Extension to OCaml for deriving functions from type declarations
 License:        MIT
 Group:          Development/Other

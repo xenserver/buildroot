@@ -1,6 +1,6 @@
 Name:           ocaml-uri
 Version:        1.3.8
-Release:        0
+Release:        1
 Summary:        A URI library for OCaml
 License:        ISC
 Group:          Development/Other

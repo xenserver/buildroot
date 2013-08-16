@@ -1,6 +1,6 @@
 Name:           cmdliner
 Version:        0.9.3
-Release:        0
+Release:        1
 Summary:        Declarative definition of commandline interfaces for OCaml
 License:        BSD3
 Group:          Development/Other
