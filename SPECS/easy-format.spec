@@ -1,6 +1,6 @@
 Name:           easy-format
 Version:        1.0.1
-Release:        0
+Release:        1
 Summary:        Indentation made easy
 License:        BSD3
 Group:          Development/Other

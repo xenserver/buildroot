@@ -1,6 +1,6 @@
 Name:           optcomp
 Version:        1.4
-Release:        0
+Release:        1
 Summary:        Optional compilation with cpp-like directives
 License:        BSD3
 Group:          Development/Other

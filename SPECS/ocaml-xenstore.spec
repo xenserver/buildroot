@@ -1,6 +1,6 @@
 Name:           ocaml-xenstore
 Version:        1.2.1
-Release:        0
+Release:        1
 Summary:        Xenstore protocol implementation in OCaml
 License:        LGPL
 Group:          Development/Other

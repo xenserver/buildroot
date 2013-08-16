@@ -1,6 +1,6 @@
 Name:           ocaml-cohttp
 Version:        0.9.8
-Release:        0
+Release:        1
 Summary:        An HTTP library for OCaml
 License:        LGPL
 Group:          Development/Other

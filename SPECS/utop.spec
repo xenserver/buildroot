@@ -1,6 +1,6 @@
 Name:           utop
 Version:        1.5
-Release:        0
+Release:        1
 Summary:        utop is a toplevel for OCaml which can run in a terminal or in emacs. It supports completion, colors, parenthesis matching, ...
 License:        BSD
 Group:          Development/Other
