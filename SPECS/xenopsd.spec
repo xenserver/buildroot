@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.18
+Version:        0.9.21
 Release:        0
 Summary:        Simple VM manager
 License:        LGPL
@@ -65,19 +65,18 @@ Simple VM manager for Xen using libxenlight
 %setup -q
 
 %build
-./configure
 make
 
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 
-install -D dist/build/xenopsd_libvirt/xenopsd_libvirt %{buildroot}/%{_sbindir}/xenopsd-libvirt
-install -D dist/build/xenopsd/xenopsd %{buildroot}/%{_sbindir}/xenopsd-xc
-install -D dist/build/xenopsd_simulator/xenopsd_simulator %{buildroot}/%{_sbindir}/xenopsd-simulator
-install -D dist/build/xenopsd_xenlight/xenopsd_xenlight %{buildroot}/%{_sbindir}/xenopsd-xenlight
+#install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
+install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir}/xenopsd-simulator
+install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
+install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
-install -D dist/build/xenguest/xenguest %{buildroot}/%{_libexecdir}/%{name}/xenguest
+install -D _build/xenguest/xenguest_main.native          %{buildroot}/%{_libexecdir}/%{name}/xenguest
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-xl %{buildroot}/%{_libexecdir}/%{name}/vif-xl
 install -D scripts/qemu-dm-wrapper %{buildroot}/%{_libexecdir}/%{name}/qemu-dm-wrapper
@@ -87,7 +86,7 @@ install -D scripts/common.py %{buildroot}/%{_libexecdir}/%{name}/common.py
 install -D scripts/network.conf %{buildroot}/%{_libexecdir}/%{name}/network.conf
 
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
+#install -m 0755 %{_sourcedir}/xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
 install -m 0755 %{_sourcedir}/xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 %{_sourcedir}/xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
 install -m 0755 %{_sourcedir}/xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
@@ -114,9 +113,9 @@ rm -rf %{buildroot}
 /etc/xapi/network.conf
 
 %files libvirt
-%defattr(-,root,root)
-%{_sbindir}/xenopsd-libvirt
-%{_sysconfdir}/init.d/xenopsd-libvirt
+#%defattr(-,root,root)
+#%{_sbindir}/xenopsd-libvirt
+#%{_sysconfdir}/init.d/xenopsd-libvirt
 
 %post libvirt
 /sbin/chkconfig --add xenopsd-libvirt
@@ -176,4 +175,3 @@ fi
 
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
-
