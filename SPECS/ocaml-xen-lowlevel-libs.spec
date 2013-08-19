@@ -1,14 +1,15 @@
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.5
+Version:        0.9.8
 Release:        1
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xapi-project/ocaml-xen-lowlevel-libs/archive/ocaml-xen-lowlevel-libs-%{version}.tar.gz
-Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
-BuildRequires:  ocaml-lwt-devel xen-devel libuuid-devel
+BuildRequires:  ocaml-lwt-devel xen-devel libuuid-devel cmdliner-devel 
+BuildRequires:  ocaml-cstruct-devel
 Requires:       ocaml ocaml-findlib
 
 %description
@@ -24,7 +25,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q
 
 %build
 make
