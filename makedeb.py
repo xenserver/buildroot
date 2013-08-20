@@ -292,7 +292,7 @@ def sourceDebFromSpec(spec):
     res += "Section: %s\n" % mapSection(spec.sourceHeader['group'])
     res += "Standards-Version: %s\n" % STANDARDS_VERSION
     res += "Build-Depends:\n"
-    build_depends = [ "debhelper (>= 8)", "dh-ocaml (>= 0.9)" ]
+    build_depends = [ "debhelper (>= 8)", "dh-ocaml (>= 0.9)", "ocaml-nox" ]
     for pkg, version in zip(spec.sourceHeader['requires'], spec.sourceHeader['requireVersion']):
         deps = mapPackage(pkg)
         # XXXX Ick!
