@@ -8,7 +8,8 @@ URL:            https://github.com/mirage/ocaml-cstruct/archive/ocaml-cstruct-0.
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocplib-endian-devel ocaml-camlp4 ocaml-camlp4-devel
-Requires:       ocaml ocaml-findlib
+Requires:       ocaml ocaml-findlib ocaml-ocplib-endian-devel
+#XXX ocaml-cstruct should require caml-ocplib-endian, not -devel
 
 %description
 Read and write low-level C-style structures in OCaml.
