@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.19
-Release: 1
+Release: 2
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -61,6 +61,7 @@ omake phase1
 omake phase2
 omake ocaml/xapi/xapi
 omake ocaml/xe-cli/xe
+omake ocaml/xapi/sparse_dd
 
 %install
 rm -rf %{buildroot}
@@ -75,6 +76,7 @@ mkdir -p %{buildroot}/%{_libexecdir}/xapi
 install -m 0755 %{_sourcedir}/xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
 install -m 0755 scripts/pci-info %{buildroot}/%{_libexecdir}/xapi/pci-info
 install -m 0755 scripts/update-mh-info %{buildroot}/%{_libexecdir}/xapi/update-mh-info
+install -m 0755 ocaml/xapi/sparse_dd %{buildroot}/%{_libexecdir}/xapi/sparse_dd
 mkdir -p %{buildroot}/etc/xapi
 install -m 0644 %{_sourcedir}/xen-api-xapi-conf %{buildroot}/etc/xapi.conf
 install -m 0644 %{_sourcedir}/xen-api-db-conf %{buildroot}/etc/xapi/db.conf
@@ -117,6 +119,7 @@ fi
 %{_libexecdir}/xapi/xapissl
 %{_libexecdir}/xapi/pci-info
 %{_libexecdir}/xapi/update-mh-info
+%{_libexecdir}/xapi/sparse_dd
 /etc/xapi/db.conf
 /etc/xapi/hook-scripts
 /var/lib/xapi
