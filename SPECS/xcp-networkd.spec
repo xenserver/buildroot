@@ -17,7 +17,7 @@ BuildRequires:  ocaml-stdext-devel forkexecd-devel ocaml-xen-api-libs-transition
 BuildRequires:  ocaml-xcp-inventory-devel ocaml-ounit-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-xen-api-client-devel
-BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-oclock-devel message-switch-devel
 
 %description
 Simple host networking management service for the xapi toolstack.
