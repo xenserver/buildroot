@@ -142,6 +142,9 @@ fi
 /usr/lib/python2.6/site-packages/XenAPIPlugin.pyc
 
 %changelog
+* Tue Aug 20 2013 David Scott <dave.scott@eu.citrix.com>
+- Add sparse_dd to the xapi package so VDI.copy should work
+
 * Tue Jun 18 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 1.9.6
 
