@@ -194,7 +194,7 @@ mapping = {
     # this seems to come from packages like xcp-networkd, which don't have
     # any requirements
     "/bin/sh": "/bin/sh",
-    "xen-hypervisor-fixup": "xen-hypervisor-fixup",
+    "libxl-headers": "libxl-headers",
     "xen-utils": "xen-utils",
     "nfs-utils": "nfs-common",
     "hwdata": "hwdata",
