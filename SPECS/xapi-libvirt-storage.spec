@@ -18,6 +18,7 @@ Allows the manipulation of libvirt storage pools and volumes via xapi.
 
 %prep
 %setup -q
+cp %{SOURCE1} xapi-libvirt-storage-init
 
 %build
 make
@@ -27,7 +28,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/sm-libvirt/sm-libvirt %{buildroot}/%{_sbindir}/xapi-libvirt-storage
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/xapi-libvirt-storage-init %{buildroot}%{_sysconfdir}/init.d/xapi-libvirt-storage
+install -m 0755 xapi-libvirt-storage-init %{buildroot}%{_sysconfdir}/init.d/xapi-libvirt-storage
 
 %clean
 rm -rf %{buildroot}

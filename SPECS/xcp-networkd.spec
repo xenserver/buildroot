@@ -23,6 +23,9 @@ Simple host networking management service for the xapi toolstack.
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
+cp %{SOURCE1} xcp-networkd-init
+cp %{SOURCE2} xcp-networkd-conf
+cp %{SOURCE3} xcp-networkd-network-conf
 
 %build
 make
@@ -32,10 +35,10 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/xcp-networkd/xcp-networkd %{buildroot}/%{_sbindir}/xcp-networkd
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/xcp-networkd-init %{buildroot}%{_sysconfdir}/init.d/xcp-networkd
+install -m 0755 xcp-networkd-init %{buildroot}%{_sysconfdir}/init.d/xcp-networkd
 mkdir -p %{buildroot}/etc/xcp
-install -m 0644 %{_sourcedir}/xcp-networkd-network-conf %{buildroot}/etc/xcp/network.conf
-install -m 0644 %{_sourcedir}/xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
+install -m 0644 xcp-networkd-network-conf %{buildroot}/etc/xcp/network.conf
+install -m 0644 xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
 
 %clean
 rm -rf %{buildroot}

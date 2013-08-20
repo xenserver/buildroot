@@ -21,6 +21,7 @@ Memory ballooning daemon for the xapi toolstack.
 
 %prep
 %setup -q -n %{name}-%{name}-%{version}
+cp %{SOURCE1} squeezed-init
 
 %build
 make
@@ -30,7 +31,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/squeezed/squeezed %{buildroot}/%{_sbindir}/squeezed
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/squeezed-init %{buildroot}%{_sysconfdir}/init.d/squeezed
+install -m 0755 squeezed-init %{buildroot}%{_sysconfdir}/init.d/squeezed
 
 %clean
 rm -rf %{buildroot}
