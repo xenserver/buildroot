@@ -21,6 +21,7 @@ Statistics gathering daemon for the xapi toolstack.
 
 %prep
 %setup -q
+cp %{SOURCE1} xcp-rrdd-init
 
 %build
 make
@@ -30,7 +31,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/xcp-rrdd-init %{buildroot}%{_sysconfdir}/init.d/xcp-rrdd
+install -m 0755 xcp-rrdd-init %{buildroot}%{_sysconfdir}/init.d/xcp-rrdd
 
 %clean
 rm -rf %{buildroot}

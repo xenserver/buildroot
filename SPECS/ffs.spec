@@ -19,6 +19,7 @@ Simple flat file storage manager for the xapi toolstack.
 
 %prep
 %setup -q
+cp %{SOURCE1} ffs-init
 
 %build
 make
@@ -28,7 +29,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/ffs/ffs %{buildroot}/%{_sbindir}/ffs
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
+install -m 0755 ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
 
 %clean
 rm -rf %{buildroot}

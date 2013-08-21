@@ -51,6 +51,12 @@ Libraries for writing XenAPI clients in python.
 %prep 
 %setup -q -n xen-api-%{version}
 #%patch0 -p0 -b xapi-version.patch
+cp %{SOURCE1} xen-api-xapi-conf
+cp %{SOURCE2} xen-api-init
+cp %{SOURCE3} xen-api-xapissl
+cp %{SOURCE4} xen-api-db-conf
+cp %{SOURCE5} xen-api-pam
+
 
 %build
 ./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=/usr/lib/xapi/plugins
@@ -69,17 +75,17 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install -m 0755 ocaml/xapi/xapi.opt %{buildroot}/%{_sbindir}/xapi
 mkdir -p %{buildroot}/etc/pam.d
-install -m 0644 %{_sourcedir}/xen-api-pam %{buildroot}/etc/pam.d/xapi
+install -m 0644 xen-api-pam %{buildroot}/etc/pam.d/xapi
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 %{_sourcedir}/xen-api-init %{buildroot}%{_sysconfdir}/init.d/xapi
+install -m 0755 xen-api-init %{buildroot}%{_sysconfdir}/init.d/xapi
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
-install -m 0755 %{_sourcedir}/xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
+install -m 0755 xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
 install -m 0755 scripts/pci-info %{buildroot}/%{_libexecdir}/xapi/pci-info
 install -m 0755 scripts/update-mh-info %{buildroot}/%{_libexecdir}/xapi/update-mh-info
 install -m 0755 ocaml/xapi/sparse_dd %{buildroot}/%{_libexecdir}/xapi/sparse_dd
 mkdir -p %{buildroot}/etc/xapi
-install -m 0644 %{_sourcedir}/xen-api-xapi-conf %{buildroot}/etc/xapi.conf
-install -m 0644 %{_sourcedir}/xen-api-db-conf %{buildroot}/etc/xapi/db.conf
+install -m 0644 xen-api-xapi-conf %{buildroot}/etc/xapi.conf
+install -m 0644 xen-api-db-conf %{buildroot}/etc/xapi/db.conf
 
 mkdir -p %{buildroot}/%{_bindir}
 install -m 0755 ocaml/xe-cli/xe.opt %{buildroot}/%{_bindir}/xe

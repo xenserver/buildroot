@@ -63,6 +63,12 @@ Simple VM manager for Xen using libxenlight
 
 %prep
 %setup -q
+cp %{SOURCE1} xenopsd-xc-init
+cp %{SOURCE2} xenopsd-simulator-init
+cp %{SOURCE3} xenopsd-libvirt-init
+cp %{SOURCE4} xenopsd-xenlight-init
+cp %{SOURCE5} xenopsd-conf
+cp %{SOURCE6} xenopsd-network-conf
 
 %build
 make
@@ -87,12 +93,12 @@ install -D scripts/network.conf %{buildroot}/%{_libexecdir}/%{name}/network.conf
 
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 #install -m 0755 %{_sourcedir}/xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
-install -m 0755 %{_sourcedir}/xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
-install -m 0755 %{_sourcedir}/xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
-install -m 0755 %{_sourcedir}/xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
+install -m 0755 xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
+install -m 0755 xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
+install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
 mkdir -p %{buildroot}/etc/xapi
-install -m 0644 %{_sourcedir}/xenopsd-conf %{buildroot}/etc/xenopsd.conf
-install -m 0644 %{_sourcedir}/xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
+install -m 0644 xenopsd-conf %{buildroot}/etc/xenopsd.conf
+install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 
 %clean
 rm -rf %{buildroot}
