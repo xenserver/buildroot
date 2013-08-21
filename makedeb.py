@@ -310,7 +310,7 @@ def sourceDebFromSpec(spec):
 def binaryDebFromSpec(spec):
     res = ""
     res += "Package: %s\n" % mapPackageName(spec.header)
-    res += "Architecture: any\n" # XXXX % spec.header['arch']
+    res += "Architecture: %s\n"  % ("any" if spec.header['arch'] in [ "x86_64", "i686"] else "all")
     res += "Depends:\n"
     depends = ["${ocaml:Depends}", "${shlibs:Depends}", "${misc:Depends}"]
     for pkg, version in zip(spec.header['requires'], spec.header['requireVersion']):
@@ -400,12 +400,12 @@ def debianRulesBuildFromSpec(spec, path):
     # aren't passed through
     # Hurray, the .ONESHELL special target may save us
 
+    if not spec.build:
+        return ""
     rule = ".PHONY: override_dh_auto_build\n"
     rule += "override_dh_auto_build:\n"
     rule += "\tdebian/build.sh\n"
     rule += "\n"
-    if not spec.build:
-        return rule
     with open(os.path.join(path, "debian/build.sh"), "w") as f:
         helper = "#!/bin/sh\n"
         helper += "unset CFLAGS\n" #XXX HACK for ocaml-oclock

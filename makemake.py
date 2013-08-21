@@ -88,7 +88,7 @@ def rpmNamesFromSpec( spec ):
         rpm.addMacro( 'NAME', makedeb.mapPackageName(h) )
         rpm.addMacro( 'VERSION', h['version'] )
         rpm.addMacro( 'RELEASE', h['release'] )
-        rpm.addMacro( 'ARCH', "amd64" if h['arch'] == "x86_64" else h['arch'])
+        rpm.addMacro( 'ARCH', "amd64" if h['arch'] == "x86_64" else "all" if h['arch'] == "noarch" else h['arch'])
         rpmname = rpm.expandMacro( rpmfilenamepat )
         rpm.delMacro( 'NAME' )
         rpm.delMacro( 'VERSION' )
