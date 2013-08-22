@@ -37,7 +37,7 @@ start() {
 	umask 077
 
         echo -n $"Starting xapi: "
-        OCAMLRUNPARAM=b
+        export OCAMLRUNPARAM=b
         daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $XAPI_OPTIONS
         RETVAL=$?
         echo
