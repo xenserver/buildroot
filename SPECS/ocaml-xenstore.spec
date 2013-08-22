@@ -9,6 +9,7 @@ Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{n
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-cstruct-devel ocaml-lwt-devel ocaml-camlp4-devel
 Requires:       ocaml ocaml-findlib
+Conflicts:      xen-ocaml
 
 %description
 An implementation of the xenstore protocol in OCaml.
@@ -16,6 +17,7 @@ An implementation of the xenstore protocol in OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
+Conflicts:      xen-ocaml-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
