@@ -1,10 +1,10 @@
 Summary: vncterm tty to vnc utility
 Name: vncterm
-Version: 0.1
+Version: 0.9.0
 Release: 1
 License: GPL
 Group: System/Hypervisor
-Source0: https://github.com/xapi-project/%{name}/archive/master/%{version}/%{name}-%{version}.tar.gz
+Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:  vncterm-1-fix-build
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: xen-devel
@@ -12,7 +12,7 @@ BuildRequires: xen-devel
 %description
 This package contains the vncterm utility
 %prep
-%setup -q -n %{name}-master-%{version}
+%setup -q
 %patch0 -p1
 
 %build
@@ -37,6 +37,9 @@ getent passwd vncterm_base >/dev/null || useradd -r -g vncterm_base -d /none -s 
 %{_bindir}/vncterm
 
 %changelog
+* Thu Aug 22 2013 Euan Harris <euan.harris@citrix.com> - 0.9.0-1
+- Update to latest version of upstream package
+
 * Thu Jun 27 2013 David Scott <dave.scott@eu.citrix.com>
 - add users and groups: vncterm,vncterm_base
 
