@@ -530,7 +530,7 @@ def debianPatchesFromSpec(spec, path):
 
 
 
-def debianDirFromSpec(spec, path, specpath):
+def debianDirFromSpec(spec, path, specpath, isnative):
     os.makedirs( os.path.join(path, "debian/source") )
 
     with open( os.path.join(path, "debian/control"), "w" ) as control:
@@ -544,7 +544,10 @@ def debianDirFromSpec(spec, path, specpath):
         compat.write("8\n")
 
     with open( os.path.join(path, "debian/source/format"), "w" ) as format:
-        format.write("3.0 (quilt)\n")
+        if isnative:
+            format.write("3.0 (native)\n")
+        else:
+            format.write("3.0 (quilt)\n")
 
     with open( os.path.join(path, "debian/copyright"), "w" ) as copyright:
         copyright.write("FIXME")
@@ -576,7 +579,7 @@ def prepareBuildDir(spec, build_subdir):
     # could also just do: RPMBUILD_PREP = 1<<0; spec._doBuild()
 
     
-def renameSource(spec):
+def renameSource(origfilename, pkgname, pkgversion):
     # Debian source package name should probably match the tarball name
     origfilename = principalSourceFile(spec)
     if origfilename.endswith(".tbz"):
@@ -587,7 +590,7 @@ def renameSource(spec):
     if not m:
         print "error: could not parse filename %s" % filename
     basename, ext = m.groups()[:2]
-    baseFileName = "%s_%s.orig%s" % (mapPackage(spec.sourceHeader['name'])[0], spec.sourceHeader['version'], ext)
+    baseFileName = "%s_%s.orig%s" % (mapPackage(pkgname)[0], pkgversion, ext)
     shutil.copy(os.path.join(src_dir, origfilename), os.path.join(build_dir, baseFileName))
 
 
@@ -681,17 +684,26 @@ if __name__ == '__main__':
 
     # subdirectory of builddir in which the tarball is unpacked;  
     # set by RPM after processing the spec file
+    # if the source file isn't a tarball this won't be set!
     build_subdir = rpm.expandMacro("%buildsubdir")  
     prepareBuildDir(spec, build_subdir)
-    if not os.path.isdir( os.path.join(build_dir, build_subdir, "debian") ):
 
-        tarball = principalSourceFile(spec)
+    if os.path.isdir( os.path.join(build_dir, build_subdir, "debian") ):
+        shutil.rmtree(os.path.join(build_dir, build_subdir, "debian"))
+
+    # a package with no original tarball is built as a 'native debian package'
+    native = True
+    tarball = principalSourceFile(spec)
+    m = re.match( "^(.+)((\.tar\.(gz|bz2|lzma|xz)|\.tbz)$)", tarball )
+    if m:
+        native = False
+         
 
         # copy over the source, run the prep rule to unpack it, then rename it as deb expects
         # this should be based on the rewritten (or not) source name in the debian package - build the debian dir first and then rename the tarball as needed
-        renameSource(spec) 
+        renameSource(tarball, spec.sourceHeader['name'], spec.sourceHeader['version']) 
 
-        debianDirFromSpec(spec, os.path.join(build_dir, build_subdir), sys.argv[1])
+    debianDirFromSpec(spec, os.path.join(build_dir, build_subdir), sys.argv[1], native)
 
     # pdebuild gives us source debs as well as binaries
     res = subprocess.call( "cd %s\ndpkg-source -b --auto-commit %s" % (build_dir, build_subdir), shell=True )
