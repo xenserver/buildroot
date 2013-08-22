@@ -24,12 +24,14 @@ Requires:       xen
 A virtual package which installs the xapi toolstack.
 
 %prep
+%setup -c -T
+cp %{SOURCE0} xenserver-readme
 
 %build
 
 %install
 mkdir -p %{buildroot}/usr/share/doc/xenserver
-install -m 0644 %{_sourcedir}/xenserver-readme %{buildroot}/usr/share/doc/xenserver/README
+install -m 0644 xenserver-readme %{buildroot}/usr/share/doc/xenserver/README
 
 %clean
 rm -rf %{buildroot}

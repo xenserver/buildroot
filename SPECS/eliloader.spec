@@ -28,6 +28,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_sbindir}/eliloader
 
-
-
 %changelog
+* Mon Jun 24 2013 David Scott <dave.scott@eu.citrix.com> - 0.3-1
+- Update to eliloader 0.3
+
+* Sat Jun 22 2013 David Scott <dave.scott@eu.citrix.com> - 0.2-1
+- Update to eliloader 0.2 (doesn't assume data file directory is present)
+
+* Sat Jun 22 2013 David Scott <dave.scott@eu.citrix.com> - 0.1-1
+- Initial package
+
