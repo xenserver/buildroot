@@ -77,7 +77,7 @@ make
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 
-#install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
+install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
 install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir}/xenopsd-simulator
 install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
 install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
@@ -92,7 +92,7 @@ install -D scripts/common.py %{buildroot}/%{_libexecdir}/%{name}/common.py
 install -D scripts/network.conf %{buildroot}/%{_libexecdir}/%{name}/network.conf
 
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-#install -m 0755 %{_sourcedir}/xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
+install -m 0755 xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
 install -m 0755 xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
 install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
@@ -119,9 +119,9 @@ rm -rf %{buildroot}
 /etc/xapi/network.conf
 
 %files libvirt
-#%defattr(-,root,root)
-#%{_sbindir}/xenopsd-libvirt
-#%{_sysconfdir}/init.d/xenopsd-libvirt
+%defattr(-,root,root)
+%{_sbindir}/xenopsd-libvirt
+%{_sysconfdir}/init.d/xenopsd-libvirt
 
 %post libvirt
 /sbin/chkconfig --add xenopsd-libvirt
