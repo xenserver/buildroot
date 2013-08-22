@@ -50,7 +50,6 @@ Libraries for writing XenAPI clients in python.
 
 %prep 
 %setup -q -n xen-api-%{version}
-#%patch0 -p0 -b xapi-version.patch
 cp %{SOURCE1} xen-api-xapi-conf
 cp %{SOURCE2} xen-api-init
 cp %{SOURCE3} xen-api-xapissl
