@@ -160,8 +160,8 @@ mapping = {
     "openssl": "libssl1.0.0",
     "xen": "xen-hypervisor",
     "libuuid": "uuid",
-    "libvirt": "libvirt",
-    "xen-libs": "libxen",
+    "libvirt": "libvirt0",
+    "xen-libs": "libxen-4.2",
     "make": "make",
     "ncurses": "libncurses5",
     "chkconfig": [], # "chkconfig",
@@ -234,6 +234,10 @@ def mapPackage(name):
             continue
         if m == "xen-hypervisor-dev":
             m = ["libxen-dev", "xen-utils", "blktap-dev"]
+        if m == "libvirt0-dev":
+            m = "libvirt-dev"
+        if m == "libxen-4.2-dev":
+            m = "libxen-dev"
         if type(m) != list:
            m = [m]
         res += m
