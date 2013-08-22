@@ -21,21 +21,31 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 A virtual package which installs the xenserver yum repos.
 
 %prep
+%setup -c -T
+cp %{SOURCE0} fusion-release-xapi.repo
+cp %{SOURCE1} fusion-release-xen-c6.repo
+cp %{SOURCE2} fusion-release-xen-c6-RC1.repo
+cp %{SOURCE3} fusion-release-epel.repo
+cp %{SOURCE4} fusion-release-epel-testing.repo
+cp %{SOURCE5} fusion-release-remi.repo
+cp %{SOURCE6} fusion-release-RPM-GPG-KEY-EPEL-6
+cp %{SOURCE7} fusion-release-RPM-GPG-KEY-remi
+cp %{SOURCE8} fusion-release-xen-c6-tweaked.repo
 
 %build
 
 %install
 mkdir -p %{buildroot}/etc/yum.repos.d
-install -m 0644 %{_sourcedir}/fusion-release-xapi.repo %{buildroot}/etc/yum.repos.d/xapi.repo
-install -m 0644 %{_sourcedir}/fusion-release-xen-c6-tweaked.repo %{buildroot}/etc/yum.repos.d/xen-c6-tweaked.repo
-#install -m 0644 %{_sourcedir}/fusion-release-xen-c6.repo %{buildroot}/etc/yum.repos.d/xen-c6.repo
-#install -m 0644 %{_sourcedir}/fusion-release-xen-c6-RC1.repo %{buildroot}/etc/yum.repos.d/xen-c6-RC1.repo
-install -m 0644 %{_sourcedir}/fusion-release-epel.repo %{buildroot}/etc/yum.repos.d/epel.repo
-install -m 0644 %{_sourcedir}/fusion-release-epel-testing.repo %{buildroot}/etc/yum.repos.d/epel-testing.repo
-install -m 0644 %{_sourcedir}/fusion-release-remi.repo %{buildroot}/etc/yum.repos.d/remi.repo
+install -m 0644 fusion-release-xapi.repo %{buildroot}/etc/yum.repos.d/xapi.repo
+install -m 0644 fusion-release-xen-c6-tweaked.repo %{buildroot}/etc/yum.repos.d/xen-c6-tweaked.repo
+#install -m 0644 fusion-release-xen-c6.repo %{buildroot}/etc/yum.repos.d/xen-c6.repo
+#install -m 0644 fusion-release-xen-c6-RC1.repo %{buildroot}/etc/yum.repos.d/xen-c6-RC1.repo
+install -m 0644 fusion-release-epel.repo %{buildroot}/etc/yum.repos.d/epel.repo
+install -m 0644 fusion-release-epel-testing.repo %{buildroot}/etc/yum.repos.d/epel-testing.repo
+install -m 0644 fusion-release-remi.repo %{buildroot}/etc/yum.repos.d/remi.repo
 mkdir -p %{buildroot}/etc/pki/rpm-gpg/
-install -m 0644 %{_sourcedir}/fusion-release-RPM-GPG-KEY-EPEL-6 %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-install -m 0644 %{_sourcedir}/fusion-release-RPM-GPG-KEY-remi %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+install -m 0644 fusion-release-RPM-GPG-KEY-EPEL-6 %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+install -m 0644 fusion-release-RPM-GPG-KEY-remi %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 %clean
 rm -rf %{buildroot}
