@@ -27,6 +27,7 @@ Simple host networking management service for the xapi toolstack.
 cp %{SOURCE1} xcp-networkd-init
 cp %{SOURCE2} xcp-networkd-conf
 cp %{SOURCE3} xcp-networkd-network-conf
+cp %{SOURCE4} xcp-networkd-bridge-conf
 
 %build
 make
@@ -40,6 +41,7 @@ install -m 0755 xcp-networkd-init %{buildroot}%{_sysconfdir}/init.d/xcp-networkd
 mkdir -p %{buildroot}/etc/xcp
 install -m 0644 xcp-networkd-network-conf %{buildroot}/etc/xcp/network.conf
 install -m 0644 xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
+mkdir -p %{buildroot}/etc/modprobe.d
 install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
 
 %clean
