@@ -1,6 +1,6 @@
 Name:           xcp-networkd
 Version:        0.9.2
-Release:        1
+Release:        2
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -9,6 +9,7 @@ Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{versio
 Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
+Source4:        xcp-networkd-bridge-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
@@ -39,6 +40,7 @@ install -m 0755 xcp-networkd-init %{buildroot}%{_sysconfdir}/init.d/xcp-networkd
 mkdir -p %{buildroot}/etc/xcp
 install -m 0644 xcp-networkd-network-conf %{buildroot}/etc/xcp/network.conf
 install -m 0644 xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
+install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
 
 %clean
 rm -rf %{buildroot}
@@ -48,6 +50,7 @@ rm -rf %{buildroot}
 %doc README.markdown LICENSE MAINTAINERS
 %{_sbindir}/xcp-networkd
 %{_sysconfdir}/init.d/xcp-networkd
+/etc/modprobe.d/bridge.conf
 %config(noreplace) /etc/xcp/network.conf
 %config(noreplace) /etc/xcp-networkd.conf
 
@@ -61,6 +64,10 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Aug 28 2013 David Scott <dave.scott@eu.citrix.com>
+- When loading the bridge module, prevent guest traffic being
+  processed by the domain 0 firewall
+
 * Sun Jun  9 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.2
 
