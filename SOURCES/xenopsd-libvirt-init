@@ -17,7 +17,7 @@
 ### END INIT INFO
 
 # Source function library.
-. /etc/init.d/functions
+. /lib/lsb/init-functions
 
 RETVAL=0
 PIDFILE=/var/run/xenopsd-libvirt.pid
@@ -41,7 +41,7 @@ start() {
 	umask 077
 
         echo -n $"Starting xenopsd-libvirt: "
-        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -config /etc/xenopsd.conf -daemon true $XENOPSD_LIBVIRT_OPTIONS
+        start_daemon -p "$PIDFILE" $exec -pidfile "$PIDFILE" -config /etc/xenopsd.conf -daemon true $XENOPSD_LIBVIRT_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
@@ -56,7 +56,7 @@ stop() {
         return $RETVAL
 }
 rhstatus() {
-        status -p "$PIDFILE" -l $prog $exec
+        status_of_proc -p "$PIDFILE" $exec $prog
 }
 restart() {
         stop
