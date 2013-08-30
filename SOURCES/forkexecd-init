@@ -24,7 +24,11 @@ PIDFILE=/var/run/forkexecd.pid
 
 prog=forkexecd
 exec=/usr/sbin/forkexecd
-lockfile=/var/lock/subsys/$prog
+if [ -d /var/lock/subsys ] ; then
+    lockfile=/var/lock/subsys/$prog
+else
+    lockfile=/var/lock/$prog
+fi
 
 # Source config
 if [ -f /etc/sysconfig/$prog ] ; then

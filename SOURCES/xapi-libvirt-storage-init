@@ -24,7 +24,11 @@ PIDFILE=/var/run/xapi-libvirt-storage.pid
 
 prog=xapi-libvirt-storage
 exec=/usr/sbin/xapi-libvirt-storage
-lockfile=/var/lock/subsys/$prog
+if [ -d /var/lock/subsys ] ; then
+    lockfile=/var/lock/subsys/$prog
+else
+    lockfile=/var/lock/$prog
+fi
 
 # Source config
 if [ -f /etc/sysconfig/$prog ] ; then

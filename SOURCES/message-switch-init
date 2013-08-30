@@ -26,7 +26,11 @@ PIDFILE=/var/run/message-switch.pid
 
 prog=message-switch
 exec=/usr/sbin/message-switch
-lockfile=/var/lock/subsys/$prog
+if [ -d /var/lock/subsys ] ; then
+    lockfile=/var/lock/subsys/$prog
+else
+    lockfile=/var/lock/$prog
+fi
 
 # Source config
 if [ -f /etc/sysconfig/$prog ] ; then

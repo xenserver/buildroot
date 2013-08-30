@@ -24,7 +24,11 @@ PIDFILE=/var/run/xcp-networkd.pid
 
 prog=xcp-networkd
 exec=/usr/sbin/xcp-networkd
-lockfile=/var/lock/subsys/$prog
+if [ -d /var/lock/subsys ] ; then
+    lockfile=/var/lock/subsys/$prog
+else
+    lockfile=/var/lock/$prog
+fi
 
 # Source config
 if [ -f /etc/sysconfig/$prog ] ; then
