@@ -13,7 +13,7 @@ BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel ocaml-libvhd-devel xen-devel libuuid-devel
 BuildRequires:  ocaml-tapctl-devel message-switch-devel forkexecd-devel
-Requires:       ocaml-libvhd-devel nfs-utils
+Requires:       ocaml-libvhd-devel nfs-utils redhat-lsb-core
 
 %description
 Simple flat file storage manager for the xapi toolstack.

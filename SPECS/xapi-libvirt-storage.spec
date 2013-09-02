@@ -13,6 +13,7 @@ BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel
 BuildRequires:  message-switch-devel
+Requires:       redhat-lsb-core
 
 %description
 Allows the manipulation of libvirt storage pools and volumes via xapi.
