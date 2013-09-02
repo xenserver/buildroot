@@ -9,6 +9,7 @@ Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{versio
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-obuild ocaml-xcp-idl-devel cmdliner-devel ocaml-uuidm-devel
+BuildRequires:  message-switch-devel
 Requires:       message-switch
 
 # XXX transitively required by message_switch

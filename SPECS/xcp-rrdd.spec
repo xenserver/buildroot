@@ -12,9 +12,10 @@ BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel ocaml-xcp-inventory-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
+BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenops-devel
 BuildRequires:  ocaml-oclock-devel
-BuildRequires:  xen-devel
+BuildRequires:  xen-devel message-switch-devel forkexecd-devel
 
 %description
 Statistics gathering daemon for the xapi toolstack.
