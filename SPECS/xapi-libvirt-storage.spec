@@ -12,6 +12,7 @@ BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel ocaml-libvir
 BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel
+BuildRequires:  message-switch-devel
 
 %description
 Allows the manipulation of libvirt storage pools and volumes via xapi.
