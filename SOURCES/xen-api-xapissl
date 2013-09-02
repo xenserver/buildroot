@@ -3,7 +3,7 @@
 # start and stop stunnel for xapi
 
 # source function library
-. /etc/rc.d/init.d/functions
+. /lib/lsb/init-functions
 
 ACCEPT=$2
 PEMFILE="/etc/xapi/ssl.pem"
@@ -92,7 +92,7 @@ start() {
     if [ ! -f %{SSLCONFFILE} ]; then
         writeconffile
     fi
-    daemon --pidfile="$PIDFILE" $exec ${SSLCONFFILE} $XAPISSL_OPTIONS
+    start_daemon -p "$PIDFILE" $exec ${SSLCONFFILE} $XAPISSL_OPTIONS
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $XAPISSL_LOCK
@@ -109,7 +109,7 @@ stop() {
 }
 
 rhstatus() {
-        status -p "$PIDFILE" -l $prog $exec
+        status -p "$PIDFILE" $exec $prog
 }
 restart() {
         stop

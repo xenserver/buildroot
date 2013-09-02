@@ -17,6 +17,7 @@ BuildRequires: ocaml-ounit-devel ocaml-syslog-devel ocaml-uri-devel
 BuildRequires: ocaml-re-devel ocaml-rpc-devel cmdliner-devel
 BuildRequires: ocaml-ssl-devel ocaml-oclock-devel
 BuildRequires: openssl openssl-devel
+Requires:      redhat-lsb-core
 #  "ocamlfind"
 #  "cohttp" {= "0.9.7"}
 #  "rpc"

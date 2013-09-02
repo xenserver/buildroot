@@ -17,14 +17,18 @@
 ### END INIT INFO
 
 # Source function library.
-. /etc/init.d/functions
+. /lib/lsb/init-functions
 
 RETVAL=0
 PIDFILE=/var/run/squeezed.pid
 
 prog=squeezed
 exec=/usr/sbin/squeezed
-lockfile=/var/lock/subsys/$prog
+if [ -d /var/lock/subsys ] ; then
+    lockfile=/var/lock/subsys/$prog
+else
+    lockfile=/var/lock/$prog
+fi
 
 # Source config
 if [ -f /etc/sysconfig/$prog ] ; then
@@ -37,7 +41,7 @@ start() {
 	umask 077
 
         echo -n $"Starting squeezed: "
-        daemon --pidfile="$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $SQUEEZED_OPTIONS
+        start_daemon -p "$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $SQUEEZED_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
@@ -52,7 +56,7 @@ stop() {
         return $RETVAL
 }
 rhstatus() {
-        status -p "$PIDFILE" -l $prog $exec
+        status_of_proc -p "$PIDFILE" $exec $prog
 }
 restart() {
         stop
