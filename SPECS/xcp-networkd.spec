@@ -18,7 +18,7 @@ BuildRequires:  ocaml-xcp-inventory-devel ocaml-ounit-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-xen-api-client-devel
 BuildRequires:  ocaml-oclock-devel message-switch-devel
-Requires:       ethtool
+Requires:       ethtool redhat-lsb-core
 
 %description
 Simple host networking management service for the xapi toolstack.

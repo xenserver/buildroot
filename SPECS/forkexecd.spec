@@ -10,7 +10,7 @@ Source1:        forkexecd-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-rpc-devel ocaml-fd-send-recv-devel ocaml-re-devel ocaml-syslog-devel ocaml-uuidm-devel ocaml-stdext-devel
-Requires:  ocaml-rpc ocaml-rpc-devel
+Requires:  ocaml-rpc ocaml-rpc-devel redhat-lsb-core
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
