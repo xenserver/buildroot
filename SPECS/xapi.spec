@@ -2,8 +2,8 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.19
-Release: 2
+Version: 1.9.20
+Release: 0
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -147,6 +147,9 @@ fi
 /usr/lib/python2.6/site-packages/XenAPIPlugin.pyc
 
 %changelog
+* Mon Sep  1 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.20-0
+- Fix XenAPI.py on python2.7
+
 * Tue Aug 20 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.19-1
 - Add sparse_dd to the xapi package so VDI.copy should work
 
