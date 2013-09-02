@@ -12,7 +12,7 @@ SSLCONFFILE="/etc/xapi/xapissl.conf"
 XAPISSL_LOCK="/var/lock/xapissl"
 
 # If stunnel4 exists, use it. Otherwise use stunnel.
-$(which stunnel4 || which stunnel) 2> /dev/null
+exec=$(which stunnel4 || which stunnel) 2> /dev/null
 
 generate_ssl_cert() {
     local FILE=$1
