@@ -1,4 +1,4 @@
-OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb http://gb.archive.ubuntu.com/ubuntu/ raring universe|deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main "
+OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb-src file:@PWD@/SRPMS/ ./|deb http://gb.archive.ubuntu.com/ubuntu/ raring universe|deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main "
 BINDMOUNTS="@PWD@/RPMS @PWD@/SRPMS"
 HOOKDIR="@PWD@/pbuilder"
 EXTRAPACKAGES="apt-utils"
