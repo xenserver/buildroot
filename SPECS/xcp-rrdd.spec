@@ -16,7 +16,7 @@ BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenops-devel
 BuildRequires:  ocaml-oclock-devel
 BuildRequires:  xen-devel message-switch-devel forkexecd-devel
-Requires:       redhat-lsb-init
+Requires:       redhat-lsb-core
 
 %description
 Statistics gathering daemon for the xapi toolstack.
