@@ -2,7 +2,7 @@
 
 use-xenopsd = true
 disable-logging-for = http db_write redo_log api_readonly
-xapissl=/usr/libexec/xapi/xapissl
-pci-info=/usr/libexec/xapi/pci-info
+xapissl=@LIBEXECDIR@/xapi/xapissl
+pci-info=@LIBEXECDIR@/xapi/pci-info
 
 udhcpd=/bin/true
