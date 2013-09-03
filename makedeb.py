@@ -457,6 +457,16 @@ def debianRulesDhInstallFromSpec(spec, specpath, path):
     return rule
 
 
+def debianConfigFilesFromSpec(spec, specpath, path):
+    pkgname = mapPackageName(spec.sourceHeader)
+    files = filesFromSpec(pkgname, specpath)
+    config_files = ""
+    if files.has_key( pkgname + "-%config" ):
+        for filename in files[pkgname + "-%config"]:
+    	    config_files += "%s\n" % filename
+    return config_files
+
+
 def debianRulesTestFromSpec(spec, path):
     # XXX HACK for ocaml-oclock - don't try to run the tests when building
     rule = ".PHONY: override_dh_auto_test\n"
@@ -576,6 +586,11 @@ def debianDirFromSpec(spec, path, specpath, isnative):
     debianFilelistsFromSpec(spec, path, specpath)
     debianPatchesFromSpec(spec, path)
 
+    configs = debianConfigFilesFromSpec(spec, specpath, path)
+    if configs:
+        with open( os.path.join(path, "debian/conffiles"), "w" ) as conffiles:
+            conffiles.write(configs)
+
 def principalSourceFile(spec):
     return os.path.basename([name for (name, seq, type) in spec.sources 
                              if seq == 0 and type == 1][0])
@@ -680,7 +695,15 @@ def filesFromSpec(basename, specpath):
                     files[excludesection] = files.get(excludesection, []) + tokens[1:]
                     continue
                 if tokens[0].lower().startswith("%config"):
-                    # XXX do the right thing here - should add to debian/configfiles
+                    # dh_install automatically considers files in /etc to be config files 
+                    # so we don't have to do anythin special for them
+                    # The spec file documentation says that a %config directive can
+                    # only apply to a single file.
+                    configsection = section + "-%config"
+                    if tokens[1].startswith("/etc"):
+                        files[section] = files.get(section, []) + tokens[1:]
+                    else:
+                        files[configsection] = files.get(configsection, []) + tokens[1:]
                     continue
                 if tokens[0].startswith("%config"):
                     # XXX do the right thing here - should add to debian/configfiles
