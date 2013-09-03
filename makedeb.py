@@ -722,6 +722,9 @@ if __name__ == '__main__':
     shutil.rmtree(build_dir)   #XXX
     os.mkdir(build_dir)
     spec = specFromFile(sys.argv[1])
+    clean = True
+    if "-noclean" in sys.argv:
+        clean = False
 
     # subdirectory of builddir in which the tarball is unpacked;  
     # set by RPM after processing the spec file
@@ -751,10 +754,14 @@ if __name__ == '__main__':
     #pbuild can build a dsc - pbuilder --build <dsc> --configfile pbuilder/pbuildrerc-amd64 --resultdir ...
     #res = subprocess.call( "cd %s\npdebuild --configfile %s --buildresult %s" % (os.path.join(build_dir, build_subdir), os.path.join(top_dir, "pbuilder/pbuilderrc-amd64"), rpm_dir), shell=True )
     assert res == 0
-    shutil.rmtree(os.path.join(build_dir, build_subdir))
+    if clean:
+        shutil.rmtree(os.path.join(build_dir, build_subdir))
     for i in glob.glob(os.path.join(build_dir, "*")):
+        if build_subdir in i:
+            continue
         shutil.copy2(i, srpm_dir) #XXX
-        os.unlink(i)
+        if clean:
+            os.unlink(i)
 
     # at this point we have a debian source package (at least 3 files) in SRPMS
     # to build it:
