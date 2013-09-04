@@ -10,7 +10,7 @@ Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
 Source3:        xenopsd-libvirt-init
 Source4:        xenopsd-xenlight-init
-Source5:        xenopsd-conf.in
+Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
@@ -21,6 +21,7 @@ BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
 BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
 BuildRequires:  xen-devel ocaml-xcp-inventory-devel message-switch-devel
+BuildRequires:  vncterm eliloader
 Requires:       message-switch xenops-cli redhat-lsb-core
 
 %description
@@ -67,13 +68,11 @@ cp %{SOURCE1} xenopsd-xc-init
 cp %{SOURCE2} xenopsd-simulator-init
 cp %{SOURCE3} xenopsd-libvirt-init
 cp %{SOURCE4} xenopsd-xenlight-init
-cp %{SOURCE5} xenopsd-conf.in
+cp %{SOURCE5} make-xsc-xenopsd.conf
 cp %{SOURCE6} xenopsd-network-conf
 
 %build
 make
-
-sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xenopsd-conf.in > xenopsd-conf
 
 %install
 rm -rf %{buildroot}
@@ -99,7 +98,10 @@ install -m 0755 xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-
 install -m 0755 xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
 install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
+
 mkdir -p %{buildroot}/etc/xapi
+chmod 755 make-xsc-xenopsd.conf 
+LIBEXECDIR=%{_libexecdir}/%{name} ETCDIR=/etc/xapi SCRIPTSDIR=%{_libexecdir}/%{name} DESTDIR=%{buildroot} ./make-xsc-xenopsd.conf > xenopsd-conf
 install -m 0644 xenopsd-conf %{buildroot}/etc/xenopsd.conf
 install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 
@@ -182,6 +184,9 @@ fi
 %changelog
 * Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.26, which includes fixes for networking and libxl
+
+* Fri Sep 20 2013 Euan Harris <euan.harris@citrix.com>
+- Generate xenopsd.conf automatically
 
 * Mon Sep 16 2013 Euan Harris <euan.harris@citrix.com>
 - Update to 0.9.25, which includes linker paths required on Debian
