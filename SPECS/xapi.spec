@@ -8,7 +8,7 @@ Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/djs55/xen-api/archive/%{version}/xen-api-%{version}.tar.gz
-Source1: xen-api-xapi-conf
+Source1: xen-api-xapi-conf.in
 Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
@@ -51,7 +51,7 @@ Libraries for writing XenAPI clients in python.
 
 %prep 
 %setup -q -n xen-api-%{version}
-cp %{SOURCE1} xen-api-xapi-conf
+cp %{SOURCE1} xen-api-xapi-conf.in
 cp %{SOURCE2} xen-api-init
 cp %{SOURCE3} xen-api-xapissl
 cp %{SOURCE4} xen-api-db-conf
@@ -68,6 +68,8 @@ omake phase2
 omake ocaml/xapi/xapi
 omake ocaml/xe-cli/xe
 omake ocaml/xapi/sparse_dd
+
+sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in > xen-api-xapi-conf
 
 %install
 rm -rf %{buildroot}
