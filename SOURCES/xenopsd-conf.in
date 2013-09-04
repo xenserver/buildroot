@@ -3,15 +3,15 @@
 # Omit some sources of log-spam by default
 disable-logging-for=http
 
-xenguest=/usr/libexec/xenopsd/xenguest
+xenguest=@LIBEXECDIR@/xenopsd/xenguest
 
 network-conf=/etc/xapi/network.conf
 
-vif-script=/usr/libexec/xenopsd/vif
-vif-xl-script=/usr/libexec/xenopsd/vif-xl
-qemu-vif-script=/usr/libexec/xenopsd/qemu-vif-script
-qemu-dm-wrapper=/usr/libexec/xenopsd/qemu-dm-wrapper
-setup-vif-rules=/usr/libexec/xenopsd/setup-vif-rules
+vif-script=@LIBEXECDIR@/xenopsd/vif
+vif-xl-script=@LIBEXECDIR@/xenopsd/vif-xl
+qemu-vif-script=@LIBEXECDIR@/xenopsd/qemu-vif-script
+qemu-dm-wrapper=@LIBEXECDIR@/xenopsd/qemu-dm-wrapper
+setup-vif-rules=@LIBEXECDIR@/xenopsd/setup-vif-rules
 
 hvmloader=/usr/lib/xen/boot/hvmloader
 pygrub=/usr/bin/pygrub
