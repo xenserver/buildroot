@@ -2,6 +2,9 @@
 
 # see http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch16s04.html
 
+import sys
+sys.path.append("scripts")
+
 import rpm
 import os
 import urlparse
@@ -125,7 +128,7 @@ for specname, spec in specs.iteritems():
                          os.path.join( spec_dir, specname ),
                          " ".join( sources ) )
     print '\t@echo [MAKEDEB] $@'
-    print '\t./makedeb.py $<'
+    print '\tscripts/makedeb.py $<'
 
 # Rules to download sources
 
