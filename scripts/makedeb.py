@@ -124,47 +124,97 @@ def debianControlFromSpec(spec):
     return res
 
 
-def ocamlRulesPreamble():
-    return """#!/usr/bin/make -f
-#include /usr/share/cdbs/1/rules/debhelper.mk
-#include /usr/share/cdbs/1/class/makefile.mk
-#include /usr/share/cdbs/1/rules/ocaml.mk
+class Tree(object):
+    def __init__(self):
+        self.t = {}
 
-export DH_VERBOSE=1
-export DH_OPTIONS
+    def append(self, filename, contents=None, permissions=None):
+        node = self.t.get( filename, {} )
+        if contents:
+	    node['contents'] = node.get( 'contents', '' ) + contents
+        if permissions:
+            if node.has_key('permissions') and node['permissions'] != permissions:
+                raise Exception("Trying to change permissions for " % filename)
+	    
+            if permissions:
+                node['permissions'] = permissions
+            else:
+                node['permissions'] = 0o644
+        self.t[filename] = node
 
-export DESTDIR=$(CURDIR)/debian/tmp
+    def apply(self, path):
+        for k, v in self.t.items():
+            permissions = v.get("permissions", 0o644)
+            contents = v.get("contents", "")
+            fullpath = os.path.dirname( os.path.join(path, k))
+            if not os.path.isdir(fullpath):
+                print "makedirs(%s)" % fullpath 
+                os.makedirs(fullpath)
+            f = os.open( os.path.join(path, k), os.O_WRONLY | os.O_CREAT, permissions)
+	    print "write(%s)" % os.path.join(path, k) 
+            os.write(f, contents)
+            os.close(f)
 
-%:
-\tdh $@ --with ocaml
+    def __repr__(self):
+        res = ""
+        for k, v in self.t.items():
+            permissions = v.get("permissions", 0o644)
+            contents = v.get("contents", "")
+            res += "%s (0o%o):\n" % (k, permissions)
+            res += contents
+            res += "\n\n"
+        return res
 
-"""
 
-
-def debianRulesFromSpec(spec, specpath, path):
-    res = ""
-    res += ocamlRulesPreamble()
-    res += debianRulesConfigureFromSpec(spec)
-    res += debianRulesBuildFromSpec(spec, path)
-    res += debianRulesInstallFromSpec(spec, path)
-    res += debianRulesDhInstallFromSpec(spec, specpath, path)
-    res += debianRulesCleanFromSpec(spec, path)
-    res += debianRulesTestFromSpec(spec, path)
+def debianRulesFromSpec(spec, specpath):
+    # XXX make each helper return a subtree and merge them at this level?
+    # XXX write some tests!
+    res = Tree()
+    ocamlRulesPreamble(spec, res)
+    debianRulesConfigureFromSpec(spec, res)
+    debianRulesBuildFromSpec(spec, res)
+    debianRulesInstallFromSpec(spec, res)
+    debianRulesDhInstallFromSpec(spec, res, specpath)   # XXX need to augment the specfile object
+    debianRulesCleanFromSpec(spec, res)
+    debianRulesTestFromSpec(spec, res)
     return res
 
-    
-# RPM doesn't have a configure target - everything happens in the build target
-def debianRulesConfigureFromSpec(spec):
-    # needed for OASIS packages with configure scripts
-    # if debhelper sees a configure script it will assume it's from autoconf
-    # and will run it with arguments that an OASIS configur script won't understand
+# XXX move all this into a separate file
+
+def ocamlRulesPreamble(spec, tree):
+    # should only include this at the end, if we noticed that we have packed up ocaml files
+    # similarly for python files
+    rule  = "#!/usr/bin/make -f\n"
+    rule += "\n"
+    rule += "#include /usr/share/cdbs/1/rules/debhelper.mk\n"
+    rule += "#include /usr/share/cdbs/1/class/makefile.mk\n"
+    rule += "#include /usr/share/cdbs/1/rules/ocaml.mk\n"
+    rule += "\n"
+    rule += "export DH_VERBOSE=1\n"
+    rule += "export DH_OPTIONS\n"
+    rule += "export DESTDIR=$(CURDIR)/debian/tmp\n"
+    rule += "%:\n"
+    rule += "\tdh $@ --with ocaml\n"
+    rule += "\n"
+
+    tree.append('debian/rules', rule)
+
+
+def debianRulesConfigureFromSpec(spec, tree):
+    # RPM doesn't have a configure target - everything happens in the
+    # build target.  Nevertheless we must override the auto_configure target
+    # because some OASIS packages have configure scripts.    If debhelper
+    # sees a configure script it will assume it's from autoconf and will
+    # run it with arguments that an OASIS configure script won't understand.
+
     rule = ".PHONY: override_dh_auto_configure\n"
     rule += "override_dh_auto_configure:\n"
-    return rule
+    rule += "\n"
+
+    tree.append('debian/rules', rule)
 
 
-
-def debianRulesBuildFromSpec(spec, path):
+def debianRulesBuildFromSpec(spec, tree):
     # RPM's build script is just a script which is run at the appropriate time.
     # debian/rules is a Makefile.   Makefile recipes aren't shell scripts - each
     # line is run independently, so exports don't survive from line to line and
@@ -175,37 +225,40 @@ def debianRulesBuildFromSpec(spec, path):
     # ...we could write them to temporary files as the makefile is evaluated...
     # this sub-script business unfortunately means that variables from the makefile
     # aren't passed through
-    # Hurray, the .ONESHELL special target may save us
 
     if not spec.build:
-        return ""
-    rule = ".PHONY: override_dh_auto_build\n"
+        return {}
+
+    rule =  ".PHONY: override_dh_auto_build\n"
     rule += "override_dh_auto_build:\n"
     rule += "\tdebian/build.sh\n"
     rule += "\n"
-    with open(os.path.join(path, "debian/build.sh"), "w") as f:
-        helper = "#!/bin/sh\n"
-        helper += "unset CFLAGS\n" #XXX HACK for ocaml-oclock
-        helper += spec.build.replace("$RPM_BUILD_ROOT", "${DESTDIR}")
-        f.write(helper)
-    os.chmod(os.path.join(path, "debian/build.sh"), 0o755)
-    return rule
+
+    helper = "#!/bin/sh\n"
+    helper += "unset CFLAGS\n" #XXX HACK for ocaml-oclock
+    helper += spec.build.replace("$RPM_BUILD_ROOT", "${DESTDIR}")
+
+    tree.append('debian/rules', rule)
+    tree.append('debian/build.sh', helper, permissions=0o755)
 
 
-def debianRulesInstallFromSpec(spec, path):
-    rule = ".PHONY: override_dh_auto_install\n"
+def debianRulesInstallFromSpec(spec, tree):
+    rule =  ".PHONY: override_dh_auto_install\n"
     rule += "override_dh_auto_install:\n"
     rule += "\tdebian/install.sh\n"
     rule += "\n"
-    with open(os.path.join(path, "debian/install.sh"), "w") as f:
-        f.write("#!/bin/sh\n" + spec.install.replace("$RPM_BUILD_ROOT", "${DESTDIR}"))
-    os.chmod(os.path.join(path, "debian/install.sh"), 0o755)
-    return rule
 
-def debianRulesDhInstallFromSpec(spec, specpath, path):
-    rule = ".PHONY: override_dh_install\n"
+    helper = "#!/bin/sh\n" 
+    helper += spec.install.replace("$RPM_BUILD_ROOT", "${DESTDIR}")
+
+    tree.append('debian/rules', rule)
+    tree.append('debian/install.sh', helper, permissions=0o755)
+
+def debianRulesDhInstallFromSpec(spec, tree, specpath):
+    rule  =  ".PHONY: override_dh_install\n"
     rule += "override_dh_install:\n"
     rule += "\tdh_install\n"
+
     pkgname = mappkgname.mapPackageName(spec.sourceHeader)
     files = filesFromSpec(pkgname, specpath)
     if files.has_key( pkgname + "-%exclude" ):
@@ -213,7 +266,8 @@ def debianRulesDhInstallFromSpec(spec, specpath, path):
             path = "\trm -f debian/%s/%s\n" % (pkgname, rpm.expandMacro(pat))
  	    rule += os.path.normpath(path)
     rule += "\n"
-    return rule
+
+    tree.append('debian/rules', rule)
 
 
 def debianConfigFilesFromSpec(spec, specpath, path):
@@ -226,23 +280,26 @@ def debianConfigFilesFromSpec(spec, specpath, path):
     return config_files
 
 
-def debianRulesTestFromSpec(spec, path):
-    # XXX HACK for ocaml-oclock - don't try to run the tests when building
-    rule = ".PHONY: override_dh_auto_test\n"
-    rule += "override_dh_auto_test:\n"
-    return rule
-
-
-def debianRulesCleanFromSpec(spec, path):
+def debianRulesCleanFromSpec(spec, tree):
     rule = ".PHONY: override_dh_auto_clean\n"
     rule += "override_dh_auto_clean:\n"
     rule += "\tdebian/clean.sh\n"
     rule += re.sub("^", "\t", spec.clean.strip(), flags=re.MULTILINE)
-    rule += "\n"
-    with open(os.path.join(path, "debian/clean.sh"), "w") as f:
-        f.write("#!/bin/sh\n" + spec.clean.replace("$RPM_BUILD_ROOT", "${DESTDIR}"))
-    os.chmod(os.path.join(path, "debian/clean.sh"), 0o755)
-    return rule
+    rule += "\n\n"
+
+    helper = "#!/bin/sh\n" + spec.clean.replace("$RPM_BUILD_ROOT", "${DESTDIR}")
+
+    tree.append('debian/rules', rule)
+    tree.append('debian/clean.sh', helper, permissions=0o755)
+
+
+def debianRulesTestFromSpec(spec, tree):
+    # XXX HACK for ocaml-oclock - don't try to run the tests when building
+    rule  = ".PHONY: override_dh_auto_test\n"
+    rule += "override_dh_auto_test:\n"
+
+    tree.append('debian/rules', rule)
+
 
 
 def debianChangelogFromSpec(spec):
@@ -323,9 +380,8 @@ def debianDirFromSpec(spec, path, specpath, isnative):
     with open( os.path.join(path, "debian/control"), "w" ) as control:
         control.write(debianControlFromSpec(spec))
 
-    with open( os.path.join(path, "debian/rules"), "w" ) as rules:
-        rules.write(debianRulesFromSpec(spec, specpath, path))
-    os.chmod( os.path.join(path, "debian/rules"), 0o755 )
+    rules = debianRulesFromSpec(spec, specpath)
+    rules.apply(path)
 
     with open( os.path.join(path, "debian/compat"), "w" ) as compat:
         compat.write("8\n")
