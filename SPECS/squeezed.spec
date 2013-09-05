@@ -57,7 +57,10 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
-* Mon Sep  2 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Sep 04 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.1-1
+- Add get_domain_zero_palicy call required for domain 0 ballooning
+
+* Mon Sep  2 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.0-1
 - Update to 0.10.0, with support for domain 0 ballooning
 
 * Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com>

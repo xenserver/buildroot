@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xcp/*
 
 %changelog
+* Wed Sep 04 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.12-1
+- Allow domain 0 memory policy to be queried
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
