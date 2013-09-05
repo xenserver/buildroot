@@ -20,14 +20,14 @@ import mappkgname
 #   Hack to disable tests for ocaml-oclock
 #   Hard coded install files only install ocaml dir
 #   Should be building signed debs
-#   mapPackageName needs to return a list of packages, and to understand version numbers
 
 
 # By default, RPM expects everything to be in $HOME/rpmbuild.  
+# We want it to run in the current directory.
 rpm.addMacro( '_topdir', os.getcwd() )
 
 
-# Directories where rpmbuild/mock expects to find inputs
+# Directories where rpmbuild expects to find inputs
 # and writes outputs
 top_dir = rpm.expandMacro( '%_topdir' )
 rpm_dir = rpm.expandMacro( '%_rpmdir' )
@@ -46,7 +46,6 @@ rpm.addMacro( '_libexecdir', "/usr/lib" )
 # (Actually, using {}, not (), because these identifiers
 # end up in helper scripts, not in the makefile
 rpm.addMacro( "buildroot", "${DESTDIR}" )
-#rpm.addMacro( "_libdir", "${STDLIBDIR}" )
 rpm.addMacro( "_libdir", "/usr/lib" )
 
 
@@ -76,7 +75,7 @@ def formatDescription(description):
 
 def sourceDebFromSpec(spec):
     res = ""
-    res += "Source: %s\n" % mappkgname.mapPackage(spec.sourceHeader['name'])[0] #XXX should this be mapped?
+    res += "Source: %s\n" % mappkgname.mapPackage(spec.sourceHeader['name'])[0]
     res += "Priority: %s\n" % "optional"
     res += "Maintainer: %s\n" % "Euan Harris <euan.harris@citrix.com>" #XXX
     res += "Section: %s\n" % mappkgname.mapSection(spec.sourceHeader['group'])
@@ -85,9 +84,6 @@ def sourceDebFromSpec(spec):
     build_depends = [ "debhelper (>= 8)", "dh-ocaml (>= 0.9)", "ocaml-nox" ]
     for pkg, version in zip(spec.sourceHeader['requires'], spec.sourceHeader['requireVersion']):
         deps = mappkgname.mapPackage(pkg)
-        # XXXX Ick!
-        if type(deps) != list:
-           deps = [deps]
         for dep in deps:
             if version:
                 dep += " (>= %s)" % version
@@ -105,9 +101,6 @@ def binaryDebFromSpec(spec):
     depends = ["${ocaml:Depends}", "${shlibs:Depends}", "${misc:Depends}"]
     for pkg, version in zip(spec.header['requires'], spec.header['requireVersion']):
         deps = mappkgname.mapPackage(pkg)
-        # XXXX Ick!
-        if type(deps) != list:
-            deps = [deps]
         for dep in deps:
             if version:
                 dep += " (>= %s)" % version
@@ -162,12 +155,6 @@ def debianRulesFromSpec(spec, specpath, path):
     
 # RPM doesn't have a configure target - everything happens in the build target
 def debianRulesConfigureFromSpec(spec):
-#    return """.PHONY: override_dh_auto_configure
-#override_dh_auto_configure:
-#\tocaml setup.ml -configure --destdir $(DESTDIR)/$(OCAML_STDLIB_DIR)
-#
-#"""
-
     # needed for OASIS packages with configure scripts
     # if debhelper sees a configure script it will assume it's from autoconf
     # and will run it with arguments that an OASIS configur script won't understand
