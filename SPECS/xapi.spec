@@ -150,6 +150,9 @@ fi
 /usr/lib/python2.6/site-packages/XenAPIPlugin.pyc
 
 %changelog
+* Wed Sep  4 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.22-1
+- Query domain 0 memory policy from squeezed
+
 * Wed Sep  4 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.21-1
 - Update to 1.9.21, switch default xenopsd to the "classic" version
 
