@@ -1,5 +1,10 @@
 import rpm
 
+
+def specFromFile(spec):
+    return rpm.ts().parseSpec(spec)
+
+
 def filesFromSpec(basename, specpath):
     """The RPM library doesn't seem to give us access to the files section,
     so we need to go and get it ourselves.   This parsing algorithm is

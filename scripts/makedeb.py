@@ -52,9 +52,6 @@ rpm.addMacro( "buildroot", "${DESTDIR}" )
 rpm.addMacro( "_libdir", "/usr/lib" )
 
 
-def specFromFile(spec):
-    return rpm.ts().parseSpec(spec)
-
 
 
 
@@ -222,7 +219,7 @@ def renameSource(origfilename, pkgname, pkgversion):
 if __name__ == '__main__':
     shutil.rmtree(build_dir)   #XXX
     os.mkdir(build_dir)
-    spec = specFromFile(sys.argv[1])
+    spec = rpmextra.specFromFile(sys.argv[1])
     clean = True
     if "-noclean" in sys.argv:
         clean = False
