@@ -20,7 +20,7 @@ BuildRequires:  ocaml-oclock-devel ocaml-uuidm-devel forkexecd-devel
 BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
 BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
-BuildRequires:  xen-devel ocaml-xcp-inventory-devel
+BuildRequires:  xen-devel ocaml-xcp-inventory-devel message-switch-devel
 Requires:       message-switch xenops-cli qemu-system-x86 redhat-lsb-core
 
 %description
