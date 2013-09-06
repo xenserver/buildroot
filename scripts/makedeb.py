@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import rpm
+import rpmextra
 import os
 import urlparse
 import sys
@@ -13,6 +14,7 @@ import subprocess
 import shlex
 import glob
 import mappkgname
+import debianrules
 
 # BUGS:
 #   Code is a mess
@@ -124,184 +126,6 @@ def debianControlFromSpec(spec):
     return res
 
 
-class Tree(object):
-    def __init__(self):
-        self.t = {}
-
-    def append(self, filename, contents=None, permissions=None):
-        node = self.t.get( filename, {} )
-        if contents:
-	    node['contents'] = node.get( 'contents', '' ) + contents
-        if permissions:
-            if node.has_key('permissions') and node['permissions'] != permissions:
-                raise Exception("Trying to change permissions for " % filename)
-	    
-            if permissions:
-                node['permissions'] = permissions
-            else:
-                node['permissions'] = 0o644
-        self.t[filename] = node
-
-    def apply(self, path):
-        for k, v in self.t.items():
-            permissions = v.get("permissions", 0o644)
-            contents = v.get("contents", "")
-            fullpath = os.path.dirname( os.path.join(path, k))
-            if not os.path.isdir(fullpath):
-                print "makedirs(%s)" % fullpath 
-                os.makedirs(fullpath)
-            f = os.open( os.path.join(path, k), os.O_WRONLY | os.O_CREAT, permissions)
-	    print "write(%s)" % os.path.join(path, k) 
-            os.write(f, contents)
-            os.close(f)
-
-    def __repr__(self):
-        res = ""
-        for k, v in self.t.items():
-            permissions = v.get("permissions", 0o644)
-            contents = v.get("contents", "")
-            res += "%s (0o%o):\n" % (k, permissions)
-            res += contents
-            res += "\n\n"
-        return res
-
-
-def debianRulesFromSpec(spec, specpath):
-    # XXX make each helper return a subtree and merge them at this level?
-    # XXX write some tests!
-    res = Tree()
-    ocamlRulesPreamble(spec, res)
-    debianRulesConfigureFromSpec(spec, res)
-    debianRulesBuildFromSpec(spec, res)
-    debianRulesInstallFromSpec(spec, res)
-    debianRulesDhInstallFromSpec(spec, res, specpath)   # XXX need to augment the specfile object
-    debianRulesCleanFromSpec(spec, res)
-    debianRulesTestFromSpec(spec, res)
-    return res
-
-# XXX move all this into a separate file
-
-def ocamlRulesPreamble(spec, tree):
-    # should only include this at the end, if we noticed that we have packed up ocaml files
-    # similarly for python files
-    rule  = "#!/usr/bin/make -f\n"
-    rule += "\n"
-    rule += "#include /usr/share/cdbs/1/rules/debhelper.mk\n"
-    rule += "#include /usr/share/cdbs/1/class/makefile.mk\n"
-    rule += "#include /usr/share/cdbs/1/rules/ocaml.mk\n"
-    rule += "\n"
-    rule += "export DH_VERBOSE=1\n"
-    rule += "export DH_OPTIONS\n"
-    rule += "export DESTDIR=$(CURDIR)/debian/tmp\n"
-    rule += "%:\n"
-    rule += "\tdh $@ --with ocaml\n"
-    rule += "\n"
-
-    tree.append('debian/rules', rule)
-
-
-def debianRulesConfigureFromSpec(spec, tree):
-    # RPM doesn't have a configure target - everything happens in the
-    # build target.  Nevertheless we must override the auto_configure target
-    # because some OASIS packages have configure scripts.    If debhelper
-    # sees a configure script it will assume it's from autoconf and will
-    # run it with arguments that an OASIS configure script won't understand.
-
-    rule = ".PHONY: override_dh_auto_configure\n"
-    rule += "override_dh_auto_configure:\n"
-    rule += "\n"
-
-    tree.append('debian/rules', rule)
-
-
-def debianRulesBuildFromSpec(spec, tree):
-    # RPM's build script is just a script which is run at the appropriate time.
-    # debian/rules is a Makefile.   Makefile recipes aren't shell scripts - each
-    # line is run independently, so exports don't survive from line to line and
-    # multi-line constructions such as if statements don't work.
-    # Tried wrapping everything in a $(shell ...) function, but that didn't work.
-    # Just write the script fragment into a helper script in the debian directory.
-    # This almost certainly violates a Debian packaging guideline...
-    # ...we could write them to temporary files as the makefile is evaluated...
-    # this sub-script business unfortunately means that variables from the makefile
-    # aren't passed through
-
-    if not spec.build:
-        return {}
-
-    rule =  ".PHONY: override_dh_auto_build\n"
-    rule += "override_dh_auto_build:\n"
-    rule += "\tdebian/build.sh\n"
-    rule += "\n"
-
-    helper = "#!/bin/sh\n"
-    helper += "unset CFLAGS\n" #XXX HACK for ocaml-oclock
-    helper += spec.build.replace("$RPM_BUILD_ROOT", "${DESTDIR}")
-
-    tree.append('debian/rules', rule)
-    tree.append('debian/build.sh', helper, permissions=0o755)
-
-
-def debianRulesInstallFromSpec(spec, tree):
-    rule =  ".PHONY: override_dh_auto_install\n"
-    rule += "override_dh_auto_install:\n"
-    rule += "\tdebian/install.sh\n"
-    rule += "\n"
-
-    helper = "#!/bin/sh\n" 
-    helper += spec.install.replace("$RPM_BUILD_ROOT", "${DESTDIR}")
-
-    tree.append('debian/rules', rule)
-    tree.append('debian/install.sh', helper, permissions=0o755)
-
-def debianRulesDhInstallFromSpec(spec, tree, specpath):
-    rule  =  ".PHONY: override_dh_install\n"
-    rule += "override_dh_install:\n"
-    rule += "\tdh_install\n"
-
-    pkgname = mappkgname.mapPackageName(spec.sourceHeader)
-    files = filesFromSpec(pkgname, specpath)
-    if files.has_key( pkgname + "-%exclude" ):
-        for pat in files[pkgname + "-%exclude"]:
-            path = "\trm -f debian/%s/%s\n" % (pkgname, rpm.expandMacro(pat))
- 	    rule += os.path.normpath(path)
-    rule += "\n"
-
-    tree.append('debian/rules', rule)
-
-
-def debianConfigFilesFromSpec(spec, specpath, path):
-    pkgname = mappkgname.mapPackageName(spec.sourceHeader)
-    files = filesFromSpec(pkgname, specpath)
-    config_files = ""
-    if files.has_key( pkgname + "-%config" ):
-        for filename in files[pkgname + "-%config"]:
-    	    config_files += "%s\n" % filename
-    return config_files
-
-
-def debianRulesCleanFromSpec(spec, tree):
-    rule = ".PHONY: override_dh_auto_clean\n"
-    rule += "override_dh_auto_clean:\n"
-    rule += "\tdebian/clean.sh\n"
-    rule += re.sub("^", "\t", spec.clean.strip(), flags=re.MULTILINE)
-    rule += "\n\n"
-
-    helper = "#!/bin/sh\n" + spec.clean.replace("$RPM_BUILD_ROOT", "${DESTDIR}")
-
-    tree.append('debian/rules', rule)
-    tree.append('debian/clean.sh', helper, permissions=0o755)
-
-
-def debianRulesTestFromSpec(spec, tree):
-    # XXX HACK for ocaml-oclock - don't try to run the tests when building
-    rule  = ".PHONY: override_dh_auto_test\n"
-    rule += "override_dh_auto_test:\n"
-
-    tree.append('debian/rules', rule)
-
-
-
 def debianChangelogFromSpec(spec):
     hdr = spec.sourceHeader
     res = ""
@@ -329,12 +153,22 @@ def debianChangelogFromSpec(spec):
     return res
 
 
+def debianConfigFilesFromSpec(spec, specpath, path):
+    pkgname = mappkgname.mapPackageName(spec.sourceHeader)
+    files = rpmextra.filesFromSpec(pkgname, specpath)
+    config_files = ""
+    if files.has_key( pkgname + "-%config" ):
+        for filename in files[pkgname + "-%config"]:
+    	    config_files += "%s\n" % filename
+    return config_files
+
+
 def debianFilesFromPkg(basename, pkg, specpath):
     # should be able to build this from the files sections - can't find how
     # to get at them from the spec object
     res = ""
     #res += "ocaml/*        @OCamlStdlibDir@/\n"   # should be more specific
-    files = filesFromSpec(basename, specpath)
+    files = rpmextra.filesFromSpec(basename, specpath)
     for l in files.get(pkg.header['name'], []):
         rpm.addMacro("_libdir", "usr/lib")
         rpm.addMacro("_bindir", "usr/bin")
@@ -380,7 +214,7 @@ def debianDirFromSpec(spec, path, specpath, isnative):
     with open( os.path.join(path, "debian/control"), "w" ) as control:
         control.write(debianControlFromSpec(spec))
 
-    rules = debianRulesFromSpec(spec, specpath)
+    rules = debianrules.rulesFromSpec(spec, specpath)
     rules.apply(path)
 
     with open( os.path.join(path, "debian/compat"), "w" ) as compat:
@@ -440,93 +274,6 @@ def renameSource(origfilename, pkgname, pkgversion):
     basename, ext = m.groups()[:2]
     baseFileName = "%s_%s.orig%s" % (mappkgname.mapPackage(pkgname)[0], pkgversion, ext)
     shutil.copy(os.path.join(src_dir, origfilename), os.path.join(build_dir, baseFileName))
-
-
-def filesFromSpec(basename, specpath):
-    """The RPM library doesn't seem to give us access to the files section,
-    so we need to go and get it ourselves.   This parsing algorithm is
-    based on build/parseFiles.c in RPM.   The list of section titles
-    comes from build/parseSpec.c.   We should get this by using ctypes
-    to load the rpm library."""
-    """XXX shouldn't be parsing this by hand.   will need to handle conditionals
-    within and surrounding files and packages sections."""
-
-    #XXX Why do we need the .install.in files?
-
-    otherparts = [ 
-        "%package", 
-        "%prep", 
-        "%build", 
-        "%install", 
-        "%check", 
-        "%clean", 
-        "%preun", 
-        "%postun", 
-        "%pretrans", 
-        "%posttrans", 
-        "%pre", 
-        "%post", 
-        "%changelog", 
-        "%description", 
-        "%triggerpostun", 
-        "%triggerprein", 
-        "%triggerun", 
-        "%triggerin", 
-        "%trigger", 
-        "%verifyscript", 
-        "%sepolicy", 
-    ]
-
-    files = {}
-    with open(specpath) as spec:
-        inFiles = False
-        section = ""
-        for line in spec:
-            tokens = line.strip().split(" ")
-            if tokens and tokens[0].lower() == "%files":
-                section = basename
-                inFiles = True
-                if len(tokens) > 1:
-                    section = basename + "-" + tokens[1]
-                continue
-                
-            if tokens and tokens[0] in otherparts:
-                inFiles = False
-
-            if inFiles:
-                if tokens[0].lower().startswith("%defattr"):
-                    continue
-                if tokens[0].lower().startswith("%attr"):
-                    continue
-                if tokens[0].lower() == "%doc":
-                    docsection = section + "-doc"
-                    files[docsection] = files.get(docsection, []) + tokens[1:]
-                    continue
-                if tokens[0].lower() == "%if" or tokens[0].lower() == "%endif":
-                    # XXX evaluate the if condition and do the right thing here
-                    continue
-                if tokens[0].lower() == "%exclude":
-                    excludesection = section + "-%exclude"
-                    files[excludesection] = files.get(excludesection, []) + tokens[1:]
-                    continue
-                if tokens[0].lower().startswith("%config"):
-                    # dh_install automatically considers files in /etc to be config files 
-                    # so we don't have to do anythin special for them
-                    # The spec file documentation says that a %config directive can
-                    # only apply to a single file.
-                    configsection = section + "-%config"
-                    if tokens[1].startswith("/etc"):
-                        files[section] = files.get(section, []) + tokens[1:]
-                    else:
-                        files[configsection] = files.get(configsection, []) + tokens[1:]
-                    continue
-                if tokens[0].startswith("%config"):
-                    # XXX do the right thing here - should add to debian/configfiles
-                    continue
-                if line.strip():
-                    files[section] = files.get(section, []) + [line.strip()]
-        return files
-            
 
 
 # Instead of writing to all these files, we could just accumulate
