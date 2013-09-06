@@ -17,6 +17,7 @@ import mappkgname
 import debianrules
 import debiancontrol
 import debianchangelog
+import debianmisc
 
 # BUGS:
 #   Code is a mess
@@ -56,68 +57,6 @@ rpm.addMacro( "_libdir", "/usr/lib" )
 
 
 
-# Patches can be added to debian/patches, with a series file
-# Files copied into this directory have to be added using dpkg-source --commit
-# (possibly just initialize quilt in that directory and add them as we copy them)
-# We can just use dpkg-source -b --auto-commit <dir>
-
-
-
-def debianConfigFilesFromSpec(spec, specpath, path):
-    pkgname = mappkgname.mapPackageName(spec.sourceHeader)
-    files = rpmextra.filesFromSpec(pkgname, specpath)
-    config_files = ""
-    if files.has_key( pkgname + "-%config" ):
-        for filename in files[pkgname + "-%config"]:
-    	    config_files += "%s\n" % filename
-    return config_files
-
-
-def debianFilesFromPkg(basename, pkg, specpath):
-    # should be able to build this from the files sections - can't find how
-    # to get at them from the spec object
-    res = ""
-    #res += "ocaml/*        @OCamlStdlibDir@/\n"   # should be more specific
-    files = rpmextra.filesFromSpec(basename, specpath)
-    for l in files.get(pkg.header['name'], []):
-        rpm.addMacro("_libdir", "usr/lib")
-        rpm.addMacro("_bindir", "usr/bin")
-        src = rpm.expandMacro(l).lstrip("/")  # deb just wants relative paths
-        rpm.delMacro("_bindir")
-        rpm.delMacro("_libdir")
-        rpm.addMacro("_libdir", "/usr/lib")
-        rpm.addMacro("_bindir", "/usr/bin")
-        dst = rpm.expandMacro(l)
-        # destination paths should be directories, not files.
-        # if the file is foo and the path is /usr/bin/foo, the
-        # package will end up install /usr/bin/foo/foo 
-        if not dst.endswith("/"):
-            dst = os.path.dirname(dst)
-        rpm.delMacro("_bindir")
-        rpm.delMacro("_libdir")
-        res += "%s %s\n" % (src, dst)
-    return res
-
-
-def debianFilelistsFromSpec(spec, path, specpath):
-    for pkg in spec.packages:
-        name = "%s.install.in" % mappkgname.mapPackageName(pkg.header)
-        with open( os.path.join(path, "debian/%s") % name, "w" ) as f:
-            f.write( debianFilesFromPkg(spec.sourceHeader['name'], pkg, specpath) )
-
-def debianPatchesFromSpec(spec, path):
-    patches = [(seq, name) for (name, seq, typ) in spec.sources 
-               if typ == 2]
-    patches = [name for (seq,name) in sorted(patches)]
-    if patches:
-        os.mkdir(os.path.join(path, "debian/patches"))
-    for patch in patches:
-        shutil.copy2(os.path.join(src_dir, patch), os.path.join(path, "debian/patches")) 
-        with open( os.path.join(path, "debian/patches/series"), "a" ) as f:
-            f.write("%s\n" % patch)
-
-
-
 def debianDirFromSpec(spec, path, specpath, isnative):
     os.makedirs( os.path.join(path, "debian/source") )
 
@@ -142,13 +81,14 @@ def debianDirFromSpec(spec, path, specpath, isnative):
     changelog = debianchangelog.changelog_from_spec(spec)
     changelog.apply(path)
 
-    debianFilelistsFromSpec(spec, path, specpath)
-    debianPatchesFromSpec(spec, path)
+    filelists = debianmisc.filelists_from_spec(spec, specpath)
+    filelists.apply(path)
 
-    configs = debianConfigFilesFromSpec(spec, specpath, path)
-    if configs:
-        with open( os.path.join(path, "debian/conffiles"), "w" ) as conffiles:
-            conffiles.write(configs)
+    patches = debianmisc.patches_from_spec(spec, src_dir)
+    patches.apply(path)
+
+    conffiles = debianmisc.conffiles_from_spec(spec, specpath)
+    conffiles.apply(path)
 
 def principalSourceFile(spec):
     return os.path.basename([name for (name, seq, type) in spec.sources 
