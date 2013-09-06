@@ -16,6 +16,7 @@ import glob
 import mappkgname
 import debianrules
 import debiancontrol
+import debianchangelog
 
 # BUGS:
 #   Code is a mess
@@ -60,33 +61,6 @@ rpm.addMacro( "_libdir", "/usr/lib" )
 # (possibly just initialize quilt in that directory and add them as we copy them)
 # We can just use dpkg-source -b --auto-commit <dir>
 
-
-
-def debianChangelogFromSpec(spec):
-    hdr = spec.sourceHeader
-    res = ""
-    for (name, timestamp, text) in zip(hdr['changelogname'], hdr['changelogtime'], hdr['changelogtext']):
-
-        # Most spec files have "First Last <first@foo.com> - version"
-        # Some of ours have "First Last <first@foo.com>" only for the first entry - could
-        # be a mistake.  For these, us the version from the spec. 
-        m = re.match( "^(.+) - (\S+)$", name )
-        if m:
-            author = m.group(1)
-            version = m.group(2)
-        else:
-            author = name
-            version = "%s-%s" % (spec.sourceHeader['version'], spec.sourceHeader['release'])
-
-        res += "%s (%s) UNRELEASED; urgency=low\n" % (mappkgname.mapPackage(hdr['name'])[0], version)
-        res += "\n"
-	text = re.sub( "^-", "*", text, flags=re.MULTILINE )
-	text = re.sub( "^", "  ", text, flags=re.MULTILINE )
-        res += "%s\n" % text
-        res += "\n"
-        res += " -- %s  %s\n" % (author, time.strftime("%a, %d %b %Y %H:%M:%S %z", time.gmtime(int(timestamp))))
-        res += "\n"
-    return res
 
 
 def debianConfigFilesFromSpec(spec, specpath, path):
@@ -165,8 +139,8 @@ def debianDirFromSpec(spec, path, specpath, isnative):
     with open( os.path.join(path, "debian/copyright"), "w" ) as copyright:
         copyright.write("FIXME")
 
-    with open( os.path.join(path, "debian/changelog"), "w" ) as changelog:
-        changelog.write(debianChangelogFromSpec(spec))
+    changelog = debianchangelog.changelog_from_spec(spec)
+    changelog.apply(path)
 
     debianFilelistsFromSpec(spec, path, specpath)
     debianPatchesFromSpec(spec, path)
