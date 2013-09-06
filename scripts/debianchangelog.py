@@ -19,16 +19,16 @@ def changelog_from_spec(spec):
         # for Red Hat spec files.
         # Some of our changelos only have "First Last <first@foo.com>".   
         # For these, we use the version from the spec. 
-        m = re.match( "^(.+) - (\S+)$", name )
-        if m:
-            author = m.group(1)
-            version = m.group(2)
+        match = re.match( "^(.+) - (\S+)$", name )
+        if match:
+            author = match.group(1)
+            version = match.group(2)
         else:
             author = name
             version = "%s-%s" % (spec.sourceHeader['version'], 
                                  spec.sourceHeader['release'])
 
-        package_name = mappkgname.mapPackage(hdr['name'])[0]
+        package_name = mappkgname.map_package(hdr['name'])[0]
         log += "%s (%s) UNRELEASED; urgency=low\n" % (package_name, version)
         log += "\n"
 

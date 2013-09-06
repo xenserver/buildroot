@@ -1,20 +1,11 @@
 #!/usr/bin/python
 
 """Maps an RPM package name to the equivalent DEB.
-   The mapping is static, but in future will be 
+   The MAPPING is static, but in future will be 
    made dynamically by querying the package databases."""
 
 
-def mapPackageBaseName(name):
-    """rewrite an rpm name to fit with debian standards"""
-    # Debian puts the language name after the library name
-    # whereas Fedora puts it before
-    if name.startswith( "ocaml-" ):
-        name = name[ len("ocaml-"): ] + "-ocaml"
-
-    return name
-
-mapping = { 
+MAPPING = { 
     "biniou": "libbiniou-ocaml",
     "cmdliner": "libcmdliner-ocaml",
     "cppo": "cppo",
@@ -150,91 +141,88 @@ mapping = {
     "python-argparse": "libpython2.7-stdlib",
 }
 
-secondary_mapping = {
+SECONDARY_MAPPING = {
     "camlp4-dev": "camlp4",
 }
 
-def mapPackage(name):
+def map_package(name):
     """map an rpm to a corresponding deb, based on file contents"""
-    # XXXXX  for now we use a static map
-    isDevel=False
+    is_devel = False
     if name.endswith( "-devel" ):
-        isDevel = True
+        is_devel = True
         name = name[ :-len("-devel") ]
-    mapped = mapping[name]
+    mapped = MAPPING[name]
     if type(mapped) != list:
-       mapped = [mapped]
+        mapped = [mapped]
     res = []
-    for m in mapped:
-        if isDevel:
-            m += "-dev"
-        if m == "camlp4-dev":
-            m = "camlp4"
-        if m == "camlp4-extra-dev":
-            m = "camlp4-extra"
-        if m == "libeasy-format-ocaml":  # packages with 'ocaml' or 'camlp4' must have a -dev...
-            m = "libeasy-format-ocaml-dev"
-        if m == "libbiniou-ocaml":  # packages with 'ocaml' or 'camlp4' must have a -dev...
-            m = "libbiniou-ocaml-dev"
-        if m == "libssl1.0.0-dev":
-            m = "libssl-dev"
-        if m == "libtype-conv-camlp4":
-            m = "libtype-conv-camlp4-dev"
-        if m == "libxapi-libvirt-storage-ocaml":
-            m = "libxapi-libvirt-storage-ocaml-dev"
-        if m == "libsexplib-camlp4":
-            m = "libsexplib-camlp4-dev"
-        if m == "ocaml-findlib-dev":
-            m = ["ocaml-findlib", "libfindlib-ocaml-dev"]
-        if m == "/bin/sh":
+    for newname in mapped:
+        if is_devel:
+            newname += "-dev"
+        if newname == "camlp4-dev":
+            newname = "camlp4"
+        if newname == "camlp4-extra-dev":
+            newname = "camlp4-extra"
+        # packages with 'ocaml' or 'camlp4' must have a -dev...
+        if newname == "libeasy-format-ocaml":  
+            newname = "libeasy-format-ocaml-dev"
+        if newname == "libbiniou-ocaml":
+            newname = "libbiniou-ocaml-dev"
+        if newname == "libssl1.0.0-dev":
+            newname = "libssl-dev"
+        if newname == "libtype-conv-camlp4":
+            newname = "libtype-conv-camlp4-dev"
+        if newname == "libxapi-libvirt-storage-ocaml":
+            newname = "libxapi-libvirt-storage-ocaml-dev"
+        if newname == "libsexplib-camlp4":
+            newname = "libsexplib-camlp4-dev"
+        if newname == "ocaml-findlib-dev":
+            newname = ["ocaml-findlib", "libfindlib-ocaml-dev"]
+        if newname == "/bin/sh":
             continue
-        if m == "xen-hypervisor-dev":
-            m = ["libxen-dev", "xen-utils", "blktap-dev"]
-        if m == "libvirt0-dev":
-            m = "libvirt-dev"
-        if m == "libxen-4.2-dev":
-            m = "libxen-dev"
-        if m == "libvirt-bin-dev":
-            m = "libvirt-bin"
-        if m == "blktap-utils-dev":
-            m = "blktap-utils"
-        if m == "qemu-system-x86-dev":
-            m = "qemu-system-x86"
-        if type(m) != list:
-           m = [m]
-        res += m
+        if newname == "xen-hypervisor-dev":
+            newname = ["libxen-dev", "xen-utils", "blktap-dev"]
+        if newname == "libvirt0-dev":
+            newname = "libvirt-dev"
+        if newname == "libxen-4.2-dev":
+            newname = "libxen-dev"
+        if newname == "libvirt-bin-dev":
+            newname = "libvirt-bin"
+        if newname == "blktap-utils-dev":
+            newname = "blktap-utils"
+        if newname == "qemu-system-x86-dev":
+            newname = "qemu-system-x86"
+        if type(newname) != list:
+            newname = [newname]
+        res += newname 
     return res
 
 
-def mapPackageName(hdr):
+def map_package_name(hdr):
     """rewrite an rpm name to fit with debian standards"""
     name = hdr['name']
     # XXX UGLY
 
     # Debian adds a -dev suffix to development packages,
     # whereas Fedora uses -devel
-    isDevel = False
+    is_devel = False
     if name.endswith( "-devel" ):
-        isDevel = True
+        is_devel = True
         name = name[ :-len("-devel") ]
-
-    #name = mapPackageBaseName(name)
 
     # Debian prefixes library packag names with 'lib'
     #if "Libraries" in hdr['group'] or "library" in hdr['summary'].lower():
     #    name = "lib" + name
+    name = name.replace( name, map_package(name)[0] )
 
-    # Do this manually for now...
-    name = name.replace( name, mapPackage(name)[0] )
-
-    if isDevel:
+    if is_devel:
         name += "-dev"
 
-    # hack for type-conv.   dh_ocaml insists that there must be a -dev package for anything with ocaml or camlp4 in the name...
+    # hack for type-conv.   dh_ocaml insists that there must be a 
+    # -dev package for anything with ocaml or camlp4 in the name...
     if name == "libtype-conv-camlp4":
         name = "libtype-conv-camlp4-dev"
     return name
 
-def mapSection(rpm_name):
+def map_section(_rpm_name):
     return "ocaml" # XXXXX
 

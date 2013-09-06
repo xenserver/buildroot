@@ -1,20 +1,18 @@
 import rpm
 
 
-def specFromFile(spec):
+def spec_from_file(spec):
     return rpm.ts().parseSpec(spec)
 
 
-def filesFromSpec(basename, specpath):
+def files_from_spec(basename, specpath):
     """The RPM library doesn't seem to give us access to the files section,
     so we need to go and get it ourselves.   This parsing algorithm is
     based on build/parseFiles.c in RPM.   The list of section titles
     comes from build/parseSpec.c.   We should get this by using ctypes
     to load the rpm library."""
-    """XXX shouldn't be parsing this by hand.   will need to handle conditionals
-    within and surrounding files and packages sections."""
-
-    #XXX Why do we need the .install.in files?
+    # XXX shouldn't be parsing this by hand.   will need to handle conditionals
+    # within and surrounding files and packages sections."""
 
     otherparts = [ 
         "%package", 
@@ -42,21 +40,21 @@ def filesFromSpec(basename, specpath):
 
     files = {}
     with open(specpath) as spec:
-        inFiles = False
+        in_files = False
         section = ""
         for line in spec:
             tokens = line.strip().split(" ")
             if tokens and tokens[0].lower() == "%files":
                 section = basename
-                inFiles = True
+                in_files = True
                 if len(tokens) > 1:
                     section = basename + "-" + tokens[1]
                 continue
                 
             if tokens and tokens[0] in otherparts:
-                inFiles = False
+                in_files = False
 
-            if inFiles:
+            if in_files:
                 if tokens[0].lower().startswith("%defattr"):
                     continue
                 if tokens[0].lower().startswith("%attr"):
@@ -70,18 +68,20 @@ def filesFromSpec(basename, specpath):
                     continue
                 if tokens[0].lower() == "%exclude":
                     excludesection = section + "-%exclude"
-                    files[excludesection] = files.get(excludesection, []) + tokens[1:]
+                    files[excludesection] = \
+                        files.get(excludesection, []) + tokens[1:]
                     continue
                 if tokens[0].lower().startswith("%config"):
-                    # dh_install automatically considers files in /etc to be config files 
-                    # so we don't have to do anythin special for them
-                    # The spec file documentation says that a %config directive can
-                    # only apply to a single file.
+                    # dh_install automatically considers files in /etc
+                    # to be config files so we don't have to do anythin
+                    # special for them The spec file documentation says that
+                    # a %config directive can only apply to a single file.
                     configsection = section + "-%config"
                     if tokens[1].startswith("/etc"):
                         files[section] = files.get(section, []) + tokens[1:]
                     else:
-                        files[configsection] = files.get(configsection, []) + tokens[1:]
+                        files[configsection] = \
+                            files.get(configsection, []) + tokens[1:]
                     continue
                 if line.strip():
                     files[section] = files.get(section, []) + [line.strip()]

@@ -3,38 +3,25 @@
 import rpm
 import rpmextra
 import os
-import urlparse
-import sys
-import textwrap
-import time
 import re
-import magic
-import shutil
-import subprocess
-import shlex
-import glob
 import mappkgname
 from tree import Tree
 
 
-def rulesFromSpec(spec, specpath):
-    # XXX make each helper return a subtree and merge them at this level?
-    # XXX write some tests!
+def rules_from_spec(spec, specpath):
     res = Tree()
-    ocamlRulesPreamble(spec, res)
-    rulesConfigureFromSpec(spec, res)
-    rulesBuildFromSpec(spec, res)
-    rulesInstallFromSpec(spec, res)
-    rulesDhInstallFromSpec(spec, res, specpath)   # XXX need to augment the specfile object
-    rulesCleanFromSpec(spec, res)
-    rulesTestFromSpec(spec, res)
+    ocaml_rules_preamble(spec, res)
+    rules_configure_from_spec(spec, res)
+    rules_build_from_spec(spec, res)
+    rules_install_from_spec(spec, res)
+    rules_dh_install_from_spec(spec, res, specpath)
+    rules_clean_from_spec(spec, res)
+    rules_test_from_spec(spec, res)
     return res
 
-# XXX move all this into a separate file
 
-def ocamlRulesPreamble(spec, tree):
-    # should only include this at the end, if we noticed that we have packed up ocaml files
-    # similarly for python files
+def ocaml_rules_preamble(_spec, tree):
+    # TODO: should only include if we have packed up ocaml files
     rule  = "#!/usr/bin/make -f\n"
     rule += "\n"
     rule += "#include /usr/share/cdbs/1/rules/debhelper.mk\n"
@@ -51,7 +38,7 @@ def ocamlRulesPreamble(spec, tree):
     tree.append('debian/rules', rule)
 
 
-def rulesConfigureFromSpec(spec, tree):
+def rules_configure_from_spec(_spec, tree):
     # RPM doesn't have a configure target - everything happens in the
     # build target.  Nevertheless we must override the auto_configure target
     # because some OASIS packages have configure scripts.    If debhelper
@@ -65,17 +52,13 @@ def rulesConfigureFromSpec(spec, tree):
     tree.append('debian/rules', rule)
 
 
-def rulesBuildFromSpec(spec, tree):
-    # RPM's build script is just a script which is run at the appropriate time.
+def rules_build_from_spec(spec, tree):
+    # RPM's build rule is just a script which is run at the appropriate time.
     # debian/rules is a Makefile.   Makefile recipes aren't shell scripts - each
     # line is run independently, so exports don't survive from line to line and
     # multi-line constructions such as if statements don't work.
-    # Tried wrapping everything in a $(shell ...) function, but that didn't work.
-    # Just write the script fragment into a helper script in the debian directory.
-    # This almost certainly violates a Debian packaging guideline...
-    # ...we could write them to temporary files as the makefile is evaluated...
-    # this sub-script business unfortunately means that variables from the makefile
-    # aren't passed through
+    # To work around this, we put these recipes in helper scripts in the debian/
+    # directory.
 
     if not spec.build:
         return {}
@@ -93,7 +76,7 @@ def rulesBuildFromSpec(spec, tree):
     tree.append('debian/build.sh', helper, permissions=0o755)
 
 
-def rulesInstallFromSpec(spec, tree):
+def rules_install_from_spec(spec, tree):
     rule =  ".PHONY: override_dh_auto_install\n"
     rule += "override_dh_auto_install:\n"
     rule += "\tdebian/install.sh\n"
@@ -105,24 +88,24 @@ def rulesInstallFromSpec(spec, tree):
     tree.append('debian/rules', rule)
     tree.append('debian/install.sh', helper, permissions=0o755)
 
-def rulesDhInstallFromSpec(spec, tree, specpath):
+def rules_dh_install_from_spec(spec, tree, specpath):
     rule  =  ".PHONY: override_dh_install\n"
     rule += "override_dh_install:\n"
     rule += "\tdh_install\n"
 
-    pkgname = mappkgname.mapPackageName(spec.sourceHeader)
-    files = rpmextra.filesFromSpec(pkgname, specpath)
+    pkgname = mappkgname.map_package_name(spec.sourceHeader)
+    files = rpmextra.files_from_spec(pkgname, specpath)
     if files.has_key( pkgname + "-%exclude" ):
         for pat in files[pkgname + "-%exclude"]:
             path = "\trm -f debian/%s/%s\n" % (pkgname, rpm.expandMacro(pat))
- 	    rule += os.path.normpath(path)
+            rule += os.path.normpath(path)
     rule += "\n"
 
     tree.append('debian/rules', rule)
 
 
 
-def rulesCleanFromSpec(spec, tree):
+def rules_clean_from_spec(spec, tree):
     rule = ".PHONY: override_dh_auto_clean\n"
     rule += "override_dh_auto_clean:\n"
     rule += "\tdebian/clean.sh\n"
@@ -135,7 +118,7 @@ def rulesCleanFromSpec(spec, tree):
     tree.append('debian/clean.sh', helper, permissions=0o755)
 
 
-def rulesTestFromSpec(spec, tree):
+def rules_test_from_spec(_spec, tree):
     # XXX HACK for ocaml-oclock - don't try to run the tests when building
     rule  = ".PHONY: override_dh_auto_test\n"
     rule += "override_dh_auto_test:\n"

@@ -66,7 +66,7 @@ for spec_name in spec_names:
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
-    rpm.addMacro( 'NAME', mappkgname.mapPackage(h['name'])[0] )
+    rpm.addMacro( 'NAME', mappkgname.map_package(h['name'])[0] )
     rpm.addMacro( 'VERSION', h['version'] )
     rpm.addMacro( 'RELEASE', h['release'] )
     rpm.addMacro( 'ARCH', 'src' )
@@ -88,7 +88,7 @@ def srpmNameFromSpec( spec ):
 
 def rpmNamesFromSpec( spec ):
     def rpmNameFromHeader( h ):
-        rpm.addMacro( 'NAME', mappkgname.mapPackageName(h) )
+        rpm.addMacro( 'NAME', mappkgname.map_package_name(h) )
         rpm.addMacro( 'VERSION', h['version'] )
         rpm.addMacro( 'RELEASE', h['release'] )
         rpm.addMacro( 'ARCH', "amd64" if h['arch'] == "x86_64" else "all" if h['arch'] == "noarch" else h['arch'])

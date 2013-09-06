@@ -16,17 +16,17 @@ def control_from_spec(spec):
 
 def source_deb_from_spec(spec, tree):
     res = ""
-    res += "Source: %s\n" % mappkgname.mapPackage(spec.sourceHeader['name'])[0]
+    res += "Source: %s\n" % mappkgname.map_package(spec.sourceHeader['name'])[0]
     res += "Priority: %s\n" % "optional"
     res += "Maintainer: %s\n" % "Euan Harris <euan.harris@citrix.com>"
-    res += "Section: %s\n" % mappkgname.mapSection(spec.sourceHeader['group'])
+    res += "Section: %s\n" % mappkgname.map_section(spec.sourceHeader['group'])
     res += "Standards-Version: %s\n" % STANDARDS_VERSION
 
     res += "Build-Depends:\n"
     build_depends = ["debhelper (>= 8)", "dh-ocaml (>= 0.9)", "ocaml-nox"]
     for pkg, version in zip(spec.sourceHeader['requires'], 
                             spec.sourceHeader['requireVersion']):
-        deps = mappkgname.mapPackage(pkg)
+        deps = mappkgname.map_package(pkg)
         for dep in deps:
             if version:
                 dep += " (>= %s)" % version
@@ -40,7 +40,7 @@ def source_deb_from_spec(spec, tree):
 
 def binary_deb_from_spec(spec, tree):
     res = ""
-    res += "Package: %s\n" % mappkgname.mapPackageName(spec.header)
+    res += "Package: %s\n" % mappkgname.map_package_name(spec.header)
     if spec.header['arch'] in ["x86_64", "i686"]:
         res += "Architecture: any\n"
     else:
@@ -50,7 +50,7 @@ def binary_deb_from_spec(spec, tree):
     depends = ["${ocaml:Depends}", "${shlibs:Depends}", "${misc:Depends}"]
     for pkg, version in zip(spec.header['requires'], 
                             spec.header['requireVersion']):
-        deps = mappkgname.mapPackage(pkg)
+        deps = mappkgname.map_package(pkg)
         for dep in deps:
             if version:
                 dep += " (>= %s)" % version
