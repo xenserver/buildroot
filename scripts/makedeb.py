@@ -15,6 +15,7 @@ import shlex
 import glob
 import mappkgname
 import debianrules
+import debiancontrol
 
 # BUGS:
 #   Code is a mess
@@ -55,7 +56,6 @@ def specFromFile(spec):
     return rpm.ts().parseSpec(spec)
 
 
-STANDARDS_VERSION = "3.9.3"
 
 
 # Patches can be added to debian/patches, with a series file
@@ -63,67 +63,6 @@ STANDARDS_VERSION = "3.9.3"
 # (possibly just initialize quilt in that directory and add them as we copy them)
 # We can just use dpkg-source -b --auto-commit <dir>
 
-
-def formatDescription(description):
-    """need to format this - correct line length, initial one space indent,
-    and blank lines must be replaced by dots"""
-
-    paragraphs = "".join(description).split("\n\n")
-    wrapped = [ "\n".join(textwrap.wrap( p, initial_indent=" ", 
-                                            subsequent_indent=" ")) 
-                for p in paragraphs ]
-    return "\n .\n".join( wrapped )
-
-
-def sourceDebFromSpec(spec):
-    res = ""
-    res += "Source: %s\n" % mappkgname.mapPackage(spec.sourceHeader['name'])[0]
-    res += "Priority: %s\n" % "optional"
-    res += "Maintainer: %s\n" % "Euan Harris <euan.harris@citrix.com>" #XXX
-    res += "Section: %s\n" % mappkgname.mapSection(spec.sourceHeader['group'])
-    res += "Standards-Version: %s\n" % STANDARDS_VERSION
-    res += "Build-Depends:\n"
-    build_depends = [ "debhelper (>= 8)", "dh-ocaml (>= 0.9)", "ocaml-nox" ]
-    for pkg, version in zip(spec.sourceHeader['requires'], spec.sourceHeader['requireVersion']):
-        deps = mappkgname.mapPackage(pkg)
-        for dep in deps:
-            if version:
-                dep += " (>= %s)" % version
-            build_depends.append(dep)
-    res += ",\n".join( set([" %s" % d for d in build_depends]))
-    res += "\n"
-    return res
-
-
-def binaryDebFromSpec(spec):
-    res = ""
-    res += "Package: %s\n" % mappkgname.mapPackageName(spec.header)
-    res += "Architecture: %s\n"  % ("any" if spec.header['arch'] in [ "x86_64", "i686"] else "all")
-    res += "Depends:\n"
-    depends = ["${ocaml:Depends}", "${shlibs:Depends}", "${misc:Depends}"]
-    for pkg, version in zip(spec.header['requires'], spec.header['requireVersion']):
-        deps = mappkgname.mapPackage(pkg)
-        for dep in deps:
-            if version:
-                dep += " (>= %s)" % version
-            depends.append(dep)
-    res += ",\n".join( [ " %s" % d for d in depends ] )
-    res += "\n"
-    res += "Provides: ${ocaml:Provides}\n"  # XXXX only for ocaml!
-    res += "Recommends: ocaml-findlib\n" # XXXX 
-    res += "Description: %s\n" % spec.header['summary']
-    res += formatDescription( spec.header['description'] )
-    res += "\n"
-    return res
-
-
-def debianControlFromSpec(spec):
-    res = ""
-    res += sourceDebFromSpec(spec)
-    for pkg in spec.packages:
-        res += "\n"
-        res += binaryDebFromSpec(pkg)
-    return res
 
 
 def debianChangelogFromSpec(spec):
@@ -211,8 +150,8 @@ def debianPatchesFromSpec(spec, path):
 def debianDirFromSpec(spec, path, specpath, isnative):
     os.makedirs( os.path.join(path, "debian/source") )
 
-    with open( os.path.join(path, "debian/control"), "w" ) as control:
-        control.write(debianControlFromSpec(spec))
+    control = debiancontrol.control_from_spec(spec)
+    control.apply(path)
 
     rules = debianrules.rulesFromSpec(spec, specpath)
     rules.apply(path)
