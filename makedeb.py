@@ -18,6 +18,8 @@ import glob
 #   Hack to disable CFLAGS for ocaml-oclock
 #   Hack to disable tests for ocaml-oclock
 #   Hard coded install files only install ocaml dir
+#   Should be building signed debs
+#   mapPackageName needs to return a list of packages, and to understand version numbers
 
 
 # By default, RPM expects everything to be in $HOME/rpmbuild.  
@@ -77,32 +79,45 @@ def mapPackageName(hdr):
         isDevel = True
         name = name[ :-len("-devel") ]
 
-    name = mapPackageBaseName(name)
+    #name = mapPackageBaseName(name)
 
     # Debian prefixes library packag names with 'lib'
-    if "Libraries" in hdr['group']:
-        name = "lib" + name
+    #if "Libraries" in hdr['group'] or "library" in hdr['summary'].lower():
+    #    name = "lib" + name
+
+    # Do this manually for now...
+    mapping = { 
+              "ocaml-re": "libre-ocaml" ,
+              "ocaml-uri": "liburi-ocaml" ,
+              }
+
+    name = name.replace( name, mapping[name] )
+
     if isDevel:
         name += "-dev"
-
     return name
 
 
 def mapPackage(rpm_name):
     """map an rpm to a corresponding deb, based on file contents"""
     # XXXXX
-    if rpm_name == "ocaml":
-        return "ocaml-nox"
-    if rpm_name == "ocaml-findlib-devel":
-        return "ocaml-findlib"
-    if rpm_name == "ocaml-findlib":
-        return "ocaml-findlib"
-    if rpm_name == "ocaml-ocamldoc":
-        return "ocaml-nox"
-    if rpm_name == "ocaml-re-devel":
-        return "re-ocaml-dev"
-    print "unrecognized package: %s" % rpm_name
-    assert False
+    mapping = { 
+              "ocaml-re": "libre-ocaml" ,
+              "ocaml-uri": "liburi-ocaml" ,
+              "ocaml": "ocaml-nox",
+              "ocaml-findlib-devel": "ocaml-findlib",
+              "ocaml-findlib": "ocaml-findlib",
+              "ocaml-ocamldoc": "ocaml-nox",
+              "ocaml-re-devel": "libre-ocaml-dev",
+               "ocaml-compiler-libs":   # added to ocaml-uri - why does rpmbuild succeed?
+                         "ocaml-compiler-libs",
+              }
+
+    if not mapping.has_key(rpm_name):
+        print "unrecognized package: %s" % rpm_name
+        sys.exit(1)
+
+    return mapping[rpm_name]
 
 
 def mapSection(rpm_name):
@@ -286,19 +301,30 @@ def debianChangelogFromSpec(spec):
     return res
 
 
-def debianFilesFromPkg(pkg):
+def debianFilesFromPkg(basename, pkg, specpath):
     # should be able to build this from the files sections - can't find how
     # to get at them from the spec object
     res = ""
-    res += "ocaml/*        @OCamlStdlibDir@/\n"   # should be more specific
+    #res += "ocaml/*        @OCamlStdlibDir@/\n"   # should be more specific
+    files = filesFromSpec(basename, specpath)
+    for l in files.get(pkg.header['name'], []):
+        rpm.addMacro("_libdir", "")
+        src = rpm.expandMacro(l).lstrip("/")  # deb just wants relative paths
+        rpm.delMacro("_libdir")
+        rpm.addMacro("_libdir", "/usr/lib")
+        dst = rpm.expandMacro(l)
+        if dst.endswith("/*"):
+            dst = dst[:-len("/*")]
+        rpm.delMacro("_libdir")
+        res += "%s %s\n" % (src, dst)
     return res
 
 
-def debianFilelistsFromSpec(spec, path):
+def debianFilelistsFromSpec(spec, path, specpath):
     for pkg in spec.packages:
         name = "%s.install.in" % mapPackageName(pkg.header)
         with open( os.path.join(path, "debian/%s") % name, "w" ) as f:
-            f.write( debianFilesFromPkg(pkg) )
+            f.write( debianFilesFromPkg(spec.sourceHeader['name'], pkg, specpath) )
 
 def debianPatchesFromSpec(spec, path):
     patches = [(seq, name) for (name, seq, typ) in spec.sources 
@@ -313,7 +339,7 @@ def debianPatchesFromSpec(spec, path):
 
 
 
-def debianDirFromSpec(spec, path):
+def debianDirFromSpec(spec, path, specpath):
     os.makedirs( os.path.join(path, "debian/source") )
 
     with open( os.path.join(path, "debian/control"), "w" ) as control:
@@ -335,7 +361,7 @@ def debianDirFromSpec(spec, path):
     with open( os.path.join(path, "debian/changelog"), "w" ) as changelog:
         changelog.write(debianChangelogFromSpec(spec))
 
-    debianFilelistsFromSpec(spec, path)
+    debianFilelistsFromSpec(spec, path, specpath)
     debianPatchesFromSpec(spec, path)
 
 def principalSourceFile(spec):
@@ -355,6 +381,7 @@ def prepareBuildDir(spec):
     # source tree.
 
     subprocess.call(spec.prep, shell=True)
+    # could also just do: RPMBUILD_PREP = 1<<0; spec._doBuild()
 
     
 def renameSource(spec):
@@ -370,6 +397,70 @@ def renameSource(spec):
     basename, ext = m.groups()[:2]
     baseFileName = "%s_%s.orig%s" % (spec.sourceHeader['name'], spec.sourceHeader['version'], ext)
     shutil.copy(os.path.join(src_dir, origfilename), os.path.join(build_dir, baseFileName))
+
+
+def filesFromSpec(basename, specpath):
+    """The RPM library doesn't seem to give us access to the files section,
+    so we need to go and get it ourselves.   This parsing algorithm is
+    based on build/parseFiles.c in RPM.   The list of section titles
+    comes from build/parseSpec.c.   We should get this by using ctypes
+    to load the rpm library."""
+    """XXX shouldn't be parsing this by hand.   will need to handle conditionals
+    within and surrounding files and packages sections."""
+
+    #XXX Why do we need the .install.in files?
+
+    otherparts = [ 
+        "%package", 
+        "%prep", 
+        "%build", 
+        "%install", 
+        "%check", 
+        "%clean", 
+        "%preun", 
+        "%postun", 
+        "%pretrans", 
+        "%posttrans", 
+        "%pre", 
+        "%post", 
+        "%changelog", 
+        "%description", 
+        "%triggerpostun", 
+        "%triggerprein", 
+        "%triggerun", 
+        "%triggerin", 
+        "%trigger", 
+        "%verifyscript", 
+        "%sepolicy", 
+    ]
+
+    files = {}
+    with open(specpath) as spec:
+        inFiles = False
+        section = ""
+        for line in spec:
+            tokens = line.lower().strip().split(" ")
+            if tokens and tokens[0] == "%files":
+                inFiles = True
+                if len(tokens) > 1:
+                    section = basename + "-" + tokens[1]
+                continue
+                
+            if tokens and tokens[0] in otherparts:
+                inFiles = False
+
+            if inFiles:
+                if tokens[0].startswith("%defattr"):
+                    continue
+                if tokens[0] == "%doc":
+                    docsection = section + "-doc"
+                    files[docsection] = files.get(docsection, []) + tokens[1:]
+                    continue
+                if line.strip():
+                    files[section] = files.get(section, []) + [line.strip()]
+        return files
+            
+
 
 # Instead of writing to all these files, we could just accumulate
 # everything in a dictionary of path -> (content, perms) and then
@@ -390,8 +481,8 @@ if __name__ == '__main__':
     # copy over the source, run the prep rule to unpack it, then rename it as deb expects
     renameSource(spec) 
     
-    debianDirFromSpec(spec, os.path.join(build_dir, build_subdir))
-    
+    debianDirFromSpec(spec, os.path.join(build_dir, build_subdir), sys.argv[1])
+
     # pdebuild gives us source debs as well as binaries
     #res = subprocess.call( "cd %s\ndpkg-source -b --auto-commit %s" % (build_dir, build_subdir), shell=True )
     res = subprocess.call( "cd %s\npdebuild --configfile %s --buildresult %s" % (os.path.join(build_dir, build_subdir), os.path.join(top_dir, "pbuilder/pbuilderrc-amd64"), rpm_dir), shell=True )
