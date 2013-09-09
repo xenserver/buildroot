@@ -7,8 +7,8 @@ Group:          Development/Other
 URL:            https://github.com/mirage/ocaml-uri/archive/ocaml-uri-1.3.8.tar.gz
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc ocaml-re-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml >= 4.00, ocaml-findlib, ocaml-ocamldoc, ocaml-re-devel, ocaml-compiler-libs
+Requires:       ocaml, ocaml-findlib
 
 %description
 A URI library for OCaml.
