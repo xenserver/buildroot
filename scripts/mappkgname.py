@@ -72,7 +72,9 @@ mapping = {
     "omake": "omake",
     "openstack-xapi-plugins": "openstack-xapi-plugins",
     "optcomp": "optcomp-ocaml",
+    "xcp-sm": "xcp-sm",
     "sm-cli": "sm-cli",
+    "xcp-sm-rawhba": "xcp-sm-rawhba",
     "squeezed": "squeezed",
     "utop": "utop",
     "vncterm": "vncterm",
@@ -133,6 +135,7 @@ mapping = {
     "chrpath": "chrpath",
     "kernel": "linux-image",
     "kernel-firmware": "linux-firmware",
+    "swig": "swig",
 
     # this seems to come from packages like xcp-networkd, which don't have
     # any requirements
