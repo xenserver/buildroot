@@ -184,6 +184,8 @@ mapping = {
     "kernel-headers": "linux-headers-3.2.0-51-generic",
     "libvirt-docs": "libvirt-doc",
     "chrpath": "chrpath",
+    "kernel": "linux-image",
+    "kernel-firmware": "linux-firmware",
 
     # this seems to come from packages like xcp-networkd, which don't have
     # any requirements
