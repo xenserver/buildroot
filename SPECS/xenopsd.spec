@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.21
+Version:        0.9.22
 Release:        1
 Summary:        Simple VM manager
 License:        LGPL
@@ -178,6 +178,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.22
+
 * Fri Jun 21 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.5, which includes xenopsd-xenlight
 
