@@ -35,6 +35,10 @@ srpm_dir = rpm.expandMacro( '%_srcrpmdir' )
 src_dir = rpm.expandMacro( '%_sourcedir' )
 build_dir = rpm.expandMacro( '%_builddir' )
 
+# Fedora puts executables run by other programs in /usr/libexec, but 
+# Debian puts them in /usr/lib, which apparently follows the FHS:
+# http://www.debian.org/doc/manuals/maint-guide/advanced.en.html#ftn.idp2018768
+rpm.addMacro( '_libexecdir', "/usr/lib" )
 
 # Override some macros interpolated into build rules, so
 # paths are appropriate for debuild
