@@ -25,7 +25,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n ocaml-%{name}-%{version}
+%setup -q -n xen-api-libs-transitional-%{version}
 
 %build
 if [ -x ./configure ]; then
