@@ -41,7 +41,8 @@ build_dir = rpm.expandMacro( '%_builddir' )
 # (Actually, using {}, not (), because these identifiers
 # end up in helper scripts, not in the makefile
 rpm.addMacro( "buildroot", "${DESTDIR}" )
-rpm.addMacro( "_libdir", "${STDLIBDIR}" )
+#rpm.addMacro( "_libdir", "${STDLIBDIR}" )
+rpm.addMacro( "_libdir", "/usr/lib" )
 
 
 def specFromFile(spec):
@@ -66,6 +67,151 @@ def mapPackageBaseName(name):
 
     return name
 
+mapping = { 
+    "biniou": "libbiniou-ocaml",
+    "cmdliner": "libcmdliner-ocaml",
+    "cppo": "cppo",
+    "deriving-ocsigen": "libderiving-ocsigen-ocaml",
+    "easy-format": "libeasy-format-ocaml",
+    "eliloader": "eliloader",
+    "ffs": "ffs",
+    "forkexecd": "forkexecd",
+    "js_of_ocaml": "libjs-of-ocaml",
+    "libnl3-cli": "libnl-3-cli",
+    "libnl3-doc": "libnl-3-doc",
+    "libnl3": "libnl-3",
+    "message-switch": "message-switch",
+    "ocaml-bitstring": "libbitstring-ocaml",
+    "ocaml-camomile-data": "libcamomile-data-ocaml",
+    "ocaml-camomile": "libcamomile-ocaml",
+    "ocaml-cdrom": "libcdrom-ocaml",
+    "ocaml-cohttp": "libcohttp-ocaml",
+    "ocaml-cstruct": "libcstruct-ocaml",
+    "ocaml-fd-send-recv": "libfd-send-recv-ocaml",
+    "ocaml-lambda-term": "liblambda-term-ocaml",
+    "ocaml-libvhd": "libvhd-ocaml",
+    "ocaml-libvirt": "libvirt-ocaml",
+    "ocaml-lwt": "liblwt-ocaml",
+    "ocaml-nbd": "libnbd-ocaml",
+    "ocaml-netdev": "libnetdev-ocaml",
+    "ocaml-obuild": "ocaml-obuild",
+    "ocaml-oclock": "liboclock-ocaml" ,
+    "ocaml-ocplib-endian": "ocplib-endian-ocaml",
+    "ocaml-ounit": "libounit-ocaml",
+    "ocaml-qmp": "libqmp-ocaml",
+    "ocaml-react": "libreact-ocaml",
+    "ocaml-re": "libre-ocaml" ,
+    "ocaml-rpc": "librpc-ocaml",
+    "ocaml-sexplib": "libsexplib-camlp4",
+    "ocaml-ssl": "libssl-ocaml" ,
+    "ocaml-stdext": "libstdext-ocaml",
+    "ocaml-syslog": "libsyslog-ocaml",
+    "ocaml-tapctl": "libtapctl-ocaml",
+    "ocaml-text": "libtext-ocaml",
+    "ocaml-type-conv": "libtype-conv-camlp4",
+    "ocaml-uri": "liburi-ocaml" ,
+    "ocaml-uuidm": "libuuidm-ocaml",
+    "ocaml-xcp-idl": "libxcp-idl-ocaml",
+    "ocaml-xcp-inventory": "libxcp-inventory-ocaml",
+    "ocaml-xcp-rrd": "libxcp-rrd-ocaml",
+    "ocaml-xen-api-client": "libxen-api-client-ocaml",
+    "ocaml-xen-api-libs-transitional": "ocaml-xen-api-libs-transitional",
+    "ocaml-xen-lowlevel-libs": "ocaml-xen-lowlevel-libs",
+    "ocaml-xenops": "libxenops-ocaml",
+    "ocaml-xenstore-clients": "libxenstore-clients-ocaml",
+    "ocaml-xenstore": "libxenstore-ocaml",
+    "ocaml-yojson": "libyojson-ocaml",
+    "ocaml-zed": "libzed-ocaml",
+    "omake": "omake",
+    "openstack-xapi-plugins": "openstack-xapi-plugins",
+    "optcomp": "optcomp-ocaml",
+    "sm-cli": "sm-cli",
+    "squeezed": "squeezed",
+    "utop": "utop",
+    "vncterm": "vncterm",
+    "xapi-libvirt-storage": "libxapi-libvirt-storage-ocaml",
+    "xapi-python": "xapi-python",
+    "xapi": "xapi",
+    "xapi-xe": "xapi-xe",
+    "xcp-networkd": "xcp-networkd" ,
+    "xcp-rrdd": "libxcp-rrdd-ocaml",
+    "xe-create-templates": "xe-create-templates",
+    "xenops-cli": "xenops-cli",
+    "xenopsd-libvirt": "xenopsd-libvirt",
+    "xenopsd-simulator": "xenopsd-simulator",
+    "xenopsd-xc": "xenopsd-xc",
+    "xenopsd-xenlight": "xenopsd-xenlight",
+    "xenopsd": "xenopsd",
+    "xenserver-core": "xenserver-core",
+    "xenserver-install-wizard": "xenserver-install-wizard",
+    "xenserver-tech-preview-release": "xenserver-tech-preview-release",
+    "xmlm": "libxmlm-ocaml",
+    "xsconsole": "xsconsole",
+    "xsiostat": "xsiostat",
+    "xenserver-core-latest-snapshot": "xenserver-core-latest-snapshot",
+
+    # extras
+    "ocaml": ["ocaml-nox", "ocaml-native-compilers"],
+    "ocaml-findlib": "ocaml-findlib",
+    "ocaml-ocamldoc": "ocaml-nox",
+    "ocaml-compiler-libs":   # added to ocaml-uri - why does rpmbuild succeed?
+                  "ocaml-compiler-libs",
+    "ocaml-camlp4": "camlp4",
+    "openssl": "libssl1.0.0",
+    "xen": "xen-hypervisor",
+    "libuuid": "libuuid1",
+    "libvirt": "libvirt",
+    "xen-libs": "libxen",
+    "make": "make",
+    "ncurses": "libncurses5-dev",
+    "chkconfig": "chkconfig",
+    "initscripts": "initscripts",
+    "PyPAM": "python-pam",
+    "perl": "perl",
+    "gawk": "gawk",
+    "pam": "libpam0g",
+    "tetex-latex": "texlive-base",
+    "zlib": "zlib1g",
+    "git": "git",
+    "stunnel": "stunnel",
+    "bash-completion": "bash-completion",
+    "python": "python",
+    "time": "time",
+    "newt": "libnewt0.52",
+    "flex": "flex",
+    "bison": "bison",
+    "/sbin/ldconfig": "/sbin/ldconfig",
+    "kernel-headers": "linux-headers-3.2.0-51-generic",
+    "libvirt-docs": "libvirt-doc",
+    "chrpath": "chrpath",
+
+    # this seems to come from packages like xcp-networkd, which don't have
+    # any requirements
+    "/bin/sh": "/bin/sh"
+}
+
+secondary_mapping = {
+    "camlp4-dev": "camlp4",
+}
+
+def mapPackage(name):
+    """map an rpm to a corresponding deb, based on file contents"""
+    # XXXXX  for now we use a static map
+    isDevel=False
+    if name.endswith( "-devel" ):
+        isDevel = True
+        name = name[ :-len("-devel") ]
+    res = mapping[name]
+    if isDevel:
+        res += "-dev"
+    if res == "camlp4-dev":
+        res = "camlp4"
+    if res == "ocaml-findlib-dev":
+        res = ["ocaml-findlib", "libfindlib-ocaml-dev"]
+    if res == "libssl1.0.0-dev":
+        res = "libssl-dev"
+    return res
+
 
 def mapPackageName(hdr):
     """rewrite an rpm name to fit with debian standards"""
@@ -86,38 +232,12 @@ def mapPackageName(hdr):
     #    name = "lib" + name
 
     # Do this manually for now...
-    mapping = { 
-              "ocaml-re": "libre-ocaml" ,
-              "ocaml-uri": "liburi-ocaml" ,
-              }
-
-    name = name.replace( name, mapping[name] )
+    name = name.replace( name, mapPackage(name) )
 
     if isDevel:
         name += "-dev"
     return name
 
-
-def mapPackage(rpm_name):
-    """map an rpm to a corresponding deb, based on file contents"""
-    # XXXXX
-    mapping = { 
-              "ocaml-re": "libre-ocaml" ,
-              "ocaml-uri": "liburi-ocaml" ,
-              "ocaml": "ocaml-nox",
-              "ocaml-findlib-devel": "ocaml-findlib",
-              "ocaml-findlib": "ocaml-findlib",
-              "ocaml-ocamldoc": "ocaml-nox",
-              "ocaml-re-devel": "libre-ocaml-dev",
-               "ocaml-compiler-libs":   # added to ocaml-uri - why does rpmbuild succeed?
-                         "ocaml-compiler-libs",
-              }
-
-    if not mapping.has_key(rpm_name):
-        print "unrecognized package: %s" % rpm_name
-        sys.exit(1)
-
-    return mapping[rpm_name]
 
 
 def mapSection(rpm_name):
@@ -137,7 +257,7 @@ def formatDescription(description):
 
 def sourceDebFromSpec(spec):
     res = ""
-    res += "Source: %s\n" % spec.sourceHeader['name'] #XXX should this be mapped?
+    res += "Source: %s\n" % mapPackage(spec.sourceHeader['name']) #XXX should this be mapped?
     res += "Priority: %s\n" % "optional"
     res += "Maintainer: %s\n" % "Euan Harris <euan.harris@citrix.com>" #XXX
     res += "Section: %s\n" % mapSection(spec.sourceHeader['group'])
@@ -145,10 +265,14 @@ def sourceDebFromSpec(spec):
     res += "Build-Depends:\n"
     build_depends = [ "debhelper (>= 8)", "dh-ocaml (>= 0.9)" ]
     for pkg, version in zip(spec.sourceHeader['requires'], spec.sourceHeader['requireVersion']):
-        dep = mapPackage(pkg)
-        if version:
-            dep += " (>= %s)" % version
-        build_depends.append(dep)
+        deps = mapPackage(pkg)
+        # XXXX Ick!
+        if type(deps) != list:
+           deps = [deps]
+        for dep in deps:
+            if version:
+                dep += " (>= %s)" % version
+            build_depends.append(dep)
     res += ",\n".join( set([" %s" % d for d in build_depends]))
     res += "\n"
     return res
@@ -160,7 +284,15 @@ def binaryDebFromSpec(spec):
     res += "Architecture: any\n" # XXXX % spec.header['arch']
     res += "Depends:\n"
     depends = ["${ocaml:Depends}", "${shlibs:Depends}", "${misc:Depends}"]
-    depends += [mapPackage(r) for r in spec.header['requires']]
+    for pkg, version in zip(spec.header['requires'], spec.header['requireVersion']):
+        deps = mapPackage(pkg)
+        # XXXX Ick!
+        if type(deps) != list:
+            deps = [deps]
+        for dep in deps:
+            if version:
+                dep += " (>= %s)" % version
+            depends.append(dep)
     res += ",\n".join( [ " %s" % d for d in depends ] )
     res += "\n"
     res += "Provides: ${ocaml:Provides}\n"  # XXXX only for ocaml!
@@ -215,7 +347,14 @@ def debianRulesConfigureFromSpec(spec):
 #\tocaml setup.ml -configure --destdir $(DESTDIR)/$(OCAML_STDLIB_DIR)
 #
 #"""
-    return ""
+
+    # needed for OASIS packages with configure scripts
+    # if debhelper sees a configure script it will assume it's from autoconf
+    # and will run it with arguments that an OASIS configur script won't understand
+    rule = ".PHONY: override_dh_auto_configure\n"
+    rule += "override_dh_auto_configure:\n"
+    return rule
+
 
 
 def debianRulesBuildFromSpec(spec, path):
@@ -235,6 +374,8 @@ def debianRulesBuildFromSpec(spec, path):
     rule += "override_dh_auto_build:\n"
     rule += "\tdebian/build.sh\n"
     rule += "\n"
+    if not spec.build:
+        return rule
     with open(os.path.join(path, "debian/build.sh"), "w") as f:
         helper = "#!/bin/sh\n"
         helper += "unset CFLAGS\n" #XXX HACK for ocaml-oclock
@@ -290,7 +431,7 @@ def debianChangelogFromSpec(spec):
             author = name
             version = spec.sourceHeader['version']
 
-        res += "%s (%s) UNRELEASED; urgency=low\n" % (hdr['name'], version)
+        res += "%s (%s) UNRELEASED; urgency=low\n" % (mapPackage(hdr['name']), version)
         res += "\n"
 	text = re.sub( "^-", "*", text, flags=re.MULTILINE )
 	text = re.sub( "^", "  ", text, flags=re.MULTILINE )
@@ -308,13 +449,20 @@ def debianFilesFromPkg(basename, pkg, specpath):
     #res += "ocaml/*        @OCamlStdlibDir@/\n"   # should be more specific
     files = filesFromSpec(basename, specpath)
     for l in files.get(pkg.header['name'], []):
-        rpm.addMacro("_libdir", "")
+        rpm.addMacro("_libdir", "usr/lib")
+        rpm.addMacro("_bindir", "usr/bin")
         src = rpm.expandMacro(l).lstrip("/")  # deb just wants relative paths
+        rpm.delMacro("_bindir")
         rpm.delMacro("_libdir")
         rpm.addMacro("_libdir", "/usr/lib")
+        rpm.addMacro("_bindir", "/usr/bin")
         dst = rpm.expandMacro(l)
-        if dst.endswith("/*"):
-            dst = dst[:-len("/*")]
+        # destination paths should be directories, not files.
+        # if the file is foo and the path is /usr/bin/foo, the
+        # package will end up install /usr/bin/foo/foo 
+        if not dst.endswith("/"):
+            dst = os.path.dirname(dst)
+        rpm.delMacro("_bindir")
         rpm.delMacro("_libdir")
         res += "%s %s\n" % (src, dst)
     return res
@@ -395,7 +543,7 @@ def renameSource(spec):
     if not m:
         print "error: could not parse filename %s" % filename
     basename, ext = m.groups()[:2]
-    baseFileName = "%s_%s.orig%s" % (spec.sourceHeader['name'], spec.sourceHeader['version'], ext)
+    baseFileName = "%s_%s.orig%s" % (mapPackage(spec.sourceHeader['name']), spec.sourceHeader['version'], ext)
     shutil.copy(os.path.join(src_dir, origfilename), os.path.join(build_dir, baseFileName))
 
 
@@ -441,6 +589,7 @@ def filesFromSpec(basename, specpath):
         for line in spec:
             tokens = line.lower().strip().split(" ")
             if tokens and tokens[0] == "%files":
+                section = basename
                 inFiles = True
                 if len(tokens) > 1:
                     section = basename + "-" + tokens[1]
@@ -484,8 +633,9 @@ if __name__ == '__main__':
     debianDirFromSpec(spec, os.path.join(build_dir, build_subdir), sys.argv[1])
 
     # pdebuild gives us source debs as well as binaries
-    #res = subprocess.call( "cd %s\ndpkg-source -b --auto-commit %s" % (build_dir, build_subdir), shell=True )
-    res = subprocess.call( "cd %s\npdebuild --configfile %s --buildresult %s" % (os.path.join(build_dir, build_subdir), os.path.join(top_dir, "pbuilder/pbuilderrc-amd64"), rpm_dir), shell=True )
+    res = subprocess.call( "cd %s\ndpkg-source -b --auto-commit %s" % (build_dir, build_subdir), shell=True )
+    #pbuild can build a dsc - pbuilder --build <dsc> --configfile pbuilder/pbuildrerc-amd64 --resultdir ...
+    #res = subprocess.call( "cd %s\npdebuild --configfile %s --buildresult %s" % (os.path.join(build_dir, build_subdir), os.path.join(top_dir, "pbuilder/pbuilderrc-amd64"), rpm_dir), shell=True )
     assert res == 0
     shutil.rmtree(os.path.join(build_dir, build_subdir))
     for i in glob.glob(os.path.join(build_dir, "*")):
