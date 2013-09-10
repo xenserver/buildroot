@@ -1,5 +1,5 @@
 Name:           squeezed
-Version:        0.10.1
+Version:        0.10.2
 Release:        1
 Summary:        Memory ballooning daemon for the xapi toolstack
 License:        LGPL
@@ -57,6 +57,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.2-1
+- Update to new xenstore interface in v1.2.3
+
 * Wed Sep 04 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.1-1
 - Add get_domain_zero_palicy call required for domain 0 ballooning
 
