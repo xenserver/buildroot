@@ -164,7 +164,7 @@ mapping = {
     "openssl": "libssl1.0.0",
     "xen": "xen-hypervisor",
     "libuuid": "uuid",
-    "libvirt": "libvirt0",
+    "libvirt": ["libvirt0", "libvirt-bin"],
     "xen-libs": "libxen-4.2",
     "make": "make",
     "ncurses": "libncurses5",
@@ -196,6 +196,12 @@ mapping = {
     "/bin/sh": "/bin/sh",
     "xen-hypervisor-fixup": "xen-hypervisor-fixup",
     "xen-utils": "xen-utils",
+    "nfs-utils": "nfs-common",
+    "hwdata": "hwdata",
+    "redhat-lsb-core": "lsb-base",
+    "ethtool": "ethtool",
+    "qemu-system-x86": "qemu-system-x86",
+    "python-argparse": "libpython2.7-stdlib",
 }
 
 secondary_mapping = {
@@ -242,6 +248,8 @@ def mapPackage(name):
             m = "libvirt-dev"
         if m == "libxen-4.2-dev":
             m = "libxen-dev"
+        if m == "libvirt-bin-dev":
+            m = "libvirt-bin"
         if type(m) != list:
            m = [m]
         res += m
