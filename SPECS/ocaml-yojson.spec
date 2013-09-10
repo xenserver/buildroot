@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-yojson
 Version:        1.1.6
 Release:        1

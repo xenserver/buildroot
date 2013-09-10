@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-syslog
 Version:        1.4
 Release:        1

@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-nbd
 Version:        0.9.0
 Release:        1
