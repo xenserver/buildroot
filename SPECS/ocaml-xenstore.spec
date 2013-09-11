@@ -1,13 +1,14 @@
 Name:           ocaml-xenstore
-Version:        1.2.1
+Version:        1.2.3
 Release:        1
 Summary:        Xenstore protocol implementation in OCaml
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/mirage/ocaml-xenstore/archive/ocaml-xenstore-1.2.1.tar.gz
-Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/mirage/ocaml-xenstore/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/mirage/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-cstruct-devel ocaml-lwt-devel ocaml-camlp4-devel
+BuildRequires:  ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 Conflicts:      xen-ocaml
 
@@ -24,7 +25,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
@@ -48,6 +49,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xenstore/*
 
 %changelog
+* Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 1.2.3
+
 * Sun May  2 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
