@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.23
+Version: 1.9.24
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -150,7 +150,7 @@ fi
 /usr/lib/python2.6/site-packages/XenAPIPlugin.pyc
 
 %changelog
-* Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.23-1
+* Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.24-1
 - Can now use either 'ffs' or 'iso' for the tools SR
 
 * Wed Sep  4 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.22-1
