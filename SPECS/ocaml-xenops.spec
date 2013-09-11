@@ -1,5 +1,5 @@
 Name:           ocaml-xenops
-Version:        0.9.0
+Version:        0.9.1
 Release:        1
 Summary:        Low-level xen control operations OCaml
 License:        LGPL
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xenops/*
 
 %changelog
+* Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.1
+
 * Tue Jun 18 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
