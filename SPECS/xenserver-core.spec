@@ -12,7 +12,7 @@ Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
 Requires:       xenopsd-xc xenopsd-libvirt xenopsd-xenlight xenopsd-simulator
 Requires:       xenops-cli
 Requires:       openstack-xapi-plugins
-Requires:       ffs xapi-libvirt-storage sm-cli
+Requires:       ffs xapi-libvirt-storage sm-cli xcp-sm
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
 Requires:       squeezed

@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-rpc
 Version:        1.4.1
 Release:        1

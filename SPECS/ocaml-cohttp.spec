@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-cohttp
 Version:        0.9.8
 Release:        1
