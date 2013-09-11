@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.22
+Version: 1.9.23
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -150,6 +150,9 @@ fi
 /usr/lib/python2.6/site-packages/XenAPIPlugin.pyc
 
 %changelog
+* Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.23-1
+- Can now use either 'ffs' or 'iso' for the tools SR
+
 * Wed Sep  4 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.22-1
 - Query domain 0 memory policy from squeezed
 
