@@ -1,5 +1,5 @@
 Name:           ocaml-xenstore
-Version:        1.2.3
+Version:        1.2.4
 Release:        1
 Summary:        Xenstore protocol implementation in OCaml
 License:        LGPL
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xenstore/*
 
 %changelog
+* Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 1.2.4 (fixes critical watching bug)
+
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 1.2.3
 
