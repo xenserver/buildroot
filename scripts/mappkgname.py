@@ -107,7 +107,7 @@ mapping = {
                   "ocaml-compiler-libs",
     "ocaml-camlp4": ["camlp4", "camlp4-extra"],
     "openssl": "libssl1.0.0",
-    "xen": "xen-hypervisor",
+    "xen": ["xen-hypervisor", "qemu-system-x86", "blktap-utils"],
     "libuuid": "uuid",
     "libvirt": ["libvirt0", "libvirt-bin"],
     "xen-libs": "libxen-4.2",
@@ -196,6 +196,10 @@ def mapPackage(name):
             m = "libxen-dev"
         if m == "libvirt-bin-dev":
             m = "libvirt-bin"
+        if m == "blktap-utils-dev":
+            m = "blktap-utils"
+        if m == "qemu-system-x86-dev":
+            m = "qemu-system-x86"
         if type(m) != list:
            m = [m]
         res += m
