@@ -4,7 +4,8 @@ ARCH=amd64
 DIST=raring
 BASETGZ=/var/cache/pbuilder/base-$DIST-$ARCH.tgz
 
-apt-get install pbuilder
+apt-get install pbuilder python-rpm curl
+mkdir -p BUILD
 
 echo -n "Writing pbuilder configuration..."
 mkdir -p pbuilder
