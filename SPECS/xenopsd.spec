@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.24
+Version:        0.9.25
 Release:        1
 Summary:        Simple VM manager
 License:        LGPL
@@ -178,6 +178,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Mon Sep 16 2013 Euan Harris <euan.harris@citrix.com>
+- Update to 0.9.25, which includes linker paths required on Debian
+
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.24
 
