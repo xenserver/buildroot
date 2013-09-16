@@ -1,7 +1,7 @@
 Summary: XenServer Host Configuration Console
 Name: xsconsole
 Version: 0.9.0
-Release: 1
+Release: 2
 License: GPL2
 Group: Administration/System
 URL: http://github.com/jamesbulpin/xsconsole
@@ -17,13 +17,13 @@ Console tool for configuring a XenServer installation.
 %setup -q
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr/bin
-mkdir -p $RPM_BUILD_ROOT/usr/lib
-make install-base DESTDIR=$RPM_BUILD_ROOT
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/%{_bindir}
+mkdir -p %{buildroot}/%{_libdir}
+make install-base DESTDIR=%{buildroot} LIBDIR=%{buildroot}/%{_libdir}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
@@ -37,6 +37,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE
 
 %changelog
+* Mon Sep 16 2013 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
+- Use %{_libdir} rather than hard coding library installation path
+
 * Fri Jul 5 2013 James Bulpin <James.Bulpin@citrix.com> - 0.9.0-1
 - Initial package
 
