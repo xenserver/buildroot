@@ -1,8 +1,9 @@
-xen-api-rpm-buildroot
-=====================
+xenserver-core
+==============
 
-RPM buildroot for xen-api and related packages. To use this, clone the
-repo into ~/rpmbuild. You'll need to set up a user to run mock.
+A build environment for xenserver-core: the core components of [XenServer](http://www.xenserver.org/).
+It currently builds on CentOS, Fedora and other RPM-based distributions.
+To use this, first clone the repo. You'll need to set up a user to run mock.
 
 Installing mock
 ---------------
