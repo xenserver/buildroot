@@ -7,7 +7,7 @@ Summary:        Syslog bindings for OCaml
 License:        LGPL
 Group:          Development/Other
 URL:            http://opam.ocamlpro.com/pkg/syslog.1.4.html
-Source0:        http://godi-backup2.camlcity.org/godi-backup/syslog-%{version}.tar.gz
+Source0:        http://opam.ocamlpro.com/archives/syslog.%{version}+opam.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib
 Requires:       ocaml ocaml-findlib
@@ -24,7 +24,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n syslog-%{version}
+%setup -q -n syslog.%{version}
 
 %build
 make reallyall
