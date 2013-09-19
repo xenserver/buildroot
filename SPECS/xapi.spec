@@ -3,7 +3,7 @@
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
 Version: 1.9.25
-Release: 1
+Release: 2
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -25,6 +25,7 @@ BuildRequires: ocaml-syslog-devel ocaml-tapctl-devel ocaml-xen-lowlevel-libs-dev
 BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-xcp-inventory-devel
 BuildRequires: ocaml-bitstring-devel libuuid-devel make utop
 BuildRequires: ocaml-xenstore-clients-devel message-switch-devel
+BuildRequires: python2-devel
 Requires: stunnel ocaml-xcp-inventory hwdata redhat-lsb-core
 
 %description
@@ -102,9 +103,9 @@ echo master > %{buildroot}/etc/xcp/pool.conf
 
 mkdir -p %{buildroot}/usr/share/xapi/packages/iso
 
-mkdir -p %{buildroot}/usr/lib/python2.6/site-packages
-install -m 0644 scripts/examples/python/XenAPI.py %{buildroot}/usr/lib/python2.6/site-packages/
-install -m 0644 scripts/examples/python/XenAPIPlugin.py %{buildroot}/usr/lib/python2.6/site-packages/
+mkdir -p %{buildroot}%{python_sitelib}
+install -m 0644 scripts/examples/python/XenAPI.py %{buildroot}%{python_sitelib}
+install -m 0644 scripts/examples/python/XenAPIPlugin.py %{buildroot}%{python_sitelib}
 
 %clean
 rm -rf %{buildroot}
@@ -141,15 +142,18 @@ fi
 
 %files python-devel
 %defattr(-,root,root,-)
-/usr/lib/python2.6/site-packages/XenAPI.py
-/usr/lib/python2.6/site-packages/XenAPI.pyo
-/usr/lib/python2.6/site-packages/XenAPI.pyc
+%{python_sitelib}/XenAPI.py
+%{python_sitelib}/XenAPI.pyo
+%{python_sitelib}/XenAPI.pyc
 
-/usr/lib/python2.6/site-packages/XenAPIPlugin.py
-/usr/lib/python2.6/site-packages/XenAPIPlugin.pyo
-/usr/lib/python2.6/site-packages/XenAPIPlugin.pyc
+%{python_sitelib}/XenAPIPlugin.py
+%{python_sitelib}/XenAPIPlugin.pyo
+%{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Wed Sep 19 2013 Euan Harris <euan.harris@citrix.com> - 1.9.25-2
+- Use %{python_sitelib} to choose Python install path, instead of hard-coding it.
+
 * Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.25-1
 - Can now use either 'ffs' or 'iso' for the tools SR
 
