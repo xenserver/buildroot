@@ -33,6 +33,12 @@ def files_from_pkg(basename, pkg, specpath):
     res = ""
     files = rpmextra.files_from_spec(basename, specpath)
     for filename in files.get(pkg.header['name'], []):
+        # Debian packages must not contain compiled Python files.
+        # Instead, the python2 helper arranges to compile these 
+        # files when they are installed.
+	if os.path.splitext(filename)[1] in [".pyc", ".pyo"]:
+            continue
+
         rpm.addMacro("_libdir", "usr/lib")
         rpm.addMacro("_bindir", "usr/bin")
 

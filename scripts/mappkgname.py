@@ -116,6 +116,7 @@ MAPPING = {
     "stunnel": ["stunnel"],
     "bash-completion": ["bash-completion"],
     "python": ["python"],
+    "python2": ["python"],
     "time": ["time"],
     "newt": ["libnewt0.52"],
     "flex": ["flex"],

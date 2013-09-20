@@ -23,7 +23,7 @@ def source_deb_from_spec(spec, tree):
     res += "Standards-Version: %s\n" % STANDARDS_VERSION
 
     res += "Build-Depends:\n"
-    build_depends = ["debhelper (>= 8)", "dh-ocaml (>= 0.9)", "ocaml-nox"]
+    build_depends = ["debhelper (>= 8)", "dh-ocaml (>= 0.9)", "ocaml-nox", "python"]
     for pkg, version in zip(spec.sourceHeader['requires'], 
                             spec.sourceHeader['requireVersion']):
         deps = mappkgname.map_package(pkg)

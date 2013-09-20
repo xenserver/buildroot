@@ -32,7 +32,7 @@ def ocaml_rules_preamble(_spec, tree):
     rule += "export DH_OPTIONS\n"
     rule += "export DESTDIR=$(CURDIR)/debian/tmp\n"
     rule += "%:\n"
-    rule += "\tdh $@ --with ocaml\n"
+    rule += "\tdh $@ --with ocaml --with python2\n"
     rule += "\n"
 
     tree.append('debian/rules', rule)
