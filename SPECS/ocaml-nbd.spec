@@ -9,7 +9,7 @@ Group:          Development/Other
 URL:            http://github.com/djs55/nbd
 Source0:        https://github.com/djs55/nbd/archive/%{version}/nbd-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib ocaml-cstruct-devel ocaml-lwt-devel ocaml-obuild ocaml-camlp4-devel ocaml-camlp4
+BuildRequires:  ocaml ocaml-findlib ocaml-cstruct-devel ocaml-lwt-devel ocaml-obuild ocaml-camlp4-devel ocaml-camlp4 cmdliner-devel
 Requires:       ocaml ocaml-findlib
 
 %description
