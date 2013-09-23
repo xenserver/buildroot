@@ -7,7 +7,7 @@ Summary:        Pure OCaml implementation of the Network Block Device protocol
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
 URL:            http://github.com/djs55/nbd
-Source0:        https://github.com/djs55/nbd/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/djs55/nbd/archive/%{version}/nbd-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-bitstring-devel ocaml-lwt-devel ocaml-obuild ocaml-camlp4-devel ocaml-camlp4
 Requires:       ocaml ocaml-findlib
@@ -27,7 +27,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q 
+%setup -q -n nbd-%{version}
 
 %build
 if [ -x ./configure ]; then
