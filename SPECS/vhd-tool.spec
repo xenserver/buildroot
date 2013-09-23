@@ -24,7 +24,7 @@ BuildRequires: python2-devel
 Simple command-line tools for manipulating and streaming .vhd format file.
 
 %prep 
-%setup -q 
+%setup -q -n ocaml-vhd-%{version}
 cp %{SOURCE1} vhd-tool-sparse_dd-conf
 
 
