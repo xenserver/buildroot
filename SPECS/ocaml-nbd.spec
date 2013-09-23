@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 Name:           ocaml-nbd
-Version:        0.9.0
+Version:        0.9.1
 Release:        1
 Summary:        Pure OCaml implementation of the Network Block Device protocol
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
-URL:            http://github.com/xapi-project/nbd
-Source0:        https://github.com/xapi-project/nbd/archive/nbd-%{version}/nbd-%{version}.tar.gz
+URL:            http://github.com/djs55/nbd
+Source0:        https://github.com/djs55/nbd/archive/nbd-%{version}/nbd-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-bitstring-devel ocaml-lwt-devel ocaml-obuild ocaml-camlp4-devel ocaml-camlp4
 Requires:       ocaml ocaml-findlib
@@ -85,6 +85,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/nbd/nbd_lwt.cmi
 
 %changelog
+* Mon Sep 23 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.1
+
 * Wed May 29 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 

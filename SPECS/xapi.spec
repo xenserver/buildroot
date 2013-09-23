@@ -2,8 +2,8 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.25
-Release: 2
+Version: 1.9.26
+Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -26,7 +26,7 @@ BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-xcp-inventory-devel
 BuildRequires: ocaml-bitstring-devel libuuid-devel make utop
 BuildRequires: ocaml-xenstore-clients-devel message-switch-devel
 BuildRequires: python2-devel
-Requires: stunnel ocaml-xcp-inventory hwdata redhat-lsb-core
+Requires: stunnel ocaml-xcp-inventory hwdata redhat-lsb-core vhd-tool
 
 %description
 XCP toolstack.
@@ -68,7 +68,6 @@ omake phase1
 omake phase2
 omake ocaml/xapi/xapi
 omake ocaml/xe-cli/xe
-omake ocaml/xapi/sparse_dd
 
 sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in > xen-api-xapi-conf
 
@@ -85,7 +84,6 @@ mkdir -p %{buildroot}/%{_libexecdir}/xapi
 install -m 0755 xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
 install -m 0755 scripts/pci-info %{buildroot}/%{_libexecdir}/xapi/pci-info
 install -m 0755 scripts/update-mh-info %{buildroot}/%{_libexecdir}/xapi/update-mh-info
-install -m 0755 ocaml/xapi/sparse_dd %{buildroot}/%{_libexecdir}/xapi/sparse_dd
 mkdir -p %{buildroot}/etc/xapi
 install -m 0644 xen-api-xapi-conf %{buildroot}/etc/xapi.conf
 install -m 0644 xen-api-db-conf %{buildroot}/etc/xapi/db.conf
@@ -128,7 +126,6 @@ fi
 %{_libexecdir}/xapi/xapissl
 %{_libexecdir}/xapi/pci-info
 %{_libexecdir}/xapi/update-mh-info
-%{_libexecdir}/xapi/sparse_dd
 /etc/xapi/db.conf
 /etc/xapi/hook-scripts
 /var/lib/xapi
@@ -151,6 +148,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Mon Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.26-1
+- Update to 1.9.26
+
 * Wed Sep 19 2013 Euan Harris <euan.harris@citrix.com> - 1.9.25-2
 - Use %{python_sitelib} to choose Python install path, instead of hard-coding it.
 
