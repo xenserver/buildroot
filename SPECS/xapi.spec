@@ -23,7 +23,7 @@ BuildRequires: ocaml-libvhd-devel ocaml-nbd-devel ocaml-oclock-devel
 BuildRequires: ocaml-ounit-devel ocaml-rpc-devel ocaml-ssl-devel ocaml-stdext-devel
 BuildRequires: ocaml-syslog-devel ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-xcp-inventory-devel
-BuildRequires: ocaml-bitstring-devel libuuid-devel make utop
+BuildRequires: libuuid-devel make utop
 BuildRequires: ocaml-xenstore-clients-devel message-switch-devel
 BuildRequires: python2-devel
 Requires: stunnel ocaml-xcp-inventory hwdata redhat-lsb-core vhd-tool
