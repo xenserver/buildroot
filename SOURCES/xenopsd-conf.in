@@ -19,3 +19,7 @@ sockets-group=wheel
 
 vncterm=/usr/bin/vncterm
 eliloader=/usr/sbin/eliloader
+
+# Workaround xenopsd bug #45
+run_hotplug_scripts=false
+
