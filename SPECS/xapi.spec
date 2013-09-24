@@ -148,6 +148,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.27-2
+- Remove dependency on ocaml-bitstring
+
 * Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.27-1
 - Update to 1.9.27
 
@@ -177,9 +180,4 @@ fi
 
 * Wed Jun 5 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.1-1
 - Initial package
-
-
-
-
-
 
