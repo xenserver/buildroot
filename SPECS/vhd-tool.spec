@@ -16,9 +16,9 @@ BuildRequires: ocaml-nbd-devel ocaml-cstruct-devel ocaml-lwt-devel
 BuildRequires: ocaml-ounit-devel ocaml-rpc-devel ocaml-ssl-devel ocaml-stdext-devel
 BuildRequires: ocaml-syslog-devel ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-oclock-devel
-BuildRequires: libuuid-devel make utop
+BuildRequires: libuuid-devel
 BuildRequires: ocaml-xenstore-clients-devel message-switch-devel
-BuildRequires: python2-devel
+BuildRequires: openssl openssl-devel
 
 %description
 Simple command-line tools for manipulating and streaming .vhd format file.
