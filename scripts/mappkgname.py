@@ -90,6 +90,8 @@ MAPPING = {
     "xsconsole": ["xsconsole"],
     "xsiostat": ["xsiostat"],
     "xenserver-core-latest-snapshot": ["xenserver-core-latest-snapshot"],
+    "python-setuptools": ["python-setuptools"],
+    "vhd-tool": ["vhd-tool"],
 
     # Distribution packages
     "ocaml": ["ocaml-nox", "ocaml-native-compilers"],
