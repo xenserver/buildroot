@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.26
+Version: 1.9.27
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -148,8 +148,8 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
-* Mon Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.26-1
-- Update to 1.9.26
+* Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.27-1
+- Update to 1.9.27
 
 * Wed Sep 19 2013 Euan Harris <euan.harris@citrix.com> - 1.9.25-2
 - Use %{python_sitelib} to choose Python install path, instead of hard-coding it.
