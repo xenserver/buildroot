@@ -8,6 +8,7 @@ URL:            https://launchpad.net/nova/grizzly/%{version}/+download/nova-%{v
 Source0:        https://launchpad.net/nova/grizzly/%{version}/+download/nova-%{version}.tar.gz
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/nova-%{version}-%{release}
+BuildRequires:  python-setuptools
 
 %define debug_package %{nil}
 
