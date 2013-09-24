@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.25
+Version:        0.9.26
 Release:        1
 Summary:        Simple VM manager
 License:        LGPL
@@ -86,6 +86,7 @@ install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
 install -D _build/xenguest/xenguest_main.native          %{buildroot}/%{_libexecdir}/%{name}/xenguest
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
+install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
 install -D scripts/vif-xl %{buildroot}/%{_libexecdir}/%{name}/vif-xl
 install -D scripts/qemu-dm-wrapper %{buildroot}/%{_libexecdir}/%{name}/qemu-dm-wrapper
 install -D scripts/qemu-vif-script %{buildroot}/%{_libexecdir}/%{name}/qemu-vif-script
@@ -109,6 +110,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README.md LICENSE
 %{_libexecdir}/%{name}/vif
+%{_libexecdir}/%{name}/vif-real
 %{_libexecdir}/%{name}/vif-xl
 %{_libexecdir}/%{name}/qemu-dm-wrapper
 %{_libexecdir}/%{name}/qemu-vif-script
@@ -178,6 +180,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.26, which includes fixes for networking and libxl
+
 * Mon Sep 16 2013 Euan Harris <euan.harris@citrix.com>
 - Update to 0.9.25, which includes linker paths required on Debian
 
