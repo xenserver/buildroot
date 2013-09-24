@@ -39,7 +39,7 @@ rm -rf %{buildroot}
  
 mkdir -p %{buildroot}/%{_sbindir}
 install -m 0755 main.native %{buildroot}/%{_sbindir}/vhd-tool
-mkdir -p %{buildroot}/%{_libexecdir}
+mkdir -p %{buildroot}/%{_libexecdir}/xapi
 install -m 0755 sparse_dd.native %{buildroot}/%{_libexecdir}/xapi/sparse_dd
 mkdir -p %{buildroot}/etc
 install -m 0755 vhd-tool-sparse_dd-conf %{buildroot}/etc/sparse_dd.conf
