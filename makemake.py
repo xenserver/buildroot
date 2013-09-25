@@ -5,8 +5,8 @@
 import sys
 sys.path.append("scripts")
 
-ignore_list = {"rpm":["libxl-headers"],
-               "deb":[]}
+ignore_list = {"rpm":["libxl-headers","libnl3"],
+               "deb":["libnl3"]}
 
 import rpm
 import os
