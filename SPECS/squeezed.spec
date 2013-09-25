@@ -1,5 +1,5 @@
 Name:           squeezed
-Version:        0.10.3
+Version:        0.10.4
 Release:        1
 Summary:        Memory ballooning daemon for the xapi toolstack
 License:        LGPL
@@ -10,7 +10,7 @@ Source1:        squeezed-init
 Source2:        squeezed-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-stdext-devel ocaml-xcp-idl-devel ocaml-syslog-devel
+BuildRequires:  ocaml-stdext-devel ocaml-xcp-idl-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel
@@ -57,6 +57,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Sep 24 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.10.4
+
 * Fri Sep 20 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.3-1
 - Update to allow minimal operation without xen
 

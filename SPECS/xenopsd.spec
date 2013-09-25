@@ -1,6 +1,6 @@
 Name:           xenopsd
-Version:        0.9.26
-Release:        2
+Version:        0.9.27
+Release:        1
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
@@ -14,7 +14,7 @@ Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel ocaml-uuidm-devel forkexecd-devel
 BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
@@ -182,6 +182,11 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Sep 24 2013 David Scott <dave.scott@eu.citrix.com>
+- modprobe blk{tap,back} in the xenopsd-xc init.d script since
+  we need these to make virtual disks work
+- update to 0.9.27
+
 * Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.26, which includes fixes for networking and libxl
 

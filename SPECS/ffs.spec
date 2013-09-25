@@ -1,5 +1,5 @@
 Name:           ffs
-Version:        0.9.17
+Version:        0.9.18
 Release:        1
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
@@ -9,7 +9,7 @@ Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{nam
 Source1:        ffs-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel ocaml-libvhd-devel xen-devel libuuid-devel
 BuildRequires:  ocaml-tapctl-devel message-switch-devel forkexecd-devel
@@ -51,6 +51,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.18
+
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.17
 
