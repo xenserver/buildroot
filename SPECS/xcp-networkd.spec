@@ -1,6 +1,6 @@
 Name:           xcp-networkd
-Version:        0.9.2
-Release:        2
+Version:        0.9.3
+Release:        1
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -67,6 +67,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.3
+
 * Wed Aug 28 2013 David Scott <dave.scott@eu.citrix.com>
 - When loading the bridge module, prevent guest traffic being
   processed by the domain 0 firewall
