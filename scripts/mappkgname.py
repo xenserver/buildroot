@@ -152,7 +152,7 @@ SECONDARY_MAPPING = {
     "libxapi-libvirt-storage-ocaml": ["libxapi-libvirt-storage-ocaml-dev"],
     "libsexplib-camlp4": ["libsexplib-camlp4-dev"],
     "ocaml-findlib-dev": ["ocaml-findlib", "libfindlib-ocaml-dev"],
-    "xen-hypervisor-dev": ["libxen-dev", "xen-utils", "blktap-dev"],
+    "xen-hypervisor-dev": ["libxen-dev", "xen-utils", "blktap-dev", "libxl-headers"],
     "libvirt0-dev": ["libvirt-dev"],
     "libxen-4.2-dev": ["libxen-dev"],
     "libvirt-bin-dev": ["libvirt-bin"],
