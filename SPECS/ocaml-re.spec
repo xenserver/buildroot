@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-re
 Version:        1.2.1
 Release:        1
