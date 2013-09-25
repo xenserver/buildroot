@@ -5,7 +5,7 @@ Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xapi-project/xcp-networkd/archive/xcp-networkd-%{version}.tar.gz
-Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
@@ -24,7 +24,7 @@ Requires:       ethtool redhat-lsb-core
 Simple host networking management service for the xapi toolstack.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q
 cp %{SOURCE1} xcp-networkd-init
 cp %{SOURCE2} xcp-networkd-conf
 cp %{SOURCE3} xcp-networkd-network-conf
