@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-xen-api-client
 Version:        0.9.4
 Release:        1

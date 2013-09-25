@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-uri
 Version:        1.3.8
 Release:        1

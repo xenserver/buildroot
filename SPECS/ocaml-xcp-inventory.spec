@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-xcp-inventory
 Version:        0.9.0
 Release:        1

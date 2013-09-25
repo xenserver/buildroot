@@ -1,4 +1,4 @@
-%global debug_package %{nil}
+%define debug_package %{nil}
 
 Name:           js_of_ocaml
 Version:        1.3.2

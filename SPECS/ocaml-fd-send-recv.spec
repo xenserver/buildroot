@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-fd-send-recv
 Version:        1.0.1
 Release:        1

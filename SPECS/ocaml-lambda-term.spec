@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-lambda-term
 Version:        1.2
 Release:        1

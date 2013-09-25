@@ -1,3 +1,5 @@
+%define debug_package %{nil}
+
 Name:           biniou
 Version:        1.0.6
 Release:        1
