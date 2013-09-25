@@ -1,2 +1,3 @@
-brctl=/usr/sbin/brctl
+# Search for brctl on the PATH
+brctl=brctl
 

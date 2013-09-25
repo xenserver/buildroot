@@ -1,18 +1,18 @@
 Name:           xcp-networkd
-Version:        0.9.2
-Release:        2
+Version:        0.9.3
+Release:        1
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xapi-project/xcp-networkd/archive/xcp-networkd-%{version}.tar.gz
-Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
 Source4:        xcp-networkd-bridge-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel forkexecd-devel ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-xcp-inventory-devel ocaml-ounit-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
@@ -24,7 +24,7 @@ Requires:       ethtool redhat-lsb-core
 Simple host networking management service for the xapi toolstack.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q
 cp %{SOURCE1} xcp-networkd-init
 cp %{SOURCE2} xcp-networkd-conf
 cp %{SOURCE3} xcp-networkd-network-conf
@@ -67,6 +67,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.3
+
 * Wed Aug 28 2013 David Scott <dave.scott@eu.citrix.com>
 - When loading the bridge module, prevent guest traffic being
   processed by the domain 0 firewall

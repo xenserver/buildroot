@@ -13,7 +13,7 @@ Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
 BuildRequires: ocaml-cohttp-devel ocaml-rpc-devel ocaml-xenstore-devel
-BuildRequires: ocaml-ounit-devel ocaml-syslog-devel ocaml-uri-devel
+BuildRequires: ocaml-ounit-devel ocaml-uri-devel
 BuildRequires: ocaml-re-devel ocaml-rpc-devel cmdliner-devel
 BuildRequires: ocaml-ssl-devel ocaml-oclock-devel
 BuildRequires: openssl openssl-devel

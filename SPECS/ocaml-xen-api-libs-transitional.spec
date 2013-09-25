@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-api-libs-transitional
-Version:        0.9.2
+Version:        0.9.3
 Release:        1
 Summary:        Deprecated standard library extension for OCaml.
 License:        LGPL2.1 + OCaml linking exception
@@ -12,7 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-stdext-devel xmlm-devel forkexecd-devel
 BuildRequires:  ocaml-rpc-devel ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel
 BuildRequires:  ocaml-xenstore-clients-devel xen-devel ocaml-camlp4-devel
-BuildRequires:  ocaml-syslog-devel
+BuildRequires:  ocaml-xcp-idl-devel ocaml-oclock-devel
 Requires:       ocaml ocaml-findlib xen-libs
 
 %description
@@ -55,7 +55,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/cpuid/*
 %{_libdir}/ocaml/gzip/*
 %{_libdir}/ocaml/http-svr/*
-%{_libdir}/ocaml/log/*
 %{_libdir}/ocaml/pciutil/*
 %{_libdir}/ocaml/sexpr/*
 %{_libdir}/ocaml/sha1/*
@@ -67,12 +66,13 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xml-light2/*
 %{_libdir}/ocaml/stublibs/dllcpuid_stubs.so
 %{_libdir}/ocaml/stublibs/dllcpuid_stubs.so.owner
-%{_libdir}/ocaml/stublibs/dlllog_stubs.so
-%{_libdir}/ocaml/stublibs/dlllog_stubs.so.owner
 %{_libdir}/ocaml/stublibs/dllxenctrlext_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenctrlext_stubs.so.owner
 
 %changelog
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.3
+
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.2
 
