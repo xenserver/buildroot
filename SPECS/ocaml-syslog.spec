@@ -2,7 +2,7 @@
 
 Name:           ocaml-syslog
 Version:        1.4
-Release:        1
+Release:        7
 Summary:        Syslog bindings for OCaml
 License:        LGPL
 Group:          Development/Other
