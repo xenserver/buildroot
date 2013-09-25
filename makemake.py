@@ -5,6 +5,8 @@
 import sys
 sys.path.append("scripts")
 
+ignore_list = {"rpm":["libxl-headers"]}
+
 import rpm
 import os
 import urlparse
@@ -79,6 +81,8 @@ specs = {}
 for spec_name in spec_names:
     spec = specFromFile( os.path.join( spec_dir, spec_name ) )
     pkg_name = spec.sourceHeader['name']
+    if pkg_name in ignore_list[buildType()]:
+        continue
     if os.path.splitext( spec_name )[0] != pkg_name:
         sys.stderr.write( "error: spec file name '%s' does not match package name '%s'\n" % ( spec_name, pkg_name ) )
         sys.exit( 1 )
