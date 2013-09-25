@@ -14,7 +14,7 @@ article for [CentOS](http://www.rackspace.com/knowledge_center/article/installin
 After installing mock, type:
 
 ```
-yum install -y mock
+yum install -y mock redhat-lsb-core
 ```
 
 Using mock to build these RPMs:
