@@ -2,8 +2,8 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.27
-Release: 2
+Version: 1.9.28
+Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -148,6 +148,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 1.9.28
+
 * Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.27-2
 - Remove dependency on ocaml-bitstring
 
