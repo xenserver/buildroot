@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-xenops
 Version:        0.9.1
 Release:        1

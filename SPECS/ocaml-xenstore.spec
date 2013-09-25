@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-xenstore
 Version:        1.2.4
 Release:        1

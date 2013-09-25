@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-xenstore-clients
 Version:        0.9.2
 Release:        1

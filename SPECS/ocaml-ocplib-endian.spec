@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-ocplib-endian
 Version:        0.4
 Release:        1

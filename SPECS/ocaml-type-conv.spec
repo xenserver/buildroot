@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-type-conv
 Version:        109.20.00
 Release:        1

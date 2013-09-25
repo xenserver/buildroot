@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-zed
 Version:        1.2
 Release:        1
