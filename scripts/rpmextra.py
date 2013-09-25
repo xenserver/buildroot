@@ -58,6 +58,7 @@ def files_from_spec(basename, specpath):
                 if tokens[0].lower().startswith("%defattr"):
                     continue
                 if tokens[0].lower().startswith("%attr"):
+                    files[section] = files.get(section, []) + tokens[1:]
                     continue
                 if tokens[0].lower() == "%doc":
                     docsection = section + "-doc"
