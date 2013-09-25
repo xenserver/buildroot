@@ -11,7 +11,7 @@ Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{nam
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
 BuildRequires:  ocaml-lwt-devel xen-devel libuuid-devel cmdliner-devel 
-BuildRequires:  ocaml-cstruct-devel libxl-headers
+BuildRequires:  ocaml-cstruct-devel
 Requires:       ocaml ocaml-findlib
 
 %description
