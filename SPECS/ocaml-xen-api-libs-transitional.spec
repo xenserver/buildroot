@@ -1,5 +1,5 @@
 Name:           ocaml-xen-api-libs-transitional
-Version:        0.9.2
+Version:        0.9.3
 Release:        1
 Summary:        Deprecated standard library extension for OCaml.
 License:        LGPL2.1 + OCaml linking exception
@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllxenctrlext_stubs.so.owner
 
 %changelog
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.3
+
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.2
 
