@@ -1,11 +1,11 @@
 Name:           forkexecd
-Version:        0.9.0
+Version:        0.9.1
 Release:        1
 Summary:        A subprocess management service
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xapi-project/forkexecd/archive/forkexecd-0.9.0.tar.gz
-Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        forkexecd-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
@@ -20,7 +20,7 @@ A service which starts and manages subprocesses, avoiding the need to manually
 fork() and exec() in a multithreaded program.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q
 cp %{SOURCE1} forkexecd-init
 
 %build
@@ -72,6 +72,9 @@ developing applications that use %{name}.
 %{_libdir}/ocaml/forkexec/*
 
 %changelog
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.1
+
 * Fri May 31 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
