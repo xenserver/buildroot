@@ -1,0 +1,4 @@
+#!/bin/sh
+(cd @PWD@/RPMS; apt-ftparchive packages . > Packages)
+(cd @PWD@/SRPMS; apt-ftparchive sources . > Sources)
+apt-get update
