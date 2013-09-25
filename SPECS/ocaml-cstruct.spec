@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-cstruct
 Version:        0.7.1
 Release:        2

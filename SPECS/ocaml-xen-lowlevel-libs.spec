@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.9
 Release:        1

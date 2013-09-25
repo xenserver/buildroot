@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-uuidm
 Version:        0.9.5
 Release:        1

@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-ssl
 Version:        0.4.6
 Release:        1

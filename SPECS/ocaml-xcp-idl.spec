@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-xcp-idl
 Version:        0.9.12
 Release:        1

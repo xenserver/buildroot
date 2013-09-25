@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-obuild
 Version:        0.0.2
 Release:        1

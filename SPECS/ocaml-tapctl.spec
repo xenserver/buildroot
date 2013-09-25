@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-tapctl
 Version:        0.9.0
 Release:        1

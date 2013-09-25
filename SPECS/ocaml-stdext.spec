@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 Name:           ocaml-stdext
 Version:        0.9.1
 Release:        1
