@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.26
-Release:        2
+Release:        3
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
@@ -180,6 +180,10 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Sep 24 2013 David Scott <dave.scott@eu.citrix.com>
+- modprobe blk{tap,back} in the xenopsd-xc init.d script since
+  we need these to make virtual disks work
+
 * Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.26, which includes fixes for networking and libxl
 
