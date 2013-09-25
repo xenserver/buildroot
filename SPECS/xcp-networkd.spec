@@ -12,7 +12,7 @@ Source3:        xcp-networkd-network-conf
 Source4:        xcp-networkd-bridge-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel forkexecd-devel ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-xcp-inventory-devel ocaml-ounit-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel

@@ -21,7 +21,7 @@ BuildRequires: ocaml-xen-api-client-devel omake ocaml-netdev-devel
 BuildRequires: ocaml-cdrom-devel ocaml-fd-send-recv-devel forkexecd-devel
 BuildRequires: ocaml-libvhd-devel ocaml-nbd-devel ocaml-oclock-devel
 BuildRequires: ocaml-ounit-devel ocaml-rpc-devel ocaml-ssl-devel ocaml-stdext-devel
-BuildRequires: ocaml-syslog-devel ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
+BuildRequires: ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-xcp-inventory-devel
 BuildRequires: libuuid-devel make utop
 BuildRequires: ocaml-xenstore-clients-devel message-switch-devel

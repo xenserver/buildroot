@@ -14,7 +14,7 @@ Source5:        xenopsd-conf.in
 Source6:        xenopsd-network-conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-syslog-devel ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel ocaml-uuidm-devel forkexecd-devel
 BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel

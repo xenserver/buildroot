@@ -9,7 +9,7 @@ Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{nam
 Source1:        forkexecd-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-rpc-devel ocaml-fd-send-recv-devel ocaml-re-devel ocaml-syslog-devel ocaml-uuidm-devel ocaml-stdext-devel
+BuildRequires:  ocaml-rpc-devel ocaml-fd-send-recv-devel ocaml-re-devel ocaml-uuidm-devel ocaml-stdext-devel ocaml-xcp-idl-devel ocaml-oclock-devel
 Requires:  ocaml-rpc ocaml-rpc-devel redhat-lsb-core
 Requires(post): chkconfig
 Requires(preun): chkconfig
