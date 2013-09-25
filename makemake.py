@@ -10,6 +10,20 @@ import os
 import urlparse
 import sys
 import mappkgname
+import platform
+
+def buildType():
+    debian_like = [ "ubuntu", "debian" ]
+    rhel_like = [ "fedora", "redhat", "centos" ]
+
+    distribution = platform.linux_distribution()[0].lower()
+    assert distribution in debian_like + rhel_like
+
+    if distribution in debian_like:
+        return "deb"
+    elif distribution in rhel_like:
+        return "rpm"
+
 
 # for debugging, make all paths relative to PWD
 rpm.addMacro( '_topdir', '.' )
@@ -41,12 +55,19 @@ host_dist = rpm.expandMacro( '%dist' )
 # We could avoid hardcoding this by running 
 # "mock -r xenserver --chroot "rpm --eval '%dist'"
 chroot_dist = '.el6'
-rpm.addMacro( 'dist', "" )
+if buildType() == "rpm":
+   rpm.addMacro( 'dist', chroot_dist )
+else:
+   rpm.addMacro( 'dist', "" )
+
 
 
 print "all: rpms"
 
-rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
+if buildType() == "rpm":
+    rpmfilenamepat = rpm.expandMacro( '%_build_name_fmt' )
+else:
+    rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
 
 ts = rpm.TransactionSet()
 
@@ -66,7 +87,10 @@ for spec_name in spec_names:
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
-    rpm.addMacro( 'NAME', mappkgname.map_package(h['name'])[0] )
+    if buildType() == "rpm":
+        rpm.addMacro( 'NAME', h['name'] )
+    else:
+        rpm.addMacro( 'NAME', mappkgname.map_package(h['name'])[0] )
     rpm.addMacro( 'VERSION', h['version'] )
     rpm.addMacro( 'RELEASE', h['release'] )
     rpm.addMacro( 'ARCH', 'src' )
@@ -76,7 +100,10 @@ def srpmNameFromSpec( spec ):
     # Unfortunately expanding that macro gives us a leading 'src' that we
     # don't want, so we strip that off
 
-    srpmname = os.path.basename( rpm.expandMacro( "%{NAME}_%{VERSION}-%{RELEASE}.dsc" ) )  
+    if buildType() == "rpm":
+        srpmname = os.path.basename( rpm.expandMacro( rpmfilenamepat ) )  
+    else:
+        srpmname = os.path.basename( rpm.expandMacro( "%{NAME}_%{VERSION}-%{RELEASE}.dsc" ) )  
 
     rpm.delMacro( 'NAME' )
     rpm.delMacro( 'VERSION' )
@@ -88,10 +115,16 @@ def srpmNameFromSpec( spec ):
 
 def rpmNamesFromSpec( spec ):
     def rpmNameFromHeader( h ):
-        rpm.addMacro( 'NAME', mappkgname.map_package_name(h) )
+        if buildType() == "rpm":
+            rpm.addMacro( 'NAME', h['name'] )
+        else:
+            rpm.addMacro( 'NAME', mappkgname.map_package_name(h) )
         rpm.addMacro( 'VERSION', h['version'] )
         rpm.addMacro( 'RELEASE', h['release'] )
-        rpm.addMacro( 'ARCH', "amd64" if h['arch'] == "x86_64" else "all" if h['arch'] == "noarch" else h['arch'])
+        if buildType() == "rpm":
+            rpm.addMacro( 'ARCH', h['arch'] )
+        else:
+            rpm.addMacro( 'ARCH', "amd64" if h['arch'] == "x86_64" else "all" if h['arch'] == "noarch" else h['arch'])
         rpmname = rpm.expandMacro( rpmfilenamepat )
         rpm.delMacro( 'NAME' )
         rpm.delMacro( 'VERSION' )
@@ -127,8 +160,12 @@ for specname, spec in specs.iteritems():
     print '%s: %s %s' % (os.path.join( srpm_dir, srpmname ), 
                          os.path.join( spec_dir, specname ),
                          " ".join( sources ) )
-    print '\t@echo [MAKEDEB] $@'
-    print '\tscripts/makedeb.py $<'
+    if buildType() == "rpm":
+        print '\t@echo [RPMBUILD] $@' 
+        print '\t@rpmbuild --quiet --define "_topdir ." -bs $<'
+    else:
+        print '\t@echo [MAKEDEB] $@'
+        print '\tscripts/makedeb.py $<'
 
 # Rules to download sources
 
@@ -180,10 +217,15 @@ for specname, spec in specs.iteritems():
         srpm_path = os.path.join( srpm_dir, srpmname )
         rpm_outdir = os.path.dirname( rpm_path )
         print '%s: %s' % ( rpm_path, srpm_path )
-        print '\t@echo [PBUILDER] $@'
-        print '\tsudo pbuilder --build --configfile pbuilder/pbuilderrc-raring-amd64 --buildresult %s $<' % rpm_outdir 
-        #print '\t@echo [CREATEREPO] $@'
-        #print '\t@createrepo --quiet --update %s' % rpm_dir
+        if buildType() == "rpm":
+            print '\t@echo [MOCK] $@'
+            print '\t@mock --configdir=mock --quiet -r xenserver --resultdir="%s" $<' % rpm_outdir
+            print '\t@echo [CREATEREPO] $@'
+            print '\t@createrepo --quiet --update %s' % rpm_dir
+
+        else:
+            print '\t@echo [PBUILDER] $@'
+            print '\tsudo pbuilder --build --configfile pbuilder/pbuilderrc-raring-amd64 --buildresult %s $<' % rpm_outdir 
         
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
