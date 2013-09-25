@@ -42,9 +42,9 @@ make
 ```
 
 Debian-based distributions (experimental)
-=========================================
+-----------------------------------------
 
-Building Debian packages is experimental.
+Building Debian packages is experimental!
 
 On Debian-based distributions, the packages are built using `pbuilder`.
 `pbuilder` is available in the main Ubuntu and Debian package repositories, so there is no need to add extra ones.
