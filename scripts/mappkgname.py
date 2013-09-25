@@ -21,7 +21,7 @@ MAPPING = {
     "libnl3": ["libnl-3"],
     "message-switch": ["message-switch"],
     "ocaml-bitstring": ["libbitstring-ocaml"],
-    "ocaml-camomile-data": ["libcamomile-data-ocaml"],
+    "ocaml-camomile-data": ["libcamomile-data"],
     "ocaml-camomile": ["libcamomile-ocaml"],
     "ocaml-cdrom": ["libcdrom-ocaml"],
     "ocaml-cohttp": ["libcohttp-ocaml"],
