@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xenops
-Version:        0.9.1
+Version:        0.9.2
 Release:        1
 Summary:        Low-level xen control operations OCaml
 License:        LGPL
