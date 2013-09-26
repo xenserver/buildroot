@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        0.9.13
+Version:        0.9.14
 Release:        1
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xapi-project/xcp-idl/archive/%{version}.tar.gz
-Source0:        https://github.com/xapi-project/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
+Source0:        https://github.com/djs55/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-cohttp-devel xmlm-devel ocaml-rpc-devel message-switch-devel cmdliner-devel ocaml-fd-send-recv-devel ocaml-xcp-rrd-devel
@@ -64,6 +64,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xcp/*
 
 %changelog
+* Thu Sep 26 2013 David Scott <dave.scott@eu.citrix.com>
+- Support searching for executables on the XCP_PATH as well as the PATH
+
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
 - Logging, channel passing and interface updates
 
