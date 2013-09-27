@@ -21,7 +21,7 @@ BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
 BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
 BuildRequires:  xen-devel ocaml-xcp-inventory-devel message-switch-devel
-BuildRequires:  vncterm eliloader
+BuildRequires:  vncterm eliloader ocaml-xcp-idl-devel
 Requires:       message-switch xenops-cli redhat-lsb-core
 
 %description
