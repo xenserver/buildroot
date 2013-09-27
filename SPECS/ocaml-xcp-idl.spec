@@ -33,6 +33,7 @@ Common interface definitions for XCP services.
 Summary:        Development files for %{name}
 Group:          Development/Other
 #Requires:       %{name} = %{version}-%{release}
+Requires:       message-switch-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
