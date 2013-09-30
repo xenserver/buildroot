@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 
 if [ `lsb_release -si` == "Fedora" -o `lsb_release -si` == "CentOS" ] ; then
 
@@ -37,6 +38,12 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	chmod 755 pbuilder/D05deps
 	echo " done"
 
+	echo -n "Initializing repository..."
+	mkdir -p RPMS SRPMS
+	(cd RPMS; apt-ftparchive packages . > Packages)
+	(cd SRPMS; apt-ftparchive sources . > Sources)
+        echo " done"
+
 	if [ -f $BASETGZ ] ; then
 	    echo $BASETGZ exists - updating
 	    sudo pbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
@@ -45,10 +52,6 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	    sudo pbuilder --create --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
 	fi
 
-	echo -n "Initializing repository..."
-	mkdir -p RPMS SRPMS
-	(cd RPMS; apt-ftparchive packages . > Packages)
-	(cd SRPMS; apt-ftparchive sources . > Sources)
 	echo " done"
 
 fi
