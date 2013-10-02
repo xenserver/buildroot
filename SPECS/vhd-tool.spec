@@ -29,7 +29,7 @@ cp %{SOURCE1} vhd-tool-sparse_dd-conf
 
 
 %build
-./configure --bindir %{buildroot}/%{_bindir} --libexecdir %{buildroot}/${_libexecdir}/xapi --etcdir %{buildroot}/etc
+./configure --bindir %{buildroot}/%{_bindir} --libexecdir %{buildroot}/%{_libexecdir}/xapi --etcdir %{buildroot}/etc
 make
 
 %install
