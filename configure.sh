@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ `lsb_release -si` == "Fedora" ] ; then
+if [ `lsb_release -si` == "Fedora" -o `lsb_release -si` == "CentOS" ] ; then
 
 	echo "Configuring RPM-based build"
 
