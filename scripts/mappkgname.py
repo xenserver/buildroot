@@ -61,7 +61,7 @@ MAPPING = {
     "ocaml-xenstore": ["libxenstore-ocaml"],
     "ocaml-yojson": ["libyojson-ocaml"],
     "ocaml-zed": ["libzed-ocaml"],
-    "ocaml-vhd": ["libvhd-ocaml"],
+    "ocaml-vhd": ["vhd-ocaml"],
     "omake": ["omake"],
     "openstack-xapi-plugins": ["openstack-xapi-plugins"],
     "optcomp": ["optcomp-ocaml"],
