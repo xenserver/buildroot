@@ -89,6 +89,7 @@ MAPPING = {
     "xenserver-tech-preview-release": ["xenserver-tech-preview-release"],
     "xmlm": ["libxmlm-ocaml"],
     "xsconsole": ["xsconsole"],
+    "xsconsole0": ["xsconsole"],
     "xsiostat": ["xsiostat"],
     "xenserver-core-latest-snapshot": ["xenserver-core-latest-snapshot"],
     "python-setuptools": ["python-setuptools"],
