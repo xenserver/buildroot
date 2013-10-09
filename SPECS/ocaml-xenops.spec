@@ -11,7 +11,7 @@ Source0:        https://github.com/xapi-project/xenops/archive/%{version}/%{name
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-stdext-devel ocaml-rpc-devel ocaml-camlp4-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel ocaml-xenstore-clients-devel
-BuildRequires:  ocaml-xen-api-libs-transitional-devel ocaml-oclock-devel
+BuildRequires:  ocaml-xen-api-libs-transitional-devel ocaml-oclock-devel ocaml-xcp-idl-devel
 Requires:       ocaml ocaml-findlib
 
 %description
