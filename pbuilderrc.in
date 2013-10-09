@@ -2,7 +2,6 @@ MIRRORSITE="http://gb.archive.ubuntu.com/ubuntu/"
 OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb-src file:@PWD@/SRPMS/ ./\
 |deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main\
 |deb http://gb.archive.ubuntu.com/ubuntu/ raring universe\
-|deb http://ppa.launchpad.net/avsm/ppa/ubuntu raring main\
 |deb-src http://ppa.launchpad.net/avsm/ppa/ubuntu raring main"
 BINDMOUNTS="@PWD@/RPMS @PWD@/SRPMS"
 HOOKDIR="@PWD@/pbuilder"
