@@ -27,6 +27,13 @@ def buildType():
     elif distribution in rhel_like:
         return "rpm"
 
+def map_package_name(name):
+    if buildType() == "rpm":
+        return [name]
+    else:
+        return mappkgname.map_package(name)
+
+
 
 # for debugging, make all paths relative to PWD
 rpm.addMacro( '_topdir', '.' )
@@ -92,10 +99,7 @@ for spec_name in spec_names:
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
-    if buildType() == "rpm":
-        rpm.addMacro( 'NAME', h['name'] )
-    else:
-        rpm.addMacro( 'NAME', mappkgname.map_package(h['name'])[0] )
+    rpm.addMacro('NAME', map_package_name(h['name'])[0])
     rpm.addMacro( 'VERSION', h['version'] )
     rpm.addMacro( 'RELEASE', h['release'] )
     rpm.addMacro( 'ARCH', 'src' )
@@ -120,10 +124,7 @@ def srpmNameFromSpec( spec ):
 
 def rpmNamesFromSpec( spec ):
     def rpmNameFromHeader( h ):
-        if buildType() == "rpm":
-            rpm.addMacro( 'NAME', h['name'] )
-        else:
-            rpm.addMacro( 'NAME', mappkgname.map_package_name(h) )
+        rpm.addMacro('NAME', map_package_name(h['name'])[0])
         rpm.addMacro( 'VERSION', h['version'] )
         rpm.addMacro( 'RELEASE', h['release'] )
         if buildType() == "rpm":
@@ -234,13 +235,20 @@ for specname, spec in specs.iteritems():
         
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
+def flatten(lst):
+    res = []
+    for li in lst:
+       res += li
+    return res
+
 def buildRequiresFromSpec( spec ):
-    return spec.sourceHeader['requires']
+    reqs = [map_package_name(r) for r in spec.sourceHeader['requires']]
+    return set(flatten(reqs))
 
 provides_to_rpm = {}
 for specname, spec in specs.iteritems():
     for package in spec.packages:
-        for provided in (package.header['provides'] + [package.header['name']]):
+        for provided in set(flatten([map_package_name(r) for r in (package.header['provides'] + [package.header['name']])])):
             for rpmname in rpmNamesFromSpec( spec ):
                 provides_to_rpm[ provided ] = rpmname
 
