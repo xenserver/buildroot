@@ -165,6 +165,10 @@ SECONDARY_MAPPING = {
 def map_package(name):
     """map an rpm to a corresponding deb, based on file contents"""
     is_devel = False
+
+    # RPM 4.6 adds architecture constraints to dependencies.  Drop them.
+    if name.endswith( "(x86-64)" ):
+        name = name[ :-len("(x86-64)") ]
     if name.endswith( "-devel" ):
         is_devel = True
         name = name[ :-len("-devel") ]
