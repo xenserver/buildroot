@@ -92,7 +92,7 @@ MAPPING = {
     "xsconsole0": ["xsconsole"],
     "xsiostat": ["xsiostat"],
     "xenserver-core-latest-snapshot": ["xenserver-core-latest-snapshot"],
-    "python-setuptools": ["python-setuptools"],
+    "python-setuptools": ["python-setuptools", "python-setuptools-git"],
     "vhd-tool": ["vhd-tool"],
 
     # Distribution packages
