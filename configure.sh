@@ -28,7 +28,7 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	DIST=raring
 	BASETGZ=/var/cache/pbuilder/base-$DIST-$ARCH.tgz
 
-	dpkg -l pbuilder python-rpm curl > /dev/null 2>&1 || sudo apt-get install pbuilder python-rpm curl
+	dpkg -l pbuilder python-rpm curl ocaml-nox > /dev/null 2>&1 || sudo apt-get install pbuilder python-rpm curl ocaml-nox
 	mkdir -p BUILD
 
 	echo -n "Writing pbuilder configuration..."
