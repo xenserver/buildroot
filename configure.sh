@@ -5,7 +5,7 @@ if [ `lsb_release -si` == "Fedora" -o `lsb_release -si` == "CentOS" ] ; then
 
 	echo "Configuring RPM-based build"
 
-	sudo yum install mock rpm-build
+	rpm -q mock rpm-build >/dev/null 2>&1 || sudo yum install -y mock rpm-build
 
 	echo -n "Writing mock configuration..."
 	mkdir -p mock
@@ -28,7 +28,7 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	DIST=raring
 	BASETGZ=/var/cache/pbuilder/base-$DIST-$ARCH.tgz
 
-	sudo apt-get install pbuilder python-rpm curl
+	dpkg -l pbuilder python-rpm curl > /dev/null 2>&1 || sudo apt-get install pbuilder python-rpm curl
 	mkdir -p BUILD
 
 	echo -n "Writing pbuilder configuration..."
