@@ -44,7 +44,6 @@ MAPPING = {
     "ocaml-sexplib": ["libsexplib-camlp4"],
     "ocaml-ssl": ["libssl-ocaml"],
     "ocaml-stdext": ["libstdext-ocaml"],
-    "ocaml-syslog": ["libsyslog-ocaml"],
     "ocaml-tapctl": ["libtapctl-ocaml"],
     "ocaml-text": ["libtext-ocaml"],
     "ocaml-type-conv": ["libtype-conv-camlp4"],
