@@ -26,9 +26,9 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 
 	ARCH=amd64
 	DIST=raring
-	BASETGZ=/var/cache/pbuilder/base-$DIST-$ARCH.tgz
+	BASEDIR=/var/cache/pbuilder/base-$DIST-$ARCH.cow
 
-	dpkg -l pbuilder python-rpm curl ocaml-nox > /dev/null 2>&1 || sudo apt-get install pbuilder python-rpm curl ocaml-nox
+	dpkg -l pbuilder cowbuilder python-rpm curl ocaml-nox > /dev/null 2>&1 || sudo apt-get install pbuilder cowbuilder python-rpm curl ocaml-nox
 	mkdir -p BUILD
 
 	echo -n "Writing pbuilder configuration..."
@@ -46,14 +46,14 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	(cd SRPMS; rm -f Sources; apt-ftparchive sources . > Sources)
         echo " done"
 
-	if [ -f $BASETGZ ] ; then
-	    echo $BASETGZ exists - updating
-	    sudo pbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
+	if [ -f $BASEDIR ] ; then
+	    echo $BASEDIR exists - updating
+	    sudo cowbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
 	else
 	    echo $BASETGZ does not exist - creating
-	    sudo pbuilder --create --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
+	    sudo cowbuilder --create --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
             # inject Keyfile for Launchpad PPA for Louis Gesbert
-            sudo pbuilder --execute --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
+            sudo cowbuilder --execute --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: SKS 1.1.4
 Comment: Hostname: keyserver.ubuntu.com
@@ -69,7 +69,7 @@ KQ3afU1hlF6EsITRd5qGry7ftxoLKOrVp8qSw9O/PdFgBTTGvgE=
 -----END PGP PUBLIC KEY BLOCK-----
 KEYFILE
             # inject Keyfile for Launchpad PPA for Anil Madhavapeddy
-            sudo pbuilder --execute --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
+            sudo cowbuilder --execute --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: SKS 1.1.4
 Comment: Hostname: keyserver.ubuntu.com
