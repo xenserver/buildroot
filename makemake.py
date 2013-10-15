@@ -230,8 +230,8 @@ for specname, spec in specs.iteritems():
             print '\t@createrepo --quiet --update %s' % rpm_dir
 
         else:
-            print '\t@echo [PBUILDER] $@'
-            print '\tsudo pbuilder --build --configfile pbuilder/pbuilderrc-raring-amd64 --buildresult %s $<' % rpm_outdir 
+            print '\t@echo [COWBUILDER] $@'
+            print '\tsudo cowbuilder --build --configfile pbuilder/pbuilderrc-raring-amd64 --buildresult %s $<' % rpm_outdir 
         
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
