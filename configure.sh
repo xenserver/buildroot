@@ -42,8 +42,8 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 
 	echo -n "Initializing repository..."
 	mkdir -p RPMS SRPMS
-	(cd RPMS; apt-ftparchive packages . > Packages)
-	(cd SRPMS; apt-ftparchive sources . > Sources)
+	(cd RPMS; rm -f Packages; apt-ftparchive packages . > Packages)
+	(cd SRPMS; rm -f Sources; apt-ftparchive sources . > Sources)
         echo " done"
 
 	if [ -f $BASETGZ ] ; then
