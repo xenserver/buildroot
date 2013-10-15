@@ -33,7 +33,7 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 
 	echo -n "Writing pbuilder configuration..."
 	mkdir -p pbuilder
-	sed -e "s|@PWD@|$PWD|g" -e "s|@ARCH@|$ARCH|g" -e "s|@BASETGZ@|$BASETGZ|g" -e "s|@DIST@|$DIST|g" pbuilderrc.in > pbuilder/pbuilderrc-$DIST-$ARCH
+	sed -e "s|@PWD@|$PWD|g" -e "s|@ARCH@|$ARCH|g" -e "s|@BASEDIR@|$BASEDIR|g" -e "s|@DIST@|$DIST|g" pbuilderrc.in > pbuilder/pbuilderrc-$DIST-$ARCH
 	sed -e "s|@PWD@|$PWD|g" D05deps.in > pbuilder/D05deps
 	chmod 755 pbuilder/D05deps
 	cp D10mandb pbuilder/D10mandb
@@ -50,7 +50,7 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	    echo $BASEDIR exists - updating
 	    sudo cowbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
 	else
-	    echo $BASETGZ does not exist - creating
+	    echo $BASEDIR does not exist - creating
 	    sudo cowbuilder --create --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
             # inject Keyfile for Launchpad PPA for Louis Gesbert
             sudo cowbuilder --execute --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
