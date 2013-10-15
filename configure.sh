@@ -36,6 +36,8 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	sed -e "s|@PWD@|$PWD|g" -e "s|@ARCH@|$ARCH|g" -e "s|@BASETGZ@|$BASETGZ|g" -e "s|@DIST@|$DIST|g" pbuilderrc.in > pbuilder/pbuilderrc-$DIST-$ARCH
 	sed -e "s|@PWD@|$PWD|g" D05deps.in > pbuilder/D05deps
 	chmod 755 pbuilder/D05deps
+	cp D10mandb pbuilder/D10mandb
+	chmod 755 pbuilder/D10mandb
 	echo " done"
 
 	echo -n "Initializing repository..."
