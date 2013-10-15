@@ -26,14 +26,14 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 
 	ARCH=amd64
 	DIST=raring
-	BASEDIR=/var/cache/pbuilder/base-$DIST-$ARCH.cow
+	BASEPATH=/var/cache/pbuilder/base-$DIST-$ARCH.cow
 
-	dpkg -l pbuilder cowbuilder python-rpm curl ocaml-nox > /dev/null 2>&1 || sudo apt-get install pbuilder cowbuilder python-rpm curl ocaml-nox
+	dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils > /dev/null 2>&1 || sudo apt-get install cowbuilder python-rpm curl ocaml-nox apt-utils
 	mkdir -p BUILD
 
 	echo -n "Writing pbuilder configuration..."
 	mkdir -p pbuilder
-	sed -e "s|@PWD@|$PWD|g" -e "s|@ARCH@|$ARCH|g" -e "s|@BASEDIR@|$BASEDIR|g" -e "s|@DIST@|$DIST|g" pbuilderrc.in > pbuilder/pbuilderrc-$DIST-$ARCH
+	sed -e "s|@PWD@|$PWD|g" -e "s|@ARCH@|$ARCH|g" -e "s|@BASEPATH@|$BASEPATH|g" -e "s|@DIST@|$DIST|g" pbuilderrc.in > pbuilder/pbuilderrc-$DIST-$ARCH
 	sed -e "s|@PWD@|$PWD|g" D05deps.in > pbuilder/D05deps
 	chmod 755 pbuilder/D05deps
 	cp D10mandb pbuilder/D10mandb
@@ -46,12 +46,13 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	(cd SRPMS; rm -f Sources; apt-ftparchive sources . > Sources)
         echo " done"
 
-	if [ -f $BASEDIR ] ; then
-	    echo $BASEDIR exists - updating
+	if [ -e $BASEPATH ] ; then
+	    echo $BASEPATH exists - updating
 	    sudo cowbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
 	else
-	    echo $BASEDIR does not exist - creating
+	    echo $BASEPATH does not exist - creating
 	    sudo cowbuilder --create --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
+	    sudo cowbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
             # inject Keyfile for Launchpad PPA for Louis Gesbert
             sudo cowbuilder --execute --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
 -----BEGIN PGP PUBLIC KEY BLOCK-----
