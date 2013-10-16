@@ -38,6 +38,8 @@ elif [ `lsb_release -si` == "Ubuntu" ] ; then
 	chmod 755 pbuilder/D05deps
 	cp D10mandb pbuilder/D10mandb
 	chmod 755 pbuilder/D10mandb
+	cp D15nofsync pbuilder/D15nofsync
+	chmod 755 pbuilder/D15nofsync
 	echo " done"
 
 	echo -n "Initializing repository..."
