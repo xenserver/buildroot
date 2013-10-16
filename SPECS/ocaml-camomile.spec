@@ -2,8 +2,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-camomile
-Version:        0.8.3
-Release:        10%{?dist}
+Version:        0.8.5
+Release:        1%{?dist}
 Summary:        Unicode library for OCaml
 
 # Several files are MIT and UCD licensed, but the overall work is LGPLv2+
@@ -11,7 +11,7 @@ Summary:        Unicode library for OCaml
 # https://www.redhat.com/archives/fedora-legal-list/2008-March/msg00005.html
 License:        LGPLv2+
 URL:            http://sourceforge.net/projects/camomile/
-Source0:        http://downloads.sourceforge.net/camomile/camomile-%{version}.tar.bz2
+Source0:        https://github.com/yoriyuki/Camomile/releases/download/rel-%{version}/camomile-%{version}.tar.bz2
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.12.1-12
@@ -105,6 +105,9 @@ cp tools/camomilelocaledef.opt $RPM_BUILD_ROOT%{_bindir}/camomilelocaledef
 
 
 %changelog
+* Wed Oct 16 2013 Euan Harris <euan.harris@citrix.com> - 0.8.5-1
+- Update to 0.8.5
+
 * Fri Oct 19 2012 Richard W.M. Jones <rjones@redhat.com> - 0.8.3-10
 - Rebuild for OCaml 4.00.1.
 - Clean up the spec file.
