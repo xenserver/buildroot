@@ -1,0 +1,5 @@
+#!/bin/sh
+# Stop apt from calling fsync for each package
+
+echo "I: Stop apt from calling fsync for each package"
+echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
