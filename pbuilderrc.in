@@ -7,6 +7,7 @@ HOOKDIR="@PWD@/pbuilder"
 EXTRAPACKAGES="apt-utils"
 ALLOWUNTRUSTED=yes
 DISTRIBUTION=@DIST@
+PBUILDERSATISFYDEPENDSCMD="/usr/lib/pbuilder/pbuilder-satisfydepends-gdebi"
 
 # Architecture specific settings
 ARCHITECTURE=@ARCH@
