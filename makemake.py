@@ -3,7 +3,7 @@
 # see http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch16s04.html
 
 import sys
-sys.path.append("scripts")
+sys.path.append("scripts/lib")
 
 ignore_list = {"rpm":["libxl-headers","libnl3"],
                "deb":["libnl3"]}
