@@ -3,7 +3,7 @@
 # see http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch16s04.html
 
 import sys
-sys.path.append("scripts")
+sys.path.append("scripts/lib")
 
 ignore_list = {"rpm":["libxl-headers","libnl3"],
                "deb":["libnl3"]}
@@ -171,7 +171,7 @@ for specname, spec in specs.iteritems():
         print '\t@rpmbuild --quiet --define "_topdir ." -bs $<'
     else:
         print '\t@echo [MAKEDEB] $@'
-        print '\tscripts/makedeb.py $<'
+        print '\tscripts/deb/makedeb.py $<'
 
 # Rules to download sources
 
