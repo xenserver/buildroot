@@ -1,19 +1,23 @@
 #!/usr/bin/python
 
 import glob
-import mappkgname
 import os
 import re
 import rpm
-import rpmextra
 import shutil
 import subprocess
 import sys
+
+SCRIPTDIR=os.path.dirname(os.path.abspath(__file__))
+LIBDIR=os.path.normpath(os.path.join(SCRIPTDIR, "lib"))
+sys.path.append(LIBDIR)
 
 import debianchangelog
 import debiancontrol
 import debianmisc
 import debianrules
+import mappkgname
+import rpmextra
 
 # BUGS:
 #   Hack to disable CFLAGS for ocaml-oclock
