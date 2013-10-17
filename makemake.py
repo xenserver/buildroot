@@ -171,7 +171,7 @@ for specname, spec in specs.iteritems():
         print '\t@rpmbuild --quiet --define "_topdir ." -bs $<'
     else:
         print '\t@echo [MAKEDEB] $@'
-        print '\tscripts/makedeb.py $<'
+        print '\tscripts/deb/makedeb.py $<'
 
 # Rules to download sources
 

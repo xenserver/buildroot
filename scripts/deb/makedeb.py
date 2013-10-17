@@ -9,7 +9,7 @@ import subprocess
 import sys
 
 SCRIPTDIR=os.path.dirname(os.path.abspath(__file__))
-LIBDIR=os.path.normpath(os.path.join(SCRIPTDIR, "lib"))
+LIBDIR=os.path.normpath(os.path.join(SCRIPTDIR, "../lib"))
 sys.path.append(LIBDIR)
 
 import debianchangelog
