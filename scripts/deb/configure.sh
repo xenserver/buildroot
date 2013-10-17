@@ -13,12 +13,12 @@ mkdir -p BUILD
 
 echo -n "Writing pbuilder configuration..."
 mkdir -p pbuilder
-sed -e "s|@PWD@|$PWD|g" -e "s|@ARCH@|$ARCH|g" -e "s|@BASEPATH@|$BASEPATH|g" -e "s|@DIST@|$DIST|g" pbuilderrc.in > pbuilder/pbuilderrc-$DIST-$ARCH
-sed -e "s|@PWD@|$PWD|g" D05deps.in > pbuilder/D05deps
+sed -e "s|@PWD@|$PWD|g" -e "s|@ARCH@|$ARCH|g" -e "s|@BASEPATH@|$BASEPATH|g" -e "s|@DIST@|$DIST|g" scripts/deb/pbuilderrc.in > pbuilder/pbuilderrc-$DIST-$ARCH
+sed -e "s|@PWD@|$PWD|g" scripts/deb/D05deps.in > pbuilder/D05deps
 chmod 755 pbuilder/D05deps
-cp D10mandb pbuilder/D10mandb
+cp scripts/deb/D10mandb pbuilder/D10mandb
 chmod 755 pbuilder/D10mandb
-cp D15nofsync pbuilder/D15nofsync
+cp scripts/deb/D15nofsync pbuilder/D15nofsync
 chmod 755 pbuilder/D15nofsync
 echo " done"
 
