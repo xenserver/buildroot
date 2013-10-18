@@ -1,6 +1,6 @@
 Name:           ocaml-uutf
 Version:        0.9.3
-Release:        1
+Release:        2
 Summary:        Non-blocking streaming codec for UTF-8, UTF-16, UTF-16LE and UTF-16BE
 License:        BSD3
 Group:          Development/Other
@@ -61,7 +61,7 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> 0.9.3-1
+* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> 0.9.3-2
 - 'Ported' from xen-dist-ocaml to xenserver-core
 
 * Fri Oct 11 2013 Jon Ludlam <jonathan.ludlam@eu.citrix.com> 0.9.3-1
