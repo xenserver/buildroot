@@ -40,7 +40,8 @@ developing applications that use %{name}.
 %install
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}%{_libdir}/ocaml/uutf
-ocamlfind install uutf _build/pkg/META _build/src/uutf.{mli,cmi,cmx,cma,a,cmxa,cmxs}
+(cd _build/src; ocamlfind install uutf ../pkg/META uutf.mli uutf.cmi uutf.cmx uutf.cma uutf.cma uutf.cmxa uutf.cmxs)
+#ocamlfind install uutf _build/pkg/META _build/src/uutf.{mli,cmi,cmx,cma,a,cmxa,cmxs}
 
 %clean
 rm -rf %{buildroot}
