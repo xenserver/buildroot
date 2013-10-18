@@ -61,8 +61,8 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> 0.9.3-2
+* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.3-2
 - 'Ported' from xen-dist-ocaml to xenserver-core
 
-* Fri Oct 11 2013 Jon Ludlam <jonathan.ludlam@eu.citrix.com> 0.9.3-1
+* Fri Oct 11 2013 Jon Ludlam <jonathan.ludlam@eu.citrix.com> - 0.9.3-1
 - Initial RPM release 
