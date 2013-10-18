@@ -1,6 +1,6 @@
 Name:           ocaml-uutf
 Version:        0.9.3
-Release:        1
+Release:        2
 Summary:        Non-blocking streaming codec for UTF-8, UTF-16, UTF-16LE and UTF-16BE
 License:        BSD3
 Group:          Development/Other
@@ -40,7 +40,8 @@ developing applications that use %{name}.
 %install
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}%{_libdir}/ocaml/uutf
-ocamlfind install uutf _build/pkg/META _build/src/uutf.{mli,cmi,cmx,cma,a,cmxa,cmxs}
+(cd _build/src; ocamlfind install uutf ../pkg/META uutf.mli uutf.cmi uutf.cmx uutf.cma uutf.a uutf.cma uutf.cmxa uutf.cmxs)
+#ocamlfind install uutf _build/pkg/META _build/src/uutf.{mli,cmi,cmx,cma,a,cmxa,cmxs}
 
 %clean
 rm -rf %{buildroot}
@@ -61,10 +62,8 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> 0.9.3-1
+* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.3-2
 - 'Ported' from xen-dist-ocaml to xenserver-core
 
-* Fri Oct 11 2013 Jon Ludlam <jonathan.ludlam@eu.citrix.com> 0.9.3-1
-  Initial RPM release 
-
-
+* Fri Oct 11 2013 Jon Ludlam <jonathan.ludlam@eu.citrix.com> - 0.9.3-1
+- Initial RPM release 
