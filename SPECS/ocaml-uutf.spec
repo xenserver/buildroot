@@ -65,6 +65,4 @@ rm -rf %{buildroot}
 - 'Ported' from xen-dist-ocaml to xenserver-core
 
 * Fri Oct 11 2013 Jon Ludlam <jonathan.ludlam@eu.citrix.com> 0.9.3-1
-  Initial RPM release 
-
-
+- Initial RPM release 
