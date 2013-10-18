@@ -276,3 +276,7 @@ for spec in specs.values():
 
 print "rpms: " + " \\\n\t".join( all_rpms )
 print "srpms: " + " \\\n\t".join( all_srpms )
+
+
+print "install: all" 
+print "\t. scripts/%s/install.sh" % buildType()

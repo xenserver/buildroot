@@ -1,0 +1,2 @@
+deb file:@PWD@/RPMS/ ./
+deb-src file:@PWD@/SRPMS/ ./
