@@ -7,8 +7,8 @@ ARCH=amd64
 DIST=raring
 BASEPATH=/var/cache/pbuilder/base-$DIST-$ARCH.cow
 
-dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core > /dev/null 2>&1 || \
-   sudo apt-get install cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core
+dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common > /dev/null 2>&1 || \
+   sudo apt-get install cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common
 mkdir -p BUILD
 
 echo -n "Writing pbuilder configuration..."
