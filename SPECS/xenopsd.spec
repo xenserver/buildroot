@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.28
+Version:        0.9.29
 Release:        1
 Summary:        Simple VM manager
 License:        LGPL
@@ -183,6 +183,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com>
+- update to 0.9.29
+
 * Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com>
 - update to 0.9.28
 
