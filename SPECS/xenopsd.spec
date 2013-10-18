@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.27
+Version:        0.9.28
 Release:        1
 Summary:        Simple VM manager
 License:        LGPL
@@ -22,6 +22,7 @@ BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
 BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
 BuildRequires:  xen-devel ocaml-xcp-inventory-devel message-switch-devel
 BuildRequires:  vncterm eliloader ocaml-xcp-idl-devel
+BuildRequires:  ocaml-uutf-devel
 Requires:       message-switch xenops-cli redhat-lsb-core
 
 %description
@@ -182,6 +183,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com>
+- update to 0.9.28
+
 * Wed Sep 24 2013 David Scott <dave.scott@eu.citrix.com>
 - modprobe blk{tap,back} in the xenopsd-xc init.d script since
   we need these to make virtual disks work
