@@ -1,5 +1,6 @@
 MIRRORSITE="http://gb.archive.ubuntu.com/ubuntu/"
 OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb-src file:@PWD@/SRPMS/ ./\
+|deb http://xenbits.xen.org/djs/xen-4.3/debian raring main\
 |deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main\
 |deb http://gb.archive.ubuntu.com/ubuntu/ raring universe"
 BINDMOUNTS="@PWD@/RPMS @PWD@/SRPMS"
