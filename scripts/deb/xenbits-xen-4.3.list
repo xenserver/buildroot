@@ -1,0 +1,3 @@
+deb http://xenbits.xen.org/djs/xen-4.3/debian raring main
+deb-src http://xenbits.xen.org/djs/xen-4.3/debian raring main
+
