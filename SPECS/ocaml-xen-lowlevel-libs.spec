@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.9
+Version:        0.9.10
 Release:        1
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
@@ -59,6 +59,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
 
 %changelog
+* Sat Oct 19 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.10, which now requires xen-4.3
+
 * Mon Sep 16 2013 Euan Harris <euan.harris@citrix.com>
 - Update to 0.9.9, which includes linker paths required on Debian
 
