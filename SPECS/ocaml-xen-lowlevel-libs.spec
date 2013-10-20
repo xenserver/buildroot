@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.9
-Release:        1
+Release:        2
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Other
@@ -50,15 +50,18 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc README.md
 %{_libdir}/ocaml/xenctrl/*
-%{_libdir}/ocaml/xenlight/*
-%{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
-%{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
-%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
-%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
-%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
-%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
+#%{_libdir}/ocaml/xenlight/*
+#%{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
+#%{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
+#%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
+#%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
+#%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
+#%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
 
 %changelog
+* Sun Oct 20 2013 David Scott <dave.scott@eu.citrix.com>
+- Remove xenlight because this old version isn't enough for xenopsd-xenlight
+
 * Mon Sep 16 2013 Euan Harris <euan.harris@citrix.com>
 - Update to 0.9.9, which includes linker paths required on Debian
 
