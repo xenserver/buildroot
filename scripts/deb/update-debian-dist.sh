@@ -34,6 +34,6 @@ EOF
 
 
 # https://enc.com.au/2007/08/07/creating-an-apt-archive/
-apt-ftparchive generate scripts/archive.conf
+apt-ftparchive generate scripts/deb/archive.conf
 
 echo "now run: rsync -avu --delete dists/ ~/public_html/dists/"
