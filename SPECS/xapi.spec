@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.30
+Version: 1.9.31
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -148,6 +148,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.31-1
+- Update to 1.9.31 - include VDI.uuid name-label improvements
+
 * Fri Oct 11 2013 Euan Harris <euan.harris@citrix.com> - 1.9.30-1
 - Update to 1.9.30 - assume dom0 can be ballooned in all memory calculations.
 
