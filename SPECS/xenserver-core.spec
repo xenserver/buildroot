@@ -1,6 +1,6 @@
 Name:           xenserver-core
 Version:        0.9.0
-Release:        10
+Release:        11
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -9,7 +9,7 @@ Source0:        xenserver-readme
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Requires:       xenserver-install-wizard
 Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
-Requires:       xenopsd-xc xenopsd-libvirt xenopsd-xenlight xenopsd-simulator
+Requires:       xenopsd-xc xenopsd-libvirt xenopsd-simulator
 Requires:       xenops-cli
 Requires:       ffs xapi-libvirt-storage sm-cli xcp-sm
 Requires:       xcp-networkd
@@ -40,6 +40,9 @@ rm -rf %{buildroot}
 /usr/share/doc/xenserver/README
 
 %changelog
+* Sun Oct 20 2013 David Scott <dave.scott@eu.citrix.com>
+- Remove xenopsd-xenlight since the build depends on xen-4.4
+
 * Fri Sep 20 2013 Euan Harris <euan.harris@citrix.com>
 - Don't install openstack-xapi-plugins with xenserver-core
 
