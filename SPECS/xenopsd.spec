@@ -1,6 +1,6 @@
 Name:           xenopsd
-Version:        0.9.30
-Release:        1
+Version:        0.9.31
+Release:        2
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
@@ -72,6 +72,8 @@ cp %{SOURCE5} make-xsc-xenopsd.conf
 cp %{SOURCE6} xenopsd-network-conf
 
 %build
+make configure
+./configure --libexecdir %{_libexecdir}/%{name}
 make
 
 %install
@@ -82,16 +84,16 @@ install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir
 install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir}/xenopsd-simulator
 install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
 #install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
-mkdir -p %{buildroot}/%{_libdir}/%{name}
-install -D _build/xenguest/xenguest_main.native          %{buildroot}/%{_libdir}/%{name}/xenguest
-install -D scripts/vif %{buildroot}/%{_libdir}/%{name}/vif
-install -D scripts/vif-real %{buildroot}/%{_libdir}/%{name}/vif-real
-install -D scripts/vif-xl %{buildroot}/%{_libdir}/%{name}/vif-xl
-install -D scripts/qemu-dm-wrapper %{buildroot}/%{_libdir}/%{name}/qemu-dm-wrapper
-install -D scripts/qemu-vif-script %{buildroot}/%{_libdir}/%{name}/qemu-vif-script
-install -D scripts/setup-vif-rules %{buildroot}/%{_libdir}/%{name}/setup-vif-rules
-install -D scripts/common.py %{buildroot}/%{_libdir}/%{name}/common.py
-install -D scripts/network.conf %{buildroot}/%{_libdir}/%{name}/network.conf
+mkdir -p %{buildroot}/%{_libexecdir}/%{name}
+install -D _build/xenguest/xenguest_main.native          %{buildroot}/%{_libexecdir}/%{name}/xenguest
+install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
+install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
+install -D scripts/vif-xl %{buildroot}/%{_libexecdir}/%{name}/vif-xl
+install -D scripts/qemu-dm-wrapper %{buildroot}/%{_libexecdir}/%{name}/qemu-dm-wrapper
+install -D scripts/qemu-vif-script %{buildroot}/%{_libexecdir}/%{name}/qemu-vif-script
+install -D scripts/setup-vif-rules %{buildroot}/%{_libexecdir}/%{name}/setup-vif-rules
+install -D scripts/common.py %{buildroot}/%{_libexecdir}/%{name}/common.py
+install -D scripts/network.conf %{buildroot}/%{_libexecdir}/%{name}/network.conf
 
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
@@ -101,7 +103,7 @@ install -m 0755 xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenops
 
 mkdir -p %{buildroot}/etc/xapi
 chmod 755 make-xsc-xenopsd.conf 
-LIBEXECDIR=%{_libdir}/%{name} ETCDIR=/etc/xapi SCRIPTSDIR=%{_libdir}/%{name} DESTDIR=%{buildroot} ./make-xsc-xenopsd.conf > xenopsd-conf
+LIBEXECDIR=%{_libexecdir}/%{name} ETCDIR=/etc/xapi SCRIPTSDIR=%{_libexecdir}/%{name} DESTDIR=%{buildroot} ./make-xsc-xenopsd.conf > xenopsd-conf
 install -m 0644 xenopsd-conf %{buildroot}/etc/xenopsd.conf
 install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 
@@ -111,16 +113,16 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc README.md LICENSE
-%{_libdir}/%{name}/vif
-%{_libdir}/%{name}/vif-real
-%{_libdir}/%{name}/vif-xl
-%{_libdir}/%{name}/qemu-dm-wrapper
-%{_libdir}/%{name}/qemu-vif-script
-%{_libdir}/%{name}/setup-vif-rules
-%{_libdir}/%{name}/network.conf
-%{_libdir}/%{name}/common.py
-%{_libdir}/%{name}/common.pyo
-%{_libdir}/%{name}/common.pyc
+%{_libexecdir}/%{name}/vif
+%{_libexecdir}/%{name}/vif-real
+%{_libexecdir}/%{name}/vif-xl
+%{_libexecdir}/%{name}/qemu-dm-wrapper
+%{_libexecdir}/%{name}/qemu-vif-script
+%{_libexecdir}/%{name}/setup-vif-rules
+%{_libexecdir}/%{name}/network.conf
+%{_libexecdir}/%{name}/common.py
+%{_libexecdir}/%{name}/common.pyo
+%{_libexecdir}/%{name}/common.pyc
 /etc/xenopsd.conf
 /etc/xapi/network.conf
 
@@ -142,7 +144,7 @@ fi
 %defattr(-,root,root)
 %{_sbindir}/xenopsd-xc
 %{_sysconfdir}/init.d/xenopsd-xc
-%{_libdir}/%{name}/xenguest
+%{_libexecdir}/%{name}/xenguest
 
 %post xc
 /sbin/chkconfig --add xenopsd-xc
@@ -182,6 +184,10 @@ fi
 #fi
 
 %changelog
+* Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.31
+- move scripts back to libexecdir
+
 * Sun Oct 20 2013 David Scott <dave.scott@eu.citrix.com>
 - give up on making libxl work, since it requires xen-4.4
 - move scripts from libexecdir to libdir
