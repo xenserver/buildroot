@@ -31,5 +31,6 @@
 
 
 deps: SPECS/*.spec makemake.py
-	./makemake.py > $@
+	@echo Updating dependencies...
+	@./makemake.py > $@
 
