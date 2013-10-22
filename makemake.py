@@ -214,29 +214,6 @@ for specname, spec in specs.iteritems():
             print '\t@tar zcf $@ -C %s --transform "s,^\./,%s/," .' % ( url.path, dirname )
     
 
-# Rules to build RPMS from SRPMS (uses information from the SPECs to
-# get packages)
-for specname, spec in specs.iteritems():
-    # This doesn't generate the right Makefile fragment for a multi-target
-    # rule - we may end up building too often, or not rebuilding correctly
-    # on a partial build
-    rpmnames = rpmNamesFromSpec( spec )
-    srpmname = srpmNameFromSpec( spec )
-    for r in rpmnames: 
-        rpm_path = os.path.join( rpm_dir, r )
-        srpm_path = os.path.join( srpm_dir, srpmname )
-        rpm_outdir = os.path.dirname( rpm_path )
-        print '%s: %s' % ( rpm_path, srpm_path )
-        if buildType() == "rpm":
-            print '\t@echo [MOCK] $@'
-            print '\t@mock --configdir=mock --quiet -r xenserver --resultdir="%s" $<' % rpm_outdir
-            print '\t@echo [CREATEREPO] $@'
-            print '\t@createrepo --quiet --update %s' % rpm_dir
-
-        else:
-            print '\t@echo [COWBUILDER] $@'
-            print '\tsudo cowbuilder --build --configfile pbuilder/pbuilderrc-raring-amd64 --buildresult %s $<' % rpm_outdir 
-        
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
 def flatten(lst):

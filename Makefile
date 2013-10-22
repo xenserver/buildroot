@@ -1,5 +1,25 @@
 -include deps
 
-deps: SPECS/*.spec
+
+./RPMS/x86_64/%.x86_64.rpm: ./SRPMS/%.src.rpm
+	@echo [MOCK] $@
+	@mock --configdir=mock --quiet -r xenserver --resultdir="./RPMS/x86_64" $<
+	@echo [CREATEREPO] $@
+	@createrepo --quiet --update ./RPMS
+
+
+./RPMS/noarch/%.noarch.rpm: ./SRPMS/%.src.rpm
+	@echo [MOCK] $@
+	@mock --configdir=mock --quiet -r xenserver --resultdir="./RPMS/noarch" $<
+	@echo [CREATEREPO] $@
+	@createrepo --quiet --update ./RPMS
+
+
+./RPMS/%_amd64.deb: ./SRPMS/%.dsc
+	@echo [COWBUILDER] $@
+	sudo cowbuilder --build --configfile pbuilder/pbuilderrc-raring-amd64 --buildresult ./RPMS $<
+
+
+deps: SPECS/*.spec makemake.py
 	./makemake.py > $@
 
