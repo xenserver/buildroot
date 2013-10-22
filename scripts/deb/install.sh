@@ -10,6 +10,9 @@ install -m 0644 scripts/deb/xapi.list /etc/apt/sources.list.d/xapi.list
 # Configure apt to prefer packages from the local repository
 install -m 0644 scripts/deb/xapi.pref /etc/apt/preferences.d/xapi
 
+(cd RPMS && apt-ftparchive packages . > Packages)
+(cd SRPMS && apt-ftparchive sources . > Sources )
+
 # Install
 apt-get update
 apt-get install -y --force-yes xenserver-core
