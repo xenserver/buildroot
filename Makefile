@@ -1,5 +1,5 @@
--include deps
 
+all: rpms
 
 ./SRPMS/%.src.rpm: 
 	@echo [RPMBUILD] $@
@@ -34,3 +34,4 @@ deps: SPECS/*.spec makemake.py
 	@echo Updating dependencies...
 	@./makemake.py > $@
 
+-include deps

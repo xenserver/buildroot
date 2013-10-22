@@ -14,6 +14,7 @@ import urlparse
 import sys
 import mappkgname
 import platform
+import glob
 
 def buildType():
     debian_like = [ "ubuntu", "debian" ]
@@ -72,8 +73,6 @@ else:
 
 
 
-print "all: rpms"
-
 if buildType() == "rpm":
     rpmfilenamepat = rpm.expandMacro( '%_build_name_fmt' )
 else:
@@ -88,18 +87,18 @@ def specFromFile( spec ):
       print >>sys.stderr, "Failed to parse %s" % spec
       raise e
 
-spec_names = os.listdir( spec_dir )
+spec_names = glob.glob( os.path.join( spec_dir, "*.spec" ) )
 specs = {}
 for spec_name in spec_names:
-    spec = specFromFile( os.path.join( spec_dir, spec_name ) )
+    spec = specFromFile( spec_name )
     pkg_name = spec.sourceHeader['name']
     if pkg_name in ignore_list[buildType()]:
         continue
-    if os.path.splitext( spec_name )[0] != pkg_name:
+    if os.path.splitext( os.path.basename(spec_name) )[0] != pkg_name:
         sys.stderr.write( "error: spec file name '%s' does not match package name '%s'\n" % ( spec_name, pkg_name ) )
         sys.exit( 1 )
         
-    specs[spec_name] = spec
+    specs[os.path.basename(spec_name)] = spec
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
