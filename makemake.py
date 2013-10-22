@@ -87,18 +87,18 @@ def specFromFile( spec ):
       print >>sys.stderr, "Failed to parse %s" % spec
       raise e
 
-spec_names = glob.glob( os.path.join( spec_dir, "*.spec" ) )
+spec_paths = glob.glob( os.path.join( spec_dir, "*.spec" ) )
 specs = {}
-for spec_name in spec_names:
-    spec = specFromFile( spec_name )
+for spec_path in spec_paths:
+    spec = specFromFile( spec_path )
     pkg_name = spec.sourceHeader['name']
     if pkg_name in ignore_list[buildType()]:
         continue
-    if os.path.splitext( os.path.basename(spec_name) )[0] != pkg_name:
-        sys.stderr.write( "error: spec file name '%s' does not match package name '%s'\n" % ( spec_name, pkg_name ) )
+    if os.path.splitext( os.path.basename(spec_path) )[0] != pkg_name:
+        sys.stderr.write( "error: spec file name '%s' does not match package name '%s'\n" % ( spec_path, pkg_name ) )
         sys.exit( 1 )
         
-    specs[os.path.basename(spec_name)] = spec
+    specs[spec_path] = spec
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
@@ -143,7 +143,7 @@ def rpmNamesFromSpec( spec ):
     return [rpmNameFromHeader( p.header ) for p in spec.packages]
 
 # Rules to build SRPM from SPEC
-for specname, spec in specs.iteritems():
+for spec_path, spec in specs.iteritems():
     srpmname = srpmNameFromSpec( spec )
 
     # spec.sourceHeader['sources'] and ['patches'] doesn't work 
@@ -167,15 +167,14 @@ for specname, spec in specs.iteritems():
             sources.append( os.path.join( src_dir, url.path ) )
 
     print '%s: %s %s' % (os.path.join( srpm_dir, srpmname ), 
-                         os.path.join( spec_dir, specname ),
-                         " ".join( sources ) )
+                         spec_path, " ".join( sources ) )
 
 # Rules to download sources
 
 # Assumes each RPM only needs one download - we have some multi-source
 # packages but in all cases the additional sources are patches provided
 # in the Git repository
-for specname, spec in specs.iteritems():
+for spec_path, spec in specs.iteritems():
     # The RPM documentation says that RPM only cares about the basename
     # of the path given in a Source: tag.   spec.sourceHeader['url'] 
     # enforces this - even if we have a URL in the source tag, it 
@@ -189,8 +188,7 @@ for specname, spec in specs.iteritems():
         # Source comes from a remote HTTP server
         if url.scheme in ["http", "https"]:
             print '%s: %s' % ( 
-                os.path.join( src_dir, os.path.basename( url.path ) ),
-                os.path.join( spec_dir, specname ) )
+                os.path.join( src_dir, os.path.basename( url.path ) ), spec_path )
             print '\t@echo [CURL] $@' 
             print '\t@curl --silent --show-error -L -o $@ %s' % source
 
@@ -198,8 +196,7 @@ for specname, spec in specs.iteritems():
         if url.scheme == "file":
             print '%s: %s $(shell find %s)' % ( 
                 os.path.join( src_dir, os.path.basename( url.fragment ) ),
-                os.path.join( spec_dir, specname ),
-                url.path )
+                spec_path, url.path )
             print '\t@echo [TAR] $@' 
             # assume that the directory name is already what's expected by the
             # spec file, and tag it with the version number in the tarball
@@ -220,13 +217,13 @@ def buildRequiresFromSpec( spec ):
     return set(flatten(reqs))
 
 provides_to_rpm = {}
-for specname, spec in specs.iteritems():
+for _, spec in specs.iteritems():
     for package in spec.packages:
         for provided in set(flatten([map_package_name(r) for r in (package.header['provides'] + [package.header['name']])])):
             for rpmname in rpmNamesFromSpec( spec ):
                 provides_to_rpm[ provided ] = rpmname
 
-for specname, spec in specs.iteritems():
+for _, spec in specs.iteritems():
     for rpmname in rpmNamesFromSpec( spec ):
         for buildreq in buildRequiresFromSpec( spec ):
             # Some buildrequires come from the system repository
