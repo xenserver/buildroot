@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.32
+Version: 1.9.33
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -148,6 +148,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Tue Oct 22 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.33-1
+- Update to 1.9.33 - bugfix for VDI.uuid filename feature
+
 * Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.32-1
 - Update to 1.9.32 - include VDI.uuid filename improvements
 
