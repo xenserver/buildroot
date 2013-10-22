@@ -170,12 +170,6 @@ for specname, spec in specs.iteritems():
     print '%s: %s %s' % (os.path.join( srpm_dir, srpmname ), 
                          os.path.join( spec_dir, specname ),
                          " ".join( sources ) )
-    if buildType() == "rpm":
-        print '\t@echo [RPMBUILD] $@' 
-        print '\t@rpmbuild --quiet --define "_topdir ." -bs $<'
-    else:
-        print '\t@echo [MAKEDEB] $@'
-        print '\tscripts/deb/makedeb.py $<'
 
 # Rules to download sources
 

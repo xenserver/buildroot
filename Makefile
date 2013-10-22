@@ -1,6 +1,16 @@
 -include deps
 
 
+./SRPMS/%.src.rpm: 
+	@echo [RPMBUILD] $@
+	@rpmbuild --quiet --define "_topdir ." -bs $<
+
+
+./SRPMS/%.dsc: 
+	@echo [MAKEDEB] $@
+	scripts/deb/makedeb.py $<
+
+
 ./RPMS/x86_64/%.x86_64.rpm: ./SRPMS/%.src.rpm
 	@echo [MOCK] $@
 	@mock --configdir=mock --quiet -r xenserver --resultdir="./RPMS/x86_64" $<
