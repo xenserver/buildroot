@@ -2,7 +2,7 @@
 
 Summary: sm - XCP storage managers
 Name:    xcp-sm
-Version: 0.9.2
+Version: 0.9.3
 Release: 1
 Group:   System/Hypervisor
 License: LGPL
@@ -251,7 +251,7 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 
 %changelog
 * Wed Oct 23 2013 David Scott <dave.scott@eu.citrix.com>
-- Update to 0.9.2
+- Update to 0.9.3
 
 * Wed Sep 11 2013 Euan Harris <euan.harris@citrix.com>
 - Move drivers to /usr/lib/xapi/sm
