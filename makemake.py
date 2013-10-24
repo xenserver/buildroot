@@ -82,7 +82,11 @@ else:
 ts = rpm.TransactionSet()
 
 def specFromFile( spec ):
-    return rpm.ts().parseSpec( spec )
+    try:
+      return rpm.ts().parseSpec( spec )
+    except Exception, e:
+      print >>sys.stderr, "Failed to parse %s" % spec
+      raise e
 
 spec_names = os.listdir( spec_dir )
 specs = {}

@@ -18,7 +18,7 @@ Enhanced version of tapdisk with support for storage mirroring.
 
 %build
 sh autogen.sh
-./configure --prefix %{buildroot}/%{_libdir}/%{name}
+./configure --prefix %{_libdir}/%{name}
 make
 
 %install
@@ -33,7 +33,7 @@ mkdir -p %{buildroot}/%{_libdir}/%{name}/include/vhd
 mkdir -p %{buildroot}/%{_libdir}/%{name}/libexec
 mkdir -p %{buildroot}/%{_libdir}/%{name}/etc/udev/rules.d
 
-make install
+make install DESTDIR=%{buildroot}
 
 %clean
 rm -rf %{buildroot}
