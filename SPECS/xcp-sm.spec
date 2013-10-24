@@ -2,12 +2,12 @@
 
 Summary: sm - XCP storage managers
 Name:    xcp-sm
-Version: 0.9.3
+Version: 0.9.4
 Release: 1
 Group:   System/Hypervisor
 License: LGPL
 URL:  http://www.citrix.com
-Source0: https://github.com/djs55/sm/archive/%{version}/sm-%{version}.tar.gz
+Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: swig python-devel xen-devel
 
