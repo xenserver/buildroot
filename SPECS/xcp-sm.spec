@@ -252,6 +252,9 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
+* Thu Oct 24 2013 Euan Harris <euan.harris@eu.citrix.com>
+- Update to 0.9.4
+
 * Wed Oct 23 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.3
 
