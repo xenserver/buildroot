@@ -15,6 +15,7 @@ MAPPING = {
     "eliloader": ["eliloader"],
     "ffs": ["ffs"],
     "forkexecd": ["forkexecd"],
+    "iscsi-initiator-utils": ["open-iscsi"],
     "js_of_ocaml": ["libjs-of-ocaml"],
     "libnl3-cli": ["libnl-3-cli"],
     "libnl3-doc": ["libnl-3-doc"],
