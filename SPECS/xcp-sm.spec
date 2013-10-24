@@ -34,6 +34,8 @@ rm -rf $RPM_BUILD_ROOT
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot
+/etc/rc.d/init.d/sm-multipath
+/etc/udev/rules.d/40-multipath.rules
 /usr/lib/xapi/plugins/coalesce-leaf
 /usr/lib/xapi/plugins/lvhd-thin
 /usr/lib/xapi/plugins/nfs-on-slave
