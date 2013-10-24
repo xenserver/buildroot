@@ -2,12 +2,12 @@
 
 Summary: sm - XCP storage managers
 Name:    xcp-sm
-Version: 0.9.3
+Version: 0.9.4
 Release: 1
 Group:   System/Hypervisor
 License: LGPL
 URL:  http://www.citrix.com
-Source0: https://github.com/djs55/sm/archive/%{version}/sm-%{version}.tar.gz
+Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: swig python-devel xen-devel
 
@@ -34,6 +34,8 @@ rm -rf $RPM_BUILD_ROOT
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot
+/etc/rc.d/init.d/sm-multipath
+/etc/udev/rules.d/40-multipath.rules
 /usr/lib/xapi/plugins/coalesce-leaf
 /usr/lib/xapi/plugins/lvhd-thin
 /usr/lib/xapi/plugins/nfs-on-slave
