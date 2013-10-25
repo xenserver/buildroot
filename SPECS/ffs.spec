@@ -1,6 +1,6 @@
 Name:           ffs
-Version:        0.9.19
-Release:        2
+Version:        0.9.20
+Release:        1
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -53,7 +53,7 @@ fi
 
 %changelog
 * Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com>
-- Update to 0.9.19
+- Update to 0.9.20
 - Detect a parallel install of blktap and use that
 
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
