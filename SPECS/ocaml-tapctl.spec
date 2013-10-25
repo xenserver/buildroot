@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 Name:           ocaml-tapctl
-Version:        0.9.0
+Version:        0.9.1
 Release:        1
 Summary:        Manipulate running tapdisk instances
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/tapctl/archive/tapctl-0.9.0.tar.gz
+URL:            https://github.com/xapi-project/tapctl/archive/tapctl-%{version}.tar.gz
 Source0:        https://github.com/xapi-project/tapctl/archive/tapctl-%{version}/tapctl-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/tapctl/*
 
 %changelog
+* Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.1
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
