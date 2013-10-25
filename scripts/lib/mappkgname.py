@@ -95,6 +95,7 @@ MAPPING = {
     "xenserver-core-latest-snapshot": ["xenserver-core-latest-snapshot"],
     "python-setuptools": ["python-setuptools", "python-setuptools-git"],
     "vhd-tool": ["vhd-tool"],
+    "blktap": ["blktap"],
 
     # Distribution packages
     "ocaml": ["ocaml-nox", "ocaml-native-compilers"],
@@ -141,6 +142,10 @@ MAPPING = {
     "ethtool": ["ethtool"],
     "qemu-system-x86": ["qemu-system-x86"],
     "python-argparse": ["libpython2.7-stdlib"],
+    "autoconf": ["autoconf"],
+    "automake": ["automake"],
+    "libtool": ["libtool"],
+    "libaio": ["libaio"],
 }
 
 SECONDARY_MAPPING = {
