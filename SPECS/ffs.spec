@@ -1,6 +1,6 @@
 Name:           ffs
 Version:        0.9.19
-Release:        1
+Release:        2
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -14,6 +14,7 @@ BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
 BuildRequires:  ocaml-oclock-devel ocaml-libvhd-devel xen-devel libuuid-devel
 BuildRequires:  ocaml-tapctl-devel message-switch-devel forkexecd-devel
 Requires:       ocaml-libvhd-devel nfs-utils redhat-lsb-core
+Requires:       blktap 
 
 %description
 Simple flat file storage manager for the xapi toolstack.
@@ -53,6 +54,7 @@ fi
 %changelog
 * Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.19
+- Detect a parallel install of blktap and use that
 
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.18
