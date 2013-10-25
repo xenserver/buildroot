@@ -35,6 +35,15 @@ if [ -f /etc/sysconfig/$prog ] ; then
     . /etc/sysconfig/$prog
 fi
 
+# Use 'blktap 2.5' if it has been installed
+if [ -d /usr/lib64/blktap/libexec/tapdisk ]; then
+	export XCP_PATH=/usr/lib64/blktap/sbin
+	export TAPDISK2=/usr/lib64/blktap/libexec/tapdisk
+elif [ -d /usr/lib/blktap/libexec/tapdisk ]; then
+	export XCP_PATH=/usr/lib/blktap/sbin
+	export TAPDISK2=/usr/lib/blktap/libexec/tapdisk
+fi
+
 start() {
 	[ -x $exec ] || exit 5
 
