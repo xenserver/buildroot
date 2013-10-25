@@ -6,8 +6,8 @@ Release:        1
 Summary:        Manipulate running tapdisk instances
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/tapctl/archive/tapctl-%{version}.tar.gz
-Source0:        https://github.com/xapi-project/tapctl/archive/tapctl-%{version}/tapctl-%{version}.tar.gz
+URL:            https://github.com/xapi-project/tapctl/archive/%{version}.tar.gz
+Source0:        https://github.com/xapi-project/tapctl/archive/%{version}/tapctl-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  forkexecd-devel ocaml-stdext-devel ocaml-rpc-devel ocaml-xcp-idl-devel ocaml-oclock-devel
@@ -26,7 +26,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n tapctl-tapctl-%{version}
+%setup -q
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
