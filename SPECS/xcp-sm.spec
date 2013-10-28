@@ -2,27 +2,36 @@
 
 Summary: sm - XCP storage managers
 Name:    xcp-sm
-Version: 0.9.4
-Release: 2
+Version: 0.9.5
+Release: 1
 Group:   System/Hypervisor
 License: LGPL
 URL:  http://www.citrix.com
 Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
+Source1: xcp-mpath-scsidev-rules
+Source2: xcp-mpath-scsidev-script
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: swig python-devel xen-devel
 Requires: iscsi-initiator-utils
+Requires: sg3_utils
 
 %description
 This package contains storage backends used in XCP
 
 %prep
 %setup -q -n sm-%{version}
+cp %{SOURCE1} xcp-mpath-scsidev-rules
+cp %{SOURCE2} xcp-mpath-scsidev-script
 
 %build
 DESTDIR=$RPM_BUILD_ROOT make
 
 %install
 make PLUGIN_SCRIPT_DEST=/usr/lib/xapi/plugins/ SM_DEST=/usr/lib/xapi/sm/ DESTDIR=$RPM_BUILD_ROOT install
+mkdir -p %{buildroot}/etc/udev/rules.d
+install -m 0644 xcp-mpath-scsidev-rules %{buildroot}/etc/udev/rules.d/55-xs-mpath-scsidev.rules
+mkdir -p %{buildroot}/etc/udev/scripts
+install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-scsidev.sh
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -37,6 +46,8 @@ rm -rf $RPM_BUILD_ROOT
 /etc/rc.d/init.d/mpathroot
 /etc/rc.d/init.d/sm-multipath
 /etc/udev/rules.d/40-multipath.rules
+/etc/udev/rules.d/55-xs-mpath-scsidev.rules
+/etc/udev/scripts/xs-mpath-scsidev.sh
 /usr/lib/xapi/plugins/coalesce-leaf
 /usr/lib/xapi/plugins/lvhd-thin
 /usr/lib/xapi/plugins/nfs-on-slave
@@ -253,6 +264,9 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
+* Mon Oct 28 2013 Euan Harris <euan.harris@eu.citrix.com>
+- Update to 0.9.5, adding udev scripts and package dependencies needed to use iSCSI volumes
+
 * Thu Oct 24 2013 Euan Harris <euan.harris@eu.citrix.com>
 - Update to 0.9.4
 

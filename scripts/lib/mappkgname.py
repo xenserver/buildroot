@@ -139,6 +139,7 @@ MAPPING = {
     "nfs-utils": ["nfs-common"],
     "hwdata": ["hwdata"],
     "redhat-lsb-core": ["lsb-base"],
+    "sg3_utils": ["sg3-utils"],
     "ethtool": ["ethtool"],
     "qemu-system-x86": ["qemu-system-x86"],
     "python-argparse": ["libpython2.7-stdlib"],
