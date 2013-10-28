@@ -1,6 +1,6 @@
 Name:           xenopsd
-Version:        0.9.31
-Release:        2
+Version:        0.9.32
+Release:        1
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
@@ -184,6 +184,9 @@ fi
 #fi
 
 %changelog
+* Mon Oct 28 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.32, with udev fix (no more "task was asynchronously cancelled")
+
 * Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.31
 - move scripts back to libexecdir
