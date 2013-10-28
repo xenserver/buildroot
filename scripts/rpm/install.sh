@@ -17,4 +17,4 @@ install -m 0644 scripts/rpm/RPM-GPG-KEY-EPEL-6 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL
 install -m 0644 scripts/rpm/RPM-GPG-KEY-remi /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 yum repolist
-yum install xenserver-core
+yum install -y xenserver-core
