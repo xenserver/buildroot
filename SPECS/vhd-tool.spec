@@ -50,7 +50,7 @@ rm -rf %{buildroot}
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
-* Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.1-0
+* Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.1-1
 - Update to 0.6.1
 
 * Wed Oct 02 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.0-1
