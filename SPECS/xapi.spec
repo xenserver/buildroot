@@ -2,7 +2,7 @@
 
 Summary: xapi - xen toolstack for XCP
 Name:    xapi
-Version: 1.9.37
+Version: 1.9.38
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -148,6 +148,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Wed Oct 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.38-1
+- update to 1.9.38 - import_raw_vdi path fix
+
 * Tue Oct 29 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.37-1
 - update to 1.9.37 - bugfixes for storage motion on Ubuntu
 

@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-vhd
-Version:        0.6.0
+Version:        0.6.1
 Release:        1
 Summary:        A pure OCaml library for reading, writing, streaming, converting vhd format files
 License:        LGPL2.1 + OCaml linking exception
@@ -54,6 +54,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllvhd*
 
 %changelog
+* Wed Oct 30 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.1-1
+- Update to 0.6.1
+
 * Wed Oct 02 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.0-1
 - Initial package
 
