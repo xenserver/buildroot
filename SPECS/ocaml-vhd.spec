@@ -54,7 +54,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllvhd*
 
 %changelog
-* Wed Oct 30 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.0-1
+* Wed Oct 30 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.1-1
 - Update to 0.6.1
 
 * Wed Oct 02 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.0-1
