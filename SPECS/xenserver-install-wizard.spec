@@ -2,7 +2,7 @@
 
 Summary: a simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
-Version: 0.2.26
+Version: 0.2.27
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -33,6 +33,9 @@ rm -rf %{buildroot}
 %{_bindir}/xenserver-install-wizard
 
 %changelog
+* Wed Oct 30 2013 Euan Harris <euan.harris@citrix.com>
+- Update to 0.2.27
+
 * Thu Oct 24 2013 Euan Harris <euan.harris@citrix.com>
 - Update to 0.2.26, which sets the iSCSI QN
 
