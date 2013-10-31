@@ -1,5 +1,5 @@
 Name:           ffs
-Version:        0.9.22
+Version:        0.9.23
 Release:        1
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
@@ -52,6 +52,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Thu Oct 31 2013 David Scott <dave.scott@eu.citrix.com>
+- Update to 0.9.23, with VDI.copy fix
+
 * Wed Oct 30 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.22, with VDI.clone and VDI.snapshot fixes
 
