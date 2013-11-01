@@ -1,6 +1,6 @@
 Name:           xenserver-core
-Version:        0.9.0
-Release:        11
+Version:        0.10.0
+Release:        1
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -40,6 +40,9 @@ rm -rf %{buildroot}
 /usr/share/doc/xenserver/README
 
 %changelog
+* Fri Nov 1 2013 Euan Harris <dave.scott@eu.citrix.com>
+- Bump version to 0.10.0
+
 * Sun Oct 20 2013 David Scott <dave.scott@eu.citrix.com>
 - Remove xenopsd-xenlight since the build depends on xen-4.4
 
