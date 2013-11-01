@@ -33,7 +33,7 @@ su - <user>
 You are now ready to clone the xenserver-core repository and build the packages:
 
 ```
-git clone git://github.com/xapi-project/xenserver-core.git
+git clone git://github.com/xenserver/xenserver-core.git
 cd xenserver-core
 
 ./configure.sh
@@ -61,7 +61,7 @@ deb-src http://ppa.launchpad.net/avsm/ppa/ubuntu raring main
 The steps to build Debian packages are the same as those to build RPMs:
 
 ```
-git clone git://github.com/xapi-project/xenserver-core.git
+git clone git://github.com/xenserver/xenserver-core.git
 cd xenserver-core
 
 ./configure.sh
