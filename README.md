@@ -39,7 +39,9 @@ cd xenserver-core
 ./configure.sh
 ./makemake.py > Makefile
 make
+make install
 ```
+
 
 Debian-based distributions (experimental)
 -----------------------------------------
@@ -50,7 +52,7 @@ On Debian-based distributions, the packages are built using `pbuilder`.
 `pbuilder` is available in the main Ubuntu and Debian package repositories, so there is no need to add extra ones.
 `pbuilder` does run as root, so you may wish to add your user to the `sudoers` list.
 
-The build also depends on a more modern OCaml compiler, available from this PPA:
+The build also depends on a more modern OCaml compiler than the version in Ubuntu, available from this PPA:
 ```
 deb http://ppa.launchpad.net/avsm/ppa/ubuntu raring main 
 deb-src http://ppa.launchpad.net/avsm/ppa/ubuntu raring main 
@@ -65,4 +67,5 @@ cd xenserver-core
 ./configure.sh
 ./makemake.py > Makefile
 make
+make install
 ```
