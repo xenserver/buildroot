@@ -1,13 +1,13 @@
 [xapi]
-name=CentOS-$releasever - xenserver core snapshot
-baseurl=http://xenbits.xen.org/djs/xenserver-core-snapshot/RPMS/
+name=CentOS-$releasever - xenserver-core snapshot
+baseurl=http://downloadns.citrix.com.edgesuite.net/akdlm/8453/xenserver-core/RPMS
 gpgcheck=0
 Priority=1
 enabled=1
 
 [xapi-source]
-name=CentOS-$releasever - xenserver core snapshot Source
-baseurl=http://xenbits.xen.org/djs/xenserver-core-snapshot/SRPMS/
+name=CentOS-$releasever - xenserver-core snapshot Source
+baseurl=http://downloadns.citrix.com.edgesuite.net/akdlm/8453/xenserver-core/SRPMS
 gpgcheck=0
 Priority=1
 enabled=0
