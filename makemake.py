@@ -14,7 +14,6 @@ import urlparse
 import sys
 import mappkgname
 import platform
-import glob
 
 def buildType():
     debian_like = [ "ubuntu", "debian" ]
@@ -73,6 +72,8 @@ else:
 
 
 
+print "all: rpms"
+
 if buildType() == "rpm":
     rpmfilenamepat = rpm.expandMacro( '%_build_name_fmt' )
 else:
@@ -87,18 +88,18 @@ def specFromFile( spec ):
       print >>sys.stderr, "Failed to parse %s" % spec
       raise e
 
-spec_paths = glob.glob( os.path.join( spec_dir, "*.spec" ) )
+spec_names = os.listdir( spec_dir )
 specs = {}
-for spec_path in spec_paths:
-    spec = specFromFile( spec_path )
+for spec_name in spec_names:
+    spec = specFromFile( os.path.join( spec_dir, spec_name ) )
     pkg_name = spec.sourceHeader['name']
     if pkg_name in ignore_list[buildType()]:
         continue
-    if os.path.splitext( os.path.basename(spec_path) )[0] != pkg_name:
-        sys.stderr.write( "error: spec file name '%s' does not match package name '%s'\n" % ( spec_path, pkg_name ) )
+    if os.path.splitext( spec_name )[0] != pkg_name:
+        sys.stderr.write( "error: spec file name '%s' does not match package name '%s'\n" % ( spec_name, pkg_name ) )
         sys.exit( 1 )
         
-    specs[spec_path] = spec
+    specs[spec_name] = spec
 
 def srpmNameFromSpec( spec ):
     h = spec.sourceHeader
@@ -143,7 +144,7 @@ def rpmNamesFromSpec( spec ):
     return [rpmNameFromHeader( p.header ) for p in spec.packages]
 
 # Rules to build SRPM from SPEC
-for spec_path, spec in specs.iteritems():
+for specname, spec in specs.iteritems():
     srpmname = srpmNameFromSpec( spec )
 
     # spec.sourceHeader['sources'] and ['patches'] doesn't work 
@@ -167,14 +168,21 @@ for spec_path, spec in specs.iteritems():
             sources.append( os.path.join( src_dir, url.path ) )
 
     print '%s: %s %s' % (os.path.join( srpm_dir, srpmname ), 
-                         spec_path, " ".join( sources ) )
+                         os.path.join( spec_dir, specname ),
+                         " ".join( sources ) )
+    if buildType() == "rpm":
+        print '\t@echo [RPMBUILD] $@' 
+        print '\t@rpmbuild --quiet --define "_topdir ." -bs $<'
+    else:
+        print '\t@echo [MAKEDEB] $@'
+        print '\tscripts/deb/makedeb.py $<'
 
 # Rules to download sources
 
 # Assumes each RPM only needs one download - we have some multi-source
 # packages but in all cases the additional sources are patches provided
 # in the Git repository
-for spec_path, spec in specs.iteritems():
+for specname, spec in specs.iteritems():
     # The RPM documentation says that RPM only cares about the basename
     # of the path given in a Source: tag.   spec.sourceHeader['url'] 
     # enforces this - even if we have a URL in the source tag, it 
@@ -188,7 +196,8 @@ for spec_path, spec in specs.iteritems():
         # Source comes from a remote HTTP server
         if url.scheme in ["http", "https"]:
             print '%s: %s' % ( 
-                os.path.join( src_dir, os.path.basename( url.path ) ), spec_path )
+                os.path.join( src_dir, os.path.basename( url.path ) ),
+                os.path.join( spec_dir, specname ) )
             print '\t@echo [CURL] $@' 
             print '\t@curl --silent --show-error -L -o $@ %s' % source
 
@@ -196,7 +205,8 @@ for spec_path, spec in specs.iteritems():
         if url.scheme == "file":
             print '%s: %s $(shell find %s)' % ( 
                 os.path.join( src_dir, os.path.basename( url.fragment ) ),
-                spec_path, url.path )
+                os.path.join( spec_dir, specname ),
+                url.path )
             print '\t@echo [TAR] $@' 
             # assume that the directory name is already what's expected by the
             # spec file, and tag it with the version number in the tarball
@@ -204,6 +214,29 @@ for spec_path, spec in specs.iteritems():
             print '\t@tar zcf $@ -C %s --transform "s,^\./,%s/," .' % ( url.path, dirname )
     
 
+# Rules to build RPMS from SRPMS (uses information from the SPECs to
+# get packages)
+for specname, spec in specs.iteritems():
+    # This doesn't generate the right Makefile fragment for a multi-target
+    # rule - we may end up building too often, or not rebuilding correctly
+    # on a partial build
+    rpmnames = rpmNamesFromSpec( spec )
+    srpmname = srpmNameFromSpec( spec )
+    for r in rpmnames: 
+        rpm_path = os.path.join( rpm_dir, r )
+        srpm_path = os.path.join( srpm_dir, srpmname )
+        rpm_outdir = os.path.dirname( rpm_path )
+        print '%s: %s' % ( rpm_path, srpm_path )
+        if buildType() == "rpm":
+            print '\t@echo [MOCK] $@'
+            print '\t@mock --configdir=mock --quiet -r xenserver --resultdir="%s" $<' % rpm_outdir
+            print '\t@echo [CREATEREPO] $@'
+            print '\t@createrepo --quiet --update %s' % rpm_dir
+
+        else:
+            print '\t@echo [COWBUILDER] $@'
+            print '\tsudo cowbuilder --build --configfile pbuilder/pbuilderrc-raring-amd64 --buildresult %s $<' % rpm_outdir 
+        
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
 def flatten(lst):
@@ -217,13 +250,13 @@ def buildRequiresFromSpec( spec ):
     return set(flatten(reqs))
 
 provides_to_rpm = {}
-for _, spec in specs.iteritems():
+for specname, spec in specs.iteritems():
     for package in spec.packages:
         for provided in set(flatten([map_package_name(r) for r in (package.header['provides'] + [package.header['name']])])):
             for rpmname in rpmNamesFromSpec( spec ):
                 provides_to_rpm[ provided ] = rpmname
 
-for _, spec in specs.iteritems():
+for specname, spec in specs.iteritems():
     for rpmname in rpmNamesFromSpec( spec ):
         for buildreq in buildRequiresFromSpec( spec ):
             # Some buildrequires come from the system repository
