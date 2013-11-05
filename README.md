@@ -39,7 +39,13 @@ cd xenserver-core
 ./configure.sh
 ./makemake.py > Makefile
 make
+```
+
+Finally, install the packages you have just built, run the install wizard to configure your system to boot Xen and start the xenserver-core components on boot, then reboot:
+```
 make install
+xenserver-install-wizard
+reboot
 ```
 
 
@@ -67,5 +73,8 @@ cd xenserver-core
 ./configure.sh
 ./makemake.py > Makefile
 make
+
 make install
+xenserver-install-wizard
+reboot
 ```
