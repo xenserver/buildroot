@@ -253,8 +253,6 @@ def buildrequires_from_spec(spec):
 
 
 def main():
-    print "all: rpms"
-
     spec_paths = glob.glob(os.path.join(SPECDIR, "*.spec"))
     specs = {}
     provides_to_rpm = {}
@@ -278,16 +276,12 @@ def main():
                     provides_to_rpm[provided] = rpmname
     
     
+    print "all: rpms"
+
     for specname, spec in specs.iteritems():
         build_srpm_from_spec(spec, specname)
-
-    for specname, spec in specs.iteritems():
         download_rpm_sources(spec, specname)
-
-    for _, spec in specs.iteritems():
         build_rpm_from_srpm(spec)
-
-    for _, spec in specs.iteritems():
         for rpmname in rpm_names_from_spec(spec):
             for buildreq in buildrequires_from_spec(spec):
                 # Some buildrequires come from the system repository
@@ -295,6 +289,7 @@ def main():
                     buildreqrpm = provides_to_rpm[buildreq]
                     print "%s: %s" % (os.path.join(RPMDIR, rpmname), 
                                       os.path.join(RPMDIR, buildreqrpm))
+        print ""
 
     # Generate targets to build all srpms and all rpms
     all_rpms = []
@@ -305,10 +300,12 @@ def main():
         all_rpms += rpm_paths
         all_srpms.append(os.path.join(SRPMDIR, srpm_name_from_spec(spec)))
         print "%s: %s" % (spec.sourceHeader['name'], " ".join(rpm_paths))
+    print ""
     
     print "rpms: " + " \\\n\t".join(all_rpms)
+    print ""
     print "srpms: " + " \\\n\t".join(all_srpms)
-    
+    print ""
     print "install: all" 
     print "\t. scripts/%s/install.sh" % build_type()
 
