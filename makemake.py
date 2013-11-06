@@ -257,6 +257,8 @@ def main():
 
     spec_paths = glob.glob(os.path.join(SPECDIR, "*.spec"))
     specs = {}
+    provides_to_rpm = {}
+
     for spec_path in spec_paths:
         spec = spec_from_file(spec_path)
         pkg_name = spec.sourceHeader['name']
@@ -269,6 +271,12 @@ def main():
             sys.exit(1)
             
         specs[os.path.basename(spec_path)] = spec
+        for package in spec.packages:
+            provides = package.header['provides'] + [package.header['name']]
+            for provided in set(flatten([map_package_name(r) for r in provides])):
+                for rpmname in rpm_names_from_spec(spec):
+                    provides_to_rpm[provided] = rpmname
+    
     
     for specname, spec in specs.iteritems():
         build_srpm_from_spec(spec, specname)
@@ -279,15 +287,6 @@ def main():
     for _, spec in specs.iteritems():
         build_rpm_from_srpm(spec)
 
-    provides_to_rpm = {}
-    for _, spec in specs.iteritems():
-        for package in spec.packages:
-            provides = package.header['provides'] + [package.header['name']]
-            for provided in set(flatten([map_package_name(r) for r in provides])):
-                for rpmname in rpm_names_from_spec(spec):
-                    provides_to_rpm[provided] = rpmname
-    
-    
     for _, spec in specs.iteritems():
         for rpmname in rpm_names_from_spec(spec):
             for buildreq in buildrequires_from_spec(spec):
@@ -298,14 +297,13 @@ def main():
                                       os.path.join(RPMDIR, buildreqrpm))
 
     # Generate targets to build all srpms and all rpms
-    all_srpms = [os.path.join(SRPMDIR, srpm_name_from_spec(s)) 
-                 for s in specs.values()]
-    
     all_rpms = []
+    all_srpms = []
     for spec in specs.values():
         rpms = rpm_names_from_spec(spec)
         rpm_paths = map((lambda rpm: os.path.join(RPMDIR, rpm)), rpms)
         all_rpms += rpm_paths
+        all_srpms.append(os.path.join(SRPMDIR, srpm_name_from_spec(spec)))
         print "%s: %s" % (spec.sourceHeader['name'], " ".join(rpm_paths))
     
     print "rpms: " + " \\\n\t".join(all_rpms)
