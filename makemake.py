@@ -73,8 +73,6 @@ else:
     rpm.addMacro('dist', "")
 
 
-print "all: rpms"
-
 if build_type() == "rpm":
     RPMFILENAMEPAT = rpm.expandMacro('%_build_name_fmt')
 else:
@@ -87,22 +85,6 @@ def spec_from_file(spec):
     except Exception, exn:
         print >> sys.stderr, "Failed to parse %s" % spec
         raise exn
-
-
-SPEC_NAMES = os.listdir(SPECDIR)
-SPECS = {}
-for spec_name in SPEC_NAMES:
-    spec = spec_from_file(os.path.join(SPECDIR, spec_name))
-    pkg_name = spec.sourceHeader['name']
-    if pkg_name in IGNORE_LIST[build_type()]:
-        continue
-    if os.path.splitext(spec_name)[0] != pkg_name:
-        sys.stderr.write(
-            "error: spec file name '%s' does not match package name '%s'\n" % 
-            (spec_name, pkg_name))
-        sys.exit(1)
-        
-    SPECS[spec_name] = spec
 
 
 def srpm_name_from_spec(spec):
@@ -154,7 +136,7 @@ def rpm_names_from_spec(spec):
 
 
 # Rules to build SRPM from SPEC
-for specname, spec in SPECS.iteritems():
+def build_srpm_from_spec(spec, specname):
     srpmname = srpm_name_from_spec(spec)
 
     # spec.sourceHeader['sources'] and ['patches'] doesn't work 
@@ -194,7 +176,7 @@ for specname, spec in SPECS.iteritems():
 # Assumes each RPM only needs one download - we have some multi-source
 # packages but in all cases the additional sources are patches provided
 # in the Git repository
-for specname, spec in SPECS.iteritems():
+def download_rpm_sources(spec, specname):
     # The RPM documentation says that RPM only cares about the basename
     # of the path given in a Source: tag.   spec.sourceHeader['url'] 
     # enforces this - even if we have a URL in the source tag, it 
@@ -226,18 +208,18 @@ for specname, spec in SPECS.iteritems():
                                  spec.sourceHeader['version'])
             print '\t@tar zcf $@ -C %s --transform "s,^\./,%s/," .' % (url.path,
                                                                        dirname)
-    
+
 
 # Rules to build RPMS from SRPMS (uses information from the SPECs to
 # get packages)
-for specname, spec in SPECS.iteritems():
+def build_rpm_from_srpm(spec):
     # This doesn't generate the right Makefile fragment for a multi-target
     # rule - we may end up building too often, or not rebuilding correctly
     # on a partial build
     rpmnames = rpm_names_from_spec(spec)
     srpmname = srpm_name_from_spec(spec)
-    for r in rpmnames: 
-        rpm_path = os.path.join(RPMDIR, r)
+    for rpmname in rpmnames: 
+        rpm_path = os.path.join(RPMDIR, rpmname)
         srpm_path = os.path.join(SRPMDIR, srpmname)
         rpm_outdir = os.path.dirname(rpm_path)
         print '%s: %s' % (rpm_path, srpm_path)
@@ -253,7 +235,7 @@ for specname, spec in SPECS.iteritems():
             print '\tsudo cowbuilder --build '\
                 '--configfile pbuilder/pbuilderrc-raring-amd64 '\
                 '--buildresult %s $<' % rpm_outdir 
-        
+
 
 # RPM build dependencies.   The 'requires' key for the *source* RPM is
 # actually the 'buildrequires' key from the spec
@@ -269,41 +251,68 @@ def buildrequires_from_spec(spec):
     return set(flatten(reqs))
 
 
-PROVIDES_TO_RPM = {}
-for specname, spec in SPECS.iteritems():
-    for package in spec.packages:
-        provides = package.header['provides'] + [package.header['name']]
-        for provided in set(flatten([map_package_name(r) for r in provides])):
-	
-            for rpmname in rpm_names_from_spec(spec):
-                PROVIDES_TO_RPM[provided] = rpmname
+def main():
+    print "all: rpms"
+
+    spec_names = os.listdir(SPECDIR)
+    specs = {}
+    for spec_name in spec_names:
+        spec = spec_from_file(os.path.join(SPECDIR, spec_name))
+        pkg_name = spec.sourceHeader['name']
+        if pkg_name in IGNORE_LIST[build_type()]:
+            continue
+        if os.path.splitext(spec_name)[0] != pkg_name:
+            sys.stderr.write(
+                "error: spec file name '%s' does not match package name '%s'\n" % 
+                (spec_name, pkg_name))
+            sys.exit(1)
+            
+        specs[spec_name] = spec
+    
+    for specname, spec in specs.iteritems():
+        build_srpm_from_spec(spec, specname)
+
+    for specname, spec in specs.iteritems():
+        download_rpm_sources(spec, specname)
+
+    for _, spec in specs.iteritems():
+        build_rpm_from_srpm(spec)
+
+    provides_to_rpm = {}
+    for _, spec in specs.iteritems():
+        for package in spec.packages:
+            provides = package.header['provides'] + [package.header['name']]
+            for provided in set(flatten([map_package_name(r) for r in provides])):
+                for rpmname in rpm_names_from_spec(spec):
+                    provides_to_rpm[provided] = rpmname
+    
+    
+    for _, spec in specs.iteritems():
+        for rpmname in rpm_names_from_spec(spec):
+            for buildreq in buildrequires_from_spec(spec):
+                # Some buildrequires come from the system repository
+                if provides_to_rpm.has_key(buildreq):
+                    buildreqrpm = provides_to_rpm[buildreq]
+                    print "%s: %s" % (os.path.join(RPMDIR, rpmname), 
+                                      os.path.join(RPMDIR, buildreqrpm))
+
+    # Generate targets to build all srpms and all rpms
+    all_srpms = [os.path.join(SRPMDIR, srpm_name_from_spec(s)) 
+                 for s in specs.values()]
+    
+    all_rpms = []
+    for spec in specs.values():
+        rpms = rpm_names_from_spec(spec)
+        rpm_paths = map((lambda rpm: os.path.join(RPMDIR, rpm)), rpms)
+        all_rpms += rpm_paths
+        print "%s: %s" % (spec.sourceHeader['name'], " ".join(rpm_paths))
+    
+    print "rpms: " + " \\\n\t".join(all_rpms)
+    print "srpms: " + " \\\n\t".join(all_srpms)
+    
+    print "install: all" 
+    print "\t. scripts/%s/install.sh" % build_type()
 
 
-for specname, spec in SPECS.iteritems():
-    for rpmname in rpm_names_from_spec(spec):
-        for buildreq in buildrequires_from_spec(spec):
-            # Some buildrequires come from the system repository
-            if PROVIDES_TO_RPM.has_key(buildreq):
-                buildreqrpm = PROVIDES_TO_RPM[buildreq]
-                print "%s: %s" % (os.path.join(RPMDIR, rpmname), 
-                                  os.path.join(RPMDIR, buildreqrpm))
-
-
-# Generate targets to build all srpms and all rpms
-ALL_SRPMS = [os.path.join(SRPMDIR, srpm_name_from_spec(s)) 
-             for s in SPECS.values()]
-
-ALL_RPMS = []
-for spec in SPECS.values():
-    rpms = rpm_names_from_spec(spec)
-    rpm_paths = map((lambda rpm: os.path.join(RPMDIR, rpm)), rpms)
-    ALL_RPMS += rpm_paths
-    print "%s: %s" % (spec.sourceHeader['name'], " ".join(rpm_paths))
-
-
-print "rpms: " + " \\\n\t".join(ALL_RPMS)
-print "srpms: " + " \\\n\t".join(ALL_SRPMS)
-
-
-print "install: all" 
-print "\t. scripts/%s/install.sh" % build_type()
+if __name__ == "__main__":
+    main()
