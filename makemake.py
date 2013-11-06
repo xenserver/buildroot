@@ -5,6 +5,7 @@
 import sys
 sys.path.append("scripts/lib")
 
+import glob
 import mappkgname
 import os
 import platform
@@ -237,8 +238,6 @@ def build_rpm_from_srpm(spec):
                 '--buildresult %s $<' % rpm_outdir 
 
 
-# RPM build dependencies.   The 'requires' key for the *source* RPM is
-# actually the 'buildrequires' key from the spec
 def flatten(lst):
     res = []
     for elt in lst:
@@ -246,6 +245,8 @@ def flatten(lst):
     return res
 
 
+# RPM build dependencies.   The 'requires' key for the *source* RPM is
+# actually the 'buildrequires' key from the spec
 def buildrequires_from_spec(spec):
     reqs = [map_package_name(r) for r in spec.sourceHeader['requires']]
     return set(flatten(reqs))
@@ -254,20 +255,20 @@ def buildrequires_from_spec(spec):
 def main():
     print "all: rpms"
 
-    spec_names = os.listdir(SPECDIR)
+    spec_paths = glob.glob(os.path.join(SPECDIR, "*.spec"))
     specs = {}
-    for spec_name in spec_names:
-        spec = spec_from_file(os.path.join(SPECDIR, spec_name))
+    for spec_path in spec_paths:
+        spec = spec_from_file(spec_path)
         pkg_name = spec.sourceHeader['name']
         if pkg_name in IGNORE_LIST[build_type()]:
             continue
-        if os.path.splitext(spec_name)[0] != pkg_name:
+        if os.path.splitext(os.path.basename(spec_path))[0] != pkg_name:
             sys.stderr.write(
                 "error: spec file name '%s' does not match package name '%s'\n" % 
-                (spec_name, pkg_name))
+                (spec_path, pkg_name))
             sys.exit(1)
             
-        specs[spec_name] = spec
+        specs[os.path.basename(spec_path)] = spec
     
     for specname, spec in specs.iteritems():
         build_srpm_from_spec(spec, specname)
