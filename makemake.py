@@ -251,11 +251,29 @@ def buildrequires_from_spec(spec):
     reqs = [map_package_name(r) for r in spec.sourceHeader['requires']]
     return set(flatten(reqs))
 
+def package_to_rpm_map(specs):
+    provides_to_rpm = {}
+    for spec in specs:
+        for package in spec.packages:
+            provides = package.header['provides'] + [package.header['name']]
+            for provided in set(flatten([map_package_name(r) for r in provides])):
+                for rpmname in rpm_names_from_spec(spec):
+                    provides_to_rpm[provided] = rpmname
+    return provides_to_rpm
+    
+
+def buildrequires_for_rpm(spec, provides_to_rpm):
+    for rpmname in rpm_names_from_spec(spec):
+        for buildreq in buildrequires_from_spec(spec):
+            # Some buildrequires come from the system repository
+            if provides_to_rpm.has_key(buildreq):
+                buildreqrpm = provides_to_rpm[buildreq]
+                print "%s: %s" % (os.path.join(RPMDIR, rpmname), 
+                                  os.path.join(RPMDIR, buildreqrpm))
 
 def main():
     spec_paths = glob.glob(os.path.join(SPECDIR, "*.spec"))
     specs = {}
-    provides_to_rpm = {}
 
     for spec_path in spec_paths:
         spec = spec_from_file(spec_path)
@@ -269,12 +287,8 @@ def main():
             sys.exit(1)
             
         specs[os.path.basename(spec_path)] = spec
-        for package in spec.packages:
-            provides = package.header['provides'] + [package.header['name']]
-            for provided in set(flatten([map_package_name(r) for r in provides])):
-                for rpmname in rpm_names_from_spec(spec):
-                    provides_to_rpm[provided] = rpmname
-    
+
+    provides_to_rpm = package_to_rpm_map(specs.values())
     
     print "all: rpms"
 
@@ -282,13 +296,7 @@ def main():
         build_srpm_from_spec(spec, specname)
         download_rpm_sources(spec, specname)
         build_rpm_from_srpm(spec)
-        for rpmname in rpm_names_from_spec(spec):
-            for buildreq in buildrequires_from_spec(spec):
-                # Some buildrequires come from the system repository
-                if provides_to_rpm.has_key(buildreq):
-                    buildreqrpm = provides_to_rpm[buildreq]
-                    print "%s: %s" % (os.path.join(RPMDIR, rpmname), 
-                                      os.path.join(RPMDIR, buildreqrpm))
+        buildrequires_for_rpm(spec, provides_to_rpm)
         print ""
 
     # Generate targets to build all srpms and all rpms
