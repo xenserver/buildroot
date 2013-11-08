@@ -7,6 +7,8 @@ NODE=${3}
 OUT=${4}
 LUN=`echo $BUS | cut -d: -f4`
 
+export PATH=/lib/udev:$PATH
+
 # The required files are located in an extra layer of directories in 3.x kernels
 kernel=`uname -r | cut -d. -f1-2`
 case $kernel in
@@ -53,7 +55,7 @@ if [ $# -gt 5 -o $# -lt 4 ]; then
 fi
 
 if [[ $OUT == "scsi_bybus" && -z ${5} ]]; then
-    SCSIID=`/sbin/scsi_id -g -u -s /block/$2`
+    SCSIID=`scsi_id -g -u -s /block/$2`
     if [ $? == 0 ]; then
         echo "disk/by-scsibus/${SCSIID}-%b disk/by-scsid/${SCSIID}/$2"
     fi
@@ -69,7 +71,7 @@ if [ $driver == "mpp" ]; then
     array=`/opt/xensource/bin/xe-getarrayidentifier ${NODE}`
     id=`/usr/sbin/mppUtil -a | grep ${array} | awk '{print $1}'`
     if [[ $OUT == "scsi_bympp" && -z ${5} ]]; then
-        SCSIID=`/sbin/scsi_id -g -u -s /block/$2`
+        SCSIID=`scsi_id -g -u -s /block/$2`
         if [ $? == 0 ]; then
             #lunnum=`/opt/xensource/bin/xe-getlunidentifier ${NODE}`
             #lunid=`/usr/sbin/mppUtil -g ${id} | grep ${lunnum} | awk '{gsub(/#/,"");print $2}'`
