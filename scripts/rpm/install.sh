@@ -2,7 +2,10 @@
 
 # Configure the local machine to install packages built in this working directory
 
-sed -e "s,@BASEDIR@,$PWD,g" scripts/rpm/xapi.repo.in > scripts/rpm/xapi.repo
+sed \
+    -e "s,@XAPIBASEURL@,file://$PWD/RPMS/,g" \
+    -e "s,@XAPISRCBASEURL@,file://$PWD/SRPMS/,g" \
+    scripts/rpm/xapi.repo.in > scripts/rpm/xapi.repo
 install -m 0644 scripts/rpm/xapi.repo /etc/yum.repos.d/xapi.repo
 
 #install -m 0644 scripts/rpm/xen-c6.repo /etc/yum.repos.d/xen-c6.repo

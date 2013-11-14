@@ -1,13 +1,13 @@
 [xapi]
 name=CentOS-$releasever - xenserver-core 
-baseurl=file://@BASEDIR@/RPMS/
+baseurl=@XAPIBASEURL@
 gpgcheck=0
 Priority=1
 enabled=1
 
 [xapi-source]
 name=CentOS-$releasever - xenserver-core Source
-baseurl=file://@BASEDIR@/SRPMS
+baseurl=@XAPISRCBASEURL@
 gpgcheck=0
 Priority=1
 enabled=0
