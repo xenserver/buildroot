@@ -5,8 +5,8 @@ install -m 0644 scripts/deb/ocp-ppa.list /etc/apt/sources.list.d/ocp-ppa.list
 
 # Configure the local machine to install packages built in this workspace
 sed \
-    -e "s,@DEBURL@,file:$PWD/RPMS/,g" \
-    -e "s,@DEBSRCURL@,file:$PWD/SRPMS/,g" \
+    -e "s,@DEBURL@,${DEBURL:-file:$PWD/RPMS/},g" \
+    -e "s,@DEBSRCURL@,${DEBSRCURL:-file:$PWD/SRPMS/},g" \
     scripts/deb/xapi.list.in > scripts/deb/xapi.list
 install -m 0644 scripts/deb/xapi.list /etc/apt/sources.list.d/xapi.list
 
