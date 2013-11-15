@@ -3,8 +3,8 @@
 # Add the OCaml 4 PPA
 install -m 0644 scripts/deb/ocp-ppa.list /etc/apt/sources.list.d/ocp-ppa.list
 
-DEBURL=${DEBURL:-file:$PWD/RPMS/}
-DEBSRCURL=${DEBSRCURL:-file:$PWD/SRPMS/}
+DEBURL=${PKG_REPO_LOCATION:-file:$PWD/RPMS/}
+DEBSRCURL=${SRC_REPO_LOCATION:-file:$PWD/SRPMS/}
 
 # Configure the local machine to install packages built in this workspace
 sed \

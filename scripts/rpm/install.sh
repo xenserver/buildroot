@@ -2,8 +2,8 @@
 
 # Configure the local machine to install packages built in this working directory
 
-XAPIBASEURL=${XAPIBASEURL:-file://$PWD/RPMS/}
-XAPISRCBASEURL=${XAPISRCBASEURL:-file://$PWD/SRPMS/}
+XAPIBASEURL=${PKG_REPO_LOCATION:-file://$PWD/RPMS/}
+XAPISRCBASEURL=${SRC_REPO_LOCATION:-file://$PWD/SRPMS/}
 
 sed \
     -e "s,@XAPIBASEURL@,${XAPISRCBASEURL},g" \
