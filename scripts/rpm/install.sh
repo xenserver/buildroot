@@ -2,9 +2,12 @@
 
 # Configure the local machine to install packages built in this working directory
 
+XAPIBASEURL=${XAPIBASEURL:-file://$PWD/RPMS/}
+XAPISRCBASEURL=${XAPISRCBASEURL:-file://$PWD/SRPMS/}
+
 sed \
-    -e "s,@XAPIBASEURL@,${XAPIBASEURL:-file://$PWD/RPMS/},g" \
-    -e "s,@XAPISRCBASEURL@,${XAPISRCBASEURL:-file://$PWD/SRPMS/},g" \
+    -e "s,@XAPIBASEURL@,${XAPISRCBASEURL},g" \
+    -e "s,@XAPISRCBASEURL@,${XAPISRCBASEURL},g" \
     scripts/rpm/xapi.repo.in > scripts/rpm/xapi.repo
 install -m 0644 scripts/rpm/xapi.repo /etc/yum.repos.d/xapi.repo
 
