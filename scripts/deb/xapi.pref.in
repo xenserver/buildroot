@@ -1,4 +1,4 @@
 Package: *
-Pin: origin ""
+Pin: origin "@REPOHOST@"
 Pin-Priority: 1500
 
