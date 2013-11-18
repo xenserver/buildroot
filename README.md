@@ -37,7 +37,6 @@ git clone git://github.com/xenserver/xenserver-core.git
 cd xenserver-core
 
 ./configure.sh
-./makemake.py > Makefile
 make
 ```
 
@@ -71,7 +70,6 @@ git clone git://github.com/xenserver/xenserver-core.git
 cd xenserver-core
 
 ./configure.sh
-./makemake.py > Makefile
 make
 
 make install
