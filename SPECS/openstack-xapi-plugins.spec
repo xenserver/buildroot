@@ -4,7 +4,7 @@ Release:        1
 Summary:        XenAPI plugins from OpenStack
 License:        ASL 2.0
 Group:          System/Hypervisor
-URL:            https://launchpad.net/nova/havana/%{version}/+download/nova-%{version}.tar.gz
+URL:            https://launchpad.net/nova/havana
 Source0:        https://launchpad.net/nova/havana/%{version}/+download/nova-%{version}.tar.gz
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/nova-%{version}-%{release}

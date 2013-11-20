@@ -4,7 +4,7 @@ Release:        1
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other
-URL:            http://www.xen.org/
+URL:            http://www.xenserver.org/
 Source0:        xenserver-readme
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Requires:       xenserver-install-wizard

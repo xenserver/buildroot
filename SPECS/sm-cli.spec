@@ -4,7 +4,7 @@ Release:        1
 Summary:        CLI for xapi toolstack storage managers.
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/sm-cli/archive/%{version}.tar.gz
+URL:            https://github.com/xapi-project/sm-cli
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel

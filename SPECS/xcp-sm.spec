@@ -6,7 +6,7 @@ Version: 0.9.6
 Release: 1
 Group:   System/Hypervisor
 License: LGPL
-URL:  http://www.citrix.com
+URL:  https://github.com/xapi-project/sm
 Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
 Source1: xcp-mpath-scsidev-rules
 Source2: xcp-mpath-scsidev-script

@@ -6,7 +6,7 @@ Version: 0.6.1
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
-URL:  http://www.xen.org
+URL:  https://github.com/djs55/vhd-tool
 Source0: https://github.com/djs55/vhd-tool/archive/%{version}/vhd-tool-%{version}.tar.gz
 Source1: vhd-tool-sparse_dd-conf
 BuildRoot: %{_tmppath}/%{name}-%{version}-root

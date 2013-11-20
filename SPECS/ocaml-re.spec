@@ -6,7 +6,7 @@ Release:        1
 Summary:        A regular expression library for OCaml
 License:        LGPL
 Group:          Development/Other
-URL:            http://github.com/ocaml/ocaml-re/tarball/ocaml-re-1.2.1
+URL:            http://github.com/ocaml/ocaml-re
 Source0:        http://github.com/ocaml/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc

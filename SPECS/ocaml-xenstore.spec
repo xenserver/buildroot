@@ -6,7 +6,7 @@ Release:        1
 Summary:        Xenstore protocol implementation in OCaml
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/mirage/ocaml-xenstore/archive/%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/mirage/ocaml-xenstore
 Source0:        https://github.com/mirage/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-cstruct-devel ocaml-lwt-devel ocaml-camlp4-devel

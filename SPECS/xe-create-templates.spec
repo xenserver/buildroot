@@ -4,7 +4,7 @@ Release:        1
 Summary:        Creates default XenServer templates
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/xcp-guest-templates/%{version}.tar.gz
+URL:            https://github.com/xapi-project/xcp-guest-templates
 Source0:        https://github.com/xapi-project/xcp-guest-templates/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel 

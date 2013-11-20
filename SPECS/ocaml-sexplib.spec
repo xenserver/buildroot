@@ -7,7 +7,7 @@ Summary:        Convert values to and from s-expressions in OCaml
 
 Group:          Development/Other
 License:        LGPLv2+ with exceptions and BSD
-URL:            https://ocaml.janestreet.com/ocaml-core/109.20.00/individual/sexplib-109.20.00.tar.gz
+URL:            https://ocaml.janestreet.com
 Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/sexplib-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 

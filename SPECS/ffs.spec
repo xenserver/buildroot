@@ -4,7 +4,7 @@ Release:        1
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/ffs/archive/%{version}.tar.gz
+URL:            https://github.com/xapi-project/ffs
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        ffs-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}

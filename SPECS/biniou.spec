@@ -6,7 +6,7 @@ Release:        1
 Summary:        Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve
 License:        BSD3
 Group:          Development/Other
-URL:            http://mjambon.com/releases/biniou/biniou-1.0.6.tar.gz
+URL:            http://mjambon.com/biniou.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib easy-format
