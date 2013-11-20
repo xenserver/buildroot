@@ -1,11 +1,11 @@
 Name:           openstack-xapi-plugins
-Version:        2013.1.2
-Release:        2
+Version:        2013.2
+Release:        1
 Summary:        XenAPI plugins from OpenStack
 License:        ASL 2.0
 Group:          System/Hypervisor
-URL:            https://launchpad.net/nova/grizzly/%{version}/+download/nova-%{version}.tar.gz
-Source0:        https://launchpad.net/nova/grizzly/%{version}/+download/nova-%{version}.tar.gz
+URL:            https://launchpad.net/nova/havana/%{version}/+download/nova-%{version}.tar.gz
+Source0:        https://launchpad.net/nova/havana/%{version}/+download/nova-%{version}.tar.gz
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/nova-%{version}-%{release}
 BuildRequires:  python-setuptools
@@ -31,6 +31,9 @@ rm -rf %{buildroot}
 /usr/lib/xapi/plugins/*
 
 %changelog
+* Wed Nov 20 2013 Euan Harris <euan.harris@citrix.com>
+- Update to Havana release
+
 * Wed Jul  3 2013 David Scott <dave.scott@eu.citrix.com>
 - Tweak plugins directory to match xapi
 
