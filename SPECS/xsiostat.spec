@@ -4,7 +4,7 @@ Release:        1
 Summary:        XenServer IO stat thingy
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/xsiostat
+URL:            https://github.com/xenserver/xsiostat
 Source0:        https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
