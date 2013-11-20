@@ -6,7 +6,7 @@ Release:        1
 Summary:        An HTTP library for OCaml
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/mirage/ocaml-cohttp/archive/ocaml-cohttp-0.9.8.tar.gz
+URL:            https://github.com/mirage/ocaml-cohttp
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-re-devel ocaml-uri-devel ocaml-cstruct-devel ocaml-lwt-devel ocaml-ounit-devel ocaml-ocamldoc ocaml-camlp4-devel

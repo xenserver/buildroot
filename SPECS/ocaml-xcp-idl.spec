@@ -6,7 +6,7 @@ Release:        1
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/xcp-idl/archive/%{version}.tar.gz
+URL:            https://github.com/xapi-project/xcp-idl
 Source0:        https://github.com/djs55/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel

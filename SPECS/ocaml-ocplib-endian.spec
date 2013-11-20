@@ -6,7 +6,7 @@ Release:        1
 Summary:        Optimised functions to read and write int16/32/64 from strings and bigarrays, based on new primitives added in version 4.01.
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/OCamlPro/ocplib-endian/archive/0.3.tar.gz
+URL:            https://github.com/OCamlPro/ocplib-endian
 Source0:        https://github.com/OCamlPro/ocplib-endian/archive/%{version}/ocplib-endian-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib optcomp ocaml-camlp4 ocaml-camlp4-devel

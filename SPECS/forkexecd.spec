@@ -4,7 +4,7 @@ Release:        1
 Summary:        A subprocess management service
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/forkexecd/archive/forkexecd-0.9.0.tar.gz
+URL:            https://github.com/xapi-project/forkexecd
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        forkexecd-init
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}

@@ -4,7 +4,7 @@ Release:        1
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
-URL:            https://github.com/xapi-project/xenopsd/archive/%{version}.tar.gz
+URL:            https://github.com/xapi-project/xenopsd
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init

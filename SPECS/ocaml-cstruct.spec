@@ -6,7 +6,7 @@ Release:        2
 Summary:        Read and write low-level C-style structures in OCaml
 License:        ISC
 Group:          Development/Other
-URL:            https://github.com/mirage/ocaml-cstruct/archive/ocaml-cstruct-0.7.1.tar.gz
+URL:            https://github.com/mirage/ocaml-cstruct
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocplib-endian-devel ocaml-camlp4 ocaml-camlp4-devel ocaml-lwt-devel
