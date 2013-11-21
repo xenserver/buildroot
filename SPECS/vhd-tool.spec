@@ -2,7 +2,7 @@
 
 Summary: command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
-Version: 0.6.1
+Version: 0.6.4
 Release: 1
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -50,6 +50,9 @@ rm -rf %{buildroot}
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
+* Thu Nov 21 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.4-1
+- Update to 0.6.4
+
 * Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.1-1
 - Update to 0.6.1
 

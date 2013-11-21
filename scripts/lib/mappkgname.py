@@ -62,6 +62,7 @@ MAPPING = {
     "ocaml-yojson": ["libyojson-ocaml"],
     "ocaml-zed": ["libzed-ocaml"],
     "ocaml-vhd": ["vhd-ocaml"],
+    "ocaml-tar": ["tar-ocaml"],
     "ocaml-uutf": ["uutf-ocaml"],
     "omake": ["omake"],
     "openstack-xapi-plugins": ["openstack-xapi-plugins"],
