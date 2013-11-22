@@ -24,8 +24,8 @@ sed \
     scripts/deb/xapi.pref.in > scripts/deb/xapi.pref
 install -m 0644 scripts/deb/xapi.pref /etc/apt/preferences.d/xapi
 
-(cd RPMS && apt-ftparchive packages . > Packages)
-(cd SRPMS && apt-ftparchive sources . > Sources )
+(mkdir -p RPMS && cd RPMS && apt-ftparchive packages . > Packages)
+(mkdir -p SRPMS && cd SRPMS && apt-ftparchive sources . > Sources )
 
 # Install
 apt-get update
