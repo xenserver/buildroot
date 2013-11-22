@@ -1,6 +1,6 @@
 # -*- rpm-spec -*-
 
-Summary: a simple wizard to configure a XenServer
+Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
 Version: 0.2.27
 Release: 1
