@@ -3,7 +3,7 @@ Version:        0.3c
 Release:        1
 Summary:        Extension to OCaml for deriving functions from type declarations
 License:        MIT
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://ocsigen.org/download/deriving-ocsigen-0.3c.tar.gz
 Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}

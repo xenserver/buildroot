@@ -3,7 +3,7 @@ Version:        1.1.1
 Release:        1
 Summary:        Streaming XML input/output for OCaml
 License:        BSD3
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://erratique.ch/software/xmlm
 Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}

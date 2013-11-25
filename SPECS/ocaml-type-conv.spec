@@ -5,7 +5,7 @@ Version:        109.20.00
 Release:        1
 Summary:        OCaml base library for type conversion
 
-Group:          Development/Other
+Group:          Development/Libraries
 License:        LGPLv2+ with exceptions and BSD
 URL:            http://www.ocaml.info/home/ocaml_sources.html#type-conv
 Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/type_conv-%{version}.tar.gz

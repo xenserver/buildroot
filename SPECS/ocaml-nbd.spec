@@ -5,7 +5,7 @@ Version:        0.9.2
 Release:        1
 Summary:        Pure OCaml implementation of the Network Block Device protocol
 License:        LGPL2.1 + OCaml linking exception
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://github.com/xapi-project/nbd
 Source0:        https://github.com/xapi-project/nbd/archive/%{version}/nbd-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -19,7 +19,7 @@ access remote block devices.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 #Requires:       %{name} = %{version}-%{release}
 
 %description    devel

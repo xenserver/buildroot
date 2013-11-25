@@ -5,7 +5,7 @@ Version:        1.3.8
 Release:        1
 Summary:        A URI library for OCaml
 License:        ISC
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-uri
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}

@@ -5,7 +5,7 @@ Version:        0.9.9
 Release:        3
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            https://github.com/xapi-project/ocaml-xen-lowlevel-libs
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -19,7 +19,7 @@ Xen hypercall bindings for OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 #Requires:       %{name} = %{version}-%{release}
 
 %description    devel
