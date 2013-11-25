@@ -3,7 +3,7 @@
 Name:           biniou
 Version:        1.0.6
 Release:        1
-Summary:        Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve
+Summary:        Compact, fast and extensible serialization format
 License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/biniou.html
@@ -13,7 +13,8 @@ BuildRequires:  ocaml ocaml-findlib easy-format
 Requires:       ocaml ocaml-findlib
 
 %description
-Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve.
+Binary data format designed for speed, safety, ease of use and backward
+compatibility as protocols evolve.
 
 %prep
 %setup -q
