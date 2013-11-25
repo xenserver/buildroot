@@ -5,7 +5,7 @@ Version:        1.4.1
 Release:        1
 Summary:        An RPC library for OCaml
 License:        LGPL
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            https://github.com/samoht/ocaml-rpc
 Source0:        https://github.com/samoht/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -17,7 +17,7 @@ Am RPC library for OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 #Requires:       %{name} = %{version}-%{release}
 
 %description    devel

@@ -19,7 +19,7 @@ virtualization hosts.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 #Requires:       %{name} = %{version}-%{release}
 
 %description    devel

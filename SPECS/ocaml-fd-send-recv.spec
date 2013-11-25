@@ -5,7 +5,7 @@ Version:        1.0.1
 Release:        1
 Summary:        Bindings to sendmsg/recvmsg for fd passing under Linux
 License:        LGPL
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://github.com/xapi-project/ocaml-fd-send-recv
 Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -17,7 +17,7 @@ Bindings to sendmsg/recvmsg for fd passing under Linux.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 #Requires:       %{name} = %{version}-%{release}
 
 %description    devel

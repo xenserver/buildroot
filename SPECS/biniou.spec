@@ -5,7 +5,7 @@ Version:        1.0.6
 Release:        1
 Summary:        Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve
 License:        BSD3
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://mjambon.com/biniou.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}

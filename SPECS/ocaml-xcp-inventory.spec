@@ -5,7 +5,7 @@ Version:        0.9.0
 Release:        1
 Summary:        OCaml library to read and write the XCP inventory file
 License:        LGPL2.1 + OCaml linking exception
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://github.com/xapi-project/xcp-inventory
 Source0:        https://github.com/xapi-project/xcp-inventory/archive/xcp-inventory-%{version}/xcp-inventory-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -16,7 +16,7 @@ A simple library to read and write the XCP inventory file.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 Requires:       ocaml ocaml-findlib
 
 %description    devel

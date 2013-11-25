@@ -5,7 +5,7 @@ Version:        0.3
 Release:        2
 Summary:        POSIX monotonic clock for OCaml
 License:        ISC
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            https://github.com/polazarus/oclock
 Source0:        http://github.com/polazarus/oclock/archive/v0.3/oclock-%{version}.tar.gz
 Patch0:         oclock-1-cc-headers
@@ -19,7 +19,7 @@ A POSIX monotonic clock for OCaml
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 #Requires:       %{name} = %{version}-%{release}
 
 %description    devel

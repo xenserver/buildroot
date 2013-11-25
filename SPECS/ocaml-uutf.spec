@@ -3,7 +3,7 @@ Version:        0.9.3
 Release:        2
 Summary:        Non-blocking streaming codec for UTF-8, UTF-16, UTF-16LE and UTF-16BE
 License:        BSD3
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://erratique.ch/software/uutf
 Source0:        http://erratique.ch/software/uutf/releases/uutf-%{version}.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -23,7 +23,7 @@ Uutf is made of a single, independent, module and distributed under the BSD3 lic
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

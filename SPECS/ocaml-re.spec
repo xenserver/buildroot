@@ -5,7 +5,7 @@ Version:        1.2.1
 Release:        1
 Summary:        A regular expression library for OCaml
 License:        LGPL
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://github.com/ocaml/ocaml-re
 Source0:        http://github.com/ocaml/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -17,7 +17,7 @@ A regular expression library for OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

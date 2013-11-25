@@ -5,7 +5,7 @@ Version:        0.9.5
 Release:        1
 Summary:        Universally Unique IDentifiers (UUIDs) for OCaml
 License:        BSD3
-Group:          Development/Other
+Group:          Development/Libraries
 URL:            http://erratique.ch/software/uuidm
 Source0:        http://erratique.ch/software/uuidm/releases/uuidm-%{version}.tbz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -19,7 +19,7 @@ identifiers version 3, 5 (named based with MD5, SHA-1 hashing) and 4
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
+Group:          Development/Libraries
 #Requires:       %{name} = %{version}-%{release}
 
 %description    devel
