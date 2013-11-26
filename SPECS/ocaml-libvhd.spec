@@ -3,7 +3,7 @@
 Name:           ocaml-libvhd
 Version:        0.9.1
 Release:        1
-Summary:        vhd manipulation via libvhd
+Summary:        VHD manipulation via libvhd
 License:        BSD3
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/libvhd

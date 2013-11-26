@@ -3,7 +3,7 @@
 Name:           ocaml-vhd
 Version:        0.6.4
 Release:        1
-Summary:        A pure OCaml library for reading, writing, streaming, converting vhd format files
+Summary:        Pure OCaml library for reading, writing, streaming, converting vhd format files
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/djs55/ocaml-vhd

@@ -1,4 +1,4 @@
-Summary: enhanced version of tapdisk
+Summary: Enhanced version of tapdisk
 Name:    blktap
 Version: 0.9.0
 Release: 1

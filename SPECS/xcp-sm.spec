@@ -1,6 +1,6 @@
 # -*- rpm-spec -*-
 
-Summary: sm - XCP storage managers
+Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.6
 Release: 1

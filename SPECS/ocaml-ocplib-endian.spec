@@ -3,7 +3,7 @@
 Name:           ocaml-ocplib-endian
 Version:        0.4
 Release:        1
-Summary:        Optimised functions to read and write int16/32/64 from strings and bigarrays, based on new primitives added in version 4.01.
+Summary:        Optimized functions to read and write int16/32/64 from strings and bigarrays
 License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/OCamlPro/ocplib-endian
@@ -17,8 +17,13 @@ Optimised functions to read and write int16/32/64 from strings and
 bigarrays, based on new primitives added in version 4.01.
 
 The library implements two modules:
-- [EndianString](ocplib-endian/blob/master/src/endianString.mli) works directly on strings, and provides submodules BigEndian and LittleEndian, with their unsafe counter-parts;
-- [EndianBigstring](ocplib-endian/blob/master/src/endianBigstring.mli) works on bigstrings (Bigarrays of chars), and provides submodules BigEndian and LittleEndian, with their unsafe counter-parts;
+- [EndianString](ocplib-endian/blob/master/src/endianString.mli) works
+  directly on strings, and provides submodules BigEndian and LittleEndian,
+  with their unsafe counter-parts;
+
+- [EndianBigstring](ocplib-endian/blob/master/src/endianBigstring.mli)
+  works on bigstrings (Bigarrays of chars), and provides submodules
+  BigEndian and LittleEndian, with their unsafe counter-parts;
 
 
 %package        devel
