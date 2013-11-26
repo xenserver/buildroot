@@ -1,6 +1,6 @@
 # -*- rpm-spec -*-
 
-Summary: xapi - xen toolstack for XCP
+Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.38
 Release: 1

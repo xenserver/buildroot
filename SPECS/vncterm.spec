@@ -1,4 +1,4 @@
-Summary: vncterm tty to vnc utility
+Summary: TTY to VNC utility
 Name: vncterm
 Version: 0.9.0
 Release: 1

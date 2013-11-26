@@ -1,6 +1,6 @@
 # -*- rpm-spec -*-
 
-Summary: command-line tools for manipulating and streaming .vhd format files
+Summary: Command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
 Version: 0.6.4
 Release: 1
