@@ -1,7 +1,7 @@
 Name:           utop
 Version:        1.5
 Release:        1
-Summary:        A toplevel for OCaml which can run in a terminal or in emacs
+Summary:        A toplevel for OCaml which can run in a terminal or in Emacs
 License:        BSD
 Group:          Development/Other
 URL:            https://github.com/diml/utop
@@ -12,7 +12,7 @@ BuildRequires:  ocaml-zed-devel ocaml-lambda-term-devel
 Requires: ocaml-camomile-data
 
 %description
-utop is a toplevel for OCaml which can run in a terminal or in emacs. It
+utop is a toplevel for OCaml which can run in a terminal or in Emacs. It
 supports completion, colors, parenthesis matching, ...
 
 %prep
