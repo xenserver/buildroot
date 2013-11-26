@@ -22,6 +22,9 @@ mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libdir}
 make install-base DESTDIR=%{buildroot} LIBDIR=%{buildroot}/%{_libdir}
 
+%build
+#This space intentionally left blank
+
 %clean
 rm -rf %{buildroot}
 
