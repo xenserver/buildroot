@@ -179,7 +179,7 @@ fi
 - Update to 1.9.27
 
 * Wed Sep 19 2013 Euan Harris <euan.harris@citrix.com> - 1.9.25-2
-- Use %{python_sitelib} to choose Python install path, instead of hard-coding it.
+- Use 'python_sitelib' macro to choose Python install path, instead of hard-coding it.
 
 * Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.25-1
 - Can now use either 'ffs' or 'iso' for the tools SR
