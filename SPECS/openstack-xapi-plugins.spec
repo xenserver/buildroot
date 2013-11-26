@@ -23,6 +23,9 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/lib/xapi/plugins
 cp -r plugins/xenserver/xenapi/etc/xapi.d/plugins/* %{buildroot}/usr/lib/xapi/plugins/
 
+%build
+#This space intentionally left blank
+
 %clean
 rm -rf %{buildroot}
 
