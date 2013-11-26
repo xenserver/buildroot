@@ -41,7 +41,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Mon Sep 16 2013 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
-- Use %{_libdir} rather than hard coding library installation path
+- Use '_libdir' macro rather than hard coding library installation path
 
 * Fri Jul 5 2013 James Bulpin <James.Bulpin@citrix.com> - 0.9.0-1
 - Initial package
