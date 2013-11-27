@@ -1,6 +1,6 @@
 Name:           ocaml-tar
 Version:        0.2.1
-Release:        0
+Release:        1
 Summary:        OCaml parser and printer for tar-format data
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
@@ -46,6 +46,9 @@ ocaml setup.ml -install
 
 %clean
 rm -rf %{buildroot}
+
+%files
+# This space intentionally left blank
 
 %files devel
 %defattr(-,root,root)
