@@ -1,6 +1,6 @@
 Version: 0.9.8.6
 Release: 1
-Summary: The omake build system.
+Summary: The omake build system
 Name: omake
 URL: http://omake.metaprl.org/
 Source0: http://pkgs.fedoraproject.org/repo/pkgs/ocaml-omake/omake-0.9.8.6-0.rc1.tar.gz/fe39a476ef4e33b7ba2ca77a6bcaded2/omake-0.9.8.6-0.rc1.tar.gz

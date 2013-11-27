@@ -14,13 +14,13 @@ Requires:       ocaml
 
 %description
 The goal is to make a very simple build system for users and developers 
-of OCaml library and programs.
+of OCaml libraries and programs.
 
-Obuild acts as building black box: user declares only what they want to 
-build and with which sources, and the build system will consistantly 
+Obuild acts as a building black box: user declares only what they want to 
+build and with which sources, and the build system will consistently 
 build it.
 
-The design is based on cabal, and borrow most of the layout and way of 
+The design is based on cabal, and borrows most of its layout and way of 
 working, adapting parts where necessary to support OCaml fully.
 
 %prep
