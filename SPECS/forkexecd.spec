@@ -72,7 +72,7 @@ developing applications that use %{name}.
 %{_libdir}/ocaml/forkexec/*
 
 %changelog
-* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-1
 - Update to 0.9.1
 
 * Fri May 31 2013 David Scott <dave.scott@eu.citrix.com>

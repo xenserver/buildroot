@@ -50,7 +50,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xenstore_transport/*
 
 %changelog
-* Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
+* Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.2-1
 - Update to 0.9.2
 
 * Mon Jun  3 2013 David Scott <dave.scott@eu.citrix.com>

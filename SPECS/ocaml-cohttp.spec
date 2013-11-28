@@ -50,6 +50,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/cohttp/*
 
 %changelog
-* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.8-1
 - Initial package
 

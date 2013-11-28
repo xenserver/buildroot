@@ -54,6 +54,6 @@ rm -rf %{buildroot}
 %{_bindir}/js_of_ocaml
 
 %changelog
-* Sun Jun  2 2013 David Scott <dave.scott@eu.citrix.com>
+* Sun Jun  2 2013 David Scott <dave.scott@eu.citrix.com> - 1.3.2-1
 - Initial package
 

@@ -93,7 +93,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/nbd/META
 
 %changelog
-* Thu Nov 21 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu Nov 21 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.2-1
 - Update to 0.9.2
 
 * Mon Sep 23 2013 David Scott <dave.scott@eu.citrix.com>

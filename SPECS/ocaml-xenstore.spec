@@ -51,7 +51,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xenstore/*
 
 %changelog
-* Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com> - 1.2.4-1
 - Update to 1.2.4 (fixes critical watching bug)
 
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>

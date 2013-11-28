@@ -38,7 +38,7 @@ rm -rf %{buildroot}
 %{_sbindir}/sm-cli
 
 %changelog
-* Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.4-1
 - Update to 0.9.4
 
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>

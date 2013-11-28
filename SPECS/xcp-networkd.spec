@@ -67,7 +67,7 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
-* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.3-1
 - Update to 0.9.3
 
 * Wed Aug 28 2013 David Scott <dave.scott@eu.citrix.com>

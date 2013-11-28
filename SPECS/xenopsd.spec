@@ -184,7 +184,7 @@ fi
 #fi
 
 %changelog
-* Mon Oct 28 2013 David Scott <dave.scott@eu.citrix.com>
+* Mon Oct 28 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.32-1
 - Update to 0.9.32, with udev fix (no more "task was asynchronously cancelled")
 
 * Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com>

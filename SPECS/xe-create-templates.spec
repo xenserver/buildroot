@@ -38,7 +38,7 @@ rm -rf %{buildroot}
 %{_bindir}/xe-create-templates
 
 %changelog
-* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.2-1
 - Update to 0.9.2
 
 * Wed Jun 12 2013 David Scott <dave.scott@eu.citrix.com>

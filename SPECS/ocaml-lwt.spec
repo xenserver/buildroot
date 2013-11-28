@@ -82,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/stublibs/*.so.owner
 
 %changelog
-* Sat Jun  1 2013 David Scott <dave.scott@eu.citrix.com>
+* Sat Jun  1 2013 David Scott <dave.scott@eu.citrix.com> - 2.4.3-1
 - Update to 2.4.3
 
 * Wed Nov  2 2011 David Scott <dave.scott@eu.citrix.com> - 2.2.0-2

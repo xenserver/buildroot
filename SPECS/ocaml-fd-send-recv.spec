@@ -53,6 +53,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllfd_send_recv_stubs.so.owner
 
 %changelog
-* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 1.0.1-1
 - Initial package
 
