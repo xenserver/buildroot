@@ -82,7 +82,7 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com>
+* Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.9-3
 - Exclude the xenlight stuff in case it manages to build
 
 * Sun Oct 20 2013 David Scott <dave.scott@eu.citrix.com>

@@ -51,7 +51,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/tapctl/*
 
 %changelog
-* Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-1
 - Update to 0.9.1
 
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>

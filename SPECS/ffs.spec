@@ -52,7 +52,7 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
-* Thu Oct 31 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu Oct 31 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.23-1
 - Update to 0.9.23, with VDI.copy fix
 
 * Wed Oct 30 2013 David Scott <dave.scott@eu.citrix.com>

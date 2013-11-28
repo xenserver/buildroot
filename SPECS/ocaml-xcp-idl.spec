@@ -65,7 +65,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xcp/*
 
 %changelog
-* Thu Sep 26 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu Sep 26 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.14-1
 - Support searching for executables on the XCP_PATH as well as the PATH
 
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>

@@ -49,6 +49,6 @@ rm -rf %{buildroot}
 %{_bindir}/ydump
 
 %changelog
-* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.1.6-1
 - Initial package
 

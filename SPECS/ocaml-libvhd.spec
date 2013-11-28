@@ -53,6 +53,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllvhdlib_stubs.so.owner
 
 %changelog
-* Wed May 29 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed May 29 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-1
 - Initial package
 

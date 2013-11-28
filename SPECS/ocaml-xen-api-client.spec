@@ -54,7 +54,7 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.4-1
 - Update to 0.9.3
 
 * Wed May 29 2013 Mike McClurg <mike.mcclurg@citrix.com>

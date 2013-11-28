@@ -54,6 +54,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xcp-inventory/*
 
 %changelog
-* Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.0-1
 - Initial package
 

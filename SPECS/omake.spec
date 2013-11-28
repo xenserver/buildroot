@@ -61,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/omake
 
 %changelog
-* Thu Nov 25 2010 Mike McClurg <mike.mcclurg@citrix.com>
+* Thu Nov 25 2010 Mike McClurg <mike.mcclurg@citrix.com> - 0.9.8.6-1
 - Updated to 0.9.8.6 (revision 13252) to support OCaml 3.12.0.
 
 * Fri May 14 2010 David Scott <dave.scott@eu.citrix.com>

@@ -53,6 +53,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllnetdev_stubs.so.owner
 
 %changelog
-* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.0-1
 - Initial package
 

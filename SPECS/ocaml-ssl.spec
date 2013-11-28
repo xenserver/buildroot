@@ -56,6 +56,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllssl_threads_stubs.so.owner
 
 %changelog
-* Sun Jun  2 2013 David Scott <dave.scott@eu.citrix.com>
+* Sun Jun  2 2013 David Scott <dave.scott@eu.citrix.com> - 0.4.6-1
 - Initial package
 

@@ -51,6 +51,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/cmdliner/*
 
 %changelog
-* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.3-1
 - Initial package
 

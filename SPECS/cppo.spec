@@ -33,6 +33,6 @@ rm -rf %{buildroot}
 %{_bindir}/cppo
 
 %changelog
-* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.3-1
 - Initial package
 

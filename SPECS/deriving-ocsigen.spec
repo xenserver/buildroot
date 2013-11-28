@@ -46,6 +46,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/deriving-ocsigen/*
 
 %changelog
-* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 0.3c-1
 - Initial package
 

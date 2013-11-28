@@ -40,6 +40,6 @@ rm -rf %{buildroot}
 %{_bindir}/optcomp-o
 
 %changelog
-* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 1.4-1
 - Initial package
 

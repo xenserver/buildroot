@@ -52,7 +52,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllstdext_stubs.so.owner
 
 %changelog
-* Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
+* Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-1
 - Update to 0.9.1
 
 * Mon Jun  3 2013 David Scott <dave.scott@eu.citrix.com>

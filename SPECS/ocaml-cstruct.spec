@@ -54,7 +54,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllcstruct_stubs.so.owner
 
 %changelog
-* Mon Sep 23 2013 David Scott <dave.scott@eu.citrix.com>
+* Mon Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 0.7.1-2
 - Add dependency on lwt so the cstruct.lwt package is built
 
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>

@@ -40,7 +40,7 @@ rm -rf %{buildroot}
 /usr/share/doc/xenserver/README
 
 %changelog
-* Fri Nov 1 2013 Euan Harris <dave.scott@eu.citrix.com>
+* Fri Nov 1 2013 Euan Harris <dave.scott@eu.citrix.com> - 0.10.0-1
 - Bump version to 0.10.0
 
 * Sun Oct 20 2013 David Scott <dave.scott@eu.citrix.com>

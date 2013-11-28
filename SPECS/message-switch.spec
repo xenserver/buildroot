@@ -87,7 +87,7 @@ developing applications that use %{name}.
 %{_libdir}/ocaml/message_switch/*
 
 %changelog
-* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.1-1
 - Update to 0.10.1 which is more tolerant of startup orderings
 
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
