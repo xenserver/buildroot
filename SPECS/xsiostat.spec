@@ -31,6 +31,6 @@ rm -rf %{buildroot}
 %{_sbindir}/xsiostat
 
 %changelog
-* Tue Jun 19 2013 David Scott <dave.scott@eu.citrix.com>
+* Tue Jun 19 2013 David Scott <dave.scott@eu.citrix.com> - 0.2.0-1
 - Initial package
 

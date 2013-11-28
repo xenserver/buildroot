@@ -69,7 +69,7 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com>
+* Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.4-1
 - Update for 0.9.4
 
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.2-2

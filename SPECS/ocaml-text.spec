@@ -64,6 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/stublibs/*
 
 %changelog
-* Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com>
+* Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com> - 0.6-1
 - Initial package
 

@@ -78,5 +78,5 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/tar/tar_unix.mli
 
 %changelog
-* Fri Nov 15 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri Nov 15 2013 David Scott <dave.scott@eu.citrix.com> - 0.2.1-1
 - Initial package

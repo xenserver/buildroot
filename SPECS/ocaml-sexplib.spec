@@ -43,6 +43,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/sexplib
 
 %changelog
-* Mon Jun  3 2013 David Scott <dave.scott@eu.citrix.com>
+* Mon Jun  3 2013 David Scott <dave.scott@eu.citrix.com> - 109.20.00-1
 - Initial package
 

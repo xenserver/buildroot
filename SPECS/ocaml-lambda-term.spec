@@ -55,6 +55,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so.owner
 
 %changelog
-* Thu Jun  6 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu Jun  6 2013 David Scott <dave.scott@eu.citrix.com> - 1.2-1
 - Initial package
 

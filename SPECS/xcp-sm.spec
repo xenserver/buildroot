@@ -264,7 +264,7 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
-* Fri Nov 8 2013 Euan Harris <euan.harris@eu.citrix.com>
+* Fri Nov 8 2013 Euan Harris <euan.harris@eu.citrix.com> - 0.9.6-1
 - Update to 0.9.6, with fixes for iSCSI volumes on Ubuntu
 
 * Mon Oct 28 2013 Euan Harris <euan.harris@eu.citrix.com>

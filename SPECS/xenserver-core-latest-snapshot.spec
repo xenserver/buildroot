@@ -69,6 +69,6 @@ yum repolist
 /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
 %changelog
-* Sun Jun  9 2013 David Scott <dave.scott@eu.citrix.com>
+* Sun Jun  9 2013 David Scott <dave.scott@eu.citrix.com> - 0.1.0-2
 - Initial package
 

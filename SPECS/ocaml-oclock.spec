@@ -58,6 +58,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dlloclock.so.owner
 
 %changelog
-* Wed May 29 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed May 29 2013 David Scott <dave.scott@eu.citrix.com> - 0.3-2
 - Initial package
 

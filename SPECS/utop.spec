@@ -42,7 +42,7 @@ rm -rf %{buildroot}
 /usr/share/emacs/site-lisp/utop.el
 
 %changelog
-* Fri Jun 21 2013 David Scott <dave.scott@eu.citrix.com>
+* Fri Jun 21 2013 David Scott <dave.scott@eu.citrix.com> - 1.5-1
 - Update to version 1.5 (discovered lurking in plain sight on github)
 
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>

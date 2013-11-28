@@ -48,6 +48,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/re/*
 
 %changelog
-* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com>
+* Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.2.1-1
 - Initial package
 

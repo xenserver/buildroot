@@ -48,7 +48,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/type_conv
 
 %changelog
-* Wed Nov 25 2010 Mike McClurg <mike.mcclurg@citrix.com>
+* Wed Nov 25 2010 Mike McClurg <mike.mcclurg@citrix.com> - 109.20.00-1
 - Updated to version 2.0.1 for compatability with OCaml 3.12.0
 
 * Fri May 14 2010 David Scott <dave.scott@eu.citrix.com>

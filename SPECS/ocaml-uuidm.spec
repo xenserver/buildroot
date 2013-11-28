@@ -59,6 +59,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/uuidm/META
 
 %changelog
-* Wed May 29 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed May 29 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.5-1
 - Initial package
 

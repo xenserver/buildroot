@@ -34,7 +34,7 @@ rm -rf %{buildroot}
 /usr/lib/xapi/plugins/*
 
 %changelog
-* Wed Nov 20 2013 Euan Harris <euan.harris@citrix.com>
+* Wed Nov 20 2013 Euan Harris <euan.harris@citrix.com> - 2013.2-1
 - Update to Havana release
 
 * Wed Jul  3 2013 David Scott <dave.scott@eu.citrix.com>

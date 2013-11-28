@@ -54,6 +54,6 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/stublibs/dllstubs_cdrom.so.owner
 
 %changelog
-* Tue May 28 2013 David Scott <dave.scott@eu.citrix.com>
+* Tue May 28 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-2
 - Initial package
 

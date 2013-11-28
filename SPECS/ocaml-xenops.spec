@@ -51,7 +51,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xenops/*
 
 %changelog
-* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.2-1
 - Update to 0.9.2
 
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>

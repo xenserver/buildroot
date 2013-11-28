@@ -33,7 +33,7 @@ rm -rf %{buildroot}
 %{_bindir}/xenserver-install-wizard
 
 %changelog
-* Wed Oct 30 2013 Euan Harris <euan.harris@citrix.com>
+* Wed Oct 30 2013 Euan Harris <euan.harris@citrix.com> - 0.2.27-1
 - Update to 0.2.27
 
 * Thu Oct 24 2013 Euan Harris <euan.harris@citrix.com>
