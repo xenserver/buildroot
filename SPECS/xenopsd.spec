@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.32
+Version:        0.9.33
 Release:        1
 Summary:        Simple VM manager
 License:        LGPL
@@ -184,6 +184,9 @@ fi
 #fi
 
 %changelog
+* Wed Dec 4 2013 Euan Harris <euan.harris@eu.citrix.com> - 0.9.33-1
+- Update to 0.9.33, with fixes for suspending and resuming HVM guests
+
 * Mon Oct 28 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.32-1
 - Update to 0.9.32, with udev fix (no more "task was asynchronously cancelled")
 
