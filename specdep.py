@@ -21,12 +21,12 @@ def build_type():
     debian_like = ["ubuntu", "debian"]
     rhel_like = ["fedora", "redhat", "centos"]
 
-    distribution = platform.linux_distribution()[0].lower()
-    assert distribution in debian_like + rhel_like
+    dist = platform.linux_distribution(full_distribution_name=False)[0].lower()
+    assert dist in debian_like + rhel_like
 
-    if distribution in debian_like:
+    if dist in debian_like:
         return "deb"
-    elif distribution in rhel_like:
+    elif dist in rhel_like:
         return "rpm"
 
 
