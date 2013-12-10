@@ -3,7 +3,7 @@
 Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.6
-Release: 1
+Release: 2
 Group:   System/Hypervisor
 License: LGPL
 URL:  https://github.com/xapi-project/sm
@@ -14,6 +14,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: swig python-devel xen-devel
 Requires: iscsi-initiator-utils
 Requires: sg3_utils
+Requires: xen-runtime
 
 %description
 This package contains storage backends used in XCP
@@ -264,6 +265,9 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
+* Tue Dec 10 2013 Euan Harris <euan.harris@eu.citrix.com> - 0.9.6-2
+- Add dependency on xen-runtime
+
 * Fri Nov 8 2013 Euan Harris <euan.harris@eu.citrix.com> - 0.9.6-1
 - Update to 0.9.6, with fixes for iSCSI volumes on Ubuntu
 
