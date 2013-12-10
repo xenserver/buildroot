@@ -137,6 +137,7 @@ MAPPING = {
     "swig": ["swig"],
     "/bin/sh": [],
     "xen-utils": ["xen-utils"],
+    "xen-runtime": ["xen-utils"],
     "nfs-utils": ["nfs-common"],
     "hwdata": ["hwdata"],
     "redhat-lsb-core": ["lsb-base"],
