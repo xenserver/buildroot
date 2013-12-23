@@ -24,7 +24,6 @@ make install-base DESTDIR=%{buildroot} LIBDIR=%{buildroot}/%{_libdir}
 
 
 %files
-%defattr(-,root,root,-)
 %{_libdir}/xsconsole/*.py
 %{_libdir}/xsconsole/*.pyc
 %{_libdir}/xsconsole/*.pyo

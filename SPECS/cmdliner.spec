@@ -42,7 +42,6 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README CHANGES
 %{_libdir}/ocaml/cmdliner/*
 

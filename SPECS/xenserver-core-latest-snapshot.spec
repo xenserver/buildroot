@@ -54,7 +54,6 @@ yum repolist
 yum repolist
 
 %files
-%defattr(-,root,root)
 /etc/yum.repos.d/xapi.repo
 /etc/yum.repos.d/xen-c6-tweaked.repo
 #/etc/yum.repos.d/xen-c6.repo

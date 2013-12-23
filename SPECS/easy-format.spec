@@ -25,7 +25,6 @@ make install
 
 
 %files
-%defattr(-,root,root)
 %doc LICENSE README
 %{_libdir}/ocaml/easy-format/*
 

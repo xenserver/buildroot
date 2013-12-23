@@ -51,7 +51,6 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc COPYING.txt README.md
 %{_libdir}/ocaml/ocplib-endian/*
 

@@ -71,7 +71,6 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root,-)
 %doc LICENSE COPYING CHANGES README
 %{_libdir}/ocaml/lwt/*
 %{_libdir}/ocaml/stublibs/*.so

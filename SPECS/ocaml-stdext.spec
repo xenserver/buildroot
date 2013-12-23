@@ -41,7 +41,6 @@ make install DESTDIR=${buildroot}
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md
 %{_libdir}/ocaml/stdext/*
 %{_libdir}/ocaml/stublibs/dllstdext_stubs.so

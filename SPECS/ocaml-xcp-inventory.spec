@@ -40,11 +40,9 @@ mkdir -p %{buildroot}/etc/xcp
 
 
 %files
-%defattr(-,root,root)
 /etc/xcp
 
 %files devel
-%defattr(-,root,root)
 %doc ChangeLog README.md LICENSE
 
 %{_libdir}/ocaml/xcp-inventory/*

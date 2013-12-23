@@ -50,7 +50,6 @@ chmod +w $RPM_BUILD_ROOT/%{_bindir}/*
 
 
 %files
-%defattr(-,root,root)
 %doc LICENSE LICENSE.OMake doc/txt/omake-doc.txt doc/ps/omake-doc.ps doc/ps/omake-doc.pdf doc/webpage CHANGELOG.txt
 
 %attr(555,root,root) %{_bindir}/*

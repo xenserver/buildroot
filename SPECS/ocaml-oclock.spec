@@ -47,7 +47,6 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.markdown
 %{_libdir}/ocaml/oclock/*
 %{_libdir}/ocaml/stublibs/dlloclock.so

@@ -41,7 +41,6 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.md CHANGES
 %{_libdir}/ocaml/cohttp/*
 

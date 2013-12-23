@@ -59,7 +59,6 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root,-)
 %doc CHANGES README
 %{_libdir}/ocaml/react/*
 

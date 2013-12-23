@@ -33,7 +33,6 @@ install -m 0755 ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
 
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/ffs
 %{_sysconfdir}/init.d/ffs

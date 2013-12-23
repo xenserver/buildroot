@@ -29,7 +29,6 @@ install main.native %{buildroot}/%{_sbindir}/xenops-cli
 
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/xenops-cli
 

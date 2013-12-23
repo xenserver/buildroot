@@ -34,7 +34,6 @@ make install
 
 
 %files
-%defattr(-,root,root,-)
 %doc CHANGES.txt COPYRIGHT.txt INRIA-DISCLAIMER.txt INSTALL.txt LICENSE-Tywith.txt LICENSE.txt README.md THIRD-PARTY.txt
 %{_libdir}/ocaml/sexplib
 

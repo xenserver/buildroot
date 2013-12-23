@@ -37,7 +37,6 @@ make install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc COPYING README CHANGES
 %{_libdir}/ocaml/deriving-ocsigen/*
 

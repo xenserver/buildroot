@@ -24,7 +24,6 @@ make install BINDIR=%{buildroot}/%{_bindir}
 
 
 %files
-%defattr(-,root,root)
 %doc LICENSE README
 %{_bindir}/cppo
 

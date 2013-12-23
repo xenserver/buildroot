@@ -41,7 +41,6 @@ make install DESTDIR=${buildroot}
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_libdir}/ocaml/xenstore_transport/*
 

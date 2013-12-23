@@ -22,7 +22,6 @@ install -m 0755 eliloader.py %{buildroot}%{_sbindir}/eliloader
 
 
 %files
-%defattr(-,root,root)
 %{_sbindir}/eliloader
 
 %changelog

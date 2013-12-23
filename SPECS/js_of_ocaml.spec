@@ -42,7 +42,6 @@ make install BINDIR=%{buildroot}/%{_bindir}/
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README CHANGES
 %{_libdir}/ocaml/js_of_ocaml/*
 %{_libdir}/ocaml/stublibs/dlljs_of_ocaml.so

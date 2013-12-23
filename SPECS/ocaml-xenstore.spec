@@ -42,7 +42,6 @@ ocaml setup.ml -install
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README CHANGES LICENSE
 %{_libdir}/ocaml/xenstore/*
 

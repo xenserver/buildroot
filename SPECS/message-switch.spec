@@ -53,7 +53,6 @@ install -m 0755 message-switch-init %{buildroot}%{_sysconfdir}/init.d/message-sw
 
 
 %files
-%defattr(-,root,root)
 %{_sbindir}/message-switch
 %{_sbindir}/message-cli
 %{_sysconfdir}/init.d/message-switch
@@ -78,7 +77,6 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.md ChangeLog
 %{_libdir}/ocaml/message_switch/*
 

@@ -42,7 +42,6 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc ChangeLog README.md
 %{_libdir}/ocaml/vhdlib/*
 %{_libdir}/ocaml/stublibs/dllvhdlib_stubs.so

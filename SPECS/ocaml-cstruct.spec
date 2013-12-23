@@ -43,7 +43,6 @@ ocaml setup.ml -install DESTDIR=%{buildroot}
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md CHANGES
 %{_libdir}/ocaml/cstruct/*
 %{_libdir}/ocaml/stublibs/dllcstruct_stubs.so

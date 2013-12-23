@@ -44,7 +44,6 @@ rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/lambda-term-actions
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE CHANGES
 %{_libdir}/ocaml/lambda-term/*
 %{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so

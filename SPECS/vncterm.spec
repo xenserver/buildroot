@@ -30,7 +30,6 @@ getent passwd vncterm >/dev/null || useradd -r -g vncterm -d /none -s /sbin/nolo
 getent passwd vncterm_base >/dev/null || useradd -r -g vncterm_base -d /none -s /sbin/nologin -c 'for vncterm' vncterm_base
 
 %files
-%defattr(-,root,root,-)
 %doc
 %{_bindir}/vncterm
 

@@ -29,7 +29,6 @@ mv %{buildroot}/%{_libdir}/ocaml/usr/local/bin/optcomp-o %{buildroot}/%{_bindir}
 
 
 %files
-%defattr(-,root,root)
 %doc LICENSE README
 %{_libdir}/ocaml/optcomp/*
 %{_bindir}/optcomp-r

@@ -46,13 +46,11 @@ mkdir -p %{buildroot}%{_libdir}/ocaml/uutf
 
 
 %files
-%defattr(-,root,root)
 %{_libdir}/ocaml/uutf/META
 %{_libdir}/ocaml/uutf/uutf.cmi
 %{_libdir}/ocaml/uutf/uutf.cma
 
 %files devel
-%defattr(-,root,root)
 %{_libdir}/ocaml/uutf/uutf.cmx
 %{_libdir}/ocaml/uutf/uutf.cmxa
 %{_libdir}/ocaml/uutf/uutf.cmxs

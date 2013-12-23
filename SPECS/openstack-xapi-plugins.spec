@@ -26,7 +26,6 @@ cp -r plugins/xenserver/xenapi/etc/xapi.d/plugins/* %{buildroot}/usr/lib/xapi/pl
 
 
 %files
-%defattr(755,root,root,-)
 /usr/lib/xapi/plugins/*
 
 %changelog

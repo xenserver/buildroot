@@ -45,7 +45,6 @@ install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
 
 
 %files
-%defattr(-,root,root)
 %doc README.markdown LICENSE MAINTAINERS
 %{_sbindir}/xcp-networkd
 %{_sysconfdir}/init.d/xcp-networkd

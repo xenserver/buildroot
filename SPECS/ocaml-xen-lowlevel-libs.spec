@@ -43,7 +43,6 @@ make install DESTDIR=${buildroot}
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md
 %{_libdir}/ocaml/xenctrl/*
 #%{_libdir}/ocaml/xenlight/*

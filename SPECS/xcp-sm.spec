@@ -38,7 +38,6 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 [ ! -x /sbin/chkconfig ] || chkconfig --add mpathroot
 
 %files
-%defattr(-,root,root,-)
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot

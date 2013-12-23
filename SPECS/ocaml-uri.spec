@@ -39,7 +39,6 @@ ocaml setup.ml -install
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md CHANGES
 %{_libdir}/ocaml/uri/*
 

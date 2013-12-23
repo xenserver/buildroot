@@ -29,7 +29,6 @@ install -m 0755 dist/build/xe-create-templates/xe-create-templates %{buildroot}/
 
 
 %files
-%defattr(-,root,root)
 %doc README.md
 %{_bindir}/xe-create-templates
 

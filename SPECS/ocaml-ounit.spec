@@ -60,7 +60,6 @@ rm -rf $RPM_BUILD_ROOT/usr/local/share/doc
 
 
 %files
-%defattr(-,root,root,-)
 %doc LICENSE.txt
 %{_libdir}/ocaml/oUnit
 %if %opt
@@ -71,7 +70,6 @@ rm -rf $RPM_BUILD_ROOT/usr/local/share/doc
 
 
 %files devel
-%defattr(-,root,root,-)
 %doc LICENSE.txt README.txt
 %doc _build/src/api-ounit.docdir/*
 %if %opt

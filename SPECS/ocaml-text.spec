@@ -54,7 +54,6 @@ rm -rf $RPM_BUILD_ROOT/usr/local/share/doc
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root,-)
 %doc /usr/share/doc/ocaml-text/*
 %{_libdir}/ocaml/text/*
 %{_libdir}/ocaml/stublibs/*

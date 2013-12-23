@@ -43,7 +43,6 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc ChangeLog README.md
 %{_libdir}/ocaml/cdrom/*
 %{_libdir}/ocaml/stublibs/dllstubs_cdrom.so

@@ -36,7 +36,6 @@ install dist/build/obuild-from-oasis/obuild-from-oasis %{buildroot}/%{_bindir}
 
 
 %files
-%defattr(-,root,root)
 %doc README.md TODO.md DESIGN.md LICENSE OBUILD_SPEC.md
 %{_bindir}/obuild
 %{_bindir}/obuild-simple

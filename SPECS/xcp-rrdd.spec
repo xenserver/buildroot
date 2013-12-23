@@ -35,7 +35,6 @@ install -m 0755 xcp-rrdd-init %{buildroot}%{_sysconfdir}/init.d/xcp-rrdd
 
 
 %files
-%defattr(-,root,root)
 %doc README.markdown LICENSE
 %{_sbindir}/xcp-rrdd
 %{_sysconfdir}/init.d/xcp-rrdd

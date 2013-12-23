@@ -32,7 +32,6 @@ install -m 0755 xapi-libvirt-storage-init %{buildroot}%{_sysconfdir}/init.d/xapi
 
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/xapi-libvirt-storage
 %{_sysconfdir}/init.d/xapi-libvirt-storage

@@ -33,7 +33,6 @@ install -m 0644 xenserver-readme %{buildroot}/usr/share/doc/xenserver/README
 
 
 %files
-%defattr(-,root,root)
 /usr/share/doc/xenserver/README
 
 %changelog

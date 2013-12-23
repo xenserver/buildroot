@@ -42,7 +42,6 @@ make install
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.md ChangeLog MAINTAINERS
 %{_libdir}/ocaml/xenops/*
 

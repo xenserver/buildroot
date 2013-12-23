@@ -43,7 +43,6 @@ rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/uuidtrip
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README CHANGES
 %{_libdir}/ocaml/uuidm/uuidm.mli
 %{_libdir}/ocaml/uuidm/uuidm.cma

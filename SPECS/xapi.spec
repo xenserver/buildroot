@@ -114,7 +114,6 @@ if [ $1 -eq 0 ]; then
 fi
 
 %files
-%defattr(-,root,root,-)
 %{_sbindir}/xapi
 /etc/init.d/xapi
 %config(noreplace) /etc/xapi.conf
@@ -129,12 +128,10 @@ fi
 /etc/pam.d/xapi
 
 %files xe
-%defattr(-,root,root,-)
 %{_bindir}/xe
 /etc/bash_completion.d/xe
 
 %files python-devel
-%defattr(-,root,root,-)
 %{python_sitelib}/XenAPI.py
 %{python_sitelib}/XenAPI.pyo
 %{python_sitelib}/XenAPI.pyc

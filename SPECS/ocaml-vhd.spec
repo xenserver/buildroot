@@ -43,7 +43,6 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc CHANGES README.md LICENSE
 
 %{_libdir}/ocaml/vhd-format/*

@@ -29,7 +29,6 @@ make install BINDIR=%{buildroot}/%{_bindir}
 
 
 %files
-%defattr(-,root,root)
 %doc LICENSE README.md
 %{_libdir}/ocaml/biniou/*
 %{_bindir}/bdump

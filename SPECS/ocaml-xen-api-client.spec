@@ -44,7 +44,6 @@ OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml ocaml setup.ml -install
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md CHANGES
 %{_libdir}/ocaml/xen-api-client/*
 

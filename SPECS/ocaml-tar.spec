@@ -47,7 +47,6 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md
 
 %{_libdir}/ocaml/tar/META

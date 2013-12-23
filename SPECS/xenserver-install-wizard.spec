@@ -25,7 +25,6 @@ ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroo
 
 
 %files
-%defattr(-,root,root,-)
 /usr/share/xenserver-install-wizard/*
 %{_bindir}/xenserver-install-wizard
 

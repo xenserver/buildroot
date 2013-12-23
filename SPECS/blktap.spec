@@ -35,7 +35,6 @@ make install DESTDIR=%{buildroot}
 
 
 %files
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/bin/*
 %{_libdir}/%{name}/etc/udev/rules.d/blktap.rules
 %{_libdir}/%{name}/include/blktap/*

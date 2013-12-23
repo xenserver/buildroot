@@ -30,7 +30,6 @@ ocaml setup.ml -install
 
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE CHANGES.md
 %{_bindir}/utop
 %{_bindir}/utop-full

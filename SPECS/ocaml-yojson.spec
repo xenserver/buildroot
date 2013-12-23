@@ -39,7 +39,6 @@ make install DESTDIR=%{buildroot} BINDIR=%{buildroot}/%{_bindir}
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md LICENSE
 %{_libdir}/ocaml/yojson/*
 %{_bindir}/ydump

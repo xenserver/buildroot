@@ -40,7 +40,6 @@ make install
 
 
 %files
-%defattr(-,root,root,-)
 %{_bindir}/vhd-tool
 /etc/sparse_dd.conf
 %{_libexecdir}/xapi/sparse_dd

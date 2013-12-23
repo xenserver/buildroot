@@ -109,7 +109,6 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/mlvirsh
 
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING.LIB README ChangeLog
 %{_libdir}/ocaml/libvirt
 %if %opt
@@ -123,7 +122,6 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/mlvirsh
 
 
 %files devel
-%defattr(-,root,root,-)
 %doc COPYING.LIB README TODO.libvirt ChangeLog html/*
 %if %opt
 %{_libdir}/ocaml/libvirt/*.a
@@ -135,7 +133,6 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/mlvirsh
 
 %if %build_mlvirsh
 %files -n mlvirsh
-%defattr(-,root,root,-)
 %doc COPYING README ChangeLog
 %{_bindir}/mlvirsh
 %endif

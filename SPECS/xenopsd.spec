@@ -107,7 +107,6 @@ install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE
 %{_libexecdir}/%{name}/vif
 %{_libexecdir}/%{name}/vif-real
@@ -123,7 +122,6 @@ install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 /etc/xapi/network.conf
 
 %files libvirt
-%defattr(-,root,root)
 %{_sbindir}/xenopsd-libvirt
 %{_sysconfdir}/init.d/xenopsd-libvirt
 
@@ -137,7 +135,6 @@ if [ $1 -eq 0 ]; then
 fi
 
 %files xc
-%defattr(-,root,root)
 %{_sbindir}/xenopsd-xc
 %{_sysconfdir}/init.d/xenopsd-xc
 %{_libexecdir}/%{name}/xenguest
@@ -152,7 +149,6 @@ if [ $1 -eq 0 ]; then
 fi
 
 %files simulator
-%defattr(-,root,root)
 %{_sbindir}/xenopsd-simulator
 %{_sysconfdir}/init.d/xenopsd-simulator
 

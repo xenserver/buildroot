@@ -38,7 +38,6 @@ install -m 0755 forkexecd-init %{buildroot}%{_sysconfdir}/init.d/forkexecd
 
 
 %files
-%defattr(-,root,root)
 %{_sbindir}/forkexecd
 %{_sbindir}/forkexecd-cli
 %{_sysconfdir}/init.d/forkexecd
@@ -63,7 +62,6 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.md ChangeLog MAINTAINERS
 %{_libdir}/ocaml/forkexec/*
 

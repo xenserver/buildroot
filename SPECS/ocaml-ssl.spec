@@ -42,7 +42,6 @@ make install DESTDIR=%{buildroot}
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc CHANGES COPYING README
 %{_libdir}/ocaml/ssl/*
 %{_libdir}/ocaml/stublibs/dllssl_stubs.so

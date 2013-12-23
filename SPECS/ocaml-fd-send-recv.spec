@@ -42,7 +42,6 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md LICENSE
 %{_libdir}/ocaml/fd-send-recv/*
 %{_libdir}/ocaml/stublibs/dllfd_send_recv_stubs.so

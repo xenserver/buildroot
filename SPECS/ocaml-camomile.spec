@@ -72,7 +72,6 @@ cp tools/camomilelocaledef.opt $RPM_BUILD_ROOT%{_bindir}/camomilelocaledef
 
 
 %files
-%defattr(-,root,root,-)
 %doc README
 %{_libdir}/ocaml/camomile
 %if %opt
@@ -88,7 +87,6 @@ cp tools/camomilelocaledef.opt $RPM_BUILD_ROOT%{_bindir}/camomilelocaledef
 
 
 %files devel
-%defattr(-,root,root,-)
 %doc README dochtml/*
 %if %opt
 %{_libdir}/ocaml/camomile/*.a
@@ -99,7 +97,6 @@ cp tools/camomilelocaledef.opt $RPM_BUILD_ROOT%{_bindir}/camomilelocaledef
 
 
 %files data
-%defattr(-,root,root,-)
 %doc README
 %{_datadir}/camomile/
 

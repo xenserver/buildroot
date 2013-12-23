@@ -22,7 +22,6 @@ install -m 0755 xsiostat %{buildroot}/%{_sbindir}/xsiostat
 
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/xsiostat
 

@@ -37,7 +37,6 @@ install -m 0644 squeezed-conf %{buildroot}%{_sysconfdir}/squeezed.conf
 
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/squeezed
 %{_sysconfdir}/init.d/squeezed

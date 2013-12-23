@@ -29,7 +29,6 @@ install dist/build/sm-cli/sm-cli %{buildroot}/%{_sbindir}/sm-cli
 
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/sm-cli
 
