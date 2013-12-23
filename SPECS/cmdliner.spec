@@ -11,7 +11,7 @@ Requires:       ocaml ocaml-findlib
 
 %description
 Cmdliner is an OCaml module for the declarative definition of command line
-interfaces. It provides a simple and compositional mechanism to	convert
+interfaces. It provides a simple and compositional mechanism to convert
 command line arguments to OCaml values and pass them to your functions.
 The module automatically handles syntax errors, help messages and UNIX
 man page generation. It supports programs with single or multiple commands
