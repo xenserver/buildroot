@@ -244,7 +244,7 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 
 %package rawhba
 Group:   System/Hypervisor
-Summary: rawhba SR type capability
+Summary: XCP rawhba SR type capability
 #Requires: sm = @SM_VERSION@-@SM_RELEASE@
 
 %description rawhba

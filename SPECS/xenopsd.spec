@@ -28,7 +28,7 @@ Requires:       message-switch xenops-cli redhat-lsb-core
 Simple VM manager for the xapi toolstack.
 
 %package        libvirt
-Summary:        %{name} using libvirt
+Summary:        Xenopsd using libvirt
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       libvirt
@@ -38,7 +38,7 @@ Simple VM manager for Xen and KVM using libvirt.
 
 
 %package        xc
-Summary:        %{name} using xc
+Summary:        Xenopsd using xc
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       xen-libs vncterm forkexecd
@@ -47,7 +47,7 @@ Requires:       xen-libs vncterm forkexecd
 Simple VM manager for Xen using libxc.
 
 %package        simulator
-Summary:        %{name} using libvirt
+Summary:        Xenopsd simulator
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
@@ -55,7 +55,7 @@ Requires:       %{name} = %{version}-%{release}
 A synthetic VM manager for testing.
 
 #%package        xenlight
-#Summary:        %{name} using libxenlight
+#Summary:        Xenopsd using libxenlight
 #Group:          Development/Other
 #Requires:       %{name} = %{version}-%{release}
 #%description    xenlight
