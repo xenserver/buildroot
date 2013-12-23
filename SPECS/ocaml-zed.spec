@@ -8,7 +8,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://forge.ocamlcore.org/projects/zed/
 Source0:        http://forge.ocamlcore.org/frs/download.php/944/zed-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc ocaml-camomile-devel ocaml-react-devel
 Requires:       ocaml ocaml-findlib
 

@@ -8,7 +8,6 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/xen-api-libs-transitional
 Source0:        https://github.com/xapi-project/xen-api-libs-transitional/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-stdext-devel xmlm-devel forkexecd-devel
 BuildRequires:  ocaml-rpc-devel ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel
 BuildRequires:  ocaml-xenstore-clients-devel xen-devel ocaml-camlp4-devel

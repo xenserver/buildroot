@@ -7,7 +7,6 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/message-switch
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        message-switch-init
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 Requires(post): chkconfig
 Requires(preun): chkconfig

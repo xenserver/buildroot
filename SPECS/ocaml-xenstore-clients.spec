@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/ocaml-xenstore-clients
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-lwt-devel ocaml-xenstore-devel
 Requires:       ocaml ocaml-findlib

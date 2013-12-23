@@ -6,7 +6,6 @@ License: GPL2
 Group: Administration/System
 URL: http://github.com/jamesbulpin/xsconsole
 Source0: https://github.com/jamesbulpin/xsconsole/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: PyPAM xapi-python-devel
 
 %description

@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/netdev
 Source0:        https://github.com/xapi-project/netdev/archive/netdev-%{version}/netdev-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib forkexecd-devel ocaml-stdext-devel ocaml-xcp-idl-devel ocaml-oclock-devel
 Requires:       ocaml ocaml-findlib
 

@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/easy-format.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib
 Requires:       ocaml ocaml-findlib
 

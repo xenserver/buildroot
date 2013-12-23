@@ -27,7 +27,6 @@ Patch10:	ocaml-libvirt-11-658970236caa31bbef44562c521d55b9a4689f4d
 Patch11:	ocaml-libvirt-12-31ce6b280a2d987abc484b8f8d1e6cb25a70d737
 Patch12:        ocaml-libvirt-13-fixbuild
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0

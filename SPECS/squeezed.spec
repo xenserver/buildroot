@@ -8,7 +8,6 @@ URL:            https://github.com/xapi-project/squeezed
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        squeezed-init
 Source2:        squeezed-conf
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-stdext-devel ocaml-xcp-idl-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel ocaml-xenstore-clients-devel

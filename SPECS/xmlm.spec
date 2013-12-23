@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://erratique.ch/software/xmlm
 Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}.tbz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 

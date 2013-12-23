@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/stdext
 Source0:        https://github.com/xapi-project/stdext/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-fd-send-recv-devel ocaml-uuidm-devel
 Requires:       ocaml ocaml-findlib
 

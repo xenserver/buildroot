@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Other
 URL:            http://forge.ocamlcore.org/projects/optcomp/
 Source0:        https://forge.ocamlcore.org/frs/download.php/1011/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc ocaml-camlp4 ocaml-camlp4-devel
 Requires:       ocaml
 

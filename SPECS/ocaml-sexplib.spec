@@ -9,7 +9,6 @@ Group:          Development/Libraries
 License:        LGPLv2+ with exceptions and BSD
 URL:            https://ocaml.janestreet.com
 Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/sexplib-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 BuildRequires:  ocaml >= 4.00.0
 BuildRequires:  ocaml-findlib

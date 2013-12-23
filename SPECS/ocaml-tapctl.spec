@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/tapctl
 Source0:        https://github.com/xapi-project/tapctl/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  forkexecd-devel ocaml-stdext-devel ocaml-rpc-devel ocaml-xcp-idl-devel ocaml-oclock-devel
 Requires:       ocaml ocaml-findlib forkexecd-devel

@@ -6,7 +6,6 @@ URL: https://github.com/djs55/xcp-eliloader
 Source0: https://github.com/djs55/xcp-%{name}/archive/master/%{version}/%{name}-%{version}.tar.gz
 License: GPL
 Group: Applications/System
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
  
 %description

@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/OCamlPro/ocplib-endian
 Source0:        https://github.com/OCamlPro/ocplib-endian/archive/%{version}/ocplib-endian-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib optcomp ocaml-camlp4 ocaml-camlp4-devel
 Requires:       ocaml ocaml-findlib
 

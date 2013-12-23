@@ -10,7 +10,6 @@ URL:  https://github.com/xapi-project/sm
 Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
 Source1: xcp-mpath-scsidev-rules
 Source2: xcp-mpath-scsidev-script
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: swig python-devel xen-devel
 Requires: iscsi-initiator-utils
 Requires: sg3_utils

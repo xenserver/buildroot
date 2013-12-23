@@ -9,7 +9,6 @@ License: LGPL+linking exception
 URL:  https://github.com/djs55/vhd-tool
 Source0: https://github.com/djs55/vhd-tool/archive/%{version}/vhd-tool-%{version}.tar.gz
 Source1: vhd-tool-sparse_dd-conf
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
 BuildRequires: ocaml-xcp-idl-devel ocaml-vhd-devel ocaml-obuild
 BuildRequires: ocaml-nbd-devel ocaml-cstruct-devel ocaml-lwt-devel

@@ -8,7 +8,6 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/xcp-inventory
 Source0:        https://github.com/xapi-project/xcp-inventory/archive/xcp-inventory-%{version}/xcp-inventory-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib-devel ocaml-obuild cmdliner-devel ocaml-uuidm-devel ocaml-stdext-devel
 
 %description

@@ -8,7 +8,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/biniou.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib easy-format
 Requires:       ocaml ocaml-findlib
 

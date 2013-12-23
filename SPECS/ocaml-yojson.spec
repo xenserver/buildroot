@@ -8,7 +8,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/yojson.html
 Source0:        http://mjambon.com/releases/yojson/yojson-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib cppo easy-format biniou
 Requires:       ocaml ocaml-findlib
 

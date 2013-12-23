@@ -6,7 +6,6 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/djs55/ocaml-tar
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ounit-devel
 # These are build requires which are also requires of the -devel package
 BuildRequires:  ocaml-re-devel ocaml-cstruct-devel ocaml-lwt-devel

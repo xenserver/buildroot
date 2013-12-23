@@ -6,7 +6,6 @@ License:        LGPLv2.1
 Group:          Development/Other
 URL:            https://github.com/xenserver/xsiostat
 Source0:        https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 Simple XenServer IO stat thingy

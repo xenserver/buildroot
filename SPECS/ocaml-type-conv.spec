@@ -10,7 +10,6 @@ License:        LGPLv2+ with exceptions and BSD
 URL:            http://www.ocaml.info/software.html#type_driven
 Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/type_conv-%{version}.tar.gz
 #Patch0:         type-conv-META.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 BuildRequires:  ocaml >= 4.00.0
 BuildRequires:  ocaml-findlib

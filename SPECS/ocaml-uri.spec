@@ -8,7 +8,6 @@ License:        ISC
 Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-uri
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml >= 4.00, ocaml-findlib, ocaml-ocamldoc, ocaml-re-devel, ocaml-compiler-libs
 Requires:       ocaml, ocaml-findlib
 

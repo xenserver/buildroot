@@ -12,7 +12,6 @@ Source3:        xenopsd-libvirt-init
 Source4:        xenopsd-xenlight-init
 Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel

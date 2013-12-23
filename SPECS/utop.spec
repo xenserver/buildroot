@@ -6,7 +6,6 @@ License:        BSD
 Group:          Development/Other
 URL:            https://github.com/diml/utop
 Source0:        https://github.com/diml/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
 BuildRequires:  ocaml-zed-devel ocaml-lambda-term-devel
 Requires: ocaml-camomile-data

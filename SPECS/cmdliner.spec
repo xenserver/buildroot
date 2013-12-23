@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Other
 URL:            http://erratique.ch/software/cmdliner
 Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}.tbz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 

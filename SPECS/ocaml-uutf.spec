@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://erratique.ch/software/uutf
 Source0:        http://erratique.ch/software/uutf/releases/uutf-%{version}.tbz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-ocamldoc ocaml-findlib
 Requires:       ocaml
 

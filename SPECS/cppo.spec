@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Other
 URL:            http://mjambon.com/cppo.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
 Requires:       ocaml
 

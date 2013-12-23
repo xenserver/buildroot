@@ -8,7 +8,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://forge.ocamlcore.org/projects/lambda-term/
 Source0:        http://forge.ocamlcore.org/frs/download.php/945/lambda-term-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc ocaml-zed-devel ocaml-lwt-devel ocaml-camomile-devel ocaml-react-devel
 Requires:       ocaml ocaml-findlib
 

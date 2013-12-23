@@ -6,7 +6,6 @@ License:        LGPL
 Group:          Development/Other
 URL:            http://www.xenserver.org/
 Source0:        xenserver-readme
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Requires:       xenserver-install-wizard
 Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
 Requires:       xenopsd-xc xenopsd-libvirt xenopsd-simulator

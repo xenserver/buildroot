@@ -7,7 +7,6 @@ Group:          System/Hypervisor
 URL:            https://launchpad.net/nova/havana
 Source0:        https://launchpad.net/nova/havana/%{version}/+download/nova-%{version}.tar.gz
 BuildArch:      noarch
-BuildRoot:      %{_tmppath}/nova-%{version}-%{release}
 BuildRequires:  python-setuptools
 
 %define debug_package %{nil}

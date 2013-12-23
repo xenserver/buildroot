@@ -7,7 +7,6 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/ffs
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        ffs-init
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel

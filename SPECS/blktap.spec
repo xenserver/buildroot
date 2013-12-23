@@ -6,7 +6,6 @@ Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/djs55/blktap
 Source0: https://github.com/djs55/blktap/archive/%{version}/blktap-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: autoconf automake libtool libaio-devel xen-devel libuuid-devel
 
 %description

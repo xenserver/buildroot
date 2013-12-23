@@ -10,7 +10,6 @@ Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
 Source4:        xcp-networkd-bridge-conf
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel forkexecd-devel ocaml-xen-api-libs-transitional-devel

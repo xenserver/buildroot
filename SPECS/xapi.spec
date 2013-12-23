@@ -13,7 +13,6 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
 BuildRequires: pam-devel tetex-latex ocaml xen-devel zlib-devel
 BuildRequires: ocaml-xcp-idl-devel ocaml-xen-api-libs-transitional-devel

@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            http://github.com/ocaml/ocaml-re
 Source0:        http://github.com/ocaml/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 

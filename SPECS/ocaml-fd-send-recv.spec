@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/ocaml-fd-send-recv
 Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib
 Requires:       ocaml ocaml-findlib
 
