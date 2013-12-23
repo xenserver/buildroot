@@ -24,12 +24,9 @@ obuild configure
 obuild build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_bindir}
 install -m 0755 dist/build/xe-create-templates/xe-create-templates %{buildroot}/%{_bindir}/
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

@@ -31,15 +31,12 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank

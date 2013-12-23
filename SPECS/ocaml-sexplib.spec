@@ -27,14 +27,11 @@ Convert values to and from s-expressions in OCaml.
 make
 
 %install
-rm -rf %{buildroot}
 export DESTDIR=%{buildroot}
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
 make install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)

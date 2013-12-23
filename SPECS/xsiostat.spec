@@ -17,12 +17,9 @@ Simple XenServer IO stat thingy
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install -m 0755 xsiostat %{buildroot}/%{_sbindir}/xsiostat
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

@@ -33,14 +33,11 @@ fi
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank

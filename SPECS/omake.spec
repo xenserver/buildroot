@@ -37,7 +37,6 @@ INSTALL_ROOT=$RPM_BUILD_ROOT\
    make all
 
 %install
-rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/omake
 
@@ -49,8 +48,6 @@ INSTALL_ROOT=$RPM_BUILD_ROOT\
 
 chmod +w $RPM_BUILD_ROOT/%{_bindir}/*
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)

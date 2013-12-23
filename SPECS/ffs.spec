@@ -26,14 +26,11 @@ cp %{SOURCE1} ffs-init
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/ffs/ffs %{buildroot}/%{_sbindir}/ffs
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

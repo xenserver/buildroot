@@ -34,12 +34,9 @@ fi
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank

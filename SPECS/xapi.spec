@@ -71,7 +71,6 @@ omake ocaml/xe-cli/xe
 sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in > xen-api-xapi-conf
 
 %install
-rm -rf %{buildroot}
  
 mkdir -p %{buildroot}/%{_sbindir}
 install -m 0755 ocaml/xapi/xapi.opt %{buildroot}/%{_sbindir}/xapi
@@ -104,8 +103,6 @@ mkdir -p %{buildroot}%{python_sitelib}
 install -m 0644 scripts/examples/python/XenAPI.py %{buildroot}%{python_sitelib}
 install -m 0644 scripts/examples/python/XenAPIPlugin.py %{buildroot}%{python_sitelib}
 
-%clean
-rm -rf %{buildroot}
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add xapi

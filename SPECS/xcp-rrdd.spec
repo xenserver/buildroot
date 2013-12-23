@@ -28,14 +28,11 @@ cp %{SOURCE1} xcp-rrdd-init
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xcp-rrdd-init %{buildroot}%{_sysconfdir}/init.d/xcp-rrdd
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

@@ -22,8 +22,6 @@ This package contains the vncterm utility
 mkdir -p %{buildroot}%{_bindir}/
 cp vncterm %{buildroot}%{_bindir}/
 
-%clean
-rm -rf %{buildroot}
 
 %pre
 getent group vncterm >/dev/null || groupadd -r vncterm

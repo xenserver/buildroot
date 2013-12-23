@@ -27,7 +27,6 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
@@ -37,8 +36,6 @@ install fe_cli.native %{buildroot}/%{_sbindir}/forkexecd-cli
 mkdir -p %{buildroot}/%{_sysconfdir}/init.d
 install -m 0755 forkexecd-init %{buildroot}%{_sysconfdir}/init.d/forkexecd
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

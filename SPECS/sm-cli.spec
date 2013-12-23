@@ -24,12 +24,9 @@ Command-line interface for xapi toolstack storage managers.
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/sm-cli/sm-cli %{buildroot}/%{_sbindir}/sm-cli
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

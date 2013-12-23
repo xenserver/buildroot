@@ -33,8 +33,6 @@ install -m 0644 xcp-mpath-scsidev-rules %{buildroot}/etc/udev/rules.d/55-xs-mpat
 mkdir -p %{buildroot}/etc/udev/scripts
 install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-scsidev.sh
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add mpathroot

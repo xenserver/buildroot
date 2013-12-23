@@ -33,7 +33,6 @@ cp %{SOURCE4} xcp-networkd-bridge-conf
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/xcp-networkd/xcp-networkd %{buildroot}/%{_sbindir}/xcp-networkd
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
@@ -44,8 +43,6 @@ install -m 0644 xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
 mkdir -p %{buildroot}/etc/modprobe.d
 install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

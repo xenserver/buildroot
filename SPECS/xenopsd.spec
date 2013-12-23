@@ -76,7 +76,6 @@ make configure
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 
 install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
@@ -106,8 +105,6 @@ LIBEXECDIR=%{_libexecdir}/%{name} ETCDIR=/etc/xapi SCRIPTSDIR=%{_libexecdir}/%{n
 install -m 0644 xenopsd-conf %{buildroot}/etc/xenopsd.conf
 install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

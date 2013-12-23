@@ -23,8 +23,6 @@ make DESTDIR=%{buildroot}
 mkdir -p %{buildroot}%{_bindir}
 ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroot}%{_bindir}/xenserver-install-wizard
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)

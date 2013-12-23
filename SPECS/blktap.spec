@@ -21,7 +21,6 @@ sh autogen.sh
 make
 
 %install
-rm -rf %{buildroot}
 
 mkdir -p %{buildroot}/%{_libdir}/%{name}
 mkdir -p %{buildroot}/%{_libdir}/%{name}/lib
@@ -34,8 +33,6 @@ mkdir -p %{buildroot}/%{_libdir}/%{name}/etc/udev/rules.d
 
 make install DESTDIR=%{buildroot}
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)

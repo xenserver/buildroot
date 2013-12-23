@@ -31,8 +31,6 @@ cp %{SOURCE0} xenserver-readme
 mkdir -p %{buildroot}/usr/share/doc/xenserver
 install -m 0644 xenserver-readme %{buildroot}/usr/share/doc/xenserver/README
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

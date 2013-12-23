@@ -32,15 +32,12 @@ cp %{SOURCE1} vhd-tool-sparse_dd-conf
 make
 
 %install
-rm -rf %{buildroot}
  
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
 mkdir -p %{buildroot}/etc
 make install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)

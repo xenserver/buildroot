@@ -91,7 +91,6 @@ strip libvirt/dllmllibvirt.so
 
 %install
 # These rules work if the library uses 'ocamlfind install' to install itself.
-rm -rf $RPM_BUILD_ROOT
 export DESTDIR=$RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
@@ -107,8 +106,6 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/mlvirsh
 %endif
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %files

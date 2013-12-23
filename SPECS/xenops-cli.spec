@@ -24,12 +24,9 @@ Command-line interface for xenopsd, the xapi toolstack domain manager.
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install main.native %{buildroot}/%{_sbindir}/xenops-cli
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

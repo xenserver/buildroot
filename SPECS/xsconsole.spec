@@ -15,7 +15,6 @@ Console tool for configuring a XenServer installation.
 %setup -q
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libdir}
 make install-base DESTDIR=%{buildroot} LIBDIR=%{buildroot}/%{_libdir}
@@ -23,8 +22,6 @@ make install-base DESTDIR=%{buildroot} LIBDIR=%{buildroot}/%{_libdir}
 %build
 #This space intentionally left blank
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)

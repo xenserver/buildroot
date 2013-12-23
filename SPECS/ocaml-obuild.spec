@@ -29,15 +29,11 @@ working, adapting parts where necessary to support OCaml fully.
 ./bootstrap
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_bindir}
 install dist/build/obuild/obuild %{buildroot}/%{_bindir}
 install dist/build/obuild-simple/obuild-simple %{buildroot}/%{_bindir}
 install dist/build/obuild-from-oasis/obuild-from-oasis %{buildroot}/%{_bindir}
 
-%clean
-rm -rf %{buildroot}
-rm -rf dist
 
 %files
 %defattr(-,root,root)

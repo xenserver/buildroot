@@ -46,8 +46,6 @@ mkdir -p %{buildroot}/etc/pki/rpm-gpg/
 install -m 0644 fusion-release-RPM-GPG-KEY-EPEL-6 %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
 install -m 0644 fusion-release-RPM-GPG-KEY-remi %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
-%clean
-rm -rf %{buildroot}
 
 %post
 yum repolist

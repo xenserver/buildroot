@@ -17,12 +17,9 @@ Bootloader for EL-based distros that support Xen.
 %build
  
 %install
-rm -rf $RPM_BUILD_ROOT
 mkdir -p %{buildroot}/%{_sbindir}
 install -m 0755 eliloader.py %{buildroot}%{_sbindir}/eliloader
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)

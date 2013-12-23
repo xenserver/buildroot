@@ -19,13 +19,10 @@ Easy_format: indentation made easy.
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 make install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

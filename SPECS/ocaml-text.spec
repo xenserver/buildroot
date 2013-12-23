@@ -41,7 +41,6 @@ ocaml setup.ml -build
 ocaml setup.ml -doc
 
 %install
-rm -rf $RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
 ocaml setup.ml -install
@@ -49,8 +48,6 @@ ocaml setup.ml -install
 # Remove this, reinstall it properly with a %%doc rule below.
 rm -rf $RPM_BUILD_ROOT/usr/local/share/doc
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %files

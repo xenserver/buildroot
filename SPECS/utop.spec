@@ -22,15 +22,12 @@ ocaml setup.ml -configure --prefix %{_prefix} --destdir %{buildroot}
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

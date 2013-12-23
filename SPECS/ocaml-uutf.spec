@@ -44,8 +44,6 @@ mkdir -p %{buildroot}%{_libdir}/ocaml/uutf
 (cd _build/src; ocamlfind install uutf ../pkg/META uutf.mli uutf.cmi uutf.cmx uutf.cma uutf.a uutf.cma uutf.cmxa uutf.cmxs)
 #ocamlfind install uutf _build/pkg/META _build/src/uutf.{mli,cmi,cmx,cma,a,cmxa,cmxs}
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

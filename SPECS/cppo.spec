@@ -19,12 +19,9 @@ Equivalent of the C preprocessor for OCaml.
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_bindir}
 make install BINDIR=%{buildroot}/%{_bindir}
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

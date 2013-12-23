@@ -20,7 +20,6 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
@@ -28,8 +27,6 @@ mkdir -p %{buildroot}/%{_bindir}
 mv %{buildroot}/%{_libdir}/ocaml/usr/local/bin/optcomp-r %{buildroot}/%{_bindir}/
 mv %{buildroot}/%{_libdir}/ocaml/usr/local/bin/optcomp-o %{buildroot}/%{_bindir}/
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

@@ -42,7 +42,6 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
@@ -52,8 +51,6 @@ install main.native %{buildroot}/%{_sbindir}/message-cli
 mkdir -p %{buildroot}/%{_sysconfdir}/init.d
 install -m 0755 message-switch-init %{buildroot}%{_sysconfdir}/init.d/message-switch
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

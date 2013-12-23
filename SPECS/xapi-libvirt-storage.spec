@@ -25,14 +25,11 @@ cp %{SOURCE1} xapi-libvirt-storage-init
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/sm-libvirt/sm-libvirt %{buildroot}/%{_sbindir}/xapi-libvirt-storage
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xapi-libvirt-storage-init %{buildroot}%{_sysconfdir}/init.d/xapi-libvirt-storage
 
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)

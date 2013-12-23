@@ -56,7 +56,6 @@ make
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 export DESTDIR=$RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
@@ -67,8 +66,6 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 #chrpath --delete $OCAMLFIND_DESTDIR/stublibs/dll*.so
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 # This space intentionally left blank
