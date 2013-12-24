@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-cohttp
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-re-devel ocaml-uri-devel ocaml-cstruct-devel ocaml-lwt-devel ocaml-ounit-devel ocaml-ocamldoc ocaml-camlp4-devel
 # should these be inherited from ssl.spec somehow?
 BuildRequires:  openssl openssl-devel
@@ -33,19 +32,15 @@ developing applications that use %{name}.
 make build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.md CHANGES
 %{_libdir}/ocaml/cohttp/*
 

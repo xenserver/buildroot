@@ -8,7 +8,6 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/ocaml-qmp
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-yojson-devel cmdliner-devel ocaml-ounit-devel
 Requires:       ocaml ocaml-findlib
 
@@ -35,18 +34,14 @@ fi
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc ChangeLog README.md LICENSE
 
 %{_libdir}/ocaml/qmp/*

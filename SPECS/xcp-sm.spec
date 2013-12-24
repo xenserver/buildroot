@@ -10,7 +10,6 @@ URL:  https://github.com/xapi-project/sm
 Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
 Source1: xcp-mpath-scsidev-rules
 Source2: xcp-mpath-scsidev-script
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: swig python-devel xen-devel
 Requires: iscsi-initiator-utils
 Requires: sg3_utils
@@ -34,14 +33,11 @@ install -m 0644 xcp-mpath-scsidev-rules %{buildroot}/etc/udev/rules.d/55-xs-mpat
 mkdir -p %{buildroot}/etc/udev/scripts
 install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-scsidev.sh
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add mpathroot
 
 %files
-%defattr(-,root,root,-)
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot
@@ -248,7 +244,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %package rawhba
 Group:   System/Hypervisor
-Summary: rawhba SR type capability
+Summary: XCP rawhba SR type capability
 #Requires: sm = @SM_VERSION@-@SM_RELEASE@
 
 %description rawhba

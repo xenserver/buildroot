@@ -10,7 +10,6 @@ Group:          Development/Libraries
 License:        BSD
 URL:            http://forge.ocamlcore.org/projects/ocaml-text
 Source0:        http://forge.ocamlcore.org/frs/download.php/937/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
@@ -42,7 +41,6 @@ ocaml setup.ml -build
 ocaml setup.ml -doc
 
 %install
-rm -rf $RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
 ocaml setup.ml -install
@@ -50,15 +48,12 @@ ocaml setup.ml -install
 # Remove this, reinstall it properly with a %%doc rule below.
 rm -rf $RPM_BUILD_ROOT/usr/local/share/doc
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %files
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root,-)
 %doc /usr/share/doc/ocaml-text/*
 %{_libdir}/ocaml/text/*
 %{_libdir}/ocaml/stublibs/*

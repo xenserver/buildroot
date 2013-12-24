@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/netdev
 Source0:        https://github.com/xapi-project/netdev/archive/netdev-%{version}/netdev-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib forkexecd-devel ocaml-stdext-devel ocaml-xcp-idl-devel ocaml-oclock-devel
 Requires:       ocaml ocaml-findlib
 
@@ -32,21 +31,17 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.md ChangeLog MAINTAINERS
 %{_libdir}/ocaml/netdev/*
 %{_libdir}/ocaml/stublibs/dllnetdev_stubs.so

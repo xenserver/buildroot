@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://erratique.ch/software/uutf
 Source0:        http://erratique.ch/software/uutf/releases/uutf-%{version}.tbz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-ocamldoc ocaml-findlib
 Requires:       ocaml
 
@@ -45,17 +44,13 @@ mkdir -p %{buildroot}%{_libdir}/ocaml/uutf
 (cd _build/src; ocamlfind install uutf ../pkg/META uutf.mli uutf.cmi uutf.cmx uutf.cma uutf.a uutf.cma uutf.cmxa uutf.cmxs)
 #ocamlfind install uutf _build/pkg/META _build/src/uutf.{mli,cmi,cmx,cma,a,cmxa,cmxs}
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %{_libdir}/ocaml/uutf/META
 %{_libdir}/ocaml/uutf/uutf.cmi
 %{_libdir}/ocaml/uutf/uutf.cma
 
 %files devel
-%defattr(-,root,root)
 %{_libdir}/ocaml/uutf/uutf.cmx
 %{_libdir}/ocaml/uutf/uutf.cmxa
 %{_libdir}/ocaml/uutf/uutf.cmxs

@@ -7,7 +7,6 @@ Group: System/Hypervisor
 URL:  https://github.com/xenserver/vncterm
 Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:  vncterm-1-fix-build
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: xen-devel
 
 %description
@@ -23,8 +22,6 @@ This package contains the vncterm utility
 mkdir -p %{buildroot}%{_bindir}/
 cp vncterm %{buildroot}%{_bindir}/
 
-%clean
-rm -rf %{buildroot}
 
 %pre
 getent group vncterm >/dev/null || groupadd -r vncterm
@@ -33,7 +30,6 @@ getent passwd vncterm >/dev/null || useradd -r -g vncterm -d /none -s /sbin/nolo
 getent passwd vncterm_base >/dev/null || useradd -r -g vncterm_base -d /none -s /sbin/nologin -c 'for vncterm' vncterm_base
 
 %files
-%defattr(-,root,root,-)
 %doc
 %{_bindir}/vncterm
 

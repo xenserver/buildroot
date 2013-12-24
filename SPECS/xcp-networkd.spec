@@ -10,7 +10,6 @@ Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
 Source4:        xcp-networkd-bridge-conf
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel forkexecd-devel ocaml-xen-api-libs-transitional-devel
@@ -34,7 +33,6 @@ cp %{SOURCE4} xcp-networkd-bridge-conf
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/xcp-networkd/xcp-networkd %{buildroot}/%{_sbindir}/xcp-networkd
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
@@ -45,11 +43,8 @@ install -m 0644 xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
 mkdir -p %{buildroot}/etc/modprobe.d
 install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc README.markdown LICENSE MAINTAINERS
 %{_sbindir}/xcp-networkd
 %{_sysconfdir}/init.d/xcp-networkd

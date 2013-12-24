@@ -7,7 +7,6 @@ Release: 1%{?dist}
 URL: http://www.infradead.org/~tgr/libnl/
 Source: http://www.infradead.org/~tgr/libnl/files/libnl-%{version}.tar.gz
 Source1: http://www.infradead.org/~tgr/libnl/files/libnl-doc-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: flex bison
 BuildRequires: python
 
@@ -63,14 +62,12 @@ find $RPM_BUILD_ROOT -name \*.la -delete
 %postun cli -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING
 %exclude %{_libdir}/libnl-cli*.so.*
 %{_libdir}/libnl-*.so.*
 %config(noreplace) %{_sysconfdir}/*
 
 %files devel
-%defattr(-,root,root,-)
 %doc COPYING
 %{_includedir}/libnl3/netlink/
 %dir %{_includedir}/libnl3/
@@ -78,7 +75,6 @@ find $RPM_BUILD_ROOT -name \*.la -delete
 %{_libdir}/pkgconfig/*.pc
 
 %files cli
-%defattr(-,root,root,-)
 %doc COPYING
 %{_libdir}/libnl-cli*.so.*
 %{_libdir}/libnl/
@@ -86,7 +82,6 @@ find $RPM_BUILD_ROOT -name \*.la -delete
 %{_mandir}/man8/* 
 
 %files doc
-%defattr(-,root,root,-)
 %doc COPYING
 %doc libnl-doc-%{version}/*.html
 %doc libnl-doc-%{version}/*.css

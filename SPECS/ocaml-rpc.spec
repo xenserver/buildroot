@@ -8,7 +8,6 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/samoht/ocaml-rpc
 Source0:        https://github.com/samoht/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-type-conv xmlm-devel js_of_ocaml-devel ocaml-camlp4-devel
 Requires:       ocaml ocaml-findlib ocaml-type-conv ocaml-camlp4-devel
 
@@ -31,20 +30,16 @@ developing applications that use %{name}.
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=${buildroot}
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md
 %{_libdir}/ocaml/rpclib/*
 

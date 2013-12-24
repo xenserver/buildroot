@@ -8,7 +8,6 @@ License:        ISC
 Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-uri
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml >= 4.00, ocaml-findlib, ocaml-ocamldoc, ocaml-re-devel, ocaml-compiler-libs
 Requires:       ocaml, ocaml-findlib
 
@@ -31,19 +30,15 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md CHANGES
 %{_libdir}/ocaml/uri/*
 

@@ -6,7 +6,6 @@ License: GPL2
 Group: Administration/System
 URL: http://github.com/jamesbulpin/xsconsole
 Source0: https://github.com/jamesbulpin/xsconsole/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: PyPAM xapi-python-devel
 
 %description
@@ -16,7 +15,6 @@ Console tool for configuring a XenServer installation.
 %setup -q
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libdir}
 make install-base DESTDIR=%{buildroot} LIBDIR=%{buildroot}/%{_libdir}
@@ -24,11 +22,8 @@ make install-base DESTDIR=%{buildroot} LIBDIR=%{buildroot}/%{_libdir}
 %build
 #This space intentionally left blank
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
 %{_libdir}/xsconsole/*.py
 %{_libdir}/xsconsole/*.pyc
 %{_libdir}/xsconsole/*.pyo

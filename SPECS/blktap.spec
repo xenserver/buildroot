@@ -6,7 +6,6 @@ Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/djs55/blktap
 Source0: https://github.com/djs55/blktap/archive/%{version}/blktap-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: autoconf automake libtool libaio-devel xen-devel libuuid-devel
 
 %description
@@ -22,7 +21,6 @@ sh autogen.sh
 make
 
 %install
-rm -rf %{buildroot}
 
 mkdir -p %{buildroot}/%{_libdir}/%{name}
 mkdir -p %{buildroot}/%{_libdir}/%{name}/lib
@@ -35,11 +33,8 @@ mkdir -p %{buildroot}/%{_libdir}/%{name}/etc/udev/rules.d
 
 make install DESTDIR=%{buildroot}
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
 %{_libdir}/%{name}/bin/*
 %{_libdir}/%{name}/etc/udev/rules.d/blktap.rules
 %{_libdir}/%{name}/include/blktap/*

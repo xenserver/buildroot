@@ -13,7 +13,6 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
 BuildRequires: pam-devel tetex-latex ocaml xen-devel zlib-devel
 BuildRequires: ocaml-xcp-idl-devel ocaml-xen-api-libs-transitional-devel
@@ -72,7 +71,6 @@ omake ocaml/xe-cli/xe
 sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in > xen-api-xapi-conf
 
 %install
-rm -rf %{buildroot}
  
 mkdir -p %{buildroot}/%{_sbindir}
 install -m 0755 ocaml/xapi/xapi.opt %{buildroot}/%{_sbindir}/xapi
@@ -105,8 +103,6 @@ mkdir -p %{buildroot}%{python_sitelib}
 install -m 0644 scripts/examples/python/XenAPI.py %{buildroot}%{python_sitelib}
 install -m 0644 scripts/examples/python/XenAPIPlugin.py %{buildroot}%{python_sitelib}
 
-%clean
-rm -rf %{buildroot}
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add xapi
@@ -118,7 +114,6 @@ if [ $1 -eq 0 ]; then
 fi
 
 %files
-%defattr(-,root,root,-)
 %{_sbindir}/xapi
 /etc/init.d/xapi
 %config(noreplace) /etc/xapi.conf
@@ -133,12 +128,10 @@ fi
 /etc/pam.d/xapi
 
 %files xe
-%defattr(-,root,root,-)
 %{_bindir}/xe
 /etc/bash_completion.d/xe
 
 %files python-devel
-%defattr(-,root,root,-)
 %{python_sitelib}/XenAPI.py
 %{python_sitelib}/XenAPI.pyo
 %{python_sitelib}/XenAPI.pyc

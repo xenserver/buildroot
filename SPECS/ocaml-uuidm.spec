@@ -8,7 +8,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://erratique.ch/software/uuidm
 Source0:        http://erratique.ch/software/uuidm/releases/uuidm-%{version}.tbz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
 Requires:       ocaml ocaml-findlib
 
@@ -34,20 +33,16 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
 rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/uuidtrip
 
-%clean
-rm -rf %{buildroot}
 
 %files
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README CHANGES
 %{_libdir}/ocaml/uuidm/uuidm.mli
 %{_libdir}/ocaml/uuidm/uuidm.cma

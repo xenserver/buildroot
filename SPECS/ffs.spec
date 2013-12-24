@@ -7,7 +7,6 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/ffs
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        ffs-init
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
@@ -27,17 +26,13 @@ cp %{SOURCE1} ffs-init
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/ffs/ffs %{buildroot}/%{_sbindir}/ffs
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/ffs
 %{_sysconfdir}/init.d/ffs

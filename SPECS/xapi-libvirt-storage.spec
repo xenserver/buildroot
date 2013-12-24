@@ -7,7 +7,6 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/xapi-libvirt-storage/archive/%{version}.tar.gz
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xapi-libvirt-storage-init
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel ocaml-libvirt-devel libvirt-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
@@ -26,17 +25,13 @@ cp %{SOURCE1} xapi-libvirt-storage-init
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install dist/build/sm-libvirt/sm-libvirt %{buildroot}/%{_sbindir}/xapi-libvirt-storage
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xapi-libvirt-storage-init %{buildroot}%{_sysconfdir}/init.d/xapi-libvirt-storage
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/xapi-libvirt-storage
 %{_sysconfdir}/init.d/xapi-libvirt-storage

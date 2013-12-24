@@ -8,7 +8,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://forge.ocamlcore.org/projects/lambda-term/
 Source0:        http://forge.ocamlcore.org/frs/download.php/945/lambda-term-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc ocaml-zed-devel ocaml-lwt-devel ocaml-camomile-devel ocaml-react-devel
 Requires:       ocaml ocaml-findlib
 
@@ -32,7 +31,6 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 
@@ -41,14 +39,11 @@ export OCAMLFIND_LDCONF=ignore
 ocaml setup.ml -install
 
 rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/lambda-term-actions
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE CHANGES
 %{_libdir}/ocaml/lambda-term/*
 %{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so

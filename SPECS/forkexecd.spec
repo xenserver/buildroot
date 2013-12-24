@@ -7,7 +7,6 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/forkexecd
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        forkexecd-init
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-rpc-devel ocaml-fd-send-recv-devel ocaml-re-devel ocaml-uuidm-devel ocaml-stdext-devel ocaml-xcp-idl-devel ocaml-oclock-devel
 Requires:  ocaml-rpc ocaml-rpc-devel redhat-lsb-core
@@ -28,7 +27,6 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
@@ -38,11 +36,8 @@ install fe_cli.native %{buildroot}/%{_sbindir}/forkexecd-cli
 mkdir -p %{buildroot}/%{_sysconfdir}/init.d
 install -m 0755 forkexecd-init %{buildroot}%{_sysconfdir}/init.d/forkexecd
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %{_sbindir}/forkexecd
 %{_sbindir}/forkexecd-cli
 %{_sysconfdir}/init.d/forkexecd
@@ -67,7 +62,6 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.md ChangeLog MAINTAINERS
 %{_libdir}/ocaml/forkexec/*
 

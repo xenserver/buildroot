@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Other
 URL:            http://forge.ocamlcore.org/projects/optcomp/
 Source0:        https://forge.ocamlcore.org/frs/download.php/1011/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc ocaml-camlp4 ocaml-camlp4-devel
 Requires:       ocaml
 
@@ -21,7 +20,6 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
@@ -29,11 +27,8 @@ mkdir -p %{buildroot}/%{_bindir}
 mv %{buildroot}/%{_libdir}/ocaml/usr/local/bin/optcomp-r %{buildroot}/%{_bindir}/
 mv %{buildroot}/%{_libdir}/ocaml/usr/local/bin/optcomp-o %{buildroot}/%{_bindir}/
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc LICENSE README
 %{_libdir}/ocaml/optcomp/*
 %{_bindir}/optcomp-r

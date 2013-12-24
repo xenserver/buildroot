@@ -6,7 +6,6 @@ License:        LGPLv2.1
 Group:          Development/Other
 URL:            https://github.com/xenserver/xsiostat
 Source0:        https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 Simple XenServer IO stat thingy
@@ -18,15 +17,11 @@ Simple XenServer IO stat thingy
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 install -m 0755 xsiostat %{buildroot}/%{_sbindir}/xsiostat
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/xsiostat
 

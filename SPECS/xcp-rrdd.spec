@@ -7,7 +7,6 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/xcp-rrdd
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xcp-rrdd-init
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel ocaml-xcp-inventory-devel
@@ -29,17 +28,13 @@ cp %{SOURCE1} xcp-rrdd-init
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xcp-rrdd-init %{buildroot}%{_sysconfdir}/init.d/xcp-rrdd
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc README.markdown LICENSE
 %{_sbindir}/xcp-rrdd
 %{_sysconfdir}/init.d/xcp-rrdd

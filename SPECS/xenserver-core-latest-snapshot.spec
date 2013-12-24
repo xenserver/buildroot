@@ -15,7 +15,6 @@ Source6:        fusion-release-RPM-GPG-KEY-EPEL-6
 Source7:        fusion-release-RPM-GPG-KEY-remi
 Source8:        fusion-release-xen-c6-tweaked.repo
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 A virtual package which installs the xenserver yum repos.
@@ -47,8 +46,6 @@ mkdir -p %{buildroot}/etc/pki/rpm-gpg/
 install -m 0644 fusion-release-RPM-GPG-KEY-EPEL-6 %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
 install -m 0644 fusion-release-RPM-GPG-KEY-remi %{buildroot}/etc/pki/rpm-gpg/RPM-GPG-KEY-remi
 
-%clean
-rm -rf %{buildroot}
 
 %post
 yum repolist
@@ -57,7 +54,6 @@ yum repolist
 yum repolist
 
 %files
-%defattr(-,root,root)
 /etc/yum.repos.d/xapi.repo
 /etc/yum.repos.d/xen-c6-tweaked.repo
 #/etc/yum.repos.d/xen-c6.repo

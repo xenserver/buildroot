@@ -12,7 +12,6 @@ Source3:        xenopsd-libvirt-init
 Source4:        xenopsd-xenlight-init
 Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
 BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
 BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
@@ -29,7 +28,7 @@ Requires:       message-switch xenops-cli redhat-lsb-core
 Simple VM manager for the xapi toolstack.
 
 %package        libvirt
-Summary:        %{name} using libvirt
+Summary:        Xenopsd using libvirt
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       libvirt
@@ -39,7 +38,7 @@ Simple VM manager for Xen and KVM using libvirt.
 
 
 %package        xc
-Summary:        %{name} using xc
+Summary:        Xenopsd using xc
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       xen-libs vncterm forkexecd
@@ -48,7 +47,7 @@ Requires:       xen-libs vncterm forkexecd
 Simple VM manager for Xen using libxc.
 
 %package        simulator
-Summary:        %{name} using libvirt
+Summary:        Xenopsd simulator
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
@@ -56,7 +55,7 @@ Requires:       %{name} = %{version}-%{release}
 A synthetic VM manager for testing.
 
 #%package        xenlight
-#Summary:        %{name} using libxenlight
+#Summary:        Xenopsd using libxenlight
 #Group:          Development/Other
 #Requires:       %{name} = %{version}-%{release}
 #%description    xenlight
@@ -77,7 +76,6 @@ make configure
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_sbindir}
 
 install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
@@ -107,11 +105,8 @@ LIBEXECDIR=%{_libexecdir}/%{name} ETCDIR=/etc/xapi SCRIPTSDIR=%{_libexecdir}/%{n
 install -m 0644 xenopsd-conf %{buildroot}/etc/xenopsd.conf
 install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc README.md LICENSE
 %{_libexecdir}/%{name}/vif
 %{_libexecdir}/%{name}/vif-real
@@ -127,7 +122,6 @@ rm -rf %{buildroot}
 /etc/xapi/network.conf
 
 %files libvirt
-%defattr(-,root,root)
 %{_sbindir}/xenopsd-libvirt
 %{_sysconfdir}/init.d/xenopsd-libvirt
 
@@ -141,7 +135,6 @@ if [ $1 -eq 0 ]; then
 fi
 
 %files xc
-%defattr(-,root,root)
 %{_sbindir}/xenopsd-xc
 %{_sysconfdir}/init.d/xenopsd-xc
 %{_libexecdir}/%{name}/xenguest
@@ -156,7 +149,6 @@ if [ $1 -eq 0 ]; then
 fi
 
 %files simulator
-%defattr(-,root,root)
 %{_sbindir}/xenopsd-simulator
 %{_sysconfdir}/init.d/xenopsd-simulator
 

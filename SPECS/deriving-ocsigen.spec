@@ -6,7 +6,6 @@ License:        MIT
 Group:          Development/Libraries
 URL:            http://ocsigen.org/download/deriving-ocsigen-0.3c.tar.gz
 Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
 Requires:       ocaml ocaml-findlib
 
@@ -29,19 +28,15 @@ developing applications that use %{name}.
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 make install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc COPYING README CHANGES
 %{_libdir}/ocaml/deriving-ocsigen/*
 

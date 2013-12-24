@@ -6,7 +6,6 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/easy-format.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib
 Requires:       ocaml ocaml-findlib
 
@@ -20,16 +19,12 @@ Easy_format: indentation made easy.
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 make install
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc LICENSE README
 %{_libdir}/ocaml/easy-format/*
 

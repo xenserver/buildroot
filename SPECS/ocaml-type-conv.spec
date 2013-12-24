@@ -10,7 +10,6 @@ License:        LGPLv2+ with exceptions and BSD
 URL:            http://www.ocaml.info/software.html#type_driven
 Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/type_conv-%{version}.tar.gz
 #Patch0:         type-conv-META.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 
 BuildRequires:  ocaml >= 4.00.0
 BuildRequires:  ocaml-findlib
@@ -33,17 +32,13 @@ ability to use these preprocessors simultaneously.
 make
 
 %install
-rm -rf %{buildroot}
 export DESTDIR=%{buildroot}
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
 make install
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
 %doc CHANGES.txt COPYRIGHT.txt INRIA-DISCLAIMER.txt INSTALL.txt LICENSE-Tywith.txt LICENSE.txt README.md THIRD-PARTY.txt
 %{_libdir}/ocaml/type_conv
 

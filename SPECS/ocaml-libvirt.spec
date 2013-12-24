@@ -27,7 +27,6 @@ Patch10:	ocaml-libvirt-11-658970236caa31bbef44562c521d55b9a4689f4d
 Patch11:	ocaml-libvirt-12-31ce6b280a2d987abc484b8f8d1e6cb25a70d737
 Patch12:        ocaml-libvirt-13-fixbuild
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
@@ -92,7 +91,6 @@ strip libvirt/dllmllibvirt.so
 
 %install
 # These rules work if the library uses 'ocamlfind install' to install itself.
-rm -rf $RPM_BUILD_ROOT
 export DESTDIR=$RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
@@ -108,12 +106,9 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/mlvirsh
 %endif
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING.LIB README ChangeLog
 %{_libdir}/ocaml/libvirt
 %if %opt
@@ -127,7 +122,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files devel
-%defattr(-,root,root,-)
 %doc COPYING.LIB README TODO.libvirt ChangeLog html/*
 %if %opt
 %{_libdir}/ocaml/libvirt/*.a
@@ -139,7 +133,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %build_mlvirsh
 %files -n mlvirsh
-%defattr(-,root,root,-)
 %doc COPYING README ChangeLog
 %{_bindir}/mlvirsh
 %endif

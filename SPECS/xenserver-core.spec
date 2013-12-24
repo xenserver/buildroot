@@ -6,7 +6,6 @@ License:        LGPL
 Group:          Development/Other
 URL:            http://www.xenserver.org/
 Source0:        xenserver-readme
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Requires:       xenserver-install-wizard
 Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
 Requires:       xenopsd-xc xenopsd-libvirt xenopsd-simulator
@@ -32,11 +31,8 @@ cp %{SOURCE0} xenserver-readme
 mkdir -p %{buildroot}/usr/share/doc/xenserver
 install -m 0644 xenserver-readme %{buildroot}/usr/share/doc/xenserver/README
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 /usr/share/doc/xenserver/README
 
 %changelog

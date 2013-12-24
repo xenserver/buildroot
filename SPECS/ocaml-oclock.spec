@@ -10,7 +10,6 @@ URL:            https://github.com/polazarus/oclock
 Source0:        http://github.com/polazarus/oclock/archive/v0.3/oclock-%{version}.tar.gz
 Patch0:         oclock-1-cc-headers
 Patch1:         oclock-2-destdir
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib-devel
 Requires:       ocaml ocaml-findlib
 
@@ -38,20 +37,16 @@ fi
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc LICENSE README.markdown
 %{_libdir}/ocaml/oclock/*
 %{_libdir}/ocaml/stublibs/dlloclock.so

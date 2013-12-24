@@ -8,7 +8,6 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/nbd
 Source0:        https://github.com/xapi-project/nbd/archive/%{version}/nbd-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-cstruct-devel ocaml-lwt-devel ocaml-obuild ocaml-camlp4-devel ocaml-camlp4 cmdliner-devel
 Requires:       ocaml ocaml-findlib
 
@@ -36,18 +35,14 @@ fi
 make
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
-%clean
-rm -rf %{buildroot}
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc ChangeLog README.markdown
 
 %{_libdir}/ocaml/nbd/nbd_lwt.a

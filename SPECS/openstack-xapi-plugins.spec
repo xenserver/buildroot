@@ -7,7 +7,6 @@ Group:          System/Hypervisor
 URL:            https://launchpad.net/nova/havana
 Source0:        https://launchpad.net/nova/havana/%{version}/+download/nova-%{version}.tar.gz
 BuildArch:      noarch
-BuildRoot:      %{_tmppath}/nova-%{version}-%{release}
 BuildRequires:  python-setuptools
 
 %define debug_package %{nil}
@@ -19,18 +18,14 @@ XenAPI plugins used by OpenStack to control XenServer.
 %setup -q -n nova-%{version}
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/lib/xapi/plugins
 cp -r plugins/xenserver/xenapi/etc/xapi.d/plugins/* %{buildroot}/usr/lib/xapi/plugins/
 
 %build
 #This space intentionally left blank
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(755,root,root,-)
 /usr/lib/xapi/plugins/*
 
 %changelog

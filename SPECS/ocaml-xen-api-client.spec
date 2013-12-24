@@ -8,7 +8,6 @@ License:        LGPLv2
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xen-api-client
 Source0:        https://github.com/xapi-project/xen-api-client/archive/%{version}/xen-api-client-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-lwt-devel ocaml-ssl-devel openssl openssl-devel ocaml-ounit-devel ocaml-cohttp-devel ocaml-uri-devel xmlm-devel ocaml-rpc-devel
 Requires:       ocaml ocaml-findlib
 
@@ -36,19 +35,15 @@ ocaml setup.ml -build
 ocaml setup.ml -doc
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
 OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
 
 %files
 #This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README.md CHANGES
 %{_libdir}/ocaml/xen-api-client/*
 

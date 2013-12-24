@@ -7,7 +7,6 @@ Source0: http://pkgs.fedoraproject.org/repo/pkgs/ocaml-omake/omake-0.9.8.6-0.rc1
 Patch0: omake-1-warnings
 License: GPL
 Group: Development/Tools
-BuildRoot: %{_tmppath}/%{name}-root
 BuildRequires: ocaml >= 3.09.2, make, ncurses-devel
 
 %define debug_package %{nil}
@@ -38,7 +37,6 @@ INSTALL_ROOT=$RPM_BUILD_ROOT\
    make all
 
 %install
-rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_bindir}
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/omake
 
@@ -50,11 +48,8 @@ INSTALL_ROOT=$RPM_BUILD_ROOT\
 
 chmod +w $RPM_BUILD_ROOT/%{_bindir}/*
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root)
 %doc LICENSE LICENSE.OMake doc/txt/omake-doc.txt doc/ps/omake-doc.ps doc/ps/omake-doc.pdf doc/webpage CHANGELOG.txt
 
 %attr(555,root,root) %{_bindir}/*

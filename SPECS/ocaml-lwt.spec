@@ -10,7 +10,6 @@ Group:          Development/Libraries
 License:        LGPLv2+ with exceptions
 URL:            http://ocsigen.org/lwt
 Source0:        http://ocsigen.org/download/lwt-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 # Location of libev headers on Fedora is in /usr/include/libev/ev.h
@@ -57,7 +56,6 @@ make
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 export DESTDIR=$RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
@@ -68,14 +66,11 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 #chrpath --delete $OCAMLFIND_DESTDIR/stublibs/dll*.so
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root,-)
 %doc LICENSE COPYING CHANGES README
 %{_libdir}/ocaml/lwt/*
 %{_libdir}/ocaml/stublibs/*.so

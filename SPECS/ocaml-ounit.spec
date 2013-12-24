@@ -10,7 +10,6 @@ Group:          Development/Libraries
 License:        MIT
 URL:            http://ounit.forge.ocamlcore.org/
 Source0:        http://forge.ocamlcore.org/frs/download.php/886/ounit-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
@@ -52,7 +51,6 @@ make test
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
 make install
@@ -61,12 +59,7 @@ make install
 rm -rf $RPM_BUILD_ROOT/usr/local/share/doc
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
 %files
-%defattr(-,root,root,-)
 %doc LICENSE.txt
 %{_libdir}/ocaml/oUnit
 %if %opt
@@ -77,7 +70,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files devel
-%defattr(-,root,root,-)
 %doc LICENSE.txt README.txt
 %doc _build/src/api-ounit.docdir/*
 %if %opt

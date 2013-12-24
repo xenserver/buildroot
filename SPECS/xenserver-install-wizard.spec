@@ -8,7 +8,6 @@ Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://github.com/djs55/xenserver-install-wizard
 Source0: https://github.com/djs55/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 Requires: python newt xapi-python-devel python-argparse
 
 %description
@@ -24,11 +23,8 @@ make DESTDIR=%{buildroot}
 mkdir -p %{buildroot}%{_bindir}
 ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroot}%{_bindir}/xenserver-install-wizard
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
 /usr/share/xenserver-install-wizard/*
 %{_bindir}/xenserver-install-wizard
 
