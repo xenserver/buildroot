@@ -59,8 +59,8 @@ On Debian-based distributions, the packages are built using `pbuilder`.
 
 The build also depends on a more modern OCaml compiler than the version in Ubuntu, available from this PPA:
 ```
-deb http://ppa.launchpad.net/avsm/ppa/ubuntu raring main 
-deb-src http://ppa.launchpad.net/avsm/ppa/ubuntu raring main 
+deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main
+deb-src http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main
 ```
 
 The steps to build Debian packages are the same as those to build RPMs:
