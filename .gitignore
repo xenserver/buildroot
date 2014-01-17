@@ -8,5 +8,10 @@
 *.cmxs
 *.cmxa
 *.swp
+*.pyc
 SOURCES/*.tar.gz
 SOURCES/*.tbz
+RPMS/
+SRPMS/
+deps
+mock/
