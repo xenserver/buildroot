@@ -1,11 +1,11 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
 Version: 0.9.0
-Release: 1
+Release: 2
 Group:   System/Hypervisor
 License: LGPL+linking exception
-URL:  https://github.com/djs55/blktap
-Source0: https://github.com/djs55/blktap/archive/%{version}/blktap-%{version}.tar.gz
+URL:  https://github.com/xapi-project/blktap
+Source0: https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires: autoconf automake libtool libaio-devel xen-devel libuuid-devel
 
 %description
@@ -44,5 +44,8 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
+* Fri Jan 17 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
+- Change to upstream source repository
+
 * Thu Oct 24 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.0-1
 - Initial package
