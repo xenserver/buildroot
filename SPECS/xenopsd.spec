@@ -1,11 +1,11 @@
 Name:           xenopsd
-Version:        0.9.33
+Version:        0.9.34
 Release:        1
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xapi-project/xenopsd
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/euanh/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
 Source3:        xenopsd-libvirt-init
@@ -176,6 +176,10 @@ fi
 #fi
 
 %changelog
+* Fri Jan 17 2014 Euan Harris <euan.harris@eu.citrix.com> - 0.9.34-1
+- Update to 0.9.34, restoring fixes from the 0.9.32 line which were 
+  not merged to trunk before 0.9.33 was tagged
+
 * Wed Dec 4 2013 Euan Harris <euan.harris@eu.citrix.com> - 0.9.33-1
 - Update to 0.9.33, with fixes for suspending and resuming HVM guests
 
