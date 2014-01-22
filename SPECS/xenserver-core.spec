@@ -14,7 +14,7 @@ Requires:       ffs xapi-libvirt-storage sm-cli xcp-sm
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
 Requires:       squeezed
-Requires:       eliloader
+Requires:       linux-guest-loader
 Requires:       kernel >= 3.4.46 kernel-firmware
 Requires:       xen
 
