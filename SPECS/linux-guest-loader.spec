@@ -11,6 +11,7 @@ License: GPL
 Group: Applications/System
 BuildArch: noarch
 BuildRequires: python-devel python-setuptools
+Requires: xcp-python-libs
 
 %description
 Bootloader for EL-based distros that support Xen.
