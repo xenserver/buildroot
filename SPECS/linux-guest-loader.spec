@@ -5,7 +5,7 @@ Name: linux-guest-loader
 Version: 0.9.1
 Release: 1
 URL: https://github.com/xenserver/linux-guest-loader
-Source0: https://github.com/mcclurmc/%{name}/archive/%{version}.tar.gz
+Source0: https://github.com/mcclurmc/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 %if 0%{?_with_data:1}
 Source1: data.tar.gz
 %endif
@@ -18,7 +18,7 @@ BuildRequires: python-devel python-setuptools
 Bootloader for EL-based distros that support Xen.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 %{__python} setup.py build
