@@ -4,9 +4,6 @@ Version: 0.9.1
 Release: 1
 URL: https://github.com/xenserver/linux-guest-loader
 Source0: https://github.com/mcclurmc/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-%if 0%{?_with_data:1}
-Source1: data.tar.gz
-%endif
 License: GPL
 Group: Applications/System
 BuildArch: noarch
@@ -26,18 +23,11 @@ Bootloader for EL-based distros that support Xen.
 mkdir -p %{buildroot}/%{_sbindir}
 %{__python} setup.py install -O1 --skip-build --root %{buildroot} --install-scripts %{_sbindir}
 ln -s %{_sbindir}/eliloader.py %{buildroot}/%{_sbindir}/eliloader
-%if 0%{?_with_data:1}
-mkdir -p %{buildroot}/opt/xensource/packages/files/guest-installer
-cp -fp data/*/* %{buildroot}/opt/xensource/packages/files/guest-installer
-%endif
 rm -rf %{buildroot}/%{python_sitelib}/*-py*.egg-info
  
 %files
 %{_sbindir}/eliloader
 %{_sbindir}/eliloader.py
-%if 0%{?_with_data:1}
-%dir /opt/xensource/packages/files/guest-installer/
-%endif
 
 %changelog
 * Wed Jan 22 2014 Mike McClurg <mike.mcclurg@citrix.com> - 0.9.1-1
