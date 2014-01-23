@@ -1,5 +1,3 @@
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-
 Summary: Bootloader for EL-based distros that support Xen
 Name: linux-guest-loader
 Version: 0.9.1
