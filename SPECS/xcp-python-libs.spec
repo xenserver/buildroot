@@ -1,13 +1,11 @@
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-
 Summary: Common XenServer Python classes
 Name: xcp-python-libs
 Version: 0.9.0
 Release: 1
+URL: https://github.com/xenserver/python-libs
 Source: https://github.com/euanh/python-libs/archive/%{version}/%{name}-%{version}.tar.gz
 License: GPL
 Group: Applications/System
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 
 BuildRequires: python-devel python-setuptools
@@ -25,15 +23,11 @@ cp -r net xcp
 %{__python} setup.py build
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install -O2 --skip-build --root %{buildroot}
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}/%{python_sitelib}/*-py*.egg-info
 
 %files
-%defattr(-,root,root)
-%{python_sitelib}
+%{python_sitelib}/xcp
 
 
 %changelog
