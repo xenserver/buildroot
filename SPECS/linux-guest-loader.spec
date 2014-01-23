@@ -8,6 +8,7 @@ License: GPL
 Group: Applications/System
 BuildArch: noarch
 BuildRequires: python-devel python-setuptools
+BuildRequires: xcp-python-libs
 Requires: xcp-python-libs
 
 %description
