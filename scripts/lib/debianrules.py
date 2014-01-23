@@ -17,6 +17,7 @@ def rules_from_spec(spec, specpath):
     rules_dh_install_from_spec(spec, res, specpath)
     rules_clean_from_spec(spec, res)
     rules_test_from_spec(spec, res)
+    python_setuptools_cfg(spec, res)
     return res
 
 
@@ -124,4 +125,13 @@ def rules_test_from_spec(_spec, tree):
     rule += "override_dh_auto_test:\n"
 
     tree.append('debian/rules', rule)
+
+
+def python_setuptools_cfg(_spec, tree):
+    # Configuration file for python setuptools, which defaults to installing
+    # in /usr/local/lib instead of /usr/lib 
+    content = "[install]\n" 
+    content += "install-layout=deb\n"
+
+    tree.append('setup.cfg', content)
 
