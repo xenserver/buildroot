@@ -12,6 +12,7 @@ MAPPING = {
     "cppo": ["cppo"],
     "deriving-ocsigen": ["libderiving-ocsigen-ocaml"],
     "easy-format": ["libeasy-format-ocaml"],
+    "eliloader": ["eliloader"],
     "linux-guest-loader": ["linux-guest-loader"],
     "xcp-python-libs": ["xcp-python-libs"],
     "ffs": ["ffs"],

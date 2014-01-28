@@ -1,4 +1,4 @@
-Summary: Bootloader for EL-based distros that support Xen
+Summary: Bootloader for EL-based distributions that support Xen
 Name: linux-guest-loader
 Version: 0.9.1
 Release: 1
@@ -14,7 +14,7 @@ Provides:  eliloader > 0.3
 Obsoletes: eliloader <= 0.3
 
 %description
-Bootloader for EL-based distros that support Xen.
+Bootloader for EL-based distributions that support Xen.
 
 %prep
 %setup -q
