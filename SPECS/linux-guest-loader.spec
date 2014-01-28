@@ -10,7 +10,8 @@ BuildArch: noarch
 BuildRequires: python-devel python-setuptools
 BuildRequires: xcp-python-libs
 Requires: xcp-python-libs
-Obsoletes: eliloader
+Provides:  eliloader > 0.3
+Obsoletes: eliloader <= 0.3
 
 %description
 Bootloader for EL-based distros that support Xen.
