@@ -17,8 +17,8 @@ class BasicTests(unittest.TestCase):
 
     def test_rpm_names_from_spec(self):
         assert specdep.rpm_names_from_spec(self.spec) == \
-            ["x86_64/ocaml-cohttp-0.9.8-1.x86_64.rpm", 
-             "x86_64/ocaml-cohttp-devel-0.9.8-1.x86_64.rpm"]
+            ["x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm",
+             "x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm"]
 
     def test_buildrequires_from_spec(self):
         assert specdep.buildrequires_from_spec(self.spec) == \
@@ -29,9 +29,9 @@ class BasicTests(unittest.TestCase):
         specdep.build_srpm_from_spec(self.spec, "ocaml-cohttp.spec")
 
         assert sys.stdout.getvalue() == \
-"""./SRPMS/ocaml-cohttp-0.9.8-1.src.rpm: ./SPECS/ocaml-cohttp.spec ./SOURCES/ocaml-cohttp-0.9.8.tar.gz
+"""./SRPMS/ocaml-cohttp-0.9.8-1.el6.src.rpm: ./SPECS/ocaml-cohttp.spec ./SOURCES/ocaml-cohttp-0.9.8.tar.gz
 	@echo [RPMBUILD] $@
-	@rpmbuild --quiet --define "_topdir ." -bs $<
+	@rpmbuild --quiet --define "_topdir ." --define "%dist .el6" -bs $<
 """
 
     def test_download_rpm_sources(self):
@@ -47,12 +47,12 @@ class BasicTests(unittest.TestCase):
         specdep.build_rpm_from_srpm(self.spec)
 
         assert sys.stdout.getvalue() == \
-"""./RPMS/x86_64/ocaml-cohttp-0.9.8-1.x86_64.rpm: ./SRPMS/ocaml-cohttp-0.9.8-1.src.rpm
+"""./RPMS/x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm: ./SRPMS/ocaml-cohttp-0.9.8-1.el6.src.rpm
 	@echo [MOCK] $@
 	@mock --configdir=mock --quiet -r xenserver --resultdir="./RPMS/x86_64" $<
 	@echo [CREATEREPO] $@
 	@createrepo --quiet --update ./RPMS
-./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.x86_64.rpm: ./SRPMS/ocaml-cohttp-0.9.8-1.src.rpm
+./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm: ./SRPMS/ocaml-cohttp-0.9.8-1.el6.src.rpm
 	@echo [MOCK] $@
 	@mock --configdir=mock --quiet -r xenserver --resultdir="./RPMS/x86_64" $<
 	@echo [CREATEREPO] $@
@@ -66,15 +66,15 @@ class BasicTests(unittest.TestCase):
 
         specdep.buildrequires_for_rpm(self.spec, specdep.package_to_rpm_map(specs))
         assert sys.stdout.getvalue() == \
-"""./RPMS/x86_64/ocaml-cohttp-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-uri-devel-1.3.8-1.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-cstruct-devel-0.7.1-2.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-ounit-devel-1.1.2-3.el6.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-re-devel-1.2.1-1.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-lwt-devel-2.4.3-1.el6.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-uri-devel-1.3.8-1.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-cstruct-devel-0.7.1-2.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-ounit-devel-1.1.2-3.el6.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-re-devel-1.2.1-1.x86_64.rpm
-./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.x86_64.rpm: ./RPMS/x86_64/ocaml-lwt-devel-2.4.3-1.el6.x86_64.rpm
+"""./RPMS/x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-uri-devel-1.3.8-1.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-cstruct-devel-0.7.1-2.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-ounit-devel-1.1.2-3.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-re-devel-1.2.1-1.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-lwt-devel-2.4.3-1.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-uri-devel-1.3.8-1.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-cstruct-devel-0.7.1-2.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-ounit-devel-1.1.2-3.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-re-devel-1.2.1-1.el6.x86_64.rpm
+./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm: ./RPMS/x86_64/ocaml-lwt-devel-2.4.3-1.el6.x86_64.rpm
 """
 
