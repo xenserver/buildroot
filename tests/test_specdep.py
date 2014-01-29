@@ -9,21 +9,11 @@ import sys
 import unittest
 
 import specdep
+import pkg
 
 class BasicTests(unittest.TestCase):
     def setUp(self):
-        self.spec = specdep.spec_from_file("SPECS/ocaml-cohttp.spec")
-        self.spec = specdep.spec_from_file("SPECS/ocaml-cohttp.spec")
-
-    def test_rpm_names_from_spec(self):
-        assert specdep.rpm_names_from_spec(self.spec) == \
-            ["x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm",
-             "x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm"]
-
-    def test_buildrequires_from_spec(self):
-        assert specdep.buildrequires_from_spec(self.spec) == \
-            set(["ocaml", "ocaml-findlib", "ocaml-re-devel", "ocaml-uri-devel", "ocaml-cstruct-devel", "ocaml-lwt-devel", "ocaml-ounit-devel", "ocaml-ocamldoc", "ocaml-camlp4-devel", "openssl", "openssl-devel"])
-
+        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec")
 
     def test_build_srpm_from_spec(self):
         specdep.build_srpm_from_spec(self.spec, "ocaml-cohttp.spec")
@@ -62,7 +52,7 @@ class BasicTests(unittest.TestCase):
 
     def test_buildrequires_for_rpm(self):
         spec_paths = glob.glob(os.path.join("./SPECS", "*.spec"))
-        specs = [specdep.spec_from_file(spec_path) for spec_path in spec_paths]
+        specs = [pkg.Spec(spec_path) for spec_path in spec_paths]
 
         specdep.buildrequires_for_rpm(self.spec, specdep.package_to_rpm_map(specs))
         assert sys.stdout.getvalue() == \
