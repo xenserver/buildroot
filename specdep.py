@@ -169,10 +169,9 @@ def build_rpm_from_srpm(spec):
 def package_to_rpm_map(specs):
     provides_to_rpm = {}
     for spec in specs:
-        for package in spec.packages():
-            for provided in spec.provides():
-                for rpmpath in spec.binary_package_paths():
-                    provides_to_rpm[provided] = rpmpath
+        for provided in spec.provides():
+            for rpmpath in spec.binary_package_paths():
+                provides_to_rpm[provided] = rpmpath
     return provides_to_rpm
     
 
