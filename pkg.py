@@ -32,7 +32,7 @@ def flatten(lst):
 class Spec(object):
     """Represents an RPM spec file"""
 
-    def __init__(self, specfile):
+    def __init__(self, path):
         # for debugging, make all paths relative to PWD
         #rpm.addMacro('_topdir', '.')
 
@@ -43,10 +43,17 @@ class Spec(object):
 
         self.rpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
 
-        with open(specfile) as spec:
+        self.path = os.path.join(SPECDIR, os.path.basename(path))
+
+        with open(path) as spec:
             self.spectext = spec.readlines()
 
-        self.spec = rpm.ts().parseSpec(specfile)
+        self.spec = rpm.ts().parseSpec(path)
+
+
+    def specpath(self):
+        """Return the path to the spec file"""
+        return self.path
 
 
     def provides(self):

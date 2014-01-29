@@ -69,7 +69,7 @@ else:
 
 
 # Rules to build SRPM from SPEC
-def build_srpm_from_spec(spec, specname):
+def build_srpm_from_spec(spec):
     srpmpath = spec.source_package_path()
 
     # spec.sourceHeader['sources'] and ['patches'] doesn't work 
@@ -93,8 +93,8 @@ def build_srpm_from_spec(spec, specname):
         if url.scheme == "":
             sources.append(os.path.join(SRCDIR, url.path))
 
-    print '%s: %s %s' % (srpmpath, os.path.join(SPECDIR, specname),
-                         " ".join(sources))
+    print '%s: %s %s' % (srpmpath, spec.specpath(), " ".join(sources))
+
     if build_type() == "rpm":
         print '\t@echo [RPMBUILD] $@' 
         print '\t@rpmbuild --quiet --define "_topdir ." --define "%%dist %s" -bs $<' % CHROOT_DIST
@@ -108,7 +108,7 @@ def build_srpm_from_spec(spec, specname):
 # Assumes each RPM only needs one download - we have some multi-source
 # packages but in all cases the additional sources are patches provided
 # in the Git repository
-def download_rpm_sources(spec, specname):
+def download_rpm_sources(spec):
     # The RPM documentation says that RPM only cares about the basename
     # of the path given in a Source: tag.   spec.sourceHeader['url'] 
     # enforces this - even if we have a URL in the source tag, it 
@@ -123,7 +123,7 @@ def download_rpm_sources(spec, specname):
         if url.scheme in ["http", "https"]:
             print '%s: %s' % (
                 os.path.join(SRCDIR, os.path.basename(url.path)),
-                os.path.join(SPECDIR, specname))
+                spec.specpath())
             print '\t@echo [CURL] $@' 
             print '\t@curl --silent --show-error -L -o $@ %s' % source
 
@@ -131,8 +131,7 @@ def download_rpm_sources(spec, specname):
         if url.scheme == "file":
             print '%s: %s $(shell find %s)' % (
                 os.path.join(SRCDIR, os.path.basename(url.fragment)),
-                os.path.join(SPECDIR, specname),
-                url.path)
+                spec.specpath(), url.path)
 
             # Assume that the directory name is already what's expected by the
             # spec file, and prefix it with the version number in the tarball
@@ -207,9 +206,9 @@ def main():
     
     print "all: rpms"
 
-    for specname, spec in specs.iteritems():
-        build_srpm_from_spec(spec, specname)
-        download_rpm_sources(spec, specname)
+    for spec in specs.itervalues():
+        build_srpm_from_spec(spec)
+        download_rpm_sources(spec)
         build_rpm_from_srpm(spec)
         buildrequires_for_rpm(spec, provides_to_rpm)
         print ""
@@ -217,7 +216,7 @@ def main():
     # Generate targets to build all srpms and all rpms
     all_rpms = []
     all_srpms = []
-    for spec in specs.values():
+    for spec in specs.itervalues():
         rpm_paths = spec.binary_package_paths()
         all_rpms += rpm_paths
         all_srpms.append(spec.source_package_path())

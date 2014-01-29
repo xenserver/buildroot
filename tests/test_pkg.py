@@ -13,6 +13,9 @@ class BasicTests(unittest.TestCase):
     def test_name(self):
         assert self.spec.name() == "ocaml-cohttp"
 
+    def test_specpath(self):
+        assert self.spec.specpath() == "./SPECS/ocaml-cohttp.spec"
+
     def test_version(self):
         assert self.spec.version() == "0.9.8"
 

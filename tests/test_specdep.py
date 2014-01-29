@@ -16,7 +16,7 @@ class BasicTests(unittest.TestCase):
         self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec")
 
     def test_build_srpm_from_spec(self):
-        specdep.build_srpm_from_spec(self.spec, "ocaml-cohttp.spec")
+        specdep.build_srpm_from_spec(self.spec)
 
         assert sys.stdout.getvalue() == \
 """./SRPMS/ocaml-cohttp-0.9.8-1.el6.src.rpm: ./SPECS/ocaml-cohttp.spec ./SOURCES/ocaml-cohttp-0.9.8.tar.gz
@@ -25,7 +25,7 @@ class BasicTests(unittest.TestCase):
 """
 
     def test_download_rpm_sources(self):
-        specdep.download_rpm_sources(self.spec, "ocaml-cohttp.spec")
+        specdep.download_rpm_sources(self.spec)
 
         assert sys.stdout.getvalue() == \
 """./SOURCES/ocaml-cohttp-0.9.8.tar.gz: ./SPECS/ocaml-cohttp.spec
