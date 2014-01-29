@@ -5,6 +5,7 @@
 
 import os
 import rpm
+import urlparse
 
 # Could have a decorator / context manager to set and unset all the RPM macros
 # around methods such as 'provides'
@@ -89,9 +90,32 @@ class Spec(object):
         return self.spec.packages
 
 
-    def sources(self):
-        """Return the sources"""
+    def source_urls(self):
+        """Return the URLs from which the sources can be downloaded"""
         return [source for (source, _, _) in self.spec.sources]
+
+
+    def source_paths(self):
+        """Return the filesystem paths to source files"""
+        sources = []
+        for source in self.source_urls():
+            url = urlparse.urlparse(source)
+
+            # Source comes from a remote HTTP server
+            if url.scheme in ["http", "https"]:
+                sources.append(os.path.join(SRCDIR, os.path.basename(url.path)))
+
+            # Source comes from a local file or directory
+            if url.scheme == "file":
+                sources.append(
+                    os.path.join(SRCDIR, os.path.basename(url.fragment)))
+
+            # Source is an otherwise unqualified file, probably a patch
+            if url.scheme == "":
+                sources.append(os.path.join(SRCDIR, url.path))
+
+        return sources
+
 
 
     # RPM build dependencies.   The 'requires' key for the *source* RPM is

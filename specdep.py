@@ -40,36 +40,13 @@ def map_package_name(name):
 # Directories where rpmbuild/mock expects to find inputs
 # and writes outputs
 SPECDIR = rpm.expandMacro('%_specdir')
-SRCDIR = rpm.expandMacro('%_sourcedir')
-
 
 
 # Rules to build SRPM from SPEC
 def build_srpm_from_spec(spec):
     srpmpath = spec.source_package_path()
-
-    # spec.sourceHeader['sources'] and ['patches'] doesn't work 
-    # in RPM 4.8 on CentOS 6.4.   spec.sources contains both
-    # sources and patches, but with full paths which must be
-    # chopped.
-    sources = []
-    for source in spec.sources():
-        url = urlparse.urlparse(source)
-
-        # Source comes from a remote HTTP server
-        if url.scheme in ["http", "https"]:
-            sources.append(os.path.join(SRCDIR, os.path.basename(url.path)))
-
-        # Source comes from a local file or directory
-        if url.scheme == "file":
-            sources.append(
-                os.path.join(SRCDIR, os.path.basename(url.fragment)))
-
-        # Source is an otherwise unqualified file, probably a patch
-        if url.scheme == "":
-            sources.append(os.path.join(SRCDIR, url.path))
-
-    print '%s: %s %s' % (srpmpath, spec.specpath(), " ".join(sources))
+    print '%s: %s %s' % (srpmpath, spec.specpath(), 
+                         " ".join(spec.source_paths()))
 
     if build_type() == "rpm":
         print '\t@echo [RPMBUILD] $@' 
@@ -85,36 +62,26 @@ def build_srpm_from_spec(spec):
 # packages but in all cases the additional sources are patches provided
 # in the Git repository
 def download_rpm_sources(spec):
-    # The RPM documentation says that RPM only cares about the basename
-    # of the path given in a Source: tag.   spec.sourceHeader['url'] 
-    # enforces this - even if we have a URL in the source tag, it 
-    # will only give us the basename.   However the full tag text is
-    # available in spec.sources.   It's not clear whether or not we
-    # can rely on this as part of the RPM library API.
-
-    for source in spec.sources():
-        url = urlparse.urlparse(source)
+    for (url, path) in zip(spec.source_urls(), spec.source_paths()):
+        source = urlparse.urlparse(url)
 
         # Source comes from a remote HTTP server
-        if url.scheme in ["http", "https"]:
-            print '%s: %s' % (
-                os.path.join(SRCDIR, os.path.basename(url.path)),
-                spec.specpath())
+        if source.scheme in ["http", "https"]:
+            print '%s: %s' % (path, spec.specpath())
             print '\t@echo [CURL] $@' 
-            print '\t@curl --silent --show-error -L -o $@ %s' % source
+            print '\t@curl --silent --show-error -L -o $@ %s' % url
 
         # Source comes from a local file or directory
-        if url.scheme == "file":
+        if source.scheme == "file":
             print '%s: %s $(shell find %s)' % (
-                os.path.join(SRCDIR, os.path.basename(url.fragment)),
-                spec.specpath(), url.path)
+                path, spec.specpath(), source.path)
 
             # Assume that the directory name is already what's expected by the
             # spec file, and prefix it with the version number in the tarball
             print '\t@echo [GIT] $@'
             dirname = "%s-%s" % (os.path.basename(url.path), spec.version())
             print '\t@git --git-dir=%s/.git '\
-                'archive --prefix %s/ -o $@ HEAD' % (url.path, dirname)
+                'archive --prefix %s/ -o $@ HEAD' % (source.path, dirname)
 
 
 # Rules to build RPMS from SRPMS (uses information from the SPECs to

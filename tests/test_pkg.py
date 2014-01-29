@@ -24,9 +24,13 @@ class BasicTests(unittest.TestCase):
             set(["ocaml-cohttp", "ocaml-cohttp(x86-64)",
                  "ocaml-cohttp-devel", "ocaml-cohttp-devel(x86-64)"])
 
-    def test_sources(self):
-        assert sorted(self.spec.sources()) == \
+    def test_source_urls(self):
+        assert sorted(self.spec.source_urls()) == \
             sorted(["https://github.com/mirage/ocaml-cohttp/archive/ocaml-cohttp-0.9.8/ocaml-cohttp-0.9.8.tar.gz"])
+
+    def test_source_paths(self):
+        assert sorted(self.spec.source_paths()) == \
+            sorted(["./SOURCES/ocaml-cohttp-0.9.8.tar.gz"])
 
     def test_buildrequires(self):
         assert self.spec.buildrequires() == \
