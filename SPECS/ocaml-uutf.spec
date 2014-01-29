@@ -1,6 +1,6 @@
 Name:           ocaml-uutf
 Version:        0.9.3
-Release:        2
+Release:        2%{?dist}
 Summary:        Non-blocking streaming codec for UTF-8, UTF-16, UTF-16LE and UTF-16BE
 License:        BSD3
 Group:          Development/Libraries

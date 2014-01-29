@@ -2,7 +2,7 @@
 
 Name:           ocaml-stdext
 Version:        0.9.1
-Release:        1
+Release:        1%{?dist}
 Summary:        Deprecated misc library functions for OCaml
 License:        LGPL
 Group:          Development/Libraries

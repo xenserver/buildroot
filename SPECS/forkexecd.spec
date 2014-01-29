@@ -1,6 +1,6 @@
 Name:           forkexecd
 Version:        0.9.1
-Release:        1
+Release:        1%{?dist}
 Summary:        A subprocess management service
 License:        LGPL
 Group:          Development/Other

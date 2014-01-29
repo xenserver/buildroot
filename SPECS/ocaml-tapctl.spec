@@ -2,7 +2,7 @@
 
 Name:           ocaml-tapctl
 Version:        0.9.1
-Release:        1
+Release:        1%{?dist}
 Summary:        Manipulate running tapdisk instances
 License:        LGPL
 Group:          Development/Libraries

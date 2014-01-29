@@ -1,6 +1,6 @@
 Name:           openstack-xapi-plugins
 Version:        2013.2
-Release:        1
+Release:        1%{?dist}
 Summary:        XenAPI plugins from OpenStack
 License:        ASL 2.0
 Group:          System/Hypervisor

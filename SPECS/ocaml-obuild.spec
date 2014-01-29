@@ -2,7 +2,7 @@
 
 Name:           ocaml-obuild
 Version:        0.0.2
-Release:        1
+Release:        1%{?dist}
 Summary:        Simple build tool for OCaml programs
 License:        BSD2
 Group:          Development/Other

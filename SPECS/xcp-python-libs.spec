@@ -1,7 +1,7 @@
 Summary: Common XenServer Python classes
 Name: xcp-python-libs
 Version: 0.9.0
-Release: 1
+Release: 1%{?dist}
 URL: https://github.com/xenserver/python-libs
 Source: https://github.com/euanh/python-libs/archive/%{version}/%{name}-%{version}.tar.gz
 License: GPL

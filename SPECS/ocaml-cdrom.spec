@@ -2,7 +2,7 @@
 
 Name:           ocaml-cdrom
 Version:        0.9.1
-Release:        2
+Release:        2%{?dist}
 Summary:        Query the state of CDROM devices
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries

@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-rrd
 Version:        0.9.0
-Release:        1
+Release:        1%{?dist}
 Summary:        Round-Robin Datasources in OCaml
 License:        LGPL
 Group:          Development/Libraries

@@ -2,7 +2,7 @@
 
 Name:           ocaml-type-conv
 Version:        109.20.00
-Release:        1
+Release:        1%{?dist}
 Summary:        OCaml base library for type conversion
 
 Group:          Development/Libraries

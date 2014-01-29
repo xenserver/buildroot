@@ -3,7 +3,7 @@
 Summary: Command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
 Version: 0.6.4
-Release: 1
+Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/djs55/vhd-tool

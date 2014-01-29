@@ -2,7 +2,7 @@
 
 Name:           ocaml-re
 Version:        1.2.1
-Release:        1
+Release:        1%{?dist}
 Summary:        A regular expression library for OCaml
 License:        LGPL
 Group:          Development/Libraries

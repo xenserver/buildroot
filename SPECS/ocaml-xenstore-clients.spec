@@ -2,7 +2,7 @@
 
 Name:           ocaml-xenstore-clients
 Version:        0.9.2
-Release:        1
+Release:        1%{?dist}
 Summary:        Unix xenstore clients for OCaml
 License:        LGPL
 Group:          Development/Libraries

@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.38
-Release: 1
+Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org

@@ -1,6 +1,6 @@
 Name:           xmlm
 Version:        1.1.1
-Release:        1
+Release:        1%{?dist}
 Summary:        Streaming XML input/output for OCaml
 License:        BSD3
 Group:          Development/Libraries

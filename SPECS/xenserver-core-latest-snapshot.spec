@@ -1,6 +1,6 @@
 Name:           xenserver-core-latest-snapshot
 Version:        0.1.0
-Release:        2
+Release:        2%{?dist}
 Summary:        Yum repositories for xenserver
 License:        GPL
 Group:          Development/Other

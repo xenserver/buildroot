@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.9
-Release:        3
+Release:        3%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Libraries

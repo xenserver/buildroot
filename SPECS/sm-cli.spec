@@ -1,6 +1,6 @@
 Name:           sm-cli
 Version:        0.9.4
-Release:        1
+Release:        1%{?dist}
 Summary:        CLI for xapi toolstack storage managers
 License:        LGPL
 Group:          Development/Other

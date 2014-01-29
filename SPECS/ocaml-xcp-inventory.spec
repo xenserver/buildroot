@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-inventory
 Version:        0.9.0
-Release:        1
+Release:        1%{?dist}
 Summary:        OCaml library to read and write the XCP inventory file
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries

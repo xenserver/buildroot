@@ -1,6 +1,6 @@
 Name:           xenops-cli
 Version:        0.9.1
-Release:        2
+Release:        2%{?dist}
 Summary:        CLI for xenopsd, the xapi toolstack domain manager
 License:        LGPL
 Group:          Development/Other

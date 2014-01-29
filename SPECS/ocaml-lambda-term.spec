@@ -2,7 +2,7 @@
 
 Name:           ocaml-lambda-term
 Version:        1.2
-Release:        1
+Release:        1%{?dist}
 Summary:        Lambda-Term is a cross-platform library for manipulating the terminal for Ocaml
 License:        BSD3
 Group:          Development/Libraries

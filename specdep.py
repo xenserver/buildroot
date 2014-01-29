@@ -53,18 +53,15 @@ SRCDIR = rpm.expandMacro('%_sourcedir')
 # such as '.el6', so RPMs produced by mock will have that in their
 # names.   However if we generate the dependencies in a Fedora 'host',
 # the filenames will be generated with a %dist of '.fc18' instead.
-# We can override %dist so these dependencies are named correctly,
-# but we (currently) run rpmbuild directly in the host to build the
-# SRPMS, so we need to make sure those dependencies use the 
-# host value of %dist.   There should not be any problem with building
-# the SRPMs in a distribution that is different to the one in
-# which we build RPMs, as an SRPM is just a CPIO archive containing
-# the spec file and the source tarball.
-#
-# Annoyingly, the dist interpolation is done when we read the specfile,
-# so we either have to read it twice or rewrite the SRPM name appropriately.
+# We need to override %dist with the value from the chroot so these 
+# dependencies are named correctly.
 
-HOST_DIST = rpm.expandMacro('%dist')
+# The same problem occurs with rpmbuild.   We currently run rpmbuild on
+# the host to build SRPMs.   By default it will use the host's %dist value
+# when naming the SRPM.   This won't match the patterns in the Makefile,
+# so we need to make sure that, whenever we run rpmbuild, we also override
+# %dist (on the command line) to have the same value as the chroot.
+
 # We could avoid hardcoding this by running 
 # "mock -r xenserver --chroot "rpm --eval '%dist'"
 CHROOT_DIST = '.el6'
@@ -111,8 +108,7 @@ def srpm_name_from_spec(spec):
     rpm.delMacro('RELEASE')
     rpm.delMacro('ARCH')
 
-    # HACK: rewrite %dist if it appears in the filename 
-    return srpmname.replace(CHROOT_DIST, HOST_DIST)
+    return srpmname
 
 
 def rpm_names_from_spec(spec):
@@ -166,7 +162,7 @@ def build_srpm_from_spec(spec, specname):
                          " ".join(sources))
     if build_type() == "rpm":
         print '\t@echo [RPMBUILD] $@' 
-        print '\t@rpmbuild --quiet --define "_topdir ." -bs $<'
+        print '\t@rpmbuild --quiet --define "_topdir ." --define "%%dist %s" -bs $<' % CHROOT_DIST
     else:
         print '\t@echo [MAKEDEB] $@'
         print '\tscripts/deb/makedeb.py $<'

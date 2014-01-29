@@ -2,7 +2,7 @@
 
 Name:           ocaml-libvhd
 Version:        0.9.1
-Release:        1
+Release:        1%{?dist}
 Summary:        VHD manipulation via libvhd
 License:        BSD3
 Group:          Development/Libraries

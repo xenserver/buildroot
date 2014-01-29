@@ -1,7 +1,7 @@
 Summary: XenServer Host Configuration Console
 Name: xsconsole
 Version: 0.9.0
-Release: 2
+Release: 2%{?dist}
 License: GPL2
 Group: Administration/System
 URL: http://github.com/jamesbulpin/xsconsole
