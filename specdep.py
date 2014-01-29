@@ -43,30 +43,6 @@ SPECDIR = rpm.expandMacro('%_specdir')
 SRCDIR = rpm.expandMacro('%_sourcedir')
 
 
-# Some RPMs include the value of '%dist' in the release part of the
-# filename.   In the mock chroot, %dist is set to a CentOS release
-# such as '.el6', so RPMs produced by mock will have that in their
-# names.   However if we generate the dependencies in a Fedora 'host',
-# the filenames will be generated with a %dist of '.fc18' instead.
-# We need to override %dist with the value from the chroot so these 
-# dependencies are named correctly.
-
-# The same problem occurs with rpmbuild.   We currently run rpmbuild on
-# the host to build SRPMs.   By default it will use the host's %dist value
-# when naming the SRPM.   This won't match the patterns in the Makefile,
-# so we need to make sure that, whenever we run rpmbuild, we also override
-# %dist (on the command line) to have the same value as the chroot.
-
-
-
-# We could avoid hardcoding this by running 
-# "mock -r xenserver --chroot "rpm --eval '%dist'"
-CHROOT_DIST = '.el6'
-if build_type() == "rpm":
-    rpm.addMacro('dist', CHROOT_DIST)
-else:
-    rpm.addMacro('dist', "")
-
 
 # Rules to build SRPM from SPEC
 def build_srpm_from_spec(spec):
@@ -97,7 +73,7 @@ def build_srpm_from_spec(spec):
 
     if build_type() == "rpm":
         print '\t@echo [RPMBUILD] $@' 
-        print '\t@rpmbuild --quiet --define "_topdir ." --define "%%dist %s" -bs $<' % CHROOT_DIST
+        print '\t@rpmbuild --quiet --define "_topdir ." --define "%%dist %s" -bs $<' % pkg.CHROOT_DIST
     else:
         print '\t@echo [MAKEDEB] $@'
         print '\tscripts/deb/makedeb.py $<'
