@@ -3,7 +3,7 @@
 Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.6
-Release: 2
+Release: 2%{?dist}
 Group:   System/Hypervisor
 License: LGPL
 URL:  https://github.com/xapi-project/sm

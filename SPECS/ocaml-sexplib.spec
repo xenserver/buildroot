@@ -2,7 +2,7 @@
 
 Name:           ocaml-sexplib
 Version:        109.20.00
-Release:        1
+Release:        1%{?dist}
 Summary:        Convert values to and from s-expressions in OCaml
 
 Group:          Development/Libraries

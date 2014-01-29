@@ -1,6 +1,6 @@
 Name:           xenserver-core
 Version:        0.10.0
-Release:        1
+Release:        1%{?dist}
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other

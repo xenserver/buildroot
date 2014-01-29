@@ -3,7 +3,7 @@
 Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
 Version: 0.2.28
-Release: 2
+Release: 2%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://github.com/xenserver/xenserver-install-wizard

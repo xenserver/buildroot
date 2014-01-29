@@ -2,7 +2,7 @@
 
 Name:           ocaml-netdev
 Version:        0.9.0
-Release:        1
+Release:        1%{?dist}
 Summary:        Manipulate Linux bridges, network devices and openvswitch instances in OCaml
 License:        LGPL
 Group:          Development/Libraries

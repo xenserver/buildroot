@@ -2,7 +2,7 @@
 
 Name:           ocaml-nbd
 Version:        0.9.2
-Release:        1
+Release:        1%{?dist}
 Summary:        Pure OCaml implementation of the Network Block Device protocol
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries

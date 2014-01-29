@@ -1,6 +1,6 @@
 Name:           utop
 Version:        1.5
-Release:        1
+Release:        1%{?dist}
 Summary:        A toplevel for OCaml which can run in a terminal or in Emacs
 License:        BSD
 Group:          Development/Other

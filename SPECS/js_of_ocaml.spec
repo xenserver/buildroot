@@ -2,7 +2,7 @@
 
 Name:           js_of_ocaml
 Version:        1.3.2
-Release:        1
+Release:        1%{?dist}
 Summary:        Compile OCaml programs to javascript
 License:        LGPL and others
 Group:          Development/Other

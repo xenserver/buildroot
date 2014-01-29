@@ -2,7 +2,7 @@
 
 Name:           ocaml-oclock
 Version:        0.3
-Release:        2
+Release:        2%{?dist}
 Summary:        POSIX monotonic clock for OCaml
 License:        ISC
 Group:          Development/Libraries

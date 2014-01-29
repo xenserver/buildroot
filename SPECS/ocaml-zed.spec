@@ -2,7 +2,7 @@
 
 Name:           ocaml-zed
 Version:        1.2
-Release:        1
+Release:        1%{?dist}
 Summary:        An abstract engine for text editing for OCaml
 License:        BSD3
 Group:          Development/Libraries

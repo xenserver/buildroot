@@ -1,7 +1,7 @@
 Summary: Bootloader for EL-based distributions that support Xen
 Name: linux-guest-loader
 Version: 0.9.1
-Release: 1
+Release: 1%{?dist}
 URL: https://github.com/xenserver/linux-guest-loader
 Source0: https://github.com/mcclurmc/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 License: GPL

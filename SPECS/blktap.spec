@@ -1,7 +1,7 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
 Version: 0.9.0
-Release: 2
+Release: 2%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap

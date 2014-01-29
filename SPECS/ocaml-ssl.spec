@@ -2,7 +2,7 @@
 
 Name:           ocaml-ssl
 Version:        0.4.6
-Release:        1
+Release:        1%{?dist}
 Summary:        Use OpenSSL from OCaml
 License:        LGPL
 Group:          Development/Libraries

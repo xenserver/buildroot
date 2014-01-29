@@ -2,7 +2,7 @@
 
 Name:           ocaml-cstruct
 Version:        0.7.1
-Release:        2
+Release:        2%{?dist}
 Summary:        Read and write low-level C-style structures in OCaml
 License:        ISC
 Group:          Development/Libraries

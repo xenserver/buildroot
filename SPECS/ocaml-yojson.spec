@@ -2,7 +2,7 @@
 
 Name:           ocaml-yojson
 Version:        1.1.6
-Release:        1
+Release:        1%{?dist}
 Summary:        A JSON parser and priter for OCaml
 License:        BSD3
 Group:          Development/Libraries

@@ -2,7 +2,7 @@
 
 Name:           ocaml-fd-send-recv
 Version:        1.0.1
-Release:        1
+Release:        1%{?dist}
 Summary:        Bindings to sendmsg/recvmsg for fd passing under Linux
 License:        LGPL
 Group:          Development/Libraries
