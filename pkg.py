@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """Classes for handling RPM spec files.   The classes defined here
    are mostly just wrappers around rpm.rpm, adding information which
    the rpm library does not currently provide."""
@@ -8,9 +6,20 @@
 import os
 import rpm
 
-
 # Could have a decorator / context manager to set and unset all the RPM macros
 # around methods such as 'provides'
+
+
+# for debugging, make all paths relative to PWD
+rpm.addMacro('_topdir', '.')
+
+# Directories where rpmbuild/mock expects to find inputs
+# and writes outputs
+RPMDIR  = rpm.expandMacro('%_rpmdir')
+SRPMDIR = rpm.expandMacro('%_srcrpmdir')
+SPECDIR = rpm.expandMacro('%_specdir')
+SRCDIR  = rpm.expandMacro('%_sourcedir')
+
 
 def flatten(lst):
     """Flatten a list of lists"""
@@ -25,7 +34,7 @@ class Spec(object):
 
     def __init__(self, specfile):
         # for debugging, make all paths relative to PWD
-        rpm.addMacro('_topdir', '.')
+        #rpm.addMacro('_topdir', '.')
 
         # We could avoid hardcoding this by running
         # "mock -r xenserver --chroot "rpm --eval '%dist'"
@@ -75,8 +84,8 @@ class Spec(object):
         return set([r for r in self.spec.sourceHeader['requires']])
 
 
-    def source_package_name(self):
-        """Return the name of the source package which building this
+    def source_package_path(self):
+        """Return the path of the source package which building this
            spec will produce"""
         hdr = self.spec.sourceHeader
         rpm.addMacro('NAME', hdr['name'])
@@ -96,10 +105,10 @@ class Spec(object):
         rpm.delMacro('RELEASE')
         rpm.delMacro('ARCH')
 
-        return srpmname
+        return os.path.join(SRPMDIR, srpmname)
 
 
-    def binary_package_names(self):
+    def binary_package_paths(self):
         """Return a list of binary packages built by this spec"""
         def rpm_name_from_header(hdr):
             """Return the name of the binary package file which
@@ -114,5 +123,5 @@ class Spec(object):
             rpm.delMacro('VERSION')
             rpm.delMacro('RELEASE')
             rpm.delMacro('ARCH')
-            return rpmname
+            return os.path.join(RPMDIR, rpmname)
         return [rpm_name_from_header(pkg.header) for pkg in self.packages()]

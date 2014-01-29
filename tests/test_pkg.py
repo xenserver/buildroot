@@ -33,12 +33,12 @@ class BasicTests(unittest.TestCase):
                  "ocaml-ocamldoc", "ocaml-camlp4-devel",
                  "openssl", "openssl-devel"])
 
-    def test_source_package_name(self):
-        assert self.spec.source_package_name() == \
-            "ocaml-cohttp-0.9.8-1.el6.src.rpm"
+    def test_source_package_path(self):
+        assert self.spec.source_package_path() == \
+            "./SRPMS/ocaml-cohttp-0.9.8-1.el6.src.rpm"
 
-    def test_binary_package_names(self):
-        assert sorted(self.spec.binary_package_names()) == \
-            sorted(["x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm",
-             "x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm"])
+    def test_binary_package_paths(self):
+        assert sorted(self.spec.binary_package_paths()) == \
+            sorted(["./RPMS/x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm",
+             "./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm"])
 

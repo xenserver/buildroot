@@ -37,15 +37,9 @@ def map_package_name(name):
         return mappkgname.map_package(name)
 
 
-# for debugging, make all paths relative to PWD
-rpm.addMacro('_topdir', '.')
-
-
 # Directories where rpmbuild/mock expects to find inputs
 # and writes outputs
-RPMDIR = rpm.expandMacro('%_rpmdir')
 SPECDIR = rpm.expandMacro('%_specdir')
-SRPMDIR = rpm.expandMacro('%_srcrpmdir')
 SRCDIR = rpm.expandMacro('%_sourcedir')
 
 
@@ -76,7 +70,7 @@ else:
 
 # Rules to build SRPM from SPEC
 def build_srpm_from_spec(spec, specname):
-    srpmname = spec.source_package_name()
+    srpmpath = spec.source_package_path()
 
     # spec.sourceHeader['sources'] and ['patches'] doesn't work 
     # in RPM 4.8 on CentOS 6.4.   spec.sources contains both
@@ -99,8 +93,7 @@ def build_srpm_from_spec(spec, specname):
         if url.scheme == "":
             sources.append(os.path.join(SRCDIR, url.path))
 
-    print '%s: %s %s' % (os.path.join(SRPMDIR, srpmname), 
-                         os.path.join(SPECDIR, specname),
+    print '%s: %s %s' % (srpmpath, os.path.join(SPECDIR, specname),
                          " ".join(sources))
     if build_type() == "rpm":
         print '\t@echo [RPMBUILD] $@' 
@@ -155,11 +148,9 @@ def build_rpm_from_srpm(spec):
     # This doesn't generate the right Makefile fragment for a multi-target
     # rule - we may end up building too often, or not rebuilding correctly
     # on a partial build
-    rpmnames = spec.binary_package_names()
-    srpmname = spec.source_package_name()
-    for rpmname in rpmnames: 
-        rpm_path = os.path.join(RPMDIR, rpmname)
-        srpm_path = os.path.join(SRPMDIR, srpmname)
+    rpm_paths = spec.binary_package_paths()
+    srpm_path = spec.source_package_path()
+    for rpm_path in rpm_paths: 
         rpm_outdir = os.path.dirname(rpm_path)
         print '%s: %s' % (rpm_path, srpm_path)
         if build_type() == "rpm":
@@ -167,7 +158,7 @@ def build_rpm_from_srpm(spec):
             print '\t@mock --configdir=mock --quiet -r xenserver '\
                 '--resultdir="%s" $<' % rpm_outdir
             print '\t@echo [CREATEREPO] $@'
-            print '\t@createrepo --quiet --update %s' % RPMDIR
+            print '\t@createrepo --quiet --update %s' % pkg.RPMDIR
 
         else:
             print '\t@echo [COWBUILDER] $@'
@@ -181,19 +172,18 @@ def package_to_rpm_map(specs):
     for spec in specs:
         for package in spec.packages():
             for provided in spec.provides():
-                for rpmname in spec.binary_package_names():
-                    provides_to_rpm[provided] = rpmname
+                for rpmpath in spec.binary_package_paths():
+                    provides_to_rpm[provided] = rpmpath
     return provides_to_rpm
     
 
 def buildrequires_for_rpm(spec, provides_to_rpm):
-    for rpmname in spec.binary_package_names():
+    for rpmpath in spec.binary_package_paths():
         for buildreq in spec.buildrequires():
             # Some buildrequires come from the system repository
             if provides_to_rpm.has_key(buildreq):
                 buildreqrpm = provides_to_rpm[buildreq]
-                print "%s: %s" % (os.path.join(RPMDIR, rpmname), 
-                                  os.path.join(RPMDIR, buildreqrpm))
+                print "%s: %s" % (rpmpath, buildreqrpm)
 
 
 def main():
@@ -228,10 +218,9 @@ def main():
     all_rpms = []
     all_srpms = []
     for spec in specs.values():
-        rpms = spec.binary_package_names()
-        rpm_paths = map((lambda rpm: os.path.join(RPMDIR, rpm)), rpms)
+        rpm_paths = spec.binary_package_paths()
         all_rpms += rpm_paths
-        all_srpms.append(os.path.join(SRPMDIR, spec.source_package_name()))
+        all_srpms.append(spec.source_package_path())
         print "%s: %s" % (spec.name(), " ".join(rpm_paths))
     print ""
     
