@@ -71,7 +71,7 @@ class Spec(object):
     def provides(self):
         """Return a list of package names provided by this spec"""
         provides = [pkg.header['provides'] + [pkg.header['name']]
-                    for pkg in self.packages()]
+                    for pkg in self.spec.packages]
         return set(flatten(provides))
 
 
@@ -83,11 +83,6 @@ class Spec(object):
     def version(self):
         """Return the package version"""
         return self.spec.sourceHeader['version']
-
-
-    def packages(self):
-        """Return package objects for each package the spec defines"""
-        return self.spec.packages
 
 
     def source_urls(self):
@@ -166,4 +161,4 @@ class Spec(object):
             rpm.delMacro('RELEASE')
             rpm.delMacro('ARCH')
             return os.path.join(RPMDIR, rpmname)
-        return [rpm_name_from_header(pkg.header) for pkg in self.packages()]
+        return [rpm_name_from_header(pkg.header) for pkg in self.spec.packages]
