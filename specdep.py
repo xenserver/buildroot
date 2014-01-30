@@ -25,13 +25,6 @@ def build_type():
         return "rpm"
 
 
-def map_package_name(name):
-    if build_type() == "rpm":
-        return [name]
-    else:
-        return mappkgname.map_package(name)
-
-
 # Rules to build SRPM from SPEC
 def build_srpm_from_spec(spec):
     srpmpath = spec.source_package_path()
@@ -116,7 +109,7 @@ def main():
     specs = {}
 
     for spec_path in spec_paths:
-        spec = pkg.Spec(spec_path)
+        spec = pkg.Spec(spec_path, target=build_type())
         pkg_name = spec.name()
         if pkg_name in ignore_list:
             continue
@@ -141,10 +134,10 @@ def main():
     all_rpms = []
     all_srpms = []
     for spec in specs.itervalues():
-        rpm_paths = spec.binary_package_paths()
-        all_rpms += rpm_paths
+        rpm_path = spec.binary_package_paths()[0]
+        all_rpms.append(rpm_path)
         all_srpms.append(spec.source_package_path())
-        print "%s: %s" % (spec.name(), " ".join(rpm_paths))
+        print "%s: %s" % (spec.name(), rpm_path)
     print ""
 
     print "rpms: " + " \\\n\t".join(all_rpms)

@@ -6,6 +6,7 @@
 import os
 import rpm
 import urlparse
+from scripts.lib import mappkgname
 
 # Could have a decorator / context manager to set and unset all the RPM macros
 # around methods such as 'provides'
@@ -21,25 +22,6 @@ SRPMDIR = rpm.expandMacro('%_srcrpmdir')
 SPECDIR = rpm.expandMacro('%_specdir')
 SRCDIR  = rpm.expandMacro('%_sourcedir')
 
-# Some RPMs include the value of '%dist' in the release part of the
-# filename.   In the mock chroot, %dist is set to a CentOS release
-# such as '.el6', so RPMs produced by mock will have that in their
-# names.   However if we generate the dependencies in a Fedora 'host',
-# the filenames will be generated with a %dist of '.fc18' instead.
-# We need to override %dist with the value from the chroot so these
-# dependencies are named correctly.
-
-# The same problem occurs with rpmbuild.   We currently run rpmbuild on
-# the host to build SRPMs.   By default it will use the host's %dist value
-# when naming the SRPM.   This won't match the patterns in the Makefile,
-# so we need to make sure that, whenever we run rpmbuild, we also override
-# %dist (on the command line) to have the same value as the chroot.
-
-# We could avoid hardcoding this by running
-# "mock -r xenserver --chroot "rpm --eval '%dist'"
-CHROOT_DIST = '.el6'
-rpm.addMacro('dist', CHROOT_DIST)
-
 
 def flatten(lst):
     """Flatten a list of lists"""
@@ -49,11 +31,49 @@ def flatten(lst):
     return res
 
 
+def identity(name):
+    """Identity mapping"""
+    return name 
+
+def map_package_name_deb(name):
+    """Map RPM package name to Deb name"""
+    return mappkgname.map_package(name)[0]
+
+def map_arch_deb(arch):
+    """Map RPM package architecture to Deb architecture"""
+    if arch == "x86_64":
+        return "amd64"
+    elif arch == "noarch": 
+        return "all"
+    else:
+        return arch
+
+
 class Spec(object):
     """Represents an RPM spec file"""
 
-    def __init__(self, path):
-        self.rpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
+    def __init__(self, path, target="rpm"):
+        if target == "rpm":
+            self.rpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
+            self.srpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
+            self.map_package_name = identity
+            self.map_arch = identity
+
+            # '%dist' in the host (where we build the source package)
+            # might not match '%dist' in the chroot (where we build
+            # the binary package).   We must override it on the host,
+            # otherwise the names of packages in the dependencies won't
+            # match the files actually produced by mock.
+            self.chroot_dist = ".el6"
+            rpm.addMacro('dist', self.chroot_dist)
+
+        else: 
+            self.rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
+            self.srpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}.dsc"
+            self.map_package_name = map_package_name_deb
+            self.map_arch = map_arch_deb
+            self.chroot_dist = ""
+            rpm.addMacro('dist', self.chroot_dist)
 
         self.path = os.path.join(SPECDIR, os.path.basename(path))
 
@@ -70,9 +90,9 @@ class Spec(object):
 
     def provides(self):
         """Return a list of package names provided by this spec"""
-        provides = [pkg.header['provides'] + [pkg.header['name']]
-                    for pkg in self.spec.packages]
-        return set(flatten(provides))
+        provides = sum([pkg.header['provides'] + [pkg.header['name']]
+                       for pkg in self.spec.packages], [])
+        return set([self.map_package_name(p) for p in provides])
 
 
     def name(self):
@@ -118,14 +138,15 @@ class Spec(object):
     def buildrequires(self):
         """Return the set of packages needed to build this spec
            (BuildRequires)"""
-        return set([r for r in self.spec.sourceHeader['requires']])
+        return set([self.map_package_name(r) for r 
+                   in self.spec.sourceHeader['requires']])
 
 
     def source_package_path(self):
         """Return the path of the source package which building this
            spec will produce"""
         hdr = self.spec.sourceHeader
-        rpm.addMacro('NAME', hdr['name'])
+        rpm.addMacro('NAME', self.map_package_name(hdr['name']))
         rpm.addMacro('VERSION', hdr['version'])
         rpm.addMacro('RELEASE', hdr['release'])
         rpm.addMacro('ARCH', 'src')
@@ -135,7 +156,7 @@ class Spec(object):
         # Unfortunately expanding that macro gives us a leading 'src' that we
         # don't want, so we strip that off
 
-        srpmname = os.path.basename(rpm.expandMacro(self.rpmfilenamepat))
+        srpmname = os.path.basename(rpm.expandMacro(self.srpmfilenamepat))
 
         rpm.delMacro('NAME')
         rpm.delMacro('VERSION')
@@ -150,11 +171,10 @@ class Spec(object):
         def rpm_name_from_header(hdr):
             """Return the name of the binary package file which
                will be built from hdr"""
-            rpm.addMacro('NAME', hdr['name'])
+            rpm.addMacro('NAME', self.map_package_name(hdr['name']))
             rpm.addMacro('VERSION', hdr['version'])
             rpm.addMacro('RELEASE', hdr['release'])
-            rpm.addMacro('ARCH', hdr['arch'])
-            rpm.addMacro('ARCH', hdr['arch'])
+            rpm.addMacro('ARCH', self.map_arch(hdr['arch']))
             rpmname = rpm.expandMacro(self.rpmfilenamepat)
             rpm.delMacro('NAME')
             rpm.delMacro('VERSION')
