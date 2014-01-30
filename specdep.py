@@ -3,18 +3,13 @@
 # see http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch16s04.html
 
 import sys
-import glob
+import argparse
 import os
 import platform
-import rpm
 import urlparse
 import pkg
 
 from scripts.lib import mappkgname
-
-
-IGNORE_LIST = {"rpm":["libnl3"],
-               "deb":["libnl3"]}
 
 
 def build_type():
@@ -37,19 +32,14 @@ def map_package_name(name):
         return mappkgname.map_package(name)
 
 
-# Directories where rpmbuild/mock expects to find inputs
-# and writes outputs
-SPECDIR = rpm.expandMacro('%_specdir')
-
-
 # Rules to build SRPM from SPEC
 def build_srpm_from_spec(spec):
     srpmpath = spec.source_package_path()
-    print '%s: %s %s' % (srpmpath, spec.specpath(), 
+    print '%s: %s %s' % (srpmpath, spec.specpath(),
                          " ".join(spec.source_paths()))
 
     if build_type() == "rpm":
-        print '\t@echo [RPMBUILD] $@' 
+        print '\t@echo [RPMBUILD] $@'
         print '\t@rpmbuild --quiet --define "_topdir ." --define "%%dist %s" -bs $<' % pkg.CHROOT_DIST
     else:
         print '\t@echo [MAKEDEB] $@'
@@ -68,7 +58,7 @@ def download_rpm_sources(spec):
         # Source comes from a remote HTTP server
         if source.scheme in ["http", "https"]:
             print '%s: %s' % (path, spec.specpath())
-            print '\t@echo [CURL] $@' 
+            print '\t@echo [CURL] $@'
             print '\t@curl --silent --show-error -L -o $@ %s' % url
 
         # Source comes from a local file or directory
@@ -79,7 +69,7 @@ def download_rpm_sources(spec):
             # Assume that the directory name is already what's expected by the
             # spec file, and prefix it with the version number in the tarball
             print '\t@echo [GIT] $@'
-            dirname = "%s-%s" % (os.path.basename(url.path), spec.version())
+            dirname = "%s-%s" % (os.path.basename(source.path), spec.version())
             print '\t@git --git-dir=%s/.git '\
                 'archive --prefix %s/ -o $@ HEAD' % (source.path, dirname)
 
@@ -92,7 +82,7 @@ def build_rpm_from_srpm(spec):
     # on a partial build
     rpm_paths = spec.binary_package_paths()
     srpm_path = spec.source_package_path()
-    for rpm_path in rpm_paths: 
+    for rpm_path in rpm_paths:
         rpm_outdir = os.path.dirname(rpm_path)
         print '%s: %s' % (rpm_path, srpm_path)
         if build_type() == "rpm":
@@ -106,7 +96,7 @@ def build_rpm_from_srpm(spec):
             print '\t@echo [COWBUILDER] $@'
             print '\tsudo cowbuilder --build '\
                 '--configfile pbuilder/pbuilderrc-raring-amd64 '\
-                '--buildresult %s $<' % rpm_outdir 
+                '--buildresult %s $<' % rpm_outdir
 
 
 def package_to_rpm_map(specs):
@@ -116,7 +106,7 @@ def package_to_rpm_map(specs):
             for rpmpath in spec.binary_package_paths():
                 provides_to_rpm[provided] = rpmpath
     return provides_to_rpm
-    
+
 
 def buildrequires_for_rpm(spec, provides_to_rpm):
     for rpmpath in spec.binary_package_paths():
@@ -127,25 +117,39 @@ def buildrequires_for_rpm(spec, provides_to_rpm):
                 print "%s: %s" % (rpmpath, buildreqrpm)
 
 
+def parse_cmdline():
+    """
+    Parse command line options
+    """
+    parser = argparse.ArgumentParser(description=
+        "Generate Makefile dependencies from RPM Spec files")
+    parser.add_argument("specs", metavar="SPEC", nargs="+", help="spec file")
+    parser.add_argument("-i", "--ignore", metavar="PKG", action="append",
+                        default=[], help="package name to ignore")
+    return parser.parse_args()
+
+
 def main():
-    spec_paths = glob.glob(os.path.join(SPECDIR, "*.spec"))
+    args = parse_cmdline()
+    spec_paths = args.specs
+    ignore_list = args.ignore
     specs = {}
 
     for spec_path in spec_paths:
         spec = pkg.Spec(spec_path)
         pkg_name = spec.name()
-        if pkg_name in IGNORE_LIST[build_type()]:
+        if pkg_name in ignore_list:
             continue
         if os.path.splitext(os.path.basename(spec_path))[0] != pkg_name:
             sys.stderr.write(
-                "error: spec file name '%s' does not match package name '%s'\n" % 
+                "error: spec file name '%s' does not match package name '%s'\n" %
                 (spec_path, pkg_name))
             sys.exit(1)
-            
+
         specs[os.path.basename(spec_path)] = spec
 
     provides_to_rpm = package_to_rpm_map(specs.values())
-    
+
     print "all: rpms"
 
     for spec in specs.itervalues():
@@ -164,12 +168,12 @@ def main():
         all_srpms.append(spec.source_package_path())
         print "%s: %s" % (spec.name(), " ".join(rpm_paths))
     print ""
-    
+
     print "rpms: " + " \\\n\t".join(all_rpms)
     print ""
     print "srpms: " + " \\\n\t".join(all_srpms)
     print ""
-    print "install: all" 
+    print "install: all"
     print "\t. scripts/%s/install.sh" % build_type()
 
 
