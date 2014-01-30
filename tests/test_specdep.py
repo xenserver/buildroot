@@ -20,8 +20,6 @@ class BasicTests(unittest.TestCase):
 
         assert sys.stdout.getvalue() == \
 """./SRPMS/ocaml-cohttp-0.9.8-1.el6.src.rpm: ./SPECS/ocaml-cohttp.spec ./SOURCES/ocaml-cohttp-0.9.8.tar.gz
-	@echo [RPMBUILD] $@
-	@rpmbuild --quiet --define "_topdir ." --define "%dist .el6" -bs $<
 """
 
     def test_download_rpm_sources(self):
@@ -38,15 +36,7 @@ class BasicTests(unittest.TestCase):
 
         assert sys.stdout.getvalue() == \
 """./RPMS/x86_64/ocaml-cohttp-0.9.8-1.el6.x86_64.rpm: ./SRPMS/ocaml-cohttp-0.9.8-1.el6.src.rpm
-	@echo [MOCK] $@
-	@mock --configdir=mock --quiet -r xenserver --resultdir="./RPMS/x86_64" $<
-	@echo [CREATEREPO] $@
-	@createrepo --quiet --update ./RPMS
 ./RPMS/x86_64/ocaml-cohttp-devel-0.9.8-1.el6.x86_64.rpm: ./SRPMS/ocaml-cohttp-0.9.8-1.el6.src.rpm
-	@echo [MOCK] $@
-	@mock --configdir=mock --quiet -r xenserver --resultdir="./RPMS/x86_64" $<
-	@echo [CREATEREPO] $@
-	@createrepo --quiet --update ./RPMS
 """
 
 

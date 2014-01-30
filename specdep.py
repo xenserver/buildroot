@@ -38,13 +38,6 @@ def build_srpm_from_spec(spec):
     print '%s: %s %s' % (srpmpath, spec.specpath(),
                          " ".join(spec.source_paths()))
 
-    if build_type() == "rpm":
-        print '\t@echo [RPMBUILD] $@'
-        print '\t@rpmbuild --quiet --define "_topdir ." --define "%%dist %s" -bs $<' % pkg.CHROOT_DIST
-    else:
-        print '\t@echo [MAKEDEB] $@'
-        print '\tscripts/deb/makedeb.py $<'
-
 
 # Rules to download sources
 
@@ -83,20 +76,7 @@ def build_rpm_from_srpm(spec):
     rpm_paths = spec.binary_package_paths()
     srpm_path = spec.source_package_path()
     for rpm_path in rpm_paths:
-        rpm_outdir = os.path.dirname(rpm_path)
         print '%s: %s' % (rpm_path, srpm_path)
-        if build_type() == "rpm":
-            print '\t@echo [MOCK] $@'
-            print '\t@mock --configdir=mock --quiet -r xenserver '\
-                '--resultdir="%s" $<' % rpm_outdir
-            print '\t@echo [CREATEREPO] $@'
-            print '\t@createrepo --quiet --update %s' % pkg.RPMDIR
-
-        else:
-            print '\t@echo [COWBUILDER] $@'
-            print '\tsudo cowbuilder --build '\
-                '--configfile pbuilder/pbuilderrc-raring-amd64 '\
-                '--buildresult %s $<' % rpm_outdir
 
 
 def package_to_rpm_map(specs):
@@ -149,8 +129,6 @@ def main():
         specs[os.path.basename(spec_path)] = spec
 
     provides_to_rpm = package_to_rpm_map(specs.values())
-
-    print "all: rpms"
 
     for spec in specs.itervalues():
         build_srpm_from_spec(spec)
