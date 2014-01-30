@@ -3,17 +3,16 @@
 # see http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch16s04.html
 
 import sys
-sys.path.append("scripts/lib")
-
 import glob
-import mappkgname
 import os
 import platform
 import rpm
 import urlparse
 
+from scripts.lib import mappkgname
 
-IGNORE_LIST = {"rpm":["libxl-headers","libnl3"],
+
+IGNORE_LIST = {"rpm":["libnl3"],
                "deb":["libnl3"]}
 
 
