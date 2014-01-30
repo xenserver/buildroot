@@ -13,7 +13,7 @@ import rpm
 import urlparse
 
 
-IGNORE_LIST = {"rpm":["libxl-headers","libnl3"],
+IGNORE_LIST = {"rpm":["libnl3"],
                "deb":["libnl3"]}
 
 
