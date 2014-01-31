@@ -197,13 +197,15 @@ def download_rpm_sources(spec, specname):
                 os.path.join(SRCDIR, os.path.basename(url.fragment)),
                 os.path.join(SPECDIR, specname),
                 url.path)
-            print '\t@echo [TAR] $@' 
-            # assume that the directory name is already what's expected by the
-            # spec file, and tag it with the version number in the tarball
+
+            # Assume that the directory name is already what's expected by the
+            # spec file, and prefix it with the version number in the tarball
+            print '\t@echo [GIT] $@'
             dirname = "%s-%s" % (os.path.basename(url.path), 
                                  spec.sourceHeader['version'])
-            print '\t@tar zcf $@ -C %s --transform "s,^\./,%s/," .' % (url.path,
-                                                                       dirname)
+            print '\t@git --git-dir=%s/.git '\
+                'archive --prefix %s/ -o $@ HEAD' % (url.path, dirname)
+
 
 
 # Rules to build RPMS from SRPMS (uses information from the SPECs to
