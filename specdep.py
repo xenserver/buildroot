@@ -3,11 +3,11 @@
 # see http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch16s04.html
 
 import sys
-import argparse
 import os
 import platform
 import urlparse
 import pkg
+import getopt
 
 from scripts.lib import mappkgname
 
@@ -96,22 +96,44 @@ def buildrequires_for_rpm(spec, provides_to_rpm):
                 print "%s: %s" % (rpmpath, buildreqrpm)
 
 
+def usage(name):
+    """
+    Print usage information
+    """
+    print "usage: %s [-h] [-i PKG] SPEC [SPEC ...]" % name
+
+
 def parse_cmdline():
     """
     Parse command line options
     """
-    parser = argparse.ArgumentParser(description=
-        "Generate Makefile dependencies from RPM Spec files")
-    parser.add_argument("specs", metavar="SPEC", nargs="+", help="spec file")
-    parser.add_argument("-i", "--ignore", metavar="PKG", action="append",
-                        default=[], help="package name to ignore")
-    return parser.parse_args()
+
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hi:", ["help", "ignore="])
+    except getopt.GetoptError as err:
+        usage(sys.argv[0])
+        print str(err)
+        sys.exit(1)
+
+    ignore = []
+    for opt, val in opts:
+        if opt == "-i" or opt == "--ignore":
+            ignore.append(val)
+        else:
+            usage(sys.argv[0])
+            print "unknown option: %s" % opt
+            sys.exit(1)
+
+    if len(args) == 0:
+        usage(sys.argv[0])
+        print "%s: error: too few arguments" % sys.argv[0]
+        sys.exit(1)
+
+    return (ignore, args)
 
 
 def main():
-    args = parse_cmdline()
-    spec_paths = args.specs
-    ignore_list = args.ignore
+    ignore_list, spec_paths = parse_cmdline()
     specs = {}
 
     for spec_path in spec_paths:
