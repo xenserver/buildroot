@@ -4,9 +4,9 @@
 
 
 import os
+import re
 import rpm
 import urlparse
-from scripts.lib import mappkgname
 
 # Could have a decorator / context manager to set and unset all the RPM macros
 # around methods such as 'provides'
@@ -25,25 +25,24 @@ SRCDIR  = rpm.expandMacro('%_sourcedir')
 
 def flatten(lst):
     """Flatten a list of lists"""
-    res = []
-    for elt in lst:
-        res += elt
-    return res
+    return sum(lst, [])
 
 
 def identity(name):
     """Identity mapping"""
-    return name 
+    return name
 
-def map_package_name_deb(name):
-    """Map RPM package name to Deb name"""
-    return mappkgname.map_package(name)[0]
+
+def identity_list(name):
+    """Identity mapping, injected into a list"""
+    return [name]
+
 
 def map_arch_deb(arch):
-    """Map RPM package architecture to Deb architecture"""
+    """Map RPM package architecture to equivalent Deb architecture"""
     if arch == "x86_64":
         return "amd64"
-    elif arch == "noarch": 
+    elif arch == "noarch":
         return "all"
     else:
         return arch
@@ -52,11 +51,10 @@ def map_arch_deb(arch):
 class Spec(object):
     """Represents an RPM spec file"""
 
-    def __init__(self, path, target="rpm"):
+    def __init__(self, path, target="rpm", map_name=None, dist=""):
         if target == "rpm":
             self.rpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
             self.srpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
-            self.map_package_name = identity
             self.map_arch = identity
 
             # '%dist' in the host (where we build the source package)
@@ -64,16 +62,21 @@ class Spec(object):
             # the binary package).   We must override it on the host,
             # otherwise the names of packages in the dependencies won't
             # match the files actually produced by mock.
-            self.chroot_dist = ".el6"
-            rpm.addMacro('dist', self.chroot_dist)
+            self.dist = dist
 
-        else: 
+        else:
             self.rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
             self.srpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}.dsc"
-            self.map_package_name = map_package_name_deb
             self.map_arch = map_arch_deb
-            self.chroot_dist = ""
-            rpm.addMacro('dist', self.chroot_dist)
+            self.dist = ""
+
+        rpm.addMacro('dist', self.dist)
+
+        if map_name:
+            self.map_package_name = map_name
+        else:
+            self.map_package_name = identity_list
+
 
         self.path = os.path.join(SPECDIR, os.path.basename(path))
 
@@ -90,9 +93,12 @@ class Spec(object):
 
     def provides(self):
         """Return a list of package names provided by this spec"""
-        provides = sum([pkg.header['provides'] + [pkg.header['name']]
-                       for pkg in self.spec.packages], [])
-        return set([self.map_package_name(p) for p in provides])
+        provides = flatten([pkg.header['provides'] + [pkg.header['name']]
+                          for pkg in self.spec.packages])
+
+        # RPM 4.6 adds architecture constraints to dependencies.  Drop them.
+        provides = [re.sub('\(x86-64\)$', '', pkg) for pkg in provides]
+        return set(flatten([self.map_package_name(p) for p in provides]))
 
 
     def name(self):
@@ -132,21 +138,20 @@ class Spec(object):
         return sources
 
 
-
     # RPM build dependencies.   The 'requires' key for the *source* RPM is
     # actually the 'buildrequires' key from the spec
     def buildrequires(self):
         """Return the set of packages needed to build this spec
            (BuildRequires)"""
-        return set([self.map_package_name(r) for r 
-                   in self.spec.sourceHeader['requires']])
+        return set(flatten([self.map_package_name(r) for r
+                           in self.spec.sourceHeader['requires']]))
 
 
     def source_package_path(self):
         """Return the path of the source package which building this
            spec will produce"""
         hdr = self.spec.sourceHeader
-        rpm.addMacro('NAME', self.map_package_name(hdr['name']))
+        rpm.addMacro('NAME', self.map_package_name(hdr['name'])[0])
         rpm.addMacro('VERSION', hdr['version'])
         rpm.addMacro('RELEASE', hdr['release'])
         rpm.addMacro('ARCH', 'src')
@@ -171,7 +176,7 @@ class Spec(object):
         def rpm_name_from_header(hdr):
             """Return the name of the binary package file which
                will be built from hdr"""
-            rpm.addMacro('NAME', self.map_package_name(hdr['name']))
+            rpm.addMacro('NAME', self.map_package_name(hdr['name'])[0])
             rpm.addMacro('VERSION', hdr['version'])
             rpm.addMacro('RELEASE', hdr['release'])
             rpm.addMacro('ARCH', self.map_arch(hdr['arch']))

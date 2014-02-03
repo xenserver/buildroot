@@ -8,7 +8,7 @@ import pkg
 
 class RpmTests(unittest.TestCase):
     def setUp(self):
-        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec")
+        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", dist=".el6")
 
     def test_name(self):
         assert self.spec.name() == "ocaml-cohttp"
@@ -51,7 +51,24 @@ class RpmTests(unittest.TestCase):
 
 class DebTests(unittest.TestCase):
     def setUp(self):
-        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", target="deb")
+        def map_rpm_to_deb(name):
+            mapping = {"ocaml-cohttp": ["libcohttp-ocaml"],
+                       "ocaml-cohttp-devel": ["libcohttp-ocaml-dev"],
+                       "ocaml": ["ocaml-nox", "ocaml-native-compilers"],
+                       "ocaml-findlib": ["ocaml-findlib"],
+                       "ocaml-re-devel": ["libre-ocaml-dev"],
+                       "ocaml-uri-devel": ["liburi-ocaml-dev"],
+                       "ocaml-cstruct-devel": ["libcstruct-ocaml-dev"],
+                       "ocaml-lwt-devel": ["liblwt-ocaml-dev"],
+                       "ocaml-ounit-devel": ["libounit-ocaml-dev"],
+                       "ocaml-ocamldoc": ["ocaml-nox"],
+                       "ocaml-camlp4-devel": ["camlp4", "camlp4-extra"],
+                       "openssl": ["libssl1.0.0"],
+                       "openssl-devel": ["libssl-dev"]}
+            return mapping[name]
+
+        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", target="deb",
+                             map_name=map_rpm_to_deb)
 
     def test_name(self):
         assert self.spec.name() == "ocaml-cohttp"
@@ -76,10 +93,12 @@ class DebTests(unittest.TestCase):
 
     def test_buildrequires(self):
         assert self.spec.buildrequires() == \
-            set(["ocaml-nox", "ocaml-findlib", "libre-ocaml-dev",
+            set(["ocaml-nox", "ocaml-native-compilers",
+                 "ocaml-findlib", "libre-ocaml-dev",
                  "liburi-ocaml-dev", "libcstruct-ocaml-dev",
                  "liblwt-ocaml-dev", "libounit-ocaml-dev",
-                 "camlp4", "libssl1.0.0", "libssl-dev"])
+                 "camlp4", "camlp4-extra", "libssl1.0.0",
+                 "libssl-dev"])
 
     def test_source_package_path(self):
         assert self.spec.source_package_path() == \

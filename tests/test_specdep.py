@@ -13,7 +13,7 @@ import pkg
 
 class BasicTests(unittest.TestCase):
     def setUp(self):
-        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec")
+        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", dist=".el6")
 
     def test_build_srpm_from_spec(self):
         specdep.build_srpm_from_spec(self.spec)
@@ -42,7 +42,7 @@ class BasicTests(unittest.TestCase):
 
     def test_buildrequires_for_rpm(self):
         spec_paths = glob.glob(os.path.join("./SPECS", "*.spec"))
-        specs = [pkg.Spec(spec_path) for spec_path in spec_paths]
+        specs = [pkg.Spec(spec_path, dist='.el6') for spec_path in spec_paths]
 
         specdep.buildrequires_for_rpm(self.spec, specdep.package_to_rpm_map(specs))
         assert sys.stdout.getvalue() == \
