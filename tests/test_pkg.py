@@ -51,7 +51,24 @@ class RpmTests(unittest.TestCase):
 
 class DebTests(unittest.TestCase):
     def setUp(self):
-        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", target="deb")
+        def map_rpm_to_deb(name):
+            mapping = {"ocaml-cohttp": ["libcohttp-ocaml"],
+                       "ocaml-cohttp-devel": ["libcohttp-ocaml-dev"],
+                       "ocaml": ["ocaml-nox", "ocaml-native-compilers"],
+                       "ocaml-findlib": ["ocaml-findlib"],
+                       "ocaml-re-devel": ["libre-ocaml-dev"],
+                       "ocaml-uri-devel": ["liburi-ocaml-dev"],
+                       "ocaml-cstruct-devel": ["libcstruct-ocaml-dev"],
+                       "ocaml-lwt-devel": ["liblwt-ocaml-dev"],
+                       "ocaml-ounit-devel": ["libounit-ocaml-dev"],
+                       "ocaml-ocamldoc": ["ocaml-nox"],
+                       "ocaml-camlp4-devel": ["camlp4", "camlp4-extra"],
+                       "openssl": ["libssl1.0.0"],
+                       "openssl-devel": ["libssl-dev"]}
+            return mapping[name]
+
+        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", target="deb",
+                             map_name=map_rpm_to_deb)
 
     def test_name(self):
         assert self.spec.name() == "ocaml-cohttp"

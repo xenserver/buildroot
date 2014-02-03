@@ -25,11 +25,17 @@ def build_type():
         return "rpm"
 
 
+def map_package_name_deb(name):
+    """Map RPM package name to equivalent Deb names"""
+    return mappkgname.map_package(name)
+
+
 # Rules to build SRPM from SPEC
 def build_srpm_from_spec(spec):
     srpmpath = spec.source_package_path()
     print '%s: %s %s' % (srpmpath, spec.specpath(),
                          " ".join(spec.source_paths()))
+
 
 
 # Rules to download sources
@@ -109,7 +115,11 @@ def main():
     specs = {}
 
     for spec_path in spec_paths:
-        spec = pkg.Spec(spec_path, target=build_type())
+	if build_type() == "deb":
+            spec = pkg.Spec(spec_path, target="deb",
+                            map_name=map_package_name_deb)
+	else:
+            spec = pkg.Spec(spec_path, target="rpm")
         pkg_name = spec.name()
         if pkg_name in ignore_list:
             continue

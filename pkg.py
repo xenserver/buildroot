@@ -6,7 +6,6 @@
 import os
 import rpm
 import urlparse
-from scripts.lib import mappkgname
 
 # Could have a decorator / context manager to set and unset all the RPM macros
 # around methods such as 'provides'
@@ -38,11 +37,6 @@ def identity_list(name):
     return [name]
 
 
-def map_package_name_deb(name):
-    """Map RPM package name to equivalent Deb names"""
-    return mappkgname.map_package(name)
-
-
 def map_arch_deb(arch):
     """Map RPM package architecture to equivalent Deb architecture"""
     if arch == "x86_64":
@@ -56,11 +50,10 @@ def map_arch_deb(arch):
 class Spec(object):
     """Represents an RPM spec file"""
 
-    def __init__(self, path, target="rpm"):
+    def __init__(self, path, target="rpm", map_name=None):
         if target == "rpm":
             self.rpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
             self.srpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
-            self.map_package_name = identity_list
             self.map_arch = identity
 
             # '%dist' in the host (where we build the source package)
@@ -74,10 +67,15 @@ class Spec(object):
         else:
             self.rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
             self.srpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}.dsc"
-            self.map_package_name = map_package_name_deb
             self.map_arch = map_arch_deb
             self.chroot_dist = ""
             rpm.addMacro('dist', self.chroot_dist)
+
+        if map_name:
+            self.map_package_name = map_name
+        else:
+            self.map_package_name = identity_list
+
 
         self.path = os.path.join(SPECDIR, os.path.basename(path))
 
@@ -134,7 +132,6 @@ class Spec(object):
                 sources.append(os.path.join(SRCDIR, url.path))
 
         return sources
-
 
 
     # RPM build dependencies.   The 'requires' key for the *source* RPM is
