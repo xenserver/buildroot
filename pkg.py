@@ -4,6 +4,7 @@
 
 
 import os
+import re
 import rpm
 import urlparse
 
@@ -94,6 +95,9 @@ class Spec(object):
         """Return a list of package names provided by this spec"""
         provides = flatten([pkg.header['provides'] + [pkg.header['name']]
                           for pkg in self.spec.packages])
+
+        # RPM 4.6 adds architecture constraints to dependencies.  Drop them.
+        provides = [re.sub('\(x86-64\)$', '', pkg) for pkg in provides]
         return set(flatten([self.map_package_name(p) for p in provides]))
 
 
