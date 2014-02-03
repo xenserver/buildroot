@@ -109,16 +109,20 @@ def parse_cmdline():
     """
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hi:", ["help", "ignore="])
+        opts, args = getopt.getopt(sys.argv[1:], "hi:d:", 
+                                   ["help", "ignore=", "dist="])
     except getopt.GetoptError as err:
         usage(sys.argv[0])
         print str(err)
         sys.exit(1)
 
     ignore = []
+    dist = ""
     for opt, val in opts:
         if opt == "-i" or opt == "--ignore":
             ignore.append(val)
+        elif opt == "-d" or opt == "--dist":
+            dist = val
         else:
             usage(sys.argv[0])
             print "unknown option: %s" % opt
@@ -129,21 +133,21 @@ def parse_cmdline():
         print "%s: error: too few arguments" % sys.argv[0]
         sys.exit(1)
 
-    return (ignore, args)
+    return {"ignore": ignore, "specs": args, "dist": dist}
 
 
 def main():
-    ignore_list, spec_paths = parse_cmdline()
+    params = parse_cmdline()
     specs = {}
 
-    for spec_path in spec_paths:
+    for spec_path in params['specs']:
 	if build_type() == "deb":
             spec = pkg.Spec(spec_path, target="deb",
                             map_name=map_package_name_deb)
 	else:
-            spec = pkg.Spec(spec_path, target="rpm")
+            spec = pkg.Spec(spec_path, target="rpm", dist=params['dist'])
         pkg_name = spec.name()
-        if pkg_name in ignore_list:
+        if pkg_name in params['ignore']:
             continue
         if os.path.splitext(os.path.basename(spec_path))[0] != pkg_name:
             sys.stderr.write(
