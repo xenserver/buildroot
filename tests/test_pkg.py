@@ -76,10 +76,12 @@ class DebTests(unittest.TestCase):
 
     def test_buildrequires(self):
         assert self.spec.buildrequires() == \
-            set(["ocaml-nox", "ocaml-findlib", "libre-ocaml-dev",
+            set(["ocaml-nox", "ocaml-native-compilers",
+                 "ocaml-findlib", "libre-ocaml-dev",
                  "liburi-ocaml-dev", "libcstruct-ocaml-dev",
                  "liblwt-ocaml-dev", "libounit-ocaml-dev",
-                 "camlp4", "libssl1.0.0", "libssl-dev"])
+                 "camlp4", "camlp4-extra", "libssl1.0.0",
+                 "libssl-dev"])
 
     def test_source_package_path(self):
         assert self.spec.source_package_path() == \
