@@ -8,7 +8,7 @@ import pkg
 
 class RpmTests(unittest.TestCase):
     def setUp(self):
-        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec")
+        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", dist=".el6")
 
     def test_name(self):
         assert self.spec.name() == "ocaml-cohttp"

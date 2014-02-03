@@ -51,7 +51,7 @@ def map_arch_deb(arch):
 class Spec(object):
     """Represents an RPM spec file"""
 
-    def __init__(self, path, target="rpm", map_name=None):
+    def __init__(self, path, target="rpm", map_name=None, dist=""):
         if target == "rpm":
             self.rpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
             self.srpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
@@ -62,15 +62,15 @@ class Spec(object):
             # the binary package).   We must override it on the host,
             # otherwise the names of packages in the dependencies won't
             # match the files actually produced by mock.
-            self.chroot_dist = ".el6"
-            rpm.addMacro('dist', self.chroot_dist)
+            self.dist = dist
 
         else:
             self.rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
             self.srpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}.dsc"
             self.map_arch = map_arch_deb
-            self.chroot_dist = ""
-            rpm.addMacro('dist', self.chroot_dist)
+            self.dist = ""
+
+        rpm.addMacro('dist', self.dist)
 
         if map_name:
             self.map_package_name = map_name
