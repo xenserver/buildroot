@@ -41,6 +41,6 @@ all: rpms
 
 deps: SPECS/*.spec specdep.py
 	@echo Updating dependencies...
-	@./specdep.py -d .el6 -i libnl3 SPECS/*.spec > $@
+	@./specdep.py -d $(DIST) -i libnl3 SPECS/*.spec > $@
 
 -include deps
