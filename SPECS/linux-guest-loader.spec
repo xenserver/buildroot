@@ -1,9 +1,9 @@
 Summary: Bootloader for EL-based distributions that support Xen
 Name: linux-guest-loader
-Version: 0.9.1
+Version: 1.9.0
 Release: 1%{?dist}
 URL: https://github.com/xenserver/linux-guest-loader
-Source0: https://github.com/mcclurmc/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0: https://github.com/xenserver/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 License: GPL
 Group: Applications/System
 BuildArch: noarch
@@ -33,8 +33,11 @@ rm -rf %{buildroot}/%{python_sitelib}/*-py*.egg-info
 %{_sbindir}/eliloader.py
 
 %changelog
+* Mon Feb 17 2014 Euan Harris <euan.harris@citrix.com> - 1.9.0-1
+- Switch to upstream repository
+
 * Wed Jan 22 2014 Mike McClurg <mike.mcclurg@citrix.com> - 0.9.1-1
-- Convert package from eliloader to upstream linux-guest-loader.
+- Convert package from eliloader to upstream linux-guest-loader
 
 * Mon Jun 24 2013 David Scott <dave.scott@eu.citrix.com> - 0.3-1
 - Update to eliloader 0.3
