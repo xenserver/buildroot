@@ -11,15 +11,9 @@ all: rpms
 	@echo [RPMBUILD] $@
 	@rpmbuild --quiet --define "_topdir ." --define "%dist $(DIST)" -bs $<
 
-%.x86_64.rpm:
+%.rpm:
 	@echo [MOCK] $@
-	@mock --configdir=mock --quiet -r xenserver --resultdir="RPMS/x86_64" $<
-	@echo [CREATEREPO] $@
-	@createrepo --quiet --update ./RPMS
-
-%.noarch.rpm:
-	@echo [MOCK] $@
-	@mock --configdir=mock --quiet -r xenserver --resultdir="RPMS/noarch" $<
+	@mock --configdir=mock --quiet -r xenserver --resultdir=$(dir $@) --rebuild $<
 	@echo [CREATEREPO] $@
 	@createrepo --quiet --update ./RPMS
 
