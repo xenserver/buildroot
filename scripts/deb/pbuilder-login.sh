@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo cowbuilder --login --configfile pbuilder/pbuilderrc-raring-amd64
+sudo cowbuilder --login --configfile pbuilder/pbuilderrc

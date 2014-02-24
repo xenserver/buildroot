@@ -3,7 +3,7 @@ import mappkgname
 import re
 import time
 
-def changelog_from_spec(spec):
+def changelog_from_spec(spec, isnative):
     res = Tree()
 
     hdr = spec.sourceHeader
@@ -23,10 +23,15 @@ def changelog_from_spec(spec):
         if match:
             author = match.group(1)
             version = match.group(2)
+            if isnative:
+                version = re.sub('-', '.', version)
         else:
             author = name
-            version = "%s-%s" % (spec.sourceHeader['version'], 
-                                 spec.sourceHeader['release'])
+            sep = '.' if isnative else '-'
+            version = "%s%s%s" % (spec.sourceHeader['version'],
+                                  sep,
+                                  spec.sourceHeader['release'])
+        print version
 
         package_name = mappkgname.map_package(hdr['name'])[0]
         log += "%s (%s) UNRELEASED; urgency=low\n" % (package_name, version)

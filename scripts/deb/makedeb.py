@@ -74,7 +74,7 @@ def debian_dir_from_spec(spec, path, specpath, isnative):
     copyright_file = debianmisc.copyright_from_spec(spec)
     copyright_file.apply(path)
 
-    changelog = debianchangelog.changelog_from_spec(spec)
+    changelog = debianchangelog.changelog_from_spec(spec, isnative)
     changelog.apply(path)
 
     filelists = debianmisc.filelists_from_spec(spec, specpath)
@@ -85,12 +85,6 @@ def debian_dir_from_spec(spec, path, specpath, isnative):
 
     conffiles = debianmisc.conffiles_from_spec(spec, specpath)
     conffiles.apply(path)
-
-
-def principal_source_file(spec):
-    return os.path.basename([name for (name, seq, filetype) 
-                             in spec.sources 
-                             if seq == 0 and filetype == 1][0])
 
 
 def prepare_build_dir(spec, build_subdir):
@@ -113,7 +107,7 @@ def prepare_build_dir(spec, build_subdir):
     
 def rename_source(spec, pkgname, pkgversion):
     # Debian source package name should probably match the tarball name
-    origfilename = principal_source_file(spec)
+    origfilename = debianmisc.principal_source_file(spec)
     if origfilename.endswith(".tbz"):
         filename = origfilename[:-len(".tbz")] + ".tar.bz2"
     else:
@@ -146,12 +140,9 @@ def main():
         shutil.rmtree(os.path.join(BUILD_DIR, build_subdir, "debian"))
 
     # a package with no original tarball is built as a 'native debian package'
-    native = True
-    tarball = principal_source_file(spec)
-    match = re.match("^(.+)((\.tar\.(gz|bz2|lzma|xz)|\.tbz)$)", tarball)
-    if match:
-        native = False
-         
+    native = debianmisc.is_native(spec)
+        
+    if not native:
         # copy over the source, run the prep rule to unpack it, then
         # rename it as deb expects this should be based on the rewritten
         # (or not) source name in the debian package - build the debian
@@ -162,8 +153,9 @@ def main():
     debian_dir_from_spec(spec, os.path.join(BUILD_DIR, build_subdir), 
                          sys.argv[1], native)
 
-    res = subprocess.call("cd %s\ndpkg-source -b --auto-commit %s" % 
-                          (BUILD_DIR, build_subdir), shell=True)
+    cmd = "cd %s\ndpkg-source -b --auto-commit %s" % (BUILD_DIR, build_subdir)
+    print cmd
+    res = subprocess.call(cmd, shell=True)
     assert res == 0
 
     for i in glob.glob(os.path.join(BUILD_DIR, "*")):

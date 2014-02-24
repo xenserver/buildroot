@@ -7,6 +7,7 @@ import os
 import re
 import rpm
 import urlparse
+from scripts.lib import debianmisc
 
 # Could have a decorator / context manager to set and unset all the RPM macros
 # around methods such as 'provides'
@@ -58,31 +59,10 @@ class Spec(object):
     """Represents an RPM spec file"""
 
     def __init__(self, path, target="rpm", map_name=None, dist=""):
-        if target == "rpm":
-            self.rpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
-            self.srpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
-            self.map_arch = identity
-
-            # '%dist' in the host (where we build the source package)
-            # might not match '%dist' in the chroot (where we build
-            # the binary package).   We must override it on the host,
-            # otherwise the names of packages in the dependencies won't
-            # match the files actually produced by mock.
-            self.dist = dist
-
-        else:
-            self.rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
-            self.srpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}.dsc"
-            self.map_arch = map_arch_deb
-            self.dist = ""
-
-        rpm.addMacro('dist', self.dist)
-
         if map_name:
             self.map_package_name = map_name
         else:
             self.map_package_name = identity_list
-
 
         self.path = os.path.join(SPECDIR, os.path.basename(path))
 
@@ -96,6 +76,30 @@ class Spec(object):
                 "spec file name '%s' does not match package name '%s'" %
                 (path, self.name()))
 
+        if target == "rpm":
+            self.rpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
+            self.srpmfilenamepat = rpm.expandMacro('%_build_name_fmt')
+            self.map_arch = identity
+
+            # '%dist' in the host (where we build the source package)
+            # might not match '%dist' in the chroot (where we build
+            # the binary package).   We must override it on the host,
+            # otherwise the names of packages in the dependencies won't
+            # match the files actually produced by mock.
+            self.dist = dist
+
+        else:
+            sep = '.' if debianmisc.is_native(self.spec) else '-'
+            if debianmisc.is_native(self.spec):
+                self.rpmfilenamepat = "%{NAME}_%{VERSION}.%{RELEASE}_%{ARCH}.deb"
+                self.srpmfilenamepat = "%{NAME}_%{VERSION}.%{RELEASE}.dsc"
+            else:
+                self.rpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}_%{ARCH}.deb"
+                self.srpmfilenamepat = "%{NAME}_%{VERSION}-%{RELEASE}.dsc"
+            self.map_arch = map_arch_deb
+            self.dist = ""
+
+        rpm.addMacro('dist', self.dist)
 
     def specpath(self):
         """Return the path to the spec file"""

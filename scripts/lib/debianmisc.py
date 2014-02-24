@@ -2,6 +2,7 @@ import rpm
 from tree import Tree
 import mappkgname
 import os
+import re
 import rpmextra
 
 def conffiles_from_spec(spec, specpath):
@@ -95,3 +96,12 @@ def copyright_from_spec(_spec):
     res.append("debian/copyright", "FIXME")
     return res
 
+def principal_source_file(spec):
+    return os.path.basename([name for (name, seq, filetype) 
+                             in spec.sources 
+                             if seq == 0 and filetype == 1][0])
+
+def is_native(_spec):
+    tarball = principal_source_file(_spec)
+    match = re.match("^(.+)((\.tar\.(gz|bz2|lzma|xz)|\.tbz)$)", tarball)
+    return match == None
