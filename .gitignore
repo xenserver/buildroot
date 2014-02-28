@@ -11,7 +11,9 @@
 *.pyc
 SOURCES/*.tar.gz
 SOURCES/*.tbz
+SOURCES/*.tar.bz2
 RPMS/
 SRPMS/
 deps
 mock/
+.coverage
