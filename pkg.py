@@ -48,6 +48,12 @@ def map_arch_deb(arch):
         return arch
 
 
+class SpecNameMismatch(Exception):
+    """Exception raised when a spec file's name does not match the name
+       of the package defined within it"""
+    pass
+
+
 class Spec(object):
     """Represents an RPM spec file"""
 
@@ -84,6 +90,11 @@ class Spec(object):
             self.spectext = spec.readlines()
 
         self.spec = rpm.ts().parseSpec(path)
+
+        if os.path.basename(path).split(".")[0] != self.name():
+            raise SpecNameMismatch(
+                "spec file name '%s' does not match package name '%s'" %
+                (path, self.name()))
 
 
     def specpath(self):

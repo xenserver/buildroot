@@ -141,21 +141,22 @@ def main():
     specs = {}
 
     for spec_path in params['specs']:
-	if build_type() == "deb":
-            spec = pkg.Spec(spec_path, target="deb",
-                            map_name=map_package_name_deb)
-	else:
-            spec = pkg.Spec(spec_path, target="rpm", dist=params['dist'])
-        pkg_name = spec.name()
-        if pkg_name in params['ignore']:
-            continue
-        if os.path.splitext(os.path.basename(spec_path))[0] != pkg_name:
-            sys.stderr.write(
-                "error: spec file name '%s' does not match package name '%s'\n" %
-                (spec_path, pkg_name))
+        try:
+            if build_type() == "deb":
+                spec = pkg.Spec(spec_path, target="deb",
+                                map_name=map_package_name_deb)
+            else:
+                spec = pkg.Spec(spec_path, target="rpm", dist=params['dist'])
+            pkg_name = spec.name()
+            if pkg_name in params['ignore']:
+                continue
+
+            specs[os.path.basename(spec_path)] = spec
+
+        except pkg.SpecNameMismatch as e:
+            sys.stderr.write("error: %s\n" % e.message)
             sys.exit(1)
 
-        specs[os.path.basename(spec_path)] = spec
 
     provides_to_rpm = package_to_rpm_map(specs.values())
 
