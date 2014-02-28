@@ -10,6 +10,15 @@ class RpmTests(unittest.TestCase):
     def setUp(self):
         self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", dist=".el6")
 
+    def test_good_filename_preprocessor(self):
+        pkg.Spec("tests/SPECS/ocaml-cohttp.spec.in")
+
+    def test_bad_filename(self):
+        self.assertRaises(pkg.SpecNameMismatch, pkg.Spec, "tests/SPECS/bad-name.spec")
+
+    def test_bad_filename_preprocessor(self):
+        self.assertRaises(pkg.SpecNameMismatch, pkg.Spec, "tests/SPECS/bad-name.spec.in")
+
     def test_name(self):
         assert self.spec.name() == "ocaml-cohttp"
 
