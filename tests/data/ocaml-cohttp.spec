@@ -8,6 +8,8 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-cohttp
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source1:        file:///code/ocaml-cohttp-extra#ocaml-cohttp-extra-%{version}.tar.gz
+Source2:        ocaml-cohttp-init
 BuildRequires:  ocaml ocaml-findlib ocaml-re-devel ocaml-uri-devel ocaml-cstruct-devel ocaml-lwt-devel ocaml-ounit-devel ocaml-ocamldoc ocaml-camlp4-devel
 # should these be inherited from ssl.spec somehow?
 BuildRequires:  openssl openssl-devel

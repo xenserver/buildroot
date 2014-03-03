@@ -38,12 +38,16 @@ class RpmTests(unittest.TestCase):
 
     def test_source_urls(self):
         self.assertEqual(self.spec.source_urls(),
-            ["https://github.com/mirage/ocaml-cohttp/archive/"
+            ["ocaml-cohttp-init",
+             "file:///code/ocaml-cohttp-extra#ocaml-cohttp-extra-0.9.8.tar.gz",
+             "https://github.com/mirage/ocaml-cohttp/archive/"
                  "ocaml-cohttp-0.9.8/ocaml-cohttp-0.9.8.tar.gz"])
 
     def test_source_paths(self):
         self.assertEqual(self.spec.source_paths(),
-            ["./SOURCES/ocaml-cohttp-0.9.8.tar.gz"])
+            ["./SOURCES/ocaml-cohttp-init",
+             "./SOURCES/ocaml-cohttp-extra-0.9.8.tar.gz",
+             "./SOURCES/ocaml-cohttp-0.9.8.tar.gz"])
 
     def test_buildrequires(self):
         self.assertEqual(self.spec.buildrequires(),
@@ -101,12 +105,16 @@ class DebTests(unittest.TestCase):
 
     def test_source_urls(self):
         self.assertEqual(self.spec.source_urls(),
-            ["https://github.com/mirage/ocaml-cohttp/archive/"
+            ["ocaml-cohttp-init",
+             "file:///code/ocaml-cohttp-extra#ocaml-cohttp-extra-0.9.8.tar.gz",
+             "https://github.com/mirage/ocaml-cohttp/archive/"
                  "ocaml-cohttp-0.9.8/ocaml-cohttp-0.9.8.tar.gz"])
 
     def test_source_paths(self):
         self.assertEqual(self.spec.source_paths(),
-            ["./SOURCES/ocaml-cohttp-0.9.8.tar.gz"])
+            ["./SOURCES/ocaml-cohttp-init",
+             "./SOURCES/ocaml-cohttp-extra-0.9.8.tar.gz",
+             "./SOURCES/ocaml-cohttp-0.9.8.tar.gz"])
 
     def test_buildrequires(self):
         self.assertEqual(self.spec.buildrequires(),
