@@ -8,16 +8,16 @@ import pkg
 
 class RpmTests(unittest.TestCase):
     def setUp(self):
-        self.spec = pkg.Spec("tests/SPECS/ocaml-cohttp.spec", dist=".el6")
+        self.spec = pkg.Spec("tests/data/ocaml-cohttp.spec", dist=".el6")
 
     def test_good_filename_preprocessor(self):
-        pkg.Spec("tests/SPECS/ocaml-cohttp.spec.in")
+        pkg.Spec("tests/data/ocaml-cohttp.spec.in")
 
     def test_bad_filename(self):
-        self.assertRaises(pkg.SpecNameMismatch, pkg.Spec, "tests/SPECS/bad-name.spec")
+        self.assertRaises(pkg.SpecNameMismatch, pkg.Spec, "tests/data/bad-name.spec")
 
     def test_bad_filename_preprocessor(self):
-        self.assertRaises(pkg.SpecNameMismatch, pkg.Spec, "tests/SPECS/bad-name.spec.in")
+        self.assertRaises(pkg.SpecNameMismatch, pkg.Spec, "tests/data/bad-name.spec.in")
 
     def test_name(self):
         assert self.spec.name() == "ocaml-cohttp"
@@ -76,7 +76,7 @@ class DebTests(unittest.TestCase):
                        "openssl-devel": ["libssl-dev"]}
             return mapping[name]
 
-        self.spec = pkg.Spec("SPECS/ocaml-cohttp.spec", target="deb",
+        self.spec = pkg.Spec("./tests/data/ocaml-cohttp.spec", target="deb",
                              map_name=map_rpm_to_deb)
 
     def test_name(self):
