@@ -109,7 +109,7 @@ def parse_cmdline():
     """
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hi:d:", 
+        opts, args = getopt.getopt(sys.argv[1:], "hi:d:",
                                    ["help", "ignore=", "dist="])
     except getopt.GetoptError as err:
         usage(sys.argv[0])
@@ -153,8 +153,8 @@ def main():
 
             specs[os.path.basename(spec_path)] = spec
 
-        except pkg.SpecNameMismatch as e:
-            sys.stderr.write("error: %s\n" % e.message)
+        except pkg.SpecNameMismatch as exn:
+            sys.stderr.write("error: %s\n" % exn.message)
             sys.exit(1)
 
 
