@@ -65,6 +65,8 @@ class RpmTests(unittest.TestCase):
 
 class DebTests(unittest.TestCase):
     def setUp(self):
+        # 'setUp' breaks Pylint's naming rules
+        # pylint: disable=C0103
         def map_rpm_to_deb(name):
             mapping = {"ocaml-cohttp": ["libcohttp-ocaml"],
                        "ocaml-cohttp-devel": ["libcohttp-ocaml-dev"],
