@@ -10,7 +10,7 @@ Source0:	https://github.com/ocaml/oasis/archive/%{version}/%{name}-%{version}.ta
 
 BuildRequires:	ocaml
 BuildRequires:	ocaml-camlp4-devel
-BuildRequires:	ocaml-findlib
+BuildRequires:	ocaml-findlib-devel
 BuildRequires:	ocamlify
 BuildRequires:	ocamlmod
 BuildRequires:	ocaml-ocamldoc
