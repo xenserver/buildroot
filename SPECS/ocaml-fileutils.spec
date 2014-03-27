@@ -52,6 +52,7 @@ mv setup.ml setup.ml.old
 sed '/oUnit/d' < setup.ml.old > setup.ml
 %endif
 
+
 %build
 ocaml setup.ml -configure --prefix %{_prefix} --destdir $RPM_BUILD_ROOT
 make
