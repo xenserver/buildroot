@@ -2,14 +2,14 @@
 %define debug_package %{nil}
 
 Name:           ocaml-ounit
-Version:        1.1.2
-Release:        3%{?dist}
+Version:        2.0.0
+Release:        1%{?dist}
 Summary:        Unit test framework for OCaml
 
 Group:          Development/Libraries
 License:        MIT
 URL:            http://ounit.forge.ocamlcore.org/
-Source0:        http://forge.ocamlcore.org/frs/download.php/886/ounit-%{version}.tar.gz
+Source0:        http://forge.ocamlcore.org/frs/download.php/1258/ounit-%{version}.tar.gz
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
@@ -80,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT/usr/local/share/doc
 
 
 %changelog
+* Tue Mar 25 2014 Euan Harris <euan.harris@citrix.com> - 2.0.0-1
+- Update to version 2.0.0
+
 * Fri Sep 30 2011 Mike McClurg <mike.mcclurg@citrix.com> - 1.1.2-3
 - Repackaged for XenSource build system
 

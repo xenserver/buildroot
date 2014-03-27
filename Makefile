@@ -33,7 +33,7 @@ all: rpms
 
 # Dependency build rules
 
-deps: SPECS/*.spec specdep.py
+deps: SPECS/*.spec specdep.py scripts/lib/mappkgname.py
 	@echo Updating dependencies...
 	@./specdep.py -d $(DIST) -i libnl3 SPECS/*.spec > $@
 

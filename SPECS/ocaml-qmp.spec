@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 Name:           ocaml-qmp
-Version:        0.9.1
+Version:        0.9.2
 Release:        1%{?dist}
 Summary:        Pure OCaml implementation of the Qemu Message Protocol (QMP)
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/ocaml-qmp
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        file:///local/scratch/euanh/ocaml-qmp#%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-yojson-devel cmdliner-devel ocaml-ounit-devel
 Requires:       ocaml ocaml-findlib
 
@@ -47,6 +47,10 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 %{_libdir}/ocaml/qmp/*
 
 %changelog
+* Thu Mar 27 2014 Euan Harris <euan.harris@citrix.com> - 0.9.2-1
+- Add support for QMP 'change' command, used to change removable media
+  and reconfigure VNC.
+
 * Fri Aug 09 2013 Euan Harris <euan.harris@citrix.com> - 0.9.1-1
 - Change representation of message timestamps from a tuple of ints to
   a float.  This avoids problems on 32-bit architectures and  follows
