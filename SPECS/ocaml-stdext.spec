@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 Name:           ocaml-stdext
-Version:        0.9.1
+Version:        0.10.0
 Release:        1%{?dist}
 Summary:        Deprecated misc library functions for OCaml
 License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/stdext
-Source0:        https://github.com/xapi-project/stdext/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/stdext/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml ocaml-findlib ocaml-fd-send-recv-devel ocaml-uuidm-devel
 Requires:       ocaml ocaml-findlib
 
@@ -47,6 +47,9 @@ make install DESTDIR=${buildroot}
 %{_libdir}/ocaml/stublibs/dllstdext_stubs.so.owner
 
 %changelog
+* Tue Apr 1 2014 Euan Harris <euan.harris@citrix.com> - 0.10.0-1
+- Update to 0.10.0, removing the Tar module (use ocaml-tar instead)
+
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-1
 - Update to 0.9.1
 
