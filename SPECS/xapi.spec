@@ -2,7 +2,7 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.38
+Version: 1.9.39
 Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -24,7 +24,7 @@ BuildRequires: ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-xcp-inventory-devel
 BuildRequires: libuuid-devel make utop
 BuildRequires: ocaml-xenstore-clients-devel message-switch-devel
-BuildRequires: python2-devel
+BuildRequires: python2-devel ocaml-tar-devel
 Requires: stunnel ocaml-xcp-inventory hwdata redhat-lsb-core vhd-tool
 
 %description
@@ -141,6 +141,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Wed Apr 2 2014 Euan Harris <euan.harris@citrix.com> - 1.9.39-1
+- update to 1.9.39 - switch from stdext's Tar to ocaml-tar
+
 * Wed Oct 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.38-1
 - update to 1.9.38 - import_raw_vdi path fix
 

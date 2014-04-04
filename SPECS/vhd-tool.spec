@@ -2,12 +2,12 @@
 
 Summary: Command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
-Version: 0.6.4
+Version: 0.7.3
 Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
-URL:  https://github.com/djs55/vhd-tool
-Source0: https://github.com/djs55/vhd-tool/archive/%{version}/vhd-tool-%{version}.tar.gz
+URL:  https://github.com/xapi-project/vhd-tool
+Source0: https://github.com/xapi-project/vhd-tool/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1: vhd-tool-sparse_dd-conf
 BuildRequires: ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
 BuildRequires: ocaml-xcp-idl-devel ocaml-vhd-devel ocaml-obuild
@@ -15,7 +15,7 @@ BuildRequires: ocaml-nbd-devel ocaml-cstruct-devel ocaml-lwt-devel
 BuildRequires: ocaml-ounit-devel ocaml-rpc-devel ocaml-ssl-devel ocaml-stdext-devel
 BuildRequires: ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-oclock-devel
-BuildRequires: libuuid-devel
+BuildRequires: libuuid-devel ocaml-tar-devel ocaml-sha-devel ocaml-io-page-devel
 BuildRequires: ocaml-xenstore-clients-devel message-switch-devel
 BuildRequires: openssl openssl-devel
 
@@ -45,6 +45,9 @@ make install
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
+* Wed Apr 4 2014 Euan Harris <euan.harris@citrix.com> - 0.7.3-1
+- Update to 0.7.3
+
 * Thu Nov 21 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.4-1
 - Update to 0.6.4
 
