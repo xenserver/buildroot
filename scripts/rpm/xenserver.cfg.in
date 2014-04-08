@@ -6,6 +6,9 @@ config_opts['dist'] = 'el6'  # only useful for --resultdir variable subst
 config_opts['basedir'] = '@PWD@/mock/root' 
 config_opts['cache_topdir'] = '@PWD@/mock/cache' 
 
+config_opts['plugin_conf']['package_state_enable'] = False
+config_opts['plugin_conf']['tmpfs_enable'] = True    
+
 config_opts['yum.conf'] = """
 [main]
 cachedir=/var/cache/yum
