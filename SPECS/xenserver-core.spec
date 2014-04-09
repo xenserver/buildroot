@@ -23,7 +23,7 @@ Requires:       xcp-networkd
 Requires:       xcp-rrdd
 Requires:       squeezed
 Requires:       linux-guest-loader
-Requires:       kernel >= 3.4.46
+Requires:       kernel >= 3.0
 Requires:       kernel-firmware
 Requires:       xen
 

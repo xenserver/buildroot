@@ -1,29 +1,32 @@
 #!/usr/bin/python
 
+import platform
+
 """Maps an RPM package name to the equivalent DEB.
    The MAPPING is static, but in future will be 
    made dynamically by querying the package databases."""
 
+TARGET_SPECIFIC_MAPPING = {
+    'jessie/sid': {
+            'kernel': ['linux-image-amd64'],
+            'kernel-firmware': ['firmware-linux-free'],
+            "xen-libs": ["libxen-4.3"],
+            },
+    }
 
 MAPPING = { 
     # Our packages
     "ocaml-biniou": ["libbiniou-ocaml"],
     "ocaml-cmdliner": ["libcmdliner-ocaml"],
-    "cppo": ["cppo"],
     "deriving-ocsigen": ["libderiving-ocsigen-ocaml"],
     "ocaml-easy-format": ["libeasy-format-ocaml"],
-    "eliloader": ["eliloader"],
     "linux-guest-loader": ["linux-guest-loader"],
-    "xcp-python-libs": ["xcp-python-libs"],
-    "ffs": ["ffs"],
-    "forkexecd": ["forkexecd"],
     "iscsi-initiator-utils": ["open-iscsi"],
     "js_of_ocaml": ["libjs-of-ocaml"],
     "libnl3-cli": ["libnl-3-cli"],
     "libnl3-doc": ["libnl-3-doc"],
     "libnl3": ["libnl-3"],
     "libffi": ["libffi6"],
-    "message-switch": ["message-switch"],
     "ocaml-bitstring": ["libbitstring-ocaml"],
     "ocaml-camomile-data": ["libcamomile-data"],
     "ocaml-camomile": ["libcamomile-ocaml"],
@@ -78,42 +81,13 @@ MAPPING = {
     "ocaml-sha": ["libsha-ocaml"],
     "ocaml-ipaddr": ["libipaddr-ocaml"],
     "ocaml-mirage-types": ["libmirage-types-ocaml"],
-    "omake": ["omake"],
-    "ocamlmod": ["ocamlmod"],
-    "ocamlify": ["ocamlify"],
-    "oasis": ["oasis"],
     "openstack-xapi-plugins": ["openstack-xapi-plugins"],
     "optcomp": ["optcomp-ocaml"],
-    "xcp-sm": ["xcp-sm"],
-    "sm-cli": ["sm-cli"],
-    "xcp-sm-rawhba": ["xcp-sm-rawhba"],
-    "squeezed": ["squeezed"],
-    "utop": ["utop"],
-    "vncterm": ["vncterm"],
     "xapi-libvirt-storage": ["libxapi-libvirt-storage-ocaml"],
-    "xapi-python": ["xapi-python"],
-    "xapi": ["xapi"],
-    "xapi-xe": ["xapi-xe"],
-    "xcp-networkd": ["xcp-networkd"],
-    "xcp-rrdd": ["xcp-rrdd"],
-    "xe-create-templates": ["xe-create-templates"],
-    "xenops-cli": ["xenops-cli"],
-    "xenopsd-libvirt": ["xenopsd-libvirt"],
-    "xenopsd-simulator": ["xenopsd-simulator"],
-    "xenopsd-xc": ["xenopsd-xc"],
-    "xenopsd-xenlight": ["xenopsd-xenlight"],
-    "xenopsd": ["xenopsd"],
-    "xenserver-core": ["xenserver-core"],
-    "xenserver-install-wizard": ["xenserver-install-wizard"],
-    "xenserver-tech-preview-release": ["xenserver-tech-preview-release"],
     "xmlm": ["libxmlm-ocaml"],
-    "xsconsole": ["xsconsole"],
     "xsconsole0": ["xsconsole"],
-    "xsiostat": ["xsiostat"],
     "xenserver-core-latest-snapshot": ["xenserver-core-latest-snapshot"],
     "python-setuptools": ["python-setuptools", "python-setuptools-git"],
-    "vhd-tool": ["vhd-tool"],
-    "blktap": ["blktap"],
 
     # Distribution packages
     "ocaml": ["ocaml-nox", "ocaml-native-compilers"],
@@ -126,46 +100,28 @@ MAPPING = {
     "libuuid": ["uuid"],
     "libvirt": ["libvirt0", "libvirt-bin"],
     "xen-libs": ["libxen-4.2"],
-    "make": ["make"],
     "ncurses": ["libncurses5"],
     "chkconfig": [], 
     "initscripts": [], 
     "PyPAM": ["python-pam"],
-    "perl": ["perl"],
-    "gawk": ["gawk"],
     "pam": ["libpam0g"],
     "tetex-latex": ["texlive-base"],
     "zlib": ["zlib1g"],
-    "git": ["git"],
     "stunnel": ["stunnel"],
     "bash-completion": ["bash-completion"],
-    "python": ["python"],
     "python2": ["python"],
-    "time": ["time"],
     "newt": ["libnewt0.52"],
-    "flex": ["flex"],
-    "bison": ["bison"],
     "/sbin/ldconfig": ["/sbin/ldconfig"],
     "kernel-headers": ["linux-headers-3.2.0-51-generic"],
     "libvirt-docs": ["libvirt-doc"],
-    "chrpath": ["chrpath"],
     "kernel": ["linux-image"],
     "kernel-firmware": ["linux-firmware"],
-    "swig": ["swig"],
     "/bin/sh": [],
-    "xen-utils": ["xen-utils"],
     "xen-runtime": ["xen-utils"],
     "nfs-utils": ["nfs-common"],
-    "hwdata": ["hwdata"],
     "redhat-lsb-core": ["lsb-base"],
     "sg3_utils": ["sg3-utils"],
-    "ethtool": ["ethtool"],
-    "qemu-system-x86": ["qemu-system-x86"],
     "python-argparse": ["libpython2.7-stdlib"],
-    "autoconf": ["autoconf"],
-    "automake": ["automake"],
-    "libtool": ["libtool"],
-    "libaio": ["libaio"],
 }
 
 SECONDARY_MAPPING = {
@@ -185,9 +141,12 @@ SECONDARY_MAPPING = {
     "qemu-system-x86-dev": ["qemu-system-x86"],
 }
 
-def map_package(name):
+def map_package(name, target=None):
     """map an rpm to a corresponding deb, based on file contents"""
     is_devel = False
+
+    if target is None:
+        target = platform.linux_distribution(full_distribution_name=False)[1].lower()
 
     # RPM 4.6 adds architecture constraints to dependencies.  Drop them.
     if name.endswith( "(x86-64)" ):
@@ -195,7 +154,13 @@ def map_package(name):
     if name.endswith( "-devel" ):
         is_devel = True
         name = name[ :-len("-devel") ]
-    mapped = MAPPING[name]
+
+    default = [name]
+    mapped = MAPPING.get(name, default)
+
+    if target in TARGET_SPECIFIC_MAPPING:
+        mapped = TARGET_SPECIFIC_MAPPING[target].get(name, mapped)
+
     res = []
     for debname in mapped:
         if is_devel:
@@ -204,7 +169,7 @@ def map_package(name):
     return res
 
 
-def map_package_name(hdr):
+def map_package_name(hdr, target=None):
     """rewrite an rpm name to fit with debian standards"""
     name = hdr['name']
 
@@ -218,7 +183,7 @@ def map_package_name(hdr):
     # Debian prefixes library packag names with 'lib'
     #if "Libraries" in hdr['group'] or "library" in hdr['summary'].lower():
     #    name = "lib" + name
-    name = name.replace( name, map_package(name)[0] )
+    name = name.replace( name, map_package(name, target)[0] )
 
     if is_devel:
         name += "-dev"
