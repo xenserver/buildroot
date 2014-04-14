@@ -74,10 +74,15 @@ def files_from_spec(basename, specpath):
                     continue
                 if tokens[0].lower().startswith("%config"):
                     # dh_install automatically considers files in /etc
-                    # to be config files so we don't have to do anythin
-                    # special for them The spec file documentation says that
-                    # a %config directive can only apply to a single file.
+                    # to be config files so we don't have to do anything
+                    # special for them.  The Debian packaging policy says 
+                    # that all configuration files must be installed in /etc, 
+                    # so we can rewrite _sysconfigdir to /etc.   The spec file 
+                    # documentation says that # a %config directive can only 
+                    # apply to a single file, so there should only be one filename
+                    # to consider.
                     configsection = section + "-%config"
+                    tokens[1] = tokens[1].replace("%{_sysconfdir}", "/etc")
                     if tokens[1].startswith("/etc"):
                         files[section] = files.get(section, []) + tokens[1:]
                     else:
