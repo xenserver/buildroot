@@ -17,3 +17,4 @@ SRPMS/
 deps
 mock/
 .coverage
+*~
