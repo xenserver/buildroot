@@ -1,5 +1,5 @@
 Name:           squeezed
-Version:        0.10.4
+Version:        0.10.5
 Release:        1%{?dist}
 Summary:        Memory ballooning daemon for the xapi toolstack
 License:        LGPL
@@ -8,39 +8,50 @@ URL:            https://github.com/xapi-project/squeezed
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        squeezed-init
 Source2:        squeezed-conf
-BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-stdext-devel ocaml-xcp-idl-devel
-BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel ocaml-xenstore-clients-devel
+BuildRequires:  message-switch-devel
+BuildRequires:  oasis
+BuildRequires:  ocaml 
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib 
+BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-re-devel 
 BuildRequires:  ocaml-rpc-devel
-BuildRequires:  ocaml-re-devel ocaml-cohttp-devel
-BuildRequires:  ocaml-oclock-devel xen-devel message-switch-devel
-Requires:       xen-libs redhat-lsb-core message-switch
+BuildRequires:  ocaml-stdext-devel 
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  ocaml-xen-lowlevel-libs-devel 
+BuildRequires:  ocaml-xenstore-clients-devel
+BuildRequires:  ocaml-xenstore-devel 
+BuildRequires:  xen-devel 
+Requires:       xen-libs 
+Requires:       redhat-lsb-core 
+Requires:       message-switch
 
 %description
 Memory ballooning daemon for the xapi toolstack.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 cp %{SOURCE1} squeezed-init
 cp %{SOURCE2} squeezed-conf
 
 %build
+oasis setup
+./configure --prefix %{_prefix} --destdir %{buildroot}
 make
 
 %install
-mkdir -p %{buildroot}/%{_sbindir}
-install dist/build/squeezed/squeezed %{buildroot}/%{_sbindir}/squeezed
-mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 squeezed-init %{buildroot}%{_sysconfdir}/init.d/squeezed
-mkdir -p %{buildroot}/etc
-install -m 0644 squeezed-conf %{buildroot}%{_sysconfdir}/squeezed.conf
+install -D -m 0755 squeezed.native %{buildroot}%{_sbindir}/squeezed
+install -D -m 0755 squeezed-init %{buildroot}%{_sysconfdir}/init.d/squeezed
+install -D -m 0644 squeezed-conf %{buildroot}%{_sysconfdir}/squeezed.conf
 
 
 %files
-%doc README.md LICENSE MAINTAINERS
+%doc README.md 
+%doc LICENSE 
+%doc MAINTAINERS
 %{_sbindir}/squeezed
 %{_sysconfdir}/init.d/squeezed
-%{_sysconfdir}/squeezed.conf
+%config %{_sysconfdir}/squeezed.conf
 
 %post
 /sbin/chkconfig --add squeezed
@@ -52,6 +63,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Fri Apr 11 2014 Euan Harris <euan.harris@citrix.com> - 0.10.5-1
+- Switch build from obuild to oasis
+
 * Wed Sep 24 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.4-1
 - Update to 0.10.4
 
