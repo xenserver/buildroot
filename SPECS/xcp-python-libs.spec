@@ -8,7 +8,8 @@ License: GPL
 Group: Applications/System
 BuildArch: noarch
 
-BuildRequires: python-devel python-setuptools
+BuildRequires: python-devel
+BuildRequires: python-setuptools
 
 %description
 Common XenServer Python classes.

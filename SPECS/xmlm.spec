@@ -6,8 +6,11 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://erratique.ch/software/xmlm
 Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}.tbz
-BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ocamldoc
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Xmlm is an OCaml module providing streaming XML input/output. It aims at

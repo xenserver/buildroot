@@ -8,8 +8,11 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            http://github.com/ocaml/ocaml-re
 Source0:        http://github.com/ocaml/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ocamldoc
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 A regular expression library for OCaml.

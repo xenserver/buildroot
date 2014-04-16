@@ -7,7 +7,8 @@ Source0: https://github.com/xenserver/%{name}/archive/v%{version}/%{name}-%{vers
 License: GPL
 Group: Applications/System
 BuildArch: noarch
-BuildRequires: python-devel python-setuptools
+BuildRequires: python-devel
+BuildRequires: python-setuptools
 BuildRequires: xcp-python-libs
 Requires: xcp-python-libs
 Provides:  eliloader > 0.3

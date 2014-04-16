@@ -12,17 +12,35 @@ Source3:        xenopsd-libvirt-init
 Source4:        xenopsd-xenlight-init
 Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
-BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
-BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
-BuildRequires:  ocaml-oclock-devel ocaml-uuidm-devel forkexecd-devel
-BuildRequires:  ocaml-libvirt-devel libvirt-devel ocaml-qmp-devel
-BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-sexplib
-BuildRequires:  ocaml-xenstore-clients-devel ocaml-xenstore-devel
-BuildRequires:  xen-devel ocaml-xcp-inventory-devel message-switch-devel
-BuildRequires:  vncterm linux-guest-loader ocaml-xcp-idl-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-cohttp-devel
+BuildRequires:  ocaml-re-devel
+BuildRequires:  forkexecd-devel
+BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-uuidm-devel
+BuildRequires:  libvirt-devel
+BuildRequires:  ocaml-libvirt-devel
+BuildRequires:  ocaml-qmp-devel
+BuildRequires:  ocaml-sexplib
+BuildRequires:  ocaml-xen-lowlevel-libs-devel
+BuildRequires:  ocaml-xenstore-clients-devel
+BuildRequires:  ocaml-xenstore-devel
+BuildRequires:  message-switch-devel
+BuildRequires:  ocaml-xcp-inventory-devel
+BuildRequires:  xen-devel
+BuildRequires:  linux-guest-loader
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  vncterm
 BuildRequires:  ocaml-uutf-devel
-Requires:       message-switch xenops-cli redhat-lsb-core
+Requires:       message-switch
+Requires:       redhat-lsb-core
+Requires:       xenops-cli
 
 %description
 Simple VM manager for the xapi toolstack.
@@ -41,7 +59,9 @@ Simple VM manager for Xen and KVM using libvirt.
 Summary:        Xenopsd using xc
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
-Requires:       xen-libs vncterm forkexecd
+Requires:       forkexecd
+Requires:       vncterm
+Requires:       xen-libs
 
 %description    xc
 Simple VM manager for Xen using libxc.

@@ -8,8 +8,11 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/cdrom
 Source0:        https://github.com/xapi-project/cdrom/archive/cdrom-%{version}/cdrom-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-obuild
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-obuild
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Simple C bindings which allow the state of CDROM devices (and discs

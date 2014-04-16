@@ -8,8 +8,14 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/ocaml-qmp
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-yojson-devel cmdliner-devel ocaml-ounit-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-yojson-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 An implementation of the Qemu Message Protocol (QMP) that allows

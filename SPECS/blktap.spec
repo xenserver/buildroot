@@ -6,7 +6,12 @@ Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
 Source0: https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires: autoconf automake libtool libaio-devel xen-devel libuuid-devel
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: libaio-devel
+BuildRequires: libtool
+BuildRequires: libuuid-devel
+BuildRequires: xen-devel
 
 %description
 Enhanced version of tapdisk with support for storage mirroring.

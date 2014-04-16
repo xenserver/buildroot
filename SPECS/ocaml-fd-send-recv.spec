@@ -8,8 +8,10 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/ocaml-fd-send-recv
 Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Bindings to sendmsg/recvmsg for fd passing under Linux.

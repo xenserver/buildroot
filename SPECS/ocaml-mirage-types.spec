@@ -9,8 +9,15 @@ Group:          Development/Other
 URL:            https://github.com/mirage/mirage
 Source0:        http://github.com/mirage/mirage/archive/%{version}/mirage-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib-devel ocaml-cstruct-devel ocaml-ounit-devel ocaml-lwt-devel ocaml-ipaddr-devel ocaml-io-page-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-cstruct-devel
+BuildRequires:  ocaml-findlib-devel
+BuildRequires:  ocaml-io-page-devel
+BuildRequires:  ocaml-ipaddr-devel
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-ounit-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 This library contains interfaces to build applications that are compatible with the Mirage operating system. It defines only interfaces, and no concrete modules.

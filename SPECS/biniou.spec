@@ -8,8 +8,11 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/biniou.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib easy-format
-Requires:       ocaml ocaml-findlib
+BuildRequires:  easy-format
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Binary data format designed for speed, safety, ease of use and backward

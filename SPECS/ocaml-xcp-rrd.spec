@@ -8,8 +8,14 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xcp-rrd
 Source0:        https://github.com/xapi-project/xcp-rrd/archive/xcp-rrd-%{version}/xcp-rrd-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-stdext-devel ocaml-rpc-devel ocaml-camlp4-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-stdext-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Round-Robin Datasources in OCaml.

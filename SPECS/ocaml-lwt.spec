@@ -22,7 +22,8 @@ BuildRequires:  ocaml-react-devel >= 0.9.0
 #BuildRequires:  libev-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-text-devel
-BuildRequires:  ocaml-camlp4 ocaml-camlp4-devel
+BuildRequires:  ocaml-camlp4
+BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-ssl-devel
 
 %description

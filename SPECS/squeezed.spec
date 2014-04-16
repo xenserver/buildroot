@@ -10,20 +10,20 @@ Source1:        squeezed-init
 Source2:        squeezed-conf
 BuildRequires:  message-switch-devel
 BuildRequires:  oasis
-BuildRequires:  ocaml 
+BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
-BuildRequires:  ocaml-findlib 
+BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-oclock-devel
-BuildRequires:  ocaml-re-devel 
+BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-rpc-devel
-BuildRequires:  ocaml-stdext-devel 
+BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xcp-idl-devel
-BuildRequires:  ocaml-xen-lowlevel-libs-devel 
+BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-clients-devel
-BuildRequires:  ocaml-xenstore-devel 
-BuildRequires:  xen-devel 
-Requires:       xen-libs 
-Requires:       redhat-lsb-core 
+BuildRequires:  ocaml-xenstore-devel
+BuildRequires:  xen-devel
+Requires:       xen-libs
+Requires:       redhat-lsb-core
 Requires:       message-switch
 
 %description

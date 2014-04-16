@@ -7,13 +7,26 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/ffs
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        ffs-init
-BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
-BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
-BuildRequires:  ocaml-oclock-devel ocaml-libvhd-devel xen-devel libuuid-devel
-BuildRequires:  ocaml-tapctl-devel message-switch-devel forkexecd-devel
-Requires:       ocaml-libvhd-devel nfs-utils redhat-lsb-core
-Requires:       blktap 
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-cohttp-devel
+BuildRequires:  ocaml-re-devel
+BuildRequires:  libuuid-devel
+BuildRequires:  ocaml-libvhd-devel
+BuildRequires:  ocaml-oclock-devel
+BuildRequires:  xen-devel
+BuildRequires:  forkexecd-devel
+BuildRequires:  message-switch-devel
+BuildRequires:  ocaml-tapctl-devel
+Requires:       nfs-utils
+Requires:       ocaml-libvhd-devel
+Requires:       redhat-lsb-core
+Requires:       blktap
 
 %description
 Simple flat file storage manager for the xapi toolstack.

@@ -6,11 +6,18 @@ License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xapi-project/xcp-guest-templates
 Source0:        https://github.com/xapi-project/xcp-guest-templates/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel 
-BuildRequires:  ocaml-lwt-devel xmlm-devel ocaml-stdext-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-stdext-devel
+BuildRequires:  xmlm-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
-BuildRequires:  ocaml-xen-api-client-devel ocaml-oclock-devel
-BuildRequires:  openssl-devel ocaml-xcp-idl-devel
+BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-xen-api-client-devel
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  openssl-devel
 Requires:       openssl
 
 %description

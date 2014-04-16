@@ -8,8 +8,15 @@ License:        ISC
 Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-cstruct
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-ocplib-endian-devel ocaml-camlp4 ocaml-camlp4-devel ocaml-lwt-devel
-Requires:       ocaml ocaml-findlib ocaml-ocplib-endian-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-ocplib-endian-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
+Requires:       ocaml-ocplib-endian-devel
 #XXX ocaml-cstruct should require caml-ocplib-endian, not -devel
 
 %description

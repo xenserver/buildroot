@@ -6,7 +6,8 @@ License: GPL2
 Group: Administration/System
 URL: http://github.com/jamesbulpin/xsconsole
 Source0: https://github.com/jamesbulpin/xsconsole/archive/%{version}/%{name}-%{version}.tar.gz
-Requires: PyPAM xapi-python-devel
+Requires: PyPAM
+Requires: xapi-python-devel
 
 %description
 Console tool for configuring a XenServer installation.

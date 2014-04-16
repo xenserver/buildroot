@@ -8,8 +8,20 @@ License:        LGPLv2
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xen-api-client
 Source0:        https://github.com/xapi-project/xen-api-client/archive/%{version}/xen-api-client-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-lwt-devel ocaml-ssl-devel openssl openssl-devel ocaml-ounit-devel ocaml-cohttp-devel ocaml-uri-devel xmlm-devel ocaml-rpc-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-cohttp-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-ssl-devel
+BuildRequires:  ocaml-uri-devel
+BuildRequires:  openssl
+BuildRequires:  openssl-devel
+BuildRequires:  xmlm-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 XenAPI Client is an OCaml library implementing XenServer's XenAPI.

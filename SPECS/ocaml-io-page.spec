@@ -9,8 +9,12 @@ Group:          Development/Other
 URL:            https://github.com/mirage/io-page
 Source0:        http://github.com/mirage/io-page/archive/v%{version}/io-page-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib ocaml-cstruct-devel ocaml-ounit-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-cstruct-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ounit-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 This library implements support for efficient handling of I/O memory pages on Unix and Xen.

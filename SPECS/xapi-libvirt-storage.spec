@@ -7,9 +7,17 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/xapi-libvirt-storage/archive/%{version}.tar.gz
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xapi-libvirt-storage-init
-BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel ocaml-libvirt-devel libvirt-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
-BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
+BuildRequires:  libvirt-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-libvirt-devel
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-cohttp-devel
+BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-oclock-devel
 BuildRequires:  message-switch-devel
 Requires:       redhat-lsb-core

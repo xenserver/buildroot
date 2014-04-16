@@ -8,8 +8,13 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/yojson.html
 Source0:        http://mjambon.com/releases/yojson/yojson-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib cppo easy-format biniou
-Requires:       ocaml ocaml-findlib
+BuildRequires:  biniou
+BuildRequires:  cppo
+BuildRequires:  easy-format
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 A JSON parser and printer for OCaml.

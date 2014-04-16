@@ -8,8 +8,13 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://forge.ocamlcore.org/projects/zed/
 Source0:        http://forge.ocamlcore.org/frs/download.php/944/zed-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc ocaml-camomile-devel ocaml-react-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camomile-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-react-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Zed is an abstract engine for text edition. It can be used for writing

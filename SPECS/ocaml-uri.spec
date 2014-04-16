@@ -8,8 +8,13 @@ License:        ISC
 Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-uri
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml >= 4.00, ocaml-findlib, ocaml-ocamldoc, ocaml-re-devel, ocaml-compiler-libs
-Requires:       ocaml, ocaml-findlib
+BuildRequires:  ocaml >= 4.00
+BuildRequires:  ocaml-compiler-libs
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-re-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 A URI library for OCaml.

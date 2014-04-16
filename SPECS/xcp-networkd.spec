@@ -10,14 +10,25 @@ Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
 Source4:        xcp-networkd-bridge-conf
-BuildRequires:  ocaml ocaml-obuild ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-xcp-idl-devel ocaml-rpc-devel
-BuildRequires:  ocaml-stdext-devel forkexecd-devel ocaml-xen-api-libs-transitional-devel
-BuildRequires:  ocaml-xcp-inventory-devel ocaml-ounit-devel
-BuildRequires:  ocaml-re-devel ocaml-cohttp-devel cmdliner-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  forkexecd-devel
+BuildRequires:  ocaml-stdext-devel
+BuildRequires:  ocaml-xen-api-libs-transitional-devel
+BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-xcp-inventory-devel
+BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-cohttp-devel
+BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-xen-api-client-devel
-BuildRequires:  ocaml-oclock-devel message-switch-devel
-Requires:       ethtool redhat-lsb-core
+BuildRequires:  message-switch-devel
+BuildRequires:  ocaml-oclock-devel
+Requires:       ethtool
+Requires:       redhat-lsb-core
 
 %description
 Simple host networking management service for the xapi toolstack.

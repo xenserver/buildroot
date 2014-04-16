@@ -8,10 +8,20 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xenops
 Source0:        https://github.com/xapi-project/xenops/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-obuild ocaml-stdext-devel ocaml-rpc-devel ocaml-camlp4-devel
-BuildRequires:  ocaml-xen-lowlevel-libs-devel ocaml-xenstore-devel ocaml-xenstore-clients-devel
-BuildRequires:  ocaml-xen-api-libs-transitional-devel ocaml-oclock-devel ocaml-xcp-idl-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-stdext-devel
+BuildRequires:  ocaml-xen-lowlevel-libs-devel
+BuildRequires:  ocaml-xenstore-clients-devel
+BuildRequires:  ocaml-xenstore-devel
+BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-xcp-idl-devel
+BuildRequires:  ocaml-xen-api-libs-transitional-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Low-level xen control operations in OCaml.

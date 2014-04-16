@@ -8,9 +8,18 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/djs55/ocaml-vhd
 Source0:        https://github.com/djs55/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib cmdliner-devel ocaml-ounit-devel ocaml-cstruct-devel ocaml-lwt-devel ocaml-uuidm-devel ocaml-camlp4-devel 
-BuildRequires:  ocaml-io-page-devel ocaml-mirage-types-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-cstruct-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-uuidm-devel
+BuildRequires:  ocaml-io-page-devel
+BuildRequires:  ocaml-mirage-types-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 A pure OCaml parser and printer for vhd format data. The library allows
