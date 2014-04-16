@@ -52,6 +52,6 @@ ocaml setup.ml -install
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 1.2.3
 
-* Sun May  2 2013 David Scott <dave.scott@eu.citrix.com>
+* Tue Jul  2 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
 
