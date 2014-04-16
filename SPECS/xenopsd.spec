@@ -200,12 +200,12 @@ fi
 * Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com>
 - update to 0.9.28
 
-* Wed Sep 24 2013 David Scott <dave.scott@eu.citrix.com>
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
 - modprobe blk{tap,back} in the xenopsd-xc init.d script since
   we need these to make virtual disks work
 - update to 0.9.27
 
-* Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com>
+* Tue Sep 24 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.9.26, which includes fixes for networking and libxl
 
 * Fri Sep 20 2013 Euan Harris <euan.harris@citrix.com>
