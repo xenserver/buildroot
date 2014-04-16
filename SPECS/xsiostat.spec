@@ -26,6 +26,6 @@ install -m 0755 xsiostat %{buildroot}/%{_sbindir}/xsiostat
 %{_sbindir}/xsiostat
 
 %changelog
-* Tue Jun 19 2013 David Scott <dave.scott@eu.citrix.com> - 0.2.0-1
+* Wed Jun 19 2013 David Scott <dave.scott@eu.citrix.com> - 0.2.0-1
 - Initial package
 
