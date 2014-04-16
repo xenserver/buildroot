@@ -8,8 +8,14 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/netdev
 Source0:        https://github.com/xapi-project/netdev/archive/netdev-%{version}/netdev-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib forkexecd-devel ocaml-stdext-devel ocaml-xcp-idl-devel ocaml-oclock-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  forkexecd-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-stdext-devel
+BuildRequires:  ocaml-xcp-idl-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Manipulate Linux bridges, network devices and openvswitch instances in OCaml.

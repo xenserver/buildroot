@@ -6,8 +6,10 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/easy-format.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Easy_format: indentation made easy.

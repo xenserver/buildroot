@@ -6,8 +6,11 @@ License:        MIT
 Group:          Development/Libraries
 URL:            http://ocsigen.org/download/deriving-ocsigen-0.3c.tar.gz
 Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Extension to OCaml for deriving functions from type declarations

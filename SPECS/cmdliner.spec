@@ -6,8 +6,11 @@ License:        BSD3
 Group:          Development/Other
 URL:            http://erratique.ch/software/cmdliner
 Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}.tbz
-BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ocamldoc
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Cmdliner is an OCaml module for the declarative definition of command line

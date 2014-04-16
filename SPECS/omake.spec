@@ -7,7 +7,9 @@ Source0: http://pkgs.fedoraproject.org/repo/pkgs/ocaml-omake/omake-0.9.8.6-0.rc1
 Patch0: omake-1-warnings
 License: GPL
 Group: Development/Tools
-BuildRequires: ocaml >= 3.09.2, make, ncurses-devel
+BuildRequires: make
+BuildRequires: ncurses-devel
+BuildRequires: ocaml >= 3.09.2
 
 %define debug_package %{nil}
 

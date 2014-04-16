@@ -8,8 +8,12 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/stdext
 Source0:        https://github.com/xapi-project/stdext/archive/v%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-fd-send-recv-devel ocaml-uuidm-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-fd-send-recv-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-uuidm-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Deprecated misc library functions for OCaml.

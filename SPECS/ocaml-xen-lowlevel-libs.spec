@@ -8,10 +8,17 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/ocaml-xen-lowlevel-libs
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
-BuildRequires:  ocaml-lwt-devel xen-devel libuuid-devel cmdliner-devel 
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ocamldoc
+BuildRequires:  cmdliner-devel
+BuildRequires:  libuuid-devel
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  xen-devel
 BuildRequires:  ocaml-cstruct-devel
-Requires:       ocaml ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Xen hypercall bindings for OCaml.

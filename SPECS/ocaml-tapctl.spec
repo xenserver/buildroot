@@ -8,9 +8,17 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/tapctl
 Source0:        https://github.com/xapi-project/tapctl/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  forkexecd-devel ocaml-stdext-devel ocaml-rpc-devel ocaml-xcp-idl-devel ocaml-oclock-devel
-Requires:       ocaml ocaml-findlib forkexecd-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  forkexecd-devel
+BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-stdext-devel
+BuildRequires:  ocaml-xcp-idl-devel
+Requires:       forkexecd-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Manipulate running tapdisk instances on a xen host.

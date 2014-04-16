@@ -7,9 +7,19 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/forkexecd
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        forkexecd-init
-BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-rpc-devel ocaml-fd-send-recv-devel ocaml-re-devel ocaml-uuidm-devel ocaml-stdext-devel ocaml-xcp-idl-devel ocaml-oclock-devel
-Requires:  ocaml-rpc ocaml-rpc-devel redhat-lsb-core
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-fd-send-recv-devel
+BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-re-devel
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-stdext-devel
+BuildRequires:  ocaml-uuidm-devel
+BuildRequires:  ocaml-xcp-idl-devel
+Requires:  ocaml-rpc
+Requires:  ocaml-rpc-devel
+Requires:  redhat-lsb-core
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
@@ -55,7 +65,8 @@ fi
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
-Requires:       ocaml ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -8,7 +8,10 @@ Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://github.com/xenserver/xenserver-install-wizard
 Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-Requires: python newt xapi-python-devel python-argparse
+Requires: newt
+Requires: python
+Requires: python-argparse
+Requires: xapi-python-devel
 
 %description
 A simple wizard to configure a XenServer after install

@@ -13,19 +13,48 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
-BuildRequires: ocaml ocaml-findlib ocaml-camlp4-devel ocaml-ocamldoc
-BuildRequires: pam-devel tetex-latex ocaml xen-devel zlib-devel
-BuildRequires: ocaml-xcp-idl-devel ocaml-xen-api-libs-transitional-devel
-BuildRequires: ocaml-xen-api-client-devel omake ocaml-netdev-devel
-BuildRequires: ocaml-cdrom-devel ocaml-fd-send-recv-devel forkexecd-devel
-BuildRequires: ocaml-libvhd-devel ocaml-nbd-devel ocaml-oclock-devel
-BuildRequires: ocaml-ounit-devel ocaml-rpc-devel ocaml-ssl-devel ocaml-stdext-devel
-BuildRequires: ocaml-tapctl-devel ocaml-xen-lowlevel-libs-devel
-BuildRequires: ocaml-xenstore-devel git cmdliner-devel ocaml-xcp-inventory-devel
-BuildRequires: libuuid-devel make utop
-BuildRequires: ocaml-xenstore-clients-devel message-switch-devel
-BuildRequires: python2-devel ocaml-tar-devel
-Requires: stunnel ocaml-xcp-inventory hwdata redhat-lsb-core vhd-tool
+BuildRequires: ocaml
+BuildRequires: ocaml-camlp4-devel
+BuildRequires: ocaml-findlib
+BuildRequires: ocaml-ocamldoc
+BuildRequires: ocaml
+BuildRequires: pam-devel
+BuildRequires: tetex-latex
+BuildRequires: xen-devel
+BuildRequires: zlib-devel
+BuildRequires: ocaml-xcp-idl-devel
+BuildRequires: ocaml-xen-api-libs-transitional-devel
+BuildRequires: ocaml-netdev-devel
+BuildRequires: ocaml-xen-api-client-devel
+BuildRequires: omake
+BuildRequires: forkexecd-devel
+BuildRequires: ocaml-cdrom-devel
+BuildRequires: ocaml-fd-send-recv-devel
+BuildRequires: ocaml-libvhd-devel
+BuildRequires: ocaml-nbd-devel
+BuildRequires: ocaml-oclock-devel
+BuildRequires: ocaml-ounit-devel
+BuildRequires: ocaml-rpc-devel
+BuildRequires: ocaml-ssl-devel
+BuildRequires: ocaml-stdext-devel
+BuildRequires: ocaml-tapctl-devel
+BuildRequires: ocaml-xen-lowlevel-libs-devel
+BuildRequires: cmdliner-devel
+BuildRequires: git
+BuildRequires: ocaml-xcp-inventory-devel
+BuildRequires: ocaml-xenstore-devel
+BuildRequires: libuuid-devel
+BuildRequires: make
+BuildRequires: utop
+BuildRequires: message-switch-devel
+BuildRequires: ocaml-xenstore-clients-devel
+BuildRequires: ocaml-tar-devel
+BuildRequires: python2-devel
+Requires: hwdata
+Requires: ocaml-xcp-inventory
+Requires: redhat-lsb-core
+Requires: stunnel
+Requires: vhd-tool
 
 %description
 XCP toolstack.

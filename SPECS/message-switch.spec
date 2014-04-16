@@ -7,15 +7,24 @@ Group:          Development/Other
 URL:            https://github.com/xapi-project/message-switch
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        message-switch-init
-BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
-BuildRequires: ocaml-cohttp-devel ocaml-rpc-devel ocaml-xenstore-devel
-BuildRequires: ocaml-ounit-devel ocaml-uri-devel
-BuildRequires: ocaml-re-devel ocaml-rpc-devel cmdliner-devel
-BuildRequires: ocaml-ssl-devel ocaml-oclock-devel
-BuildRequires: openssl openssl-devel
+BuildRequires: ocaml-cohttp-devel
+BuildRequires: ocaml-rpc-devel
+BuildRequires: ocaml-xenstore-devel
+BuildRequires: ocaml-ounit-devel
+BuildRequires: ocaml-uri-devel
+BuildRequires: cmdliner-devel
+BuildRequires: ocaml-re-devel
+BuildRequires: ocaml-rpc-devel
+BuildRequires: ocaml-oclock-devel
+BuildRequires: ocaml-ssl-devel
+BuildRequires: openssl
+BuildRequires: openssl-devel
 Requires:      redhat-lsb-core
 #  "ocamlfind"
 #  "cohttp" {= "0.9.7"}
@@ -70,7 +79,8 @@ fi
 Summary:        Development files for %{name}
 Group:          Development/Other
 #Requires:       %{name} = %{version}-%{release}
-Requires:       ocaml ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

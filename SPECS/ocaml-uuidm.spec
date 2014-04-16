@@ -8,8 +8,11 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://erratique.ch/software/uuidm
 Source0:        http://erratique.ch/software/uuidm/releases/uuidm-%{version}.tbz
-BuildRequires:  ocaml ocaml-findlib ocaml-ocamldoc
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ocamldoc
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Uuidm is an OCaml module implementing 128 bits universally unique

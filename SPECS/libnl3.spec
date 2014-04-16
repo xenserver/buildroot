@@ -7,7 +7,8 @@ Release: 1%{?dist}
 URL: http://www.infradead.org/~tgr/libnl/
 Source: http://www.infradead.org/~tgr/libnl/files/libnl-%{version}.tar.gz
 Source1: http://www.infradead.org/~tgr/libnl/files/libnl-doc-%{version}.tar.gz
-BuildRequires: flex bison
+BuildRequires: bison
+BuildRequires: flex
 BuildRequires: python
 
 %description

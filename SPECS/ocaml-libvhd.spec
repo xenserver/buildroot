@@ -8,8 +8,12 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/libvhd
 Source0:        https://github.com/xapi-project/libvhd/archive/libvhd-%{version}/libvhd-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib xen-devel libuuid-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  libuuid-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  xen-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Simple C bindings which allow .vhd files to be manipulated.

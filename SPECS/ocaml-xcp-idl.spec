@@ -8,8 +8,16 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xcp-idl
 Source0:        https://github.com/djs55/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-cohttp-devel xmlm-devel ocaml-rpc-devel message-switch-devel cmdliner-devel ocaml-fd-send-recv-devel ocaml-xcp-rrd-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  cmdliner-devel
+BuildRequires:  message-switch-devel
+BuildRequires:  ocaml-cohttp-devel
+BuildRequires:  ocaml-fd-send-recv-devel
+BuildRequires:  ocaml-rpc-devel
+BuildRequires:  ocaml-xcp-rrd-devel
+BuildRequires:  xmlm-devel
 BuildRequires:  ocaml-ounit-devel
 
 # XXX transitive dependencies of message-switch-devel
@@ -23,7 +31,8 @@ BuildRequires: ocaml-oclock-devel
 #           "ocamlfind"
 #           "syslog"
 #           "message_switch"
-Requires:       ocaml ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 Common interface definitions for XCP services.

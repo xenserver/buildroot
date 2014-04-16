@@ -7,15 +7,24 @@ Group:          Development/Other
 URL:            http://www.xenserver.org/
 Source0:        xenserver-readme
 Requires:       xenserver-install-wizard
-Requires:       xapi xapi-xe xe-create-templates xapi-python-devel
-Requires:       xenopsd-xc xenopsd-libvirt xenopsd-simulator
+Requires:       xapi
+Requires:       xapi-python-devel
+Requires:       xapi-xe
+Requires:       xe-create-templates
+Requires:       xenopsd-libvirt
+Requires:       xenopsd-simulator
+Requires:       xenopsd-xc
 Requires:       xenops-cli
-Requires:       ffs xapi-libvirt-storage sm-cli xcp-sm
+Requires:       ffs
+Requires:       sm-cli
+Requires:       xapi-libvirt-storage
+Requires:       xcp-sm
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
 Requires:       squeezed
 Requires:       linux-guest-loader
-Requires:       kernel >= 3.4.46 kernel-firmware
+Requires:       kernel >= 3.4.46
+Requires:       kernel-firmware
 Requires:       xen
 
 %description

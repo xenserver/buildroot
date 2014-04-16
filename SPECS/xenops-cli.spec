@@ -6,8 +6,13 @@ License:        LGPL
 Group:          Development/Other
 URL:            https://github.com/xapi-project/xenops-cli
 Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-camlp4-devel
-BuildRequires:  ocaml-obuild ocaml-xcp-idl-devel cmdliner-devel ocaml-uuidm-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-obuild
+BuildRequires:  ocaml-uuidm-devel
+BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  message-switch-devel
 Requires:       message-switch
 

@@ -10,8 +10,10 @@ URL:            https://github.com/polazarus/oclock
 Source0:        http://github.com/polazarus/oclock/archive/v0.3/oclock-%{version}.tar.gz
 Patch0:         oclock-1-cc-headers
 Patch1:         oclock-2-destdir
-BuildRequires:  ocaml ocaml-findlib-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 A POSIX monotonic clock for OCaml

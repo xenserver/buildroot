@@ -7,8 +7,10 @@ Group:          Development/Other
 URL:            http://github.com/vincenthz/ocaml-sha
 Source0:        https://github.com/xapi-project/ocaml-sha/archive/ocaml-sha-v%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 This is a set of C bindings for computing SHA digests.

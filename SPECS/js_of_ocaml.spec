@@ -8,8 +8,19 @@ License:        LGPL and others
 Group:          Development/Other
 URL:            http://ocsigen.org/download/js_of_ocaml-1.3.2.tar.gz
 Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-findlib-devel deriving-ocsigen-devel ocaml-lwt-devel ocaml-camlp4-devel ocaml-ocamldoc
-Requires:       ocaml ocaml-findlib ocaml-findlib-devel deriving-ocsigen-devel ocaml-lwt-devel ocaml-camlp4-devel
+BuildRequires:  deriving-ocsigen-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-findlib-devel
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-ocamldoc
+Requires:       deriving-ocsigen-devel
+Requires:       ocaml
+Requires:       ocaml-camlp4-devel
+Requires:       ocaml-findlib
+Requires:       ocaml-findlib-devel
+Requires:       ocaml-lwt-devel
 
 %description
 Compile OCaml programs to Javascript.

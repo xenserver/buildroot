@@ -8,9 +8,14 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-xenstore
 Source0:        https://github.com/mirage/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-cstruct-devel ocaml-lwt-devel ocaml-camlp4-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-cstruct-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 Conflicts:      xen-ocaml
 
 %description

@@ -6,13 +6,18 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/djs55/ocaml-tar
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz 
-BuildRequires:  ocaml ocaml-findlib ocaml-ounit-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-ounit-devel
 # These are build requires which are also requires of the -devel package
-BuildRequires:  ocaml-re-devel ocaml-cstruct-devel ocaml-lwt-devel
+BuildRequires:  ocaml-cstruct-devel
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-re-devel
 # These are build requires which should be requires of some of the -devel
 # packages -- update the devel packages later
 BuildRequires:  ocaml-camlp4-devel
-Requires:       ocaml ocaml-findlib
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 This is a pure OCaml library for reading and writing tar-format data.
@@ -20,7 +25,9 @@ This is a pure OCaml library for reading and writing tar-format data.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-Requires:       ocaml-re-devel ocaml-cstruct-devel ocaml-lwt-devel
+Requires:       ocaml-cstruct-devel
+Requires:       ocaml-lwt-devel
+Requires:       ocaml-re-devel
 # These are requires which should be requires of some of the -devel
 # packages -- update the devel packages later
 Requires:       ocaml-camlp4

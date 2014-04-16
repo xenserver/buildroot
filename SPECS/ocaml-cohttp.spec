@@ -8,10 +8,20 @@ License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-cohttp
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  ocaml ocaml-findlib ocaml-re-devel ocaml-uri-devel ocaml-cstruct-devel ocaml-lwt-devel ocaml-ounit-devel ocaml-ocamldoc ocaml-camlp4-devel
+BuildRequires:  ocaml
+BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-cstruct-devel
+BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-re-devel
+BuildRequires:  ocaml-uri-devel
 # should these be inherited from ssl.spec somehow?
-BuildRequires:  openssl openssl-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  openssl
+BuildRequires:  openssl-devel
+Requires:       ocaml
+Requires:       ocaml-findlib
 
 %description
 An HTTP library for OCaml.
