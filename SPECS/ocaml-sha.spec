@@ -73,5 +73,5 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/sha/dllsha512.so
 
 %changelog
-* Fri Nov 18 2013 David Scott <dave.scott@eu.citrix.com>
+* Mon Nov 18 2013 David Scott <dave.scott@eu.citrix.com>
 - Initial package
