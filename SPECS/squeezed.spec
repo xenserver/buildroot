@@ -66,7 +66,7 @@ fi
 * Fri Apr 11 2014 Euan Harris <euan.harris@citrix.com> - 0.10.5-1
 - Switch build from obuild to oasis
 
-* Wed Sep 24 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.4-1
+* Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.4-1
 - Update to 0.10.4
 
 * Fri Sep 20 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.3-1
