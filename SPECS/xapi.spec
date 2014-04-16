@@ -168,13 +168,13 @@ fi
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 1.9.28
 
-* Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.27-2
+* Tue Sep 24 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.27-2
 - Remove dependency on ocaml-bitstring
 
-* Tue Sep 23 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.27-1
+* Tue Sep 24 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.27-1
 - Update to 1.9.27
 
-* Wed Sep 19 2013 Euan Harris <euan.harris@citrix.com> - 1.9.25-2
+* Thu Sep 19 2013 Euan Harris <euan.harris@citrix.com> - 1.9.25-2
 - Use 'python_sitelib' macro to choose Python install path, instead of hard-coding it.
 
 * Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.25-1
@@ -186,7 +186,7 @@ fi
 * Wed Sep  4 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.21-1
 - Update to 1.9.21, switch default xenopsd to the "classic" version
 
-* Mon Sep  1 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.20-1
+* Mon Sep  2 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.20-1
 - Fix XenAPI.py on python2.7
 
 * Tue Aug 20 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.19-1
@@ -195,7 +195,7 @@ fi
 * Tue Jun 18 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.6-1
 - Update to 1.9.6
 
-* Sun Jun 8 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.2-1
+* Sat Jun 8 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.2-1
 - Add python-devel for writing python clients
 
 * Wed Jun 5 2013 David Scott <dave.scott@eu.citrix.com> - 1.9.1-1

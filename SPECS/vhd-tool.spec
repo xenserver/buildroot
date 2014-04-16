@@ -48,7 +48,7 @@ make install
 * Wed Apr 9 2014 Euan Harris <euan.harris@citrix.com> - 0.7.4-1
 - Update to 0.7.4 - fix handling of tar file prefixes
 
-* Wed Apr 4 2014 Euan Harris <euan.harris@citrix.com> - 0.7.3-1
+* Wed Apr 2 2014 Euan Harris <euan.harris@citrix.com> - 0.7.3-1
 - Update to 0.7.3
 
 * Thu Nov 21 2013 David Scott <dave.scott@eu.citrix.com> - 0.6.4-1

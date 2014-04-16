@@ -56,7 +56,7 @@ ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroo
 * Mon Sep  2 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.2.19
 
-* Mon Sep  1 2013 David Scott <dave.scott@eu.citrix.com>
+* Mon Sep  2 2013 David Scott <dave.scott@eu.citrix.com>
 - Update to 0.2.18
 
 * Mon Jun 10 2013 David Scott <dave.scott@eu.citrix.com>
