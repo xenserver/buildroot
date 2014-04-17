@@ -7,6 +7,7 @@ Group:          Development/Libraries
 URL:            http://github.com/xapi-project/nbd
 Source0:        https://github.com/xapi-project/nbd/archive/v%{version}/nbd-%{version}.tar.gz
 
+
 BuildRequires:  cmdliner-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
@@ -20,28 +21,30 @@ An implementation of the Network Block Device protocol for both
 regular Unix and Lwt in OCaml. This library allows applications to
 access remote block devices.
 
+
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
+
 %description    devel
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
+
 %prep
 %setup -q -n nbd-%{version}
 
+
 %build
-if [ -x ./configure ]; then
-  ./configure --prefix %{_prefix} --destdir %{buildroot}
-fi
+./configure --prefix %{_prefix} --destdir %{buildroot}
 make
 
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 make install
 
 
