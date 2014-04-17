@@ -1,6 +1,6 @@
 Name:           ocaml-cmdliner
 Version:        0.9.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Declarative definition of commandline interfaces for OCaml
 License:        BSD3
 URL:            http://erratique.ch/software/cmdliner
@@ -36,19 +36,30 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
 
 
 %files
-# This space intentionally left blank
+%doc CHANGES
+%doc README
+%{_libdir}/ocaml/cmdliner
+%exclude %{_libdir}/ocaml/cmdliner/*.a
+%exclude %{_libdir}/ocaml/cmdliner/*.cmxa
+%exclude %{_libdir}/ocaml/cmdliner/*.cmx
+%exclude %{_libdir}/ocaml/cmdliner/*.mli
 
 %files devel
-%doc README CHANGES
-%{_libdir}/ocaml/cmdliner/*
+%{_libdir}/ocaml/cmdliner/*.a
+%{_libdir}/ocaml/cmdliner/*.cmx
+%{_libdir}/ocaml/cmdliner/*.cmxa
+%{_libdir}/ocaml/cmdliner/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.9.3-3
+- Split files correctly between base and devel packages
+
 * Mon May 19 2014 Euan Harris <euan.harris@citrix.com> - 0.9.3-2
 - Switch to GitHub mirror
 
