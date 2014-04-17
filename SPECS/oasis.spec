@@ -15,7 +15,6 @@ BuildRequires:	ocamlify
 BuildRequires:	ocamlmod
 BuildRequires:	ocaml-ocamldoc
 BuildRequires:	ocaml-odn-devel
-Requires:	ocaml
 
 %description
 OASIS generates a full configure, build and install system for your
