@@ -15,7 +15,6 @@ BuildRequires:	ocamlify
 BuildRequires:	ocamlmod
 BuildRequires:	ocaml-ocamldoc
 BuildRequires:	ocaml-odn-devel
-Requires:	ocaml
 
 %description
 OASIS generates a full configure, build and install system for your
@@ -42,15 +41,14 @@ developing applications that use %{name}.
 
 
 %build
-ocaml setup.ml -configure --prefix %{_prefix} --destdir %{buildroot}
-ocaml setup.ml -build
+./configure --prefix %{_prefix} --destdir %{buildroot}
+make
 
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -install
-
+mkdir -p $OCAMLFIND_DESTDIR
+make install
 
 
 %files
