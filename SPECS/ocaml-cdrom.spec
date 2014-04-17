@@ -2,7 +2,7 @@
 
 Name:           ocaml-cdrom
 Version:        0.9.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Query the state of CDROM devices
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/cdrom
@@ -27,9 +27,6 @@ developing applications that use %{name}.
 %setup -q -n cdrom-cdrom-%{version}
 
 %build
-if [ -x ./configure ]; then
-  ./configure
-fi
 make
 
 %install
@@ -38,17 +35,27 @@ mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
-
 %files
-# This space intentionally left blank
-
-%files devel
-%doc ChangeLog README.md
-%{_libdir}/ocaml/cdrom/*
+%doc ChangeLog 
+%doc README.md
+%{_libdir}/ocaml/cdrom
+%exclude %{_libdir}/ocaml/cdrom/*.a
+%exclude %{_libdir}/ocaml/cdrom/*.cmxa
+%exclude %{_libdir}/ocaml/cdrom/*.cmx
+%exclude %{_libdir}/ocaml/cdrom/*.mli
 %{_libdir}/ocaml/stublibs/dllstubs_cdrom.so
 %{_libdir}/ocaml/stublibs/dllstubs_cdrom.so.owner
 
+%files devel
+%{_libdir}/ocaml/cdrom/*.a
+%{_libdir}/ocaml/cdrom/*.cmx
+%{_libdir}/ocaml/cdrom/*.cmxa
+%{_libdir}/ocaml/cdrom/*.mli
+
 %changelog
+* Fri Apr 17 2014 Euan Harris <euan.harris@citrix.com> - 0.9.1-3
+- Split files correctly between base and devel packages
+
 * Tue May 28 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-2
 - Initial package
 
