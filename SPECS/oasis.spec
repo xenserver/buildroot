@@ -41,14 +41,14 @@ developing applications that use %{name}.
 
 
 %build
-ocaml setup.ml -configure --prefix %{_prefix} --destdir %{buildroot}
-ocaml setup.ml -build
+./configure --prefix %{_prefix} --destdir %{buildroot}
+make
 
 
 %install
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -install
+make install
 
 
 
