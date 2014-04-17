@@ -20,9 +20,9 @@ make
 mkdir -p %{buildroot}/%{_bindir}
 make install BINDIR=%{buildroot}/%{_bindir}
 
-
 %files
-%doc LICENSE README
+%doc LICENSE 
+%doc README
 %{_bindir}/cppo
 
 %changelog
