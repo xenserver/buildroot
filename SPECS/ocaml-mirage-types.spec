@@ -40,7 +40,6 @@ make build-types
 rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
-#export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 make install-types
 
 %files
@@ -50,7 +49,7 @@ make install-types
 %files devel
 %{_libdir}/ocaml/mirage-types/*.mli
 
-
 %changelog
 * Tue Apr 1 2014 Euan Harris <euan.harris@citrix.com> - 1.1.1-1
 - Initial package
+
