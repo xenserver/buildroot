@@ -47,7 +47,7 @@ vagrant ssh
 
 git clone git://github.com/xapi-project/xen-api-libs
 cd xen-api-libs
-git checkout clearwater
+git checkout clearwater-sp1-lcm
 sh autogen.sh
 ./configure
 make
@@ -56,6 +56,7 @@ sudo make install
 cd ..
 git clone git://github.com/xapi-project/xen-api
 cd xen-api
+git checkout clearwater-sp1-lcm
 make
 ```
 
