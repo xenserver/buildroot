@@ -1,2 +1,0 @@
-deb @DEBURL@ ./
-deb-src @DEBSRCURL@ ./

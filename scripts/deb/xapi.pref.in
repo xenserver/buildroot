@@ -1,4 +1,0 @@
-Package: *
-Pin: origin "@REPOHOST@"
-Pin-Priority: 1500
-

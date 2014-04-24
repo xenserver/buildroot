@@ -1,4 +1,0 @@
-# Prevent guest traffic flowing over the bridge being processed
-# by the domain 0 firewall
-install bridge \
-/sbin/modprobe bridge --ignore-install && /sbin/sysctl -w net.bridge.bridge-nf-call-iptables=0

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-echo "I: Updating Packages file"
-(cd @PWD@/RPMS; apt-ftparchive packages . > Packages)
-echo "I: Updating Sources file"
-(cd @PWD@/SRPMS; apt-ftparchive sources . > Sources)
-apt-get update
