@@ -13,7 +13,7 @@ such as [virtual box](http://virtualbox.org/).
 Building the environment
 ------------------------
 
-The definitions for the VM are in the definitions/ directory. THe
+The definitions for the VM are in the definitions/ directory. The
 VM can be built by:
 
 ```
