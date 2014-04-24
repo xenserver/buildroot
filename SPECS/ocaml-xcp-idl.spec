@@ -40,7 +40,7 @@ Common interface definitions for XCP services.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel
 
 %description    devel

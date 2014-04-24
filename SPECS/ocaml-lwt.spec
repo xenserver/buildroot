@@ -34,6 +34,7 @@ is part of the Ocsigen project.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
 
 
 %description    devel

@@ -24,6 +24,7 @@ An implementation of the xenstore protocol in OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
 Conflicts:      xen-ocaml-devel
 
 %description    devel

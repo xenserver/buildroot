@@ -21,6 +21,8 @@ A simple library to read and write the XCP inventory file.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
+
 Requires:       ocaml
 Requires:       ocaml-findlib
 

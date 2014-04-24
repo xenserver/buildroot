@@ -31,7 +31,7 @@ virtualization hosts.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 XenAPI Client is an OCaml library implementing XenServer's XenAPI.

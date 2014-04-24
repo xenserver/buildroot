@@ -25,6 +25,7 @@ This is a pure OCaml library for reading and writing tar-format data.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cstruct-devel
 Requires:       ocaml-lwt-devel
 Requires:       ocaml-re-devel
