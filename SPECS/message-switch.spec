@@ -15,7 +15,7 @@ BuildRequires: ocaml-rpc-devel
 BuildRequires: ocaml-xenstore-devel
 BuildRequires: ocaml-ounit-devel
 BuildRequires: ocaml-uri-devel
-BuildRequires: cmdliner-devel
+BuildRequires: ocaml-cmdliner-devel
 BuildRequires: ocaml-re-devel
 BuildRequires: ocaml-rpc-devel
 BuildRequires: ocaml-oclock-devel

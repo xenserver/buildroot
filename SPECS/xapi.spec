@@ -38,7 +38,7 @@ BuildRequires: ocaml-ssl-devel
 BuildRequires: ocaml-stdext-devel
 BuildRequires: ocaml-tapctl-devel
 BuildRequires: ocaml-xen-lowlevel-libs-devel
-BuildRequires: cmdliner-devel
+BuildRequires: ocaml-cmdliner-devel
 BuildRequires: git
 BuildRequires: ocaml-xcp-inventory-devel
 BuildRequires: ocaml-xenstore-devel

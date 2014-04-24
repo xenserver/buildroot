@@ -8,8 +8,8 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/ocaml-qmp
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  cmdliner-devel
 BuildRequires:  ocaml
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-ounit-devel

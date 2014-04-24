@@ -10,8 +10,8 @@ URL:            https://github.com/xapi-project/xcp-idl
 Source0:        https://github.com/djs55/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-findlib
-BuildRequires:  cmdliner-devel
 BuildRequires:  message-switch-devel
 BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-fd-send-recv-devel

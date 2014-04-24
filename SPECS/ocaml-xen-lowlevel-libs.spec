@@ -10,9 +10,9 @@ URL:            https://github.com/xapi-project/ocaml-xen-lowlevel-libs
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-BuildRequires:  cmdliner-devel
 BuildRequires:  libuuid-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  xen-devel

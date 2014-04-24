@@ -15,7 +15,7 @@ BuildRequires:  ocaml-libvirt-devel
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-idl-devel
-BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-oclock-devel
