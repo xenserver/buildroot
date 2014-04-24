@@ -1,13 +1,14 @@
-Name:           easy-format
+Name:           ocaml-easy-format
 Version:        1.0.1
 Release:        1%{?dist}
 Summary:        Indentation made easy
 License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/easy-format.html
-Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
+Source0:        http://mjambon.com/releases/easy-format/easy-format-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
+Obsoletes:      easy-format <= 1.0.1
 
 %description
 Easy_format: indentation made easy.
@@ -22,7 +23,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q
+%setup -q -n easy-format-%{version}
 
 %build
 make

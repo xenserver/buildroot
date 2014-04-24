@@ -9,9 +9,9 @@ Group:          Development/Libraries
 URL:            http://mjambon.com/yojson.html
 Source0:        http://mjambon.com/releases/yojson/yojson-%{version}.tar.gz
 BuildRequires:  cppo
-BuildRequires:  easy-format-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-biniou-devel
+BuildRequires:  ocaml-easy-format-devel
 BuildRequires:  ocaml-findlib
 
 %description

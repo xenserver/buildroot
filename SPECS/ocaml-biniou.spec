@@ -8,8 +8,8 @@ License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/biniou.html
 Source0:        http://mjambon.com/releases/biniou/biniou-%{version}.tar.gz
-BuildRequires:  easy-format-devel
 BuildRequires:  ocaml
+BuildRequires:  ocaml-easy-format-devel
 BuildRequires:  ocaml-findlib
 Obsoletes:      biniou <= 1.0.6
 
