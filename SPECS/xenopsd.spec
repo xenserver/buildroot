@@ -27,7 +27,7 @@ BuildRequires:  ocaml-uuidm-devel
 BuildRequires:  libvirt-devel
 BuildRequires:  ocaml-libvirt-devel
 BuildRequires:  ocaml-qmp-devel
-BuildRequires:  ocaml-sexplib
+BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-xenstore-devel

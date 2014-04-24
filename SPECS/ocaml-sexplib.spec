@@ -20,6 +20,15 @@ BuildRequires:  ocaml-type-conv
 %description
 Convert values to and from s-expressions in OCaml.
 
+%package        devel
+Summary:        Development files for %{name}
+Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+The %{name}-devel package contains libraries and signature files for
+developing applications that use %{name}.
+
 %prep
 %setup -q -n sexplib-%{version}
 
@@ -32,8 +41,10 @@ export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
 make install
 
-
 %files
+#This space intentionally left blank
+
+%files devel
 %doc CHANGES.txt COPYRIGHT.txt INRIA-DISCLAIMER.txt INSTALL.txt LICENSE-Tywith.txt LICENSE.txt README.md THIRD-PARTY.txt
 %{_libdir}/ocaml/sexplib
 
