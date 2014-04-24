@@ -7,11 +7,9 @@ Group:          Development/Other
 URL:            http://forge.ocamlcore.org/projects/optcomp/
 Source0:        https://forge.ocamlcore.org/frs/download.php/1011/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
-BuildRequires:  ocaml-camlp4
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml
 
 %description
 Optional compilation with cpp-like directives.

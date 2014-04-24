@@ -16,9 +16,6 @@ BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xcp-idl-devel
-Requires:       forkexecd-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Manipulate running tapdisk instances on a xen host.

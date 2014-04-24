@@ -13,8 +13,6 @@ BuildRequires:  cppo
 BuildRequires:  easy-format
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 A JSON parser and printer for OCaml.

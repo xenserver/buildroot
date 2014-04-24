@@ -13,8 +13,6 @@ BuildRequires:  ocaml-camomile-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-react-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Zed is an abstract engine for text edition. It can be used for writing

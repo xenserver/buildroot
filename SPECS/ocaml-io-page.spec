@@ -13,8 +13,6 @@ BuildRequires:  ocaml
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ounit-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 This library implements support for efficient handling of I/O memory pages on Unix and Xen.

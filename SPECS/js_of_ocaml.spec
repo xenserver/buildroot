@@ -16,10 +16,6 @@ BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
 Requires:       deriving-ocsigen-devel
-Requires:       ocaml
-Requires:       ocaml-camlp4-devel
-Requires:       ocaml-findlib
-Requires:       ocaml-findlib-devel
 Requires:       ocaml-lwt-devel
 
 %description

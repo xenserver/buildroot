@@ -20,8 +20,6 @@ BuildRequires:  ocaml-uri-devel
 # should these be inherited from ssl.spec somehow?
 BuildRequires:  openssl
 BuildRequires:  openssl-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 An HTTP library for OCaml.

@@ -21,8 +21,6 @@ BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  xen-devel
 BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-xcp-idl-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 Requires:       xen-libs
 
 %description

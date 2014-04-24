@@ -14,8 +14,6 @@ BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml
-Requires:       ocaml-findlib
 Conflicts:      xen-ocaml
 
 %description

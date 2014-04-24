@@ -15,8 +15,6 @@ BuildRequires:	ocaml-type-conv >= 108.07.01
 BuildRequires:	ocaml-ounit-devel >= 2.0.0
 BuildRequires:	ocaml-fileutils-devel >= 0.4.0
 
-Requires:	ocaml
-
 %description
 
 

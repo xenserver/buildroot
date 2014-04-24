@@ -20,8 +20,6 @@ BuildRequires:  ocaml-uri-devel
 BuildRequires:  openssl
 BuildRequires:  openssl-devel
 BuildRequires:  xmlm-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 XenAPI Client is an OCaml library implementing XenServer's XenAPI.

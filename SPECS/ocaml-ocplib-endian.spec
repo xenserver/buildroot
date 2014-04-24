@@ -13,8 +13,6 @@ BuildRequires:  ocaml-camlp4
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  optcomp
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Optimised functions to read and write int16/32/64 from strings and

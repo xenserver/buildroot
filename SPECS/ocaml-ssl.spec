@@ -11,9 +11,6 @@ Source0:        http://downloads.sourceforge.net/project/savonet/%{name}/%{versi
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  openssl-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
-Requires:       openssl
 
 %description
 Use OpenSSL from OCaml.

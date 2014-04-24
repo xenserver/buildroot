@@ -13,8 +13,6 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-xenstore-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Unix xenstore clients for OCaml.

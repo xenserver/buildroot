@@ -20,8 +20,6 @@ BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Low-level xen control operations in OCaml.

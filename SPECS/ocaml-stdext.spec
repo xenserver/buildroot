@@ -12,8 +12,6 @@ BuildRequires:  ocaml
 BuildRequires:  ocaml-fd-send-recv-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-uuidm-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Deprecated misc library functions for OCaml.

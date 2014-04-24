@@ -23,17 +23,6 @@ BuildRequires:  ocaml-ounit-devel
 # XXX transitive dependencies of message-switch-devel
 BuildRequires: ocaml-oclock-devel
 
-#  "uri"
-#"re"
-#           "cohttp"
-#           "xmlm"
-#           "rpc" {> "1.4.0"}
-#           "ocamlfind"
-#           "syslog"
-#           "message_switch"
-Requires:       ocaml
-Requires:       ocaml-findlib
-
 %description
 Common interface definitions for XCP services.
 

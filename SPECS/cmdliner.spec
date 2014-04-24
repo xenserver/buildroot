@@ -9,8 +9,6 @@ Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Cmdliner is an OCaml module for the declarative definition of command line

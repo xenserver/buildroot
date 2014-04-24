@@ -7,7 +7,6 @@ Group:          Development/Other
 URL:            http://mjambon.com/cppo.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
-Requires:       ocaml
 
 %description
 Equivalent of the C preprocessor for OCaml.

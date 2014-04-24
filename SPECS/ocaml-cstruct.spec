@@ -14,8 +14,6 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocplib-endian-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 Requires:       ocaml-ocplib-endian-devel
 #XXX ocaml-cstruct should require caml-ocplib-endian, not -devel
 

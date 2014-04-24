@@ -16,8 +16,6 @@ BuildRequires:  ocaml-io-page-devel
 BuildRequires:  ocaml-ipaddr-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ounit-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 This library contains interfaces to build applications that are compatible with the Mirage operating system. It defines only interfaces, and no concrete modules.

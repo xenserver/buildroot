@@ -23,9 +23,6 @@ Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
-Requires:       ocaml
-Requires:       ocaml-findlib
-
 %description    devel
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.

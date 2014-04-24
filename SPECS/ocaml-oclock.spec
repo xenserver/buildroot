@@ -12,8 +12,6 @@ Patch0:         oclock-1-cc-headers
 Patch1:         oclock-2-destdir
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 A POSIX monotonic clock for OCaml

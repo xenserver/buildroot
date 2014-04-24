@@ -9,7 +9,6 @@ Group:          Development/Other
 URL:            http://github.com/vincenthz/obuild
 Source0:        https://github.com/vincenthz/obuild/archive/v%{version}/obuild-%{version}.tar.gz
 BuildRequires:  ocaml
-Requires:       ocaml
 
 %description
 The goal is to make a very simple build system for users and developers 

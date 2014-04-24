@@ -9,7 +9,6 @@ Source0:        http://erratique.ch/software/uutf/releases/uutf-%{version}.tbz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml
 
 %description
 Uutf is an non-blocking streaming Unicode codec for OCaml to decode and

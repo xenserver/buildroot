@@ -17,8 +17,6 @@ BuildRequires:  libuuid-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  xen-devel
 BuildRequires:  ocaml-cstruct-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Xen hypercall bindings for OCaml.

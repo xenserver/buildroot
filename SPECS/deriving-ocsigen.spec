@@ -9,8 +9,6 @@ Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Extension to OCaml for deriving functions from type declarations

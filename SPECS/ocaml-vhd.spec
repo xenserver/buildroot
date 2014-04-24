@@ -18,8 +18,6 @@ BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-uuidm-devel
 BuildRequires:  ocaml-io-page-devel
 BuildRequires:  ocaml-mirage-types-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 A pure OCaml parser and printer for vhd format data. The library allows

@@ -8,8 +8,6 @@ URL:            http://mjambon.com/easy-format.html
 Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Easy_format: indentation made easy.
