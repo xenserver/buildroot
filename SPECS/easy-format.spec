@@ -12,6 +12,15 @@ BuildRequires:  ocaml-findlib
 %description
 Easy_format: indentation made easy.
 
+%package        devel
+Summary:        Development files for %{name}
+Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+The %{name}-devel package contains libraries and signature files for
+developing applications that use %{name}.
+
 %prep
 %setup -q
 
@@ -23,8 +32,10 @@ mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 make install
 
-
 %files
+#This space intentionally left blank
+
+%files devel
 %doc LICENSE README
 %{_libdir}/ocaml/easy-format/*
 
