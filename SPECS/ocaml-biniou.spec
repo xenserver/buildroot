@@ -1,16 +1,17 @@
 %define debug_package %{nil}
 
-Name:           biniou
+Name:           ocaml-biniou
 Version:        1.0.6
 Release:        1%{?dist}
 Summary:        Compact, fast and extensible serialization format
 License:        BSD3
 Group:          Development/Libraries
 URL:            http://mjambon.com/biniou.html
-Source0:        http://mjambon.com/releases/%{name}/%{name}-%{version}.tar.gz
+Source0:        http://mjambon.com/releases/biniou/biniou-%{version}.tar.gz
 BuildRequires:  easy-format-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
+Obsoletes:      biniou <= 1.0.6
 
 %description
 Binary data format designed for speed, safety, ease of use and backward
@@ -26,7 +27,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q
+%setup -q -n biniou-%{version}
 
 %build
 make
