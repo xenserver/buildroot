@@ -17,8 +17,7 @@ BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-uri-devel
-# should these be inherited from ssl.spec somehow?
-BuildRequires:  openssl
+# should this be inherited from ssl.spec somehow?
 BuildRequires:  openssl-devel
 
 %description

@@ -13,7 +13,7 @@ Source0:        http://forge.ocamlcore.org/frs/download.php/937/%{name}-%{versio
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
-BuildRequires:  ocaml-findlib-devel
+BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-camlp4
 BuildRequires:  ocaml-ocamldoc
 

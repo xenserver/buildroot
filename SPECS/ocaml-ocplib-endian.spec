@@ -9,7 +9,6 @@ Group:          Development/Libraries
 URL:            https://github.com/OCamlPro/ocplib-endian
 Source0:        https://github.com/OCamlPro/ocplib-endian/archive/%{version}/ocplib-endian-%{version}.tar.gz
 BuildRequires:  ocaml
-BuildRequires:  ocaml-camlp4
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  optcomp

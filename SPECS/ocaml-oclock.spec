@@ -11,7 +11,7 @@ Source0:        http://github.com/polazarus/oclock/archive/v0.3/oclock-%{version
 Patch0:         oclock-1-cc-headers
 Patch1:         oclock-2-destdir
 BuildRequires:  ocaml
-BuildRequires:  ocaml-findlib-devel
+BuildRequires:  ocaml-findlib
 
 %description
 A POSIX monotonic clock for OCaml

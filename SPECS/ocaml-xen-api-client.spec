@@ -17,7 +17,6 @@ BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-ssl-devel
 BuildRequires:  ocaml-uri-devel
-BuildRequires:  openssl
 BuildRequires:  openssl-devel
 BuildRequires:  xmlm-devel
 

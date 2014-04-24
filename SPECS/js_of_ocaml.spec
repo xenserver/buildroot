@@ -11,7 +11,6 @@ Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
 BuildRequires:  deriving-ocsigen-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
-BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc

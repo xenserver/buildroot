@@ -12,7 +12,6 @@ Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/se
 
 BuildRequires:  ocaml >= 4.00.0
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-camlp4
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-type-conv

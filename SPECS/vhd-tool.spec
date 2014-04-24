@@ -35,7 +35,6 @@ BuildRequires: ocaml-sha-devel
 BuildRequires: ocaml-tar-devel
 BuildRequires: message-switch-devel
 BuildRequires: ocaml-xenstore-clients-devel
-BuildRequires: openssl
 BuildRequires: openssl-devel
 
 %description

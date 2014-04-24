@@ -9,7 +9,6 @@ Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-cstruct
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
-BuildRequires:  ocaml-camlp4
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
