@@ -1,0 +1,39 @@
+diff -ur ocaml-opasswd-0.9.0/lib/common.ml ocaml-opasswd-0.9.0.new/lib/common.ml
+--- ocaml-opasswd-0.9.0/lib/common.ml	2013-10-30 19:25:11.000000000 +0000
++++ ocaml-opasswd-0.9.0.new/lib/common.ml	2014-04-24 20:53:02.459679143 +0000
+@@ -1,3 +1,5 @@
++let ( |> ) a b = b a
++
+ let get_password name =
+   if Shadow.shadow_enabled ()
+   then Shadow.(with_lock (fun () ->
+diff -ur ocaml-opasswd-0.9.0/lib/passwd.ml ocaml-opasswd-0.9.0.new/lib/passwd.ml
+--- ocaml-opasswd-0.9.0/lib/passwd.ml	2013-10-30 19:25:11.000000000 +0000
++++ ocaml-opasswd-0.9.0.new/lib/passwd.ml	2014-04-24 20:52:04.155679390 +0000
+@@ -1,3 +1,5 @@
++let ( |> ) a b = b a
++
+ let passwd_file = "/etc/passwd"
+ 
+ type ent = {
+diff -ur ocaml-opasswd-0.9.0/lib/shadow.ml ocaml-opasswd-0.9.0.new/lib/shadow.ml
+--- ocaml-opasswd-0.9.0/lib/shadow.ml	2013-10-30 19:25:11.000000000 +0000
++++ ocaml-opasswd-0.9.0.new/lib/shadow.ml	2014-04-24 20:52:34.331682809 +0000
+@@ -1,3 +1,5 @@
++let ( |> ) a b = b a
++
+ let shadow_file = "/etc/shadow"
+ 
+ type ent = {
+Only in ocaml-opasswd-0.9.0.new: opasswd_test.native
+Only in ocaml-opasswd-0.9.0.new: setup.bin
+Only in ocaml-opasswd-0.9.0.new: setup.data
+diff -ur ocaml-opasswd-0.9.0/test/opasswd_test.ml ocaml-opasswd-0.9.0.new/test/opasswd_test.ml
+--- ocaml-opasswd-0.9.0/test/opasswd_test.ml	2013-10-30 19:25:11.000000000 +0000
++++ ocaml-opasswd-0.9.0.new/test/opasswd_test.ml	2014-04-24 20:53:25.451682072 +0000
+@@ -1,3 +1,5 @@
++let ( |> ) a b = b a
++
+ open Unix
+ 
+ open OPasswd
