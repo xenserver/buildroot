@@ -21,6 +21,8 @@ A JSON parser and printer for OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-biniou-devel%{?_isa}
+Requires:       ocaml-easy-format-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

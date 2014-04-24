@@ -26,6 +26,8 @@ See http://openmirage.org for more information.
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+BuildRequires:  ocaml-ipaddr-devel%{?_isa}
+BuildRequires:  ocaml-lwt-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -9,12 +9,9 @@ Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{nam
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ounit-devel
-# These are build requires which are also requires of the -devel package
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-re-devel
-# These are build requires which should be requires of some of the -devel
-# packages -- update the devel packages later
 BuildRequires:  ocaml-camlp4-devel
 
 %description
@@ -24,12 +21,9 @@ This is a pure OCaml library for reading and writing tar-format data.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
-Requires:       ocaml-cstruct-devel
-Requires:       ocaml-lwt-devel
-Requires:       ocaml-re-devel
-# These are requires which should be requires of some of the -devel
-# packages -- update the devel packages later
-Requires:       ocaml-camlp4
+Requires:       ocaml-cstruct-devel%{?_isa}
+Requires:       ocaml-lwt-devel%{?_isa}
+Requires:       ocaml-re-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

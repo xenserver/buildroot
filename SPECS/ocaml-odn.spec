@@ -21,6 +21,7 @@ BuildRequires:	ocaml-fileutils-devel >= 0.4.0
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
+BuildRequires:	ocaml-type-conv%{_isa} >= 108.07.01
 
 
 %description    devel

@@ -12,12 +12,9 @@ BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
-BuildRequires:  ocaml-rpc-devel
-BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-xenstore-devel
-BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 
@@ -28,6 +25,11 @@ Low-level xen control operations in OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-xcp-idl-devel%{?_isa}
+Requires:       ocaml-stdext-devel%{?_isa}
+Requires:       ocaml-xen-lowlevel-libs-devel%{?_isa}
+Requires:       ocaml-xenstore-devel%{?_isa}
+Requires:       ocaml-xenstore-clients-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -23,6 +23,8 @@ An implementation of the xenstore protocol in OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-cstruct-devel%{?_isa}
+Requires:       ocaml-lwt-devel%{?_isa}
 Conflicts:      xen-ocaml-devel
 
 %description    devel

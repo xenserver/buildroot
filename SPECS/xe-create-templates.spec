@@ -13,12 +13,9 @@ BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-stdext-devel
 BuildRequires:  xmlm-devel
-BuildRequires:  ocaml-xen-api-libs-transitional-devel
-BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-xen-api-client-devel
 BuildRequires:  ocaml-xcp-idl-devel
-BuildRequires:  openssl-devel
-Requires:       openssl
+BuildRequires:  ocaml-xen-api-libs-transitional-devel
 
 %description
 A utility to create the default XenServer templates.

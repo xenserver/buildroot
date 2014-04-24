@@ -13,8 +13,6 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocplib-endian-devel
-Requires:       ocaml-ocplib-endian-devel
-#XXX ocaml-cstruct should require caml-ocplib-endian, not -devel
 
 %description
 Read and write low-level C-style structures in OCaml.
@@ -23,6 +21,7 @@ Read and write low-level C-style structures in OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-ocplib-endian-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

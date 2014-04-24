@@ -8,7 +8,6 @@ URL:            https://github.com/xapi-project/ffs
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        ffs-init
 BuildRequires:  ocaml
-BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
@@ -16,15 +15,9 @@ BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-re-devel
-BuildRequires:  libuuid-devel
 BuildRequires:  ocaml-libvhd-devel
-BuildRequires:  ocaml-oclock-devel
-BuildRequires:  xen-devel
-BuildRequires:  forkexecd-devel
-BuildRequires:  message-switch-devel
 BuildRequires:  ocaml-tapctl-devel
 Requires:       nfs-utils
-Requires:       ocaml-libvhd-devel
 Requires:       redhat-lsb-core
 Requires:       blktap
 

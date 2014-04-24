@@ -23,6 +23,7 @@ IO pages are page-aligned, and wrapped in the Cstruct library to avoid copying t
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-cstruct-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

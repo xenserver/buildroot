@@ -10,32 +10,19 @@ URL:  https://github.com/xapi-project/vhd-tool
 Source0: https://github.com/xapi-project/vhd-tool/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1: vhd-tool-sparse_dd-conf
 BuildRequires: ocaml
-BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
 BuildRequires: ocaml-ocamldoc
-BuildRequires: ocaml-obuild
 BuildRequires: ocaml-vhd-devel
 BuildRequires: ocaml-xcp-idl-devel
-BuildRequires: ocaml-cstruct-devel
 BuildRequires: ocaml-lwt-devel
 BuildRequires: ocaml-nbd-devel
-BuildRequires: ocaml-ounit-devel
-BuildRequires: ocaml-rpc-devel
-BuildRequires: ocaml-ssl-devel
-BuildRequires: ocaml-stdext-devel
 BuildRequires: ocaml-tapctl-devel
-BuildRequires: ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-cmdliner-devel
-BuildRequires: git
-BuildRequires: ocaml-oclock-devel
 BuildRequires: ocaml-xenstore-devel
-BuildRequires: libuuid-devel
 BuildRequires: ocaml-io-page-devel
 BuildRequires: ocaml-sha-devel
 BuildRequires: ocaml-tar-devel
-BuildRequires: message-switch-devel
 BuildRequires: ocaml-xenstore-clients-devel
-BuildRequires: openssl-devel
 
 %description
 Simple command-line tools for manipulating and streaming .vhd format file.

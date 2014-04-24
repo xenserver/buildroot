@@ -26,6 +26,7 @@ access remote block devices.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+BuildRequires:  ocaml-cstruct-devel%{?_isa}
 
 
 %description    devel
