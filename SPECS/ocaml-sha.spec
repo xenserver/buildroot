@@ -9,8 +9,6 @@ Source0:        https://github.com/xapi-project/ocaml-sha/archive/ocaml-sha-v%{v
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 This is a set of C bindings for computing SHA digests.
@@ -18,6 +16,7 @@ This is a set of C bindings for computing SHA digests.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

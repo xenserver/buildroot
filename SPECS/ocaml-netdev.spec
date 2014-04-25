@@ -14,8 +14,6 @@ BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xcp-idl-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Manipulate Linux bridges, network devices and openvswitch instances in OCaml.
@@ -23,7 +21,7 @@ Manipulate Linux bridges, network devices and openvswitch instances in OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -1,16 +1,15 @@
-Name:           cmdliner
+Name:           ocaml-cmdliner
 Version:        0.9.3
 Release:        1%{?dist}
 Summary:        Declarative definition of commandline interfaces for OCaml
 License:        BSD3
 Group:          Development/Other
 URL:            http://erratique.ch/software/cmdliner
-Source0:        http://erratique.ch/software/%{name}/releases/%{name}-%{version}.tbz
+Source0:        http://erratique.ch/software/cmdliner/releases/cmdliner-%{version}.tbz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml
-Requires:       ocaml-findlib
+Obsoletes:      cmdliner <= 0.9.3
 
 %description
 Cmdliner is an OCaml module for the declarative definition of command line
@@ -23,13 +22,14 @@ man page generation. It supports programs with single or multiple commands
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q
+%setup -q -n cmdliner-%{version}
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml

@@ -11,15 +11,10 @@ Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
 BuildRequires:  deriving-ocsigen-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
-BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
 Requires:       deriving-ocsigen-devel
-Requires:       ocaml
-Requires:       ocaml-camlp4-devel
-Requires:       ocaml-findlib
-Requires:       ocaml-findlib-devel
 Requires:       ocaml-lwt-devel
 
 %description
@@ -28,7 +23,7 @@ Compile OCaml programs to Javascript.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

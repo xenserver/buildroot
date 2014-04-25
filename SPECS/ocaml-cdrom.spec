@@ -11,8 +11,6 @@ Source0:        https://github.com/xapi-project/cdrom/archive/cdrom-%{version}/c
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Simple C bindings which allow the state of CDROM devices (and discs
@@ -21,6 +19,7 @@ inside) to be queried under Linux.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

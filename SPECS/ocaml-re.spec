@@ -11,8 +11,6 @@ Source0:        http://github.com/ocaml/%{name}/archive/%{name}-%{version}/%{nam
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 A regular expression library for OCaml.
@@ -20,6 +18,7 @@ A regular expression library for OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

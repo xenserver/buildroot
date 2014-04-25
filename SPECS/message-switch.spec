@@ -10,22 +10,21 @@ Source1:        message-switch-init
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
-Requires(post): chkconfig
-Requires(preun): chkconfig
-Requires(preun): initscripts
 BuildRequires: ocaml-cohttp-devel
 BuildRequires: ocaml-rpc-devel
 BuildRequires: ocaml-xenstore-devel
 BuildRequires: ocaml-ounit-devel
 BuildRequires: ocaml-uri-devel
-BuildRequires: cmdliner-devel
+BuildRequires: ocaml-cmdliner-devel
 BuildRequires: ocaml-re-devel
 BuildRequires: ocaml-rpc-devel
 BuildRequires: ocaml-oclock-devel
 BuildRequires: ocaml-ssl-devel
-BuildRequires: openssl
 BuildRequires: openssl-devel
 Requires:      redhat-lsb-core
+Requires(post): chkconfig
+Requires(preun): chkconfig
+Requires(preun): initscripts
 #  "ocamlfind"
 #  "cohttp" {= "0.9.7"}
 #  "rpc"

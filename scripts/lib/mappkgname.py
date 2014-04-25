@@ -7,11 +7,11 @@
 
 MAPPING = { 
     # Our packages
-    "biniou": ["libbiniou-ocaml"],
-    "cmdliner": ["libcmdliner-ocaml"],
+    "ocaml-biniou": ["libbiniou-ocaml"],
+    "ocaml-cmdliner": ["libcmdliner-ocaml"],
     "cppo": ["cppo"],
     "deriving-ocsigen": ["libderiving-ocsigen-ocaml"],
-    "easy-format": ["libeasy-format-ocaml"],
+    "ocaml-easy-format": ["libeasy-format-ocaml"],
     "eliloader": ["eliloader"],
     "linux-guest-loader": ["linux-guest-loader"],
     "xcp-python-libs": ["xcp-python-libs"],
@@ -166,12 +166,9 @@ SECONDARY_MAPPING = {
     "camlp4-dev": ["camlp4"],
     "camlp4-extra-dev": ["camlp4-extra"],
     # packages with 'ocaml' or 'camlp4' in the name must have a -dev...
-    "libeasy-format-ocaml":  ["libeasy-format-ocaml-dev"],
-    "libbiniou-ocaml": ["libbiniou-ocaml-dev"],
     "libssl1.0.0-dev": ["libssl-dev"],
     "libtype-conv-camlp4": ["libtype-conv-camlp4-dev"],
     "libxapi-libvirt-storage-ocaml": ["libxapi-libvirt-storage-ocaml-dev"],
-    "libsexplib-camlp4": ["libsexplib-camlp4-dev"],
     "ocaml-findlib-dev": ["ocaml-findlib", "libfindlib-ocaml-dev"],
     "xen-hypervisor-dev": ["libxen-dev", "xen-utils", "blktap-dev"],
     "libvirt0-dev": ["libvirt-dev"],

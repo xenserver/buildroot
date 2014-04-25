@@ -10,8 +10,6 @@ URL:            http://github.com/xapi-project/ocaml-fd-send-recv
 Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Bindings to sendmsg/recvmsg for fd passing under Linux.
@@ -19,7 +17,7 @@ Bindings to sendmsg/recvmsg for fd passing under Linux.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

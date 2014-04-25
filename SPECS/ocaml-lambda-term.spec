@@ -16,8 +16,6 @@ BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-react-devel
 BuildRequires:  ocaml-zed-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Lambda-Term is a cross-platform library for manipulating the terminal.
@@ -25,7 +23,7 @@ Lambda-Term is a cross-platform library for manipulating the terminal.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

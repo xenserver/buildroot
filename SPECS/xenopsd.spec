@@ -18,7 +18,7 @@ BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-idl-devel
-BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-re-devel
 BuildRequires:  forkexecd-devel
@@ -27,7 +27,7 @@ BuildRequires:  ocaml-uuidm-devel
 BuildRequires:  libvirt-devel
 BuildRequires:  ocaml-libvirt-devel
 BuildRequires:  ocaml-qmp-devel
-BuildRequires:  ocaml-sexplib
+BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-xenstore-devel

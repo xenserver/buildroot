@@ -8,8 +8,8 @@ License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
 URL:            http://github.com/xapi-project/xcp-inventory
 Source0:        https://github.com/xapi-project/xcp-inventory/archive/xcp-inventory-%{version}/xcp-inventory-%{version}.tar.gz
-BuildRequires:  cmdliner-devel
 BuildRequires:  ocaml
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-stdext-devel
@@ -21,8 +21,7 @@ A simple library to read and write the XCP inventory file.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-Requires:       ocaml
-Requires:       ocaml-findlib
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

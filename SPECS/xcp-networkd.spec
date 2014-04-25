@@ -21,7 +21,7 @@ BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-xcp-inventory-devel
-BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-xen-api-client-devel

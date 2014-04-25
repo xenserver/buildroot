@@ -16,9 +16,6 @@ BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xcp-idl-devel
-Requires:       forkexecd-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Manipulate running tapdisk instances on a xen host.
@@ -26,7 +23,8 @@ Manipulate running tapdisk instances on a xen host.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
+Requires:       forkexecd-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -14,10 +14,6 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-type-conv
 BuildRequires:  xmlm-devel
-Requires:       ocaml
-Requires:       ocaml-camlp4-devel
-Requires:       ocaml-findlib
-Requires:       ocaml-type-conv
 
 %description
 Am RPC library for OCaml.
@@ -25,7 +21,7 @@ Am RPC library for OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

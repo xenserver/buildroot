@@ -11,9 +11,7 @@ Source0:        http://github.com/polazarus/oclock/archive/v0.3/oclock-%{version
 Patch0:         oclock-1-cc-headers
 Patch1:         oclock-2-destdir
 BuildRequires:  ocaml
-BuildRequires:  ocaml-findlib-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
+BuildRequires:  ocaml-findlib
 
 %description
 A POSIX monotonic clock for OCaml
@@ -21,7 +19,7 @@ A POSIX monotonic clock for OCaml
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

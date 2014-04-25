@@ -8,9 +8,9 @@ URL:            http://github.com/xapi-project/nbd
 Source0:        https://github.com/xapi-project/nbd/archive/v%{version}/nbd-%{version}.tar.gz
 
 
-BuildRequires:  cmdliner-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-lwt-devel

@@ -13,7 +13,6 @@ Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/ty
 
 BuildRequires:  ocaml >= 4.00.0
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-camlp4
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-camlp4-devel
 

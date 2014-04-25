@@ -9,13 +9,11 @@ URL:		https://forge.ocamlcore.org/projects/odn/
 Source0:	https://forge.ocamlcore.org/frs/download.php/1310/ocaml-data-notation-%{version}.tar.gz
 
 BuildRequires:	ocaml >= 3.10.2
-BuildRequires:	ocaml-findlib-devel
+BuildRequires:	ocaml-findlib
 BuildRequires:	ocaml-camlp4-devel
 BuildRequires:	ocaml-type-conv >= 108.07.01
 BuildRequires:	ocaml-ounit-devel >= 2.0.0
 BuildRequires:	ocaml-fileutils-devel >= 0.4.0
-
-Requires:	ocaml
 
 %description
 

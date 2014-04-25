@@ -13,8 +13,6 @@ BuildRequires:  ocaml-compiler-libs
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-re-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 A URI library for OCaml.
@@ -22,6 +20,7 @@ A URI library for OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -14,8 +14,6 @@ BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml
-Requires:       ocaml-findlib
 Conflicts:      xen-ocaml
 
 %description
@@ -24,6 +22,7 @@ An implementation of the xenstore protocol in OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
 Conflicts:      xen-ocaml-devel
 
 %description    devel

@@ -9,7 +9,7 @@ Source0:	http://forge.ocamlcore.org/frs/download.php/1209/%{name}-%{version}.tar
 
 
 BuildRequires:	ocaml >= 3.10.2
-BuildRequires:	ocaml-findlib-devel
+BuildRequires:	ocaml-findlib
 
 
 %description

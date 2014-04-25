@@ -11,9 +11,6 @@ Source0:        http://downloads.sourceforge.net/project/savonet/%{name}/%{versi
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  openssl-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
-Requires:       openssl
 
 %description
 Use OpenSSL from OCaml.
@@ -21,6 +18,7 @@ Use OpenSSL from OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

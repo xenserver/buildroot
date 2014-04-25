@@ -9,12 +9,9 @@ Group:          Development/Libraries
 URL:            https://github.com/OCamlPro/ocplib-endian
 Source0:        https://github.com/OCamlPro/ocplib-endian/archive/%{version}/ocplib-endian-%{version}.tar.gz
 BuildRequires:  ocaml
-BuildRequires:  ocaml-camlp4
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  optcomp
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Optimised functions to read and write int16/32/64 from strings and
@@ -33,6 +30,7 @@ The library implements two modules:
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
 Requires:       optcomp
 
 %description    devel

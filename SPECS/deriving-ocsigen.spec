@@ -9,8 +9,6 @@ Source0:        http://ocsigen.org/download/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Extension to OCaml for deriving functions from type declarations
@@ -18,7 +16,7 @@ Extension to OCaml for deriving functions from type declarations
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

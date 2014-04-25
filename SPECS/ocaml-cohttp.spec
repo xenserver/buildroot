@@ -17,11 +17,8 @@ BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-uri-devel
-# should these be inherited from ssl.spec somehow?
-BuildRequires:  openssl
+# should this be inherited from ssl.spec somehow?
 BuildRequires:  openssl-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 An HTTP library for OCaml.
@@ -29,7 +26,7 @@ An HTTP library for OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

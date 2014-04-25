@@ -11,8 +11,6 @@ Source0:        http://erratique.ch/software/uuidm/releases/uuidm-%{version}.tbz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Uuidm is an OCaml module implementing 128 bits universally unique
@@ -22,7 +20,7 @@ identifiers version 3, 5 (named based with MD5, SHA-1 hashing) and 4
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

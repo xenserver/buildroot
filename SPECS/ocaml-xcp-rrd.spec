@@ -14,8 +14,6 @@ BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 Round-Robin Datasources in OCaml.
@@ -23,7 +21,7 @@ Round-Robin Datasources in OCaml.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-#Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
