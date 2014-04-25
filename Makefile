@@ -11,13 +11,13 @@ all: rpms
 	@echo [RPMBUILD] $@
 	@rpmbuild --quiet --define "_topdir ." --define "%dist $(DIST)" -bs $<
 	@echo [CREATEREPO] $@
-	@createrepo --quiet --update ./SRPMS
+	@flock --timeout 30 ./SRPMS createrepo --quiet --update ./SRPMS
 
 %.rpm:
 	@echo [MOCK] $@
-	@mock --configdir=mock --quiet -r xenserver --resultdir=$(dir $@) --rebuild $<
+	@mock --configdir=mock --quiet -r xenserver --resultdir=$(dir $@) --uniqueext=$(notdir $@) --rebuild $<
 	@echo [CREATEREPO] $@
-	@createrepo --quiet --update ./RPMS
+	@flock --timeout 30 ./RPMS createrepo --quiet --update ./RPMS
 
 
 # Deb build rules
