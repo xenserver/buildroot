@@ -169,7 +169,6 @@ SECONDARY_MAPPING = {
     "libssl1.0.0-dev": ["libssl-dev"],
     "libtype-conv-camlp4": ["libtype-conv-camlp4-dev"],
     "libxapi-libvirt-storage-ocaml": ["libxapi-libvirt-storage-ocaml-dev"],
-    "libsexplib-camlp4": ["libsexplib-camlp4-dev"],
     "ocaml-findlib-dev": ["ocaml-findlib", "libfindlib-ocaml-dev"],
     "xen-hypervisor-dev": ["libxen-dev", "xen-utils", "blktap-dev"],
     "libvirt0-dev": ["libvirt-dev"],
