@@ -1,5 +1,5 @@
-xenserver-core
-==============
+buildroot
+=========
 
 Buildroot for xen-api and related packages, producing RPM and (experimentally) Debian packages.
 
@@ -30,17 +30,17 @@ passwd <user>
 su - <user>
 ```
 
-You are now ready to clone the xenserver-core repository and build the packages:
+You are now ready to clone the buildroot repository and build the packages:
 
 ```
-git clone git://github.com/xenserver/xenserver-core.git
-cd xenserver-core
+git clone git://github.com/xenserver/buildroot.git
+cd buildroot
 
 ./configure.sh
 make
 ```
 
-Finally, install the packages you have just built, run the install wizard to configure your system to boot Xen and start the xenserver-core components on boot, then reboot:
+Finally, install the packages you have just built, run the install wizard to configure your system to boot Xen and start the buildroot components on boot, then reboot:
 ```
 make install
 xenserver-install-wizard
@@ -66,8 +66,8 @@ deb-src http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main
 The steps to build Debian packages are the same as those to build RPMs:
 
 ```
-git clone git://github.com/xenserver/xenserver-core.git
-cd xenserver-core
+git clone git://github.com/xenserver/buildroot.git
+cd buildroot
 
 ./configure.sh
 make
