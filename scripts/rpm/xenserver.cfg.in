@@ -3,8 +3,6 @@ config_opts['target_arch'] = 'x86_64'
 config_opts['legal_host_arches'] = ('x86_64',)
 config_opts['chroot_setup_cmd'] = 'groupinstall buildsys-build'
 config_opts['dist'] = 'el6'  # only useful for --resultdir variable subst
-config_opts['basedir'] = '@PWD@/mock/root' 
-config_opts['cache_topdir'] = '@PWD@/mock/cache' 
 
 config_opts['plugin_conf']['package_state_enable'] = False
 config_opts['plugin_conf']['tmpfs_enable'] = True    
