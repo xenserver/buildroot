@@ -1,13 +1,14 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        0.9.14
+Version:        0.9.15
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xcp-idl
-Source0:        https://github.com/djs55/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
+
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-cmdliner-devel
@@ -58,6 +59,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/xcp/*
 
 %changelog
+* Fri Apr 25 2014 David Scott <dave.scott@eu.citrix.com> - 0.9.15-1
+- Update to 0.9.15, now with vGPU and SR.probe
+
 * Thu Sep 26 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.14-1
 - Support searching for executables on the XCP_PATH as well as the PATH
 
