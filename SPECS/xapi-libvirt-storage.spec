@@ -1,5 +1,5 @@
 Name:           xapi-libvirt-storage
-Version:        0.9.7
+Version:        0.9.8
 Release:        1%{?dist}
 Summary:        Allows the manipulation of libvirt storage pools and volumes via xapi
 License:        LGPL
@@ -12,7 +12,6 @@ BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-libvirt-devel
-BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-cmdliner-devel
@@ -34,7 +33,7 @@ make
 
 %install
 mkdir -p %{buildroot}/%{_sbindir}
-install dist/build/sm-libvirt/sm-libvirt %{buildroot}/%{_sbindir}/xapi-libvirt-storage
+install main.native %{buildroot}/%{_sbindir}/xapi-libvirt-storage
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xapi-libvirt-storage-init %{buildroot}%{_sysconfdir}/init.d/xapi-libvirt-storage
 
@@ -54,6 +53,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.9.8-1
+- Update to 0.9.8
+
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.7-1
 - Update to 0.9.7
 

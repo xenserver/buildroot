@@ -1,5 +1,5 @@
 Name:           xcp-rrdd
-Version:        0.9.2
+Version:        0.9.4
 Release:        1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
@@ -17,9 +17,9 @@ BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
-BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenops-devel
 BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-rrd-transport-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  message-switch-devel
 BuildRequires:  xen-devel
@@ -57,6 +57,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Sat Apr 26 2014 David Scott <dave.scott@eu.citrix.com> - 0.9.3-1
+- Update to 0.9.4, now depends on rrdd-transport
+
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.2-1
 - Update to 0.9.2
 
