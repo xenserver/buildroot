@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.9
-Release:        3%{?dist}
+Version:        0.9.14
+Release:        1%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Libraries
@@ -34,6 +34,8 @@ developing applications that use %{name}.
 %setup -q
 
 %build
+make configure
+./configure --disable-xenlight
 make
 
 %install
@@ -58,30 +60,11 @@ make install DESTDIR=${buildroot}
 #%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
 #%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
 
-%exclude %{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
-%exclude %{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
-%exclude %{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
-%exclude %{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
-%exclude %{_libdir}/ocaml/xenlight/META
-%exclude %{_libdir}/ocaml/xenlight/libxenlight_stubs.a
-%exclude %{_libdir}/ocaml/xenlight/libxentoollog_stubs.a
-%exclude %{_libdir}/ocaml/xenlight/xenlight.a
-%exclude %{_libdir}/ocaml/xenlight/xenlight.cma
-%exclude %{_libdir}/ocaml/xenlight/xenlight.cmi
-%exclude %{_libdir}/ocaml/xenlight/xenlight.cmx
-%exclude %{_libdir}/ocaml/xenlight/xenlight.cmxa
-%exclude %{_libdir}/ocaml/xenlight/xenlight.cmxs
-%exclude %{_libdir}/ocaml/xenlight/xenlight.mli
-%exclude %{_libdir}/ocaml/xenlight/xentoollog.a
-%exclude %{_libdir}/ocaml/xenlight/xentoollog.cma
-%exclude %{_libdir}/ocaml/xenlight/xentoollog.cmi
-%exclude %{_libdir}/ocaml/xenlight/xentoollog.cmx
-%exclude %{_libdir}/ocaml/xenlight/xentoollog.cmxa
-%exclude %{_libdir}/ocaml/xenlight/xentoollog.cmxs
-%exclude %{_libdir}/ocaml/xenlight/xentoollog.mli
-
 
 %changelog
+* Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.9.12-1
+- Update to 0.9.14
+
 * Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.9-3
 - Exclude the xenlight stuff in case it manages to build
 

@@ -2,7 +2,7 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.39
+Version: 1.9.40
 Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -170,6 +170,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 1.9.40-1
+- update to new xcp-idl interface with SR.probe
+
 * Wed Apr 2 2014 Euan Harris <euan.harris@citrix.com> - 1.9.39-1
 - update to 1.9.39 - switch from stdext's Tar to ocaml-tar
 

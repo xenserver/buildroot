@@ -80,6 +80,7 @@ Group:          Development/Other
 #Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml
 Requires:       ocaml-findlib
+Requires:       ocaml-oclock-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
