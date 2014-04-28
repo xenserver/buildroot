@@ -69,31 +69,38 @@ def download_rpm_sources(spec):
 # Rules to build RPMS from SRPMS (uses information from the SPECs to
 # get packages)
 def build_rpm_from_srpm(spec):
-    # This doesn't generate the right Makefile fragment for a multi-target
-    # rule - we may end up building too often, or not rebuilding correctly
-    # on a partial build
-    rpm_paths = spec.binary_package_paths()
+    # We only generate a rule for the first binary RPM produced by the
+    # specfile.  If we generate multiple rules (one for the base package,
+    # one for -devel and so on), make will interpret these as completely
+    # separate targets which must be built separately.   At best, this means
+    # that the same package will be built more than once; at worst, in a 
+    # concurrent build, there is a risk that the targets might not be rebuilt 
+    # correctly.
+    #
+    # Make does understand the concept of multiple targets being built by
+    # a single rule invocation, but only for pattern rules (e.g. %.h %.c: %.y).
+    # It is tricky to generate correct pattern rules for RPM builds.
+
+    rpm_path = spec.binary_package_paths()[0]
     srpm_path = spec.source_package_path()
-    for rpm_path in rpm_paths:
-        print '%s: %s' % (rpm_path, srpm_path)
+    print '%s: %s' % (rpm_path, srpm_path)
 
 
 def package_to_rpm_map(specs):
     provides_to_rpm = {}
     for spec in specs:
         for provided in spec.provides():
-            for rpmpath in spec.binary_package_paths():
-                provides_to_rpm[provided] = rpmpath
+            provides_to_rpm[provided] = spec.binary_package_paths()[0]
     return provides_to_rpm
 
 
 def buildrequires_for_rpm(spec, provides_to_rpm):
-    for rpmpath in spec.binary_package_paths():
-        for buildreq in spec.buildrequires():
-            # Some buildrequires come from the system repository
-            if provides_to_rpm.has_key(buildreq):
-                buildreqrpm = provides_to_rpm[buildreq]
-                print "%s: %s" % (rpmpath, buildreqrpm)
+    rpmpath = spec.binary_package_paths()[0]
+    for buildreq in spec.buildrequires():
+        # Some buildrequires come from the system repository
+        if provides_to_rpm.has_key(buildreq):
+            buildreqrpm = provides_to_rpm[buildreq]
+            print "%s: %s" % (rpmpath, buildreqrpm)
 
 
 def usage(name):

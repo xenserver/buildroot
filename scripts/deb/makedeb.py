@@ -7,6 +7,7 @@ import rpm
 import shutil
 import subprocess
 import sys
+import tempfile
 
 SCRIPTDIR=os.path.dirname(os.path.abspath(__file__))
 LIBDIR=os.path.normpath(os.path.join(SCRIPTDIR, "../lib"))
@@ -33,8 +34,11 @@ rpm.addMacro('_topdir', os.getcwd())
 
 # Directories where rpmbuild expects to find inputs
 # and writes outputs
+TMPDIR = tempfile.mkdtemp(prefix="makedeb")
+
 SRPM_DIR = rpm.expandMacro('%_srcrpmdir')
 SRC_DIR = rpm.expandMacro('%_sourcedir')
+rpm.addMacro("_builddir", TMPDIR)
 BUILD_DIR = rpm.expandMacro('%_builddir')
 
 
@@ -162,14 +166,16 @@ def main():
                           (BUILD_DIR, build_subdir), shell=True)
     assert res == 0
 
-    if clean:
-        shutil.rmtree(os.path.join(BUILD_DIR, build_subdir))
     for i in glob.glob(os.path.join(BUILD_DIR, "*")):
         if build_subdir in i:
             continue
         shutil.copy2(i, SRPM_DIR)
         if clean:
             os.unlink(i)
+    if clean:
+        shutil.rmtree(TMPDIR)
+    else:
+        print "makedeb: dpkg input files in %s" % TMPDIR
 
     # At this point we have a debian source package (at least 3 files) in SRPMS.
     # To build:
