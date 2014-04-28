@@ -25,17 +25,18 @@ all: rpms
 %.dsc: 
 	@echo [MAKEDEB] $@
 	@scripts/deb/makedeb.py $<
-	@echo [APT-FTPARCHIVE] $@
-	@cd ./SRPMS && apt-ftparchive sources . > Sources
+	@echo [UPDATEREPO] $@
+	@flock --timeout 30 ./SRPMS scripts/deb/updaterepo sources SRPMS
 
 %.deb:
 	@echo [COWBUILDER] $@
+	@mkdir -p logs
+	@touch RPMS/Packages	
 	@sudo cowbuilder --build \
 		--configfile pbuilder/pbuilderrc \
 		--buildresult RPMS $<
-	@echo [APT-FTPARCHIVE] $@
-	@cd ./RPMS && apt-ftparchive packages . > Packages
-
+	@echo [UPDATEREPO] $@
+	@flock --timeout 30 ./RPMS scripts/deb/updaterepo packages RPMS
 
 
 # Dependency build rules
@@ -45,3 +46,4 @@ deps: SPECS/*.spec specdep.py scripts/lib/mappkgname.py
 	@./specdep.py -d $(DIST) -i libnl3 SPECS/*.spec > $@
 
 -include deps
+
