@@ -15,7 +15,7 @@ BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-crc-devel
 BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  ocaml-xcp-idl-devel
-BuildRequires:  cmdliner-devel
+BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-gnt-devel
 Requires:       ocaml
 Requires:       ocaml-findlib
