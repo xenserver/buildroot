@@ -62,7 +62,7 @@ make install DESTDIR=${buildroot}
 
 
 %changelog
-* Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.9.12-1
+* Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.9.14-1
 - Update to 0.9.14
 
 * Mon Oct 21 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.9-3
