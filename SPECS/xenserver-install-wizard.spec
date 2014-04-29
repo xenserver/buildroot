@@ -2,8 +2,8 @@
 
 Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
-Version: 0.2.28
-Release: 2%{?dist}
+Version: 0.2.29
+Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://github.com/xenserver/xenserver-install-wizard
@@ -32,6 +32,9 @@ ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroo
 %{_bindir}/xenserver-install-wizard
 
 %changelog
+* Tue Apr 29 2014 Bob Ball <bob.ball@citrix.com> - 0.2.29-1
+- Update to 0.2.29, with fixes for static IP on debian/ubuntu
+
 * Wed Jan 15 2014 Euan Harris <euan.harris@citrix.com> - 0.2.28-2
 - Source moved to https://github.com/xenserver/xenserver-install-wizard
 
