@@ -57,7 +57,7 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
-* Sat Apr 26 2014 David Scott <dave.scott@eu.citrix.com> - 0.9.3-1
+* Sat Apr 26 2014 David Scott <dave.scott@eu.citrix.com> - 0.9.4-1
 - Update to 0.9.4, now depends on rrdd-transport
 
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.2-1
