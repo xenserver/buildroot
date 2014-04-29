@@ -90,8 +90,8 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/rrd-transport/rrd_writer.mli
 
 %changelog
-* Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.7.0-1
-- Update to 0.7.0
+* Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.7.1-1
+- Update to 0.7.1
 
 * Mon Dec 16 2013 John Else <john.else@citrix.com> - 0.5.0-1
 - Initial package
