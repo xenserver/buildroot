@@ -3,13 +3,14 @@
 Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group:   System/Hypervisor
 License: LGPL
 URL:  https://github.com/xapi-project/sm
 Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
 Source1: xcp-mpath-scsidev-rules
 Source2: xcp-mpath-scsidev-script
+Patch0: sm-path-fix.patch
 BuildRequires: python-devel
 BuildRequires: swig
 BuildRequires: xen-devel
@@ -22,10 +23,14 @@ This package contains storage backends used in XCP
 
 %prep
 %setup -q -n sm-%{version}
+%patch0 -p1
 cp %{SOURCE1} xcp-mpath-scsidev-rules
 cp %{SOURCE2} xcp-mpath-scsidev-script
 
 %build
+sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/SR.py
+sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/blktap2.py
+sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/vhdutil.py
 DESTDIR=$RPM_BUILD_ROOT make
 
 %install
@@ -263,6 +268,9 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
+* Wed Apr 30 2014 Bob Ball <bob.ball@citrix.com> - 0.9.6-3
+- Added fix for paths to blktap to use buildroot versions
+
 * Tue Dec 10 2013 Euan Harris <euan.harris@eu.citrix.com> - 0.9.6-2
 - Add dependency on xen-runtime
 
