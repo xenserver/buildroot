@@ -1,0 +1,45 @@
+diff -urN sm-0.9.6-orig/drivers/blktap2.py sm-0.9.6/drivers/blktap2.py
+--- sm-0.9.6-orig/drivers/blktap2.py	2013-11-01 19:10:26.000000000 +0000
++++ sm-0.9.6/drivers/blktap2.py	2014-04-30 14:44:08.496171595 +0000
+@@ -112,7 +112,7 @@
+ class TapCtl(object):
+     """Tapdisk IPC utility calls."""
+ 
+-    PATH = "/usr/sbin/tap-ctl"
++    PATH = "@LIBDIR@/blktap/sbin/tap-ctl"
+ 
+     def __init__(self, cmd, p):
+         self.cmd    = cmd
+diff -urN sm-0.9.6-orig/drivers/SR.py sm-0.9.6/drivers/SR.py
+--- sm-0.9.6-orig/drivers/SR.py	2013-11-01 19:10:26.000000000 +0000
++++ sm-0.9.6/drivers/SR.py	2014-04-30 14:43:49.056171573 +0000
+@@ -27,7 +27,7 @@
+ 
+ MOUNT_BASE = '/var/run/sr-mount'
+ DEFAULT_TAP = 'vhd'
+-TAPDISK_UTIL = '/usr/sbin/td-util'
++TAPDISK_UTIL = '@LIBDIR@/blktap/sbin/td-util'
+ 
+ # LUN per VDI key for XenCenter
+ LUNPERVDI = "LUNperVDI"
+diff -urN sm-0.9.6-orig/drivers/vhdutil.py sm-0.9.6/drivers/vhdutil.py
+--- sm-0.9.6-orig/drivers/vhdutil.py	2013-11-01 19:10:26.000000000 +0000
++++ sm-0.9.6/drivers/vhdutil.py	2014-04-30 14:44:39.792171865 +0000
+@@ -28,7 +28,7 @@
+ 
+ MAX_VHD_JOURNAL_SIZE = 6 * 1024 * 1024 # 2MB VHD block size, max 2TB VHD size
+ MAX_CHAIN_SIZE = 30 # max VHD parent chain size
+-VHD_UTIL = "/usr/bin/vhd-util"
++VHD_UTIL = "@LIBDIR@/blktap/bin/vhd-util"
+ OPT_LOG_ERR = "--debug"
+ VHD_BLOCK_SIZE = 2 * 1024 * 1024
+ VHD_FOOTER_SIZE = 512
+@@ -324,7 +324,7 @@
+     return vhdInfo
+ 
+ def _getVHDParentNoCheck(path):
+-    cmd = ["vhd-util", "read", "-p", "-n", "%s" % path]
++    cmd = [VHD_UTIL, "read", "-p", "-n", "%s" % path]
+     text = util.pread(cmd)
+     util.SMlog(text)
+     for line in text.split('\n'):
