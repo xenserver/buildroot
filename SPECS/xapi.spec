@@ -2,17 +2,19 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.40
+Version: 1.9.41
 Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
-Source0: https://github.com/djs55/xen-api/archive/%{version}/xen-api-%{version}.tar.gz
+Source0: https://github.com/xapi-project/xen-api/archive/%{version}/xen-api-%{version}.tar.gz
 Source1: xen-api-xapi-conf.in
 Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
+Patch0: xen-api.211c042934ecca68b622aef8b7bcf910320a1a61
+Patch1: xen-api.a9f563a89e2b27d394573f8d542fc7e7a9068f5f
 BuildRequires: ocaml
 BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
@@ -20,6 +22,7 @@ BuildRequires: ocaml-ocamldoc
 BuildRequires: pam-devel
 BuildRequires: tetex-latex
 BuildRequires: xen-devel
+BuildRequires: libffi-devel
 BuildRequires: zlib-devel
 BuildRequires: ocaml-xcp-idl-devel
 BuildRequires: ocaml-xen-api-libs-transitional-devel
@@ -55,6 +58,7 @@ Requires: ocaml-xcp-inventory
 Requires: redhat-lsb-core
 Requires: stunnel
 Requires: vhd-tool
+Requires: libffi
 
 %description
 XCP toolstack.
@@ -80,6 +84,8 @@ Libraries for writing XenAPI clients in python.
 
 %prep 
 %setup -q -n xen-api-%{version}
+%patch0 -p1
+%patch1 -p1
 cp %{SOURCE1} xen-api-xapi-conf.in
 cp %{SOURCE2} xen-api-init
 cp %{SOURCE3} xen-api-xapissl
@@ -88,14 +94,8 @@ cp %{SOURCE5} xen-api-pam
 
 
 %build
-./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=/usr/lib/xapi/plugins --optdir=/usr/lib/xapi
-
-export COMPILE_JAVA=no
-make version
-omake phase1
-omake phase2
-omake ocaml/xapi/xapi
-omake ocaml/xe-cli/xe
+./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=/usr/lib/xapi/plugins --optdir=/usr/lib/xapi --disable-tests
+make
 
 sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in > xen-api-xapi-conf
 
@@ -109,7 +109,6 @@ mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xen-api-init %{buildroot}%{_sysconfdir}/init.d/xapi
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
 install -m 0755 xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
-install -m 0755 scripts/pci-info %{buildroot}/%{_libexecdir}/xapi/pci-info
 install -m 0755 scripts/update-mh-info %{buildroot}/%{_libexecdir}/xapi/update-mh-info
 mkdir -p %{buildroot}/etc/xapi
 install -m 0644 xen-api-xapi-conf %{buildroot}/etc/xapi.conf
@@ -148,7 +147,6 @@ fi
 %config(noreplace) /etc/xapi.conf
 %config(noreplace) /etc/xcp/pool.conf
 %{_libexecdir}/xapi/xapissl
-%{_libexecdir}/xapi/pci-info
 %{_libexecdir}/xapi/update-mh-info
 /etc/xapi/db.conf
 /etc/xapi/hook-scripts
@@ -170,6 +168,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Mon Apr 28 2014 David Scott <dave.scott@citrix.com> - 1.9.41-1
+- first release from master
+
 * Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 1.9.40-1
 - update to new xcp-idl interface with SR.probe
 
