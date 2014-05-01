@@ -20,6 +20,8 @@ nixes, but it has not been tested.
 %package        devel
 Summary:        Development files for %{name}
 Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-ctypes-devel
 Requires:       libffi
 
 %description    devel
@@ -58,7 +60,10 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/oPasswd/*.mli
 
 %changelog
-* Thu Apr 24 2014 David Scott <dave.scott@citrix.com> - 0.9.3-1
+* Thu May  1 2014 David Scott <dave.scott@citrix.com> - 0.9.3-1
+- For -devel package add dependency on ocaml-ctypes-devel
+
+* Thu Apr 24 2014 David Scott <dave.scott@citrix.com>
 - Fix split between -devel and main package, hopefully
 
 * Thu Oct 31 2013 Mike McClurg <mike.mcclurg@citrix.com>
