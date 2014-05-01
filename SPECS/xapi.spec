@@ -2,7 +2,7 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.40
+Version: 1.9.41
 Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -13,6 +13,7 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
+Patch0: xen-api-vhdtool-path.patch
 BuildRequires: ocaml
 BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
@@ -88,6 +89,7 @@ cp %{SOURCE5} xen-api-pam
 
 
 %build
+sed -ie "s|@LIBDIR@|%{_libdir}|g" ocaml/xapi/vhd_tool_wrapper.ml
 ./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=/usr/lib/xapi/plugins --optdir=/usr/lib/xapi
 
 export COMPILE_JAVA=no
@@ -170,6 +172,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Thu May 01 2014 Bob Ball <bob.ball@citrix.com> - 1.9.41-1
+- Update to 1.9.41 - integrate new configure script
+
 * Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 1.9.40-1
 - update to new xcp-idl interface with SR.probe
 
