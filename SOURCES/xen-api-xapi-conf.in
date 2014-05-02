@@ -15,6 +15,7 @@ xenopsd-default = org.xen.xcp.xenops.classic
 # The pool configuration file contains either 'master' or
 # 'slave:<MASTER IP>':
 # pool_config_file = @ETCDIR@/pool.conf
+pool_config_file = /etc/xcp/pool.conf
 
 # The pool secret (or pool token) is shared on pool join and used
 # to authenticate the slave to the master.
