@@ -3,9 +3,11 @@ set -eu
 
 echo "Configuring DEB-based build"
 
-ARCH=amd64
-DIST=raring
-BASEPATH=/var/cache/pbuilder/base-$DIST-$ARCH.cow
+ARCH=${ARCH:-amd64}
+DIST=${DIST:-raring}
+BASEPATH=/var/cache/pbuilder/base.cow
+MIRROR=${MIRROR:-http://gb.archive.ubuntu.com/ubuntu/}
+APT_REPOS=${APT_REPOS:-|deb $MIRROR $DIST universe |deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu $DIST main}
 
 dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common > /dev/null 2>&1 || \
    sudo apt-get install cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common
@@ -13,13 +15,15 @@ mkdir -p BUILD
 
 echo -n "Writing pbuilder configuration..."
 mkdir -p pbuilder
-sed -e "s|@PWD@|$PWD|g" -e "s|@ARCH@|$ARCH|g" -e "s|@BASEPATH@|$BASEPATH|g" -e "s|@DIST@|$DIST|g" scripts/deb/pbuilderrc.in > pbuilder/pbuilderrc-$DIST-$ARCH
-sed -e "s|@PWD@|$PWD|g" scripts/deb/D05deps.in > pbuilder/D05deps
-chmod 755 pbuilder/D05deps
-cp scripts/deb/D10mandb pbuilder/D10mandb
-chmod 755 pbuilder/D10mandb
-cp scripts/deb/D15nofsync pbuilder/D15nofsync
-chmod 755 pbuilder/D15nofsync
+for file in scripts/deb/templates/*; do
+    filename=`basename $file`
+    cp $file pbuilder/${filename}
+    for replace_var in "APT_REPOS" "PWD" "ARCH" "BASEPATH" "DIST" "MIRROR" ; do
+	sed -ie "s~@$replace_var@~${!replace_var}~g" pbuilder/${filename}
+    done
+    chmod 755 pbuilder/${filename}
+done
+
 echo " done"
 
 echo -n "Initializing repository..."
@@ -30,13 +34,13 @@ echo " done"
 
 if [ -e $BASEPATH ] ; then
     echo $BASEPATH exists - updating
-    sudo cowbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
+    sudo cowbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc
 else
     echo $BASEPATH does not exist - creating
-    sudo cowbuilder --create --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
-    sudo cowbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH
+    sudo cowbuilder --create --configfile $PWD/pbuilder/pbuilderrc
+    sudo cowbuilder --update --override-config --configfile $PWD/pbuilder/pbuilderrc
     # inject Keyfile for Launchpad PPA for Louis Gesbert
-    sudo cowbuilder --execute --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
+    sudo cowbuilder --execute --configfile $PWD/pbuilder/pbuilderrc --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: SKS 1.1.4
 Comment: Hostname: keyserver.ubuntu.com
@@ -52,7 +56,7 @@ KQ3afU1hlF6EsITRd5qGry7ftxoLKOrVp8qSw9O/PdFgBTTGvgE=
 -----END PGP PUBLIC KEY BLOCK-----
 KEYFILE
     # inject Keyfile for Launchpad PPA for Anil Madhavapeddy
-    sudo cowbuilder --execute --configfile $PWD/pbuilder/pbuilderrc-$DIST-$ARCH --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
+    sudo cowbuilder --execute --configfile $PWD/pbuilder/pbuilderrc --save-after-exec -- /usr/bin/apt-key add - << KEYFILE
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: SKS 1.1.4
 Comment: Hostname: keyserver.ubuntu.com

@@ -27,7 +27,7 @@ all: rpms
 %.deb:
 	@echo [COWBUILDER] $@
 	@sudo cowbuilder --build \
-		--configfile pbuilder/pbuilderrc-raring-amd64 \
+		--configfile pbuilder/pbuilderrc \
 		--buildresult RPMS $<
 
 
