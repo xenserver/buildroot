@@ -22,6 +22,8 @@ A simple library to read and write the XCP inventory file.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-stdext-devel%{?_isa}
+Requires:       ocaml-uuidm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -21,6 +21,8 @@ Unix xenstore clients for OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-lwt-devel%{?_isa}
+Requires:       ocaml-xenstore-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

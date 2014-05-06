@@ -11,9 +11,7 @@ Source0:        https://github.com/xapi-project/netdev/archive/netdev-%{version}
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-stdext-devel
-BuildRequires:  ocaml-xcp-idl-devel
 
 %description
 Manipulate Linux bridges, network devices and openvswitch instances in OCaml.
@@ -22,6 +20,8 @@ Manipulate Linux bridges, network devices and openvswitch instances in OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+BuildRequires:  forkexecd-devel%{?_isa}
+BuildRequires:  ocaml-stdext-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

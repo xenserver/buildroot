@@ -21,9 +21,6 @@ BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  xmlm-devel
 BuildRequires:  ocaml-ounit-devel
 
-# XXX transitive dependencies of message-switch-devel
-BuildRequires: ocaml-oclock-devel
-
 %description
 Common interface definitions for XCP services.
 
@@ -31,7 +28,13 @@ Common interface definitions for XCP services.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
-Requires:       message-switch-devel
+Requires:       message-switch-devel%{?_isa}
+Requires:       ocaml-uri-devel%{?_isa}
+Requires:       ocaml-re-devel%{?_isa}
+Requires:       ocaml-cohttp-devel%{?_isa}
+Requires:       ocaml-rpc-devel%{?_isa}
+Requires:       ocaml-fd-send-recv-devel%{?_isa}
+Requires:       xmlm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

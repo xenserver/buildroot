@@ -15,9 +15,7 @@ BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-rpc-devel
-BuildRequires:  ocaml-ssl-devel
 BuildRequires:  ocaml-uri-devel
-BuildRequires:  openssl-devel
 BuildRequires:  xmlm-devel
 
 %description
@@ -29,6 +27,12 @@ virtualization hosts.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       xmlm-devel%{?_isa}
+Requires:       ocaml-cohttp-devel%{?_isa}
+Requires:       ocaml-rpc-devel%{?_isa}
+Requires:       ocaml-lwt-devel%{?_isa}
+Requires:       ocaml-uri-devel%{?_isa}
+Requires:       ocaml-cstruct-devel%{?_isa}
 
 %description    devel
 XenAPI Client is an OCaml library implementing XenServer's XenAPI.

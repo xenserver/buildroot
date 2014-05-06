@@ -10,7 +10,6 @@ URL:            http://github.com/djs55/ocaml-vhd
 Source0:        https://github.com/djs55/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
-BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
@@ -27,7 +26,12 @@ vhd files to be read, written and streamed with on-the-fly format conversion.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
-
+Requires:       ocaml-cstruct-devel%{?_isa}
+Requires:       ocaml-io-page-devel%{?_isa}
+Requires:       ocaml-lwt-devel%{?_isa}
+Requires:       ocaml-ounit-devel%{?_isa}
+Requires:       ocaml-mirage-types-devel%{?_isa}
+Requires:       ocaml-uuidm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

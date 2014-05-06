@@ -22,6 +22,8 @@ Round-Robin Datasources in OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-rpc-devel%{?_isa}
+Requires:       ocaml-stdext-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -10,7 +10,6 @@ URL:            https://github.com/mirage/ocaml-cohttp
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
-BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
@@ -27,6 +26,9 @@ An HTTP library for OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-lwt-devel%{?_isa}
+Requires:       ocaml-re-devel%{?_isa}
+Requires:       ocaml-uri-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

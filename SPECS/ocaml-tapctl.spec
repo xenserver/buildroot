@@ -12,10 +12,8 @@ BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  forkexecd-devel
-BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel
-BuildRequires:  ocaml-xcp-idl-devel
 
 %description
 Manipulate running tapdisk instances on a xen host.
@@ -25,6 +23,8 @@ Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       forkexecd-devel%{?_isa}
+Requires:       ocaml-rpc-devel%{?_isa}
+Requires:       ocaml-stdext-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

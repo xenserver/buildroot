@@ -11,7 +11,6 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-lambda-term-devel
-BuildRequires:  ocaml-zed-devel
 Requires: ocaml-camomile-data
 
 %description

@@ -9,7 +9,6 @@ Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{nam
 Source1:        xapi-libvirt-storage-init
 BuildRequires:  libvirt-devel
 BuildRequires:  ocaml
-BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-libvirt-devel
 BuildRequires:  ocaml-rpc-devel
@@ -17,8 +16,6 @@ BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-re-devel
-BuildRequires:  ocaml-oclock-devel
-BuildRequires:  message-switch-devel
 Requires:       redhat-lsb-core
 
 %description

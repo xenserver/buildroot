@@ -13,14 +13,11 @@ Source4:        xenopsd-xenlight-init
 Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
 BuildRequires:  ocaml
-BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cohttp-devel
-BuildRequires:  ocaml-re-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-uuidm-devel
@@ -31,16 +28,14 @@ BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-xenstore-devel
-BuildRequires:  message-switch-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  xen-devel
-BuildRequires:  linux-guest-loader
-BuildRequires:  ocaml-xcp-idl-devel
-BuildRequires:  vncterm
 BuildRequires:  ocaml-uutf-devel
 Requires:       message-switch
 Requires:       redhat-lsb-core
 Requires:       xenops-cli
+Requires:       vncterm
+Requires:       linux-guest-loader
 
 %description
 Simple VM manager for the xapi toolstack.

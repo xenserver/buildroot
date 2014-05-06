@@ -22,6 +22,9 @@ Am RPC library for OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-camlp4-devel%{?_isa}
+Requires:       ocaml-type-conv%{?_isa}
+Requires:       xmlm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

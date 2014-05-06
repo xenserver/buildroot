@@ -21,6 +21,7 @@ A URI library for OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-re-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

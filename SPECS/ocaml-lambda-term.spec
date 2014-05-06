@@ -24,6 +24,8 @@ Lambda-Term is a cross-platform library for manipulating the terminal.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-lwt-devel%{?_isa}
+Requires:       ocaml-zed-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

@@ -11,7 +11,6 @@ Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
 Source4:        xcp-networkd-bridge-conf
 BuildRequires:  ocaml
-BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
@@ -21,12 +20,7 @@ BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-xcp-inventory-devel
-BuildRequires:  ocaml-cmdliner-devel
-BuildRequires:  ocaml-cohttp-devel
-BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-xen-api-client-devel
-BuildRequires:  message-switch-devel
-BuildRequires:  ocaml-oclock-devel
 Requires:       ethtool
 Requires:       redhat-lsb-core
 

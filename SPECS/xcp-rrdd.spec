@@ -13,16 +13,11 @@ BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-idl-devel
-BuildRequires:  ocaml-cohttp-devel
-BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-xcp-inventory-devel
-BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-xenops-devel
-BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-rrd-transport-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  forkexecd-devel
-BuildRequires:  message-switch-devel
 BuildRequires:  xen-devel
 Requires:       redhat-lsb-core
 

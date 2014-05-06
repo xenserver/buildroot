@@ -24,6 +24,7 @@ your project and creates everything required.
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-odn-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

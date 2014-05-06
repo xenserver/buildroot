@@ -20,6 +20,8 @@ Deprecated misc library functions for OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-fd-send-recv-devel%{?_isa}
+BuildRequires:  ocaml-uuidm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

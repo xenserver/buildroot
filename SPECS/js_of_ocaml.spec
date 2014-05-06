@@ -14,8 +14,6 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
-Requires:       deriving-ocsigen-devel
-Requires:       ocaml-lwt-devel
 
 %description
 Compile OCaml programs to Javascript.
@@ -24,6 +22,7 @@ Compile OCaml programs to Javascript.
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-lwt-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

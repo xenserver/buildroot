@@ -21,6 +21,7 @@ compatibility as protocols evolve.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-easy-format-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
