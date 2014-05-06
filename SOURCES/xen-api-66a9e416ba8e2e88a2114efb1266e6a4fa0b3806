@@ -1,0 +1,230 @@
+commit 66a9e416ba8e2e88a2114efb1266e6a4fa0b3806
+Author: David Scott <dave.scott@citrix.com>
+Date:   Tue May 6 19:45:20 2014 +0000
+
+    pool.conf: always use the path from the config file
+    
+    Previously we had cached a copy in Pool_role for no obvious reason.
+    Also, consolidate Pool_role and Pool_role_shared into Pool_role.
+    
+    Signed-off-by: David Scott <dave.scott@citrix.com>
+
+diff --git a/ocaml/idl/ocaml_backend/OMakefile b/ocaml/idl/ocaml_backend/OMakefile
+index a7b2a41..c0b7233 100644
+--- a/ocaml/idl/ocaml_backend/OMakefile
++++ b/ocaml/idl/ocaml_backend/OMakefile
+@@ -103,7 +103,6 @@ SERVER_OBJS = ../../database/escaping locking_helpers \
+ 	../datamodel ../datamodel_utils ../datamodel_values \
+ 	gen_client ocaml_syntax ocaml_utils taskHelper exnHelper \
+ 	server_helpers session_check context \
+-	../../pool_role_shared \
+ 	../../xapi/pool_role \
+ 	../../xapi/xapi_inventory \
+ 	../../xapi/hashtbl_xml \
+diff --git a/ocaml/pool_role_shared.ml b/ocaml/pool_role_shared.ml
+deleted file mode 100644
+index c210fdc..0000000
+--- a/ocaml/pool_role_shared.ml
++++ /dev/null
+@@ -1,89 +0,0 @@
+-(*
+- * Copyright (C) Citrix Systems Inc.
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU Lesser General Public License as published
+- * by the Free Software Foundation; version 2.1 only. with the special
+- * exception on linking described in file LICENSE.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU Lesser General Public License for more details.
+- *)
+-(**
+- * @group Pool Management
+- *)
+-
+-open Stringext
+-open Threadext
+-
+-module D=Debug.Make(struct let name="pool_role" end)
+-open D
+-
+-(** The role of this node *)
+-type t =
+-	| Master
+-	| Slave of string (* IP address *)
+-	| Broken
+-
+-let role = ref None
+-let role_unit_tests = ref false
+-let role_m = Mutex.create ()
+-let filename = ref (Filename.concat Fhs.etcdir "pool.conf")
+-
+-let set_pool_role_for_test () =
+-	Mutex.execute role_m (fun _ -> role := Some Master;
+-	                               role_unit_tests := true)
+-
+-let is_unit_test () =
+-	Mutex.execute role_m (fun _ -> !role_unit_tests)
+-
+-let string_of = function
+-	| Master -> "master"
+-	| Slave x -> "slave:" ^ x
+-	| Broken -> "broken"
+-
+-let read_pool_role () =
+-	try
+-		let s = String.strip String.isspace
+-			(Unixext.string_of_file !filename) in
+-		match String.split ~limit:2 ':' s with
+-			| [ "master" ]      -> Master
+-			| [ "slave"; m_ip ] -> Slave m_ip
+-			| [ "broken" ]      -> Broken
+-			| _ -> failwith "cannot parse pool_role from pool config file"
+-	with _ ->
+-		(* If exec name is suite.opt, we're running as unit tests *)
+-		if "xapi" <> Filename.basename Sys.executable_name
+-		then (debug "Executable name is not 'xapi', so we must be running \
+-		             in unit-test mode; setting pool-role to 'Master'";
+-		      Master)
+-		else (error "Failed to read pool role from %s" !filename;
+-		      Broken)
+-
+-let get_role () =
+-	Mutex.execute role_m (fun _ ->
+-		match !role with
+-		| Some x -> x
+-		| None ->
+-			let r = read_pool_role () in
+-			role := Some r;
+-			r
+-	)
+-
+-let is_master () = get_role () = Master
+-
+-let is_slave () = match get_role () with
+-	| Slave _ -> true
+-	| _ -> false
+-
+-let is_broken () = get_role () = Broken
+-
+-exception This_host_is_a_master
+-exception This_host_is_broken
+-
+-let get_master_address () = match get_role () with
+-	| Slave ip -> ip
+-	| Master -> raise This_host_is_a_master
+-	| Broken -> raise This_host_is_broken
+diff --git a/ocaml/test/suite.ml b/ocaml/test/suite.ml
+index 2926395..8e00c49 100644
+--- a/ocaml/test/suite.ml
++++ b/ocaml/test/suite.ml
+@@ -59,7 +59,7 @@ let start_server handlers =
+ 
+ let harness_init () =
+ 	Printexc.record_backtrace true;
+-	Pool_role_shared.set_pool_role_for_test ();
++	Pool_role.set_pool_role_for_test ();
+ 	Xapi.register_callback_fns ();
+ 	start_server handlers
+ 
+diff --git a/ocaml/xapi/pool_role.ml b/ocaml/xapi/pool_role.ml
+index 2c736eb..c9aafee 100644
+--- a/ocaml/xapi/pool_role.ml
++++ b/ocaml/xapi/pool_role.ml
+@@ -15,12 +15,79 @@
+  * @group Pool Management
+  *)
+ 
++open Stringext
+ open Threadext
+ 
+-include Pool_role_shared
++module D=Debug.Make(struct let name="pool_role" end)
++open D
++
++(** The role of this node *)
++type t =
++	| Master
++	| Slave of string (* IP address *)
++	| Broken
++
++let role = ref None
++let role_unit_tests = ref false
++let role_m = Mutex.create ()
++
++let set_pool_role_for_test () =
++	Mutex.execute role_m (fun _ -> role := Some Master;
++	                               role_unit_tests := true)
++
++let is_unit_test () =
++	Mutex.execute role_m (fun _ -> !role_unit_tests)
++
++let string_of = function
++	| Master -> "master"
++	| Slave x -> "slave:" ^ x
++	| Broken -> "broken"
++
++let read_pool_role () =
++	try
++		let s = String.strip String.isspace
++			(Unixext.string_of_file !Xapi_globs.pool_config_file) in
++		match String.split ~limit:2 ':' s with
++			| [ "master" ]      -> Master
++			| [ "slave"; m_ip ] -> Slave m_ip
++			| [ "broken" ]      -> Broken
++			| _ -> failwith "cannot parse pool_role from pool config file"
++	with _ ->
++		(* If exec name is suite.opt, we're running as unit tests *)
++		if "xapi" <> Filename.basename Sys.executable_name
++		then (debug "Executable name is not 'xapi', so we must be running \
++		             in unit-test mode; setting pool-role to 'Master'";
++		      Master)
++		else (error "Failed to read pool role from %s" !Xapi_globs.pool_config_file;
++		      Broken)
++
++let get_role () =
++	Mutex.execute role_m (fun _ ->
++		match !role with
++		| Some x -> x
++		| None ->
++			let r = read_pool_role () in
++			role := Some r;
++			r
++	)
++
++let is_master () = get_role () = Master
++
++let is_slave () = match get_role () with
++	| Slave _ -> true
++	| _ -> false
++
++let is_broken () = get_role () = Broken
++
++exception This_host_is_a_master
++exception This_host_is_broken
++
++let get_master_address () = match get_role () with
++	| Slave ip -> ip
++	| Master -> raise This_host_is_a_master
++	| Broken -> raise This_host_is_broken
+ 
+ let set_role r =
+-  filename := !Xapi_globs.pool_config_file;
+   let old_role = get_role () in
+   Mutex.execute role_m
+     (fun () ->
+diff --git a/ocaml/xapi/pool_role.mli b/ocaml/xapi/pool_role.mli
+index 80f41b7..932c89c 100644
+--- a/ocaml/xapi/pool_role.mli
++++ b/ocaml/xapi/pool_role.mli
+@@ -34,6 +34,8 @@ val is_broken: unit -> bool
+ (** Returns true if this is a unit test *)
+ val is_unit_test: unit -> bool
+ 
++val set_pool_role_for_test: unit -> unit
++
+ exception This_host_is_a_master
+ exception This_host_is_broken
+ 
