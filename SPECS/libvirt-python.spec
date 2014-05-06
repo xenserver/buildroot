@@ -7,7 +7,7 @@
 Summary: The libvirt virtualization API python2 binding
 Name: libvirt-python
 Version: 1.2.1
-Release: 1%{?dist}%{?extra_release}
+Release: 2%{?dist}%{?extra_release}
 Source0: http://libvirt.org/sources/python/%{name}-%{version}.tar.gz
 Url: http://libvirt.org
 License: LGPLv2+
@@ -65,7 +65,6 @@ rm -f %{buildroot}%{_libdir}/python*/site-packages/*egg-info
 %doc ChangeLog AUTHORS NEWS README COPYING COPYING.LESSER examples/
 %{_libdir}/python2*/site-packages/libvirt.py*
 %{_libdir}/python2*/site-packages/libvirt_qemu.py*
-%{_libdir}/python2*/site-packages/libvirt_lxc.py*
 %{_libdir}/python2*/site-packages/libvirtmod*
 
 %if %{with_python3}
@@ -74,11 +73,14 @@ rm -f %{buildroot}%{_libdir}/python*/site-packages/*egg-info
 %doc ChangeLog AUTHORS NEWS README COPYING COPYING.LESSER examples/
 %{_libdir}/python3*/site-packages/libvirt.py*
 %{_libdir}/python3*/site-packages/libvirt_qemu.py*
-%{_libdir}/python3*/site-packages/libvirt_lxc.py*
 %{_libdir}/python3*/site-packages/__pycache__/libvirt.cpython-*.py*
 %{_libdir}/python3*/site-packages/__pycache__/libvirt_qemu.cpython-*.py*
-%{_libdir}/python3*/site-packages/__pycache__/libvirt_lxc.cpython-*.py*
 %{_libdir}/python3*/site-packages/libvirtmod*
 %endif
 
 %changelog
+* Tue May  6 2014 David Scott <dave.scott@citrix.com> - 1.2.1-2
+- Remove dependency on LXC
+
+* Tue May  6 2014 David Scott <dave.scott@citrix.com> - 1.2.1-1
+- Import package from libvirt.org
