@@ -164,6 +164,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Wed May  7 2014 David Scott <dave.scott@citrix.com> - 1.9.42-1
+- update to 1.9.42
+
 * Mon Apr 28 2014 David Scott <dave.scott@citrix.com> - 1.9.41-1
 - first release from master
 
