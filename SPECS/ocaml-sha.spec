@@ -1,6 +1,6 @@
 Name:           ocaml-sha
 Version:        1.9
-Release:        1
+Release:        1%{?dist}
 Summary:        OCaml SHA
 License:        LGPL2.1
 Group:          Development/Other

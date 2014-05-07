@@ -2,7 +2,7 @@
 
 Name:           ocaml-rrd-transport
 Version:        0.7.1
-Release:        1
+Release:        1%{?dist}
 Summary:        Shared-memory protocols for transmitting RRD data
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other

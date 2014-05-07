@@ -2,7 +2,7 @@
 
 Name:           ocaml-mirage-types
 Version:        1.1.1
-Release:        1
+Release:        1%{?dist}
 Summary:        MirageOS interfaces
 License:        ISC
 Group:          Development/Other

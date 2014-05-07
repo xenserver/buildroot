@@ -1,6 +1,6 @@
 Name:           ocaml-opasswd
 Version:        0.9.3
-Release:        0
+Release:        1%{?dist}
 Summary:        OCaml interface to the glibc passwd/shadow password functions
 License:        ISC
 Group:          Development/Other
@@ -58,7 +58,7 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/oPasswd/*.mli
 
 %changelog
-* Thu Apr 24 2014 David Scott <dave.scott@citrix.com>
+* Thu Apr 24 2014 David Scott <dave.scott@citrix.com> - 0.9.3-1
 - Fix split between -devel and main package, hopefully
 
 * Thu Oct 31 2013 Mike McClurg <mike.mcclurg@citrix.com>
