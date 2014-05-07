@@ -2,7 +2,7 @@
 
 Name:           ocaml-crc
 Version:        0.9.1
-Release:        1
+Release:        1%{?dist}
 Summary:        CRC implementation for OCaml
 License:        ISC
 Group:          Development/Other

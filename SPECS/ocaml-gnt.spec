@@ -2,7 +2,7 @@
 
 Name:           ocaml-gnt
 Version:        1.0.0
-Release:        1
+Release:        1%{?dist}
 Summary:        OCaml bindings for userspace Xen grant table controls
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
