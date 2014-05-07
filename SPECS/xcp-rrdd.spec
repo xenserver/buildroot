@@ -17,6 +17,7 @@ BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  ocaml-xenops-devel
 BuildRequires:  ocaml-rrd-transport-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
+BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  xen-devel
 Requires:       redhat-lsb-core
