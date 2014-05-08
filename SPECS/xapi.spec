@@ -2,7 +2,7 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.42
+Version: 1.9.43
 Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -13,7 +13,6 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
-Patch0: xen-api-66a9e416ba8e2e88a2114efb1266e6a4fa0b3806
 BuildRequires: ocaml
 BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
@@ -83,7 +82,6 @@ Libraries for writing XenAPI clients in python.
 
 %prep 
 %setup -q -n xen-api-%{version}
-%patch0 -p1
 cp %{SOURCE1} xen-api-xapi-conf.in
 cp %{SOURCE2} xen-api-init
 cp %{SOURCE3} xen-api-xapissl
@@ -166,8 +164,8 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
-* Wed May  7 2014 David Scott <dave.scott@citrix.com> - 1.9.42-1
-- update to 1.9.42
+* Thu May  8 2014 David Scott <dave.scott@citrix.com> - 1.9.43-1
+- update to 1.9.43
 
 * Mon Apr 28 2014 David Scott <dave.scott@citrix.com> - 1.9.41-1
 - first release from master
