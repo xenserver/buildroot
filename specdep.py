@@ -13,7 +13,7 @@ from scripts.lib import mappkgname
 
 
 def build_type():
-    debian_like = ["ubuntu", "debian"]
+    debian_like = ["ubuntu", "debian", "linaro"]
     rhel_like = ["fedora", "redhat", "centos"]
 
     dist = platform.linux_distribution(full_distribution_name=False)[0].lower()
