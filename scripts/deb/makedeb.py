@@ -171,14 +171,14 @@ def main():
 
     # At this point we have a debian source package (at least 3 files) in SRPMS.
     # To build:
-    #    pbuilder --create --distribution raring --architecture amd64 \
+    #    pbuilder --create --distribution trusty --architecture amd64 \
     #       --debootstrap qemu-debootstrap --mirror http://ports.ubuntu.com \
-    #       --basetgz /var/cache/pbuilder/qemu-raring-armhf-base.tar.gz
+    #       --basetgz /var/cache/pbuilder/qemu-trusty-armhf-base.tar.gz
     #
     # To build for ARM:
-    #    pbuilder --create --distribution raring --architecture armhf \
+    #    pbuilder --create --distribution trusty --architecture armhf \
     #       --debootstrap qemu-debootstrap --mirror http://ports.ubuntu.com \
-    #       --basetgz /var/cache/pbuilder/qemu-raring-armhf-base.tar.gz
+    #       --basetgz /var/cache/pbuilder/qemu-trusty-armhf-base.tar.gz
 
 
 if __name__ == '__main__':

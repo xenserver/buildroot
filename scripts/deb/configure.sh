@@ -4,10 +4,10 @@ set -eu
 echo "Configuring DEB-based build"
 
 ARCH=${ARCH:-amd64}
-DIST=${DIST:-raring}
+DIST=${DIST:-trusty}
 BASEPATH=/var/cache/pbuilder/base.cow
 MIRROR=${MIRROR:-http://gb.archive.ubuntu.com/ubuntu/}
-APT_REPOS=${APT_REPOS:-|deb $MIRROR $DIST universe |deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu $DIST main}
+APT_REPOS=${APT_REPOS:-|deb $MIRROR $DIST universe}
 
 dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common > /dev/null 2>&1 || \
    sudo apt-get install cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common
