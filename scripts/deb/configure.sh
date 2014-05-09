@@ -3,10 +3,17 @@ set -eu
 
 echo "Configuring DEB-based build"
 
-ARCH=${ARCH:-amd64}
+if [ $(arch | grep arm) ]; then
+  echo Running on an $(arch) so targetting armhf
+  ARCH=${ARCH:-armhf}
+  MIRROR=${MIRROR:-http://ports.ubuntu.com/ubuntu-ports/}
+else
+  echo Running on an $(arch) so targetting amd64
+  ARCH=${ARCH:-amd64}
+  MIRROR=${MIRROR:-http://gb.archive.ubuntu.com/ubuntu/}
+fi
 DIST=${DIST:-trusty}
 BASEPATH=/var/cache/pbuilder/base.cow
-MIRROR=${MIRROR:-http://gb.archive.ubuntu.com/ubuntu/}
 APT_REPOS=${APT_REPOS:-|deb $MIRROR $DIST universe}
 
 dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common > /dev/null 2>&1 || \
