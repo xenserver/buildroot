@@ -10,6 +10,8 @@ all: rpms
 %.src.rpm: 
 	@echo [RPMBUILD] $@
 	@rpmbuild --quiet --define "_topdir ." --define "%dist $(DIST)" -bs $<
+	@echo [CREATEREPO] $@
+	@createrepo --quiet --update ./SRPMS
 
 %.rpm:
 	@echo [MOCK] $@
