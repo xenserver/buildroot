@@ -55,7 +55,7 @@ Building Debian packages is experimental!
 
 The Debian/Ubuntu package build uses [cowbuilder](https://wiki.debian.org/cowbuilder), which needs to run as root, so you may wish to add your user to the `sudoers` list.
 
-The build also depends on OCaml 4.01.0, now available in Ubuntu trusty.
+The build also depends on OCaml 4.01.0, now available in Ubuntu Trusty and Debian Jessie.
 
 The steps to build Debian packages are the same as those to build RPMs:
 
