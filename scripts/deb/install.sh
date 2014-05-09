@@ -1,8 +1,5 @@
 #!/bin/bash -x
 
-# Add the OCaml 4 PPA
-install -m 0644 scripts/deb/ocp-ppa.list /etc/apt/sources.list.d/ocp-ppa.list
-
 DEBURL=${PKG_REPO_LOCATION:-file:$PWD/RPMS/}
 DEBSRCURL=${SRC_REPO_LOCATION:-file:$PWD/SRPMS/}
 
