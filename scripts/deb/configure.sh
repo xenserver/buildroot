@@ -3,7 +3,13 @@ set -eu
 
 echo "Configuring DEB-based build"
 
-ARCH=${ARCH:-amd64}
+if [ $(arch | grep arm) ]; then
+  echo Running on an $(arch) so targetting armhf
+  ARCH=${ARCH:-armhf}
+else
+  echo Running on an $(arch) so targetting amd64
+  ARCH=${ARCH:-amd64}
+fi
 DIST=${DIST:-`lsb_release -sc`}
 BASEPATH=/var/cache/pbuilder/base.cow
 APT_REPOS=${APT_REPOS:-}
