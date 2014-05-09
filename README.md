@@ -53,15 +53,14 @@ Debian-based distributions (experimental)
 
 Building Debian packages is experimental!
 
-On Debian-based distributions, the packages are built using `pbuilder`.
-`pbuilder` is available in the main Ubuntu and Debian package repositories, so there is no need to add extra ones.
-`pbuilder` does run as root, so you may wish to add your user to the `sudoers` list.
+Install dependencies:
+```
+sudo apt-get install build-essential pbuilder python-rpm
+```
 
-The build also depends on a more modern OCaml compiler than the version in Ubuntu, available from this PPA:
-```
-deb http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main
-deb-src http://ppa.launchpad.net/louis-gesbert/ocp/ubuntu raring main
-```
+Note `pbuilder` does run as root, so you may wish to add your user to the `sudoers` list.
+
+The build also depends on OCaml 4.01.0, available in Ubuntu trusty.
 
 The steps to build Debian packages are the same as those to build RPMs:
 
