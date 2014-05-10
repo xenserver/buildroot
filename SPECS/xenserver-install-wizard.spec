@@ -2,7 +2,7 @@
 
 Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
-Version: 0.2.29
+Version: 0.2.30
 Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -32,6 +32,9 @@ ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroo
 %{_bindir}/xenserver-install-wizard
 
 %changelog
+* Sat May 10 2014 David Scott <dave.scott@citrix.com> - 0.2.30-1
+- Update to 0.2.30, now starts xcp-rrdd
+
 * Tue Apr 29 2014 Bob Ball <bob.ball@citrix.com> - 0.2.29-1
 - Update to 0.2.29, with fixes for static IP on debian/ubuntu
 
