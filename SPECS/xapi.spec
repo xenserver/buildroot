@@ -2,7 +2,7 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.45
+Version: 1.9.46
 Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
@@ -164,6 +164,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Sun May 11 2014 David Scott <dave.scott@citrix.com> - 1.9.46-1
+- update to 1.9.46
+
 * Sat May 10 2014 David Scott <dave.scott@citrix.com> - 1.9.45-1
 - update to 1.9.45
 
