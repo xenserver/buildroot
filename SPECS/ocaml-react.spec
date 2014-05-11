@@ -2,8 +2,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-react
-Version:        0.9.4
-Release:        1%{?dist}
+Version:        1.1.0
+Release:        2%{?dist}
 Summary:        OCaml framework for Functional Reactive Programming (FRP)
 
 
@@ -14,7 +14,7 @@ URL:            http://erratique.ch/software/react
 Source0:        http://erratique.ch/software/react/releases/react-%{version}.tbz
 Source1:        react-LICENSE
 
-BuildRequires:  ocaml >= 3.10.0
+BuildRequires:  ocaml >= 3.11.0
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
 
@@ -47,24 +47,24 @@ developing applications that use %{name}.
 cp %{SOURCE1} LICENSE
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+ocaml pkg/build.ml native=true native-dynlink=true
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -install
-
+mkdir -p %{buildroot}/%{_libdir}/ocaml/react
+cp _build/pkg/META _build/src/react.a _build/src/react.cma _build/src/react.cmi _build/src/react.cmx _build/src/react.cmxa _build/src/react.cmxs _build/src/react.mli %{buildroot}/%{_libdir}/ocaml/react
 
 %files
 # This space intentionally left blank
 
 %files devel
-%doc CHANGES README
+%doc CHANGES.md README.md
 %{_libdir}/ocaml/react/*
 
 
 %changelog
+* Sun May 11 2014 David Scott <dave.scott@citrix.com> - 1.1.0-2
+- Update for 1.1.0
+
 * Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.4-1
 - Update for 0.9.4
 
