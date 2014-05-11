@@ -2,14 +2,14 @@
 %define debug_package %{nil}
 
 Name:           ocaml-lwt
-Version:        2.4.3
+Version:        2.4.5
 Release:        1%{?dist}
 Summary:        OCaml lightweight thread library
 
 Group:          Development/Libraries
 License:        LGPLv2+ with exceptions
 URL:            http://ocsigen.org/lwt
-Source0:        http://ocsigen.org/download/lwt-%{version}.tar.gz
+Source0:        https://github.com/ocsigen/lwt/archive/%{version}.tar.gz
 ExcludeArch:    sparc64 s390 s390x
 
 # Location of libev headers on Fedora is in /usr/include/libev/ev.h
@@ -18,7 +18,7 @@ ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
 BuildRequires:  ocaml-findlib-devel
-BuildRequires:  ocaml-react-devel >= 0.9.0
+BuildRequires:  ocaml-react-devel >= 1.0.0
 #BuildRequires:  libev-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-text-devel
@@ -79,6 +79,9 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 %{_libdir}/ocaml/stublibs/*.so.owner
 
 %changelog
+* Sun May 11 2014 David Scott <dave.scott@citrix.com> - 2.4.5-1
+- Update to 2.4.5
+
 * Sat Jun  1 2013 David Scott <dave.scott@eu.citrix.com> - 2.4.3-1
 - Update to 2.4.3
 
