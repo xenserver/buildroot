@@ -1,8 +1,6 @@
-%global debug_package %{nil}
-
 Name:           ocaml-uri
 Version:        1.3.8
-Release:        1%{?dist}
+Release:        3%{?dist}
 Summary:        A URI library for OCaml
 License:        ISC
 Group:          Development/Libraries
@@ -21,7 +19,7 @@ A URI library for OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
-Requires:       ocaml-re-devel%{?_isa}
+BuildRequires:  ocaml-re-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -39,15 +37,26 @@ mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -install
 
-
 %files
-#This space intentionally left blank
+%doc CHANGES
+%doc README.md
+%{_libdir}/ocaml/uri
+%exclude %{_libdir}/ocaml/uri/*.a
+%exclude %{_libdir}/ocaml/uri/*.cmxa
+%exclude %{_libdir}/ocaml/uri/*.cmx
+%exclude %{_libdir}/ocaml/uri/*.ml
+%exclude %{_libdir}/ocaml/uri/*.mli
 
 %files devel
-%doc README.md CHANGES
-%{_libdir}/ocaml/uri/*
+%{_libdir}/ocaml/uri/*.a
+%{_libdir}/ocaml/uri/*.cmx
+%{_libdir}/ocaml/uri/*.cmxa
+%{_libdir}/ocaml/uri/*.mli
 
 %changelog
+* Sun May 11 2014 David Scott <dave.scott@citrix.com> - 1.3.8-3
+- Distribute files between %{name} and %{name}-devel
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.3.8-1
 - Initial package
 
