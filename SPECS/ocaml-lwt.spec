@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-lwt
-Version:        2.4.4
+Version:        2.4.5
 Release:        1%{?dist}
 Summary:        OCaml lightweight thread library
 
@@ -17,7 +17,7 @@ ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 3.10.0
 BuildRequires:  ocaml-findlib-devel
-BuildRequires:  ocaml-react-devel >= 0.9.0
+BuildRequires:  ocaml-react-devel >= 1.0.0
 #BuildRequires:  libev-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-text-devel
@@ -77,6 +77,9 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 %{_libdir}/ocaml/stublibs/*.so.owner
 
 %changelog
+* Sun May 11 2014 David Scott <dave.scott@citrix.com> - 2.4.5-1
+- Update to 2.4.5
+
 * Mon Mar 10 2014 Bob Ball <bob.ball@citrix.com> - 2.4.4-1
 - Update to 2.4.4
 
