@@ -1,5 +1,5 @@
 Name:           utop
-Version:        1.5
+Version:        1.12
 Release:        1%{?dist}
 Summary:        A toplevel for OCaml which can run in a terminal or in Emacs
 License:        BSD
@@ -40,6 +40,9 @@ ocaml setup.ml -install
 /usr/share/emacs/site-lisp/utop.el
 
 %changelog
+* Mon May 12 2014 David Scott <dave.scott@citrix.com> - 1.12-1
+- Update to 1.12
+
 * Fri Jun 21 2013 David Scott <dave.scott@eu.citrix.com> - 1.5-1
 - Update to version 1.5 (discovered lurking in plain sight on github)
 

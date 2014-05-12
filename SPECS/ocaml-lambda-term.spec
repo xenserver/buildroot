@@ -1,13 +1,13 @@
 %global debug_package %{nil}
 
 Name:           ocaml-lambda-term
-Version:        1.2
+Version:        1.6
 Release:        1%{?dist}
 Summary:        Lambda-Term is a cross-platform library for manipulating the terminal for Ocaml
 License:        BSD3
 Group:          Development/Libraries
 URL:            http://forge.ocamlcore.org/projects/lambda-term/
-Source0:        http://forge.ocamlcore.org/frs/download.php/945/lambda-term-%{version}.tar.gz
+Source0:        https://github.com/diml/lambda-term/archive/%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-camomile-devel
@@ -49,15 +49,27 @@ ocaml setup.ml -install
 rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/lambda-term-actions
 
 %files
-# This space intentionally left blank
-
-%files devel
-%doc LICENSE CHANGES
-%{_libdir}/ocaml/lambda-term/*
+%doc CHANGES
+%doc LICENSE
+%{_libdir}/ocaml/lambda-term
 %{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so
 %{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so.owner
+%exclude %{_libdir}/ocaml/lambda-term/*.a
+%exclude %{_libdir}/ocaml/lambda-term/*.cmxa
+%exclude %{_libdir}/ocaml/lambda-term/*.cmx
+%exclude %{_libdir}/ocaml/lambda-term/*.ml
+%exclude %{_libdir}/ocaml/lambda-term/*.mli
+
+%files devel
+%{_libdir}/ocaml/lambda-term/*.a
+%{_libdir}/ocaml/lambda-term/*.cmx
+%{_libdir}/ocaml/lambda-term/*.cmxa
+%{_libdir}/ocaml/lambda-term/*.mli
 
 %changelog
+* Mon May 12 2014 David Scott <dave.scott@citrix.com> - 1.6-1
+- Update to 1.6
+
 * Thu Jun  6 2013 David Scott <dave.scott@eu.citrix.com> - 1.2-1
 - Initial package
 
