@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.40
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
@@ -13,6 +13,7 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
+Patch0: xen-api-fix_import_vdi
 BuildRequires: ocaml
 BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
@@ -80,6 +81,7 @@ Libraries for writing XenAPI clients in python.
 
 %prep 
 %setup -q -n xen-api-%{version}
+%patch0 -p1
 cp %{SOURCE1} xen-api-xapi-conf.in
 cp %{SOURCE2} xen-api-init
 cp %{SOURCE3} xen-api-xapissl
@@ -170,6 +172,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Thu May 01 2014 Bob Ball <bob.ball@citrix.com> - 1.9.40-2
+- Added patch for RW VDI import
+
 * Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 1.9.40-1
 - update to new xcp-idl interface with SR.probe
 
