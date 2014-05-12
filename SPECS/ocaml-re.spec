@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-re
-Version:        1.2.1
+Version:        1.2.2
 Release:        1%{?dist}
 Summary:        A regular expression library for OCaml
 License:        LGPL
@@ -45,6 +45,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/re/*
 
 %changelog
+* Mon May 12 2014 David Scott <dave.scott@eu.citrix.com> - 1.2.2-1
+- Update to 1.2.2
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.2.1-1
 - Initial package
 
