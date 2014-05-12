@@ -1,14 +1,15 @@
 %global debug_package %{nil}
 
 Name:           ocaml-rpc
-Version:        1.4.1
+Version:        1.5.0
 Release:        1%{?dist}
 Summary:        An RPC library for OCaml
 License:        LGPL
 Group:          Development/Libraries
 URL:            https://github.com/samoht/ocaml-rpc
 Source0:        https://github.com/samoht/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:  js_of_ocaml-devel
+Patch0:         ocaml-rpc-no-js.patch
+Patch1:         ocaml-rpc-no-js2.patch
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
@@ -32,6 +33,8 @@ developing applications that use %{name}.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 make
@@ -44,13 +47,17 @@ make install DESTDIR=${buildroot}
 
 
 %files
-# This space intentionally left blank
+%doc README.md
+%{_libdir}/ocaml/rpclib
+%exclude %{_libdir}/ocaml/rpclib/*.cmx
 
 %files devel
-%doc README.md
-%{_libdir}/ocaml/rpclib/*
+%{_libdir}/ocaml/rpclib/*.cmx
 
 %changelog
+* Mon May 12 2014 David Scott <dave.scott@citrix.com> - 1.5.0-1
+* Update to 1.5.0
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.4.1-1
 - Initial package
 
