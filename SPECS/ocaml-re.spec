@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-re
-Version:        1.2.1
-Release:        2%{?dist}
+Version:        1.2.2
+Release:        1%{?dist}
 Summary:        A regular expression library for OCaml
 License:        LGPL
 URL:            https://github.com/ocaml/ocaml-re
@@ -37,7 +37,7 @@ make install
 %files
 %doc CHANGES
 %doc LICENSE
-%doc README
+%doc README.md
 %{_libdir}/ocaml/re
 %exclude %{_libdir}/ocaml/re/*.a
 %exclude %{_libdir}/ocaml/re/*.cmxa
@@ -53,6 +53,9 @@ make install
 %{_libdir}/ocaml/re/*.mli
 
 %changelog
+* Sat Jun  7 2014 David Scott <dave.scott@citrix.com> - 1.2.2-1
+- Update to 1.2.2
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.2.1-2
 - Split files correctly between base and devel packages
 
