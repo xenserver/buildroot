@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.34
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
@@ -87,7 +87,7 @@ cp %{SOURCE6} xenopsd-network-conf
 
 %build
 make configure
-./configure --libexecdir %{_libexecdir}/%{name}
+./configure --libexecdir %{_libexecdir}/%{name} --disable-xenguestbin
 make
 
 %install
@@ -98,7 +98,6 @@ install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir
 install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
 #install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
-install -D _build/xenguest/xenguest_main.native          %{buildroot}/%{_libexecdir}/%{name}/xenguest
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
 install -D scripts/vif-xl %{buildroot}/%{_libexecdir}/%{name}/vif-xl
@@ -152,7 +151,6 @@ fi
 %files xc
 %{_sbindir}/xenopsd-xc
 %{_sysconfdir}/init.d/xenopsd-xc
-%{_libexecdir}/%{name}/xenguest
 
 %post xc
 /sbin/chkconfig --add xenopsd-xc
@@ -191,6 +189,9 @@ fi
 #fi
 
 %changelog
+* Tue May 14 2014 David Scott <dave.scott@citrix.com> - 0.9.34-2
+- Don't include xenguest: this now comes from ocaml-xen-lowlevel-libs
+
 * Fri Jan 17 2014 Euan Harris <euan.harris@eu.citrix.com> - 0.9.34-1
 - Update to 0.9.34, restoring fixes from the 0.9.32 line which were 
   not merged to trunk before 0.9.33 was tagged
