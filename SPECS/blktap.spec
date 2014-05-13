@@ -19,7 +19,7 @@ Enhanced version of tapdisk with support for storage mirroring.
 
 %prep 
 %setup -q
-
+%patch0 -p1
 
 %build
 sh autogen.sh
@@ -54,6 +54,9 @@ make install DESTDIR=%{buildroot}
 %changelog
 * Wed Mar 12 2014 Bob Ball <bob.ball@citrix.com - 0.9.1-1
 - Update blktap to avoid Debian Jessie compile failure 
+
+* Tue May 13 2014 David Scott <dave.scott@citrix.com> - 0.9.0-3
+- Fix build on Ubuntu 14.04
 
 * Fri Jan 17 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
 - Change to upstream source repository
