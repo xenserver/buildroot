@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.15
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Libraries
@@ -46,22 +46,32 @@ export OCAMLFIND_LDCONF=ignore
 make install BINDIR=%{buildroot}/var/lib/xcp/xenguest
 
 %files
-#This space intentionally left blank
-/var/lib/xcp/xenguest
-
-%files devel
 %doc README.md
-%{_libdir}/ocaml/xenctrl/*
-#%{_libdir}/ocaml/xenlight/*
+/var/lib/xcp/xenguest
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
 #%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
 #%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
 #%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
 #%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
+%{_libdir}/ocaml/xenctrl
+%exclude %{_libdir}/ocaml/xenctrl/*.a
+%exclude %{_libdir}/ocaml/xenctrl/*.cmxa
+%exclude %{_libdir}/ocaml/xenctrl/*.cmx
+%exclude %{_libdir}/ocaml/xenctrl/*.ml
+%exclude %{_libdir}/ocaml/xenctrl/*.mli
+#%{_libdir}/ocaml/xenlight/*
 
+%files devel
+%{_libdir}/ocaml/xenctrl/*.a
+%{_libdir}/ocaml/xenctrl/*.cmx
+%{_libdir}/ocaml/xenctrl/*.cmxa
+%{_libdir}/ocaml/xenctrl/*.mli
 
 %changelog
+* Tue May 13 2014 David Scott <dave.scott@citrix.com> - 0.9.15-2
+- Fix the split between %{name} and %{name}-devel
+
 * Mon May 12 2014 David Scott <dave.scott@citrix.com> - 0.9.15-1
 - Update to 0.9.15
 
