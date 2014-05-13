@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.14
+Version:        0.9.16
 Release:        2%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
@@ -28,6 +28,14 @@ Requires:       %{name} = %{version}-%{release}
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
+%package        runtime
+Summary:        Runtime binaries for users of %{name}
+Group:          Development/Libraries
+
+%description    runtime
+The %{name}-runtime package contains binaries which must be present
+at runtime when executing programs that use %{name}.
+
 %prep
 %setup -q
 
@@ -40,11 +48,11 @@ make
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR/stublibs
 export OCAMLFIND_LDCONF=ignore
-make install DESTDIR=${buildroot}
-
+make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 
 %files
 %doc README.md
+%{_libexecdir}/xenopsd/xenguest
 %{_libdir}/ocaml/xenctrl
 %exclude %{_libdir}/ocaml/xenctrl/*.a
 %exclude %{_libdir}/ocaml/xenctrl/*.cmxa
@@ -68,13 +76,24 @@ make install DESTDIR=${buildroot}
 %{_libdir}/ocaml/xenctrl/*.cmxa
 %{_libdir}/ocaml/xenctrl/*.cmx
 %{_libdir}/ocaml/xenctrl/*.mli
-
 #%{_libdir}/ocaml/xenlight/*.a
 #%{_libdir}/ocaml/xenlight/*.cmxa
 #%{_libdir}/ocaml/xenlight/*.cmx
 #%{_libdir}/ocaml/xenlight/*.mli
 
+%files runtime
+%{_libexecdir}/xenopsd/xenguest
+
 %changelog
+* Sat Jun  7 2014 David Scott <dave.scott@citrix.com> - 0.9.16-2
+- Place xenguest in %{name}-runtime
+
+* Sat Jun  7 2014 David Scott <dave.scott@citrix.com> - 0.9.16-1
+- Update to 0.9.16
+
+* Sat Jun  7 2014 David Scott <dave.scott@citrix.com> - 0.9.15-1
+- Update to 0.9.15
+
 * Mon Jun  2 2014 Euan Harris <euan.harris@citrix.com> - 0.9.14-2
 - Split files correctly between base and devel packages
 

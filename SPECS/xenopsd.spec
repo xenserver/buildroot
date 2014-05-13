@@ -36,6 +36,7 @@ Requires:       redhat-lsb-core
 Requires:       xenops-cli
 Requires:       vncterm
 Requires:       linux-guest-loader
+Requires:       ocaml-xen-lowlevel-libs-runtime
 
 %description
 Simple VM manager for the xapi toolstack.
@@ -188,6 +189,9 @@ fi
 #fi
 
 %changelog
+* Sat Jun 20 2014 David Scott <dave.scott@citrix.com> - 0.9.37-1
+- Depend on the ocaml-xen-lowlevel-libs-runtime package
+
 * Fri Jun  6 2014 Jonathan Ludlam <jonathan.ludlam@citrix.com> - 0.9.37-1
 - Update to 0.9.37
 
