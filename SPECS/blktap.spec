@@ -1,11 +1,12 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
 Version: 0.9.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
 Source0: https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Patch0: blktap-c89e6a0a9968b882621e0bb6f6f2f69bdfda8dd0
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libaio-devel
@@ -18,7 +19,7 @@ Enhanced version of tapdisk with support for storage mirroring.
 
 %prep 
 %setup -q
-
+%patch0 -p1
 
 %build
 sh autogen.sh
@@ -49,6 +50,9 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
+* Tue May 13 2014 David Scott <dave.scott@citrix.com> - 0.9.0-3
+- Fix build on Ubuntu 14.04
+
 * Fri Jan 17 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
 - Change to upstream source repository
 
