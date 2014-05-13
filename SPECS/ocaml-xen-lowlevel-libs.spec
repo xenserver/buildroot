@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.14
+Version:        0.9.15
 Release:        1%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
@@ -43,11 +43,11 @@ mkdir -p %{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
-make install DESTDIR=${buildroot}
-
+make install BINDIR=%{buildroot}/var/lib/xcp/xenguest
 
 %files
 #This space intentionally left blank
+/var/lib/xcp/xenguest
 
 %files devel
 %doc README.md
@@ -62,6 +62,9 @@ make install DESTDIR=${buildroot}
 
 
 %changelog
+* Mon May 12 2014 David Scott <dave.scott@citrix.com> - 0.9.15-1
+- Update to 0.9.15
+
 * Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.9.14-1
 - Update to 0.9.14
 
