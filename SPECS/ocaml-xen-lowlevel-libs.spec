@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.15
-Release:        2%{?dist}
+Version:        0.9.16
+Release:        1%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Libraries
@@ -69,6 +69,9 @@ make install BINDIR=%{buildroot}/var/lib/xcp/xenguest
 %{_libdir}/ocaml/xenctrl/*.mli
 
 %changelog
+* Wed May 14 2014 David Scott <dave.scott@citrix.com> - 0.9.16-1
+- Update to 0.9.16, with arm support
+
 * Tue May 13 2014 David Scott <dave.scott@citrix.com> - 0.9.15-2
 - Fix the split between %{name} and %{name}-devel
 
