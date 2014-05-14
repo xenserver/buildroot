@@ -2,7 +2,7 @@
 
 Name:           ocaml-re
 Version:        1.2.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A regular expression library for OCaml
 License:        LGPL
 Group:          Development/Libraries
@@ -41,10 +41,13 @@ ocaml setup.ml -install
 # This space intentionally left blank
 
 %files devel
-%doc LICENSE README CHANGES
+%doc LICENSE README.md CHANGES
 %{_libdir}/ocaml/re/*
 
 %changelog
+* Wed May 14 2014 David Scott <dave.scott@citrix.com> - 1.2.2-2
+- README has become README.md
+
 * Mon May 12 2014 David Scott <dave.scott@eu.citrix.com> - 1.2.2-1
 - Update to 1.2.2
 
