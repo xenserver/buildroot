@@ -1,6 +1,6 @@
 Name:           xenserver-core
 Version:        0.10.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 Group:          Development/Other
@@ -23,8 +23,8 @@ Requires:       xcp-networkd
 Requires:       xcp-rrdd
 Requires:       squeezed
 Requires:       linux-guest-loader
-Requires:       kernel >= 3.0
-Requires:       kernel-firmware
+Requires:       linux-image-generic >= 3.0
+Requires:       linux-firmware
 Requires:       xen
 
 %description
@@ -45,6 +45,9 @@ install -m 0644 xenserver-readme %{buildroot}/usr/share/doc/xenserver/README
 /usr/share/doc/xenserver/README
 
 %changelog
+* Wed May 14 2014 David Scott <dave.scott@citrix.com> - 0.10.0-2
+- Update the kernel package name
+
 * Fri Nov 1 2013 Euan Harris <dave.scott@eu.citrix.com> - 0.10.0-1
 - Bump version to 0.10.0
 
