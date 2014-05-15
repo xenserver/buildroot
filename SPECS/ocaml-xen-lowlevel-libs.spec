@@ -16,6 +16,7 @@ BuildRequires:  ocaml-ocamldoc
 BuildRequires:  libuuid-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  xen-devel
+BuildRequires:  xen-missing-headers
 BuildRequires:  ocaml-cstruct-devel
 
 %description
