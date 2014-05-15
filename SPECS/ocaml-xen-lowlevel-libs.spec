@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.16
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Libraries
@@ -44,11 +44,11 @@ mkdir -p %{buildroot}/%{_libdir}/ocaml
 mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
-make install BINDIR=%{buildroot}/var/lib/xcp/xenguest
+make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 
 %files
 %doc README.md
-/var/lib/xcp/xenguest
+%{_libexecdir}/xenopsd/xenguest
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
 #%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
@@ -70,6 +70,9 @@ make install BINDIR=%{buildroot}/var/lib/xcp/xenguest
 %{_libdir}/ocaml/xenctrl/*.mli
 
 %changelog
+* Thu May 15 2014 David Scott <dave.scott@citrix.com> - 0.9.16-2
+- Update xenguest path
+
 * Wed May 14 2014 David Scott <dave.scott@citrix.com> - 0.9.16-1
 - Update to 0.9.16, with arm support
 
