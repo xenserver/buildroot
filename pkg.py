@@ -43,6 +43,8 @@ def map_arch_deb(arch):
     """Map RPM package architecture to equivalent Deb architecture"""
     if arch == "x86_64":
         return "amd64"
+    elif arch == "armv7l":
+        return "armhf"
     elif arch == "noarch":
         return "all"
     else:
