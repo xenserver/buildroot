@@ -16,6 +16,7 @@ BuildRequires:  ocaml-io-page-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  xen-devel
+BuildRequires:  xen-missing-headers
 Requires:       ocaml
 Requires:       ocaml-findlib
 

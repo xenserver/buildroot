@@ -20,6 +20,7 @@ BuildRequires: pam-devel
 BuildRequires: tetex-latex
 BuildRequires: xen-devel
 BuildRequires: libffi-devel
+BuildRequires: xen-missing-headers
 BuildRequires: zlib-devel
 BuildRequires: ocaml-xcp-idl-devel
 BuildRequires: ocaml-xen-api-libs-transitional-devel

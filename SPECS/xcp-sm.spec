@@ -15,6 +15,7 @@ BuildRequires: python-devel
 BuildRequires: swig
 BuildRequires: xen-devel
 BuildRequires: pylint
+BuildRequires: xen-missing-headers
 Requires: iscsi-initiator-utils
 Requires: sg3_utils
 Requires: xen-runtime
