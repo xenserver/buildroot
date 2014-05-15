@@ -1,7 +1,7 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
-Version: 0.9.0
-Release: 2%{?dist}
+Version: 0.9.1
+Release: 1%{?dist}
 Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
@@ -12,6 +12,7 @@ BuildRequires: libaio-devel
 BuildRequires: libtool
 BuildRequires: libuuid-devel
 BuildRequires: xen-devel
+BuildRequires: openssl-devel
 
 %description
 Enhanced version of tapdisk with support for storage mirroring.
@@ -42,6 +43,8 @@ make install DESTDIR=%{buildroot}
 %files
 %{_libdir}/%{name}/bin/*
 %{_libdir}/%{name}/etc/udev/rules.d/blktap.rules
+%{_libdir}/%{name}/etc/cron.daily/blktap-log-cleanup
+%{_libdir}/%{name}/etc/logrotate.d/blktap
 %{_libdir}/%{name}/include/blktap/*
 %{_libdir}/%{name}/include/vhd/*
 %{_libdir}/%{name}/lib/*
@@ -49,6 +52,9 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
+* Wed Mar 12 2014 Bob Ball <bob.ball@citrix.com - 0.9.1
+- Update blktap to avoid jessie compile failure 
+
 * Fri Jan 17 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
 - Change to upstream source repository
 
