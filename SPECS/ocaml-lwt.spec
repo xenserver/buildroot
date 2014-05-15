@@ -9,7 +9,7 @@ Summary:        OCaml lightweight thread library
 Group:          Development/Libraries
 License:        LGPLv2+ with exceptions
 URL:            http://ocsigen.org/lwt
-Source0:        https://github.com/ocsigen/lwt/archive/%{version}.tar.gz
+Source0:        https://github.com/ocsigen/lwt/archive/%{version}/%{name}-%{version}.tar.gz
 ExcludeArch:    sparc64 s390 s390x
 
 # Location of libev headers on Fedora is in /usr/include/libev/ev.h
@@ -81,6 +81,9 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 %changelog
 * Sun May 11 2014 David Scott <dave.scott@citrix.com> - 2.4.5-1
 - Update to 2.4.5
+
+* Mon Mar 10 2014 Bob Ball <bob.ball@citrix.com> - 2.4.4-1
+- Update to 2.4.4
 
 * Sat Jun  1 2013 David Scott <dave.scott@eu.citrix.com> - 2.4.3-1
 - Update to 2.4.3

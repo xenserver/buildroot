@@ -36,7 +36,7 @@ if [ -f /etc/sysconfig/$prog ] ; then
 fi
 
 # ensure that all the possible xen directories are on the XCP_PATH
-export XCP_PATH=/usr/lib/xen/bin:/usr/lib/xen-4.2/bin:/usr/lib/xen-4.1/bin:/usr/lib/xen/boot:/usr/lib/xen-4.2/boot:/usr/lib/xen-4.1/boot
+export XCP_PATH=/usr/lib/xen/bin:/usr/lib/xen-4.3/bin:/usr/lib/xen-4.2/bin:/usr/lib/xen-4.1/bin:/usr/lib/xen/boot:/usr/lib/xen-4.3/boot:/usr/lib/xen-4.2/boot:/usr/lib/xen-4.1/boot
 
 start() {
 	[ -x $exec ] || exit 5

@@ -19,6 +19,7 @@ BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  xen-devel
+BuildRequires:  xen-missing-headers
 Requires:       redhat-lsb-core
 Requires:       message-switch
 

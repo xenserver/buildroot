@@ -19,6 +19,7 @@ BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  xen-devel
+BuildRequires:  xen-missing-headers
 BuildRequires:  ocaml-xcp-idl-devel
 Requires:       xen-libs
 

@@ -30,6 +30,7 @@ BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  xen-devel
+BuildRequires:  xen-missing-headers
 BuildRequires:  ocaml-uutf-devel
 Requires:       message-switch
 Requires:       redhat-lsb-core
