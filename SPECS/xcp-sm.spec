@@ -13,6 +13,7 @@ Source2: xcp-mpath-scsidev-script
 BuildRequires: python-devel
 BuildRequires: swig
 BuildRequires: xen-devel
+BuildRequires: xen-missing-headers
 Requires: iscsi-initiator-utils
 Requires: sg3_utils
 Requires: xen-runtime
