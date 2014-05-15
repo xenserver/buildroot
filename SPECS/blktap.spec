@@ -52,8 +52,8 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
-* Wed Mar 12 2014 Bob Ball <bob.ball@citrix.com - 0.9.1
-- Update blktap to avoid jessie compile failure 
+* Wed Mar 12 2014 Bob Ball <bob.ball@citrix.com - 0.9.1-1
+- Update blktap to avoid Debian Jessie compile failure 
 
 * Fri Jan 17 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
 - Change to upstream source repository
