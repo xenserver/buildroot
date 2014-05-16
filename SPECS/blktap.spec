@@ -6,7 +6,6 @@ Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
 Source0: https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
-Patch0: blktap-c89e6a0a9968b882621e0bb6f6f2f69bdfda8dd0
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libaio-devel
@@ -53,7 +52,7 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
-* Wed Mar 12 2014 Bob Ball <bob.ball@citrix.com - 0.9.1-1
+* Wed Mar 12 2014 Bob Ball <bob.ball@citrix.com> - 0.9.1-1
 - Update blktap to avoid Debian Jessie compile failure 
 
 * Fri Jan 17 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
