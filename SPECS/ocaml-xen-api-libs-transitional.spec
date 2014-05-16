@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-api-libs-transitional
-Version:        0.9.3
-Release:        2%{?dist}
+Version:        0.9.4
+Release:        1%{?dist}
 Summary:        Deprecated standard library extension for OCaml
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Libraries
@@ -182,6 +182,9 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 %{_libdir}/ocaml/xml-light2/*.mli
 
 %changelog
+* Fri May 16 2014 David Scott <dave.scott@citrix.com> - 0.9.4-1
+- Update to 0.9.4, which builds on arm
+
 * Tue May 13 2014 David Scott <dave.scott@citrix.com> - 0.9.3-2
 - Fix split between %{name} and %{name}-devel
 
