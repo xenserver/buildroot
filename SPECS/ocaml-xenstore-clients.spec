@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xenstore-clients
-Version:        0.9.2
+Version:        0.9.3
 Release:        1%{?dist}
 Summary:        Unix xenstore clients for OCaml
 License:        LGPL
@@ -49,6 +49,9 @@ make install DESTDIR=${buildroot}
 %{_libdir}/ocaml/xenstore_transport/*
 
 %changelog
+* Fri May  9 2014 David Scott <dave.scott@citrix.com> - 0.9.3-1
+- Update to 0.9.3
+
 * Tue Sep 10 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.2-1
 - Update to 0.9.2
 

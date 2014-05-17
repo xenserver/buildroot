@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        0.9.15
+Version:        0.9.16
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
@@ -62,6 +62,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/xcp/*
 
 %changelog
+* Fri May  9 2014 David Scott <dave.scott@citrix.com> - 0.9.16-1
+- Update to 0.9.16, with RRD fixes
+
 * Fri Apr 25 2014 David Scott <dave.scott@eu.citrix.com> - 0.9.15-1
 - Update to 0.9.15, now with vGPU and SR.probe
 

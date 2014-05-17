@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xenops
-Version:        0.9.2
+Version:        0.9.4
 Release:        1%{?dist}
 Summary:        Low-level xen control operations OCaml
 License:        LGPL
@@ -35,6 +35,15 @@ Requires:       ocaml-xenstore-clients-devel%{?_isa}
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
+%package        tools
+Summary:        Debugging tools for %{name}
+Group:          Development/Libraries
+Requires:       xen-libs
+BuildRequires:  xen-devel
+
+%description   tools
+A set of debugging tools which showcase the features of %{name}-devel.
+
 %prep
 %setup -q -n xenops-%{version}
 
@@ -45,7 +54,8 @@ make
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
-make install
+mkdir -p %{buildroot}/%{_bindir}
+make install BINDIR=%{buildroot}/%{_bindir}
 
 
 %files
@@ -55,7 +65,13 @@ make install
 %doc LICENSE README.md ChangeLog MAINTAINERS
 %{_libdir}/ocaml/xenops/*
 
+%files tools
+%{_bindir}/list_domains
+
 %changelog
+* Thu May  8 2014 David Scott <dave.scott@citrix.com> - 0.9.4-1
+- Update to 0.9.4, add list_domains binary
+
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.2-1
 - Update to 0.9.2
 
