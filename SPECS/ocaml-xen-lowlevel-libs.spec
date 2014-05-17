@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.16
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Libraries
@@ -31,6 +31,14 @@ Requires:       %{name} = %{version}-%{release}
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
+%package        runtime
+Summary:        Runtime binaries for users of %{name}
+Group:          Development/Libraries
+
+%description    runtime
+The %{name}-runtime package contains binaries which must be present
+at runtime when executing programs that use %{name}.
+
 %prep
 %setup -q
 
@@ -48,7 +56,6 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 
 %files
 %doc README.md
-%{_libexecdir}/xenopsd/xenguest
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
 #%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
@@ -69,7 +76,13 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libdir}/ocaml/xenctrl/*.cmxa
 %{_libdir}/ocaml/xenctrl/*.mli
 
+%files runtime
+%{_libexecdir}/xenopsd/xenguest
+
 %changelog
+* Sat May 17 2014 David Scott <dave.scott@citrix.com> - 0.9.16-3
+- Place xenguest in %{name}-runtime
+
 * Thu May 15 2014 David Scott <dave.scott@citrix.com> - 0.9.16-2
 - Update xenguest path
 

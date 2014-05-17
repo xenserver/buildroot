@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.34
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
@@ -37,6 +37,7 @@ Requires:       redhat-lsb-core
 Requires:       xenops-cli
 Requires:       vncterm
 Requires:       linux-guest-loader
+Requires:       ocaml-xen-lowlevel-libs-runtime
 
 %description
 Simple VM manager for the xapi toolstack.
@@ -190,6 +191,9 @@ fi
 #fi
 
 %changelog
+* Sat May 17 2014 David Scott <dave.scott@citrix.com> - 0.9.34-3
+- Depend on the ocaml-xen-lowlevel-libs-runtime package
+
 * Tue May 14 2014 David Scott <dave.scott@citrix.com> - 0.9.34-2
 - Don't include xenguest: this now comes from ocaml-xen-lowlevel-libs
 
