@@ -1,6 +1,6 @@
 Name:           xenopsd
-Version:        0.9.34
-Release:        3%{?dist}
+Version:        0.9.35
+Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 Group:          Development/Other
@@ -191,6 +191,9 @@ fi
 #fi
 
 %changelog
+* Sun May 18 2014 David Scott <dave.scott@citrix.com> - 0.9.35-1
+- Update to 0.9.35
+
 * Sat May 17 2014 David Scott <dave.scott@citrix.com> - 0.9.34-3
 - Depend on the ocaml-xen-lowlevel-libs-runtime package
 
