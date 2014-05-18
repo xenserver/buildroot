@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-api-libs-transitional
-Version:        0.9.4
+Version:        0.9.5
 Release:        1%{?dist}
 Summary:        Deprecated standard library extension for OCaml
 License:        LGPL2.1 + OCaml linking exception
@@ -182,6 +182,9 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 %{_libdir}/ocaml/xml-light2/*.mli
 
 %changelog
+* Sun May 18 2014 David Scott <dave.scott@citrix.com> - 0.9.5-1
+- Update to 0.9.5, which hopefully doesn't throw exceptions on arm
+
 * Fri May 16 2014 David Scott <dave.scott@citrix.com> - 0.9.4-1
 - Update to 0.9.4, which builds on arm
 
