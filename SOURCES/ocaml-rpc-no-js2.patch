@@ -1,0 +1,33 @@
+commit cf4229b24aae120b1945f88f0b142a23d23e61cd
+Author: David Scott <dave.scott@citrix.com>
+Date:   Mon May 12 14:01:17 2014 +0100
+
+    We only depend on Lwt when using js_of_ocaml
+    
+    Signed-off-by: David Scott <dave.scott@citrix.com>
+
+diff --git a/lib/Makefile b/lib/Makefile
+index 11f50e8..dab0777 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -1,8 +1,8 @@
+ OCAMLC = ocamlfind ocamlc
+ OCAMLOPT = ocamlfind ocamlopt
+ OCAMLFLAGS = -annot -g
+-PACKS = xmlm,lwt
+-PACKS_JS = js_of_ocaml,js_of_ocaml.syntax
++PACKS = xmlm
++PACKS_JS = lwt,js_of_ocaml,js_of_ocaml.syntax
+ 
+ ICAMLP4 = -I $(shell ocamlfind query camlp4) \
+ 	-I $(shell ocamlfind query type_conv) 
+@@ -56,6 +56,9 @@ rpc_client_js_helper.cmo: rpc_client_js_helper.ml
+ rpc_client_js.cmo: rpc_client_js.ml rpc_client_js_helper.cmo 
+ 	$(OCAMLC) $(OCAMLFLAGS) -package $(PACKS_JS) -syntax camlp4o $(ICAMLP4_JS) -c $@ $<
+ 
++rpc_client_js.cmi: rpc_client_js.mli rpc_client_js_helper.cmo
++	$(OCAMLOPT) $(OCAMLFLAGS) -package $(PACKS_JS) -syntax camlp4o $(ICAMLP4_JS) -c rpc_client_js.mli
++
+ %.o %.cmx: %.ml
+ 	$(OCAMLOPT) $(OCAMLFLAGS) -package $(PACKS) -c -o $@ $<
+ 

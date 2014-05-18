@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.34
+Version:        0.9.36
 Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
@@ -30,12 +30,14 @@ BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  xen-devel
+BuildRequires:  xen-missing-headers
 BuildRequires:  ocaml-uutf-devel
 Requires:       message-switch
 Requires:       redhat-lsb-core
 Requires:       xenops-cli
 Requires:       vncterm
 Requires:       linux-guest-loader
+Requires:       ocaml-xen-lowlevel-libs-runtime
 
 %description
 Simple VM manager for the xapi toolstack.
@@ -69,12 +71,12 @@ Requires:       %{name} = %{version}-%{release}
 %description    simulator
 A synthetic VM manager for testing.
 
-#%package        xenlight
-#Summary:        Xenopsd using libxenlight
-#Group:          Development/Other
-#Requires:       %{name} = %{version}-%{release}
-#%description    xenlight
-#Simple VM manager for Xen using libxenlight
+%package        xenlight
+Summary:        Xenopsd using libxenlight
+Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
+%description    xenlight
+Simple VM manager for Xen using libxenlight
 
 %prep
 %setup -q
@@ -87,7 +89,7 @@ cp %{SOURCE6} xenopsd-network-conf
 
 %build
 make configure
-./configure --libexecdir %{_libexecdir}/%{name}
+./configure --libexecdir %{_libexecdir}/%{name} --disable-xenguestbin
 make
 
 %install
@@ -96,9 +98,8 @@ mkdir -p %{buildroot}/%{_sbindir}
 install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
 install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir}/xenopsd-simulator
 install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
-#install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
+install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
-install -D _build/xenguest/xenguest_main.native          %{buildroot}/%{_libexecdir}/%{name}/xenguest
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
 install -D scripts/vif-xl %{buildroot}/%{_libexecdir}/%{name}/vif-xl
@@ -112,7 +113,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
 install -m 0755 xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
-#install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
+install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
 
 mkdir -p %{buildroot}/etc/xapi
 chmod 755 make-xsc-xenopsd.conf 
@@ -152,7 +153,6 @@ fi
 %files xc
 %{_sbindir}/xenopsd-xc
 %{_sysconfdir}/init.d/xenopsd-xc
-%{_libexecdir}/%{name}/xenguest
 
 %post xc
 /sbin/chkconfig --add xenopsd-xc
@@ -176,21 +176,33 @@ if [ $1 -eq 0 ]; then
   /sbin/chkconfig --del xenopsd-simulator
 fi
 
-#%files xenlight
-#%defattr(-,root,root)
-#%{_sbindir}/xenopsd-xenlight
-#%{_sysconfdir}/init.d/xenopsd-xenlight
+%files xenlight
+%defattr(-,root,root)
+%{_sbindir}/xenopsd-xenlight
+%{_sysconfdir}/init.d/xenopsd-xenlight
 
-#%post xenlight
-#/sbin/chkconfig --add xenopsd-xenlight
+%post xenlight
+/sbin/chkconfig --add xenopsd-xenlight
 
-#%preun xenlight
-#if [ $1 -eq 0 ]; then
-#  /sbin/service xenopsd-xenlight stop > /dev/null 2>&1
-#  /sbin/chkconfig --del xenopsd-xenlight
-#fi
+%preun xenlight
+if [ $1 -eq 0 ]; then
+  /sbin/service xenopsd-xenlight stop > /dev/null 2>&1
+  /sbin/chkconfig --del xenopsd-xenlight
+fi
 
 %changelog
+* Sun May 18 2014 David Scott <dave.scott@citrix.com> - 0.9.36-1
+- Enable xenlight, update to 0.9.36
+
+* Sun May 18 2014 David Scott <dave.scott@citrix.com> - 0.9.35-1
+- Update to 0.9.35
+
+* Sat May 17 2014 David Scott <dave.scott@citrix.com> - 0.9.34-3
+- Depend on the ocaml-xen-lowlevel-libs-runtime package
+
+* Tue May 14 2014 David Scott <dave.scott@citrix.com> - 0.9.34-2
+- Don't include xenguest: this now comes from ocaml-xen-lowlevel-libs
+
 * Fri Jan 17 2014 Euan Harris <euan.harris@eu.citrix.com> - 0.9.34-1
 - Update to 0.9.34, restoring fixes from the 0.9.32 line which were 
   not merged to trunk before 0.9.33 was tagged

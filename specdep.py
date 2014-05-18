@@ -153,6 +153,7 @@ def main():
                 spec = pkg.Spec(spec_path, target="rpm", dist=params['dist'])
             pkg_name = spec.name()
             if pkg_name in params['ignore']:
+                sys.stderr.write("ignoring %s\n" % pkg_name)
                 continue
 
             specs[os.path.basename(spec_path)] = spec

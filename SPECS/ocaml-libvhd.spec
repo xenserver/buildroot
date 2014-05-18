@@ -12,6 +12,7 @@ BuildRequires:  libuuid-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  xen-devel
+BuildRequires:  xen-missing-headers
 
 %description
 Simple C bindings which allow .vhd files to be manipulated.

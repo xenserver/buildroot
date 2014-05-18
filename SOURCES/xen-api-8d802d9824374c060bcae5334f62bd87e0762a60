@@ -1,0 +1,26 @@
+commit 8d802d9824374c060bcae5334f62bd87e0762a60
+Author: David Scott <dave.scott@citrix.com>
+Date:   Sun May 18 12:48:38 2014 +0000
+
+    arm: don't fail (float_of_string) if some /proc/cpuinfo keys are missing
+    
+    Signed-off-by: David Scott <dave.scott@citrix.com>
+
+diff --git a/ocaml/xapi/create_misc.ml b/ocaml/xapi/create_misc.ml
+index f36aa49..db10d1d 100644
+--- a/ocaml/xapi/create_misc.ml
++++ b/ocaml/xapi/create_misc.ml
+@@ -477,9 +477,10 @@ let create_host_cpu ~__context =
+ 
+ 	(* Recreate all Host_cpu objects *)
+ 	
+-	let speed = Int64.of_float (float_of_string cpu_mhz) in
+-	let model = Int64.of_string model in
+-	let family = Int64.of_string family in
++	(* Not all /proc/cpuinfo files contain MHz information. *)
++	let speed = try Int64.of_float (float_of_string cpu_mhz) with _ -> 0L in
++	let model = try Int64.of_string model with _ -> 0L in
++	let family = try Int64.of_string family with _ -> 0L in
+ 
+ 	(* Recreate all Host_cpu objects *)
+ 	let host_cpus = List.filter (fun (_, s) -> s.API.host_cpu_host = host) (Db.Host_cpu.get_all_records ~__context) in
