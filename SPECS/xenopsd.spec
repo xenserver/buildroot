@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.35
+Version:        0.9.36
 Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
@@ -71,12 +71,12 @@ Requires:       %{name} = %{version}-%{release}
 %description    simulator
 A synthetic VM manager for testing.
 
-#%package        xenlight
-#Summary:        Xenopsd using libxenlight
-#Group:          Development/Other
-#Requires:       %{name} = %{version}-%{release}
-#%description    xenlight
-#Simple VM manager for Xen using libxenlight
+%package        xenlight
+Summary:        Xenopsd using libxenlight
+Group:          Development/Other
+Requires:       %{name} = %{version}-%{release}
+%description    xenlight
+Simple VM manager for Xen using libxenlight
 
 %prep
 %setup -q
@@ -98,7 +98,7 @@ mkdir -p %{buildroot}/%{_sbindir}
 install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
 install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir}/xenopsd-simulator
 install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
-#install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
+install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
@@ -113,7 +113,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
 install -m 0755 xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
-#install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
+install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
 
 mkdir -p %{buildroot}/etc/xapi
 chmod 755 make-xsc-xenopsd.conf 
@@ -176,21 +176,24 @@ if [ $1 -eq 0 ]; then
   /sbin/chkconfig --del xenopsd-simulator
 fi
 
-#%files xenlight
-#%defattr(-,root,root)
-#%{_sbindir}/xenopsd-xenlight
-#%{_sysconfdir}/init.d/xenopsd-xenlight
+%files xenlight
+%defattr(-,root,root)
+%{_sbindir}/xenopsd-xenlight
+%{_sysconfdir}/init.d/xenopsd-xenlight
 
-#%post xenlight
-#/sbin/chkconfig --add xenopsd-xenlight
+%post xenlight
+/sbin/chkconfig --add xenopsd-xenlight
 
-#%preun xenlight
-#if [ $1 -eq 0 ]; then
-#  /sbin/service xenopsd-xenlight stop > /dev/null 2>&1
-#  /sbin/chkconfig --del xenopsd-xenlight
-#fi
+%preun xenlight
+if [ $1 -eq 0 ]; then
+  /sbin/service xenopsd-xenlight stop > /dev/null 2>&1
+  /sbin/chkconfig --del xenopsd-xenlight
+fi
 
 %changelog
+* Sun May 18 2014 David Scott <dave.scott@citrix.com> - 0.9.36-1
+- Enable xenlight, update to 0.9.36
+
 * Sun May 18 2014 David Scott <dave.scott@citrix.com> - 0.9.35-1
 - Update to 0.9.35
 

@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.16
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 Group:          Development/Libraries
@@ -44,7 +44,7 @@ at runtime when executing programs that use %{name}.
 
 %build
 make configure
-./configure --disable-xenlight
+./configure
 make
 
 %install
@@ -58,28 +58,40 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %doc README.md
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
-#%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
-#%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
-#%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
-#%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
+%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
+%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
+%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
+%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
 %{_libdir}/ocaml/xenctrl
 %exclude %{_libdir}/ocaml/xenctrl/*.a
 %exclude %{_libdir}/ocaml/xenctrl/*.cmxa
 %exclude %{_libdir}/ocaml/xenctrl/*.cmx
 %exclude %{_libdir}/ocaml/xenctrl/*.ml
 %exclude %{_libdir}/ocaml/xenctrl/*.mli
-#%{_libdir}/ocaml/xenlight/*
+%{_libdir}/ocaml/xenlight
+%exclude %{_libdir}/ocaml/xenlight/*.a
+%exclude %{_libdir}/ocaml/xenlight/*.cmxa
+%exclude %{_libdir}/ocaml/xenlight/*.cmx
+%exclude %{_libdir}/ocaml/xenlight/*.ml
+%exclude %{_libdir}/ocaml/xenlight/*.mli
 
 %files devel
 %{_libdir}/ocaml/xenctrl/*.a
 %{_libdir}/ocaml/xenctrl/*.cmx
 %{_libdir}/ocaml/xenctrl/*.cmxa
 %{_libdir}/ocaml/xenctrl/*.mli
+%{_libdir}/ocaml/xenlight/*.a
+%{_libdir}/ocaml/xenlight/*.cmx
+%{_libdir}/ocaml/xenlight/*.cmxa
+%{_libdir}/ocaml/xenlight/*.mli
 
 %files runtime
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Sun May 18 2014 David Scott <dave.scott@citrix.com> - 0.9.16-4
+- Enable xenlight
+
 * Sat May 17 2014 David Scott <dave.scott@citrix.com> - 0.9.16-3
 - Place xenguest in %{name}-runtime
 
