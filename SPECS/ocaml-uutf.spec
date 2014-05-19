@@ -1,11 +1,11 @@
 Name:           ocaml-uutf
 Version:        0.9.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Non-blocking streaming codec for UTF-8, UTF-16, UTF-16LE and UTF-16BE
 License:        BSD3
 Group:          Development/Libraries
 URL:            http://erratique.ch/software/uutf
-Source0:        http://erratique.ch/software/uutf/releases/uutf-%{version}.tbz
+Source0:        https://github.com/dbuenzli/uutf/archive/v%{version}/uutf-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
@@ -60,6 +60,9 @@ mkdir -p %{buildroot}%{_libdir}/ocaml/uutf
 
 
 %changelog
+* Mon May 19 2014 Euan Harris <euan.harris@citrix.com> - 0.9.3-3
+- Switch to GitHub mirror
+
 * Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.3-2
 - 'Ported' from xen-dist-ocaml to xenserver-core
 

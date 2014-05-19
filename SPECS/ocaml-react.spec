@@ -3,7 +3,7 @@
 
 Name:           ocaml-react
 Version:        0.9.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OCaml framework for Functional Reactive Programming (FRP)
 
 
@@ -11,9 +11,10 @@ Group:          Development/Libraries
 License:        BSD
 URL:            http://erratique.ch/software/react
 
-Source0:        http://erratique.ch/software/react/releases/react-%{version}.tbz
+Source0:        https://github.com/dbuenzli/react/archive/v%{version}/react-%{version}.tar.gz
 Source1:        react-LICENSE
 
+BuildRequires:  oasis
 BuildRequires:  ocaml >= 3.10.0
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
@@ -47,6 +48,7 @@ developing applications that use %{name}.
 cp %{SOURCE1} LICENSE
 
 %build
+oasis setup
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
@@ -65,6 +67,9 @@ ocaml setup.ml -install
 
 
 %changelog
+* Mon May 19 2014 Euan Harris <euan.harris@citrix.com> - 0.9.4-2
+- Switch to GitHub mirror
+
 * Sat Jun 01 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.4-1
 - Update for 0.9.4
 

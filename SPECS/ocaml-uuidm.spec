@@ -2,12 +2,13 @@
 
 Name:           ocaml-uuidm
 Version:        0.9.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Universally Unique IDentifiers (UUIDs) for OCaml
 License:        BSD3
 Group:          Development/Libraries
 URL:            http://erratique.ch/software/uuidm
-Source0:        http://erratique.ch/software/uuidm/releases/uuidm-%{version}.tbz
+Source0:        https://github.com/dbuenzli/uuidm/archive/v%{version}/uuidm-%{version}.tar.gz
+BuildRequires:  oasis
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
@@ -30,6 +31,7 @@ developing applications that use %{name}.
 %setup -q -n uuidm-%{version}
 
 %build
+oasis setup
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
@@ -55,6 +57,9 @@ rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/uuidtrip
 %{_libdir}/ocaml/uuidm/META
 
 %changelog
+* Mon May 19 2014 Euan Harris <euan.harris@citrix.com> - 0.9.5-2
+- Switch to GitHub mirror
+
 * Wed May 29 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.5-1
 - Initial package
 
