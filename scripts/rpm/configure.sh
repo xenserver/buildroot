@@ -21,5 +21,6 @@ echo -n "Initializing repository..."
 mkdir -p RPMS
 createrepo --quiet RPMS
 mkdir -p SRPMS
+createrepo --quiet SRPMS
 echo " done"
 
