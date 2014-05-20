@@ -8,8 +8,10 @@ URL:            http://github.com/xapi-project/ocaml-opasswd
 Source0:        https://github.com/xapi-project/ocaml-opasswd/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:         ocaml-opasswd-ocaml-4.00.1.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires:  ocaml ocaml-findlib ocaml-ctypes-devel libffi-devel
-Requires:       ocaml ocaml-findlib
+BuildRequires:  ocaml 
+BuildRequires:  ocaml-findlib 
+BuildRequires:  ocaml-ctypes-devel 
+BuildRequires:  libffi-devel
 
 %description
 This is an OCaml binding to the glibc passwd file and shadow password
@@ -21,8 +23,8 @@ nixes, but it has not been tested.
 Summary:        Development files for %{name}
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
-Requires:       ocaml-ctypes-devel
-Requires:       libffi
+Requires:       ocaml-ctypes-devel%{?_isa}
+Requires:       libffi%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
