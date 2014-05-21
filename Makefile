@@ -25,12 +25,17 @@ all: rpms
 %.dsc: 
 	@echo [MAKEDEB] $@
 	@scripts/deb/makedeb.py $<
+	@echo [APT-FTPARCHIVE] $@
+	@cd ./SRPMS && apt-ftparchive sources . > Sources
 
 %.deb:
 	@echo [COWBUILDER] $@
 	@sudo cowbuilder --build \
 		--configfile pbuilder/pbuilderrc \
 		--buildresult RPMS $<
+	@echo [APT-FTPARCHIVE] $@
+	@cd ./RPMS && apt-ftparchive packages . > Packages
+
 
 
 # Dependency build rules
