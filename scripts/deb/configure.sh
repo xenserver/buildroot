@@ -19,7 +19,7 @@ for file in scripts/deb/templates/*; do
     filename=`basename $file`
     cp $file pbuilder/${filename}
     for replace_var in "APT_REPOS" "PWD" "ARCH" "BASEPATH" "DIST" "MIRROR" ; do
-	sed -ie "s~@$replace_var@~${!replace_var}~g" pbuilder/${filename}
+	sed -i -e "s~@$replace_var@~${!replace_var}~g" pbuilder/${filename}
     done
     chmod 755 pbuilder/${filename}
 done
