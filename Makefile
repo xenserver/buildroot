@@ -11,13 +11,13 @@ all: rpms
 	@echo [RPMBUILD] $@
 	@rpmbuild --quiet --define "_topdir ." --define "%dist $(DIST)" -bs $<
 	@echo [CREATEREPO] $@
-	@createrepo --quiet --update ./SRPMS
+	@flock --timeout 30 ./SRPMS createrepo --quiet --update ./SRPMS
 
 %.rpm:
 	@echo [MOCK] $@
-	@mock --configdir=mock --quiet -r xenserver --resultdir=$(dir $@) --rebuild $<
+	@mock --configdir=mock --quiet -r xenserver --resultdir=$(dir $@) --uniqueext=$(notdir $@) --rebuild $<
 	@echo [CREATEREPO] $@
-	@createrepo --quiet --update ./RPMS
+	@flock --timeout 30 ./RPMS createrepo --quiet --update ./RPMS
 
 
 # Deb build rules
@@ -25,17 +25,18 @@ all: rpms
 %.dsc: 
 	@echo [MAKEDEB] $@
 	@scripts/deb/makedeb.py $<
-	@echo [APT-FTPARCHIVE] $@
-	@cd ./SRPMS && apt-ftparchive sources . > Sources
+	@echo [UPDATEREPO] $@
+	@flock --timeout 30 ./SRPMS scripts/deb/updaterepo sources SRPMS
 
 %.deb:
 	@echo [COWBUILDER] $@
+	@mkdir -p logs
+	@touch RPMS/Packages	
 	@sudo cowbuilder --build \
 		--configfile pbuilder/pbuilderrc \
 		--buildresult RPMS $<
-	@echo [APT-FTPARCHIVE] $@
-	@cd ./RPMS && apt-ftparchive packages . > Packages
-
+	@echo [UPDATEREPO] $@
+	@flock --timeout 30 ./RPMS scripts/deb/updaterepo packages RPMS
 
 
 # Dependency build rules
@@ -45,3 +46,4 @@ deps: SPECS/*.spec specdep.py scripts/lib/mappkgname.py
 	@./specdep.py -d $(DIST) -i libnl3 SPECS/*.spec > $@
 
 -include deps
+

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Update the Debian repository metadata files.  
+# apt-ftparchive writes the new metadata to standard
+# output, which is then redirected to the appropriate
+# file.   This causes problems for concurrent builds
+# because the script takes time to print the new 
+# metadata, but the executing shell truncates the 
+# old metadata file immediately.  This means there
+# is a short period of time during which the metadata
+# file is empty, and if a concurrently-running build
+# tries to run apt during that period it will fail.
+#
+# To avoid this problem, we write the new metadata
+# file to a temporary file, then move that into the
+# correct place.
+#
+# Usage: updaterepo <sources|packages> <PKGDIR> 
+
+cd $2
+PID=$BASHPID
+
+case $1 in
+sources)
+        apt-ftparchive sources . > Sources.$PID
+	mv Sources.$PID Sources
+	;;
+packages)
+        apt-ftparchive packages . > Packages.$PID
+	mv Packages.$PID Packages
+	;;
+esac
