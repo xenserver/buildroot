@@ -3,6 +3,10 @@ set -eu
 
 echo "Configuring DEB-based build"
 
+# Check we can use sudo, so the rest of the script can run as any user
+which sudo > /dev/null || ( [ `id -u` == "0" ] && apt-get install sudo ) || echo "Please install sudo"
+sudo /bin/true || echo "Please configure sudo for current user"
+
 ARCH=${ARCH:-amd64}
 DIST=${DIST:-raring}
 BASEPATH=/var/cache/pbuilder/base.cow
