@@ -41,7 +41,7 @@ make
 export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 mkdir -p ${OCAMLFIND_DESTDIR}
 export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
-ocaml setup.ml -install
+make install
 
 %files
 %doc CHANGES
