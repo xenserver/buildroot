@@ -1,11 +1,11 @@
 Name:           openstack-xapi-plugins
-Version:        2013.2
+Version:        2014.1
 Release:        1%{?dist}
 Summary:        XenAPI plugins from OpenStack
 License:        ASL 2.0
 Group:          System/Hypervisor
-URL:            https://launchpad.net/nova/havana
-Source0:        https://launchpad.net/nova/havana/%{version}/+download/nova-%{version}.tar.gz
+URL:            https://launchpad.net/nova/icehouse
+Source0:        https://launchpad.net/nova/icehouse/%{version}/+download/nova-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  python-setuptools
 
@@ -29,6 +29,9 @@ cp -r plugins/xenserver/xenapi/etc/xapi.d/plugins/* %{buildroot}/usr/lib/xapi/pl
 /usr/lib/xapi/plugins/*
 
 %changelog
+* Thu May 22 2014 Antony Messerli <amesserl@rackspace.com> - 2014.1-1
+- Update to Icehouse release
+
 * Wed Nov 20 2013 Euan Harris <euan.harris@citrix.com> - 2013.2-1
 - Update to Havana release
 
