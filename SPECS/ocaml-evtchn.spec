@@ -24,8 +24,8 @@ on the same host.
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
-Requires:       ocaml-io-page-devel
-Requires:       xen-devel
+Requires:       ocaml-io-page-devel%{?_isa}
+Requires:       xen-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
