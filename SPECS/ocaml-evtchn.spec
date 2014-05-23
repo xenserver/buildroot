@@ -16,8 +16,6 @@ BuildRequires:  ocaml-io-page-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  xen-devel
-Requires:       ocaml
-Requires:       ocaml-findlib
 
 %description
 These APIs allow programs running in userspace to signal other domains
