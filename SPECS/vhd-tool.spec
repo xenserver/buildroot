@@ -49,6 +49,9 @@ make install
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
+* Fri Jun 6 2014 Jonathan Ludlam <jonathan.ludlam@citrix.com> - 0.7.5-1
+- Update to 0.7.5
+
 * Wed Apr 9 2014 Euan Harris <euan.harris@citrix.com> - 0.7.4-1
 - Update to 0.7.4 - fix handling of tar file prefixes
 
