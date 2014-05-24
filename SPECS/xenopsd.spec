@@ -188,6 +188,9 @@ fi
 #fi
 
 %changelog
+* Fri Jun  6 2014 Jonathan Ludlam <jonathan.ludlam@citrix.com> - 0.9.37-1
+- Update to 0.9.37
+
 * Fri Jan 17 2014 Euan Harris <euan.harris@eu.citrix.com> - 0.9.34-1
 - Update to 0.9.34, restoring fixes from the 0.9.32 line which were 
   not merged to trunk before 0.9.33 was tagged
