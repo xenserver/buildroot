@@ -1,9 +1,18 @@
 #!/bin/bash
 set -eu
 
-if [ `lsb_release -si` == "Fedora" -o `lsb_release -si` == "CentOS" -o `lsb_release -si` == "RedHatEnterpriseServer" ] ; then
-	. scripts/rpm/configure.sh
+DISTRIBUTION=`lsb_release -si`
+case "$DISTRIBUTION" in
+    Fedora|CentOS|RedHatEnterpriseServer)
+        . scripts/rpm/configure.sh
+        ;;
 
-elif [ `lsb_release -si` == "Ubuntu" -o `lsb_release -si` == "Debian" -o `lsb_release -si` == "Linaro" ] ; then
+    Ubuntu|Debian|Linaro)
 	. scripts/deb/configure.sh
-fi
+        ;;
+
+    *)
+        echo "Unknown distribution: $DISTRIBUTION"
+        exit 1
+        ;;
+esac
