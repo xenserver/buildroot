@@ -6,7 +6,7 @@
 
 Name:           ocaml-libvirt
 Version:        0.6.1.2
-Release:        1%{?dist}%{?extra_release}
+Release:        100%{?dist}%{?extra_release}
 Summary:        OCaml binding for libvirt
 
 Group:          Development/Libraries
@@ -139,6 +139,10 @@ rm -f $RPM_BUILD_ROOT%{_bindir}/mlvirsh
 
 
 %changelog
+* Tue May 13 2014 David Scott <dave.scott@citrix.com> - 0.6.1.2-100
+- Bump release number to 100 to override upstream. Next release will
+  have our patches applied.
+
 * Fri Mar 23 2012 Richard W.M. Jones <rjones@redhat.com> - 0.6.1.2-1
 - New upstream version 0.6.1.2.
 
