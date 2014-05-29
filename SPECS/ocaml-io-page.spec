@@ -41,14 +41,12 @@ export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 ocaml setup.ml -install
 
 %files
-%defattr(-,root,root)
 %{_libdir}/ocaml/io-page/META
 %{_libdir}/ocaml/io-page/io_page.cma
 %{_libdir}/ocaml/io-page/io_page.cmi
 %{_libdir}/ocaml/io-page/dllio_page_unix_stubs.so
 
 %files devel
-%defattr(-,root,root)
 %doc CHANGES README.md
 %{_libdir}/ocaml/io-page/io_page.a
 %{_libdir}/ocaml/io-page/io_page.cmx

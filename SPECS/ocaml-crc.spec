@@ -42,14 +42,12 @@ export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 ocaml setup.ml -install
 
 %files
-%defattr(-,root,root)
 %{_libdir}/ocaml/crc/META
 %{_libdir}/ocaml/crc/crc.cma
 %{_libdir}/ocaml/crc/crc.cmi
 %{_libdir}/ocaml/crc/dllcrc_stubs.so
 
 %files devel
-%defattr(-,root,root)
 %doc ChangeLog README.md
 %{_libdir}/ocaml/crc/crc.a
 %{_libdir}/ocaml/crc/crc.cmx

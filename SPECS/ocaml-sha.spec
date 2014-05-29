@@ -36,7 +36,6 @@ make install
 # This space intentionally left blank
 
 %files devel
-%defattr(-,root,root)
 %doc README
 
 %{_libdir}/ocaml/sha/META

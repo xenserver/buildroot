@@ -47,7 +47,6 @@ export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 ocaml setup.ml -install
 
 %files
-%defattr(-,root,root)
 %doc LICENSE
 %{_libdir}/ocaml/rrd-transport/META
 %{_libdir}/ocaml/rrd-transport/rrd_transport.cma
@@ -61,7 +60,6 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/rrd-transport/rrd_writer.cmi
 
 %files devel
-%defattr(-,root,root)
 %doc ChangeLog README.md
 %{_libdir}/ocaml/rrd-transport/rrd_transport.a
 %{_libdir}/ocaml/rrd-transport/rrd_transport.cmxa

@@ -48,7 +48,6 @@ export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 ocaml setup.ml -install
 
 %files
-%defattr(-,root,root)
 %doc LICENSE
 %doc ChangeLog README.md
 %{_libdir}/ocaml/xen-gnt
