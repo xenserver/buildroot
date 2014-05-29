@@ -5,7 +5,6 @@ Version:        1.2
 Release:        1%{?dist}
 Summary:        Lambda-Term is a cross-platform library for manipulating the terminal for Ocaml
 License:        BSD3
-Group:          Development/Libraries
 URL:            http://forge.ocamlcore.org/projects/lambda-term/
 Source0:        http://forge.ocamlcore.org/frs/download.php/945/lambda-term-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -22,7 +21,6 @@ Lambda-Term is a cross-platform library for manipulating the terminal.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-lwt-devel%{?_isa}
 Requires:       ocaml-zed-devel%{?_isa}

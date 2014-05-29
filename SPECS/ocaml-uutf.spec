@@ -3,7 +3,6 @@ Version:        0.9.3
 Release:        3%{?dist}
 Summary:        Non-blocking streaming codec for UTF-8, UTF-16, UTF-16LE and UTF-16BE
 License:        BSD3
-Group:          Development/Libraries
 URL:            http://erratique.ch/software/uutf
 Source0:        https://github.com/dbuenzli/uutf/archive/v%{version}/uutf-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -25,7 +24,6 @@ BSD3 license.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

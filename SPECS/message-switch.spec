@@ -3,7 +3,6 @@ Version:        0.10.1
 Release:        1%{?dist}
 Summary:        A store and forward message switch
 License:        FreeBSD
-Group:          Development/Other
 URL:            https://github.com/xapi-project/message-switch
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        message-switch-init
@@ -59,7 +58,6 @@ fi
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cohttp-devel%{?_isa}
 Requires:       ocaml-oclock-devel%{?_isa}

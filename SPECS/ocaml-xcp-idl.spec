@@ -5,7 +5,6 @@ Version:        0.9.16
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xcp-idl
 Source0:        https://github.com/xapi-project/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
 
@@ -26,7 +25,6 @@ Common interface definitions for XCP services.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
 Requires:       ocaml-uri-devel%{?_isa}

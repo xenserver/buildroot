@@ -4,7 +4,6 @@ Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.49
 Release: 1%{?dist}
-Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/%{version}/xen-api-%{version}.tar.gz
@@ -66,7 +65,6 @@ This package contains the xapi toolstack.
 
 %package xe
 Summary: The xapi toolstack CLI
-Group: System/Hypervisor
 Requires: bash-completion
 
 %description xe
@@ -74,7 +72,6 @@ The command-line interface for controlling XCP hosts.
 
 %package python-devel
 Summary: XenAPI client support in python
-Group: System/Hypervisor
 Requires: python
 
 %description python-devel

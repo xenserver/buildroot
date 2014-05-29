@@ -3,7 +3,6 @@ Name: vncterm
 Version: 0.9.0
 Release: 1%{?dist}
 License: GPL
-Group: System/Hypervisor
 URL:  https://github.com/xenserver/vncterm
 Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:  vncterm-1-fix-build

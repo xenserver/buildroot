@@ -5,7 +5,6 @@ Version:        1.1.1
 Release:        1%{?dist}
 Summary:        Efficient handling of I/O memory pages on Unix and Xen.
 License:        ISC
-Group:          Development/Other
 URL:            https://github.com/mirage/io-page
 Source0:        http://github.com/mirage/io-page/archive/v%{version}/io-page-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -21,7 +20,6 @@ IO pages are page-aligned, and wrapped in the Cstruct library to avoid copying t
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cstruct-devel%{?_isa}
 

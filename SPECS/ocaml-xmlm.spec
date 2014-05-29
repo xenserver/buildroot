@@ -3,7 +3,6 @@ Version:        1.1.1
 Release:        2%{?dist}
 Summary:        Streaming XML input/output for OCaml
 License:        BSD3
-Group:          Development/Libraries
 URL:            http://erratique.ch/software/xmlm
 Source0:        https://github.com/dbuenzli/xmlm/archive/v%{version}/xmlm-%{version}.tar.gz
 Obsoletes:      xmlm <= 1.1.1
@@ -23,7 +22,6 @@ arborescent data structures to/from XML documents.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

@@ -7,7 +7,6 @@ Release:        2%{?dist}
 Summary:        OCaml framework for Functional Reactive Programming (FRP)
 
 
-Group:          Development/Libraries
 License:        BSD
 URL:            http://erratique.ch/software/react
 
@@ -34,7 +33,6 @@ and provides time stamp events, delayed events and delayed signals.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 

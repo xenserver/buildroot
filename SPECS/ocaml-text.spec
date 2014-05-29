@@ -6,7 +6,6 @@ Version:        0.6
 Release:        1%{?dist}
 Summary:        Library for dealing with unicode text conveniently
 
-Group:          Development/Libraries
 License:        BSD
 URL:            http://forge.ocamlcore.org/projects/ocaml-text
 Source0:        http://forge.ocamlcore.org/frs/download.php/937/%{name}-%{version}.tar.gz
@@ -24,7 +23,6 @@ unicode characters, in a convenient way.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

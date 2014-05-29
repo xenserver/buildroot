@@ -2,7 +2,6 @@ Name:		ocamlmod
 Version:	0.0.7
 Release:	1%{?dist}
 Summary:	Generate OCaml modules from source files
-Group:		Development/Tools
 License:	LGPL
 URL:		http://forge.ocamlcore.org/projects/ocamlmod/
 Source0:	http://forge.ocamlcore.org/frs/download.php/1350/%{name}-%{version}.tar.gz

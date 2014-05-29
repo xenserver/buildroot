@@ -1,5 +1,4 @@
 Summary: Convenience library for kernel netlink sockets
-Group: Development/Libraries
 License: LGPLv2
 Name: libnl3
 Version: 3.2.22
@@ -18,7 +17,6 @@ network manipulation
 
 %package devel
 Summary: Libraries and headers for using libnl3
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 Requires: %{name}-cli = %{version}-%{release}
 Requires: kernel-headers
@@ -28,7 +26,6 @@ This package contains various headers for using libnl3
 
 %package cli
 Summary: Command line interface utils for libnl3
-Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
 
 %description cli
@@ -37,7 +34,6 @@ libraries on which they depend
 
 %package doc
 Summary: API documentation for libnl3
-Group: Documentation
 Requires: %{name} = %{version}-%{release}
 
 %description doc

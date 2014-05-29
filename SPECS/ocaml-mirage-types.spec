@@ -5,7 +5,6 @@ Version:        1.1.1
 Release:        1%{?dist}
 Summary:        MirageOS interfaces
 License:        ISC
-Group:          Development/Other
 URL:            https://github.com/mirage/mirage
 Source0:        http://github.com/mirage/mirage/archive/%{version}/mirage-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -24,7 +23,6 @@ See http://openmirage.org for more information.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 BuildRequires:  ocaml-ipaddr-devel%{?_isa}
 BuildRequires:  ocaml-lwt-devel%{?_isa}

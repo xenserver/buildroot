@@ -3,7 +3,6 @@ Version:	0.4.4
 Release:	1%{?dist}
 Summary:	Architecture for building OCaml libraries and applications
 
-Group:          Development/Tools
 License:	LGPL
 URL:		http://oasis.forge.ocamlcore.org/index.html
 Source0:	https://github.com/ocaml/oasis/archive/%{version}/%{name}-%{version}.tar.gz

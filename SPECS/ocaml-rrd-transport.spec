@@ -5,7 +5,6 @@ Version:        0.7.1
 Release:        1%{?dist}
 Summary:        Shared-memory protocols for transmitting RRD data
 License:        LGPL2.1 + OCaml linking exception
-Group:          Development/Other
 URL:            https://github.com/xapi-project/rrd-transport/
 Source0:        https://github.com/xapi-project/rrd-transport/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -26,7 +25,6 @@ and shared Xen pages.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-gnt-devel
 Requires:       ocaml-crc-devel

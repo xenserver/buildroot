@@ -5,7 +5,6 @@ Version:        0.9.2
 Release:        1%{?dist}
 Summary:        Pure OCaml implementation of the Qemu Message Protocol (QMP)
 License:        LGPL2.1 + OCaml linking exception
-Group:          Development/Libraries
 URL:            http://github.com/xapi-project/ocaml-qmp
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -22,7 +21,6 @@ process.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-yojson-devel%{?_isa}
 

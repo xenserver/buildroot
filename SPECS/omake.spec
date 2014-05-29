@@ -6,7 +6,6 @@ URL: http://omake.metaprl.org/
 Source0: http://pkgs.fedoraproject.org/repo/pkgs/ocaml-omake/omake-0.9.8.6-0.rc1.tar.gz/fe39a476ef4e33b7ba2ca77a6bcaded2/omake-0.9.8.6-0.rc1.tar.gz
 Patch0: omake-1-warnings
 License: GPL
-Group: Development/Tools
 BuildRequires: make
 BuildRequires: ncurses-devel
 BuildRequires: ocaml >= 3.09.2

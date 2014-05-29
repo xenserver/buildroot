@@ -5,7 +5,6 @@ Version:        0.9.0
 Release:        1%{?dist}
 Summary:        Manipulate Linux bridges, network devices and openvswitch instances in OCaml
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/xapi-project/netdev
 Source0:        https://github.com/xapi-project/netdev/archive/netdev-%{version}/netdev-%{version}.tar.gz
 BuildRequires:  forkexecd-devel
@@ -18,7 +17,6 @@ Manipulate Linux bridges, network devices and openvswitch instances in OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 BuildRequires:  forkexecd-devel%{?_isa}
 BuildRequires:  ocaml-stdext-devel%{?_isa}

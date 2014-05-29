@@ -5,7 +5,6 @@ Version:        0.7.0
 Release:        1%{?dist}
 Summary:        Pure OCaml library for reading, writing, streaming, converting vhd format files
 License:        LGPL2.1 + OCaml linking exception
-Group:          Development/Libraries
 URL:            http://github.com/djs55/ocaml-vhd
 Source0:        https://github.com/djs55/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -24,7 +23,6 @@ vhd files to be read, written and streamed with on-the-fly format conversion.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cstruct-devel%{?_isa}
 Requires:       ocaml-io-page-devel%{?_isa}

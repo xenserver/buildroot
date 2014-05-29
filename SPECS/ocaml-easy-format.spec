@@ -3,7 +3,6 @@ Version:        1.0.1
 Release:        1%{?dist}
 Summary:        Indentation made easy
 License:        BSD3
-Group:          Development/Libraries
 URL:            http://mjambon.com/easy-format.html
 Source0:        http://mjambon.com/releases/easy-format/easy-format-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -15,7 +14,6 @@ Easy_format: indentation made easy.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

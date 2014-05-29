@@ -3,7 +3,6 @@ Version:        0.9.3
 Release:        2%{?dist}
 Summary:        Declarative definition of commandline interfaces for OCaml
 License:        BSD3
-Group:          Development/Other
 URL:            http://erratique.ch/software/cmdliner
 Source0:        https://github.com/dbuenzli/cmdliner/archive/v%{version}/cmdliner-%{version}.tar.gz
 BuildRequires:  oasis
@@ -22,7 +21,6 @@ man page generation. It supports programs with single or multiple commands
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

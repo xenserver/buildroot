@@ -3,7 +3,6 @@ Version:        0.1.0
 Release:        2%{?dist}
 Summary:        Yum repositories for xenserver
 License:        GPL
-Group:          Development/Other
 URL:            http://www.xenserver.org/
 Source0:        fusion-release-xapi.repo
 Source1:        fusion-release-xen-c6.repo

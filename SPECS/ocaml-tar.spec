@@ -3,7 +3,6 @@ Version:        0.2.1
 Release:        1%{?dist}
 Summary:        OCaml parser and printer for tar-format data
 License:        LGPL2.1 + OCaml linking exception
-Group:          Development/Libraries
 URL:            http://github.com/djs55/ocaml-tar
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz 
 BuildRequires:  ocaml
@@ -19,7 +18,6 @@ This is a pure OCaml library for reading and writing tar-format data.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cstruct-devel%{?_isa}
 Requires:       ocaml-lwt-devel%{?_isa}

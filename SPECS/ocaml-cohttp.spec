@@ -5,7 +5,6 @@ Version:        0.9.8
 Release:        1%{?dist}
 Summary:        An HTTP library for OCaml
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/mirage/ocaml-cohttp
 Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -24,7 +23,6 @@ An HTTP library for OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-lwt-devel%{?_isa}
 Requires:       ocaml-re-devel%{?_isa}

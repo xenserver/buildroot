@@ -3,7 +3,6 @@ Version:        0.9.8
 Release:        1%{?dist}
 Summary:        Allows the manipulation of libvirt storage pools and volumes via xapi
 License:        LGPL
-Group:          Development/Other
 URL:            https://github.com/xapi-project/xapi-libvirt-storage/archive/%{version}.tar.gz
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xapi-libvirt-storage-init

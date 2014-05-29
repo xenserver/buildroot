@@ -3,7 +3,6 @@ Version:	0.0.11
 Release:	1%{?dist}
 Summary:	Dump OCaml data structures using OCaml data notation
 
-Group:		Development/Libraries
 License:	LGPL
 URL:		https://forge.ocamlcore.org/projects/odn/
 Source0:	https://forge.ocamlcore.org/frs/download.php/1310/ocaml-data-notation-%{version}.tar.gz

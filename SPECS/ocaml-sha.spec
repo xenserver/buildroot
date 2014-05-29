@@ -3,7 +3,6 @@ Version:        1.9
 Release:        1%{?dist}
 Summary:        OCaml SHA
 License:        LGPL2.1
-Group:          Development/Other
 URL:            http://github.com/vincenthz/ocaml-sha
 Source0:        https://github.com/xapi-project/ocaml-sha/archive/ocaml-sha-v%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -15,7 +14,6 @@ This is a set of C bindings for computing SHA digests.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

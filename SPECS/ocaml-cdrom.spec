@@ -5,7 +5,6 @@ Version:        0.9.1
 Release:        2%{?dist}
 Summary:        Query the state of CDROM devices
 License:        LGPL2.1 + OCaml linking exception
-Group:          Development/Libraries
 URL:            http://github.com/xapi-project/cdrom
 Source0:        https://github.com/xapi-project/cdrom/archive/cdrom-%{version}/cdrom-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -18,7 +17,6 @@ inside) to be queried under Linux.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

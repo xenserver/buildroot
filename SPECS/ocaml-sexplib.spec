@@ -5,7 +5,6 @@ Version:        109.20.00
 Release:        1%{?dist}
 Summary:        Convert values to and from s-expressions in OCaml
 
-Group:          Development/Libraries
 License:        LGPLv2+ with exceptions and BSD
 URL:            https://ocaml.janestreet.com
 Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/sexplib-%{version}.tar.gz
@@ -21,7 +20,6 @@ Convert values to and from s-expressions in OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-camlp4-devel%{?_isa}
 Requires:       ocaml-type-conv%{?_isa}

@@ -3,7 +3,6 @@ Version:        0.2.0
 Release:        1%{?dist}
 Summary:        XenServer IO stat thingy
 License:        LGPLv2.1
-Group:          Development/Other
 URL:            https://github.com/xenserver/xsiostat
 Source0:        https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 

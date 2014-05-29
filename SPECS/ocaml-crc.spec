@@ -5,7 +5,6 @@ Version:        0.9.1
 Release:        1%{?dist}
 Summary:        CRC implementation for OCaml
 License:        ISC
-Group:          Development/Other
 URL:            https://github.com/xapi-project/ocaml-crc/
 Source0:        https://github.com/xapi-project/ocaml-crc/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
@@ -23,7 +22,6 @@ and strings.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
