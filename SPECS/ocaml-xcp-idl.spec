@@ -18,7 +18,7 @@ BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-fd-send-recv-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-rrd-devel
-BuildRequires:  xmlm-devel
+BuildRequires:  ocaml-xmlm-devel
 BuildRequires:  ocaml-ounit-devel
 
 %description
@@ -34,7 +34,7 @@ Requires:       ocaml-re-devel%{?_isa}
 Requires:       ocaml-cohttp-devel%{?_isa}
 Requires:       ocaml-rpc-devel%{?_isa}
 Requires:       ocaml-fd-send-recv-devel%{?_isa}
-Requires:       xmlm-devel%{?_isa}
+Requires:       ocaml-xmlm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

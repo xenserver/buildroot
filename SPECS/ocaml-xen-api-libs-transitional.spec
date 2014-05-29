@@ -12,7 +12,7 @@ BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-stdext-devel
-BuildRequires:  xmlm-devel
+BuildRequires:  ocaml-xmlm-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-devel
