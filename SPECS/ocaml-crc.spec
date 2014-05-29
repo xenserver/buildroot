@@ -7,7 +7,6 @@ Summary:        CRC implementation for OCaml
 License:        ISC
 URL:            https://github.com/xapi-project/ocaml-crc/
 Source0:        https://github.com/xapi-project/ocaml-crc/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-findlib
