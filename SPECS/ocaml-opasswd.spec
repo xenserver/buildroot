@@ -43,9 +43,6 @@ export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 ocaml setup.ml -install
 rm -f %{buildroot}%{_libdir}/ocaml/usr/local/bin/opasswd_test
 
-%clean
-rm -rf %{buildroot}
-
 %files
 %doc README.md
 %{_libdir}/ocaml/oPasswd

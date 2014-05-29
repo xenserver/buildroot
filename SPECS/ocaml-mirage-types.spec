@@ -43,9 +43,6 @@ export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 #export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 make install-types
 
-%clean
-rm -rf %{buildroot}
-
 %files
 %{_libdir}/ocaml/mirage-types
 %exclude %{_libdir}/ocaml/mirage-types/*.mli

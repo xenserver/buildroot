@@ -32,9 +32,6 @@ export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 make install
 
-%clean
-rm -rf %{buildroot}
-
 %files
 # This space intentionally left blank
 

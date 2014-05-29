@@ -40,9 +40,6 @@ export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
-
 %files
 %defattr(-,root,root)
 %{_libdir}/ocaml/io-page/META
