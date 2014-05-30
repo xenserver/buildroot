@@ -1,6 +1,6 @@
 Name:           ocaml-easy-format
 Version:        1.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Indentation made easy
 License:        BSD3
 URL:            http://mjambon.com/easy-format.html
@@ -27,18 +27,25 @@ developing applications that use %{name}.
 make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 make install
 
 %files
-#This space intentionally left blank
+%doc LICENSE
+%doc README
+%{_libdir}/ocaml/easy-format
+%exclude %{_libdir}/ocaml/easy-format/*.cmx
+%exclude %{_libdir}/ocaml/easy-format/*.mli
 
 %files devel
-%doc LICENSE README
-%{_libdir}/ocaml/easy-format/*
+%{_libdir}/ocaml/easy-format/*.cmx
+%{_libdir}/ocaml/easy-format/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.0.1-2
+- Split files correctly between base and devel packages
+
 * Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 1.0.1-1
 - Initial package
 
