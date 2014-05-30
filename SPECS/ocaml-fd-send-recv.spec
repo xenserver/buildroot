@@ -2,7 +2,7 @@
 
 Name:           ocaml-fd-send-recv
 Version:        1.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Bindings to sendmsg/recvmsg for fd passing under Linux
 License:        LGPL
 URL:            https://github.com/xapi-project/ocaml-fd-send-recv
@@ -29,23 +29,33 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
+mkdir -p $OCAMLFIND_DESTDIR/stublibs
 export OCAMLFIND_LDCONF=ignore
-ocaml setup.ml -install
-
+make install
 
 %files
-# This space intentionally left blank
-
-%files devel
-%doc README.md LICENSE
-%{_libdir}/ocaml/fd-send-recv/*
+%doc LICENSE
+%doc README.md
+%{_libdir}/ocaml/fd-send-recv
+%exclude %{_libdir}/ocaml/fd-send-recv/*.a
+%exclude %{_libdir}/ocaml/fd-send-recv/*.cmxa
+%exclude %{_libdir}/ocaml/fd-send-recv/*.cmx
+%exclude %{_libdir}/ocaml/fd-send-recv/*.mli
 %{_libdir}/ocaml/stublibs/dllfd_send_recv_stubs.so
 %{_libdir}/ocaml/stublibs/dllfd_send_recv_stubs.so.owner
 
+%files devel
+%{_libdir}/ocaml/fd-send-recv/*.a
+%{_libdir}/ocaml/fd-send-recv/*.cmx
+%{_libdir}/ocaml/fd-send-recv/*.cmxa
+%{_libdir}/ocaml/fd-send-recv/*.mli
+
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.0.1-2
+- Split files correctly between base and devel packages
+
 * Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 1.0.1-1
 - Initial package
 
