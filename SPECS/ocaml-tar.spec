@@ -1,6 +1,6 @@
 Name:           ocaml-tar
 Version:        0.2.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OCaml parser and printer for tar-format data
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/djs55/ocaml-tar
@@ -28,48 +28,35 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-mkdir -p %{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 ocaml setup.ml -install
 
-
 %files
-# This space intentionally left blank
+%doc README.md
+%{_libdir}/ocaml/tar
+%exclude %{_libdir}/ocaml/tar/*.a
+%exclude %{_libdir}/ocaml/tar/*.cmxa
+%exclude %{_libdir}/ocaml/tar/*.cmx
+%exclude %{_libdir}/ocaml/tar/*.mli
 
 %files devel
-%doc README.md
-
-%{_libdir}/ocaml/tar/META
-%{_libdir}/ocaml/tar/tar.a
-%{_libdir}/ocaml/tar/tar.cma
-%{_libdir}/ocaml/tar/tar.cmi
-%{_libdir}/ocaml/tar/tar.cmx
-%{_libdir}/ocaml/tar/tar.cmxa
-%{_libdir}/ocaml/tar/tar.cmxs
-%{_libdir}/ocaml/tar/tar.mli
-%{_libdir}/ocaml/tar/tar_lwt_unix.a
-%{_libdir}/ocaml/tar/tar_lwt_unix.cma
-%{_libdir}/ocaml/tar/tar_lwt_unix.cmi
-%{_libdir}/ocaml/tar/tar_lwt_unix.cmx
-%{_libdir}/ocaml/tar/tar_lwt_unix.cmxa
-%{_libdir}/ocaml/tar/tar_lwt_unix.cmxs
-%{_libdir}/ocaml/tar/tar_lwt_unix.mli
-%{_libdir}/ocaml/tar/tar_unix.a
-%{_libdir}/ocaml/tar/tar_unix.cma
-%{_libdir}/ocaml/tar/tar_unix.cmi
-%{_libdir}/ocaml/tar/tar_unix.cmx
-%{_libdir}/ocaml/tar/tar_unix.cmxa
-%{_libdir}/ocaml/tar/tar_unix.cmxs
-%{_libdir}/ocaml/tar/tar_unix.mli
+%{_libdir}/ocaml/tar/*.a
+%{_libdir}/ocaml/tar/*.cmx
+%{_libdir}/ocaml/tar/*.cmxa
+%{_libdir}/ocaml/tar/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.2.1-2
+- Split files correctly between base and devel packages
+
 * Fri Nov 15 2013 David Scott <dave.scott@eu.citrix.com> - 0.2.1-1
 - Initial package
