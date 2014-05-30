@@ -2,7 +2,7 @@
 
 Name:           ocaml-oclock
 Version:        0.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        POSIX monotonic clock for OCaml
 License:        ISC
 URL:            https://github.com/polazarus/oclock
@@ -29,28 +29,32 @@ developing applications that use %{name}.
 %patch1 -p1
 
 %build
-if [ -x ./configure ]; then
-  ./configure
-fi
 make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
+export OCAMLFIND_DISTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DISTDIR
+mkdir -p $OCAMLFIND_DISTDIR/stublibs
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
-
 %files
-# This space intentionally left blank
-
-%files devel
-%doc LICENSE README.markdown
-%{_libdir}/ocaml/oclock/*
+%doc LICENSE
+%doc README.markdown
+%{_libdir}/ocaml/oclock
+%exclude %{_libdir}/ocaml/oclock/*.a
+%exclude %{_libdir}/ocaml/oclock/*.cmxa
 %{_libdir}/ocaml/stublibs/dlloclock.so
 %{_libdir}/ocaml/stublibs/dlloclock.so.owner
 
+%files devel
+%{_libdir}/ocaml/oclock/*.a
+%{_libdir}/ocaml/oclock/*.cmxa
+
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.3-3
+- Split files correctly between base and devel packages
+
 * Wed May 29 2013 David Scott <dave.scott@eu.citrix.com> - 0.3-2
 - Initial package
 
