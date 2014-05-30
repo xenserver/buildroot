@@ -5,7 +5,7 @@ Version:        0.0.2
 Release:        1%{?dist}
 Summary:        Simple build tool for OCaml programs
 License:        BSD2
-URL:            http://github.com/vincenthz/obuild
+URL:            https://github.com/vincenthz/obuild
 Source0:        https://github.com/vincenthz/obuild/archive/v%{version}/obuild-%{version}.tar.gz
 BuildRequires:  ocaml
 

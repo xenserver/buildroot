@@ -3,7 +3,7 @@ Version:        2.4.0
 Release:        1%{?dist}
 Summary:        Pure OCaml implementation of the Network Block Device protocol
 License:        LGPL2.1 + OCaml linking exception
-URL:            http://github.com/mirage/ocaml-ipaddr
+URL:            https://github.com/mirage/ocaml-ipaddr
 Source0:        https://github.com/mirage/ocaml-ipaddr/archive/%{version}/ocaml-ipaddr-%{version}.tar.gz
 
 BuildRequires:  ocaml

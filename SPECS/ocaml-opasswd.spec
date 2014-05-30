@@ -3,7 +3,7 @@ Version:        0.9.3
 Release:        1%{?dist}
 Summary:        OCaml interface to the glibc passwd/shadow password functions
 License:        ISC
-URL:            http://github.com/xapi-project/ocaml-opasswd
+URL:            https://github.com/xapi-project/ocaml-opasswd
 Source0:        https://github.com/xapi-project/ocaml-opasswd/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:         ocaml-opasswd-ocaml-4.00.1.patch
 BuildRequires:  ocaml 

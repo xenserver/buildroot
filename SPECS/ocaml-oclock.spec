@@ -6,7 +6,7 @@ Release:        2%{?dist}
 Summary:        POSIX monotonic clock for OCaml
 License:        ISC
 URL:            https://github.com/polazarus/oclock
-Source0:        http://github.com/polazarus/oclock/archive/v0.3/oclock-%{version}.tar.gz
+Source0:        https://github.com/polazarus/oclock/archive/v0.3/oclock-%{version}.tar.gz
 Patch0:         oclock-1-cc-headers
 Patch1:         oclock-2-destdir
 BuildRequires:  ocaml
