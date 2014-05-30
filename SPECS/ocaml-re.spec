@@ -2,7 +2,7 @@
 
 Name:           ocaml-re
 Version:        1.2.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A regular expression library for OCaml
 License:        LGPL
 URL:            https://github.com/ocaml/ocaml-re
@@ -26,23 +26,36 @@ developing applications that use %{name}.
 %setup -q -n %{name}-%{name}-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+ocaml setup.ml -configure --destdir %{buildroot}
+make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -install
-
+mkdir -p $OCAMLFIND_DESTDIR
+make install
 
 %files
-# This space intentionally left blank
+%doc CHANGES
+%doc LICENSE
+%doc README
+%{_libdir}/ocaml/re
+%exclude %{_libdir}/ocaml/re/*.a
+%exclude %{_libdir}/ocaml/re/*.cmxa
+%exclude %{_libdir}/ocaml/re/*.cmx
+%exclude %{_libdir}/ocaml/re/*.mli
 
 %files devel
-%doc LICENSE README CHANGES
-%{_libdir}/ocaml/re/*
+%doc re-api.docdir/*
+%exclude /usr/local/share/doc/re/
+%{_libdir}/ocaml/re/*.a
+%{_libdir}/ocaml/re/*.cmx
+%{_libdir}/ocaml/re/*.cmxa
+%{_libdir}/ocaml/re/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.2.1-2
+- Split files correctly between base and devel packages
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.2.1-1
 - Initial package
 
