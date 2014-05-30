@@ -2,7 +2,7 @@
 
 Name:           ocaml-tapctl
 Version:        0.9.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Manipulate running tapdisk instances
 License:        LGPL
 URL:            https://github.com/xapi-project/tapctl
@@ -32,24 +32,36 @@ developing applications that use %{name}.
 %setup -q -n tapctl-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+./configure --destdir %{buildroot}/%{_libdir}/ocaml
+make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 export OCAMLFIND_LDCONF=ignore
-ocaml setup.ml -install
-
+make install
 
 %files
-#This space intentionally left blank
+%doc ChangeLog
+%doc LICENSE
+%doc MAINTAINERS
+%doc README.md
+%{_libdir}/ocaml/tapctl
+%exclude %{_libdir}/ocaml/tapctl/*.a
+%exclude %{_libdir}/ocaml/tapctl/*.cmxa
+%exclude %{_libdir}/ocaml/tapctl/*.cmx
+%exclude %{_libdir}/ocaml/tapctl/*.mli
 
 %files devel
-%doc LICENSE README.md ChangeLog MAINTAINERS
-%{_libdir}/ocaml/tapctl/*
+%{_libdir}/ocaml/tapctl/*.a
+%{_libdir}/ocaml/tapctl/*.cmx
+%{_libdir}/ocaml/tapctl/*.cmxa
+%{_libdir}/ocaml/tapctl/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.9.1-2
+- Split files correctly between base and devel packages
+
 * Fri Oct 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-1
 - Update to 0.9.1
 
