@@ -84,7 +84,7 @@ MAPPING = {
     "openstack-xapi-plugins": ["openstack-xapi-plugins"],
     "optcomp": ["optcomp-ocaml"],
     "xapi-libvirt-storage": ["libxapi-libvirt-storage-ocaml"],
-    "xmlm": ["libxmlm-ocaml"],
+    "ocaml-xmlm": ["libxmlm-ocaml"],
     "xsconsole0": ["xsconsole"],
     "xenserver-core-latest-snapshot": ["xenserver-core-latest-snapshot"],
     "python-setuptools": ["python-setuptools", "python-setuptools-git"],

@@ -5,7 +5,6 @@ Version:        0.4.6
 Release:        1%{?dist}
 Summary:        Use OpenSSL from OCaml
 License:        LGPL
-Group:          Development/Libraries
 URL:            http://downloads.sourceforge.net/project/savonet/ocaml-ssl
 Source0:        http://downloads.sourceforge.net/project/savonet/%{name}/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -17,7 +16,6 @@ Use OpenSSL from OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       openssl-devel%{?_isa}
 

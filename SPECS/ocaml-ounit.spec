@@ -6,7 +6,6 @@ Version:        2.0.0
 Release:        1%{?dist}
 Summary:        Unit test framework for OCaml
 
-Group:          Development/Libraries
 License:        MIT
 URL:            http://ounit.forge.ocamlcore.org/
 Source0:        http://forge.ocamlcore.org/frs/download.php/1258/ounit-%{version}.tar.gz
@@ -27,7 +26,6 @@ frameworks.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 

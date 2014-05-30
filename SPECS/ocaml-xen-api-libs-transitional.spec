@@ -5,14 +5,13 @@ Version:        0.9.3
 Release:        1%{?dist}
 Summary:        Deprecated standard library extension for OCaml
 License:        LGPL2.1 + OCaml linking exception
-Group:          Development/Libraries
 URL:            http://github.com/xapi-project/xen-api-libs-transitional
 Source0:        https://github.com/xapi-project/xen-api-libs-transitional/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-stdext-devel
-BuildRequires:  xmlm-devel
+BuildRequires:  ocaml-xmlm-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-devel
@@ -27,7 +26,6 @@ A deprecated standard library extension for OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel

@@ -5,10 +5,8 @@ Version:        0.9.1
 Release:        1%{?dist}
 Summary:        CRC implementation for OCaml
 License:        ISC
-Group:          Development/Other
 URL:            https://github.com/xapi-project/ocaml-crc/
 Source0:        https://github.com/xapi-project/ocaml-crc/archive/%{version}/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-findlib
@@ -23,7 +21,6 @@ and strings.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -44,18 +41,13 @@ export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %{_libdir}/ocaml/crc/META
 %{_libdir}/ocaml/crc/crc.cma
 %{_libdir}/ocaml/crc/crc.cmi
 %{_libdir}/ocaml/crc/dllcrc_stubs.so
 
 %files devel
-%defattr(-,root,root)
 %doc ChangeLog README.md
 %{_libdir}/ocaml/crc/crc.a
 %{_libdir}/ocaml/crc/crc.cmx

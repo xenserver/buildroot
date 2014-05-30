@@ -5,10 +5,8 @@ Version:        1.1.1
 Release:        1%{?dist}
 Summary:        Efficient handling of I/O memory pages on Unix and Xen.
 License:        ISC
-Group:          Development/Other
 URL:            https://github.com/mirage/io-page
 Source0:        http://github.com/mirage/io-page/archive/v%{version}/io-page-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib
@@ -21,7 +19,6 @@ IO pages are page-aligned, and wrapped in the Cstruct library to avoid copying t
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cstruct-devel%{?_isa}
 
@@ -43,18 +40,13 @@ export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 ocaml setup.ml -install
 
-%clean
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %{_libdir}/ocaml/io-page/META
 %{_libdir}/ocaml/io-page/io_page.cma
 %{_libdir}/ocaml/io-page/io_page.cmi
 %{_libdir}/ocaml/io-page/dllio_page_unix_stubs.so
 
 %files devel
-%defattr(-,root,root)
 %doc CHANGES README.md
 %{_libdir}/ocaml/io-page/io_page.a
 %{_libdir}/ocaml/io-page/io_page.cmx

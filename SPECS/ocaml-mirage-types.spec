@@ -5,10 +5,8 @@ Version:        1.1.1
 Release:        1%{?dist}
 Summary:        MirageOS interfaces
 License:        ISC
-Group:          Development/Other
 URL:            https://github.com/mirage/mirage
 Source0:        http://github.com/mirage/mirage/archive/%{version}/mirage-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib-devel
@@ -24,7 +22,6 @@ See http://openmirage.org for more information.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 BuildRequires:  ocaml-ipaddr-devel%{?_isa}
 BuildRequires:  ocaml-lwt-devel%{?_isa}
@@ -45,9 +42,6 @@ mkdir -p %{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 #export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
 make install-types
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %{_libdir}/ocaml/mirage-types

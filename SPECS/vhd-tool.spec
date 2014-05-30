@@ -4,7 +4,6 @@ Summary: Command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
 Version: 0.7.4
 Release: 1%{?dist}
-Group:   System/Hypervisor
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/vhd-tool
 Source0: https://github.com/xapi-project/vhd-tool/archive/v%{version}/%{name}-%{version}.tar.gz

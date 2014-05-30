@@ -3,7 +3,6 @@ Version:        0.9.1
 Release:        2%{?dist}
 Summary:        CLI for xenopsd, the xapi toolstack domain manager
 License:        LGPL
-Group:          Development/Other
 URL:            https://github.com/xapi-project/xenops-cli
 Source0:        https://github.com/xapi-project/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml

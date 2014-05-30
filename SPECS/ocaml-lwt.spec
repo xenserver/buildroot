@@ -6,7 +6,6 @@ Version:        2.4.4
 Release:        1%{?dist}
 Summary:        OCaml lightweight thread library
 
-Group:          Development/Libraries
 License:        LGPLv2+ with exceptions
 URL:            http://ocsigen.org/lwt
 Source0:        https://github.com/ocsigen/lwt/archive/%{version}/%{name}-%{version}.tar.gz
@@ -33,7 +32,6 @@ is part of the Ocsigen project.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 

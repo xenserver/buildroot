@@ -5,7 +5,6 @@ Version:        0.9.4
 Release:        1%{?dist}
 Summary:        Low-level xen control operations OCaml
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xenops
 Source0:        https://github.com/xapi-project/xenops/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -23,7 +22,6 @@ Low-level xen control operations in OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-xcp-idl-devel%{?_isa}
 Requires:       ocaml-stdext-devel%{?_isa}
@@ -37,7 +35,6 @@ developing applications that use %{name}.
 
 %package        tools
 Summary:        Debugging tools for %{name}
-Group:          Development/Libraries
 Requires:       xen-libs
 BuildRequires:  xen-devel
 

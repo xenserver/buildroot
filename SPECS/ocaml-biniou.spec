@@ -5,7 +5,6 @@ Version:        1.0.6
 Release:        1%{?dist}
 Summary:        Compact, fast and extensible serialization format
 License:        BSD3
-Group:          Development/Libraries
 URL:            http://mjambon.com/biniou.html
 Source0:        http://mjambon.com/releases/biniou/biniou-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -19,7 +18,6 @@ compatibility as protocols evolve.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-easy-format-devel%{?_isa}
 

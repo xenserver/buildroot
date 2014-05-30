@@ -5,7 +5,6 @@ Version:        0.9.1
 Release:        1%{?dist}
 Summary:        Manipulate running tapdisk instances
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/xapi-project/tapctl
 Source0:        https://github.com/xapi-project/tapctl/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -20,7 +19,6 @@ Manipulate running tapdisk instances on a xen host.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       forkexecd-devel%{?_isa}
 Requires:       ocaml-rpc-devel%{?_isa}

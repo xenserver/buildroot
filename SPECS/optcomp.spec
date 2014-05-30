@@ -3,7 +3,6 @@ Version:        1.4
 Release:        1%{?dist}
 Summary:        Optional compilation with cpp-like directives
 License:        BSD3
-Group:          Development/Other
 URL:            http://forge.ocamlcore.org/projects/optcomp/
 Source0:        https://forge.ocamlcore.org/frs/download.php/1011/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml

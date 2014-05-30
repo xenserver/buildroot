@@ -5,7 +5,6 @@ Version:        0.9.3
 Release:        1%{?dist}
 Summary:        Unix xenstore clients for OCaml
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/xapi-project/ocaml-xenstore-clients
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -19,7 +18,6 @@ Unix xenstore clients for OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-lwt-devel%{?_isa}
 Requires:       ocaml-xenstore-devel%{?_isa}

@@ -3,7 +3,6 @@ Version:        2014.1
 Release:        1%{?dist}
 Summary:        XenAPI plugins from OpenStack
 License:        ASL 2.0
-Group:          System/Hypervisor
 URL:            https://launchpad.net/nova/icehouse
 Source0:        https://launchpad.net/nova/icehouse/%{version}/+download/nova-%{version}.tar.gz
 BuildArch:      noarch

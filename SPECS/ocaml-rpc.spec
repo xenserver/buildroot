@@ -5,7 +5,6 @@ Version:        1.5.1
 Release:        1%{?dist}
 Summary:        An RPC library for OCaml
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/samoht/ocaml-rpc
 Source0:        https://github.com/samoht/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -13,19 +12,18 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-type-conv
-BuildRequires:  xmlm-devel
+BuildRequires:  ocaml-xmlm-devel
 
 %description
 Am RPC library for OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-camlp4-devel%{?_isa}
 Requires:       ocaml-type-conv%{?_isa}
 Requires:       ocaml-lwt%{?_isa}
-Requires:       xmlm-devel%{?_isa}
+Requires:       ocaml-xmlm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

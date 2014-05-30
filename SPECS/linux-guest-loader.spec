@@ -5,7 +5,6 @@ Release: 1%{?dist}
 URL: https://github.com/xenserver/linux-guest-loader
 Source0: https://github.com/xenserver/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 License: GPL
-Group: Applications/System
 BuildArch: noarch
 BuildRequires: python-devel
 BuildRequires: python-setuptools

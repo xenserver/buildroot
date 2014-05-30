@@ -2,7 +2,6 @@ Name:		ocamlify
 Version:	0.0.2
 Release:	1%{?dist}
 Summary:	Create OCaml source code by including whole files into OCaml string or string list
-Group:		Development/Tools
 License:	LGPL
 URL:		http://forge.ocamlcore.org/projects/ocamlify/
 Source0:	http://forge.ocamlcore.org/frs/download.php/1209/%{name}-%{version}.tar.gz

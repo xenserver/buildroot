@@ -5,7 +5,6 @@ Version:        0.10.0
 Release:        1%{?dist}
 Summary:        Deprecated misc library functions for OCaml
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/xapi-project/stdext
 Source0:        https://github.com/xapi-project/stdext/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -18,7 +17,6 @@ Deprecated misc library functions for OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-fd-send-recv-devel%{?_isa}
 BuildRequires:  ocaml-uuidm-devel%{?_isa}

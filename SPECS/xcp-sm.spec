@@ -4,7 +4,6 @@ Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.6
 Release: 3%{?dist}
-Group:   System/Hypervisor
 License: LGPL
 URL:  https://github.com/xapi-project/sm
 Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
@@ -250,7 +249,6 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 
 
 %package rawhba
-Group:   System/Hypervisor
 Summary: XCP rawhba SR type capability
 #Requires: sm = @SM_VERSION@-@SM_RELEASE@
 

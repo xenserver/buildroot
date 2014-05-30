@@ -9,7 +9,6 @@ Version:        0.6.1.2
 Release:        100%{?dist}%{?extra_release}
 Summary:        OCaml binding for libvirt
 
-Group:          Development/Libraries
 License:        LGPLv2+
 URL:            http://libvirt.org/ocaml/
 Source0:        http://libvirt.org/sources/ocaml/%{name}-%{version}.tar.gz
@@ -43,7 +42,6 @@ OCaml binding for libvirt.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 
 
@@ -55,7 +53,6 @@ developing applications that use %{name}.
 %if %build_mlvirsh
 %package        -n mlvirsh
 Summary:        OCaml virsh utility
-Group:          Applications/Emulators
 License:        GPLv2+
 
 

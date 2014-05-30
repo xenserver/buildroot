@@ -3,7 +3,6 @@ Version:        0.9.34
 Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
-Group:          Development/Other
 URL:            https://github.com/xapi-project/xenopsd
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        xenopsd-xc-init
@@ -42,7 +41,6 @@ Simple VM manager for the xapi toolstack.
 
 %package        libvirt
 Summary:        Xenopsd using libvirt
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       libvirt
 
@@ -52,7 +50,6 @@ Simple VM manager for Xen and KVM using libvirt.
 
 %package        xc
 Summary:        Xenopsd using xc
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       forkexecd
 Requires:       vncterm
@@ -63,7 +60,6 @@ Simple VM manager for Xen using libxc.
 
 %package        simulator
 Summary:        Xenopsd simulator
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
 %description    simulator

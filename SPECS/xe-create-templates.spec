@@ -3,7 +3,6 @@ Version:        0.9.2
 Release:        1%{?dist}
 Summary:        Creates default XenServer templates
 License:        LGPL
-Group:          Development/Other
 URL:            https://github.com/xapi-project/xcp-guest-templates
 Source0:        https://github.com/xapi-project/xcp-guest-templates/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
@@ -12,7 +11,7 @@ BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-stdext-devel
-BuildRequires:  xmlm-devel
+BuildRequires:  ocaml-xmlm-devel
 BuildRequires:  ocaml-xen-api-client-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel

@@ -3,7 +3,6 @@ Version:        0.9.1
 Release:        1%{?dist}
 Summary:        A subprocess management service
 License:        LGPL
-Group:          Development/Other
 URL:            https://github.com/xapi-project/forkexecd
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        forkexecd-init
@@ -59,7 +58,6 @@ fi
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-fd-send-recv-devel%{?_isa}
 Requires:       ocaml-rpc-devel%{?_isa}

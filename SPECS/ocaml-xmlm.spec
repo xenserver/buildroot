@@ -1,11 +1,11 @@
-Name:           xmlm
+Name:           ocaml-xmlm
 Version:        1.1.1
 Release:        2%{?dist}
 Summary:        Streaming XML input/output for OCaml
 License:        BSD3
-Group:          Development/Libraries
 URL:            http://erratique.ch/software/xmlm
 Source0:        https://github.com/dbuenzli/xmlm/archive/v%{version}/xmlm-%{version}.tar.gz
+Obsoletes:      xmlm <= 1.1.1
 BuildRequires:  oasis
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
@@ -22,7 +22,6 @@ arborescent data structures to/from XML documents.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 
 %description    devel
@@ -30,7 +29,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q
+%setup -q -n xmlm-%{version}
 
 %build
 oasis setup

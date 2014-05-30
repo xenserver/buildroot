@@ -5,7 +5,6 @@ Version:        0.9.16
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
-Group:          Development/Libraries
 URL:            https://github.com/xapi-project/xcp-idl
 Source0:        https://github.com/xapi-project/xcp-idl/archive/%{version}/xcp-idl-%{version}.tar.gz
 
@@ -18,7 +17,7 @@ BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-fd-send-recv-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-rrd-devel
-BuildRequires:  xmlm-devel
+BuildRequires:  ocaml-xmlm-devel
 BuildRequires:  ocaml-ounit-devel
 
 %description
@@ -26,7 +25,6 @@ Common interface definitions for XCP services.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
 Requires:       message-switch-devel%{?_isa}
 Requires:       ocaml-uri-devel%{?_isa}
@@ -34,7 +32,7 @@ Requires:       ocaml-re-devel%{?_isa}
 Requires:       ocaml-cohttp-devel%{?_isa}
 Requires:       ocaml-rpc-devel%{?_isa}
 Requires:       ocaml-fd-send-recv-devel%{?_isa}
-Requires:       xmlm-devel%{?_isa}
+Requires:       ocaml-xmlm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

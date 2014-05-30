@@ -5,7 +5,6 @@ Release: 1%{?dist}
 URL: https://github.com/xenserver/python-libs
 Source: https://github.com/xenserver/python-libs/archive/v%{version}/%{name}-%{version}.tar.gz
 License: GPL
-Group: Applications/System
 BuildArch: noarch
 
 BuildRequires: python-devel
