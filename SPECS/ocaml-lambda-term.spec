@@ -2,7 +2,7 @@
 
 Name:           ocaml-lambda-term
 Version:        1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Lambda-Term is a cross-platform library for manipulating the terminal for Ocaml
 License:        BSD3
 URL:            http://forge.ocamlcore.org/projects/lambda-term/
@@ -33,29 +33,39 @@ developing applications that use %{name}.
 %setup -q -n lambda-term-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+./configure --destdir %{buildroot}/%{_libdir}/ocaml
+make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
-
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
+mkdir -p $OCAMLFIND_DESTDIR/stublibs
 export OCAMLFIND_LDCONF=ignore
-ocaml setup.ml -install
+make install
 
 rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/lambda-term-actions
 
 %files
-# This space intentionally left blank
-
-%files devel
-%doc LICENSE CHANGES
-%{_libdir}/ocaml/lambda-term/*
+%doc CHANGES
+%doc LICENSE
+%{_libdir}/ocaml/lambda-term
+%exclude %{_libdir}/ocaml/lambda-term/*.a
+%exclude %{_libdir}/ocaml/lambda-term/*.cmxa
+%exclude %{_libdir}/ocaml/lambda-term/*.cmx
+%exclude %{_libdir}/ocaml/lambda-term/*.mli
 %{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so
 %{_libdir}/ocaml/stublibs/dlllambda-term_stubs.so.owner
 
+%files devel
+%{_libdir}/ocaml/lambda-term/*.a
+%{_libdir}/ocaml/lambda-term/*.cmx
+%{_libdir}/ocaml/lambda-term/*.cmxa
+%{_libdir}/ocaml/lambda-term/*.mli
+
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.2-2
+- Split files correctly between base and devel packages
+
 * Thu Jun  6 2013 David Scott <dave.scott@eu.citrix.com> - 1.2-1
 - Initial package
 
