@@ -53,7 +53,7 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 %{_libdir}/ocaml/cdrom/*.mli
 
 %changelog
-* Fri Apr 17 2014 Euan Harris <euan.harris@citrix.com> - 0.9.1-3
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.9.1-3
 - Split files correctly between base and devel packages
 
 * Tue May 28 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-2
