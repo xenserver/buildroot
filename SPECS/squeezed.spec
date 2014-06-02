@@ -13,6 +13,7 @@ BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel
+BuildRequires:  ocaml-uuidm-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xenstore-clients-devel
