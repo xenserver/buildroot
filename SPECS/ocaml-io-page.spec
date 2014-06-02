@@ -6,7 +6,7 @@ Release:        1%{?dist}
 Summary:        Efficient handling of I/O memory pages on Unix and Xen.
 License:        ISC
 URL:            https://github.com/mirage/io-page
-Source0:        http://github.com/mirage/io-page/archive/v%{version}/io-page-%{version}.tar.gz
+Source0:        https://github.com/mirage/io-page/archive/v%{version}/io-page-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib

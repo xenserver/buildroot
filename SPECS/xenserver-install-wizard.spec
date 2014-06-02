@@ -5,7 +5,7 @@ Name:    xenserver-install-wizard
 Version: 0.2.30
 Release: 1%{?dist}
 License: LGPL+linking exception
-URL:  http://github.com/xenserver/xenserver-install-wizard
+URL:  https://github.com/xenserver/xenserver-install-wizard
 Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Requires: newt
 Requires: python

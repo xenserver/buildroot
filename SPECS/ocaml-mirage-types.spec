@@ -6,7 +6,7 @@ Release:        1%{?dist}
 Summary:        MirageOS interfaces
 License:        ISC
 URL:            https://github.com/mirage/mirage
-Source0:        http://github.com/mirage/mirage/archive/%{version}/mirage-%{version}.tar.gz
+Source0:        https://github.com/mirage/mirage/archive/%{version}/mirage-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib-devel

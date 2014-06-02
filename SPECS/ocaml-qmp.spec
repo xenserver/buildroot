@@ -5,7 +5,7 @@ Version:        0.9.2
 Release:        1%{?dist}
 Summary:        Pure OCaml implementation of the Qemu Message Protocol (QMP)
 License:        LGPL2.1 + OCaml linking exception
-URL:            http://github.com/xapi-project/ocaml-qmp
+URL:            https://github.com/xapi-project/ocaml-qmp
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cmdliner-devel

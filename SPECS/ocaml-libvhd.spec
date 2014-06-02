@@ -5,7 +5,7 @@ Version:        0.9.1
 Release:        1%{?dist}
 Summary:        VHD manipulation via libvhd
 License:        BSD3
-URL:            http://github.com/xapi-project/libvhd
+URL:            https://github.com/xapi-project/libvhd
 Source0:        https://github.com/xapi-project/libvhd/archive/libvhd-%{version}/libvhd-%{version}.tar.gz
 BuildRequires:  libuuid-devel
 BuildRequires:  ocaml
