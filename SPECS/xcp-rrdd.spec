@@ -15,6 +15,7 @@ BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  ocaml-xenops-devel
 BuildRequires:  ocaml-rrd-transport-devel
+BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  forkexecd-devel

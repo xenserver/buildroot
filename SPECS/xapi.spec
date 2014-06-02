@@ -48,6 +48,7 @@ BuildRequires: make
 BuildRequires: utop
 BuildRequires: message-switch-devel
 BuildRequires: ocaml-xenstore-clients-devel
+BuildRequires: ocaml-xcp-rrd-devel
 BuildRequires: ocaml-tar-devel
 BuildRequires: python2-devel
 Requires: hwdata
