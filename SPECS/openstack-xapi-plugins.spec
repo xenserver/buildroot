@@ -16,13 +16,12 @@ XenAPI plugins used by OpenStack to control XenServer.
 %prep
 %setup -q -n nova-%{version}
 
+%build
+# This package does not have a build step 
+
 %install
 mkdir -p %{buildroot}/usr/lib/xapi/plugins
 cp -r plugins/xenserver/xenapi/etc/xapi.d/plugins/* %{buildroot}/usr/lib/xapi/plugins/
-
-%build
-#This space intentionally left blank
-
 
 %files
 /usr/lib/xapi/plugins/*
