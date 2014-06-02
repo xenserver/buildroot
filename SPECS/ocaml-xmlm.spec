@@ -1,6 +1,6 @@
 Name:           ocaml-xmlm
 Version:        1.1.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Streaming XML input/output for OCaml
 License:        BSD3
 URL:            http://erratique.ch/software/xmlm
@@ -37,20 +37,31 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
 rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/xmltrip
 
 
 %files
-#This space intentionally left blank
+%doc CHANGES
+%doc README
+%{_libdir}/ocaml/xmlm
+%exclude %{_libdir}/ocaml/xmlm/*.a
+%exclude %{_libdir}/ocaml/xmlm/*.cmxa
+%exclude %{_libdir}/ocaml/xmlm/*.cmx
+%exclude %{_libdir}/ocaml/xmlm/*.mli
 
 %files devel
-%doc README CHANGES
-%{_libdir}/ocaml/xmlm/*
+%{_libdir}/ocaml/xmlm/*.a
+%{_libdir}/ocaml/xmlm/*.cmxa
+%{_libdir}/ocaml/xmlm/*.cmx
+%{_libdir}/ocaml/xmlm/*.mli
 
 %changelog
+* Mon Jun 2 2014 Euan Harris <euan.harris@citrix.com> - 1.1.1-3
+- Split files correctly between base and devel packages
+
 * Mon May 19 2014 Euan Harris <euan.harris@citrix.com> - 1.1.1-2
 - Switch to GitHub mirror
 
