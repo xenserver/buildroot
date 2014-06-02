@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-idl
 Version:        0.9.16
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
@@ -43,23 +43,35 @@ developing applications that use %{name}.
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 export OCAMLFIND_LDCONF=ignore
-ocaml setup.ml -install
-
+make install
 
 %files
-#This space intentionally left blank
+%doc ChangeLog 
+%doc LICENSE 
+%doc MAINTAINERS
+%doc README.md 
+%{_libdir}/ocaml/xcp
+%exclude %{_libdir}/ocaml/xcp/*.a
+%exclude %{_libdir}/ocaml/xcp/*.cmxa
+%exclude %{_libdir}/ocaml/xcp/*.cmx
+%exclude %{_libdir}/ocaml/xcp/*.mli
 
 %files devel
-%doc LICENSE README.md ChangeLog MAINTAINERS
-%{_libdir}/ocaml/xcp/*
+%{_libdir}/ocaml/xcp/*.a
+%{_libdir}/ocaml/xcp/*.cmx
+%{_libdir}/ocaml/xcp/*.cmxa
+%{_libdir}/ocaml/xcp/*.mli
 
 %changelog
+* Mon Jun 02 2014 Euan Harris <euan.harris@citrix.com> - 0.9.16-2
+- Split files correctly between base and devel packages
+
 * Fri May  9 2014 David Scott <dave.scott@citrix.com> - 0.9.16-1
 - Update to 0.9.16, with RRD fixes
 
