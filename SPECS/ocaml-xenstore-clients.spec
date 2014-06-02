@@ -2,7 +2,7 @@
 
 Name:           ocaml-xenstore-clients
 Version:        0.9.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Unix xenstore clients for OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/ocaml-xenstore-clients
@@ -33,20 +33,29 @@ developing applications that use %{name}.
 make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-export OCAMLFIND_LDCONF=ignore
+mkdir -p $OCAMLFIND_DESTDIR
 make install DESTDIR=${buildroot}
 
 
 %files
-#This space intentionally left blank
+%doc LICENSE 
+%doc MAINTAINERS
+%doc README.md 
+%{_libdir}/ocaml/xenstore_transport
+%exclude %{_libdir}/ocaml/xenstore_transport/*.a
+%exclude %{_libdir}/ocaml/xenstore_transport/*.cmxa
+%exclude %{_libdir}/ocaml/xenstore_transport/*.cmx
 
 %files devel
-%doc README.md LICENSE MAINTAINERS
-%{_libdir}/ocaml/xenstore_transport/*
+%{_libdir}/ocaml/xenstore_transport/*.a
+%{_libdir}/ocaml/xenstore_transport/*.cmxa
+%{_libdir}/ocaml/xenstore_transport/*.cmx
 
 %changelog
+* Mon Jun  2 2014 Euan Harris <euan.harris@citrix.com> - 0.9.3-2
+- Split files correctly between base and devel packages
+
 * Fri May  9 2014 David Scott <dave.scott@citrix.com> - 0.9.3-1
 - Update to 0.9.3
 
