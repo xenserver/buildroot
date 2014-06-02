@@ -28,12 +28,10 @@ developing applications that use %{name}.
 %build
 make
 
-
 %install
 mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 make install
-
 
 %files
 %doc CHANGES
@@ -45,13 +43,11 @@ make install
 %exclude %{_libdir}/ocaml/ipaddr/*.ml
 %exclude %{_libdir}/ocaml/ipaddr/*.mli
 
-
 %files devel
 %{_libdir}/ocaml/ipaddr/*.a
 %{_libdir}/ocaml/ipaddr/*.cmx
 %{_libdir}/ocaml/ipaddr/*.cmxa
 %{_libdir}/ocaml/ipaddr/*.mli
-
 
 %changelog
 * Tue Apr 1 2014 Euan Harris <euan.harris@citrix.com> - 2.4.0-1

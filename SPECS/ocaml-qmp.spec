@@ -2,7 +2,7 @@
 
 Name:           ocaml-qmp
 Version:        0.9.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Pure OCaml implementation of the Qemu Message Protocol (QMP)
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/ocaml-qmp
@@ -32,25 +32,31 @@ developing applications that use %{name}.
 %setup -q
 
 %build
-if [ -x ./configure ]; then
-  ./configure
-fi
 make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 
-
 %files
-# This space intentionally left blank
+%doc ChangeLog
+%doc README.md
+%doc LICENSE
+%{_libdir}/ocaml/qmp
+%exclude %{_libdir}/ocaml/qmp/*.a
+%exclude %{_libdir}/ocaml/qmp/*.cmxa
+%exclude %{_libdir}/ocaml/qmp/*.cmx
 
 %files devel
-%doc ChangeLog README.md LICENSE
-
-%{_libdir}/ocaml/qmp/*
+%{_libdir}/ocaml/qmp/*.a
+%{_libdir}/ocaml/qmp/*.cmx
+%{_libdir}/ocaml/qmp/*.cmxa
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.9.2-2
+- Split files correctly between base and devel packages
+
 * Thu Mar 27 2014 Euan Harris <euan.harris@citrix.com> - 0.9.2-1
 - Add support for QMP 'change' command, used to change removable media
   and reconfigure VNC.

@@ -15,46 +15,43 @@ BuildRequires:	ocaml-ounit-devel >= 2.0.0
 BuildRequires:	ocaml-fileutils-devel >= 0.4.0
 
 %description
-
+This library uses type-conv to dump OCaml data structure using OCaml data
+notation. This kind of data dumping helps to write OCaml code generator,
+like OASIS.
 
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 BuildRequires:	ocaml-type-conv%{_isa} >= 108.07.01
 
-
 %description    devel
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
-
 %prep
 %setup -q -n ocaml-data-notation-%{version}
 
-
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+./configure --destdir %{buildroot}/%{_libdir}/ocaml
+make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -install
-
+mkdir -p $OCAMLFIND_DESTDIR
+make install
 
 %files
-%doc COPYING.txt CHANGES.txt
-%{_libdir}/ocaml/odn/META
-%{_libdir}/ocaml/odn/*.cma
-%{_libdir}/ocaml/odn/*.cmi
-
+%doc CHANGES.txt
+%doc COPYING.txt
+%{_libdir}/ocaml/odn
+%exclude %{_libdir}/ocaml/odn/*.a
+%exclude %{_libdir}/ocaml/odn/*.cmxa
+%exclude %{_libdir}/ocaml/odn/*.cmx
 
 %files devel
 %{_libdir}/ocaml/odn/*.a
 %{_libdir}/ocaml/odn/*.cmx
 %{_libdir}/ocaml/odn/*.cmxa
-%exclude %{_libdir}/ocaml/odn/*.cmxs
-%exclude %{_libdir}/ocaml/odn/*.ml
 
 %changelog
 * Tue Mar 25 2014 Euan Harris <euan.harris@citrix.com> - 0.0.11-1

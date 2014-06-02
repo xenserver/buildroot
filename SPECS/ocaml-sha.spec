@@ -1,6 +1,6 @@
 Name:           ocaml-sha
 Version:        1.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OCaml SHA
 License:        LGPL2.1
 URL:            https://github.com/vincenthz/ocaml-sha
@@ -26,46 +26,27 @@ developing applications that use %{name}.
 make
 
 %install
-rm -rf %{buildroot}
-mkdir -p %{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
+mkdir -p $OCAMLFIND_DESTDIR
 make install
 
 %files
-# This space intentionally left blank
+%doc README
+%{_libdir}/ocaml/sha
+%exclude %{_libdir}/ocaml/sha/*.a
+%exclude %{_libdir}/ocaml/sha/*.cmxa
+%exclude %{_libdir}/ocaml/sha/*.cmx
 
 %files devel
-%doc README
-
-%{_libdir}/ocaml/sha/META
-%{_libdir}/ocaml/sha/libsha.a
-%{_libdir}/ocaml/sha/libsha1.a
-%{_libdir}/ocaml/sha/libsha256.a
-%{_libdir}/ocaml/sha/libsha512.a
-%{_libdir}/ocaml/sha/sha.a
-%{_libdir}/ocaml/sha/sha.cma
-%{_libdir}/ocaml/sha/sha.cmxa
-%{_libdir}/ocaml/sha/sha1.a
-%{_libdir}/ocaml/sha/sha1.cma
-%{_libdir}/ocaml/sha/sha1.cmi
-%{_libdir}/ocaml/sha/sha1.cmx
-%{_libdir}/ocaml/sha/sha1.cmxa
-%{_libdir}/ocaml/sha/sha256.a
-%{_libdir}/ocaml/sha/sha256.cma
-%{_libdir}/ocaml/sha/sha256.cmi
-%{_libdir}/ocaml/sha/sha256.cmx
-%{_libdir}/ocaml/sha/sha256.cmxa
-%{_libdir}/ocaml/sha/sha512.a
-%{_libdir}/ocaml/sha/sha512.cma
-%{_libdir}/ocaml/sha/sha512.cmi
-%{_libdir}/ocaml/sha/sha512.cmx
-%{_libdir}/ocaml/sha/sha512.cmxa
-%{_libdir}/ocaml/sha/dllsha.so
-%{_libdir}/ocaml/sha/dllsha1.so
-%{_libdir}/ocaml/sha/dllsha256.so
-%{_libdir}/ocaml/sha/dllsha512.so
+%{_libdir}/ocaml/sha/*.a
+%{_libdir}/ocaml/sha/*.cmx
+%{_libdir}/ocaml/sha/*.cmxa
 
 %changelog
-* Mon Nov 18 2013 David Scott <dave.scott@eu.citrix.com>
+* Tue Apr 22 2014 Euan Harris <euan.harris@citrix.com> - 1.9-2
+- Split files correctly between base and devel packages
+
+* Mon Nov 18 2013 David Scott <dave.scott@eu.citrix.com> - 1.9-1
 - Initial package
+

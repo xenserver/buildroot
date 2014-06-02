@@ -2,7 +2,7 @@
 
 Name:           ocaml-biniou
 Version:        1.0.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Compact, fast and extensible serialization format
 License:        BSD3
 URL:            http://mjambon.com/biniou.html
@@ -32,20 +32,31 @@ developing applications that use %{name}.
 make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 mkdir -p %{buildroot}/%{_bindir}
 make install BINDIR=%{buildroot}/%{_bindir}
 
 %files
-#This space intentionally left blank
+%doc LICENSE
+%doc README.md
+%{_bindir}/bdump
+%{_libdir}/ocaml/biniou
+%exclude %{_libdir}/ocaml/biniou/*.a
+%exclude %{_libdir}/ocaml/biniou/*.cmxa
+%exclude %{_libdir}/ocaml/biniou/*.cmx
+%exclude %{_libdir}/ocaml/biniou/*.mli
 
 %files devel
-%doc LICENSE README.md
-%{_libdir}/ocaml/biniou/*
-%{_bindir}/bdump
+%{_libdir}/ocaml/biniou/*.a
+%{_libdir}/ocaml/biniou/*.cmx
+%{_libdir}/ocaml/biniou/*.cmxa
+%{_libdir}/ocaml/biniou/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.0.6-2
+- Split files correctly between base and devel packages
+
 * Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 1.0.6-1
 - Initial package
 

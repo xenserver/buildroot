@@ -2,7 +2,7 @@
 
 Name:           ocaml-ocplib-endian
 Version:        0.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Optimized functions to read and write int16/32/64 from strings and bigarrays
 License:        LGPL
 URL:            https://github.com/OCamlPro/ocplib-endian
@@ -43,19 +43,29 @@ ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
 
-
 %files
-# This space intentionally left blank
+%doc COPYING.txt
+%doc README.md
+%{_libdir}/ocaml/ocplib-endian
+%exclude %{_libdir}/ocaml/ocplib-endian/*.a
+%exclude %{_libdir}/ocaml/ocplib-endian/*.cmxa
+%exclude %{_libdir}/ocaml/ocplib-endian/*.cmx
+%exclude %{_libdir}/ocaml/ocplib-endian/*.mli
 
 %files devel
-%doc COPYING.txt README.md
-%{_libdir}/ocaml/ocplib-endian/*
+%{_libdir}/ocaml/ocplib-endian/*.a
+%{_libdir}/ocaml/ocplib-endian/*.cmx
+%{_libdir}/ocaml/ocplib-endian/*.cmxa
+%{_libdir}/ocaml/ocplib-endian/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.4-2
+- Split files correctly between base and devel packages
+
 * Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 0.4-1
 - Initial package
 

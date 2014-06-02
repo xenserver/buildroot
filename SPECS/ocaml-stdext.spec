@@ -2,7 +2,7 @@
 
 Name:           ocaml-stdext
 Version:        0.10.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Deprecated misc library functions for OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/stdext
@@ -32,23 +32,32 @@ developing applications that use %{name}.
 make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
+mkdir -p $OCAMLFIND_DESTDIR/stublibs
 export OCAMLFIND_LDCONF=ignore
 make install DESTDIR=${buildroot}
 
-
 %files
-#This space intentionally left blank
-
-%files devel
 %doc README.md
-%{_libdir}/ocaml/stdext/*
+%{_libdir}/ocaml/stdext
+%exclude %{_libdir}/ocaml/stdext/*.a
+%exclude %{_libdir}/ocaml/stdext/*.cmxa
+%exclude %{_libdir}/ocaml/stdext/*.cmx
+%exclude %{_libdir}/ocaml/stdext/*.mli
 %{_libdir}/ocaml/stublibs/dllstdext_stubs.so
 %{_libdir}/ocaml/stublibs/dllstdext_stubs.so.owner
 
+%files devel
+%{_libdir}/ocaml/stdext/*.a
+%{_libdir}/ocaml/stdext/*.cmx
+%{_libdir}/ocaml/stdext/*.cmxa
+%{_libdir}/ocaml/stdext/*.mli
+
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.10.0-2
+- Split files correctly between base and devel packages
+
 * Tue Apr 1 2014 Euan Harris <euan.harris@citrix.com> - 0.10.0-1
 - Update to 0.10.0, removing the Tar module (use ocaml-tar instead)
 

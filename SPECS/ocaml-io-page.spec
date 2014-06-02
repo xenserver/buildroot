@@ -2,7 +2,7 @@
 
 Name:           ocaml-io-page
 Version:        1.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Efficient handling of I/O memory pages on Unix and Xen.
 License:        ISC
 URL:            https://github.com/mirage/io-page
@@ -30,38 +30,34 @@ developing applications that use %{name}.
 %setup -q -n io-page-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}%{_libdir}/ocaml
-ocaml setup.ml -build
+./configure --destdir %{buildroot}%{_libdir}/ocaml
+make
 
 %install
-rm -rf %{buildroot}
-mkdir -p %{buildroot}%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
-ocaml setup.ml -install
+make install
 
 %files
-%{_libdir}/ocaml/io-page/META
-%{_libdir}/ocaml/io-page/io_page.cma
-%{_libdir}/ocaml/io-page/io_page.cmi
-%{_libdir}/ocaml/io-page/dllio_page_unix_stubs.so
+%doc CHANGES 
+%doc README.md
+%{_libdir}/ocaml/io-page
+%exclude %{_libdir}/ocaml/io-page/*.a
+%exclude %{_libdir}/ocaml/io-page/*.cmxa
+%exclude %{_libdir}/ocaml/io-page/*.cmx
+%exclude %{_libdir}/ocaml/io-page/*.mli
 
 %files devel
-%doc CHANGES README.md
-%{_libdir}/ocaml/io-page/io_page.a
-%{_libdir}/ocaml/io-page/io_page.cmx
-%{_libdir}/ocaml/io-page/io_page.cmxa
-%{_libdir}/ocaml/io-page/io_page.cmxs
-%{_libdir}/ocaml/io-page/io_page.mli
-%{_libdir}/ocaml/io-page/libio_page_unix_stubs.a
-%{_libdir}/ocaml/io-page/io_page_unix.a
-%{_libdir}/ocaml/io-page/io_page_unix.cma
-%{_libdir}/ocaml/io-page/io_page_unix.cmi
-%{_libdir}/ocaml/io-page/io_page_unix.cmx
-%{_libdir}/ocaml/io-page/io_page_unix.cmxa
-%{_libdir}/ocaml/io-page/io_page_unix.cmxs
-%{_libdir}/ocaml/io-page/io_page_unix.ml
+%{_libdir}/ocaml/io-page/*.a
+%{_libdir}/ocaml/io-page/*.cmx
+%{_libdir}/ocaml/io-page/*.cmxa
+%{_libdir}/ocaml/io-page/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.1.1-2
+- Split files corrrectly between base and devel packages
+
 * Tue Apr 1 2014 Euan Harris <euan.harris@citrix.com> - 1.1.1-1
 - Initial package
+

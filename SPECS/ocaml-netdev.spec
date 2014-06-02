@@ -2,7 +2,7 @@
 
 Name:           ocaml-netdev
 Version:        0.9.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Manipulate Linux bridges, network devices and openvswitch instances in OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/netdev
@@ -29,27 +29,39 @@ developing applications that use %{name}.
 %setup -q -n netdev-netdev-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+./configure --destdir %{buildroot}/%{_libdir}/ocaml
+make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-mkdir -p %{buildroot}/%{_libdir}/ocaml/stublibs
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
+mkdir -p $OCAMLFIND_DESTDIR/stublibs
 export OCAMLFIND_LDCONF=ignore
-ocaml setup.ml -install
-
+make install
 
 %files
-# This space intentionally left blank
-
-%files devel
-%doc LICENSE README.md ChangeLog MAINTAINERS
-%{_libdir}/ocaml/netdev/*
+%doc ChangeLog
+%doc LICENSE
+%doc MAINTAINERS
+%doc README.md
+%{_libdir}/ocaml/netdev
+%exclude %{_libdir}/ocaml/netdev/*.a
+%exclude %{_libdir}/ocaml/netdev/*.cmxa
+%exclude %{_libdir}/ocaml/netdev/*.cmx
+%exclude %{_libdir}/ocaml/netdev/*.mli
 %{_libdir}/ocaml/stublibs/dllnetdev_stubs.so
 %{_libdir}/ocaml/stublibs/dllnetdev_stubs.so.owner
 
+%files devel
+%{_libdir}/ocaml/netdev/*.a
+%{_libdir}/ocaml/netdev/*.cmx
+%{_libdir}/ocaml/netdev/*.cmxa
+%{_libdir}/ocaml/netdev/*.mli
+
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
+- Split files correctly between base and devel packages
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.0-1
 - Initial package
 

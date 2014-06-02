@@ -2,8 +2,8 @@
 
 Name:           ocaml-yojson
 Version:        1.1.6
-Release:        1%{?dist}
-Summary:        A JSON parser and priter for OCaml
+Release:        2%{?dist}
+Summary:        A JSON parser and printer for OCaml
 License:        BSD3
 URL:            http://mjambon.com/yojson.html
 Source0:        http://mjambon.com/releases/yojson/yojson-%{version}.tar.gz
@@ -33,21 +33,27 @@ developing applications that use %{name}.
 make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 mkdir -p %{buildroot}/%{_bindir}
 make install DESTDIR=%{buildroot} BINDIR=%{buildroot}/%{_bindir}
 
-
 %files
-#This space intentionally left blank
+%doc README.md
+%doc LICENSE
+%{_bindir}/ydump
+%{_libdir}/ocaml/yojson
+%exclude %{_libdir}/ocaml/yojson/*.cmx
+%exclude %{_libdir}/ocaml/yojson/*.mli
 
 %files devel
-%doc README.md LICENSE
-%{_libdir}/ocaml/yojson/*
-%{_bindir}/ydump
+%{_libdir}/ocaml/yojson/*.cmx
+%{_libdir}/ocaml/yojson/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.1.6-2
+- Split files correctly between base and devel packages
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.1.6-1
 - Initial package
 

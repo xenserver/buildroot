@@ -2,7 +2,7 @@
 
 Name:           ocaml-sexplib
 Version:        109.20.00
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Convert values to and from s-expressions in OCaml
 
 License:        LGPLv2+ with exceptions and BSD
@@ -41,13 +41,30 @@ mkdir -p $OCAMLFIND_DESTDIR
 make install
 
 %files
-#This space intentionally left blank
+%doc CHANGES.txt
+%doc COPYRIGHT.txt
+%doc INRIA-DISCLAIMER.txt
+%doc INSTALL.txt
+%doc LICENSE.txt
+%doc LICENSE-Tywith.txt
+%doc README.md
+%doc THIRD-PARTY.txt
+%{_libdir}/ocaml/sexplib
+%exclude %{_libdir}/ocaml/sexplib/*.a
+%exclude %{_libdir}/ocaml/sexplib/*.cmxa
+%exclude %{_libdir}/ocaml/sexplib/*.cmx
+%exclude %{_libdir}/ocaml/sexplib/*.mli
 
 %files devel
-%doc CHANGES.txt COPYRIGHT.txt INRIA-DISCLAIMER.txt INSTALL.txt LICENSE-Tywith.txt LICENSE.txt README.md THIRD-PARTY.txt
-%{_libdir}/ocaml/sexplib
+%{_libdir}/ocaml/sexplib/*.a
+%{_libdir}/ocaml/sexplib/*.cmx
+%{_libdir}/ocaml/sexplib/*.cmxa
+%{_libdir}/ocaml/sexplib/*.mli
 
 %changelog
+* Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 109.20.00-2
+- Split files correctly between base and devel packages
+
 * Mon Jun  3 2013 David Scott <dave.scott@eu.citrix.com> - 109.20.00-1
 - Initial package
 
