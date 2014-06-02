@@ -2,7 +2,7 @@
 
 Name:           ocaml-uri
 Version:        1.3.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A URI library for OCaml
 License:        ISC
 URL:            https://github.com/mirage/ocaml-uri
@@ -11,6 +11,7 @@ BuildRequires:  ocaml >= 4.00
 BuildRequires:  ocaml-compiler-libs
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-re-devel
 
 %description
@@ -30,22 +31,35 @@ developing applications that use %{name}.
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -install
-
+mkdir -p $OCAMLFIND_DESTDIR
+make install
 
 %files
-#This space intentionally left blank
+%doc CHANGES
+%doc README.md 
+%{_libdir}/ocaml/uri
+%exclude %{_libdir}/ocaml/uri/*.a
+%exclude %{_libdir}/ocaml/uri/*.cmxa
+%exclude %{_libdir}/ocaml/uri/*.cmx
+%exclude %{_libdir}/ocaml/uri/*.mli
 
 %files devel
-%doc README.md CHANGES
-%{_libdir}/ocaml/uri/*
+%doc uri.docdir/*
+%exclude %{_libdir}/ocaml/usr/local/share/doc/uri/
+%exclude /usr/share/doc/%{name}-%{version}/
+%{_libdir}/ocaml/uri/*.a
+%{_libdir}/ocaml/uri/*.cmx
+%{_libdir}/ocaml/uri/*.cmxa
+%{_libdir}/ocaml/uri/*.mli
 
 %changelog
+* Mon Jun 02 2014 David Scott <dave.scott@eu.citrix.com> - 1.3.8-2
+- Split files correctly between base and devel packages
+
 * Thu May 30 2013 David Scott <dave.scott@eu.citrix.com> - 1.3.8-1
 - Initial package
 
