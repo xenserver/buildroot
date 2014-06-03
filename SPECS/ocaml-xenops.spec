@@ -2,7 +2,7 @@
 
 Name:           ocaml-xenops
 Version:        0.9.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Low-level xen control operations OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/xenops
@@ -48,24 +48,34 @@ A set of debugging tools which showcase the features of %{name}-devel.
 make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_LDCONF=ignore
+mkdir -p $OCAMLFIND_DESTDIR
 mkdir -p %{buildroot}/%{_bindir}
 make install BINDIR=%{buildroot}/%{_bindir}
 
-
 %files
-#This space intentionally left blank
+%doc ChangeLog 
+%doc LICENSE 
+%doc MAINTAINERS
+%doc README.md 
+%{_libdir}/ocaml/xenops
+%exclude %{_libdir}/ocaml/xenops/*.a
+%exclude %{_libdir}/ocaml/xenops/*.cmxa
+%exclude %{_libdir}/ocaml/xenops/*.cmx
 
 %files devel
-%doc LICENSE README.md ChangeLog MAINTAINERS
-%{_libdir}/ocaml/xenops/*
+%{_libdir}/ocaml/xenops/*.a
+%{_libdir}/ocaml/xenops/*.cmxa
+%{_libdir}/ocaml/xenops/*.cmx
 
 %files tools
 %{_bindir}/list_domains
 
 %changelog
+* Mon Jun  2 2014 Euan Harris <euan.harris@citrix.com> - 0.9.4-2
+- Split files correctly between base and devel packages
+
 * Thu May  8 2014 David Scott <dave.scott@citrix.com> - 0.9.4-1
 - Update to 0.9.4, add list_domains binary
 

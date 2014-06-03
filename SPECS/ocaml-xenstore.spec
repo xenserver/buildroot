@@ -2,7 +2,7 @@
 
 Name:           ocaml-xenstore
 Version:        1.2.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Xenstore protocol implementation in OCaml
 License:        LGPL
 URL:            https://github.com/mirage/ocaml-xenstore
@@ -13,6 +13,7 @@ BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-ounit-devel
 Conflicts:      xen-ocaml
 
 %description
@@ -34,22 +35,33 @@ developing applications that use %{name}.
 
 %build
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -build
+make
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-ocaml setup.ml -install
-
+mkdir -p $OCAMLFIND_DESTDIR
+make install
 
 %files
-#This space intentionally left blank
+%doc CHANGES 
+%doc LICENSE
+%doc README 
+%{_libdir}/ocaml/xenstore
+%exclude %{_libdir}/ocaml/xenstore/*.a
+%exclude %{_libdir}/ocaml/xenstore/*.cmxa
+%exclude %{_libdir}/ocaml/xenstore/*.cmx
+%exclude %{_libdir}/ocaml/xenstore/*.mli
 
 %files devel
-%doc README CHANGES LICENSE
-%{_libdir}/ocaml/xenstore/*
+%{_libdir}/ocaml/xenstore/*.a
+%{_libdir}/ocaml/xenstore/*.cmxa
+%{_libdir}/ocaml/xenstore/*.cmx
+%{_libdir}/ocaml/xenstore/*.mli
 
 %changelog
+* Mon Jun  2 2014 Euan Harris <euan.harris@citrix.com> - 1.2.4-2
+- Split files correctly between base and devel packages
+
 * Wed Sep 11 2013 David Scott <dave.scott@eu.citrix.com> - 1.2.4-1
 - Update to 1.2.4 (fixes critical watching bug)
 

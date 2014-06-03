@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-rrd
 Version:        0.9.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Round-Robin Datasources in OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrd
@@ -13,6 +13,7 @@ BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel
+BuildRequires:  ocaml-uuidm-devel
 
 %description
 Round-Robin Datasources in OCaml.
@@ -22,6 +23,7 @@ Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-rpc-devel%{?_isa}
 Requires:       ocaml-stdext-devel%{?_isa}
+Requires:       ocaml-uuidm-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -38,15 +40,25 @@ mkdir -p %{buildroot}/%{_libdir}/ocaml
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 make install
 
-
 %files
-#This space intentionally left blank
+%doc ChangeLog 
+%doc LICENSE 
+%doc MAINTAINERS
+%doc README.md 
+%{_libdir}/ocaml/xcp-rrd
+%exclude %{_libdir}/ocaml/xcp-rrd/*.a
+%exclude %{_libdir}/ocaml/xcp-rrd/*.cmxa
+%exclude %{_libdir}/ocaml/xcp-rrd/*.cmx
 
 %files devel
-%doc LICENSE README.md ChangeLog MAINTAINERS
-%{_libdir}/ocaml/xcp-rrd/*
+%{_libdir}/ocaml/xcp-rrd/*.a
+%{_libdir}/ocaml/xcp-rrd/*.cmxa
+%{_libdir}/ocaml/xcp-rrd/*.cmx
 
 %changelog
+* Mon Jun  2 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
+- Split files correctly between base and devel packages
+
 * Thu Jun  6 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.0-1
 - Initial package
 

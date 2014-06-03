@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-api-client
 Version:        0.9.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        XenServer XenAPI Client Library for OCaml
 License:        LGPLv2
 URL:            https://github.com/xapi-project/xen-api-client
@@ -42,24 +42,34 @@ virtualization hosts.
 
 %build
 ocaml setup.ml -configure --disable-tests --enable-lwt
-ocaml setup.ml -build
-ocaml setup.ml -doc
+make
+make doc
 
 %install
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-export OCAMLFIND_LDCONF=ignore
-OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml ocaml setup.ml -install
+export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
+make install
 
 
 %files
-#This space intentionally left blank
+%doc CHANGES
+%doc README.md
+%{_libdir}/ocaml/xen-api-client
+%exclude %{_libdir}/ocaml/xen-api-client/*.a
+%exclude %{_libdir}/ocaml/xen-api-client/*.cmxa
+%exclude %{_libdir}/ocaml/xen-api-client/*.cmx
+%exclude %{_libdir}/ocaml/xen-api-client/*.mli
 
 %files devel
-%doc README.md CHANGES
-%{_libdir}/ocaml/xen-api-client/*
-
+%{_libdir}/ocaml/xen-api-client/*.a
+%{_libdir}/ocaml/xen-api-client/*.cmx
+%{_libdir}/ocaml/xen-api-client/*.cmxa
+%{_libdir}/ocaml/xen-api-client/*.mli
 
 %changelog
+* Mon Jun  2 2014 Euan Harris <euan.harris@citrix.com> - 0.9.4-2
+- Split files correctly between base and devel packages
+
 * Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.4-1
 - Update to 0.9.3
 
