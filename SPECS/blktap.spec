@@ -1,6 +1,6 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
-Version: 0.9.1
+Version: 0.9.2
 Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
@@ -51,6 +51,9 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
+* Wed Jun 04 2014 Bob Ball <bob.ball@citrix.com> - 0.9.2-1
+- Update blktap to latest release
+
 * Wed Mar 12 2014 Bob Ball <bob.ball@citrix.com> - 0.9.1-1
 - Update blktap to avoid Debian Jessie compile failure 
 
