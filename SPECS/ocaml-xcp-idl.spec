@@ -42,7 +42,7 @@ developing applications that use %{name}.
 %setup -q -n xcp-idl-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -configure
 make
 
 %install

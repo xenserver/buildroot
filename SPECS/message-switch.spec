@@ -28,7 +28,7 @@ A store and forward message switch for OCaml.
 cp %{SOURCE1} message-switch-init
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -configure
 ocaml setup.ml -build
 
 %install

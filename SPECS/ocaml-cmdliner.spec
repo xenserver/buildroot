@@ -32,7 +32,7 @@ developing applications that use %{name}.
 
 %build
 oasis setup
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -configure
 ocaml setup.ml -build
 
 %install
