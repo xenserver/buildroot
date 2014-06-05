@@ -1,10 +1,10 @@
 Name:           xcp-rrdd
-Version:        0.9.5
+Version:        0.9.7
 Release:        1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        xcp-rrdd-init
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
@@ -25,6 +25,16 @@ Requires:       redhat-lsb-core
 %description
 Statistics gathering daemon for the xapi toolstack.
 
+%package        devel
+Summary:        Development files for %{name}
+Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-xcp-idl-devel%{?_isa}
+Requires:       ocaml-stdext-devel%{?_isa}
+
+%description    devel
+The %{name}-devel package contains libraries and signature files for
+developing applications that use %{name}.
+
 %prep
 %setup -q
 cp %{SOURCE1} xcp-rrdd-init
@@ -34,6 +44,8 @@ make
 
 %install
 mkdir -p %{buildroot}/%{_sbindir}
+export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR
 make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir}
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xcp-rrdd-init %{buildroot}%{_sysconfdir}/init.d/xcp-rrdd
@@ -43,6 +55,17 @@ install -m 0755 xcp-rrdd-init %{buildroot}%{_sysconfdir}/init.d/xcp-rrdd
 %doc README.markdown LICENSE
 %{_sbindir}/xcp-rrdd
 %{_sysconfdir}/init.d/xcp-rrdd
+%{_libdir}/ocaml/rrdd-libs
+%exclude %{_libdir}/ocaml/rrdd-libs/*.a
+%exclude %{_libdir}/ocaml/rrdd-libs/*.cmx
+%exclude %{_libdir}/ocaml/rrdd-libs/*.cmxa
+%exclude %{_libdir}/ocaml/rrdd-libs/*.mli
+
+%files devel
+%{_libdir}/ocaml/rrdd-libs/*.a
+%{_libdir}/ocaml/rrdd-libs/*.cmx
+%{_libdir}/ocaml/rrdd-libs/*.cmxa
+%{_libdir}/ocaml/rrdd-libs/*.mli
 
 %post
 /sbin/chkconfig --add xcp-rrdd
@@ -54,6 +77,10 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Jun 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-1
+- Update to 0.9.7
+- Create new subpackage for the devel libraries now installed
+
 * Fri May  9 2014 David Scott <dave.scott@citrix.com> - 0.9.5-1
 - Update to 0.9.5, now will start without xen
 

@@ -1,10 +1,10 @@
 Name:           xcp-networkd
-Version:        0.9.3
+Version:        0.9.4
 Release:        1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        xcp-networkd-init
 Source2:        xcp-networkd-conf
 Source3:        xcp-networkd-network-conf
@@ -38,7 +38,8 @@ make
 
 %install
 mkdir -p %{buildroot}/%{_sbindir}
-install dist/build/xcp-networkd/xcp-networkd %{buildroot}/%{_sbindir}/xcp-networkd
+mkdir -p %{buildroot}/%{_bindir}
+make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xcp-networkd-init %{buildroot}%{_sysconfdir}/init.d/xcp-networkd
 mkdir -p %{buildroot}/etc/xcp
@@ -47,10 +48,10 @@ install -m 0644 xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
 mkdir -p %{buildroot}/etc/modprobe.d
 install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
 
-
 %files
 %doc README.markdown LICENSE MAINTAINERS
 %{_sbindir}/xcp-networkd
+%{_bindir}/networkd_db
 %{_sysconfdir}/init.d/xcp-networkd
 /etc/modprobe.d/bridge.conf
 %config(noreplace) /etc/xcp/network.conf
@@ -66,6 +67,10 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Jun 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.4-1
+- Update to 0.9.4
+- Add networkd_db CLI
+
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.3-1
 - Update to 0.9.3
 

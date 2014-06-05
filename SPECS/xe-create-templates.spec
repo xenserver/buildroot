@@ -1,10 +1,10 @@
 Name:           xe-create-templates
-Version:        0.9.2
+Version:        0.9.3
 Release:        1%{?dist}
 Summary:        Creates default XenServer templates
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-guest-templates
-Source0:        https://github.com/xapi-project/xcp-guest-templates/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/xcp-guest-templates/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
