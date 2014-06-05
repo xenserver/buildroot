@@ -1,5 +1,5 @@
 Name:           squeezed
-Version:        0.10.5
+Version:        0.10.6
 Release:        1%{?dist}
 Summary:        Memory ballooning daemon for the xapi toolstack
 License:        LGPL

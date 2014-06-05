@@ -1,10 +1,10 @@
 Name:           xenopsd
-Version:        0.9.34
+Version:        0.9.37
 Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
 Source3:        xenopsd-libvirt-init
@@ -30,6 +30,7 @@ BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  xen-devel
 BuildRequires:  ocaml-uutf-devel
+BuildRequires:  ocaml-xcp-rrd-devel
 Requires:       message-switch
 Requires:       redhat-lsb-core
 Requires:       xenops-cli

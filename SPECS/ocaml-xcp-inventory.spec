@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-inventory
-Version:        0.9.0
+Version:        0.9.1
 Release:        1%{?dist}
 Summary:        OCaml library to read and write the XCP inventory file
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/xcp-inventory
-Source0:        https://github.com/xapi-project/xcp-inventory/archive/xcp-inventory-%{version}/xcp-inventory-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/xcp-inventory/archive/v%{version}/xcp-inventory-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-findlib-devel
@@ -28,7 +28,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n xcp-inventory-xcp-inventory-%{version}
+%setup -q -n xcp-inventory-%{version}
 
 %build
 if [ -x ./configure ]; then
@@ -53,6 +53,9 @@ mkdir -p %{buildroot}/etc/xcp
 %{_libdir}/ocaml/xcp-inventory/*
 
 %changelog
+* Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.1-1
+- Update to 0.9.1
+
 * Wed Jun  5 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.0-1
 - Initial package
 

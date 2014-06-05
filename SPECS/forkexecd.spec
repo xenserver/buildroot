@@ -1,5 +1,5 @@
 Name:           forkexecd
-Version:        0.9.1
+Version:        0.9.2
 Release:        1%{?dist}
 Summary:        A subprocess management service
 License:        LGPL
@@ -74,6 +74,9 @@ developing applications that use %{name}.
 %{_libdir}/ocaml/forkexec/*
 
 %changelog
+* Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.2-1
+- Update to 0.9.2
+
 * Wed Sep 25 2013 David Scott <dave.scott@eu.citrix.com> - 0.9.1-1
 - Update to 0.9.1
 

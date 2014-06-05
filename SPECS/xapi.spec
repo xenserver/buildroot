@@ -2,11 +2,11 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.49
+Version: 1.9.50
 Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
-Source0: https://github.com/xapi-project/xen-api/archive/%{version}/xen-api-%{version}.tar.gz
+Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
 Source1: xen-api-xapi-conf.in
 Source2: xen-api-init
 Source3: xen-api-xapissl
