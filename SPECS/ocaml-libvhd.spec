@@ -29,7 +29,7 @@ developing applications that use %{name}.
 %setup -q -n libvhd-libvhd-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -configure
 make
 
 %install

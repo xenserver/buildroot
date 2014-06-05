@@ -34,7 +34,7 @@ developing applications that use %{name}.
 %setup -q
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -configure
 make
 
 %install

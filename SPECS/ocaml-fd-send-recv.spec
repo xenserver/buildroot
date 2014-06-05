@@ -25,7 +25,7 @@ developing applications that use %{name}.
 %setup -q -n %{name}-%{name}-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -configure
 ocaml setup.ml -build
 
 %install

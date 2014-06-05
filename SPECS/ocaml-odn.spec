@@ -32,7 +32,7 @@ developing applications that use %{name}.
 %setup -q -n ocaml-data-notation-%{version}
 
 %build
-./configure --destdir %{buildroot}/%{_libdir}/ocaml
+./configure
 make
 
 %install

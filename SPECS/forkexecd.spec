@@ -28,7 +28,7 @@ fork() and exec() in a multithreaded program.
 cp %{SOURCE1} forkexecd-init
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
+ocaml setup.ml -configure
 ocaml setup.ml -build
 
 %install

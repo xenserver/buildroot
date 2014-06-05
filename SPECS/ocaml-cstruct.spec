@@ -29,7 +29,7 @@ developing applications that use %{name}.
 %setup -q -n %{name}-%{name}-%{version}
 
 %build
-ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml --enable-lwt
+ocaml setup.ml -configure --enable-lwt
 ocaml setup.ml -build
 
 %install

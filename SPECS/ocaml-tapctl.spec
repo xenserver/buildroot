@@ -32,7 +32,7 @@ developing applications that use %{name}.
 %setup -q -n tapctl-%{version}
 
 %build
-./configure --destdir %{buildroot}/%{_libdir}/ocaml
+./configure
 make
 
 %install

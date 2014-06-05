@@ -29,7 +29,7 @@ developing applications that use %{name}.
 %setup -q -n netdev-netdev-%{version}
 
 %build
-./configure --destdir %{buildroot}/%{_libdir}/ocaml
+./configure
 make
 
 %install
