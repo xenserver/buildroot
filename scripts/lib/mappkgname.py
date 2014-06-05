@@ -25,7 +25,7 @@ MAPPING = {
     "js_of_ocaml": ["libjs-of-ocaml"],
     "libnl3-cli": ["libnl-3-cli"],
     "libnl3-doc": ["libnl-3-doc"],
-    "libnl3": ["libnl-3"],
+    "libnl3": ["libnl-3-200"],
     "libffi": ["libffi6"],
     "ocaml-bitstring": ["libbitstring-ocaml"],
     "ocaml-camomile-data": ["libcamomile-data"],
