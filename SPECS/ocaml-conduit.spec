@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        OCaml network conduit library
 License:        Unknown 
 Group:          Development/Libraries
-URL:            http://github.com/mirage/ocaml-conduit
+URL:            https://github.com/mirage/ocaml-conduit
 Source0:        https://github.com/mirage/ocaml-conduit/archive/v%{version}/ocaml-conduit-%{version}.tar.gz
 
 BuildRequires:  ocaml
@@ -28,7 +28,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q -n ocaml-conduit-%{version}
+%setup -q
 
 
 %build

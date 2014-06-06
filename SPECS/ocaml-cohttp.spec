@@ -52,7 +52,7 @@ developing applications that use %{name}.
 
 %build
 # Dirty hack
-export PREFIX=%{buildroot}/usr
+export PREFIX=%{buildroot}%{_prefix}
 make build
 
 %install
@@ -77,7 +77,7 @@ make install
 %{_libdir}/ocaml/cohttp/*.mli
 
 %files bin
-/usr/bin/cohttp-server-lwt
+%{_prefix}/bin/cohttp-server-lwt
 
 %changelog
 * Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.11.2-1

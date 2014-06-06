@@ -43,11 +43,23 @@ mkdir -p $OCAMLFIND_DESTDIR
 make install
 
 %files
-#This space intentionally left blank
+%doc README.txt
+%doc LICENSE.txt
+%doc COPYRIGHT.txt
+%doc THIRD-PARTY.txt
+%doc INRIA-DISCLAIMER.txt
+%doc INSTALL.txt
+%{_libdir}/ocaml/fieldslib
+%exclude %{_libdir}/ocaml/fieldslib/*.a
+%exclude %{_libdir}/ocaml/fieldslib/*.cmxa
+%exclude %{_libdir}/ocaml/fieldslib/*.cmx
+%exclude %{_libdir}/ocaml/fieldslib/*.mli
 
 %files devel
-%doc COPYRIGHT.txt INRIA-DISCLAIMER.txt INSTALL.txt LICENSE.txt THIRD-PARTY.txt
-%{_libdir}/ocaml/fieldslib
+%{_libdir}/ocaml/fieldslib/*.a
+%{_libdir}/ocaml/fieldslib/*.cmxa
+%{_libdir}/ocaml/fieldslib/*.cmx
+%{_libdir}/ocaml/fieldslib/*.mli
 
 %changelog
 * Tue May 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 109.20.00-1
