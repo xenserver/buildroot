@@ -7,7 +7,14 @@ import subprocess
 import time
 
 def guess_file_type(path):
-	line = subprocess.check_output(["file", path])
+	# If we have python2.7:
+	#line = subprocess.check_output(["file", path])
+	p = subprocess.Popen(["file", path], stdout = subprocess.PIPE)
+	line = p.stdout.read()
+	p.communicate()
+	if p.returncode <> 0:
+		print >>sys.stderr, "file %s: failed with exit code %d" % (path, p.returncode)
+		exit(1)
 	# file: description
 	if len(line) < (len(path) + 2):
 		print >>sys.stderr, "Malformed output from 'file %s': '%s'" % (path, line)
