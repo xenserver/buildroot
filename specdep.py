@@ -45,8 +45,8 @@ def download_rpm_sources(spec):
         # Source comes from a remote HTTP server
         if source.scheme in ["http", "https"]:
             print '%s: %s' % (path, spec.specpath())
-            print '\t@echo [CURL] $@'
-            print '\t@curl --silent --show-error -L -o $@ %s' % url
+            print '\t@echo [DOWNLOADER] $@'
+            print '\t@./scripts/downloader.py %s %s' % (url, path)
 
         # Source comes from a local file or directory
         if source.scheme == "file":
