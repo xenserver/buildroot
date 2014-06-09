@@ -60,8 +60,8 @@ find $RPM_BUILD_ROOT -name \*.la -delete
 
 %files
 %doc COPYING
-%exclude %{_libdir}/libnl-cli*.so.*
-%{_libdir}/libnl-*.so.*
+%exclude %{_libdir}/libnl-cli*.so*
+%{_libdir}/libnl-*.so*
 %config(noreplace) %{_sysconfdir}/*
 
 %files devel
@@ -73,7 +73,7 @@ find $RPM_BUILD_ROOT -name \*.la -delete
 
 %files cli
 %doc COPYING
-%{_libdir}/libnl-cli*.so.*
+%{_libdir}/libnl-cli*.so*
 %{_libdir}/libnl/
 %{_sbindir}/*
 %{_mandir}/man8/* 
