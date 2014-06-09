@@ -6,7 +6,7 @@
 # description: Manages host memory by ballooning VMs
 ### BEGIN INIT INFO
 # Provides: squeezed
-# Required-Start: $local_fs $network $syslog message-switch xenstored
+# Required-Start: $local_fs $network $syslog message-switch xen
 # Required-Stop: $local_fs $syslog
 # Should-Start: $syslog message-switch
 # Should-Stop: $network $syslog
