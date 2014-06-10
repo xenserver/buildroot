@@ -122,6 +122,7 @@ MAPPING = {
     "redhat-lsb-core": ["lsb-base"],
     "sg3_utils": ["sg3-utils"],
     "python-argparse": ["libpython2.7-stdlib"],
+    "util-linux-ng": ["uuid-runtime"],
 }
 
 SECONDARY_MAPPING = {

@@ -11,6 +11,7 @@ Requires: newt
 Requires: python
 Requires: python-argparse
 Requires: xapi-python-devel
+Requires: util-linux-ng
 
 %description
 A simple wizard to configure a XenServer after install
