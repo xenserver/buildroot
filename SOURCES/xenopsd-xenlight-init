@@ -6,7 +6,7 @@
 # description: Manages VMs via libxl
 ### BEGIN INIT INFO
 # Provides: xenopsd-xenlight
-# Required-Start: $local_fs $network $syslog message-switch forkexecd xen
+# Required-Start: $local_fs $network $syslog message-switch forkexecd xenstored
 # Required-Stop: $local_fs $syslog
 # Should-Start: $syslog message-switch
 # Should-Stop: $network $syslog
