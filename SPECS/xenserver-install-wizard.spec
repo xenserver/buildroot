@@ -3,10 +3,11 @@
 Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
 Version: 0.2.30
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xenserver/xenserver-install-wizard
 Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source1: xenserver-install-wizard-init
 Requires: newt
 Requires: python
 Requires: python-argparse
@@ -17,6 +18,7 @@ A simple wizard to configure a XenServer after install
 
 %prep 
 %setup -q
+cp %{SOURCE1} xenserver-install-wizard-init
 
 %build
 
@@ -24,13 +26,27 @@ A simple wizard to configure a XenServer after install
 make DESTDIR=%{buildroot}
 mkdir -p %{buildroot}%{_bindir}
 ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroot}%{_bindir}/xenserver-install-wizard
-
+mkdir -p %{buildroot}%{_sysconfdir}/init.d
+install -m 0755 xenserver-install-wizard-init %{buildroot}%{_sysconfdir}/init.d/xenserver-install-wizard
 
 %files
 /usr/share/xenserver-install-wizard/*
 %{_bindir}/xenserver-install-wizard
+%{_sysconfdir}/init.d/xenserver-install-wizard
+
+%post
+[ ! -x /sbin/chkconfig ] || chkconfig --add xenserver-install-wizard
+
+%preun
+if [ $1 -eq 0 ]; then
+  /sbin/service xenserver-install-wizard stop > /dev/null 2>&1
+  /sbin/chkconfig --del xenserver-install-wizard
+fi
 
 %changelog
+* Tue Jun 17 2014 David Scott <dave.scott@citrix.com> - 0.2.30-2
+- Add init script
+
 * Sat May 10 2014 David Scott <dave.scott@citrix.com> - 0.2.30-1
 - Update to 0.2.30, now starts xcp-rrdd
 

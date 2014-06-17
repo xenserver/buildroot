@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+#  xenserver-first-boot Complete XenServer installation
+#
+# chkconfig: 2345 1 99
+# description: Complete XenServer setup
+### BEGIN INIT INFO
+# Required-Start: $local_fs $network $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Complete XenServer installation
+# Description:       Complete XenServer installation
+### END INIT INFO
+
+# Source function library.
+. /lib/lsb/init-functions
+
+STAMPFILE=/var/xenserver/trigger-wizard
+
+start() {
+	if [ -e $STAMPFILE ]; then
+		rm -f $STAMPFILE
+		/usr/share/xenserver-install-wizard/xenserver-install-wizard.py --yes-to-all
+	fi
+}
+stop() {
+	echo .
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+	stop
+	;;
+  *)
+        echo $"Usage: $0 {start|stop}"
+        exit 3
+esac
+
+exit $?
