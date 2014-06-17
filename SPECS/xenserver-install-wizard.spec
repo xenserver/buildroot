@@ -2,8 +2,8 @@
 
 Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
-Version: 0.2.30
-Release: 2%{?dist}
+Version: 0.2.32
+Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xenserver/xenserver-install-wizard
 Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
@@ -44,8 +44,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
-* Tue Jun 17 2014 David Scott <dave.scott@citrix.com> - 0.2.30-2
+* Tue Jun 17 2014 David Scott <dave.scott@citrix.com> - 0.2.32-1
 - Add init script
+- Update to 0.2.32
 
 * Sat May 10 2014 David Scott <dave.scott@citrix.com> - 0.2.30-1
 - Update to 0.2.30, now starts xcp-rrdd
