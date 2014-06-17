@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-stdext
-Version:        0.10.0
-Release:        2%{?dist}
+Version:        0.11.0
+Release:        1%{?dist}
 Summary:        Deprecated misc library functions for OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/stdext
@@ -55,6 +55,9 @@ make install DESTDIR=${buildroot}
 %{_libdir}/ocaml/stdext/*.mli
 
 %changelog
+* Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.11.0-1
+- Update to 0.11.0
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.10.0-2
 - Split files correctly between base and devel packages
 

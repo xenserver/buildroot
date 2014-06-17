@@ -2,7 +2,7 @@
 
 Summary: Command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
-Version: 0.7.4
+Version: 0.7.5
 Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/vhd-tool
@@ -49,6 +49,9 @@ make install
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
+* Fri Jun 6 2014 Jonathan Ludlam <jonathan.ludlam@citrix.com> - 0.7.5-1
+- Update to 0.7.5
+
 * Wed Apr 9 2014 Euan Harris <euan.harris@citrix.com> - 0.7.4-1
 - Update to 0.7.4 - fix handling of tar file prefixes
 
