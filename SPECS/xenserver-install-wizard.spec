@@ -2,7 +2,7 @@
 
 Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
-Version: 0.2.32
+Version: 0.2.33
 Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xenserver/xenserver-install-wizard
@@ -44,6 +44,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Jun 18 2014 David Scott <dave.scott@citrix.com> - 0.2.33-1
+- Update to 0.2.33
+
 * Tue Jun 17 2014 David Scott <dave.scott@citrix.com> - 0.2.32-1
 - Add init script
 - Update to 0.2.32
