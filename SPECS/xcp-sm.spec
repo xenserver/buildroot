@@ -3,7 +3,7 @@
 Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.7
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL
 URL:  https://github.com/xapi-project/sm
 Source0: https://github.com/BobBall/sm/archive/%{version}/sm-%{version}.tar.gz
@@ -80,7 +80,6 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot
 /etc/rc.d/init.d/sm-multipath
-/etc/udev/rules.d/40-multipath.rules
 /etc/udev/rules.d/55-xs-mpath-scsidev.rules
 /etc/udev/scripts/xs-mpath-scsidev.sh
 /usr/lib/xapi/plugins/coalesce-leaf
@@ -253,6 +252,9 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /opt/xensource/sm/snapwatchd/xslib.py
 /opt/xensource/sm/snapwatchd/xslib.pyc
 /opt/xensource/sm/snapwatchd/xslib.pyo
+/opt/xensource/sm/snapwatchd/snapdebug.py
+/opt/xensource/sm/snapwatchd/snapdebug.pyc
+/opt/xensource/sm/snapwatchd/snapdebug.pyo
 /usr/lib/xapi/sm/sysdevice.py
 /usr/lib/xapi/sm/sysdevice.pyc
 /usr/lib/xapi/sm/sysdevice.pyo
@@ -280,7 +282,6 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /usr/lib/xapi/sm/wwid_conf.pyc
 /usr/lib/xapi/sm/wwid_conf.pyo
 /sbin/mpathutil
-/etc/rc.d/init.d/sm-multipath
 %config /etc/udev/rules.d/40-multipath.rules
 %config /etc/multipath.xenserver/multipath.conf
 
@@ -303,6 +304,9 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
+* Fri Jun 20 2014 David Scott <dave.scott@citrix.com> - 0.9.7-2
+- Update file list
+
 * Fri Jun 20 2014 Bob Ball <bob.ball@citrix.com> - 0.9.7-1
 - Update to 0.9.7: Rebase to xapi-project/sm b890746ea3b64058654947a6b74caf578cc11311
 
