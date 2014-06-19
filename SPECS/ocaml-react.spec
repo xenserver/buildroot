@@ -47,7 +47,7 @@ cp _build/pkg/META _build/src/react.a _build/src/react.cma _build/src/react.cmi 
 
 %files
 %doc CHANGES.md
-%doc README
+%doc README.md
 %{_libdir}/ocaml/react
 %exclude %{_libdir}/ocaml/react/*.a
 %exclude %{_libdir}/ocaml/react/*.cmxa
