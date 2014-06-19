@@ -54,7 +54,6 @@ rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/lambda-term-actions
 %exclude %{_libdir}/ocaml/lambda-term/*.a
 %exclude %{_libdir}/ocaml/lambda-term/*.cmxa
 %exclude %{_libdir}/ocaml/lambda-term/*.cmx
-%exclude %{_libdir}/ocaml/lambda-term/*.ml
 %exclude %{_libdir}/ocaml/lambda-term/*.mli
 
 %files devel
