@@ -2,17 +2,19 @@
 
 Summary: XCP storage managers
 Name:    xcp-sm
-Version: 0.9.6
-Release: 3%{?dist}
+Version: 0.9.7
+Release: 2%{?dist}
 License: LGPL
 URL:  https://github.com/xapi-project/sm
-Source0: https://github.com/euanh/sm/archive/%{version}/sm-%{version}.tar.gz
+Source0: https://github.com/BobBall/sm/archive/%{version}/sm-%{version}.tar.gz
 Source1: xcp-mpath-scsidev-rules
 Source2: xcp-mpath-scsidev-script
 Patch0: sm-path-fix.patch
+Patch1: xcp-sm-pylint-fix.patch
 BuildRequires: python-devel
 BuildRequires: swig
 BuildRequires: xen-devel
+BuildRequires: pylint
 Requires: iscsi-initiator-utils
 Requires: sg3_utils
 Requires: xen-runtime
@@ -23,6 +25,7 @@ This package contains storage backends used in XCP
 %prep
 %setup -q -n sm-%{version}
 %patch0 -p1
+%patch1 -p1
 cp %{SOURCE1} xcp-mpath-scsidev-rules
 cp %{SOURCE2} xcp-mpath-scsidev-script
 
@@ -42,13 +45,41 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add mpathroot
+[ ! -x /sbin/chkconfig ] || chkconfig --add sm-multipath
+service sm-multipath start
+
+[ -f /etc/lvm/lvm.conf.orig ] || cp /etc/lvm/lvm.conf /etc/lvm/lvm.conf.orig || exit $?
+[ -d /etc/lvm/master ] || mkdir /etc/lvm/master || exit $?
+mv -f /etc/lvm/lvm.conf /etc/lvm/master/lvm.conf || exit $?
+sed -i 's/metadata_read_only =.*/metadata_read_only = 0/' /etc/lvm/master/lvm.conf || exit $?
+sed -i 's/archive = .*/archive = 0/' /etc/lvm/master/lvm.conf || exit $?
+sed -i 's/filter \= \[ \"a\/\.\*\/\" \]/filter = \[ \"r\|\/dev\/xvd\.\|\"\, \"r\|\/dev\/VG\_Xen\.\*\/\*\|\"\]/g' /etc/lvm/master/lvm.conf || exit $?
+cp /etc/lvm/master/lvm.conf /etc/lvm/lvm.conf || exit $?
+sed -i 's/metadata_read_only =.*/metadata_read_only = 1/' /etc/lvm/lvm.conf || exit $?
+# We try to be "update-alternatives" ready.
+# If a file exists and it is not a symlink we back it up
+if [ -e /etc/multipath.conf -a ! -h /etc/multipath.conf ]; then
+   mv -f /etc/multipath.conf /etc/multipath.conf.$(date +%F_%T)
+fi
+update-alternatives --install /etc/multipath.conf multipath.conf /etc/multipath.xenserver/multipath.conf 90
+
+%preun
+[ ! -x /sbin/chkconfig ] || chkconfig --del sm-multipath
+#only remove in case of erase (but not at upgrade)
+if [ $1 -eq 0 ] ; then
+	update-alternatives --remove multipath.conf /etc/multipath.xenserver/multipath.conf
+fi
+exit 0
+
+%postun
+[ ! -d /etc/lvm/master ] || rm -Rf /etc/lvm/master || exit $?
+cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 
 %files
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot
 /etc/rc.d/init.d/sm-multipath
-/etc/udev/rules.d/40-multipath.rules
 /etc/udev/rules.d/55-xs-mpath-scsidev.rules
 /etc/udev/scripts/xs-mpath-scsidev.sh
 /usr/lib/xapi/plugins/coalesce-leaf
@@ -217,11 +248,13 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 /usr/lib/xapi/sm/scsi_host_rescan.py
 /usr/lib/xapi/sm/scsi_host_rescan.pyc
 /usr/lib/xapi/sm/scsi_host_rescan.pyo
-/opt/xensource/sm/snapwatchd/_xslib.so
 /opt/xensource/sm/snapwatchd/snapwatchd
 /opt/xensource/sm/snapwatchd/xslib.py
 /opt/xensource/sm/snapwatchd/xslib.pyc
 /opt/xensource/sm/snapwatchd/xslib.pyo
+/opt/xensource/sm/snapwatchd/snapdebug.py
+/opt/xensource/sm/snapwatchd/snapdebug.pyc
+/opt/xensource/sm/snapwatchd/snapdebug.pyo
 /usr/lib/xapi/sm/sysdevice.py
 /usr/lib/xapi/sm/sysdevice.pyc
 /usr/lib/xapi/sm/sysdevice.pyo
@@ -245,7 +278,12 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 /usr/lib/xapi/sm/xs_errors.py
 /usr/lib/xapi/sm/xs_errors.pyc
 /usr/lib/xapi/sm/xs_errors.pyo
+/usr/lib/xapi/sm/wwid_conf.py
+/usr/lib/xapi/sm/wwid_conf.pyc
+/usr/lib/xapi/sm/wwid_conf.pyo
 /sbin/mpathutil
+%config /etc/udev/rules.d/40-multipath.rules
+%config /etc/multipath.xenserver/multipath.conf
 
 
 %package rawhba
@@ -266,6 +304,12 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
+* Fri Jun 20 2014 David Scott <dave.scott@citrix.com> - 0.9.7-2
+- Update file list
+
+* Fri Jun 20 2014 Bob Ball <bob.ball@citrix.com> - 0.9.7-1
+- Update to 0.9.7: Rebase to xapi-project/sm b890746ea3b64058654947a6b74caf578cc11311
+
 * Wed Apr 30 2014 Bob Ball <bob.ball@citrix.com> - 0.9.6-3
 - Added fix for paths to blktap to use buildroot versions
 
