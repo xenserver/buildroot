@@ -1,10 +1,10 @@
 Name:           xenopsd
-Version:        0.9.34
+Version:        0.9.37
 Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
 Source3:        xenopsd-libvirt-init
@@ -30,6 +30,7 @@ BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  xen-devel
 BuildRequires:  ocaml-uutf-devel
+BuildRequires:  ocaml-xcp-rrd-devel
 Requires:       message-switch
 Requires:       redhat-lsb-core
 Requires:       xenops-cli
@@ -187,6 +188,9 @@ fi
 #fi
 
 %changelog
+* Fri Jun  6 2014 Jonathan Ludlam <jonathan.ludlam@citrix.com> - 0.9.37-1
+- Update to 0.9.37
+
 * Fri Jan 17 2014 Euan Harris <euan.harris@eu.citrix.com> - 0.9.34-1
 - Update to 0.9.34, restoring fixes from the 0.9.32 line which were 
   not merged to trunk before 0.9.33 was tagged

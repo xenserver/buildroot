@@ -1,10 +1,10 @@
 Name:           message-switch
-Version:        0.10.1
+Version:        0.10.3
 Release:        1%{?dist}
 Summary:        A store and forward message switch
 License:        FreeBSD
 URL:            https://github.com/xapi-project/message-switch
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        message-switch-init
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
@@ -73,6 +73,12 @@ developing applications that use %{name}.
 %{_libdir}/ocaml/message_switch/*
 
 %changelog
+* Thu Jun 19 2014 David Scott <dave.scott@citrix.com> - 0.10.3-1
+- Update to 0.10.3
+
+* Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.10.2-1
+- Update to 0.10.2
+
 * Fri Oct 18 2013 David Scott <dave.scott@eu.citrix.com> - 0.10.1-1
 - Update to 0.10.1 which is more tolerant of startup orderings
 

@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 Name:           ocaml-netdev
-Version:        0.9.0
-Release:        2%{?dist}
+Version:        0.9.1
+Release:        1%{?dist}
 Summary:        Manipulate Linux bridges, network devices and openvswitch instances in OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/netdev
-Source0:        https://github.com/xapi-project/netdev/archive/netdev-%{version}/netdev-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/netdev/archive/v%{version}/netdev-%{version}.tar.gz
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
@@ -26,7 +26,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n netdev-netdev-%{version}
+%setup -q -n netdev-%{version}
 
 %build
 ./configure
@@ -59,6 +59,9 @@ make install
 %{_libdir}/ocaml/netdev/*.mli
 
 %changelog
+* Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.1-1
+- Update to 0.9.1
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.9.0-2
 - Split files correctly between base and devel packages
 

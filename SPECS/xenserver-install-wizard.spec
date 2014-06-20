@@ -2,7 +2,7 @@
 
 Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
-Version: 0.2.30
+Version: 0.2.35
 Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xenserver/xenserver-install-wizard
@@ -26,12 +26,21 @@ make DESTDIR=%{buildroot}
 mkdir -p %{buildroot}%{_bindir}
 ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroot}%{_bindir}/xenserver-install-wizard
 
-
 %files
 /usr/share/xenserver-install-wizard/*
 %{_bindir}/xenserver-install-wizard
 
 %changelog
+* Thu Jun 19 2014 David Scott <dave.scott@citrix.com> - 0.2.35-1
+- Update to 0.2.35
+
+* Wed Jun 18 2014 David Scott <dave.scott@citrix.com> - 0.2.33-1
+- Update to 0.2.33
+
+* Tue Jun 17 2014 David Scott <dave.scott@citrix.com> - 0.2.32-1
+- Add init script
+- Update to 0.2.32
+
 * Sat May 10 2014 David Scott <dave.scott@citrix.com> - 0.2.30-1
 - Update to 0.2.30, now starts xcp-rrdd
 
