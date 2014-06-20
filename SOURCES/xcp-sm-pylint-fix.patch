@@ -1,0 +1,44 @@
+diff -ur a/drivers/cleanup.py b/drivers/cleanup.py
+--- a/drivers/cleanup.py    2014-03-21 12:41:04.000000000 +0000
++++ b/drivers/cleanup.py    2014-04-02 15:35:37.396329000 +0100
+@@ -115,7 +115,7 @@
+         (stdout, stderr) = proc.communicate(inputtext)
+         stdout = str(stdout)
+         stderr = str(stderr)
+-        rc = proc.returncode
++        rc = proc.returncode # pylint: disable=E1101
+         if log:
+             Util.log("`%s`: %s" % (args, rc))
+         if type(expectedRC) != type([]):
+diff --git a/drivers/util.py b/drivers/util.py
+index 65b86e2..a0b8361 100755
+--- a/drivers/util.py
++++ b/drivers/util.py
+@@ -138,7 +138,7 @@ def doexec(args, inputtext=None):
+     # python 3.x or maybe a newer version of pylint in the future
+     stdout = str(stdout)
+     stderr = str(stderr)
+-    rc = proc.returncode
++    rc = proc.returncode # pylint: disable=E1101
+     return (rc,stdout,stderr)
+ 
+ def is_string(value):
+@@ -1381,6 +1381,7 @@ class extractXVA:
+     #   returns filename, checksum content. Returns filename, '' in case  
+     #   of checksum file missing. e.g. ova.xml
+     def getTuple(self):
++        # pylint: disable=E1101
+         zerod_record = 0
+         ret_f_name = ''
+         ret_base_f_name = ''
+
+diff -ur a/tests/pylintrc b/tests/pylintrc
+--- a/tests/pylintrc    2014-03-21 12:41:04.000000000 +0000
++++ b/tests/pylintrc    2014-04-02 14:21:59.592322566 +0000
+@@ -40,7 +40,7 @@
+ # append the F0401 code at the end of the "disable" config variable to temporarily
+ # disable it from complaining missing libraries and get some useful information
+ # from a partial run at least. 
+-disable=design,rpython,newstyle,R,C,W,I
++disable=design,rpython,newstyle,R,C,W,I,F0401
+ #,F0401
