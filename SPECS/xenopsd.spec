@@ -85,7 +85,7 @@ cp %{SOURCE6} xenopsd-network-conf
 
 %build
 make configure
-./configure --libexecdir %{_libexecdir}/%{name} --disable-xenguestbin
+./configure --libexecdir %{_libexecdir}/%{name}
 make
 
 %install
