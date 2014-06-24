@@ -187,7 +187,7 @@ fi
 #fi
 
 %changelog
-* Sat Jun 20 2014 David Scott <dave.scott@citrix.com> - 0.9.37-1
+* Sat Jun 21 2014 David Scott <dave.scott@citrix.com> - 0.9.37-1
 - Depend on the ocaml-xen-lowlevel-libs-runtime package
 - Don't include xenguest: this now comes from ocaml-xen-lowlevel-libs
 
