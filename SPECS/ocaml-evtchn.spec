@@ -60,5 +60,5 @@ make install
 %{_libdir}/ocaml/xen-evtchn/*.mli
 
 %changelog
-* Tue Jun 02 2014 David Scott <dave.scott@citrix.com> - 1.0.1-1
+* Fri May 23 2014 David Scott <dave.scott@citrix.com> - 1.0.1-1
 - Initial package
