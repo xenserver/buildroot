@@ -1,5 +1,78 @@
+diff --git a/Makefile b/Makefile
+index d00d4a6..a15c4ec 100755
+--- a/Makefile
++++ b/Makefile
+@@ -65,6 +65,8 @@ CRON_JOBS += ringwatch
+ 
+ SM_XML := XE_SR_ERRORCODES
+ 
++BLKTAP_ROOT := /usr
++
+ SM_DEST := /opt/xensource/sm/
+ DEBUG_DEST := /opt/xensource/debug/
+ BIN_DEST := /opt/xensource/bin/
+@@ -83,8 +85,8 @@ SM_PY_FILES = $(foreach LIB, $(SM_LIBS), drivers/$(LIB).py) $(foreach DRIVER, $(
+ 
+ .PHONY: build
+ build:
+-	make -C dcopy 
+-	make -C mpathroot
++	make -C dcopy DESTDIR=$(SM_STAGING) DEBUGDIR=$(DEBUG_DEST)
++	make -C mpathroot DESTDIR=$(SM_STAGING) SM_DEST=$(SM_DEST)
+ 
+ .PHONY: precommit
+ precommit: build
+@@ -163,13 +165,17 @@ install: precheck
+ 	mkdir -p $(SM_STAGING)$(LIBEXEC)
+ 	install -m 755 scripts/local-device-change $(SM_STAGING)$(LIBEXEC)
+ 	install -m 755 scripts/check-device-sharing $(SM_STAGING)$(LIBEXEC)
+-	$(MAKE) -C dcopy install DESTDIR=$(SM_STAGING)
+-	$(MAKE) -C snapwatchd install DESTDIR=$(SM_STAGING)
+-	$(MAKE) -C mpathroot install DESTDIR=$(SM_STAGING)
++	$(MAKE) -C dcopy install DESTDIR=$(SM_STAGING) DEBUGDIR=$(DEBUG_DEST)
++# srmetadata.py and vss_control depend on the location of snapwatchd so must force it here
++	$(MAKE) -C snapwatchd install DESTDIR=$(SM_STAGING) SM_DEST=$(SM_DEST) PREFIX=$(SM_DEST)snapwatchd
++	$(MAKE) -C mpathroot install DESTDIR=$(SM_STAGING) SM_DEST=$(SM_DEST)
+ 	ln -sf $(SM_DEST)blktap2.py $(SM_STAGING)$(BIN_DEST)/blktap2
+ 	install -m 755 -d $(SM_STAGING)$(CRON_DEST)
+ 	install -m 644 $(CRON_JOBS:%=etc/cron.d/%) -t $(SM_STAGING)$(CRON_DEST)
+ 	ln -sf $(SM_DEST)lcache.py $(SM_STAGING)$(BIN_DEST)tapdisk-cache-stats
++	find $(SM_STAGING) -type f | xargs sed -i 's#@SM_DEST@#$(SM_DEST)#'
++	find $(SM_STAGING) -type f | xargs sed -i 's#@BLKTAP_ROOT@#$(BLKTAP_ROOT)#'
++
+ 
+ .PHONY: clean
+ clean:
+diff --git a/drivers/02-vhdcleanup b/drivers/02-vhdcleanup
+index 74b2887..5af5119 100644
+--- a/drivers/02-vhdcleanup
++++ b/drivers/02-vhdcleanup
+@@ -20,8 +20,8 @@
+ # Source function library.
+ . /etc/init.d/functions
+ 
+-CLEANUP_SCRIPT="/opt/xensource/sm/cleanup.py"
+-LVHD_UTIL_SCRIPT="/opt/xensource/sm/lvhdutil.py"
++CLEANUP_SCRIPT="@SM_DEST@/cleanup.py"
++LVHD_UTIL_SCRIPT="@SM_DEST@/lvhdutil.py"
+ 
+ start() {
+     echo -n $"Fixing refcounts on new master: "
+diff --git a/drivers/RawHBASR.py b/drivers/RawHBASR.py
+index 9d675b7..82dac44 100755
+--- a/drivers/RawHBASR.py
++++ b/drivers/RawHBASR.py
+@@ -371,7 +371,7 @@ class RawHBAVDI(LUNperVDI.RAWVDI):
+             # The SCSIid is already stored inside SR sm_config.
+             # We need only to trigger mpathcount
+             try:
+-                cmd = ['/opt/xensource/sm/mpathcount.py', scsi_id]
++                cmd = ['@SM_DEST@/mpathcount.py', scsi_id]
+                 util.pread2(cmd)
+             except:
+                 util.SMlog("RawHBA: something wrong with mpathcount")
 diff --git a/drivers/SR.py b/drivers/SR.py
-index 41c6ce7..c8ec2c8 100755
+index 41c6ce7..85500f4 100755
 --- a/drivers/SR.py
 +++ b/drivers/SR.py
 @@ -27,7 +27,7 @@ import copy, os
@@ -7,12 +80,30 @@ index 41c6ce7..c8ec2c8 100755
  MOUNT_BASE = '/var/run/sr-mount'
  DEFAULT_TAP = 'vhd'
 -TAPDISK_UTIL = '/usr/sbin/td-util'
-+TAPDISK_UTIL = '@LIBDIR@/blktap/sbin/td-util'
++TAPDISK_UTIL = '@BLKTAP_ROOT@/sbin/td-util'
  MASTER_LVM_CONF = '/etc/lvm/master'
  
  # LUN per VDI key for XenCenter
+@@ -450,7 +450,7 @@ class SR(object):
+                 self.mpath = "false"
+                 self.mpathhandle = "null"
+                 
+-            if not os.path.exists("/opt/xensource/sm/mpath_%s.py" % self.mpathhandle):
++            if not os.path.exists("@SM_DEST@/mpath_%s.py" % self.mpathhandle):
+                 raise
+         except:
+             self.mpath = "false"
+@@ -476,7 +476,7 @@ class SR(object):
+             self.session.xenapi.SR.set_sm_config(self.sr_ref, sm_config)
+ 
+             if self.mpath == "true" and len(SCSIid):
+-                cmd = ['/opt/xensource/sm/mpathcount.py',SCSIid]
++                cmd = ['@SM_DEST@/mpathcount.py',SCSIid]
+                 util.pread2(cmd)
+         except:
+             pass
 diff --git a/drivers/blktap2.py b/drivers/blktap2.py
-index a0a25b3..f3029f7 100755
+index a0a25b3..3b457a9 100755
 --- a/drivers/blktap2.py
 +++ b/drivers/blktap2.py
 @@ -135,7 +135,7 @@ def retried(**args): return RetryLoop(**args)
@@ -20,12 +111,157 @@ index a0a25b3..f3029f7 100755
      """Tapdisk IPC utility calls."""
  
 -    PATH = "/usr/sbin/tap-ctl"
-+    PATH = "@LIBDIR@/blktap/sbin/tap-ctl"
++    PATH = "@BLKTAP_ROOT@/sbin/tap-ctl"
  
      def __init__(self, cmd, p):
          self.cmd    = cmd
+diff --git a/drivers/coalesce-leaf b/drivers/coalesce-leaf
+index fe8c326..c080c3c 100755
+--- a/drivers/coalesce-leaf
++++ b/drivers/coalesce-leaf
+@@ -20,8 +20,8 @@
+ 
+ import sys
+ import XenAPIPlugin
+-sys.path.append("/opt/xensource/sm/")
+-sys.path.insert(0, "/opt/xensource/sm")
++sys.path.append("@SM_DEST@/")
++sys.path.insert(0, "@SM_DEST@")
+ import getopt
+ import XenAPI
+ import cleanup
+diff --git a/drivers/intellicache-clean b/drivers/intellicache-clean
+index 64764ac..0b6fec2 100644
+--- a/drivers/intellicache-clean
++++ b/drivers/intellicache-clean
+@@ -19,7 +19,7 @@
+ 
+ import sys
+ import XenAPIPlugin
+-sys.path.append("/opt/xensource/sm/")
++sys.path.append("@SM_DEST@/")
+ import util
+ import cleanup
+ 
+diff --git a/drivers/lvhd-thin b/drivers/lvhd-thin
+index 42d509d..fb0ef83 100755
+--- a/drivers/lvhd-thin
++++ b/drivers/lvhd-thin
+@@ -20,7 +20,7 @@
+ 
+ import sys
+ import XenAPIPlugin
+-sys.path.append("/opt/xensource/sm/")
++sys.path.append("@SM_DEST@/")
+ import util
+ import vhdutil
+ import lvhdutil
+diff --git a/drivers/mpath_dmp.py b/drivers/mpath_dmp.py
+index ba8c907..21ff7ce 100755
+--- a/drivers/mpath_dmp.py
++++ b/drivers/mpath_dmp.py
+@@ -52,7 +52,7 @@ def _is_mpath_daemon_running():
+     return (rc==0)
+ 
+ def _is_mpp_daemon_running():
+-    #cmd = ["/sbin/pidof", "-s", "/opt/xensource/sm/updatempppathd.py"]
++    #cmd = ["/sbin/pidof", "-s", "@SM_DEST@/updatempppathd.py"]
+     #(rc,stdout,stderr) = util.doexec(cmd)
+     if os.path.exists(UMPD_PATH):
+         return True
+diff --git a/drivers/nfs-on-slave b/drivers/nfs-on-slave
+index aab0483..cb560c9 100644
+--- a/drivers/nfs-on-slave
++++ b/drivers/nfs-on-slave
+@@ -17,7 +17,7 @@
+ #
+ # A plugin for synchronizing slaves when something changes on the Master
+ 
+-import sys; sys.path.append("/opt/xensource/sm/")
++import sys; sys.path.append("@SM_DEST@/")
+ import util
+ import os, glob, errno, re
+ 
+diff --git a/drivers/on-slave b/drivers/on-slave
+index 3732723..528016b 100755
+--- a/drivers/on-slave
++++ b/drivers/on-slave
+@@ -19,7 +19,7 @@
+ 
+ import sys
+ import XenAPIPlugin
+-sys.path.append("/opt/xensource/sm/")
++sys.path.append("@SM_DEST@/")
+ import util
+ import lock
+ from lvmcache import LVMCache
+diff --git a/drivers/srmetadata.py b/drivers/srmetadata.py
+index f7c56aa..b3aa76d 100755
+--- a/drivers/srmetadata.py
++++ b/drivers/srmetadata.py
+@@ -21,7 +21,7 @@ import util
+ import metadata
+ import os
+ import sys
+-sys.path.insert(0,'/opt/xensource/sm/snapwatchd')
++sys.path.insert(0,'@SM_DEST@/snapwatchd')
+ import xs_errors
+ import lvutil
+ import xml.sax.saxutils
+diff --git a/drivers/tapdisk-pause b/drivers/tapdisk-pause
+index 720c019..ac8765c 100755
+--- a/drivers/tapdisk-pause
++++ b/drivers/tapdisk-pause
+@@ -20,7 +20,7 @@
+ import os
+ import sys
+ import XenAPIPlugin
+-sys.path.append("/opt/xensource/sm/")
++sys.path.append("@SM_DEST@/")
+ import blktap2, util
+ from lock import Lock
+ import xs_errors
+diff --git a/drivers/updatempppathd.py b/drivers/updatempppathd.py
+index 3eaed86..e2a61e4 100755
+--- a/drivers/updatempppathd.py
++++ b/drivers/updatempppathd.py
+@@ -96,7 +96,7 @@ def UpdatePaths():
+ 		    DEBUG("Some path status has changed for SCSI ID %s, updating PBD." % scsiid) 
+ 		    entry = "[" + str(activePaths) + ", " + str(totalPaths) + "]"
+                     DEBUG(entry)
+-                    cmd = ['/opt/xensource/sm/mpathcount.py', scsiid, entry]
++                    cmd = ['@SM_DEST@/mpathcount.py', scsiid, entry]
+                     util.pread2(cmd)
+ 
+ 		    # Now update the cache with this updated path status
+diff --git a/drivers/util.py b/drivers/util.py
+index 76add2b..57ea57b 100755
+--- a/drivers/util.py
++++ b/drivers/util.py
+@@ -1060,7 +1060,7 @@ def p_id_fork():
+             print "Fork failed: %s (%d)" % (e.strerror,e.errno)
+             sys.exit(-1)
+         if (p_id == 0):
+-            os.chdir('/opt/xensource/sm')
++            os.chdir('@SM_DEST@')
+             os.umask(0)
+         else:
+             os._exit(0)                             
+diff --git a/drivers/verifyVHDsOnSR.py b/drivers/verifyVHDsOnSR.py
+index f6c6587..ea7418f 100755
+--- a/drivers/verifyVHDsOnSR.py
++++ b/drivers/verifyVHDsOnSR.py
+@@ -137,7 +137,7 @@ def checkAllVHD(sr_uuid):
+ if __name__ == '__main__':
+     if len(sys.argv) == 1:
+         print("Usage:")
+-        print("/opt/xensource/sm/verifyVHDsOnSR.py <sr_uuid>")
++        print("@SM_DEST@/verifyVHDsOnSR.py <sr_uuid>")
+     else:
+         checkAllVHD(sys.argv[1])
+ 
 diff --git a/drivers/vhdutil.py b/drivers/vhdutil.py
-index 94696f7..ab6d444 100755
+index 94696f7..2a1badc 100755
 --- a/drivers/vhdutil.py
 +++ b/drivers/vhdutil.py
 @@ -28,7 +28,7 @@ import re
@@ -33,7 +269,7 @@ index 94696f7..ab6d444 100755
  MAX_VHD_JOURNAL_SIZE = 6 * 1024 * 1024 # 2MB VHD block size, max 2TB VHD size
  MAX_CHAIN_SIZE = 30 # max VHD parent chain size
 -VHD_UTIL = "/usr/bin/vhd-util"
-+VHD_UTIL = "@LIBDIR@/blktap/bin/vhd-util"
++VHD_UTIL = "@BLKTAP_ROOT@/bin/vhd-util"
  OPT_LOG_ERR = "--debug"
  VHD_BLOCK_SIZE = 2 * 1024 * 1024
  VHD_FOOTER_SIZE = 512
@@ -46,3 +282,148 @@ index 94696f7..ab6d444 100755
      text = util.pread(cmd)
      util.SMlog(text)
      for line in text.split('\n'):
+diff --git a/drivers/vss_control b/drivers/vss_control
+index 98a71e2..83013c5 100755
+--- a/drivers/vss_control
++++ b/drivers/vss_control
+@@ -21,8 +21,8 @@
+ import os
+ import sys
+ import XenAPIPlugin
+-sys.path.append("/opt/xensource/sm/")
+-sys.path.append("/opt/xensource/sm/snapwatchd/")
++sys.path.append("@SM_DEST@/")
++sys.path.append("@SM_DEST@/snapwatchd/")
+ import util
+ import xslib
+ import time 
+diff --git a/mpathroot/Makefile b/mpathroot/Makefile
+index 23e9c43..a755ac0 100644
+--- a/mpathroot/Makefile
++++ b/mpathroot/Makefile
+@@ -1,4 +1,5 @@
+ INITDIR ?= /etc/rc.d/init.d
++SM_DEST ?= /opt/xensource/sm
+ DESTDIR ?= 
+ 
+ .PHONY: all
+@@ -7,6 +8,7 @@ all:
+ .PHONY: install
+ install: mpathroot.init
+ 	cp mpathroot.init $(DESTDIR)$(INITDIR)/mpathroot
++	sed -i -e 's#@SM_DEST@#$(SM_DEST)#' $(DESTDIR)$(INITDIR)/*
+ 	chmod +x $(DESTDIR)$(INITDIR)/mpathroot
+ 
+ .PHONY: clean
+diff --git a/mpathroot/mpathroot.init b/mpathroot/mpathroot.init
+index 3f87cd7..2e778af 100644
+--- a/mpathroot/mpathroot.init
++++ b/mpathroot/mpathroot.init
+@@ -42,7 +42,7 @@ start() {
+ 		logger -t "${TAG}" "Updating multipath root status"
+ 		echo -n $"Updating multipath root status: "
+ 		if wait_for_xapi; then
+-		    /opt/xensource/sm/mpathcount.py
++		    @SM_DEST@/mpathcount.py
+ 			success $"OK"
+ 			exit 0
+ 		else
+@@ -73,4 +73,4 @@ restart)
+ 	exit 3
+ esac
+ 
+-exit 4
+\ No newline at end of file
++exit 4
+diff --git a/multipath/40-multipath.rules b/multipath/40-multipath.rules
+index 2437719..8ecc17a 100644
+--- a/multipath/40-multipath.rules
++++ b/multipath/40-multipath.rules
+@@ -8,5 +8,5 @@ ACTION=="change", PROGRAM!="/sbin/dmsetup info -c --noheadings -j %M -m %m", GOT
+ PROGRAM!="/sbin/dmsetup info -c -o uuid,name --separator ' ' --noheadings -j %M -m %m", GOTO="end_mpath"
+ RESULT!="mpath-*", GOTO="end_mpath"
+ # ENV is necessary otherwise the child process of mpathcount cannot find multipathd executable
+-ACTION=="change", ENV{PATH}="/sbin:/bin:/usr/sbin:/usr/bin", RUN+="/opt/xensource/sm/mpathcount.py %c{2}"
++ACTION=="change", ENV{PATH}="/sbin:/bin:/usr/sbin:/usr/bin", RUN+="@SM_DEST@/mpathcount.py %c{2}"
+ LABEL="end_mpath"
+diff --git a/multipath/sm-multipath b/multipath/sm-multipath
+index c58e51c..0b59e9c 100755
+--- a/multipath/sm-multipath
++++ b/multipath/sm-multipath
+@@ -79,7 +79,7 @@ start() {
+ 				WWID=$(basename ${n})
+ 				ROOT_SLAVES=$(/bin/ls /sys/block/dm-$NODE_MINOR/slaves)
+ 				for i in $ROOT_SLAVES; do
+-					/opt/xensource/sm/wwid_conf.py -d /dev/${i} -w $WWID && break
++					@SM_DEST@/wwid_conf.py -d /dev/${i} -w $WWID && break
+ 				done
+ 			fi
+ 		done
+diff --git a/snapwatchd/Makefile b/snapwatchd/Makefile
+index dd0b8df..4f1228c 100644
+--- a/snapwatchd/Makefile
++++ b/snapwatchd/Makefile
+@@ -1,6 +1,7 @@
+ XS_INCLUDE ?= /usr/include
+ 
+-PREFIX ?= /opt/xensource/sm/snapwatchd
++SM_DEST ?= /opt/xensource/sm/
++PREFIX ?= $(SM_DEST)snapwatchd
+ INITDIR ?= /etc/rc.d/init.d
+ DESTDIR ?= 
+ 
+@@ -8,11 +9,15 @@ DESTDIR ?=
+ install: xslib.py snapwatchd snapdebug.py
+ 	mkdir -p $(DESTDIR)$(PREFIX)
+ 	install -m 644 $^ $(DESTDIR)$(PREFIX)
++	find $(DESTDIR)$(PREFIX) -type f | xargs sed -i 's#@SM_DEST@#$(SM_DEST)#'
++	find $(DESTDIR)$(PREFIX) -type f | xargs sed -i 's#@PREFIX@#$(PREFIX)#'
+ 	chmod +x $(DESTDIR)$(PREFIX)/snapwatchd
+ 	chmod +x $(DESTDIR)$(PREFIX)/xslib.py
+ 	chmod +x $(DESTDIR)$(PREFIX)/snapdebug.py
+ 	mkdir -p $(DESTDIR)$(INITDIR)
+ 	cp snapwatchd.init $(DESTDIR)$(INITDIR)/snapwatchd
++	find $(DESTDIR)$(INITDIR) -type f | xargs sed -i 's#@SM_DEST@#$(SM_DEST)#'
++	find $(DESTDIR)$(INITDIR) -type f | xargs sed -i 's#@PREFIX@#$(PREFIX)#'
+ 	chmod +x $(DESTDIR)$(INITDIR)/snapwatchd
+ 
+ .PHONY: clean
+diff --git a/snapwatchd/snapdebug.py b/snapwatchd/snapdebug.py
+index aab8ad8..cac2099 100644
+--- a/snapwatchd/snapdebug.py
++++ b/snapwatchd/snapdebug.py
+@@ -19,7 +19,7 @@
+ #
+ 
+ import sys
+-sys.path.append("/opt/xensource/sm")
++sys.path.append("@SM_DEST@")
+ import util
+ 
+ DEBUG_OUT = False
+diff --git a/snapwatchd/snapwatchd b/snapwatchd/snapwatchd
+index a6c0465..43e601a 100755
+--- a/snapwatchd/snapwatchd
++++ b/snapwatchd/snapwatchd
+@@ -23,7 +23,7 @@ import XenAPI
+ import xml.dom.minidom
+ import datetime, time
+ import resource
+-sys.path.insert(0, "/opt/xensource/sm")
++sys.path.insert(0, "@SM_DEST@")
+ import util
+ import gc
+ import xs_errors
+diff --git a/snapwatchd/snapwatchd.init b/snapwatchd/snapwatchd.init
+index 88fb8c8..79f283b 100755
+--- a/snapwatchd/snapwatchd.init
++++ b/snapwatchd/snapwatchd.init
+@@ -24,7 +24,7 @@
+ # processname: snapwatchd
+ # pidfile: /var/run/snapwatchd.pid
+ 
+-DAEMON=/opt/xensource/sm/snapwatchd/snapwatchd
++DAEMON=@PREFIX@/snapwatchd
+ prog=`basename $DAEMON`
+ pidfile=/var/run/${prog}.pid
+ 
