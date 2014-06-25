@@ -7,10 +7,13 @@ import platform
    made dynamically by querying the package databases."""
 
 TARGET_SPECIFIC_MAPPING = {
-    'jessie/sid': {
+    'debian:jessie/sid': {
             'kernel': ['linux-image-amd64'],
             'kernel-firmware': ['firmware-linux-free'],
             "xen-libs": ["libxen-4.3"],
+            },
+    'ubuntu:14.04': {
+            "xen-libs": ["libxen-4.4"],
             },
     }
 
@@ -147,7 +150,8 @@ def map_package(name, target=None):
     is_devel = False
 
     if target is None:
-        target = platform.linux_distribution(full_distribution_name=False)[1].lower()
+        dist = platform.linux_distribution(full_distribution_name=False)
+        target = "%s:%s" % (dist[0].lower(), dist[1].lower())
 
     # RPM 4.6 adds architecture constraints to dependencies.  Drop them.
     if name.endswith( "(x86-64)" ):
