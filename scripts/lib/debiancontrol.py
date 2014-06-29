@@ -41,7 +41,7 @@ def source_deb_from_spec(spec, tree):
 def binary_deb_from_spec(spec, tree):
     res = ""
     res += "Package: %s\n" % mappkgname.map_package_name(spec.header)
-    if spec.header['arch'] in ["x86_64", "i686"]:
+    if spec.header['arch'] in ["x86_64", "i686", "armhf"]:
         res += "Architecture: any\n"
     else:
         res += "Architecture: all\n"
