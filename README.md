@@ -7,7 +7,7 @@ RPM-based distributions
 -----------------------
 
 On RPM-based distributions, the packages are built using `mock`.
-To install it on a RHEL/CentOS system then you will need to add the
+To install it on a 64-bit RHEL/CentOS system then you will need to add the
 [EPEL repositories](http://fedoraproject.org/wiki/EPEL). 
 Here is a useful article for [CentOS](http://www.rackspace.com/knowledge_center/article/installing-rhel-epel-repo-on-centos-5x-or-6x).
 
