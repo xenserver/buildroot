@@ -3,7 +3,7 @@ set -eu
 
 echo "Configuring RPM-based build"
 
-rpm -q mock rpm-build >/dev/null 2>&1 || sudo yum install -y mock rpm-build
+rpm -q mock rpm-build createrepo >/dev/null 2>&1 || sudo yum install -y mock rpm-build createrepo
 
 echo -n "Writing mock configuration..."
 mkdir -p mock
