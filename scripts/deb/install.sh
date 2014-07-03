@@ -1,8 +1,5 @@
 #!/bin/bash -x
 
-# Add the OCaml 4 PPA
-install -m 0644 scripts/deb/ocp-ppa.list /etc/apt/sources.list.d/ocp-ppa.list
-
 DEBURL=${PKG_REPO_LOCATION:-file:$PWD/RPMS/}
 DEBSRCURL=${SRC_REPO_LOCATION:-file:$PWD/SRPMS/}
 
@@ -18,12 +15,7 @@ sed \
     scripts/deb/xapi.list.in > scripts/deb/xapi.list
 install -m 0644 scripts/deb/xapi.list /etc/apt/sources.list.d/xapi.list
 
-# Configure apt to prefer packages from the xenserver-core repository
-sed \
-    -e "s,@REPOHOST@,${REPOHOST},g" \
-    scripts/deb/xapi.pref.in > scripts/deb/xapi.pref
-install -m 0644 scripts/deb/xapi.pref /etc/apt/preferences.d/xapi
-
+# Rebuild repository metadata
 (mkdir -p RPMS && cd RPMS && apt-ftparchive packages . > Packages)
 (mkdir -p SRPMS && cd SRPMS && apt-ftparchive sources . > Sources )
 
