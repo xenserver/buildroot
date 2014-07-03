@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.18
+Version:        0.9.19
 Release:        1%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
@@ -85,6 +85,9 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Thu Jul 03 2014 Si Beaumont <simon.beaumont@citrix.com> - 0.9.19-1
+- Added -supports feature to xenguest-4.4
+
 * Sat Jun 21 2014 David Scott <dave.scott@citrix.com> - 0.9.18-1
 - Update to 0.9.18
 
