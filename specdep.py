@@ -2,12 +2,12 @@
 
 # see http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch16s04.html
 
-import sys
+import argparse
 import os
-import platform
-import urlparse
 import pkg
-import getopt
+import platform
+import sys
+import urlparse
 
 from scripts.lib import mappkgname
 
@@ -98,51 +98,25 @@ def buildrequires_for_rpm(spec, provides_to_rpm):
             print "%s: %s" % (rpmpath, buildreqrpm)
 
 
-def usage(name):
-    """
-    Print usage information
-    """
-    print "usage: %s [-h] [-i PKG] SPEC [SPEC ...]" % name
-
-
 def parse_cmdline():
     """
     Parse command line options
     """
-
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "hi:d:",
-                                   ["help", "ignore=", "dist="])
-    except getopt.GetoptError as err:
-        usage(sys.argv[0])
-        print str(err)
-        sys.exit(1)
-
-    ignore = []
-    dist = ""
-    for opt, val in opts:
-        if opt == "-i" or opt == "--ignore":
-            ignore.append(val)
-        elif opt == "-d" or opt == "--dist":
-            dist = val
-        else:
-            usage(sys.argv[0])
-            print "unknown option: %s" % opt
-            sys.exit(1)
-
-    if len(args) == 0:
-        usage(sys.argv[0])
-        print "%s: error: too few arguments" % sys.argv[0]
-        sys.exit(1)
-
-    return {"ignore": ignore, "specs": args, "dist": dist}
+    parser = argparse.ArgumentParser(description=
+        "Generate Makefile dependencies from RPM Spec files")
+    parser.add_argument("specs", metavar="SPEC", nargs="+", help="spec file")
+    parser.add_argument("-i", "--ignore", metavar="PKG", action="append",
+        default=[], help="package name to ignore")
+    parser.add_argument("-d", "--dist", metavar="DIST",
+        default=[], help="distribution tag (used in RPM filenames)")
+    return parser.parse_args()
 
 
 def main():
-    params = parse_cmdline()
+    args = parse_cmdline()
     specs = {}
 
-    for spec_path in params['specs']:
+    for spec_path in args.specs:
         try:
             if build_type() == "deb":
                 os_type = platform.linux_distribution(full_distribution_name=False)[1].lower()
@@ -150,9 +124,9 @@ def main():
                 spec = pkg.Spec(spec_path, target="deb",
                                 map_name=map_name_fn)
             else:
-                spec = pkg.Spec(spec_path, target="rpm", dist=params['dist'])
+                spec = pkg.Spec(spec_path, target="rpm", dist=args.dist)
             pkg_name = spec.name()
-            if pkg_name in params['ignore']:
+            if pkg_name in args.ignore:
                 continue
 
             specs[os.path.basename(spec_path)] = spec
