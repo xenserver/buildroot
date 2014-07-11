@@ -108,7 +108,7 @@ def parse_cmdline():
     parser.add_argument("-i", "--ignore", metavar="PKG", action="append",
         default=[], help="package name to ignore")
     parser.add_argument("-d", "--dist", metavar="DIST",
-        default=[], help="distribution tag (used in RPM filenames)")
+        default="", help="distribution tag (used in RPM filenames)")
     return parser.parse_args()
 
 
