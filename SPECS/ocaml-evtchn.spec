@@ -1,12 +1,12 @@
 %define debug_package %{nil}
 
 Name:           ocaml-evtchn
-Version:        1.0.1
+Version:        1.0.5
 Release:        1%{?dist}
 Summary:        OCaml bindings for userspace Xen event channel controls
 License:        ISC
-URL:            https://github.com/xapi-project/ocaml-evtchn/
-Source0:        https://github.com/xapi-project/ocaml-evtchn/archive/v%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/mirage/ocaml-evtchn/
+Source0:        https://github.com/mirage/ocaml-evtchn/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-camlp4-devel
@@ -60,5 +60,8 @@ make install
 %{_libdir}/ocaml/xen-evtchn/*.mli
 
 %changelog
+* Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 1.0.5-1
+- Update to 1.0.5
+
 * Fri May 23 2014 David Scott <dave.scott@citrix.com> - 1.0.1-1
 - Initial package
