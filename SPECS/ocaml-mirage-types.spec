@@ -1,12 +1,12 @@
 %define debug_package %{nil}
 
 Name:           ocaml-mirage-types
-Version:        1.1.1
+Version:        1.2.0
 Release:        1%{?dist}
 Summary:        MirageOS interfaces
 License:        ISC
 URL:            https://github.com/mirage/mirage
-Source0:        https://github.com/mirage/mirage/archive/%{version}/mirage-%{version}.tar.gz
+Source0:        https://github.com/mirage/mirage/archive/v%{version}/mirage-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-findlib-devel
@@ -50,6 +50,9 @@ make install-types
 %{_libdir}/ocaml/mirage-types/*.mli
 
 %changelog
+* Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 1.2.0-1
+- Update to 1.2.0
+
 * Tue Apr 1 2014 Euan Harris <euan.harris@citrix.com> - 1.1.1-1
 - Initial package
 
