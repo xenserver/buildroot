@@ -56,5 +56,5 @@ make install
 %{_libdir}/ocaml/shared-memory-ring/*.mli
 
 %changelog
-* Wed Jun 16 2014 David Scott <dave.scott@citrix.com> - 1.1.0-1
+* Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 1.1.0-1
 - Initial package
