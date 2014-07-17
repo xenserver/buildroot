@@ -30,7 +30,6 @@ cp %{SOURCE1} squeezed-init
 cp %{SOURCE2} squeezed-conf
 
 %build
-oasis setup
 ./configure --prefix %{_prefix} --destdir %{buildroot}
 make
 

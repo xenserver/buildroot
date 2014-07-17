@@ -47,10 +47,6 @@ make xen-build
 %install
 mkdir -p %{buildroot}%{_libdir}/ocaml
 sh ./ocaml-mirage-xen.install.sh %{buildroot}%{_libdir}/ocaml %{buildroot}
-echo Files in _build:
-find _build -name "*.a"
-echo Files in buildroot:
-find %{buildroot}
 
 %files
 %doc CHANGES

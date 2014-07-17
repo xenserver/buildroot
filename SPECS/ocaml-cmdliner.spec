@@ -39,8 +39,8 @@ find .
 cp _build/src/cmdliner.a _build/src/cmdliner.cma _build/src/cmdliner.cmi _build/src/cmdliner.cmx _build/src/cmdliner.cmxa _build/src/cmdliner.cmxs _build/src/cmdliner.mli _build/pkg/META %{buildroot}/%{_libdir}/ocaml/cmdliner
 
 %files
-%doc CHANGES
-%doc README
+%doc CHANGES.md
+%doc README.md
 %{_libdir}/ocaml/cmdliner
 %exclude %{_libdir}/ocaml/cmdliner/*.a
 %exclude %{_libdir}/ocaml/cmdliner/*.cmxa

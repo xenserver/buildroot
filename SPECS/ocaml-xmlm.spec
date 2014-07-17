@@ -42,8 +42,8 @@ cp _build/pkg/META  _build/src/xmlm.a  _build/src/xmlm.cma  _build/src/xmlm.cmi 
 
 
 %files
-%doc CHANGES
-%doc README
+%doc CHANGES.md
+%doc README.md
 %{_libdir}/ocaml/xmlm
 %exclude %{_libdir}/ocaml/xmlm/*.a
 %exclude %{_libdir}/ocaml/xmlm/*.cmxa
