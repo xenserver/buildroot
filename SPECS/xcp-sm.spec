@@ -3,7 +3,7 @@
 Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.7
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPL
 URL:  https://github.com/xapi-project/sm
 Source0: https://github.com/BobBall/sm/archive/%{version}/sm-%{version}.tar.gz
@@ -30,13 +30,10 @@ cp %{SOURCE1} xcp-mpath-scsidev-rules
 cp %{SOURCE2} xcp-mpath-scsidev-script
 
 %build
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/SR.py
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/blktap2.py
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/vhdutil.py
 DESTDIR=$RPM_BUILD_ROOT make
 
 %install
-make PLUGIN_SCRIPT_DEST=/usr/lib/xapi/plugins/ SM_DEST=/usr/lib/xapi/sm/ DESTDIR=$RPM_BUILD_ROOT install
+make PLUGIN_SCRIPT_DEST=/usr/lib/xapi/plugins/ SM_DEST=/usr/lib/xapi/sm/ DESTDIR=$RPM_BUILD_ROOT BLKTAP_ROOT=%{_libdir}/blktap install
 mkdir -p %{buildroot}/etc/udev/rules.d
 install -m 0644 xcp-mpath-scsidev-rules %{buildroot}/etc/udev/rules.d/55-xs-mpath-scsidev.rules
 mkdir -p %{buildroot}/etc/udev/scripts
@@ -248,13 +245,13 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /usr/lib/xapi/sm/scsi_host_rescan.py
 /usr/lib/xapi/sm/scsi_host_rescan.pyc
 /usr/lib/xapi/sm/scsi_host_rescan.pyo
-/opt/xensource/sm/snapwatchd/snapwatchd
-/opt/xensource/sm/snapwatchd/xslib.py
-/opt/xensource/sm/snapwatchd/xslib.pyc
-/opt/xensource/sm/snapwatchd/xslib.pyo
-/opt/xensource/sm/snapwatchd/snapdebug.py
-/opt/xensource/sm/snapwatchd/snapdebug.pyc
-/opt/xensource/sm/snapwatchd/snapdebug.pyo
+/usr/lib/xapi/sm/snapwatchd/snapwatchd
+/usr/lib/xapi/sm/snapwatchd/xslib.py
+/usr/lib/xapi/sm/snapwatchd/xslib.pyc
+/usr/lib/xapi/sm/snapwatchd/xslib.pyo
+/usr/lib/xapi/sm/snapwatchd/snapdebug.py
+/usr/lib/xapi/sm/snapwatchd/snapdebug.pyc
+/usr/lib/xapi/sm/snapwatchd/snapdebug.pyo
 /usr/lib/xapi/sm/sysdevice.py
 /usr/lib/xapi/sm/sysdevice.pyc
 /usr/lib/xapi/sm/sysdevice.pyo
@@ -304,6 +301,9 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
+* Wed Jun 25 2014 Bob Ball <bob.ball@citrix.com> - 0.9.7-3
+- Updated sm-path-fix to be more generic and fix all paths
+
 * Fri Jun 20 2014 David Scott <dave.scott@citrix.com> - 0.9.7-2
 - Update file list
 
