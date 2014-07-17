@@ -20,6 +20,8 @@ BuildRequires:  ocaml-shared-memory-ring-devel
 BuildRequires:  ocaml-ipaddr-devel
 BuildRequires:  ocaml-mirage-types-devel
 BuildRequires:  ocaml-mirage-xen-devel
+BuildRequires:  ocaml-evtchn-devel
+BuildRequires:  ocaml-gnt-devel
 
 %description
 Mirage block driver for Xen that implements the blkfront/back protocol
@@ -61,5 +63,5 @@ make install
 %{_libdir}/ocaml/mirage-block-xen/*.mli
 
 %changelog
-* Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 1.0.5-1
+* Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 1.1.0-1
 - Initial package

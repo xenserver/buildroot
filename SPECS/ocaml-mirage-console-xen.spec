@@ -13,6 +13,8 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-mirage-types-devel
 BuildRequires:  ocaml-mirage-xen-devel
+BuildRequires:  ocaml-evtchn-devel
+BuildRequires:  ocaml-gnt-devel
 
 %description
 A Mirage-compatible Console library for Xen
@@ -34,7 +36,7 @@ make xen-build
 %install
 export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
 mkdir -p ${OCAMLFIND_DESTDIR}
-export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
+export OCAMLFIND_LDCONF=ignore
 make xen-install
 
 %files

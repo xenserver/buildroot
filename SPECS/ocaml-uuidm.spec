@@ -7,7 +7,7 @@ Summary:        Universally Unique IDentifiers (UUIDs) for OCaml
 License:        BSD3
 URL:            http://erratique.ch/software/uuidm
 Source0:        https://github.com/dbuenzli/uuidm/archive/v%{version}/uuidm-%{version}.tar.gz
-BuildRequires:  oasis
+Patch0:         uuidm.oasis.patch
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
@@ -27,9 +27,9 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n uuidm-%{version}
+%patch0 -p1
 
 %build
-oasis setup
 ocaml setup.ml -configure --destdir %{buildroot}/%{_libdir}/ocaml
 ocaml setup.ml -build
 

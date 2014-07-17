@@ -7,6 +7,7 @@ Summary:        Mirage OS library for Xen compilation
 License:        ISC
 URL:            https://github.com/mirage/mirage-platform/
 Source0:        https://github.com/mirage/mirage-platform/archive/v%{version}/%{name}-%{version}.tar.gz
+Source1:        ocaml-mirage-xen.install.sh
 BuildRequires:  ocaml
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-camlp4-devel
@@ -28,6 +29,8 @@ Mirage OS library for Xen compilation
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-io-page-devel%{?_isa}
+Requires:       ocaml-mirage-clock-xen-devel%{?_isa}
+Requires:       ocaml-shared-memory-ring-devel%{?_isa}
 Requires:       xen-devel%{?_isa}
 
 %description    devel
@@ -36,25 +39,18 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n mirage-platform-%{version}
+cp %{SOURCE1} ocaml-mirage-xen.install.sh
 
 %build
 make xen-build
 
 %install
-export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
-mkdir -p ${OCAMLFIND_DESTDIR}
-export OCAMLFIND_LDCONF=%{buildroot}%{_libdir}/ocaml/ld.conf
-cd xen
-MIRAGE_OS=xen ./cmd install
+mkdir -p %{buildroot}%{_libdir}/ocaml
+sh ./ocaml-mirage-xen.install.sh %{buildroot}%{_libdir}/ocaml %{buildroot}
+echo Files in _build:
+find _build -name "*.a"
+echo Files in buildroot:
 find %{buildroot}
-cp _build/runtime/kernel/libxencaml.a ${OCAMLFIND_DESTDIR}/mirage-xen
-cp _build/runtime/ocaml.4.00.1/libocaml.a ${OCAMLFIND_DESTDIR}/mirage-xen
-cp _build/runtime/dietlibc/libdiet.a ${OCAMLFIND_DESTDIR}/mirage-xen
-cp _build/runtime/libm/libm.a ${OCAMLFIND_DESTDIR}/mirage-xen
-cp _build/runtime/kernel/libxen.a ${OCAMLFIND_DESTDIR}/mirage-xen
-cp _build/runtime/kernel/longjmp.o ${OCAMLFIND_DESTDIR}/mirage-xen
-cp _build/runtime/kernel/x86_64.o ${OCAMLFIND_DESTDIR}/mirage-xen
-cp _build/runtime/kernel/mirage-x86_64.lds ${OCAMLFIND_DESTDIR}/mirage-xen
 
 %files
 %doc CHANGES
@@ -63,6 +59,8 @@ cp _build/runtime/kernel/mirage-x86_64.lds ${OCAMLFIND_DESTDIR}/mirage-xen
 %exclude %{_libdir}/ocaml/mirage-xen/*.a
 %exclude %{_libdir}/ocaml/mirage-xen/*.cmxa
 %exclude %{_libdir}/ocaml/mirage-xen/*.cmx
+%exclude %{_libdir}/ocaml/mirage-xen/*.o
+%exclude %{_libdir}/ocaml/mirage-xen/*.lds
 
 %files devel
 %{_libdir}/ocaml/mirage-xen/*.a

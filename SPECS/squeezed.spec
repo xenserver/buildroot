@@ -7,7 +7,6 @@ URL:            https://github.com/xapi-project/squeezed
 Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        squeezed-init
 Source2:        squeezed-conf
-BuildRequires:  oasis
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-re-devel
