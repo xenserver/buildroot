@@ -1,4 +1,5 @@
 DIST := .el6
+DISTRIBUTION=`lsb_release -si`
 
 .PHONY: all rpms srpms
 
@@ -43,7 +44,11 @@ all: rpms
 
 deps: SPECS/*.spec specdep.py scripts/lib/mappkgname.py
 	@echo Updating dependencies...
-	@./specdep.py -d $(DIST) -i libnl3 SPECS/*.spec > $@
+	if [ "$(DISTRIBUTION)" != "CentOS" ]; then \
+		@./specdep.py -d $(DIST) -i libnl3 SPECS/*.spec > $@ \
+	else \
+		@./specdep.py -d $(DIST) SPECS/*.spec > $@ \
+	fi
 
 -include deps
 
