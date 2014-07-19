@@ -43,7 +43,7 @@ all: rpms
 
 deps: SPECS/*.spec specdep.py scripts/lib/mappkgname.py
 	@echo Updating dependencies...
-	@./specdep.py -d $(DIST) -i libnl3 SPECS/*.spec > $@
+	@./specdep.py -d $(DIST) --ignore-from ignore SPECS/*.spec > $@
 
 -include deps
 
