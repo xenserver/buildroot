@@ -17,6 +17,7 @@ A library for manipulation of IP (and MAC) address representations
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-sexplib-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
