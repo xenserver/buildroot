@@ -121,7 +121,10 @@ def main():
     pkgs_to_ignore = args.ignore
     for ignore_from in args.ignore_from:
         with open(ignore_from) as f:
-            pkgs_to_ignore.extend(f.readlines())
+            for name in f.readlines():
+                pkgs_to_ignore.append(name.strip())
+    for i in pkgs_to_ignore:
+      print "# Will ignore: %s" % i
 
     for spec_path in args.specs:
         try:
@@ -132,7 +135,7 @@ def main():
             else:
                 spec = pkg.Spec(spec_path, target="rpm", dist=args.dist)
             pkg_name = spec.name()
-            if pkg_name in args.ignore:
+            if pkg_name in pkgs_to_ignore:
                 continue
 
             specs[os.path.basename(spec_path)] = spec
