@@ -1,22 +1,23 @@
 Name:           ocaml-ipaddr
-Version:        2.4.0
-Release:        1%{?dist}
-Summary:        Pure OCaml implementation of the Network Block Device protocol
-License:        LGPL2.1 + OCaml linking exception
+Version:        2.5.0
+Release:        1000%{?dist}
+Summary:        Pure OCaml parsers and printers for IP addresses
+License:        ISC
 URL:            https://github.com/mirage/ocaml-ipaddr
 Source0:        https://github.com/mirage/ocaml-ipaddr/archive/%{version}/ocaml-ipaddr-%{version}.tar.gz
 
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-sexplib-devel
+BuildRequires:  ocaml-camlp4
 
 %description
-An implementation of the Network Block Device protocol for both
-regular Unix and Lwt in OCaml. This library allows applications to
-access remote block devices.
+A library for manipulation of IP (and MAC) address representations
 
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-sexplib-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -50,6 +51,9 @@ make install
 %{_libdir}/ocaml/ipaddr/*.mli
 
 %changelog
+* Sat Jul 19 2014 David Scott <dave.scott@citrix.com> - 2.5.0-1000
+- Update to 2.5.0; override upstream package
+
 * Tue Apr 1 2014 Euan Harris <euan.harris@citrix.com> - 2.4.0-1
 - Initial package
 

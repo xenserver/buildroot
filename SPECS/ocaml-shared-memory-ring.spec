@@ -1,9 +1,9 @@
 %define debug_package %{nil}
 
 Name:           ocaml-shared-memory-ring
-Version:        1.0.0
+Version:        1.1.0
 Release:        1%{?dist}
-Summary:        OCaml implementation of Xen memory protocols
+Summary:        OCaml implementation of Xen shared memory rings
 License:        ISC
 URL:            https://github.com/mirage/shared-memory-ring/
 Source0:        https://github.com/mirage/shared-memory-ring/archive/%{version}/%{name}-%{version}.tar.gz
@@ -12,19 +12,17 @@ BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-cstruct-devel
-BuildRequires:  ocaml-io-page-devel
-BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-lwt-devel
 
 %description
-This is a pure OCaml implementation of Xen-style shared memory rings.
-These can be used for RPCs (disk requests, network packets) and for streaming
-(xenstore, consoles)
+The shared memory ring protocols are used for: xenstore, console, disk and network devices.
 
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
-Requires:       ocaml-io-page-devel%{?_isa}
+Requires:       ocaml-cstruct-devel%{?_isa}
+Requires:       ocaml-lwt-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -58,5 +56,5 @@ make install
 %{_libdir}/ocaml/shared-memory-ring/*.mli
 
 %changelog
-* Wed Jun 04 2014 David Scott <dave.scott@citrix.com> - 1.0.0-1
+* Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 1.1.0-1
 - Initial package

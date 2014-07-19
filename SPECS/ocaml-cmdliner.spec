@@ -1,15 +1,14 @@
 Name:           ocaml-cmdliner
-Version:        0.9.3
-Release:        3%{?dist}
+Version:        0.9.5
+Release:        1%{?dist}
 Summary:        Declarative definition of commandline interfaces for OCaml
 License:        BSD3
 URL:            http://erratique.ch/software/cmdliner
-Source0:        https://github.com/dbuenzli/cmdliner/archive/v%{version}/cmdliner-%{version}.tar.gz
-BuildRequires:  oasis
+Source0:        http://erratique.ch/software/cmdliner/releases/cmdliner-%{version}.tbz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-Obsoletes:      cmdliner <= 0.9.3
+Obsoletes:      cmdliner <= 0.9.5
 
 %description
 Cmdliner is an OCaml module for the declarative definition of command line
@@ -31,19 +30,17 @@ developing applications that use %{name}.
 %setup -q -n cmdliner-%{version}
 
 %build
-oasis setup
-ocaml setup.ml -configure
-ocaml setup.ml -build
+ocaml pkg/git.ml
+ocaml pkg/build.ml native=true native-dynlink=true
 
 %install
-export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
-mkdir -p $OCAMLFIND_DESTDIR
-ocaml setup.ml -install
-
+mkdir -p %{buildroot}/%{_libdir}/ocaml/cmdliner
+find .
+cp _build/src/cmdliner.a _build/src/cmdliner.cma _build/src/cmdliner.cmi _build/src/cmdliner.cmx _build/src/cmdliner.cmxa _build/src/cmdliner.cmxs _build/src/cmdliner.mli _build/pkg/META %{buildroot}/%{_libdir}/ocaml/cmdliner
 
 %files
-%doc CHANGES
-%doc README
+%doc CHANGES.md
+%doc README.md
 %{_libdir}/ocaml/cmdliner
 %exclude %{_libdir}/ocaml/cmdliner/*.a
 %exclude %{_libdir}/ocaml/cmdliner/*.cmxa
@@ -57,6 +54,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/cmdliner/*.mli
 
 %changelog
+* Thu Jul 17 2014 David Scott <dave.scott@citrix.com> - 0.9.5-1
+- Update to 0.9.5
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.9.3-3
 - Split files correctly between base and devel packages
 

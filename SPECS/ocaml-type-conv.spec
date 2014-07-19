@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-type-conv
-Version:        109.20.00
+Version:        111.13.00
 Release:        1%{?dist}
 Summary:        OCaml base library for type conversion
 
@@ -41,6 +41,9 @@ make install
 %{_libdir}/ocaml/type_conv
 
 %changelog
+* Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 111.13.00-1
+- Updated to 111.13.00 for Mirage compatibility
+
 * Thu Nov 25 2010 Mike McClurg <mike.mcclurg@citrix.com> - 109.20.00-1
 - Updated to version 2.0.1 for compatability with OCaml 3.12.0
 
