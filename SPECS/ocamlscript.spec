@@ -32,7 +32,7 @@ ocamlfind install ocamlscript META ocamlscript.cmi ocamlscript.cmo ocamlscript.c
 
 %files
 %doc Changes
-%doc README.md
+%doc README
 %{_bindir}/ocamlscript
 %{_libdir}/ocaml/ocamlscript
 %{_libdir}/ocaml/ocamlscript/META
