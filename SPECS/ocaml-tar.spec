@@ -4,7 +4,7 @@ Release:        2%{?dist}
 Summary:        OCaml parser and printer for tar-format data
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/djs55/ocaml-tar
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz 
+Source0:        https://github.com/djs55/%{name}/archive/%{version}/%{name}-%{version}.tar.gz 
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ounit-devel
