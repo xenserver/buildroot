@@ -1,0 +1,34 @@
+commit 5c68f03d2ea1ea0bd4f80528dcd6aa089620aba3
+Author: Euan Harris <euan.harris@citrix.com>
+Date:   Mon Oct 28 10:49:43 2013 +0000
+
+    sm: Don't use full paths for pidof
+    
+    Signed-off-by: Euan Harris <euan.harris@citrix.com>
+
+diff --git a/drivers/iscsilib.py b/drivers/iscsilib.py
+index 887d1dc..e3bd890 100644
+--- a/drivers/iscsilib.py
++++ b/drivers/iscsilib.py
+@@ -313,7 +313,7 @@ def get_luns(targetIQN, portal):
+         raise xs_errors.XenError('ISCSIDevice', opterr='Failed to find any LUNs')
+ 
+ def is_iscsi_daemon_running():
+-    cmd = ["/sbin/pidof", "-s", "/sbin/iscsid"]
++    cmd = ["pidof", "-s", "iscsid"]
+     (rc,stdout,stderr) = util.doexec(cmd)
+     return (rc==0)
+ 
+diff --git a/drivers/mpath_dmp.py b/drivers/mpath_dmp.py
+index ea4d1bf..095789c 100755
+--- a/drivers/mpath_dmp.py
++++ b/drivers/mpath_dmp.py
+@@ -47,7 +47,7 @@ MP_INUSEDIR = "/dev/disk/mpInuse"
+ MPPGETAIDLNOBIN = "/opt/xensource/bin/xe-get-arrayid-lunnum"
+ 
+ def _is_mpath_daemon_running():
+-    cmd = ["/sbin/pidof", "-s", "/sbin/multipathd"]
++    cmd = ["pidof", "-s", "multipathd"]
+     (rc,stdout,stderr) = util.doexec(cmd)
+     return (rc==0)
+ 

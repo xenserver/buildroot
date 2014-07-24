@@ -1,7 +1,14 @@
-diff -ur a/drivers/cleanup.py b/drivers/cleanup.py
---- a/drivers/cleanup.py    2014-03-21 12:41:04.000000000 +0000
-+++ b/drivers/cleanup.py    2014-04-02 15:35:37.396329000 +0100
-@@ -115,7 +115,7 @@
+commit 0692dd162b09434b0b269c3077046072b8b504a6
+Author: Bob Ball <bob.ball@citrix.com>
+Date:   Mon Aug 18 13:54:44 2014 +0100
+
+    pylint-fix
+
+diff --git a/drivers/cleanup.py b/drivers/cleanup.py
+index 37209f5..8ebe9ab 100755
+--- a/drivers/cleanup.py
++++ b/drivers/cleanup.py
+@@ -115,7 +115,7 @@ class Util:
          (stdout, stderr) = proc.communicate(inputtext)
          stdout = str(stdout)
          stderr = str(stderr)
@@ -11,19 +18,10 @@ diff -ur a/drivers/cleanup.py b/drivers/cleanup.py
              Util.log("`%s`: %s" % (args, rc))
          if type(expectedRC) != type([]):
 diff --git a/drivers/util.py b/drivers/util.py
-index 65b86e2..a0b8361 100755
+index 59f9a50..9cb97e5 100755
 --- a/drivers/util.py
 +++ b/drivers/util.py
-@@ -138,7 +138,7 @@ def doexec(args, inputtext=None):
-     # python 3.x or maybe a newer version of pylint in the future
-     stdout = str(stdout)
-     stderr = str(stderr)
--    rc = proc.returncode
-+    rc = proc.returncode # pylint: disable=E1101
-     return (rc,stdout,stderr)
- 
- def is_string(value):
-@@ -1381,6 +1381,7 @@ class extractXVA:
+@@ -1358,6 +1358,7 @@ class extractXVA:
      #   returns filename, checksum content. Returns filename, '' in case  
      #   of checksum file missing. e.g. ova.xml
      def getTuple(self):
@@ -31,14 +29,16 @@ index 65b86e2..a0b8361 100755
          zerod_record = 0
          ret_f_name = ''
          ret_base_f_name = ''
-
-diff -ur a/tests/pylintrc b/tests/pylintrc
---- a/tests/pylintrc    2014-03-21 12:41:04.000000000 +0000
-+++ b/tests/pylintrc    2014-04-02 14:21:59.592322566 +0000
-@@ -40,7 +40,7 @@
- # append the F0401 code at the end of the "disable" config variable to temporarily
- # disable it from complaining missing libraries and get some useful information
- # from a partial run at least. 
--disable=design,rpython,newstyle,R,C,W,I
-+disable=design,rpython,newstyle,R,C,W,I,F0401
+diff --git a/tests/pylintrc b/tests/pylintrc
+index 1f4b6f5..1d62dc7 100644
+--- a/tests/pylintrc
++++ b/tests/pylintrc
+@@ -68,7 +68,7 @@ disable-msg=E1201,E1202
+ # if pylint complains with F0401 module can not be imported (due to the
+ # libs are not present on your system), you can temporarily disable the
+ # error by postfixing F0401 tag to the end of the following line.
+-disable=design,rpython,newstyle,R,C,W,E1201,E0710,E1101 
++disable=design,rpython,newstyle,R,C,W,E1201,E0710,E1101,F0401
  #,F0401
+ 
+ [REPORTS]
