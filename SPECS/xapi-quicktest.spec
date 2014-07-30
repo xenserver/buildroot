@@ -2,7 +2,7 @@
 
 Name:           xapi-quicktest
 Version:        0.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple xapi-project test suite
 License:        ISC
 URL:            https://github.com/xapi-project/quicktest
@@ -20,6 +20,8 @@ BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-gnt-devel
 BuildRequires:  ocaml-evtchn-devel
 BuildRequires:  ocaml-ipaddr-devel
+Requires:       mirage-testvm
+
 %description
 This is a simple test suite for the xapi-project components
 
@@ -38,5 +40,8 @@ cp quicktest.native %{buildroot}%{_bindir}
 %{_bindir}/quicktest.native
 
 %changelog
+* Wed Jul 30 2014 Jon Ludlam <euan.harris@citrix.com> - 0.0.0-2
+- Add runtime dependency on mirage-testvm
+
 * Wed Jul 23 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.0.0-1
 - Initial package
