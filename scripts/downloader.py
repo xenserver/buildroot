@@ -44,6 +44,11 @@ def look_for_it(url, destination):
 		if os.path.exists(destination):
 			if looks_like_an_archive(destination):
 				print >>sys.stderr, "%s exists and looks like an archive" % destination
+				# Refresh the archive's last access time.
+				# If the spec file which depends on this archive has been modified, it will have a later access time than the archive and make will continually rebuild it.   'Touch' the archive, to prevent this happening
+				# There is a potential race here:  http://stackoverflow.com/questions/1158076/implement-touch-using-python
+				with open(destination, 'a'):
+					os.utime(destination, None)
 				return
 			else:
 				print >>sys.stderr, "%s is not an archive, deleting it" % destination
