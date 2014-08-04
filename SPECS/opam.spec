@@ -25,10 +25,15 @@ mv %{buildroot}/usr/man/* %{buildroot}/%{_mandir}
 rm -rf %{buildroot}/usr/man
 
 %files
+%doc AUTHORS
+%doc CHANGES
+%doc CONTRIBUTING.md
+%doc LICENSE
+%doc README.md
 %{_mandir}/man1/opam*
 %{_bindir}/opam
 %{_bindir}/opam-admin
-%{_bindir}/opam-installer
+%exclude %{_bindir}/opam-installer
 
 %changelog
 * Fri Aug 01 2014 Euan Harris <euan.harris@citrix.com> 1.1.2-1
