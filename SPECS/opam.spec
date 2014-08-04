@@ -33,7 +33,7 @@ rm -rf %{buildroot}/usr/man
 %{_mandir}/man1/opam*
 %{_bindir}/opam
 %{_bindir}/opam-admin
-%exclude %{_bindir}/opam-installer
+%{_bindir}/opam-installer
 
 %changelog
 * Fri Aug 01 2014 Euan Harris <euan.harris@citrix.com> 1.1.2-1
