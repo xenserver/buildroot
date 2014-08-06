@@ -5,6 +5,7 @@ Summary:        Source-based OCaml package manager
 License:        LGPLv3
 URL:            http://opam.ocaml.org/
 Source0:        https://github.com/ocaml/%{name}/releases/download/%{version}/%{name}-full-%{version}.tar.gz
+BuildRequires:  curl 
 BuildRequires:  ocaml 
 
 %description
@@ -36,6 +37,6 @@ rm -rf %{buildroot}/usr/man
 %{_bindir}/opam-installer
 
 %changelog
-* Fri Aug 01 2014 Euan Harris <euan.harris@citrix.com> 1.1.2-1
+* Fri Aug 01 2014 Euan Harris <euan.harris@citrix.com> - 1.1.2-1
 - Initial package
 
