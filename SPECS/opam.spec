@@ -5,6 +5,7 @@ Summary:        Source-based OCaml package manager
 License:        LGPLv3
 URL:            http://opam.ocaml.org/
 Source0:        https://github.com/ocaml/%{name}/releases/download/%{version}/%{name}-full-%{version}.tar.gz
+BuildRequires:  curl 
 BuildRequires:  ocaml 
 
 %description
