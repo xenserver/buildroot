@@ -36,6 +36,6 @@ rm -rf %{buildroot}/usr/man
 %{_bindir}/opam-installer
 
 %changelog
-* Fri Aug 01 2014 Euan Harris <euan.harris@citrix.com> 1.1.2-1
+* Fri Aug 01 2014 Euan Harris <euan.harris@citrix.com> - 1.1.2-1
 - Initial package
 
