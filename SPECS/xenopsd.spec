@@ -98,7 +98,6 @@ install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
-install -D scripts/vif-xl %{buildroot}/%{_libexecdir}/%{name}/vif-xl
 install -D scripts/qemu-dm-wrapper %{buildroot}/%{_libexecdir}/%{name}/qemu-dm-wrapper
 install -D scripts/qemu-vif-script %{buildroot}/%{_libexecdir}/%{name}/qemu-vif-script
 install -D scripts/setup-vif-rules %{buildroot}/%{_libexecdir}/%{name}/setup-vif-rules
@@ -122,7 +121,6 @@ install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 %doc README.md LICENSE
 %{_libexecdir}/%{name}/vif
 %{_libexecdir}/%{name}/vif-real
-%{_libexecdir}/%{name}/vif-xl
 %{_libexecdir}/%{name}/qemu-dm-wrapper
 %{_libexecdir}/%{name}/qemu-vif-script
 %{_libexecdir}/%{name}/setup-vif-rules
