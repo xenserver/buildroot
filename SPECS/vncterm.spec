@@ -7,6 +7,7 @@ URL:  https://github.com/xenserver/vncterm
 Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:  vncterm-1-fix-build
 BuildRequires: xen-devel
+BuildRequires: xen-missing-headers
 
 %description
 This package contains the vncterm utility

@@ -11,6 +11,7 @@ BuildRequires: libaio-devel
 BuildRequires: libtool
 BuildRequires: libuuid-devel
 BuildRequires: xen-devel
+BuildRequires: xen-missing-headers
 BuildRequires: openssl-devel
 
 %description

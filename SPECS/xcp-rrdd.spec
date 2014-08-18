@@ -20,6 +20,7 @@ BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  xen-devel
+BuildRequires:  xen-missing-headers
 Requires:       redhat-lsb-core
 
 %description
