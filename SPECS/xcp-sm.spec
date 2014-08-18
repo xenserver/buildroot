@@ -48,8 +48,6 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add mpathroot
-[ ! -x /sbin/chkconfig ] || chkconfig --add sm-multipath
-service sm-multipath start
 
 [ -f /etc/lvm/lvm.conf.orig ] || cp /etc/lvm/lvm.conf /etc/lvm/lvm.conf.orig || exit $?
 [ -d /etc/lvm/master ] || mkdir /etc/lvm/master || exit $?
@@ -67,7 +65,6 @@ fi
 update-alternatives --install /etc/multipath.conf multipath.conf /etc/multipath.xenserver/multipath.conf 90
 
 %preun
-[ ! -x /sbin/chkconfig ] || chkconfig --del sm-multipath
 #only remove in case of erase (but not at upgrade)
 if [ $1 -eq 0 ] ; then
    update-alternatives --remove multipath.conf /etc/multipath.xenserver/multipath.conf
@@ -82,7 +79,6 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot
-/etc/rc.d/init.d/sm-multipath
 /etc/udev/rules.d/55-xs-mpath-scsidev.rules
 /etc/udev/scripts/xs-mpath-scsidev.sh
 %{_libdir}/xapi/plugins/coalesce-leaf
@@ -93,6 +89,7 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/plugins/testing-hooks
 %{_libdir}/xapi/plugins/vss_control
 %{_libdir}/xapi/plugins/intellicache-clean
+%{_libdir}/xapi/plugins/trim
 /etc/xensource/master.d/02-vhdcleanup
 /opt/xensource/bin/blktap2
 /opt/xensource/bin/tapdisk-cache-stats
@@ -124,17 +121,6 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/sm/ISOSR.py
 %{_libdir}/xapi/sm/ISOSR.pyc
 %{_libdir}/xapi/sm/ISOSR.pyo
-%{_libdir}/xapi/sm/OCFSSR.py
-%{_libdir}/xapi/sm/OCFSSR.pyc
-%{_libdir}/xapi/sm/OCFSSR.pyo
-%{_libdir}/xapi/sm/OCFSoISCSISR
-%{_libdir}/xapi/sm/OCFSoISCSISR.py
-%{_libdir}/xapi/sm/OCFSoISCSISR.pyc
-%{_libdir}/xapi/sm/OCFSoISCSISR.pyo
-%{_libdir}/xapi/sm/OCFSoHBASR
-%{_libdir}/xapi/sm/OCFSoHBASR.py
-%{_libdir}/xapi/sm/OCFSoHBASR.pyc
-%{_libdir}/xapi/sm/OCFSoHBASR.pyo
 %{_libdir}/xapi/sm/LUNperVDI.py
 %{_libdir}/xapi/sm/LUNperVDI.pyc
 %{_libdir}/xapi/sm/LUNperVDI.pyo
@@ -280,15 +266,14 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/sm/vhdutil.py
 %{_libdir}/xapi/sm/vhdutil.pyc
 %{_libdir}/xapi/sm/vhdutil.pyo
+%{_libdir}/xapi/sm/trim_util.py
+%{_libdir}/xapi/sm/trim_util.pyc
+%{_libdir}/xapi/sm/trim_util.pyo
 %{_libdir}/xapi/sm/vss_control
 %{_libdir}/xapi/sm/xs_errors.py
 %{_libdir}/xapi/sm/xs_errors.pyc
 %{_libdir}/xapi/sm/xs_errors.pyo
-%{_libdir}/xapi/sm/wwid_conf.py
-%{_libdir}/xapi/sm/wwid_conf.pyc
-%{_libdir}/xapi/sm/wwid_conf.pyo
 /sbin/mpathutil
-%config /etc/udev/rules.d/40-multipath.rules
 %config /etc/multipath.xenserver/multipath.conf
 
 
@@ -301,6 +286,7 @@ This package adds a new rawhba SR type. This SR type allows utilization of
 Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 
 %files rawhba
+%exclude %{_libdir}/xapi/sm/RawHBASR
 %{_libdir}/xapi/sm/RawHBASR
 %{_libdir}/xapi/sm/RawHBASR.py
 %{_libdir}/xapi/sm/RawHBASR.pyc
@@ -308,6 +294,7 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 %{_libdir}/xapi/sm/B_util.py
 %{_libdir}/xapi/sm/B_util.pyc
 %{_libdir}/xapi/sm/B_util.pyo
+%{_libdir}/xapi/sm/enable-borehamwood
 
 %changelog
 * Tue Sep 30 2014 Bob Ball <bob.ball@citrix.com> - 0.9.8-1
