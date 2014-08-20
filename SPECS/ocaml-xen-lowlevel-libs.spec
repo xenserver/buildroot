@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.18
+Version:        0.9.21
 Release:        1%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
@@ -42,7 +42,7 @@ at runtime when executing programs that use %{name}.
 
 %build
 make configure
-./configure --disable-xenlight
+./configure
 make
 
 %install
@@ -62,30 +62,33 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
 
-#%{_libdir}/ocaml/xenlight
-#%exclude %{_libdir}/ocaml/xenlight/*.a
-#%exclude %{_libdir}/ocaml/xenlight/*.cmxa
-#%exclude %{_libdir}/ocaml/xenlight/*.cmx
-#%exclude %{_libdir}/ocaml/xenlight/*.mli
-#%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
-#%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
-#%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
-#%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
+%{_libdir}/ocaml/xenlight
+%exclude %{_libdir}/ocaml/xenlight/*.a
+%exclude %{_libdir}/ocaml/xenlight/*.cmxa
+%exclude %{_libdir}/ocaml/xenlight/*.cmx
+%exclude %{_libdir}/ocaml/xenlight/*.mli
+%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
+%{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
+%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
+%{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
 
 %files devel
 %{_libdir}/ocaml/xenctrl/*.a
 %{_libdir}/ocaml/xenctrl/*.cmxa
 %{_libdir}/ocaml/xenctrl/*.cmx
 %{_libdir}/ocaml/xenctrl/*.mli
-#%{_libdir}/ocaml/xenlight/*.a
-#%{_libdir}/ocaml/xenlight/*.cmxa
-#%{_libdir}/ocaml/xenlight/*.cmx
-#%{_libdir}/ocaml/xenlight/*.mli
+%{_libdir}/ocaml/xenlight/*.a
+%{_libdir}/ocaml/xenlight/*.cmxa
+%{_libdir}/ocaml/xenlight/*.cmx
+%{_libdir}/ocaml/xenlight/*.mli
 
 %files runtime
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Wed Aug 20 2014 David Scott <dave.scott@citrix.com> - 0.9.21-1
+- Update to 0.9.21, re-activate xenlight
+
 * Sat Jun 21 2014 David Scott <dave.scott@citrix.com> - 0.9.18-1
 - Update to 0.9.18
 
