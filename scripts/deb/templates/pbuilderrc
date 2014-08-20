@@ -3,7 +3,7 @@ OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb-src file:@PWD@/SRPMS/ ./\
 @APT_REPOS@"
 BINDMOUNTS="@PWD@/RPMS @PWD@/SRPMS"
 HOOKDIR="@PWD@/pbuilder"
-EXTRAPACKAGES="apt-utils"
+EXTRAPACKAGES="apt-utils fakeroot gettext intltool-debian python bsdmainutils debhelper dh-apparmor dh-ocaml file gettext-base groff-base man-db"
 ALLOWUNTRUSTED=yes
 DISTRIBUTION=@DIST@
 PBUILDERSATISFYDEPENDSCMD="/usr/lib/pbuilder/pbuilder-satisfydepends-gdebi"
