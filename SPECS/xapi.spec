@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.52
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -163,6 +163,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Thu Aug 21 2014 David Scott <dave.scott@citrix.com> - 1.9.52-2
+- switch to xenlight xenopsd by default
+
 * Tue Jul 29 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 1.9.52-1
 - update 1.9.52
 
