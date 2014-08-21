@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Copyright (c) Citrix Inc
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published
+# by the Free Software Foundation; version 2.1 only. with the special
+# exception on linking described in file LICENSE.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+
+# vncterm is like a qemu parasite, using it's keymap files. The exact
+# location of qemu keymap files depends on the distro, while the vncterm
+# source code hard-codes /usr/share/xen/qemu
+
+mkdir -p /usr/share/xen
+if [ ! -e /usr/share/xen/qemu ]; then
+  for path in /usr/share/qemu # include other possibilities later
+  do
+    if [ -e $path ]; then
+      if [ ! -e /usr/share/xen/qemu ]; then
+        ln -s $path /usr/share/xen/qemu
+      fi
+    fi
+  done
+fi
+
+if [ ! -e /usr/share/xen/qemu ]; then
+  echo "Failed to find keymaps in /usr/share/xen/qemu"
+  logger "Failed to find keymaps in /usr/share/xen/qemu"
+  exit 1
+fi
+exec vncterm $*

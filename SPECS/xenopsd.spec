@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.39
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -11,6 +11,7 @@ Source3:        xenopsd-libvirt-init
 Source4:        xenopsd-xenlight-init
 Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
+Source7:        xenopsd-vncterm-wrapper
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-rpc-devel
@@ -83,6 +84,7 @@ cp %{SOURCE3} xenopsd-libvirt-init
 cp %{SOURCE4} xenopsd-xenlight-init
 cp %{SOURCE5} make-xsc-xenopsd.conf
 cp %{SOURCE6} xenopsd-network-conf
+cp %{SOURCE7} xenopsd-vncterm-wrapper
 
 %build
 make configure
@@ -101,6 +103,7 @@ install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
 install -D scripts/block %{buildroot}/%{_libexecdir}/%{name}/block
 install -D scripts/qemu-dm-wrapper %{buildroot}/%{_libexecdir}/%{name}/qemu-dm-wrapper
+install -D xenopsd-vncterm-wrapper %{buildroot}/%{_libexecdir}/%{name}/vncterm-wrapper
 install -D scripts/qemu-vif-script %{buildroot}/%{_libexecdir}/%{name}/qemu-vif-script
 install -D scripts/setup-vif-rules %{buildroot}/%{_libexecdir}/%{name}/setup-vif-rules
 install -D scripts/common.py %{buildroot}/%{_libexecdir}/%{name}/common.py
@@ -125,6 +128,7 @@ install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 %{_libexecdir}/%{name}/vif-real
 %{_libexecdir}/%{name}/block
 %{_libexecdir}/%{name}/qemu-dm-wrapper
+%{_libexecdir}/%{name}/vncterm-wrapper
 %{_libexecdir}/%{name}/qemu-vif-script
 %{_libexecdir}/%{name}/setup-vif-rules
 %{_libexecdir}/%{name}/network.conf
@@ -188,6 +192,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Fri Aug 22 2014 David Scott <dave.scott@citrix.com> - 0.9.39-4
+- Add a vncterm-wrapper: needed to locate the qemu keymaps
+
 * Thu Aug 21 2014 David Scott <dave.scott@citrix.com> - 0.9.39-2
 - Include {vbd,vif}-xl in the package
 
