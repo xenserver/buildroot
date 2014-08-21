@@ -52,7 +52,6 @@ socket = r:TCP_NODELAY=1
 socket = a:TCP_NODELAY=1
 socket = l:TCP_NODELAY=1
 socket = r:SO_KEEPALIVE=1
-compression = zlib
 
 [xapi]
 accept = ${ACCEPT}
