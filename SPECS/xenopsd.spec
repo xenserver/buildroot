@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.39
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -99,6 +99,7 @@ install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
+install -D scripts/block %{buildroot}/%{_libexecdir}/%{name}/block
 install -D scripts/qemu-dm-wrapper %{buildroot}/%{_libexecdir}/%{name}/qemu-dm-wrapper
 install -D scripts/qemu-vif-script %{buildroot}/%{_libexecdir}/%{name}/qemu-vif-script
 install -D scripts/setup-vif-rules %{buildroot}/%{_libexecdir}/%{name}/setup-vif-rules
@@ -122,6 +123,7 @@ install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 %doc README.md LICENSE
 %{_libexecdir}/%{name}/vif
 %{_libexecdir}/%{name}/vif-real
+%{_libexecdir}/%{name}/block
 %{_libexecdir}/%{name}/qemu-dm-wrapper
 %{_libexecdir}/%{name}/qemu-vif-script
 %{_libexecdir}/%{name}/setup-vif-rules
@@ -186,6 +188,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Thu Aug 21 2014 David Scott <dave.scott@citrix.com> - 0.9.39-2
+- Include {vbd,vif}-xl in the package
+
 * Wed Aug 20 2014 David Scott <dave.scott@citrix.com> - 0.9.39-2
 - Package xenopsd-xenlight
 
