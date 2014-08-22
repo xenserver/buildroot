@@ -41,7 +41,7 @@ start() {
 	umask 077
 
         echo -n $"Starting xenopsd-simulator: "
-        start_daemon -p "$PIDFILE" $exec -pidfile "$PIDFILE" -config /etc/xenopsd.conf -daemon true $XENOPSD_SIMULATOR_OPTIONS
+        start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --config /etc/xenopsd.conf --daemon true $XENOPSD_SIMULATOR_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
