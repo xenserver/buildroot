@@ -54,7 +54,7 @@ export OCAMLFIND_LDCONF=ignore
 make install
 
 %files
-%doc ChangeLog 
+%doc CHANGES
 %doc LICENSE 
 %doc MAINTAINERS
 %doc README.md 
