@@ -1,6 +1,6 @@
 Name:           xenopsd
-Version:        0.9.39
-Release:        5%{?dist}
+Version:        0.9.41
+Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -192,6 +192,10 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Fri Aug 22 2014 David Scott <dave.scott@citrix.com> - 0.9.41-1
+- Update to 0.9.41: now pygrub, eliloader, hvmloader and vncterm
+  are optional
+
 * Fri Aug 22 2014 David Scott <dave.scott@citrix.com> - 0.9.39-5
 - vncterm-wrapper: ensure the groups are added on startup.
 
