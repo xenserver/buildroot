@@ -12,6 +12,13 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Lesser General Public License for more details.
 
+# this is a horrible hack: the vncterm deb fails to set the user and
+# group properly:
+getent group vncterm >/dev/null || groupadd -r vncterm
+getent group vncterm_base >/dev/null || groupadd -r vncterm_base
+getent passwd vncterm >/dev/null || useradd -r -g vncterm -d /none -s /sbin/nologin -c 'for vncterm' vncterm
+getent passwd vncterm_base >/dev/null || useradd -r -g vncterm_base -d /none -s /sbin/nologin -c 'for vncterm' vncterm_base
+
 # vncterm is like a qemu parasite, using it's keymap files. The exact
 # location of qemu keymap files depends on the distro, while the vncterm
 # source code hard-codes /usr/share/xen/qemu
