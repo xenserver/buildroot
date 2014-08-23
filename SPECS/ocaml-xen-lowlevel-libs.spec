@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.21
+Version:        0.9.22
 Release:        1%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
@@ -86,6 +86,9 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Sat Aug 22 2014 David Scott <dave.scott@citrix.com> - 0.9.22-1
+- Update to 0.9.22, only build xenlight on xen-4.4 and xen-4.5
+
 * Wed Aug 20 2014 David Scott <dave.scott@citrix.com> - 0.9.21-1
 - Update to 0.9.21, re-activate xenlight
 

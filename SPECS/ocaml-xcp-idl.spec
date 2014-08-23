@@ -27,6 +27,7 @@ Common interface definitions for XCP services.
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-cmdliner-devel%{?_isa}
 Requires:       message-switch-devel%{?_isa}
 Requires:       ocaml-uri-devel%{?_isa}
 Requires:       ocaml-re-devel%{?_isa}
