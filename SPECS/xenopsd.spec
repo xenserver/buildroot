@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.41
+Version:        0.9.43
 Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
@@ -14,6 +14,7 @@ Source6:        xenopsd-network-conf
 Source7:        xenopsd-vncterm-wrapper
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-cmdliner-devel
@@ -69,12 +70,14 @@ Requires:       %{name} = %{version}-%{release}
 %description    simulator
 A synthetic VM manager for testing.
 
+%if "%{dist}" != ".el6"
 %package        xenlight
 Summary:        Xenopsd using libxenlight
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 %description    xenlight
 Simple VM manager for Xen using libxenlight
+%endif
 
 %prep
 %setup -q
@@ -87,7 +90,6 @@ cp %{SOURCE6} xenopsd-network-conf
 cp %{SOURCE7} xenopsd-vncterm-wrapper
 
 %build
-make configure
 ./configure --libexecdir %{_libexecdir}/%{name}
 make
 
@@ -97,7 +99,10 @@ mkdir -p %{buildroot}/%{_sbindir}
 install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
 install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir}/xenopsd-simulator
 install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
+%if "%{dist}" != ".el6"
 install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
+install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
+%endif
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
@@ -113,7 +118,6 @@ mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
 install -m 0755 xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
-install -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
 
 mkdir -p %{buildroot}/etc/xapi
 chmod 755 make-xsc-xenopsd.conf 
@@ -177,6 +181,7 @@ if [ $1 -eq 0 ]; then
   /sbin/chkconfig --del xenopsd-simulator
 fi
 
+%if "%{dist}" != ".el6"
 %files xenlight
 %defattr(-,root,root)
 %{_sbindir}/xenopsd-xenlight
@@ -190,8 +195,12 @@ if [ $1 -eq 0 ]; then
   /sbin/service xenopsd-xenlight stop > /dev/null 2>&1
   /sbin/chkconfig --del xenopsd-xenlight
 fi
+%endif
 
 %changelog
+* Sun Aug 24 2014 David Scott <dave.scott@citrix.com> - 0.9.43-1
+- Update to 0.9.43 which supports OCaml 4.01.0
+
 * Fri Aug 22 2014 David Scott <dave.scott@citrix.com> - 0.9.41-1
 - Update to 0.9.41: now pygrub, eliloader, hvmloader and vncterm
   are optional

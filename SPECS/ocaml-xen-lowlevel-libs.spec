@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.22
+Version:        0.9.25
 Release:        1%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
@@ -41,7 +41,6 @@ at runtime when executing programs that use %{name}.
 %setup -q
 
 %build
-make configure
 ./configure
 make
 
@@ -62,6 +61,7 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
 
+%if "%{dist}" != ".el6"
 %{_libdir}/ocaml/xenlight
 %exclude %{_libdir}/ocaml/xenlight/*.a
 %exclude %{_libdir}/ocaml/xenlight/*.cmxa
@@ -71,21 +71,30 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
 %{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
 %{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
+%endif
 
 %files devel
 %{_libdir}/ocaml/xenctrl/*.a
 %{_libdir}/ocaml/xenctrl/*.cmxa
 %{_libdir}/ocaml/xenctrl/*.cmx
 %{_libdir}/ocaml/xenctrl/*.mli
+%if "%{dist}" != ".el6"
 %{_libdir}/ocaml/xenlight/*.a
 %{_libdir}/ocaml/xenlight/*.cmxa
 %{_libdir}/ocaml/xenlight/*.cmx
 %{_libdir}/ocaml/xenlight/*.mli
+%endif
 
 %files runtime
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Sun Aug 23 2014 David Scott <dave.scott@citrix.com> - 0.9.25-1
+- Update to 0.9.25
+
+* Sun Aug 23 2014 David Scott <dave.scott@citrix.com> - 0.9.23-1
+- Update to 0.9.23, improved configure script
+
 * Sat Aug 22 2014 David Scott <dave.scott@citrix.com> - 0.9.22-1
 - Update to 0.9.22, only build xenlight on xen-4.4 and xen-4.5
 
