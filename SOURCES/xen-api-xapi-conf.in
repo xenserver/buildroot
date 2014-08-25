@@ -4,10 +4,10 @@
 # Global policy: #################################################
 
 # The full list of xenopsd instances to manage. These must all be running.
-xenopsd-queues = org.xen.xcp.xenops.classic
+xenopsd-queues = org.xen.xcp.xenops.xenlight
 
 # The default xenopsd to use for VMs, unless a per-VM override is specified
-xenopsd-default = org.xen.xcp.xenops.classic
+xenopsd-default = org.xen.xcp.xenops.xenlight
 
 # Configure the logging policy:
 # logconfig = @ETCDIR@/log.conf

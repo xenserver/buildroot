@@ -1,6 +1,6 @@
 Name:           xenserver-core
 Version:        0.10.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A virtual package which installs the xapi toolstack
 License:        LGPL
 URL:            http://www.xenserver.org/
@@ -13,6 +13,7 @@ Requires:       xe-create-templates
 Requires:       xenopsd-libvirt
 Requires:       xenopsd-simulator
 Requires:       xenopsd-xc
+Requires:       xenopsd-xenlight
 Requires:       xenops-cli
 Requires:       ffs
 Requires:       sm-cli
@@ -42,6 +43,9 @@ install -m 0644 xenserver-readme %{buildroot}/usr/share/doc/xenserver/README
 /usr/share/doc/xenserver/README
 
 %changelog
+* Wed Aug 20 2014 David Scott <dave.scott@eu.citrix.com> - 0.10.0-2
+- Add dependency on xenopsd-xenlight
+
 * Fri Nov 1 2013 Euan Harris <dave.scott@eu.citrix.com> - 0.10.0-1
 - Bump version to 0.10.0
 

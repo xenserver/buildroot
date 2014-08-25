@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        0.9.17
+Version:        0.9.18
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
@@ -19,6 +19,7 @@ BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  ocaml-xmlm-devel
 BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-sexplib-devel
 
 %description
 Common interface definitions for XCP services.
@@ -26,6 +27,7 @@ Common interface definitions for XCP services.
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-cmdliner-devel%{?_isa}
 Requires:       message-switch-devel%{?_isa}
 Requires:       ocaml-uri-devel%{?_isa}
 Requires:       ocaml-re-devel%{?_isa}
@@ -33,6 +35,7 @@ Requires:       ocaml-cohttp-devel%{?_isa}
 Requires:       ocaml-rpc-devel%{?_isa}
 Requires:       ocaml-fd-send-recv-devel%{?_isa}
 Requires:       ocaml-xmlm-devel%{?_isa}
+Requires:       ocaml-sexplib-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -52,7 +55,7 @@ export OCAMLFIND_LDCONF=ignore
 make install
 
 %files
-%doc ChangeLog 
+%doc CHANGES
 %doc LICENSE 
 %doc MAINTAINERS
 %doc README.md 
@@ -69,6 +72,9 @@ make install
 %{_libdir}/ocaml/xcp/*.mli
 
 %changelog
+* Wed Aug 20 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.18-1
+- Update to 0.9.18
+
 * Fri Jun 06 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.17-1
 - Update to 0.9.17
 
