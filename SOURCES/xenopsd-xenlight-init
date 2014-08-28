@@ -35,13 +35,19 @@ if [ -f /etc/sysconfig/$prog ] ; then
     . /etc/sysconfig/$prog
 fi
 
+# ensure that all the possible xen directories are on the XCP_PATH
+for xenpath in xen xen-4.4 xen-4.3 xen-4.2 xen-4.1; do
+    XCP_PATH="$XCP_PATH:/usr/lib/$xenpath/bin:/usr/lib/$xenpath/boot"
+done
+export XCP_PATH
+
 start() {
 	[ -x $exec ] || exit 5
 
 	umask 077
 
         echo -n $"Starting xenopsd-xenlight: "
-        start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --config /etc/xenopsd.conf --daemon true $XENOPSD_XENLIGHT_OPTIONS
+        start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --config /etc/xenopsd.conf --daemon true --search-path $XCP_PATH $XENOPSD_XENLIGHT_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
