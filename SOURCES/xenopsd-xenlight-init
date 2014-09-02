@@ -46,6 +46,8 @@ start() {
 
 	umask 077
 
+	modprobe blktap 2>/dev/null || logger -t xenopsd-xenlight "Failed to modprobe blktap: vhd-based disks will not work"
+	modprobe blkback 2>/dev/null || logger -t xenopsd-xenlight "Failed to modprobe blkback: virtual disks will not work"
         echo -n $"Starting xenopsd-xenlight: "
         start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --config /etc/xenopsd.conf --daemon true --search-path $XCP_PATH $XENOPSD_XENLIGHT_OPTIONS
         RETVAL=$?
