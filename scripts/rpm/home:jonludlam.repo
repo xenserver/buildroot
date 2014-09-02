@@ -1,0 +1,7 @@
+[home_jonludlam]
+name=jonludlam's Home Project (CentOS_6)
+type=rpm-md
+baseurl=http://download.opensuse.org/repositories/home:/jonludlam/CentOS_6/
+gpgcheck=1
+gpgkey=http://download.opensuse.org/repositories/home:/jonludlam/CentOS_6/repodata/repomd.xml.key
+enabled=1
