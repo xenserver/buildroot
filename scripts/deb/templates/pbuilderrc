@@ -1,5 +1,5 @@
 MIRRORSITE="@MIRROR@"
-OTHERMIRROR="deb @MIRROR@ @DIST@ restricted universe | deb file:@PWD@/RPMS/ ./|deb-src file:@PWD@/SRPMS/ ./\
+OTHERMIRROR="deb file:@PWD@/RPMS/ ./|deb-src file:@PWD@/SRPMS/ ./\
 @APT_REPOS@"
 BINDMOUNTS="@PWD@/RPMS @PWD@/SRPMS"
 HOOKDIR="@PWD@/pbuilder"

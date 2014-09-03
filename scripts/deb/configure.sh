@@ -15,8 +15,12 @@ BASEPATH=/var/cache/pbuilder/base.cow
 APT_REPOS=${APT_REPOS:-}
 DEFAULT_MIRROR=$(grep "^deb .*$DIST .*main" /etc/apt/sources.list | cut -d' ' -f 2 | head -n1)
 MIRROR=${MIRROR:-$DEFAULT_MIRROR}
+
 if [ `lsb_release -si` == "Ubuntu" ] ; then
     APT_REPOS="$APT_REPOS |deb $MIRROR $DIST universe"
+fi
+if [ $ARCH == 'armhf' ]; then
+    APT_REPOS="$APT_REPOS |deb $MIRROR $DIST restricted universe"
 fi
 
 dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common > /dev/null 2>&1 || \
