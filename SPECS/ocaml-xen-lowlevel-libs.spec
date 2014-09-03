@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.25
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/ocaml-xen-lowlevel-libs
@@ -60,8 +60,6 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %exclude %{_libdir}/ocaml/xenctrl/*.mli
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenctrl_stubs.so.owner
-
-%if "%{dist}" != ".el6"
 %{_libdir}/ocaml/xenlight
 %exclude %{_libdir}/ocaml/xenlight/*.a
 %exclude %{_libdir}/ocaml/xenlight/*.cmxa
@@ -71,24 +69,24 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
 %{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
 %{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so.owner
-%endif
 
 %files devel
 %{_libdir}/ocaml/xenctrl/*.a
 %{_libdir}/ocaml/xenctrl/*.cmxa
 %{_libdir}/ocaml/xenctrl/*.cmx
 %{_libdir}/ocaml/xenctrl/*.mli
-%if "%{dist}" != ".el6"
 %{_libdir}/ocaml/xenlight/*.a
 %{_libdir}/ocaml/xenlight/*.cmxa
 %{_libdir}/ocaml/xenlight/*.cmx
 %{_libdir}/ocaml/xenlight/*.mli
-%endif
 
 %files runtime
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Tue Sep 2 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.25-2
+- Reinstate xenlight in CentOS
+
 * Sun Aug 23 2014 David Scott <dave.scott@citrix.com> - 0.9.25-1
 - Update to 0.9.25
 
