@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.43
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -70,14 +70,12 @@ Requires:       %{name} = %{version}-%{release}
 %description    simulator
 A synthetic VM manager for testing.
 
-%if "%{dist}" != ".el6"
 %package        xenlight
 Summary:        Xenopsd using libxenlight
 Group:          Development/Other
 Requires:       %{name} = %{version}-%{release}
 %description    xenlight
 Simple VM manager for Xen using libxenlight
-%endif
 
 %prep
 %setup -q
@@ -99,10 +97,8 @@ mkdir -p %{buildroot}/%{_sbindir}
 install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
 install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir}/xenopsd-simulator
 install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
-%if "%{dist}" != ".el6"
 install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
 install -D -m 0755 xenopsd-xenlight-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xenlight
-%endif
 mkdir -p %{buildroot}/%{_libexecdir}/%{name}
 install -D scripts/vif %{buildroot}/%{_libexecdir}/%{name}/vif
 install -D scripts/vif-real %{buildroot}/%{_libexecdir}/%{name}/vif-real
@@ -181,7 +177,6 @@ if [ $1 -eq 0 ]; then
   /sbin/chkconfig --del xenopsd-simulator
 fi
 
-%if "%{dist}" != ".el6"
 %files xenlight
 %defattr(-,root,root)
 %{_sbindir}/xenopsd-xenlight
@@ -195,9 +190,11 @@ if [ $1 -eq 0 ]; then
   /sbin/service xenopsd-xenlight stop > /dev/null 2>&1
   /sbin/chkconfig --del xenopsd-xenlight
 fi
-%endif
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.43-2
+- Reinstate xenlight package in CentOS
+
 * Sun Aug 24 2014 David Scott <dave.scott@citrix.com> - 0.9.43-1
 - Update to 0.9.43 which supports OCaml 4.01.0
 
