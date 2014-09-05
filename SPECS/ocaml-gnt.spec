@@ -2,7 +2,7 @@
 
 Name:           ocaml-gnt
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OCaml bindings for userspace Xen grant table controls
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/ocaml-gnt/
@@ -16,7 +16,6 @@ BuildRequires:  ocaml-io-page-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  xen-devel
-BuildRequires:  xen-missing-headers
 Requires:       ocaml
 Requires:       ocaml-findlib
 
@@ -65,5 +64,8 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/xen-gnt/*.mli
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 1.0.0-2
+- Remove dependency on xen-missing-headers
+
 * Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 1.0.0-1
 - Initial package

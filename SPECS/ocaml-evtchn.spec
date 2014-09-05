@@ -2,7 +2,7 @@
 
 Name:           ocaml-evtchn
 Version:        1.0.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        OCaml bindings for userspace Xen event channel controls
 License:        ISC
 URL:            https://github.com/mirage/ocaml-evtchn/
@@ -16,7 +16,6 @@ BuildRequires:  ocaml-io-page-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  xen-devel
-BuildRequires:  xen-missing-headers
 
 %description
 These APIs allow programs running in userspace to signal other domains
@@ -61,6 +60,9 @@ make install
 %{_libdir}/ocaml/xen-evtchn/*.mli
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 1.0.5-3
+- Remove dependency on xen-missing-headers
+
 * Tue Aug 19 2014 David Scott <dave.scott@citrix.com> - 1.0.5-2
 - Add dependency on xen-missing-headers
 

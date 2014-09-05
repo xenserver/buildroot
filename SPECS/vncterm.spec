@@ -1,13 +1,12 @@
 Summary: TTY to VNC utility
 Name: vncterm
 Version: 0.9.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPL
 URL:  https://github.com/xenserver/vncterm
 Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:  vncterm-1-fix-build
 BuildRequires: xen-devel
-BuildRequires: xen-missing-headers
 
 %description
 This package contains the vncterm utility
@@ -34,6 +33,9 @@ getent passwd vncterm_base >/dev/null || useradd -r -g vncterm_base -d /none -s 
 %{_bindir}/vncterm
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.0-2
+- Remove xen-missing-headers dependency
+
 * Thu Aug 22 2013 Euan Harris <euan.harris@citrix.com> - 0.9.0-1
 - Update to latest version of upstream package
 

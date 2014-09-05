@@ -3,7 +3,7 @@
 Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.7
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPL
 URL:  https://github.com/xapi-project/sm
 Source0: https://github.com/BobBall/sm/archive/%{version}/sm-%{version}.tar.gz
@@ -15,7 +15,6 @@ BuildRequires: python-devel
 BuildRequires: swig
 BuildRequires: xen-devel
 BuildRequires: pylint
-BuildRequires: xen-missing-headers
 Requires: iscsi-initiator-utils
 Requires: sg3_utils
 Requires: xen-runtime
@@ -305,6 +304,9 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 /usr/lib/xapi/sm/B_util.pyo
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-3
+- Remove xen-missing-headers dependency
+
 * Fri Jun 20 2014 David Scott <dave.scott@citrix.com> - 0.9.7-2
 - Update file list
 

@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.25
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/ocaml-xen-lowlevel-libs
@@ -15,7 +15,6 @@ BuildRequires:  ocaml-ocamldoc
 BuildRequires:  libuuid-devel
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  xen-devel
-BuildRequires:  xen-missing-headers
 BuildRequires:  ocaml-cstruct-devel
 
 %description
@@ -84,6 +83,9 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.25-3
+- Remove dependency on xen-missing-headers
+
 * Tue Sep 2 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.25-2
 - Reinstate xenlight in CentOS
 

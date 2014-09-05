@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.52
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -20,7 +20,6 @@ BuildRequires: pam-devel
 BuildRequires: tetex-latex
 BuildRequires: xen-devel
 BuildRequires: libffi-devel
-BuildRequires: xen-missing-headers
 BuildRequires: zlib-devel
 BuildRequires: ocaml-xcp-idl-devel
 BuildRequires: ocaml-xen-api-libs-transitional-devel
@@ -163,6 +162,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 1.9.52-3
+- Remove xen-missing-headers dependency
+
 * Thu Aug 21 2014 David Scott <dave.scott@citrix.com> - 1.9.52-2
 - switch to xenlight xenopsd by default
 
