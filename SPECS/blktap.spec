@@ -1,7 +1,7 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
 Version: 0.9.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
 Source0: https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
@@ -11,7 +11,6 @@ BuildRequires: libaio-devel
 BuildRequires: libtool
 BuildRequires: libuuid-devel
 BuildRequires: xen-devel
-BuildRequires: xen-missing-headers
 BuildRequires: openssl-devel
 
 %description
@@ -52,6 +51,9 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.2-2
+- Remove xen-missing-headers dependency
+
 * Wed Jun 04 2014 Bob Ball <bob.ball@citrix.com> - 0.9.2-1
 - Update blktap to latest release
 

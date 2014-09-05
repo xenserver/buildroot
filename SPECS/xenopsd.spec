@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.43
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -31,7 +31,6 @@ BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  ocaml-xenstore-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  xen-devel
-BuildRequires:  xen-missing-headers
 BuildRequires:  ocaml-uutf-devel
 BuildRequires:  ocaml-xcp-rrd-devel
 Requires:       message-switch
@@ -192,6 +191,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.43-3
+- Remove xen-missing-headers dependency
+
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.43-2
 - Reinstate xenlight package in CentOS
 

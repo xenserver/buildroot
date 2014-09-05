@@ -1,6 +1,6 @@
 Name:           xcp-rrdd
 Version:        0.9.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
@@ -20,7 +20,6 @@ BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  xen-devel
-BuildRequires:  xen-missing-headers
 Requires:       redhat-lsb-core
 
 %description
@@ -78,6 +77,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-2
+- Remove xen-missing-headers dependency 
+
 * Wed Jun 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-1
 - Update to 0.9.7
 - Create new subpackage for the devel libraries now installed
