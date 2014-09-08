@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.43
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -191,6 +191,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Mon Aug 8 2014 David Scott <dave.scott@citrix.com> - 0.9.43-4
+- Add a search-path to the xenopsd.conf
+
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.43-3
 - Remove xen-missing-headers dependency
 
