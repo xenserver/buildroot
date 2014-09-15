@@ -15,6 +15,9 @@ set -eu
 # is waiting to become the head of the queue and the second
 # timeout is waiting for <lock_name> to be available
 
+PID=$$
+echo "[$PID] $(date): $0 $*"
+
 # Consume args as we go so we can use $* to run later
 lockfile=.${1//\//_}
 shift
@@ -23,57 +26,75 @@ shift
 token=${1//\//_}
 shift
 
-PID=$$
 queue_lockfile=${lockfile}.queue
 
-flock -w 1 $queue_lockfile -c "echo $PID:$token >> $queue_lockfile"
+lock_entry="$PID:$token"
+flock -w 1 $queue_lockfile -c "echo $lock_entry >> $queue_lockfile"
 
 # Wait for either us to be the head of the queue, or the queue to be empty
 # (which can happen if someone else has run for us while we were waiting)
 timeout $timeout bash << EOT
-set -eux
-head=\$(flock -w 1 $queue_lockfile -c "head -n1 $queue_lockfile") # PID:token
-head_pid=\${head%%:*}
-head_token=\${head#*:}
-in_queue=\$(grep -c $token $queue_lockfile)
-while [ \$in_queue -gt 0 -a "\$head_token" != "$token" ]; do
-        sleep 1;
-        head=\$(flock -w 1 $queue_lockfile -c "head -n1 $queue_lockfile")
-        in_queue=\$(grep -c $token $queue_lockfile)
+set -eu
+while \$(flock -w 1 $queue_lockfile -c "grep -q $token $queue_lockfile") ; do
+	head=\$(flock -w 1 $queue_lockfile -c "head -n1 $queue_lockfile") # PID:token
+	head_pid=\${head%%:*}
+	head_token=\${head#*:}
+	if [ "\$head_token" == "$token" ] ; then
+		echo "[$PID] $token is now head"
+		exit 0
+	fi
+	echo "[$PID] Not head yet (\$head_token) is head.  Waiting for \$head_pid to complete"
+	set +e
+	wait \$head_pid
+	set -e
 
-        head_pid=\${head%%:*}
-        head_token=\${head#*:}
-
-        # Remove the head if it's not running
-        kill -0 \$head_pid >/dev/null 2>&1 || flock -w 1 $queue_lockfile -c "sed -i '/^\$head\\\$/d' $queue_lockfile"
+        # Remove the head now it's not running
+        flock -w 1 $queue_lockfile -c "sed -i '/^\$head\\\$/d' $queue_lockfile"
 done
+echo "[$PID] $token not in the queue any more"
 EOT
+
+if $(flock -w 1 $queue_lockfile -c "grep -q $token ${queue_lockfile}.completed"); then
+	echo "[$PID] Now present in completed file thanks"
+	exit 0
+fi
+echo "[$PID] Not run by anyone else yet"
 
 # We only need to run this command once for all in the queue
 # Use the actual lock now, so it doesn't matter if we change the queue, no one else
 # will get in here.
+echo "[$PID] $(date) wants lock $lockfile"
 (
 # Use flock to protect this whole block of code; fd 9 is redirected to $lockfile at the end of the block
 # Use a custom exit code so it's clear where the failure occured
 flock -w $timeout 9 || exit 76
+echo "[$PID] $(date) got lock $lockfile"
 
 # Make sure we're still at the head of the queue; a previous run_once lock might have run for us
 head=$(head -n1 $queue_lockfile)
-head_token=\${head#:*}
-if [ "$head_token" == "$token" ]; then
+if [ "$head" == "$lock_entry" ]; then
 
-        # We're running for the whole queue here, so remove the queue
-	(
 	# Use flock to protect this whole block of code; fd 8 is redirected to $queue_lockfile at the end of the block
+	(
 	flock -w 1 8 || exit 74
-	mv -f $queue_lockfile ${queue_lockfile}.running
-	touch $queue_lockfile
-	) 8>$queue_lockfile
+	cat $queue_lockfile > ${queue_lockfile}.running
+	) 8>>$queue_lockfile
 
 	# Log (if we're logging) who we are running the jobs for, then actually run it
-	echo "Running jobs for:"
+	echo "[$PID] Running jobs for:"
 	cat ${queue_lockfile}.running
         $*
-fi
-) 9>$lockfile
 
+	# Use flock to protect this whole block of code; fd 8 is redirected to $queue_lockfile at the end of the block
+	(
+	flock -w 1 8 || exit 75
+	set +e
+	# Grep will 'fail' if there are no lines left after removing those running
+	grep -v -f ${queue_lockfile}.running ${queue_lockfile} > ${queue_lockfile}.new
+	set -e
+	mv ${queue_lockfile}.new ${queue_lockfile}
+	cat ${queue_lockfile}.running >> ${queue_lockfile}.completed
+	) 8>>$queue_lockfile
+fi
+) 9>>$lockfile
+echo "[$PID] $(date) released lock $lockfile"
