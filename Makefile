@@ -8,7 +8,7 @@ clean:
 	[ ! -e srpm_output.log ] || rm srpm_output.log
 	[ ! -e rpm_output.log ] || rm rpm_output.log
 	[ ! -e deps ] || rm deps
-	rm -rf RPMS SRPMS
+	rm -rf RPMS SRPMS .RPMS* .SRPMS*
 
 SRPMS/.stamp:
 	mkdir -p SRPMS
