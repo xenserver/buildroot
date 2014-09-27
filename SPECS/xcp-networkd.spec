@@ -1,5 +1,5 @@
 Name:           xcp-networkd
-Version:        0.9.4
+Version:        0.9.5
 Release:        1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
@@ -20,8 +20,11 @@ BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  ocaml-xen-api-client-devel
+BuildRequires:  ocaml-netlink-devel
 Requires:       ethtool
 Requires:       redhat-lsb-core
+Requires:       libffi-dev
+Requires:       libnl3
 
 %description
 Simple host networking management service for the xapi toolstack.
@@ -67,6 +70,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Sat Sep 27 2014 David Scott <dave.scott@citrix.com> - 0.9.5-1
+- Update to 0.9.5 (now uses libnl)
+
 * Wed Jun 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.4-1
 - Update to 0.9.4
 - Add networkd_db CLI
