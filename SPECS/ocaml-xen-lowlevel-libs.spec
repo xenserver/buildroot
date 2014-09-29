@@ -89,13 +89,13 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 * Tue Sep 2 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.25-2
 - Reinstate xenlight in CentOS
 
-* Sun Aug 23 2014 David Scott <dave.scott@citrix.com> - 0.9.25-1
+* Sun Aug 24 2014 David Scott <dave.scott@citrix.com> - 0.9.25-1
 - Update to 0.9.25
 
-* Sun Aug 23 2014 David Scott <dave.scott@citrix.com> - 0.9.23-1
+* Sun Aug 24 2014 David Scott <dave.scott@citrix.com> - 0.9.23-1
 - Update to 0.9.23, improved configure script
 
-* Sat Aug 22 2014 David Scott <dave.scott@citrix.com> - 0.9.22-1
+* Sat Aug 23 2014 David Scott <dave.scott@citrix.com> - 0.9.22-1
 - Update to 0.9.22, only build xenlight on xen-4.4 and xen-4.5
 
 * Wed Aug 20 2014 David Scott <dave.scott@citrix.com> - 0.9.21-1
