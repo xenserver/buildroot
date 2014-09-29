@@ -4,44 +4,29 @@ DIST := .el6
 
 all: rpms
 
-clean:
-	[ ! -e srpm_output.log ] || rm srpm_output.log
-	[ ! -e rpm_output.log ] || rm rpm_output.log
-	[ ! -e deps ] || rm deps
-	rm -rf RPMS SRPMS .RPMS* .SRPMS*
-
-SRPMS/.stamp:
-	mkdir -p SRPMS
-	createrepo --quiet SRPMS
-	touch $@
-
-RPMS/.stamp:
-	mkdir -p RPMS
-	createrepo --quiet RPMS
-	touch $@
 
 # RPM build rules
 
-%.src.rpm: SRPMS/.stamp
+%.src.rpm: 
 	@echo [RPMBUILD] $@
-	@rpmbuild --define "_topdir ." --define "%dist $(DIST)" -bs $(word 2,$^) >> srpm_output.log 2>&1
+	@rpmbuild --quiet --define "_topdir ." --define "%dist $(DIST)" -bs $<
 	@echo [CREATEREPO] $@
-	@scripts/runonce_queue.sh SRPMS 30 $@ createrepo --update ./SRPMS >> srpm_output.log 2>&1
+	@flock --timeout 30 ./SRPMS createrepo --quiet --update ./SRPMS
 
-%.rpm: RPMS/.stamp
+%.rpm:
 	@echo [MOCK] $@
-	@mock --configdir=mock -r xenserver --resultdir=$(dir $@) --uniqueext=$(notdir $@) --rebuild $(word 2,$^) >> rpm_output.log 2>&1
+	@mock --configdir=mock --quiet -r xenserver --resultdir=$(dir $@) --uniqueext=$(notdir $@) --rebuild $<
 	@echo [CREATEREPO] $@
-	@scripts/runonce_queue.sh RPMS 30 $@ createrepo --update ./RPMS >> rpm_output.log 2>&1
+	@flock --timeout 30 ./RPMS createrepo --quiet --update ./RPMS
 
 
 # Deb build rules
 
 %.dsc: 
 	@echo [MAKEDEB] $@
-	@scripts/deb/makedeb.py $< >> srpm_output.log 2>&1
+	@scripts/deb/makedeb.py $<
 	@echo [UPDATEREPO] $@
-	@scripts/runonce_queue.sh SRPMS 30 $@ scripts/deb/updaterepo sources SRPMS >> srpm_output.log 2>&1
+	@flock --timeout 30 ./SRPMS scripts/deb/updaterepo sources SRPMS
 
 %.deb:
 	@echo [COWBUILDER] $@
@@ -49,9 +34,9 @@ RPMS/.stamp:
 	@touch RPMS/Packages	
 	@sudo cowbuilder --build \
 		--configfile pbuilder/pbuilderrc \
-		--buildresult RPMS $< >> rpm_output.log 2>&1
+		--buildresult RPMS $<
 	@echo [UPDATEREPO] $@
-	@scripts/runonce_queue.sh RPMS 30 $@ scripts/deb/updaterepo packages RPMS >> rpm_output.log 2>&1
+	@flock --timeout 30 ./RPMS scripts/deb/updaterepo packages RPMS
 
 
 # Dependency build rules
