@@ -93,6 +93,11 @@ make
 
 sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in > xen-api-xapi-conf
 
+# CentOS 6 is stuck on qemu-trad so needs xenops classic
+%if "%{dist}" == ".el6"
+sed -i -e "s|org.xen.xcp.xenops.xenlight|org.xen.xcp.xenops.classic|g" xen-api-xapi-conf
+%endif
+
 %install
  
 mkdir -p %{buildroot}/%{_sbindir}

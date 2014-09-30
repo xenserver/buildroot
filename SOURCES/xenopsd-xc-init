@@ -49,7 +49,7 @@ start() {
 	modprobe blktap 2>/dev/null || logger -t xenopsd-xc "Failed to modprobe blktap: vhd-based disks will not work"
 	modprobe blkback 2>/dev/null || logger -t xenopsd-xc "Failed to modprobe blkback: virtual disks will not work"
         echo -n $"Starting xenopsd-xc: "
-        start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --config /etc/xenopsd.conf --daemon true $XENOPSD_XC_OPTIONS
+        start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --config /etc/xenopsd.conf --daemon true --search-path $XCP_PATH $XENOPSD_XC_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
