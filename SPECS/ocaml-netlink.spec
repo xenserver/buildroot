@@ -1,4 +1,4 @@
-%define planex_version 0.1.0
+%define planex_version 0.2.0
 %define planex_release 1
 
 Name:           ocaml-netlink
@@ -57,6 +57,9 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 %{_libdir}/ocaml/netlink/*.cmxa
 
 %changelog
+* Wed Oct 01 2014 David Scott <dave.scott@citrix.com> - 0.2.0-1
+- Update to 0.2.0
+
 * Thu Jun 05 2014 Rob Hoes <rob.hoes@citrix.com> - 0.1.0-1
 - Initial package
 
