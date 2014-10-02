@@ -60,6 +60,7 @@ install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
 /etc/modprobe.d/bridge.conf
 %config(noreplace) /etc/xcp/network.conf
 %config(noreplace) /etc/xcp-networkd.conf
+%{_mandir}/man1/xcp-networkd.1.gz
 
 %post
 /sbin/chkconfig --add xcp-networkd
