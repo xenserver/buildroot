@@ -33,6 +33,8 @@ def looks_like_an_archive(path):
 
 def download(url, destination):
 	args = ["curl", "--silent", "--show-error", "-L", "-o", destination, url]
+	if "forge.ocamlcore.org" in url:
+		args.append("--insecure")
 	print >>sys.stderr, "Running %s" % (" ".join(args))
 	returncode = subprocess.call(args)
 	if returncode <> 0:

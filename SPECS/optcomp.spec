@@ -1,10 +1,10 @@
 Name:           optcomp
-Version:        1.4
+Version:        1.6
 Release:        1%{?dist}
 Summary:        Optional compilation with cpp-like directives
 License:        BSD3
-URL:            http://forge.ocamlcore.org/projects/optcomp/
-Source0:        https://forge.ocamlcore.org/frs/download.php/1011/%{name}-%{version}.tar.gz
+URL:            https://github.com/diml/optcomp
+Source0:        https://github.com/diml/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
@@ -30,12 +30,16 @@ mv %{buildroot}/%{_libdir}/ocaml/usr/local/bin/optcomp-o %{buildroot}/%{_bindir}
 
 
 %files
-%doc LICENSE README
-%{_libdir}/ocaml/optcomp/*
+%doc LICENSE
+%doc README.md
+%{_libdir}/ocaml/optcomp
 %{_bindir}/optcomp-r
 %{_bindir}/optcomp-o
 
 %changelog
+* Thu Oct 2 2014 Euan Harris <euan.harris@citrix.com> - 1.6-1
+- Update to 1.6 and switch to GitHub sources
+
 * Fri May 31 2013 David Scott <dave.scott@eu.citrix.com> - 1.4-1
 - Initial package
 

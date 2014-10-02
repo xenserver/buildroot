@@ -1,12 +1,14 @@
 %global debug_package %{nil}
 
 Name:           ocaml-ssl
-Version:        0.4.6
-Release:        2%{?dist}
+Version:        0.4.7
+Release:        1%{?dist}
 Summary:        Use OpenSSL from OCaml
 License:        LGPL
 URL:            http://downloads.sourceforge.net/project/savonet/ocaml-ssl
-Source0:        http://downloads.sourceforge.net/project/savonet/%{name}/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/savonet/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+BuildRequires:  autoconf
+BuildRequires:  automake
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  openssl-devel
@@ -27,6 +29,7 @@ developing applications that use %{name}.
 %setup -q
 
 %build
+./bootstrap
 ./configure
 make
 
@@ -58,6 +61,9 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/ocaml/ssl/*.mli
 
 %changelog
+* Thu Oct 2 2014 Euan Harris <euan.harris@citrix.com> - 0.4.7-1
+- Update to 0.4.7 and get source from GitHub
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.4.6-2
 - Split files correctly between base and devel packages
 
