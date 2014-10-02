@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 Name:           ocaml-zed
-Version:        1.2
-Release:        2%{?dist}
+Version:        1.3
+Release:        1%{?dist}
 Summary:        An abstract engine for text editing for OCaml
 License:        BSD3
-URL:            http://forge.ocamlcore.org/projects/zed/
-Source0:        http://forge.ocamlcore.org/frs/download.php/944/zed-%{version}.tar.gz
+URL:            https://github.com/diml/zed
+Source0:        https://github.com/diml/zed/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camomile-devel
 BuildRequires:  ocaml-findlib
@@ -40,8 +40,9 @@ mkdir -p $OCAMLFIND_DESTDIR
 make install
 
 %files
-%doc CHANGES
+%doc CHANGES.md
 %doc LICENSE
+%doc README.md
 %{_libdir}/ocaml/zed
 %exclude %{_libdir}/ocaml/zed/*.a
 %exclude %{_libdir}/ocaml/zed/*.cmxa
@@ -55,6 +56,9 @@ make install
 %{_libdir}/ocaml/zed/*.mli
 
 %changelog
+* Thu Oct 2 2014 Euan Harris <euan.harris@citrix.com> - 1.3-1
+- Update to 1.3 and switch to GitHub sources
+
 * Mon Jun  2 2014 Euan Harris <euan.harris@citrix.com> - 1.2-2
 - Split files correctly between base and devel packages
 
