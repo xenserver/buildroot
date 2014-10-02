@@ -51,6 +51,9 @@ install -m 0644 xcp-networkd-network-conf %{buildroot}/etc/xcp/network.conf
 install -m 0644 xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
 mkdir -p %{buildroot}/etc/modprobe.d
 install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
+mkdir -p %{buildroot}%{_mandir}/man1
+cp xcp-networkd.1 %{buildroot}%{_mandir}/man1/xcp-networkd.1
+gzip %{buildroot}%{_mandir}/man1/xcp-networkd.1
 
 %files
 %doc README.markdown LICENSE MAINTAINERS
