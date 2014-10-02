@@ -1,16 +1,17 @@
 DIST := .el6
 
-.PHONY: all rpms srpms
+.PHONY: all rpms srpms srpm_repo
 
-all: rpms
-
+all: rpms srpm_repo
 
 # RPM build rules
 
 %.src.rpm: 
 	@echo [RPMBUILD] $@
 	@rpmbuild --quiet --define "_topdir ." --define "%dist $(DIST)" -bs $<
-	@echo [CREATEREPO] $@
+
+srpm_repo: srpms
+	echo [CREATEREPO] SRPMS
 	@flock --timeout 30 ./SRPMS createrepo --quiet --update ./SRPMS
 
 %.rpm:
@@ -18,6 +19,7 @@ all: rpms
 	@mock --configdir=mock --quiet -r xenserver --resultdir=$(dir $@) --uniqueext=$(notdir $@) --rebuild $<
 	@echo [CREATEREPO] $@
 	@flock --timeout 30 ./RPMS createrepo --quiet --update ./RPMS
+
 
 
 # Deb build rules
@@ -30,8 +32,7 @@ all: rpms
 
 %.deb:
 	@echo [COWBUILDER] $@
-	@mkdir -p logs
-	@touch RPMS/Packages	
+	@touch RPMS/Packages
 	@sudo cowbuilder --build \
 		--configfile pbuilder/pbuilderrc \
 		--buildresult RPMS $<
