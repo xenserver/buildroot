@@ -41,7 +41,7 @@ start() {
 	umask 077
 
         echo -n $"Starting xcp-networkd: "
-        start_daemon -p "$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $XCP_NETWORKD_OPTIONS
+        start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --daemon true $XCP_NETWORKD_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile

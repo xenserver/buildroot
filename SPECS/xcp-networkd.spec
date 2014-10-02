@@ -1,5 +1,5 @@
 Name:           xcp-networkd
-Version:        0.9.4
+Version:        0.9.5
 Release:        1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
@@ -20,8 +20,12 @@ BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  ocaml-xen-api-client-devel
+BuildRequires:  libffi-devel
+BuildRequires:  ocaml-netlink-devel
 Requires:       ethtool
 Requires:       redhat-lsb-core
+Requires:       libffi-devel
+Requires:       libnl3
 
 %description
 Simple host networking management service for the xapi toolstack.
@@ -47,6 +51,9 @@ install -m 0644 xcp-networkd-network-conf %{buildroot}/etc/xcp/network.conf
 install -m 0644 xcp-networkd-conf %{buildroot}/etc/xcp-networkd.conf
 mkdir -p %{buildroot}/etc/modprobe.d
 install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
+mkdir -p %{buildroot}%{_mandir}/man1
+cp xcp-networkd.1 %{buildroot}%{_mandir}/man1/xcp-networkd.1
+gzip %{buildroot}%{_mandir}/man1/xcp-networkd.1
 
 %files
 %doc README.markdown LICENSE MAINTAINERS
@@ -56,6 +63,7 @@ install -m 0644 xcp-networkd-bridge-conf %{buildroot}/etc/modprobe.d/bridge.conf
 /etc/modprobe.d/bridge.conf
 %config(noreplace) /etc/xcp/network.conf
 %config(noreplace) /etc/xcp-networkd.conf
+%{_mandir}/man1/xcp-networkd.1.gz
 
 %post
 /sbin/chkconfig --add xcp-networkd
@@ -67,6 +75,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Sat Sep 27 2014 David Scott <dave.scott@citrix.com> - 0.9.5-1
+- Update to 0.9.5 (now uses libnl)
+
 * Wed Jun 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.4-1
 - Update to 0.9.4
 - Add networkd_db CLI

@@ -1,6 +1,6 @@
 Name:           xenopsd
-Version:        0.9.43
-Release:        4%{?dist}
+Version:        0.9.44
+Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -191,6 +191,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Mon Sep 22 2014 David Scott <dave.scott@citrix.com> - 0.9.44-1
+- Update to 0.9.44
+
 * Mon Sep 8 2014 David Scott <dave.scott@citrix.com> - 0.9.43-4
 - Add a search-path to the xenopsd.conf
 
