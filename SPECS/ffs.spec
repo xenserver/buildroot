@@ -1,5 +1,5 @@
 Name:           ffs
-Version:        0.9.24
+Version:        0.9.25
 Release:        1%{?dist}
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
@@ -14,7 +14,7 @@ BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-re-devel
-BuildRequires:  ocaml-libvhd-devel
+BuildRequires:  ocaml-vhd-devel
 BuildRequires:  ocaml-tapctl-devel
 Requires:       nfs-utils
 Requires:       redhat-lsb-core
@@ -32,7 +32,8 @@ make
 
 %install
 mkdir -p %{buildroot}/%{_sbindir}
-install dist/build/ffs/ffs %{buildroot}/%{_sbindir}/ffs
+mkdir -p %{buildroot}/%{_mandir}/man1
+make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir} MANDIR=%{_mandir}
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
 
@@ -40,6 +41,7 @@ install -m 0755 ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
 %files
 %doc README.md LICENSE MAINTAINERS
 %{_sbindir}/ffs
+%{_mandir}/man1/ffs.1.gz
 %{_sysconfdir}/init.d/ffs
 
 %post
@@ -52,6 +54,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Thu Oct 2 2014 David Scott <dave.scott@citrix.com> - 0.9.25-1
+- Update to 0.9.25
+
 * Thu Jan 16 2014 Euan Harris <euan.harris@citrix.com> - 0.9.24-1
 - Update to 0.9.24, with VDI.clone fix
 
