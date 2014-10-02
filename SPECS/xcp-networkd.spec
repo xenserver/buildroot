@@ -20,11 +20,11 @@ BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  ocaml-xen-api-client-devel
-BuildRequires:  libffi-dev
+BuildRequires:  libffi-devel
 BuildRequires:  ocaml-netlink-devel
 Requires:       ethtool
 Requires:       redhat-lsb-core
-Requires:       libffi-dev
+Requires:       libffi-devel
 Requires:       libnl3
 
 %description
