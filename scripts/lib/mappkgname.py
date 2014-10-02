@@ -129,6 +129,8 @@ MAPPING = {
     "sg3_utils": ["sg3-utils"],
     "python-argparse": ["libpython2.7-stdlib"],
     "util-linux-ng": ["uuid-runtime"],
+    "autoconf": ["autoconf"],
+    "automake": ["automake"],
 }
 
 SECONDARY_MAPPING = {
