@@ -29,7 +29,6 @@ BuildRequires: omake
 BuildRequires: forkexecd-devel
 BuildRequires: ocaml-cdrom-devel
 BuildRequires: ocaml-fd-send-recv-devel
-#BuildRequires: ocaml-libvhd-devel
 BuildRequires: ocaml-nbd-devel
 BuildRequires: ocaml-oclock-devel
 BuildRequires: ocaml-ounit-devel
