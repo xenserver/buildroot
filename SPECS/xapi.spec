@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.52
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -63,13 +63,6 @@ XCP toolstack.
 %description
 This package contains the xapi toolstack.
 
-%package xe
-Summary: The xapi toolstack CLI
-Requires: bash-completion
-
-%description xe
-The command-line interface for controlling XCP hosts.
-
 %package python-devel
 Summary: XenAPI client support in python
 Requires: python
@@ -107,11 +100,6 @@ mkdir -p %{buildroot}/etc/xapi
 install -m 0644 xen-api-xapi-conf %{buildroot}/etc/xapi.conf
 install -m 0644 xen-api-db-conf %{buildroot}/etc/xapi/db.conf
 
-mkdir -p %{buildroot}/%{_bindir}
-install -m 0755 ocaml/xe-cli/xe.opt %{buildroot}/%{_bindir}/xe
-mkdir -p %{buildroot}/etc/bash_completion.d
-install -m 0755 ocaml/xe-cli/bash-completion %{buildroot}/etc/bash_completion.d/xe
-
 mkdir -p %{buildroot}/var/lib/xapi
 mkdir -p %{buildroot}/etc/xapi/hook-scripts
 
@@ -147,10 +135,6 @@ fi
 /usr/share/xapi/packages/iso
 /etc/pam.d/xapi
 
-%files xe
-%{_bindir}/xe
-/etc/bash_completion.d/xe
-
 %files python-devel
 %{python_sitelib}/XenAPI.py
 %{python_sitelib}/XenAPI.pyo
@@ -161,6 +145,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Fri Oct 3 2014 David Scott <dave.scott@citrix.com> - 1.9.52-5
+- Remove the xe cli (now in a separate package)
+
 * Thu Oct 2 2014 David Scott <dave.scott@citrix.com> - 1.9.52-4
 - Remove ocaml-libvhd dependency
 

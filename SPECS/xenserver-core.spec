@@ -8,7 +8,7 @@ Source0:        xenserver-readme
 Requires:       xenserver-install-wizard
 Requires:       xapi
 Requires:       xapi-python-devel
-Requires:       xapi-xe
+Requires:       xe
 Requires:       xe-create-templates
 Requires:       xenopsd-libvirt
 Requires:       xenopsd-simulator
