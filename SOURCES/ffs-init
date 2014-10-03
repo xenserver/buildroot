@@ -51,7 +51,7 @@ start() {
 	umask 077
 
         echo -n $"Starting ffs: "
-        start_daemon -p "$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $FFS_OPTIONS
+        start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --daemon true $FFS_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile

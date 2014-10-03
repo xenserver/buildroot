@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.52
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -29,7 +29,6 @@ BuildRequires: omake
 BuildRequires: forkexecd-devel
 BuildRequires: ocaml-cdrom-devel
 BuildRequires: ocaml-fd-send-recv-devel
-BuildRequires: ocaml-libvhd-devel
 BuildRequires: ocaml-nbd-devel
 BuildRequires: ocaml-oclock-devel
 BuildRequires: ocaml-ounit-devel
@@ -162,6 +161,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Thu Oct 2 2014 David Scott <dave.scott@citrix.com> - 1.9.52-4
+- Remove ocaml-libvhd dependency
+
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 1.9.52-3
 - Remove xen-missing-headers dependency
 
