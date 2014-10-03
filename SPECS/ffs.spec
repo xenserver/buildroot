@@ -36,7 +36,8 @@ mkdir -p %{buildroot}/%{_mandir}/man1
 make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir} MANDIR=%{_mandir}
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
-
+cp ffs.1 %{buildroot}%{_mandir}/man1/ffs.1
+gzip %{buildroot}%{_mandir}/man1/ffs.1
 
 %files
 %doc README.md LICENSE MAINTAINERS
