@@ -37,7 +37,7 @@ make
 mkdir -p %{buildroot}/%{_bindir}
 make install BINDIR=%{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/etc/bash-completion.d
-cp src/bash-completion/xe %{buildroot}/etc/bash-completion.d
+cp src/bash-completion %{buildroot}/etc/bash-completion.d/xe
 
 %files
 %{_bindir}/xe
