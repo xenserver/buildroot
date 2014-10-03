@@ -3,14 +3,17 @@
 Summary: XCP storage managers
 Name:    xcp-sm
 Version: 0.9.7
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPL
 URL:  https://github.com/xapi-project/sm
-Source0: https://github.com/BobBall/sm/archive/%{version}/sm-%{version}.tar.gz
+Source0: https://github.com/xapi-project/sm/archive/creedence-alpha-4/sm-%{version}.tar.gz
 Source1: xcp-mpath-scsidev-rules
 Source2: xcp-mpath-scsidev-script
-Patch0: sm-path-fix.patch
+Patch0: xcp-sm-scsi-id-path.patch
 Patch1: xcp-sm-pylint-fix.patch
+Patch2: xcp-sm-path-fix.patch
+Patch3: xcp-sm-pidof-path.patch
+Patch4: xcp-sm-initiator-name.patch
 BuildRequires: python-devel
 BuildRequires: swig
 BuildRequires: xen-devel
@@ -23,20 +26,20 @@ Requires: xen-runtime
 This package contains storage backends used in XCP
 
 %prep
-%setup -q -n sm-%{version}
+%setup -q -n sm-creedence-alpha-4
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 cp %{SOURCE1} xcp-mpath-scsidev-rules
 cp %{SOURCE2} xcp-mpath-scsidev-script
 
 %build
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/SR.py
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/blktap2.py
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/vhdutil.py
 DESTDIR=$RPM_BUILD_ROOT make
 
 %install
-make PLUGIN_SCRIPT_DEST=/usr/lib/xapi/plugins/ SM_DEST=/usr/lib/xapi/sm/ DESTDIR=$RPM_BUILD_ROOT install
+make PLUGIN_SCRIPT_DEST=/usr/lib/xapi/plugins/ SM_DEST=/usr/lib/xapi/sm/ BLKTAP_ROOT=%{_libdir}/blktap INVENTORY=/etc/xcp/inventory DESTDIR=$RPM_BUILD_ROOT install
 mkdir -p %{buildroot}/etc/udev/rules.d
 install -m 0644 xcp-mpath-scsidev-rules %{buildroot}/etc/udev/rules.d/55-xs-mpath-scsidev.rules
 mkdir -p %{buildroot}/etc/udev/scripts
@@ -45,8 +48,6 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add mpathroot
-[ ! -x /sbin/chkconfig ] || chkconfig --add sm-multipath
-service sm-multipath start
 
 [ -f /etc/lvm/lvm.conf.orig ] || cp /etc/lvm/lvm.conf /etc/lvm/lvm.conf.orig || exit $?
 [ -d /etc/lvm/master ] || mkdir /etc/lvm/master || exit $?
@@ -64,7 +65,6 @@ fi
 update-alternatives --install /etc/multipath.conf multipath.conf /etc/multipath.xenserver/multipath.conf 90
 
 %preun
-[ ! -x /sbin/chkconfig ] || chkconfig --del sm-multipath
 #only remove in case of erase (but not at upgrade)
 if [ $1 -eq 0 ] ; then
 	update-alternatives --remove multipath.conf /etc/multipath.xenserver/multipath.conf
@@ -79,7 +79,6 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot
-/etc/rc.d/init.d/sm-multipath
 /etc/udev/rules.d/55-xs-mpath-scsidev.rules
 /etc/udev/scripts/xs-mpath-scsidev.sh
 /usr/lib/xapi/plugins/coalesce-leaf
@@ -90,6 +89,7 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /usr/lib/xapi/plugins/testing-hooks
 /usr/lib/xapi/plugins/vss_control
 /usr/lib/xapi/plugins/intellicache-clean
+/usr/lib/xapi/plugins/trim
 /etc/xensource/master.d/02-vhdcleanup
 /opt/xensource/bin/blktap2
 /opt/xensource/bin/tapdisk-cache-stats
@@ -121,17 +121,6 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /usr/lib/xapi/sm/ISOSR.py
 /usr/lib/xapi/sm/ISOSR.pyc
 /usr/lib/xapi/sm/ISOSR.pyo
-/usr/lib/xapi/sm/OCFSSR.py
-/usr/lib/xapi/sm/OCFSSR.pyc
-/usr/lib/xapi/sm/OCFSSR.pyo
-/usr/lib/xapi/sm/OCFSoISCSISR
-/usr/lib/xapi/sm/OCFSoISCSISR.py
-/usr/lib/xapi/sm/OCFSoISCSISR.pyc
-/usr/lib/xapi/sm/OCFSoISCSISR.pyo
-/usr/lib/xapi/sm/OCFSoHBASR
-/usr/lib/xapi/sm/OCFSoHBASR.py
-/usr/lib/xapi/sm/OCFSoHBASR.pyc
-/usr/lib/xapi/sm/OCFSoHBASR.pyo
 /usr/lib/xapi/sm/LUNperVDI.py
 /usr/lib/xapi/sm/LUNperVDI.pyc
 /usr/lib/xapi/sm/LUNperVDI.pyo
@@ -167,6 +156,9 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /usr/lib/xapi/sm/blktap2.py
 /usr/lib/xapi/sm/blktap2.pyc
 /usr/lib/xapi/sm/blktap2.pyo
+/usr/lib/xapi/sm/constants.py
+/usr/lib/xapi/sm/constants.pyc
+/usr/lib/xapi/sm/constants.pyo
 /usr/lib/xapi/sm/cleanup.py
 /usr/lib/xapi/sm/cleanup.pyc
 /usr/lib/xapi/sm/cleanup.pyo
@@ -248,13 +240,13 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /usr/lib/xapi/sm/scsi_host_rescan.py
 /usr/lib/xapi/sm/scsi_host_rescan.pyc
 /usr/lib/xapi/sm/scsi_host_rescan.pyo
-/opt/xensource/sm/snapwatchd/snapwatchd
-/opt/xensource/sm/snapwatchd/xslib.py
-/opt/xensource/sm/snapwatchd/xslib.pyc
-/opt/xensource/sm/snapwatchd/xslib.pyo
-/opt/xensource/sm/snapwatchd/snapdebug.py
-/opt/xensource/sm/snapwatchd/snapdebug.pyc
-/opt/xensource/sm/snapwatchd/snapdebug.pyo
+/usr/lib/xapi/sm/snapwatchd/snapwatchd
+/usr/lib/xapi/sm/snapwatchd/xslib.py
+/usr/lib/xapi/sm/snapwatchd/xslib.pyc
+/usr/lib/xapi/sm/snapwatchd/xslib.pyo
+/usr/lib/xapi/sm/snapwatchd/snapdebug.py
+/usr/lib/xapi/sm/snapwatchd/snapdebug.pyc
+/usr/lib/xapi/sm/snapwatchd/snapdebug.pyo
 /usr/lib/xapi/sm/sysdevice.py
 /usr/lib/xapi/sm/sysdevice.pyc
 /usr/lib/xapi/sm/sysdevice.pyo
@@ -274,15 +266,14 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /usr/lib/xapi/sm/vhdutil.py
 /usr/lib/xapi/sm/vhdutil.pyc
 /usr/lib/xapi/sm/vhdutil.pyo
+/usr/lib/xapi/sm/trim_util.py
+/usr/lib/xapi/sm/trim_util.pyc
+/usr/lib/xapi/sm/trim_util.pyo
 /usr/lib/xapi/sm/vss_control
 /usr/lib/xapi/sm/xs_errors.py
 /usr/lib/xapi/sm/xs_errors.pyc
 /usr/lib/xapi/sm/xs_errors.pyo
-/usr/lib/xapi/sm/wwid_conf.py
-/usr/lib/xapi/sm/wwid_conf.pyc
-/usr/lib/xapi/sm/wwid_conf.pyo
 /sbin/mpathutil
-%config /etc/udev/rules.d/40-multipath.rules
 %config /etc/multipath.xenserver/multipath.conf
 
 
@@ -295,15 +286,19 @@ This package adds a new rawhba SR type. This SR type allows utilization of
 Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 
 %files rawhba
-/usr/lib/xapi/sm/RawHBASR
+%exclude /usr/lib/xapi/sm/RawHBASR
 /usr/lib/xapi/sm/RawHBASR.py
 /usr/lib/xapi/sm/RawHBASR.pyc
 /usr/lib/xapi/sm/RawHBASR.pyo
 /usr/lib/xapi/sm/B_util.py
 /usr/lib/xapi/sm/B_util.pyc
 /usr/lib/xapi/sm/B_util.pyo
+/usr/lib/xapi/sm/enable-borehamwood
 
 %changelog
+* Tue Sep 30 2014 Bob Ball <bob.ball@citrix.com> - 0.9.7-4
+- Moved patches to spec file rather than custom repository
+
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-3
 - Remove xen-missing-headers dependency
 
