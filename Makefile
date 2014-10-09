@@ -4,6 +4,11 @@ DIST := .el6
 
 all: rpms
 
+.PHONY: clean
+clean:
+	rm -rf deps RPMS SRPMS
+
+
 
 ############################################################################
 # RPM build rules
