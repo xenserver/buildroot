@@ -34,7 +34,7 @@ srpm_repo: srpms
 # to find and install it.
 %.rpm:
 	@echo [MOCK] $@
-	@mock --configdir=mock --quiet -r xenserver \
+	@mock --configdir=mock --quiet \
 		--resultdir=$(dir $@) --uniqueext=$(notdir $@) --rebuild $<
 	@echo [CREATEREPO] $@
 	@flock --timeout 30 ./RPMS createrepo --quiet --update ./RPMS
