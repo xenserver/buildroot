@@ -13,3 +13,10 @@ ln -fs /etc/mock/default.cfg mock/
 ln -fs /etc/mock/site-defaults.cfg mock/
 ln -fs /etc/mock/logging.ini mock/
 echo " done"
+
+echo -n "Initializing repository..."
+mkdir -p RPMS SRPMS
+createrepo --quiet RPMS
+createrepo --quiet SRPMS
+echo " done"
+
