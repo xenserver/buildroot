@@ -2,7 +2,7 @@ DIST := .el6
 
 .PHONY: all rpms srpms srpm_repo
 
-all: rpms srpm_repo
+all: rpms
 
 
 ############################################################################
