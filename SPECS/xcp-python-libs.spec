@@ -3,7 +3,7 @@ Name: xcp-python-libs
 Version: 1.9.0
 Release: 1%{?dist}
 URL: https://github.com/xenserver/python-libs
-Source: https://github.com/xenserver/python-libs/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0: https://github.com/xenserver/python-libs/archive/v%{version}/%{name}-%{version}.tar.gz
 License: GPL
 BuildArch: noarch
 

@@ -4,7 +4,7 @@ Name: libnl3
 Version: 3.2.22
 Release: 1%{?dist}
 URL: http://www.infradead.org/~tgr/libnl/
-Source: http://www.infradead.org/~tgr/libnl/files/libnl-%{version}.tar.gz
+Source0: http://www.infradead.org/~tgr/libnl/files/libnl-%{version}.tar.gz
 Source1: http://www.infradead.org/~tgr/libnl/files/libnl-doc-%{version}.tar.gz
 BuildRequires: bison
 BuildRequires: flex
