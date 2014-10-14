@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-inotify
-Version:        1.3
+Version:        2.0
 Release:        1%{?dist}
 Summary:        Inotify bindings for OCaml.
 
@@ -97,5 +97,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/inotify/*.mli
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 2.0-1
+- Update to 2.0
+
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 1.3-1
 - Initial package for Fedora 20.

@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-core
-Version:        109.55.02
+Version:        111.28.00
 Release:        1%{?dist}
 Summary:        System-independent part of Jane Street's Core.
 
@@ -117,5 +117,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/core/*.mli
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.28.00-1
+- Update to 111.28.00
+
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.55.02-1
 - Initial package for Fedora 20.

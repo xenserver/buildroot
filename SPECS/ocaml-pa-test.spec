@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-pa-test
-Version:        109.53.02
+Version:        111.08.00
 Release:        1%{?dist}
 Summary:        Jane Street's pa_test
 
@@ -97,5 +97,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/pa_test/*.mli
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.08.00-1
+- Update to 111.08.00
+
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.53.02-1
 - Initial package for Fedora 20.

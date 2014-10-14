@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-comparelib
-Version:        109.27.02
+Version:        109.60.00
 Release:        1%{?dist}
 Summary:        Syntax extension that derives comparison functions from type representations.
 
@@ -94,5 +94,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 109.60.00-1
+- Update to 109.60.00
+
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.27.02-1
 - Initial package for Fedora 20

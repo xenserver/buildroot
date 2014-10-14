@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-typerep
-Version:        109.55.02
+Version:        111.17.00
 Release:        1%{?dist}
 Summary:        Runtime types for OCaml.
 
@@ -113,5 +113,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/typerep_generics_sexprep/*.mli
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.17.00-1
+- Update to 111.17.00
+
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.55.02-1
 - Initial package for Fedora 20.

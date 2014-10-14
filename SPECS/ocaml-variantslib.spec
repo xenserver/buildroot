@@ -9,7 +9,7 @@ Summary:        OCaml variants as first class values
 Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/janestreet/variantslib
-Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/variantslib-%{version}.tar.gz
+Source0:        https://ocaml.janestreet.com/ocaml-core/109.15.00/individual/variantslib-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 

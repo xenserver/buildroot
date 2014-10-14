@@ -2,7 +2,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-bin-prot
-Version:        109.53.02
+Version:        111.03.00
 Release:        1%{?dist}
 Summary:        Read and write OCaml values in a type-safe binary protocol
 
@@ -108,6 +108,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.03.00-1
+- Update to 111.03.00
+
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.53.02-1
 - Update to version 109.53.02.
 

@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-textutils
-Version:        109.53.02
+Version:        112.01.00
 Release:        1%{?dist}
 Summary:        Syntax extension for inserting the current location.
 
@@ -100,5 +100,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 112.01.00-1
+- Update to 112.01.00
+
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.35.02-1
 - Initial package for Fedora 20.

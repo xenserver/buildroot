@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-async
-Version:        109.53.02
+Version:        111.25.00
 Release:        1%{?dist}
 Summary:        Jane Street Capital's asynchronous execution library (core)
 
@@ -93,5 +93,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/async/*.ml
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.25.00-1
+- Update to 111.25.00
+
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.53.02-1
 - Initial package for Fedora 20.
