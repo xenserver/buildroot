@@ -21,6 +21,7 @@ BuildRequires:  ocaml-async-devel
 BuildRequires:  ocaml-core-devel
 BuildRequires:  ocaml-pa-ounit-devel
 BuildRequires:  ocaml-sexplib-devel
+BuildRequires:  ocaml-enumerate-devel
 
 %define _use_internal_dependency_generator 0
 %define __find_requires /usr/lib/rpm/ocaml-find-requires.sh

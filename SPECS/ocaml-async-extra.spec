@@ -17,7 +17,6 @@ BuildRequires:  ocaml >= 4.00.1
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-findlib-devel
-BuildRequires:  ocaml-async-core-devel
 BuildRequires:  ocaml-async-unix-devel
 BuildRequires:  ocaml-bin-prot-devel
 BuildRequires:  ocaml-core-devel
@@ -27,6 +26,9 @@ BuildRequires:  ocaml-pa-ounit-devel
 BuildRequires:  ocaml-pa-pipebang-devel
 BuildRequires:  ocaml-pa-test-devel
 BuildRequires:  ocaml-sexplib-devel
+BuildRequires:  ocaml-custom-printf-devel
+BuildRequires:  ocaml-comparelib-devel
+BuildRequires:  ocaml-enumerate-devel
 
 %define _use_internal_dependency_generator 0
 %define __find_requires /usr/lib/rpm/ocaml-find-requires.sh

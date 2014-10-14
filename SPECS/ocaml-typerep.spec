@@ -79,18 +79,16 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE.txt  THIRD-PARTY.txt INRIA-DISCLAIMER.txt
 %{_libdir}/ocaml/
 %if %opt
-%exclude %{_libdir}/ocaml/typerep_kernel/*.a
-%exclude %{_libdir}/ocaml/typerep_kernel/*.cmxa
-%exclude %{_libdir}/ocaml/typerep_core/*.a
-%exclude %{_libdir}/ocaml/typerep_core/*.cmxa
-%exclude %{_libdir}/ocaml/typerep_kernel/*.a
+%exclude %{_libdir}/ocaml/typerep_lib/*.a
+%exclude %{_libdir}/ocaml/typerep_lib/*.cmxa
+%exclude %{_libdir}/ocaml/typerep_extended/*.a
+%exclude %{_libdir}/ocaml/typerep_extended/*.cmxa
 %exclude %{_libdir}/ocaml/typerep_generics_sexprep/*.cmxa
 %endif
-%exclude %{_libdir}/ocaml/typerep_kernel/*.ml
-%exclude %{_libdir}/ocaml/typerep_kernel/*.mli
-%exclude %{_libdir}/ocaml/typerep_core/*.ml
-%exclude %{_libdir}/ocaml/typerep_core/*.mli
-%exclude %{_libdir}/ocaml/typerep_kernel/*.ml
+%exclude %{_libdir}/ocaml/typerep_lib/*.ml
+%exclude %{_libdir}/ocaml/typerep_lib/*.mli
+%exclude %{_libdir}/ocaml/typerep_extended/*.ml
+%exclude %{_libdir}/ocaml/typerep_extended/*.mli
 %exclude %{_libdir}/ocaml/typerep_generics_sexprep/*.mli
 
 
@@ -98,18 +96,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc LICENSE.txt  THIRD-PARTY.txt INRIA-DISCLAIMER.txt
 %if %opt
-%{_libdir}/ocaml/typerep_kernel/*.a
-%{_libdir}/ocaml/typerep_kernel/*.cmxa
-%{_libdir}/ocaml/typerep_core/*.a
-%{_libdir}/ocaml/typerep_core/*.cmxa
-%{_libdir}/ocaml/typerep_kernel/*.a
+%{_libdir}/ocaml/typerep_lib/*.a
+%{_libdir}/ocaml/typerep_lib/*.cmxa
+%{_libdir}/ocaml/typerep_extended/*.a
+%{_libdir}/ocaml/typerep_extended/*.cmxa
 %{_libdir}/ocaml/typerep_generics_sexprep/*.cmxa
 %endif
-%{_libdir}/ocaml/typerep_kernel/*.ml
-%{_libdir}/ocaml/typerep_kernel/*.mli
-%{_libdir}/ocaml/typerep_core/*.ml
-%{_libdir}/ocaml/typerep_core/*.mli
-%{_libdir}/ocaml/typerep_kernel/*.ml
+%{_libdir}/ocaml/typerep_lib/*.ml
+%{_libdir}/ocaml/typerep_lib/*.mli
+%{_libdir}/ocaml/typerep_extended/*.ml
+%{_libdir}/ocaml/typerep_extended/*.mli
 %{_libdir}/ocaml/typerep_generics_sexprep/*.mli
 
 %changelog

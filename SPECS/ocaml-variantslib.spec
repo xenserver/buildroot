@@ -17,6 +17,7 @@ BuildRequires:  ocaml >= 4.00.1
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-type-conv >= 109.53.02
+BuildRequires:  ocaml-ocamldoc
 
 %define _use_internal_dependency_generator 0
 %define __find_requires /usr/lib/rpm/ocaml-find-requires.sh

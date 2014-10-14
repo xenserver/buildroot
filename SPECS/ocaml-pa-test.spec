@@ -18,7 +18,6 @@ BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-type-conv
-BuildRequires:  ocaml-core-kernel-devel
 
 %define _use_internal_dependency_generator 0
 %define __find_requires /usr/lib/rpm/ocaml-find-requires.sh
@@ -82,7 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_libdir}/ocaml/pa_test/*.a
 %exclude %{_libdir}/ocaml/pa_test/*.cmxa
 %endif
-%exclude %{_libdir}/ocaml/pa_test/*.ml
 %exclude %{_libdir}/ocaml/pa_test/*.mli
 
 
@@ -93,7 +91,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/pa_test/*.a
 %{_libdir}/ocaml/pa_test/*.cmxa
 %endif
-%{_libdir}/ocaml/pa_test/*.ml
 %{_libdir}/ocaml/pa_test/*.mli
 
 %changelog

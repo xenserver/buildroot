@@ -18,6 +18,13 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-async-devel
 BuildRequires:  ocaml-sexplib-devel
+BuildRequires:  ocaml-findlib-devel
+BuildRequires:  ocaml-comparelib-devel
+BuildRequires:  ocaml-enumerate-devel
+BuildRequires:  ocaml-herelib-devel
+BuildRequires:  ocaml-custom-printf-devel
+BuildRequires:  ocaml-async-find-devel
+BuildRequires:  ocaml-inotify-devel
 
 %define _use_internal_dependency_generator 0
 %define __find_requires /usr/lib/rpm/ocaml-find-requires.sh

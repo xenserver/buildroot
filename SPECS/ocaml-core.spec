@@ -25,12 +25,12 @@ BuildRequires:  ocaml-pa-bench-devel
 BuildRequires:  ocaml-pa-ounit-devel
 BuildRequires:  ocaml-pa-pipebang-devel
 BuildRequires:  ocaml-pa-test-devel
+BuildRequires:  ocaml-enumerate-devel
 BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-typerep-devel
 BuildRequires:  ocaml-variantslib-devel
 BuildRequires:  ocaml-compiler-libs
 BuildRequires:  ocaml-core-kernel-devel
-BuildRequires:  ocaml-res-devel
 BuildRequires:  chrpath
 
 %define _use_internal_dependency_generator 0

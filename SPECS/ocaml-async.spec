@@ -16,10 +16,14 @@ ExcludeArch:    sparc64 s390 s390x
 BuildRequires:  ocaml >= 4.00.1
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-ocamldoc
-BuildRequires:  ocaml-async-core-devel
 BuildRequires:  ocaml-async-unix-devel
 BuildRequires:  ocaml-async-extra-devel
 BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-findlib-devel
+BuildRequires:  ocaml-comparelib-devel
+BuildRequires:  ocaml-enumerate-devel
+BuildRequires:  ocaml-herelib-devel
+BuildRequires:  ocaml-custom-printf-devel
 
 %define _use_internal_dependency_generator 0
 %define __find_requires /usr/lib/rpm/ocaml-find-requires.sh

@@ -8,14 +8,15 @@ Summary:        Inotify bindings for OCaml.
 
 Group:          Development/Libraries
 License:        Apache Software License 2.0
-URL:            https://bitbucket.org/seanmcl/ocaml-inotify
-Source0:        https://bitbucket.org/seanmcl/ocaml-inotify/get/%{version}.tar.gz
+URL:            https://github.com/whitequark/ocaml-inotify
+Source0:        https://github.com/whitequark/ocaml-inotify/archive/%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 4.00.1
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-findlib-devel
 BuildRequires:  chrpath
 
 
@@ -39,7 +40,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q -n seanmcl-ocaml-inotify-97ffca4c739e
+%setup -q -n %{name}-%{version}
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
@@ -76,7 +77,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc LICENSE
+%doc LICENSE.txt
+%doc README.md
 %{_libdir}/ocaml/inotify
 %if %opt
 %exclude %{_libdir}/ocaml/inotify/*.a
@@ -85,11 +87,11 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_libdir}/ocaml/inotify/*.mli
 %{_libdir}/ocaml/stublibs/*.so
 %{_libdir}/ocaml/stublibs/*.so.owner
-%{_bindir}/test-inotify
 
 %files devel
 %defattr(-,root,root,-)
-%doc LICENSE
+%doc LICENSE.txt
+%doc README.md
 %if %opt
 %{_libdir}/ocaml/inotify/*.a
 %{_libdir}/ocaml/inotify/*.cmxa

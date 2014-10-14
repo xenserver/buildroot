@@ -1,15 +1,15 @@
 %define opt %(test -x %{_bindir}/ocamlopt && echo 1 || echo 0)
 %define debug_package %{nil}
 
-Name:           ocaml-async-core
-Version:        111.25.00
+Name:           ocaml-async-kernel
+Version:        111.28.00
 Release:        1%{?dist}
-Summary:        Jane Street Capital's asynchronous execution library (core)
+Summary:        Monad concurrency library
 
 Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/janestreet/async_kernel
-Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/async_core-%{version}.tar.gz
+Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/async_kernel-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
@@ -24,6 +24,8 @@ BuildRequires:  ocaml-pa-ounit-devel
 BuildRequires:  ocaml-pa-test-devel
 BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-herelib-devel
+BuildRequires:  ocaml-comparelib-devel
+BuildRequires:  ocaml-enumerate-devel
 
 %define _use_internal_dependency_generator 0
 %define __find_requires /usr/lib/rpm/ocaml-find-requires.sh
@@ -31,7 +33,10 @@ BuildRequires:  ocaml-herelib-devel
 
 
 %description
-Jane Street Capital's asynchronous execution library (core).
+Part of Jane Street’s Core library
+The Core suite of libraries is an industrial strength alternative to
+OCaml's standard library that was developed by Jane Street, the
+largest industrial user of OCaml.
 
 %package        devel
 Summary:        Development files for %{name}
@@ -45,7 +50,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q -n async_core-%{version}
+%setup -q -n async_kernel-%{version}
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
@@ -80,27 +85,24 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc LICENSE.txt THIRD-PARTY.txt INRIA-DISCLAIMER.txt
-%{_libdir}/ocaml/async_core
+%{_libdir}/ocaml/async_kernel
 %if %opt
-%exclude %{_libdir}/ocaml/async_core/*.a
-%exclude %{_libdir}/ocaml/async_core/*.cmxa
+%exclude %{_libdir}/ocaml/async_kernel/*.a
+%exclude %{_libdir}/ocaml/async_kernel/*.cmxa
 %endif
-%exclude %{_libdir}/ocaml/async_core/*.ml
-%exclude %{_libdir}/ocaml/async_core/*.mli
+%exclude %{_libdir}/ocaml/async_kernel/*.ml
+%exclude %{_libdir}/ocaml/async_kernel/*.mli
 
 %files devel
 %defattr(-,root,root,-)
 %doc LICENSE.txt THIRD-PARTY.txt INRIA-DISCLAIMER.txt
 %if %opt
-%{_libdir}/ocaml/async_core/*.a
-%{_libdir}/ocaml/async_core/*.cmxa
+%{_libdir}/ocaml/async_kernel/*.a
+%{_libdir}/ocaml/async_kernel/*.cmxa
 %endif
-%{_libdir}/ocaml/async_core/*.ml
-%{_libdir}/ocaml/async_core/*.mli
+%{_libdir}/ocaml/async_kernel/*.ml
+%{_libdir}/ocaml/async_kernel/*.mli
 
 %changelog
-* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.25.00-1
-- Update to 111.25.00
-
-* Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.55.02-1
-- Initial package for Fedora 20.
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.28.00-1
+- Initial package
