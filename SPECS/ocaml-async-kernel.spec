@@ -42,7 +42,15 @@ largest industrial user of OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
-
+Requires:  ocaml-bin-prot-devel
+Requires:  ocaml-core-devel
+Requires:  ocaml-fieldslib-devel
+Requires:  ocaml-pa-ounit-devel
+Requires:  ocaml-pa-test-devel
+Requires:  ocaml-sexplib-devel
+Requires:  ocaml-herelib-devel
+Requires:  ocaml-comparelib-devel
+Requires:  ocaml-enumerate-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

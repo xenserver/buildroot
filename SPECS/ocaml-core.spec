@@ -50,7 +50,20 @@ available, such as in Javascript.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
-
+Requires:  ocaml-bin-prot-devel
+Requires:  ocaml-comparelib-devel
+Requires:  ocaml-fieldslib-devel
+Requires:  ocaml-herelib-devel
+Requires:  ocaml-pa-bench-devel
+Requires:  ocaml-pa-ounit-devel
+Requires:  ocaml-pa-pipebang-devel
+Requires:  ocaml-pa-test-devel
+Requires:  ocaml-enumerate-devel
+Requires:  ocaml-sexplib-devel
+Requires:  ocaml-typerep-devel
+Requires:  ocaml-variantslib-devel
+Requires:  ocaml-compiler-libs
+Requires:  ocaml-core-kernel-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

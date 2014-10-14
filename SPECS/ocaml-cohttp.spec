@@ -2,7 +2,7 @@
 
 Name:           ocaml-cohttp
 Version:        0.11.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        An HTTP library for OCaml
 License:        LGPL
 URL:            https://github.com/mirage/ocaml-cohttp
@@ -18,8 +18,7 @@ BuildRequires:  ocaml-ssl-devel
 BuildRequires:  ocaml-uri-devel
 BuildRequires:  ocaml-stringext-devel
 BuildRequires:  ocaml-conduit-devel
-BuildRequires:  ocaml-fieldslib-devel
-BuildRequires:  ocaml-sexplib-devel
+BuildRequires:  ocaml-async-kernel-devel
 
 %description
 An HTTP library for OCaml.
@@ -35,6 +34,7 @@ Requires:       ocaml-stringext-devel%{?_isa}
 Requires:       ocaml-conduit-devel%{?_isa}
 Requires:       ocaml-fieldslib-devel%{?_isa}
 Requires:       ocaml-sexplib-devel%{?_isa}
+Requires: ocaml-async-kernel-devel
 
 %package	bin
 Summary:        Example binaries for %{name}
@@ -69,6 +69,7 @@ make install
 %exclude %{_libdir}/ocaml/cohttp/*.cmxa
 %exclude %{_libdir}/ocaml/cohttp/*.cmx
 %exclude %{_libdir}/ocaml/cohttp/*.mli
+%{_bindir}/cohttp-server-async
 
 %files devel
 %{_libdir}/ocaml/cohttp/*.a
@@ -80,6 +81,9 @@ make install
 %{_prefix}/bin/cohttp-server-lwt
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 0.11.2-2
+- Add dependency on core/async
+
 * Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.11.2-1
 - Update to 0.11.2
 

@@ -1,6 +1,6 @@
 Name:           ocaml-conduit
 Version:        0.5.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        OCaml network conduit library
 License:        Unknown 
 Group:          Development/Libraries
@@ -11,6 +11,7 @@ BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-lwt-devel
+BuildRequires:  ocaml-async-devel
 
 %description
 The conduit library takes care of establishing and listening for TCP and SSL/TLS connections for the Lwt and Async libraries.
@@ -21,6 +22,9 @@ The reason this library exists is to provide a degree of abstraction from the pr
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:  ocaml-sexplib-devel
+Requires:  ocaml-lwt-devel
+Requires:  ocaml-async-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -52,6 +56,9 @@ make install
 %{_libdir}/ocaml/conduit/*.cmxa
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 0.5.0-2
+- Add dependency on core/async
+
 * Fri May 2 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.5.0-1
 - Initial package
 
