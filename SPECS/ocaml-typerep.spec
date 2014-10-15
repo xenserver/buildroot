@@ -10,7 +10,6 @@ Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/janestreet/typerep
 Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/typerep-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 4.00.1
@@ -19,6 +18,7 @@ BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-bin-prot >= 109.53.02
 BuildRequires:  ocaml-sexplib >= 109.55.02
+BuildRequires:  ocaml-type-conv
 
 %define _use_internal_dependency_generator 0
 %define __find_requires /usr/lib/rpm/ocaml-find-requires.sh
@@ -33,7 +33,9 @@ Runtime types for OCaml.
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
-
+Requires:       ocaml-sexplib
+Requires:       ocaml-bin-prot
+Requires:       ocaml-type-conv
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -42,6 +44,8 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n typerep-%{version}
+
+%build
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
@@ -51,10 +55,7 @@ ocaml setup.ml -configure --prefix %{_prefix} \
       --mandir %{_mandir} \
       --datadir %{_datadir} \
       --localstatedir %{_localstatedir} \
-      --sharedstatedir %{_sharedstatedir} \
-      --destdir $RPM_BUILD_ROOT
-
-%build
+      --sharedstatedir %{_sharedstatedir}
 ocaml setup.ml -build
 
 
@@ -69,7 +70,6 @@ export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
 ocaml setup.ml -install
 
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -77,7 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc LICENSE.txt  THIRD-PARTY.txt INRIA-DISCLAIMER.txt
-%{_libdir}/ocaml/
+%{_libdir}/ocaml/typerep_lib
+%{_libdir}/ocaml/typerep_extended
+%{_libdir}/ocaml/typerep_generics_sexprep
 %if %opt
 %exclude %{_libdir}/ocaml/typerep_lib/*.a
 %exclude %{_libdir}/ocaml/typerep_lib/*.cmxa

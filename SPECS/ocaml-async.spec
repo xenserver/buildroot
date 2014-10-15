@@ -16,6 +16,7 @@ ExcludeArch:    sparc64 s390 s390x
 BuildRequires:  ocaml >= 4.00.1
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-ocamldoc
+BuildRequires:  ocaml-async-kernel-devel
 BuildRequires:  ocaml-async-unix-devel
 BuildRequires:  ocaml-async-extra-devel
 BuildRequires:  ocaml-ounit-devel
@@ -37,6 +38,7 @@ Jane Street Capital's asynchronous execution library (core).
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+Requires:  ocaml-async-kernel-devel
 Requires:  ocaml-async-unix-devel
 Requires:  ocaml-async-extra-devel
 Requires:  ocaml-ounit-devel
@@ -53,6 +55,8 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n async-%{version}
+
+%build
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
@@ -64,8 +68,6 @@ ocaml setup.ml -configure --prefix %{_prefix} \
       --localstatedir %{_localstatedir} \
       --sharedstatedir %{_sharedstatedir} \
       --destdir $RPM_BUILD_ROOT
-
-%build
 ocaml setup.ml -build
 
 

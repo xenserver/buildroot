@@ -10,7 +10,6 @@ Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/janestreet/pa_bench
 Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/pa_bench-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 4.00.1
@@ -41,6 +40,8 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n pa_bench-%{version}
+
+%build
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
@@ -50,10 +51,7 @@ ocaml setup.ml -configure --prefix %{_prefix} \
       --mandir %{_mandir} \
       --datadir %{_datadir} \
       --localstatedir %{_localstatedir} \
-      --sharedstatedir %{_sharedstatedir} \
-      --destdir $RPM_BUILD_ROOT
-
-%build
+      --sharedstatedir %{_sharedstatedir}
 ocaml setup.ml -build
 
 

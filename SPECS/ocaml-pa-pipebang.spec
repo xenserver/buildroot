@@ -96,8 +96,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.01.00-1
-- Update to 111.01.00
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 110.01.00-1
+- Update to 110.01.00
 
 * Wed Jan 01 2014 Edvard Fagerholm <edvard.fagerholm@gmail.com> - 109.28.02-1
 - Initial package for Fedora 20

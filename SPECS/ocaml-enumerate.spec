@@ -7,8 +7,8 @@ Summary:        Quotation expanders for enumerating finite types.
 
 Group:          Development/Libraries
 License:        Apache-2.0
-URL:            https://ocaml.janestreet.com
-Source0:        https://ocaml.janestreet.com/ocaml-core/%{version}/individual/enumerate-%{version}.tar.gz
+URL:            https://ocaml.janestreet.com/
+Source0:        https://github.com/janestreet/enumerate/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  ocaml >= 4.00.0
 BuildRequires:  ocaml-findlib
@@ -32,7 +32,8 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n enumerate-%{version}
-ocaml setup.ml -configure --prefix %{_prefix} --destdir %{buildroot}
+ocaml setup.ml -configure --prefix %{_prefix}
+# --destdir %{buildroot}
 
 %build
 make
@@ -62,6 +63,6 @@ make install
 %{_libdir}/ocaml/enumerate/*.mli
 
 %changelog
-* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.03.00-1
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 111.08.00-1
 - Initial package
 
