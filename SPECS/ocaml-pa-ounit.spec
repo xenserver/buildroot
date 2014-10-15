@@ -39,6 +39,8 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n pa_ounit-%{version}
+
+%build
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
@@ -49,8 +51,6 @@ ocaml setup.ml -configure --prefix %{_prefix} \
       --datadir %{_datadir} \
       --localstatedir %{_localstatedir} \
       --sharedstatedir %{_sharedstatedir}
-
-%build
 ocaml setup.ml -build
 
 
