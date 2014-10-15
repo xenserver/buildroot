@@ -1,6 +1,6 @@
 Name:           xcp-rrdd
-Version:        0.9.7
-Release:        2%{?dist}
+Version:        0.9.8
+Release:        1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
@@ -18,22 +18,13 @@ BuildRequires:  ocaml-rrd-transport-devel
 BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
+BuildRequires:  ocaml-oclock-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  xen-devel
 Requires:       redhat-lsb-core
 
 %description
 Statistics gathering daemon for the xapi toolstack.
-
-%package        devel
-Summary:        Development files for %{name}
-Requires:       %{name} = %{version}-%{release}
-Requires:       ocaml-xcp-idl-devel%{?_isa}
-Requires:       ocaml-stdext-devel%{?_isa}
-
-%description    devel
-The %{name}-devel package contains libraries and signature files for
-developing applications that use %{name}.
 
 %prep
 %setup -q
@@ -55,17 +46,6 @@ install -m 0755 xcp-rrdd-init %{buildroot}%{_sysconfdir}/init.d/xcp-rrdd
 %doc README.markdown LICENSE
 %{_sbindir}/xcp-rrdd
 %{_sysconfdir}/init.d/xcp-rrdd
-%{_libdir}/ocaml/rrdd-libs
-%exclude %{_libdir}/ocaml/rrdd-libs/*.a
-%exclude %{_libdir}/ocaml/rrdd-libs/*.cmx
-%exclude %{_libdir}/ocaml/rrdd-libs/*.cmxa
-%exclude %{_libdir}/ocaml/rrdd-libs/*.mli
-
-%files devel
-%{_libdir}/ocaml/rrdd-libs/*.a
-%{_libdir}/ocaml/rrdd-libs/*.cmx
-%{_libdir}/ocaml/rrdd-libs/*.cmxa
-%{_libdir}/ocaml/rrdd-libs/*.mli
 
 %post
 /sbin/chkconfig --add xcp-rrdd
@@ -77,6 +57,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 0.9.8-1
+- Update to 0.9.8
+
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-2
 - Remove xen-missing-headers dependency 
 

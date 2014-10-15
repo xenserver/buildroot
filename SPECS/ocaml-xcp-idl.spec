@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        0.9.18
+Version:        0.9.20
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
@@ -20,6 +20,7 @@ BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  ocaml-xmlm-devel
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-sexplib-devel
+BuildRequires:  ocaml-xcp-inventory-devel
 
 %description
 Common interface definitions for XCP services.
@@ -36,6 +37,7 @@ Requires:       ocaml-rpc-devel%{?_isa}
 Requires:       ocaml-fd-send-recv-devel%{?_isa}
 Requires:       ocaml-xmlm-devel%{?_isa}
 Requires:       ocaml-sexplib-devel%{?_isa}
+Requires:       ocaml-xcp-inventory-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
@@ -72,6 +74,9 @@ make install
 %{_libdir}/ocaml/xcp/*.mli
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 0.9.20-1
+- Update to 0.9.20
+
 * Wed Aug 20 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.18-1
 - Update to 0.9.18
 

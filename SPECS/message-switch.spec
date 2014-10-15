@@ -1,10 +1,10 @@
 Name:           message-switch
-Version:        0.10.3
+Version:        0.10.4
 Release:        1%{?dist}
 Summary:        A store and forward message switch
 License:        FreeBSD
-URL:            https://github.com/xapi-project/message-switch
-Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/djs55/message-switch
+Source0:        https://github.com/djs55/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        message-switch-init
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
@@ -14,7 +14,7 @@ BuildRequires: ocaml-rpc-devel
 BuildRequires: ocaml-cmdliner-devel
 BuildRequires: ocaml-re-devel
 BuildRequires: ocaml-rpc-devel
-BuildRequires: ocaml-oclock-devel
+BuildRequires: ocaml-async-devel
 Requires:      redhat-lsb-core
 Requires(post): chkconfig
 Requires(preun): chkconfig
@@ -60,7 +60,6 @@ fi
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cohttp-devel%{?_isa}
-Requires:       ocaml-oclock-devel%{?_isa}
 Requires:       ocaml-re-devel%{?_isa}
 Requires:       ocaml-rpc-devel%{?_isa}
 
@@ -69,10 +68,13 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %files devel
-%doc LICENSE README.md ChangeLog
+%doc LICENSE README.md CHANGES
 %{_libdir}/ocaml/message_switch/*
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 0.10.4-1
+- Update to 0.10.4, enable core/async
+
 * Thu Jun 19 2014 David Scott <dave.scott@citrix.com> - 0.10.3-1
 - Update to 0.10.3
 

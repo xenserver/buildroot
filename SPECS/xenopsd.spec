@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.44
+Version:        0.9.45
 Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
@@ -33,6 +33,7 @@ BuildRequires:  ocaml-xcp-inventory-devel
 BuildRequires:  xen-devel
 BuildRequires:  ocaml-uutf-devel
 BuildRequires:  ocaml-xcp-rrd-devel
+BuildRequires:  ocaml-oclock-devel
 Requires:       message-switch
 Requires:       redhat-lsb-core
 Requires:       xenops-cli
@@ -191,6 +192,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 0.9.45-1
+- Update to 0.9.45
+
 * Mon Sep 22 2014 David Scott <dave.scott@citrix.com> - 0.9.44-1
 - Update to 0.9.44
 
