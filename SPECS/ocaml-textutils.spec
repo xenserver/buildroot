@@ -45,6 +45,8 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n textutils-%{version}
+
+%build
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
@@ -56,8 +58,6 @@ ocaml setup.ml -configure --prefix %{_prefix} \
       --localstatedir %{_localstatedir} \
       --sharedstatedir %{_sharedstatedir} \
       --destdir $RPM_BUILD_ROOT
-
-%build
 ocaml setup.ml -build
 
 
