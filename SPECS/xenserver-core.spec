@@ -10,14 +10,12 @@ Requires:       xapi
 Requires:       xapi-python-devel
 Requires:       xapi-xe
 Requires:       xe-create-templates
-Requires:       xenopsd-libvirt
 Requires:       xenopsd-simulator
 Requires:       xenopsd-xc
 Requires:       xenopsd-xenlight
 Requires:       xenops-cli
 Requires:       ffs
 Requires:       sm-cli
-Requires:       xapi-libvirt-storage
 Requires:       xcp-sm
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
