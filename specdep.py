@@ -85,7 +85,7 @@ def package_to_rpm_map(specs):
     provides_to_rpm = {}
     for spec in specs:
         for provided in spec.provides():
-            provides_to_rpm[provided] = spec.binary_package_paths()[0]
+            provides_to_rpm[provided] = (spec, spec.binary_package_paths()[0])
     return provides_to_rpm
 
 
@@ -94,8 +94,16 @@ def buildrequires_for_rpm(spec, provides_to_rpm):
     for buildreq in spec.buildrequires():
         # Some buildrequires come from the system repository
         if provides_to_rpm.has_key(buildreq):
-            buildreqrpm = provides_to_rpm[buildreq]
+            buildreqrpm = provides_to_rpm[buildreq][1]
             print "%s: %s" % (rpmpath, buildreqrpm)
+
+
+def requires_for_rpm(spec, provides_to_rpm):
+    for buildreq in spec.requires():
+        # Some requires come from the system repository
+        if provides_to_rpm.has_key(buildreq):
+            requires_spec = provides_to_rpm[buildreq][0]
+            print "%s-deps: %s %s-deps" % (spec.name(), requires_spec.name(), requires_spec.name())
 
 
 def parse_cmdline():
@@ -151,6 +159,7 @@ def main():
         download_rpm_sources(spec)
         build_rpm_from_srpm(spec)
         buildrequires_for_rpm(spec, provides_to_rpm)
+        requires_for_rpm(spec, provides_to_rpm)
         print ""
 
     # Generate targets to build all srpms and all rpms
@@ -167,8 +176,8 @@ def main():
     print ""
     print "srpms: " + " \\\n\t".join(all_srpms)
     print ""
-    print "install: all"
-    print "\t. scripts/%s/install.sh" % build_type()
+    print "install: xenserver-core xenserver-core-deps"
+    print "\t. scripts/%s/install.sh xenserver-core" % build_type()
 
 
 if __name__ == "__main__":
