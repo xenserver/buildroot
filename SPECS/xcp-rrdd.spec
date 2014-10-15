@@ -1,6 +1,6 @@
 Name:           xcp-rrdd
 Version:        0.9.8
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
