@@ -60,7 +60,6 @@ fi
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cohttp-devel%{?_isa}
-Requires:       ocaml-oclock-devel%{?_isa}
 Requires:       ocaml-re-devel%{?_isa}
 Requires:       ocaml-rpc-devel%{?_isa}
 
