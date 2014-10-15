@@ -98,6 +98,14 @@ def buildrequires_for_rpm(spec, provides_to_rpm):
             print "%s: %s" % (rpmpath, buildreqrpm)
 
 
+def requires_for_rpm(spec, provides_to_rpm):
+    for buildreq in spec.requires():
+        # Some requires come from the system repository
+        if provides_to_rpm.has_key(buildreq):
+            buildreqrpm = provides_to_rpm[buildreq]
+            print "%s: %s" % (spec.name(), buildreqrpm)
+
+
 def parse_cmdline():
     """
     Parse command line options
@@ -151,6 +159,7 @@ def main():
         download_rpm_sources(spec)
         build_rpm_from_srpm(spec)
         buildrequires_for_rpm(spec, provides_to_rpm)
+        requires_for_rpm(spec, provides_to_rpm)
         print ""
 
     # Generate targets to build all srpms and all rpms
