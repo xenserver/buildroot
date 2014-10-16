@@ -4,6 +4,7 @@ Version:       0.1
 Release:       1%{?dist}
 URL:           https://github.com/djs55/xapi-storage
 Source0:       https://github.com/djs55/xapi-storage/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch0:        xapi-storage.patch
 License:       LGPL+linking exception
 
 BuildRequires: python-devel
@@ -34,6 +35,7 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
 
 %build
 make
@@ -60,7 +62,7 @@ mkdir -p $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
 cd ../python
 mkdir -p %{buildroot}%{python_sitelib}/xapi
-cp xapi.py d.py v.py p.py %{buildroot}%{python_sitelib}/xapi
+cp __init__.py xapi.py d.py v.py p.py %{buildroot}%{python_sitelib}/xapi
 
 %files
 %defattr(-,root,root,-)
@@ -72,6 +74,7 @@ cp xapi.py d.py v.py p.py %{buildroot}%{python_sitelib}/xapi
 %{python_sitelib}/xapi/d.py*
 %{python_sitelib}/xapi/v.py*
 %{python_sitelib}/xapi/p.py*
+%{python_sitelib}/xapi/__init__.py*
 
 %files devel
 %defattr(-,root,root,-)
