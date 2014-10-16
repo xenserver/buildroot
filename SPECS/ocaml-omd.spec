@@ -5,10 +5,10 @@ Summary:        A Markdown frontend in pure OCaml.
 License:        ISC
 URL:            https://github.com/ocaml/omd
 Source0:        https://github.com/ocaml/omd/archive/%{version}/%{name}-%{version}.tar.gz
+Patch0:         ocaml-omd-setup.ml.patch
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
-BuildRequires:  oasis
 
 %description
 This Markdown library is implemented using only pure OCaml (including
@@ -30,9 +30,9 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n omd-%{version}
+%patch0 -p1
 
 %build
-oasis setup
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
