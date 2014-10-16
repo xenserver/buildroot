@@ -44,6 +44,7 @@ mkdir -p %{buildroot}/etc
 install -m 0644 xapi-storage-script.conf %{buildroot}/etc/xapi-storage-script.conf
 mkdir -p %{buildroot}%{_mandir}/man2
 install -m 0644 xapi-storage-script.1 %{buildroot}%{_mandir}/man2/xapi-storage-script.1
+gzip %{buildroot}%{_mandir}/man2/xapi-storage-script.1
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add xapi-storage-script
@@ -59,6 +60,7 @@ fi
 /etc/init.d/xapi-storage-script
 %config(noreplace) /etc/xapi-storage-script.conf
 %{_libexecdir}/xapi-storage-script
+%{_mandir}/man2/xapi-storage-script.1.gz
 
 %changelog
 * Thu Oct 16 2014 David Scott <dave.scott@citrix.com> - 0.1-1
