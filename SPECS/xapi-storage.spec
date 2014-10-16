@@ -59,8 +59,8 @@ export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
 cd ../python
-%{__python} setup.py install -O2 --root %{buildroot}
-rm -rf %{buildroot}/%{python_sitelib}/*-py*.egg-info
+mkdir -p %{buildroot}%{python_sitelib}/xapi
+cp xapi.py d.py v.py p.py %{buildroot}%{python_sitelib}/xapi
 
 %files
 %defattr(-,root,root,-)
@@ -68,10 +68,10 @@ rm -rf %{buildroot}/%{python_sitelib}/*-py*.egg-info
 %exclude %{_libdir}/ocaml/xapi-storage/*.a
 %exclude %{_libdir}/ocaml/xapi-storage/*.cmxa
 %exclude %{_libdir}/ocaml/xapi-storage/*.ml
-%{python_sitelib}/xapi.py*
-%{python_sitelib}/d.py*
-%{python_sitelib}/v.py*
-%{python_sitelib}/p.py*
+%{python_sitelib}/xapi/xapi.py*
+%{python_sitelib}/xapi/d.py*
+%{python_sitelib}/xapi/v.py*
+%{python_sitelib}/xapi/p.py*
 
 %files devel
 %defattr(-,root,root,-)
