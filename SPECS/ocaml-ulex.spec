@@ -13,14 +13,6 @@ BuildRequires:  ocaml-camlp4-devel
 %description
 lexer generator for Unicode and OCaml
 
-%package        devel
-Summary:        Development files for %{name}
-Requires:       %{name} = %{version}-%{release}
-
-%description    devel
-The %{name}-devel package contains libraries and signature files for
-developing applications that use %{name}.
-
 %prep
 %setup -q -n ulex-%{version}
 
@@ -35,12 +27,6 @@ make install
 
 %files
 %{_libdir}/ocaml/ulex
-%exclude %{_libdir}/ocaml/ulex/*.a
-%exclude %{_libdir}/ocaml/ulex/*.cmxa
-%exclude %{_libdir}/ocaml/ulex/*.cmx
-%exclude %{_libdir}/ocaml/ulex/*.mli
-
-%files devel
 %{_libdir}/ocaml/ulex/*.a
 %{_libdir}/ocaml/ulex/*.cmxa
 %{_libdir}/ocaml/ulex/*.cmx

@@ -9,7 +9,7 @@ BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-type-conv
-BuildRequires:  ocaml-ulex-devel
+BuildRequires:  ocaml-ulex
 BuildRequires:  ocaml-re-devel
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-uri-devel
@@ -42,7 +42,7 @@ Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-findlib
 Requires:       ocaml-ocamldoc
 Requires:       ocaml-type-conv
-Requires:       ocaml-ulex-devel
+Requires:       ocaml-ulex
 Requires:       ocaml-re-devel
 Requires:       ocaml-ounit-devel
 Requires:       ocaml-uri-devel
@@ -59,10 +59,12 @@ developing applications that use %{name}.
 %setup -q -n %{name}-%{version}
 
 %build
-make all
+make
 
 %install
-export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+rm -rf $RPM_BUILD_ROOT
+export DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
+export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
 make install
 
