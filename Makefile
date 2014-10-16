@@ -28,7 +28,7 @@ clean:
 # it possible to add the SRPMS directory to yum.conf and use yumdownloader
 # to install source RPMs.
 srpm_repo: srpms
-	echo [CREATEREPO] SRPMS
+	@echo [CREATEREPO] SRPMS
 	@flock --timeout 30 ./SRPMS createrepo --quiet --update ./SRPMS
 
 # Build one or more binary RPMs from a source RPM.   A typical source RPM
