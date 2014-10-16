@@ -32,10 +32,10 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n enumerate-%{version}
-ocaml setup.ml -configure --prefix %{_prefix}
-# --destdir %{buildroot}
 
 %build
+ocaml setup.ml -configure --prefix %{_prefix}
+# --destdir %{buildroot}
 make
 
 %install
