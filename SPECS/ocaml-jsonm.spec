@@ -5,11 +5,11 @@ Summary:        Non-blocking streaming JSON codec for OCaml
 License:        BSD3
 URL:            http://erratique.ch/software/jsonm
 Source0:        https://github.com/dbuenzli/jsonm/archive/v%{version}/%{name}-%{version}.tar.gz
+Patch0:         ocaml-jsonm-setup.ml.patch
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-uutf-devel
-BuildRequires:  oasis
 
 %description
 Jsonm is a non-blocking streaming codec to decode and encode the JSON
@@ -35,10 +35,9 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n jsonm-%{version}
+%patch0 -p1
 
 %build
-rm _tags
-oasis setup
 ocaml setup.ml -configure --prefix %{_prefix} \
       --libdir %{_libdir} \
       --libexecdir %{_libexecdir} \
