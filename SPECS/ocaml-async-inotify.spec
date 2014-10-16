@@ -38,7 +38,16 @@ Jane Street Capital's asynchronous execution library (core).
 Summary:        Development files for %{name}
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
-
+Requires:       ocaml-camlp4-devel
+Requires:       ocaml-async-devel
+Requires:       ocaml-sexplib-devel
+Requires:       ocaml-findlib-devel
+Requires:       ocaml-comparelib-devel
+Requires:       ocaml-enumerate-devel
+Requires:       ocaml-herelib-devel
+Requires:       ocaml-custom-printf-devel
+Requires:       ocaml-async-find-devel
+Requires:       ocaml-inotify-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
