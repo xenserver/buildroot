@@ -49,6 +49,7 @@ Requires:       ocaml-uri-devel
 Requires:       ocaml-xmlm-devel
 Requires:       ocaml-omd-devel
 Requires:       ocaml-ezjsonm-devel
+Requires:       ocaml-dyntype-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
