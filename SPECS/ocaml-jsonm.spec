@@ -27,6 +27,7 @@ distributed under the BSD3 license.
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
+Requires:       ocaml-uutf-devel
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
