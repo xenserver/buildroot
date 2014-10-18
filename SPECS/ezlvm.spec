@@ -40,7 +40,10 @@ Simple LVM storage adapter for xapi
 ./volume/SR.ls --help=groff
 
 %install
-DESTDIR=%{buildroot} SCRIPTSDIR=%{_libexecdir}/xapi-storage-script make install
+cd volume
+DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ezlvm make install
+cd ../datapath
+DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/datapath/block make install
 
 %files
 %{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ezlvm/*
