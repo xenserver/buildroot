@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-lowlevel-libs
 Version:        0.9.25
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/ocaml-xen-lowlevel-libs
@@ -51,7 +51,6 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 
 %files
 %doc README.md
-%{_libexecdir}/xenopsd/xenguest
 %{_libdir}/ocaml/xenctrl
 %exclude %{_libdir}/ocaml/xenctrl/*.a
 %exclude %{_libdir}/ocaml/xenctrl/*.cmxa
@@ -83,6 +82,9 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Sun Oct 19 2014 David Scott <dave.scott@citrix.com> - 0.9.25-4
+- xenguest should only be in the runtime package
+
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.25-3
 - Remove dependency on xen-missing-headers
 
