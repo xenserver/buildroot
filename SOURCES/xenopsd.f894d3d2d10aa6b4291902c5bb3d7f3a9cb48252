@@ -1,0 +1,48 @@
+commit f894d3d2d10aa6b4291902c5bb3d7f3a9cb48252
+Author: David Scott <dave.scott@eu.citrix.com>
+Date:   Sun Oct 19 11:23:09 2014 +0000
+
+    CA-149017: libxl will reject 4MiB videoram with upstream qemu
+    
+    If the user asks for 4MiB (-- which is the xapi default, see
+    [xapi-project/xen-api#1989]) then, if xenopsd is using upstream
+    qemu, then it will emit a warning and transparently increase the
+    amount of videoram to the minimum (i.e. 8MiB)
+    
+    Signed-off-by: David Scott <dave.scott@eu.citrix.com>
+
+diff --git a/xl/xenops_server_xenlight.ml b/xl/xenops_server_xenlight.ml
+index 97be1ee..a42cc40 100644
+--- a/xl/xenops_server_xenlight.ml
++++ b/xl/xenops_server_xenlight.ml
+@@ -37,6 +37,12 @@ exception Restore_signature_mismatch
+ 
+ exception Domain_stuck_in_dying_state of domid
+ 
++let minimum_videoram mib =
++	let minimum = if !Xenopsd.use_upstream_qemu then 8 else 4 in
++	if mib < minimum
++	then warn "VM configuration has illegal videoram value: %d (minimum is %d) MiB. Using the minimum value instead." mib minimum;
++	max minimum mib
++
+ (* libxl logging and context *)
+ 
+ let vmessage min_level level errno ctx msg =
+@@ -1598,7 +1604,7 @@ module VM = struct
+ 				| HVM hvm_info ->
+ 					Domain.BuildHVM {
+ 						Domain.shadow_multiplier = hvm_info.shadow_multiplier;
+-						video_mib = hvm_info.video_mib;
++						video_mib = minimum_videoram hvm_info.video_mib;
+ 					}
+ 				| PV { boot = Direct direct } ->
+ 					Domain.BuildPV {
+@@ -1963,7 +1969,7 @@ module VM = struct
+ 				let video_memkb, shadow_memkb =
+ 					match vm.ty with
+ 						| HVM hvm_info ->
+-							Int64.mul (Int64.of_int hvm_info.video_mib) 1024L,
++							Int64.mul (Int64.of_int (minimum_videoram hvm_info.video_mib)) 1024L,
+ 							Int64.mul
+ 								(Memory.HVM.shadow_mib (max_memkb /// 1024L) max_vcpus hvm_info.shadow_multiplier)
+ 								1024L
