@@ -1,0 +1,34 @@
+commit 958171fc701559903af413b2ae6a4ee6dcfd8266
+Author: David Scott <dave.scott@eu.citrix.com>
+Date:   Sun Oct 19 10:59:01 2014 +0000
+
+    xl: fix the 'upgrade' of Ide devices to Xen devices
+    
+    Without this patch a VM.start will hang in 'wait_for_plug' because
+    the hotplug script writes the xvda paths (51712) while xenopsd
+    waits for the hda paths (768)
+    
+    Signed-off-by: David Scott <dave.scott@eu.citrix.com>
+
+diff --git a/xl/xenops_server_xenlight.ml b/xl/xenops_server_xenlight.ml
+index 97be1ee..6e741f9 100644
+--- a/xl/xenops_server_xenlight.ml
++++ b/xl/xenops_server_xenlight.ml
+@@ -745,10 +745,15 @@ module VBD = struct
+ 		(* If no device number is provided then autodetect a free one *)
+ 		let device_number =
+ 			match vbd.position with
+-			| Some x -> x
++			| Some x ->
++				(* If the 'position' is on the Ide bus, we "upgrade" to
++				   to the Xen bus instead *)
++				make (match spec x with
++					| Ide, disk, partition -> Xen, disk, partition
++					| x -> x)
+ 			| None ->
+ 				on_frontend (fun _ xs domid hvm ->
+-					make (free_device ~xs (if hvm then Ide else Xen) domid)
++					make (free_device ~xs Xen domid)
+ 				) Newest vm
+ 		in
+ 		let devid = to_xenstore_key device_number in

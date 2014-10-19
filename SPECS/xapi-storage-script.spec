@@ -2,11 +2,11 @@
 
 Summary: Xapi storage script plugin server
 Name:    xapi-storage-script
-Version: 0.1
+Version: 0.1.2
 Release: 1%{?dist}
 License: LGPL+linking exception
-URL:     https://github.com/djs55/xapi-storage-script
-Source0: https://github.com/djs55/xapi-storage-script/archive/v%{version}/%{name}-%{version}.tar.gz
+URL:     https://github.com/xapi-project/xapi-storage-script
+Source0: https://github.com/xapi-project/xapi-storage-script/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1: xapi-storage-script-init
 Source2: xapi-storage-script-conf.in
 BuildRequires: ocaml
@@ -40,6 +40,8 @@ install -m 0755 xapi-storage-script %{buildroot}/%{_sbindir}/xapi-storage-script
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xapi-storage-script-init %{buildroot}%{_sysconfdir}/init.d/xapi-storage-script
 mkdir -p %{buildroot}/%{_libexecdir}/xapi-storage-script
+mkdir -p %{buildroot}/%{_libexecdir}/xapi-storage-script/volume
+mkdir -p %{buildroot}/%{_libexecdir}/xapi-storage-script/datapath
 mkdir -p %{buildroot}/etc
 install -m 0644 xapi-storage-script.conf %{buildroot}/etc/xapi-storage-script.conf
 mkdir -p %{buildroot}%{_mandir}/man2
@@ -60,8 +62,19 @@ fi
 /etc/init.d/xapi-storage-script
 %config(noreplace) /etc/xapi-storage-script.conf
 %{_libexecdir}/xapi-storage-script
+%{_libexecdir}/xapi-storage-script/volume
+%{_libexecdir}/xapi-storage-script/datapath
 %{_mandir}/man2/xapi-storage-script.1.gz
 
 %changelog
+* Sun Oct 19 2014 David Scott <dave.scott@citrix.com> - 0.1.2-1
+- Write the pidfile properly
+- VDI.epoch_{begin,end} are no-ops
+
+* Fri Oct 17 2014 David Scott <dave.scott@citrix.com> - 0.1.1-1
+- Add the /volume and /datapath subdirectories to the package
+- Fix daemonization
+- Use syslog
+
 * Thu Oct 16 2014 David Scott <dave.scott@citrix.com> - 0.1-1
 - Initial package
