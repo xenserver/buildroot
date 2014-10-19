@@ -2,7 +2,7 @@
 
 Summary: Xapi storage script plugin server
 Name:    xapi-storage-script
-Version: 0.1.1
+Version: 0.1.2
 Release: 1%{?dist}
 License: LGPL+linking exception
 URL:     https://github.com/xapi-project/xapi-storage-script
@@ -67,6 +67,10 @@ fi
 %{_mandir}/man2/xapi-storage-script.1.gz
 
 %changelog
+* Sun Oct 19 2014 David Scott <dave.scott@citrix.com> - 0.1.2-1
+- Write the pidfile properly
+- VDI.epoch_{begin,end} are no-ops
+
 * Fri Oct 17 2014 David Scott <dave.scott@citrix.com> - 0.1.1-1
 - Add the /volume and /datapath subdirectories to the package
 - Fix daemonization
