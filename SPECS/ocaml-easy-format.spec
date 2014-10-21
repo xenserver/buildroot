@@ -1,10 +1,10 @@
 Name:           ocaml-easy-format
 Version:        1.0.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Indentation made easy
 License:        BSD3
 URL:            http://mjambon.com/easy-format.html
-Source0:        http://mjambon.com/releases/easy-format/easy-format-%{version}.tar.gz
+Source0:        https://github.com/mjambon/easy-format/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 Obsoletes:      easy-format <= 1.0.1
@@ -43,6 +43,9 @@ make install
 %{_libdir}/ocaml/easy-format/*.mli
 
 %changelog
+* Tue Oct 21 2014 Euan Harris <euan.harris@citrix.com> - 1.0.1-3
+- Switch to GitHub sources
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.0.1-2
 - Split files correctly between base and devel packages
 
