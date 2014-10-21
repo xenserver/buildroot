@@ -2,11 +2,11 @@
 
 Name:           ocaml-yojson
 Version:        1.1.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A JSON parser and printer for OCaml
 License:        BSD3
 URL:            http://mjambon.com/yojson.html
-Source0:        http://mjambon.com/releases/yojson/yojson-%{version}.tar.gz
+Source0:        https://github.com/mjambon/yojson/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  cppo
 BuildRequires:  ocaml
 BuildRequires:  ocaml-biniou-devel
@@ -51,6 +51,9 @@ make install DESTDIR=%{buildroot} BINDIR=%{buildroot}/%{_bindir}
 %{_libdir}/ocaml/yojson/*.mli
 
 %changelog
+* Tue Oct 21 2014 Euan Harris <euan.harris@citrix.com> - 1.1.6-3
+- Switch to GitHub sources
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.1.6-2
 - Split files correctly between base and devel packages
 
