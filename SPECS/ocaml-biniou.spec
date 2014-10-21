@@ -2,11 +2,11 @@
 
 Name:           ocaml-biniou
 Version:        1.0.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Compact, fast and extensible serialization format
 License:        BSD3
 URL:            http://mjambon.com/biniou.html
-Source0:        http://mjambon.com/releases/biniou/biniou-%{version}.tar.gz
+Source0:        https://github.com/mjambon/biniou/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-easy-format-devel
 BuildRequires:  ocaml-findlib
@@ -54,6 +54,9 @@ make install BINDIR=%{buildroot}/%{_bindir}
 %{_libdir}/ocaml/biniou/*.mli
 
 %changelog
+* Tue Oct 21 2014 Euan Harris <euan.harris@citrix.com> - 1.0.6-3
+- Switch to GitHub sources
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 1.0.6-2
 - Split files correctly between base and devel packages
 
