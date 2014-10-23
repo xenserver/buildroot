@@ -70,3 +70,15 @@ make install
 xenserver-install-wizard
 reboot
 ```
+
+Status by distro
+----------------
+
+Some distros get more attention that others and are likely to work better, on average.
+Here are the distros which are being actively used:
+
+- Ubuntu-14.04: @djs55
+- CentOS 6.5: @euanh
+
+If you are actively using a distro and feel able to fix bugs in it, please add yourself
+to the list.
