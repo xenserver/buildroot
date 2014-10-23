@@ -10,7 +10,7 @@ TARGET_SPECIFIC_MAPPING = {
     'debian:jessie/sid': {
             'kernel': ['linux-image-amd64'],
             'kernel-firmware': ['firmware-linux-free'],
-            "xen-libs": ["libxen-4.3"],
+            "xen-libs": ["libxen-4.4"],
             },
     'ubuntu:14.04': {
             "xen-libs": ["libxen-4.4"],
