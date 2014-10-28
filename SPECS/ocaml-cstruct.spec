@@ -9,6 +9,7 @@ URL:            https://github.com/mirage/ocaml-cstruct
 Source0:        https://github.com/mirage/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocplib-endian-devel
