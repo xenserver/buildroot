@@ -1,17 +1,20 @@
 %global debug_package %{nil}
 
 Name:           ocaml-cstruct
-Version:        0.7.1
-Release:        3%{?dist}
+Version:        1.4.0
+Release:        1%{?dist}
 Summary:        Read and write low-level C-style structures in OCaml
 License:        ISC
 URL:            https://github.com/mirage/ocaml-cstruct
-Source0:        https://github.com/mirage/%{name}/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/mirage/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-lwt-devel
 BuildRequires:  ocaml-ocplib-endian-devel
+BuildRequires:  ocaml-ounit-devel
+BuildRequires:  ocaml-sexplib-devel
 
 %description
 Read and write low-level C-style structures in OCaml.
@@ -20,17 +23,17 @@ Read and write low-level C-style structures in OCaml.
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-ocplib-endian-devel%{?_isa}
+Requires:       ocaml-sexplib-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n %{name}-%{name}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
-ocaml setup.ml -configure --enable-lwt
-ocaml setup.ml -build
+make
 
 %install
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
@@ -57,6 +60,9 @@ ocaml setup.ml -install DESTDIR=%{buildroot}
 %{_libdir}/ocaml/cstruct/*.mli
 
 %changelog
+* Tue Oct 28 2014 David Scott <dave.scott@citrix.com> - 1.4.0-1
+- Update to 1.4.0
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.7.1-3
 - Split files correctly between base and devel packages
 

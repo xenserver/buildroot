@@ -79,6 +79,7 @@ make install
 
 %files bin
 %{_prefix}/bin/cohttp-server-lwt
+%{_prefix}/bin/cohttp-server-async
 
 %changelog
 * Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 0.11.2-2
