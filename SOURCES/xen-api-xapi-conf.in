@@ -192,3 +192,55 @@ udhcpd = /bin/true
 # The delay between each attempt to connect to the block device I/O
 # process
 # redo_log_connect_delay = 0.1
+
+# The script executed when likewise domain-leave fails
+lw-force-domain-leave-script = /bin/false
+
+# Used by the redo log for block device IO
+redo-log-block-device-io = /bin/false
+
+# Path to sparse_dd
+sparse_dd = /usr/lib/xapi/sparse_dd
+
+# Path to fence binary, used for HA host fencing
+fence = /bin/false
+
+# Path to host-bugreport-upload
+host-bugreport-upload=/bin/false
+
+# Path to set-hostname
+set-hostname=/bin/false
+
+# Path to xe-syslog-reconfigure
+xe-syslog-reconfigure=/bin/false
+
+# Used by /get_host_logs_download HTTP handler
+logs-download=/bin/false
+
+# Executed when changing the management interface
+update-mh-info=/bin/false
+
+# Used by Host_crashdump.upload
+upload-wrapper=/bin/false
+
+# Path to host-backup
+host-backup=/bin/false
+
+# Path to host-restore
+host-restore=/bin/false
+
+# Path to xe-toolstack-restart script
+xe-toolstack-restart=/bin/false
+
+# Path to xsh binary
+xsh=/bin/false
+
+# Path to static-vdis script
+static-vdis=/bin/false
+
+# Database configuration file
+db-config-file=/etc/xapi/db.conf
+
+# DHCP skeleton configuration file
+udhcpd-skel=/etc/xcp/udhcpd.skel
+

@@ -124,7 +124,7 @@ mkdir -p %{buildroot}/usr/share/xapi/packages/iso
 mkdir -p %{buildroot}%{python_sitelib}
 install -m 0644 scripts/examples/python/XenAPI.py %{buildroot}%{python_sitelib}
 install -m 0644 scripts/examples/python/XenAPIPlugin.py %{buildroot}%{python_sitelib}
-
+install -m 0644 scripts/udhcpd.skel %{buildroot}/etc/xcp/udhcpd.skel
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add xapi
@@ -140,6 +140,7 @@ fi
 /etc/init.d/xapi
 %config(noreplace) /etc/xapi.conf
 %config(noreplace) /etc/xcp/pool.conf
+%config(noreplace) /etc/xcp/udhcpd.skel
 %{_libexecdir}/xapi/xapissl
 %{_libexecdir}/xapi/update-mh-info
 /etc/xapi/db.conf
