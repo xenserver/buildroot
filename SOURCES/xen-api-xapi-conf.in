@@ -2,6 +2,7 @@
 # a section for paths to helper utilities; and a timeout tweak section.
 
 # Global policy: #################################################
+search-path=/usr/lib/xapi:/usr/libexec/xapi
 
 # The full list of xenopsd instances to manage. These must all be running.
 xenopsd-queues = org.xen.xcp.xenops.xenlight
@@ -198,9 +199,6 @@ lw-force-domain-leave-script = /bin/false
 
 # Used by the redo log for block device IO
 redo-log-block-device-io = /bin/false
-
-# Path to sparse_dd
-sparse_dd = /usr/lib/xapi/sparse_dd
 
 # Path to fence binary, used for HA host fencing
 fence = /bin/false
