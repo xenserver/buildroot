@@ -2,8 +2,8 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.52
-Release: 5%{?dist}
+Version: 1.9.57
+Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -12,7 +12,6 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
-Patch0: xen-api.8c68223753278ebe653ac9f3dfae2554525722cd
 BuildRequires: ocaml
 BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
@@ -51,6 +50,7 @@ BuildRequires: ocaml-xenstore-clients-devel
 BuildRequires: ocaml-xcp-rrd-devel
 BuildRequires: ocaml-tar-devel
 BuildRequires: python2-devel
+BuildRequires: ocaml-rrdd-plugin-devel
 Requires: hwdata
 Requires: ocaml-xcp-inventory
 Requires: redhat-lsb-core
@@ -80,7 +80,6 @@ Libraries for writing XenAPI clients in python.
 
 %prep 
 %setup -q -n xen-api-%{version}
-%patch0 -p1
 cp %{SOURCE1} xen-api-xapi-conf.in
 cp %{SOURCE2} xen-api-init
 cp %{SOURCE3} xen-api-xapissl
@@ -125,7 +124,7 @@ mkdir -p %{buildroot}/usr/share/xapi/packages/iso
 mkdir -p %{buildroot}%{python_sitelib}
 install -m 0644 scripts/examples/python/XenAPI.py %{buildroot}%{python_sitelib}
 install -m 0644 scripts/examples/python/XenAPIPlugin.py %{buildroot}%{python_sitelib}
-
+install -m 0644 scripts/udhcpd.skel %{buildroot}/etc/xcp/udhcpd.skel
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add xapi
@@ -141,6 +140,7 @@ fi
 /etc/init.d/xapi
 %config(noreplace) /etc/xapi.conf
 %config(noreplace) /etc/xcp/pool.conf
+%config(noreplace) /etc/xcp/udhcpd.skel
 %{_libexecdir}/xapi/xapissl
 %{_libexecdir}/xapi/update-mh-info
 /etc/xapi/db.conf
@@ -163,6 +163,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Fri Oct 24 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 1.9.57-1
+- update to 1.9.57
+
 * Fri Oct 17 2014 David Scott <dave.scott@citrix.com> - 1.9.52-5
 - Add fix for Unix domain socket VNC consoles
 

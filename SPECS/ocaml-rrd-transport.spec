@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-rrd-transport
-Version:        0.7.1
+Version:        0.7.2
 Release:        1%{?dist}
 Summary:        Shared-memory protocols for transmitting RRD data
 License:        LGPL2.1 + OCaml linking exception
@@ -82,6 +82,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/rrd-transport/rrd_writer.mli
 
 %changelog
+* Fri Oct 24 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.7.2-1
+- Update to 0.7.2
+
 * Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.7.1-1
 - Update to 0.7.1
 
