@@ -56,7 +56,7 @@ srpm_repo: srpms
 # files.
 %.dsc: 
 	@echo [MAKEDEB] $@
-	@scripts/deb/makedeb.py $<
+	@planex-makedeb $<
 	@echo [UPDATEREPO] $@
 	@flock --timeout 30 ./SRPMS scripts/deb/updaterepo sources SRPMS
 
@@ -84,9 +84,9 @@ srpm_repo: srpms
 # for RPM or Debian builds depending on the host distribution.
 # If dependency generation fails, the deps file is deleted to avoid
 # problems with empty, incomplete or corrupt deps.   
-deps: SPECS/*.spec specdep.py scripts/lib/mappkgname.py
+deps: SPECS/*.spec
 	@echo Updating dependencies...
-	@./specdep.py -d $(DIST) --ignore-from ignore SPECS/*.spec > $@ || rm -f $@
+	@planex-specdep -d $(DIST) --ignore-from ignore SPECS/*.spec > $@ || rm -f $@
 
 -include deps
 
