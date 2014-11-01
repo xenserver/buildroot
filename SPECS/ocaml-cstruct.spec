@@ -24,6 +24,7 @@ Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-ocplib-endian-devel%{?_isa}
 Requires:       ocaml-sexplib-devel%{?_isa}
+Requires:       ocaml-ocplib-endian-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

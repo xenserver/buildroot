@@ -1,60 +1,57 @@
 Name:           ffs
-Version:        0.9.25
+Version:        0.10.0
 Release:        1%{?dist}
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/ffs
 Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
-Source1:        ffs-init
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  ocaml-re-devel
-BuildRequires:  ocaml-vhd-devel
-BuildRequires:  ocaml-tapctl-devel
-Requires:       nfs-utils
+BuildRequires:  ocaml-cstruct-devel
+BuildRequires:  ocamlscript
+BuildRequires:  xapi-storage-devel
 Requires:       redhat-lsb-core
-Requires:       blktap
+Requires:       ocaml
+Requires:       ocaml-camlp4-devel
+Requires:       ocaml-findlib
+Requires:       ocaml-findlib-devel
+Requires:       xapi-storage-devel
+Requires:       ocaml-re-devel
+Requires:       ocaml-cmdliner-devel
+Requires:       ocaml-uri-devel
+Requires:       ocamlscript
+Requires:       ocaml-ounit-devel
+Requires:       ocaml-cstruct-devel
 
 %description
 Simple flat file storage manager for the xapi toolstack.
 
 %prep
 %setup -q
-cp %{SOURCE1} ffs-init
 
 %build
-make
+./volume/SR.ls --help=groff
 
 %install
-mkdir -p %{buildroot}/%{_sbindir}
-mkdir -p %{buildroot}/%{_mandir}/man1
-make install DESTDIR=%{buildroot} SBINDIR=%{_sbindir} MANDIR=%{_mandir}
-mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 ffs-init %{buildroot}%{_sysconfdir}/init.d/ffs
-cp ffs.1 %{buildroot}%{_mandir}/man1/ffs.1
-gzip %{buildroot}%{_mandir}/man1/ffs.1
+cd volume
+DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ffs make install
+cd ../datapath
+DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/datapath/file make install
 
 %files
 %doc README.md LICENSE MAINTAINERS
-%{_sbindir}/ffs
-%{_mandir}/man1/ffs.1.gz
-%{_sysconfdir}/init.d/ffs
-
-%post
-/sbin/chkconfig --add ffs
-
-%preun
-if [ $1 -eq 0 ]; then
-  /sbin/service ffs stop > /dev/null 2>&1
-  /sbin/chkconfig --del ffs
-fi
+%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ffs/*
+%{_libexecdir}/xapi-storage-script/datapath/file/*
 
 %changelog
+* Thu Oct 2 2014 David Scott <dave.scott@citrix.com> - 0.10.0-1
+- Update to 0.10.0
+
 * Thu Oct 2 2014 David Scott <dave.scott@citrix.com> - 0.9.25-1
 - Update to 0.9.25
 
