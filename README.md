@@ -36,7 +36,7 @@ You are now ready to clone the buildroot repository and build the packages:
 git clone git://github.com/xenserver/buildroot.git
 cd buildroot
 
-./configure.sh
+./configure
 make
 ```
 
@@ -63,7 +63,7 @@ The steps to build Debian packages are the same as those to build RPMs:
 git clone git://github.com/xenserver/buildroot.git
 cd buildroot
 
-./configure.sh
+./configure
 make
 
 make install
