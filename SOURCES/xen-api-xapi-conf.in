@@ -216,7 +216,7 @@ xe-syslog-reconfigure=/bin/false
 logs-download=/bin/false
 
 # Executed when changing the management interface
-update-mh-info=/bin/false
+update-mh-info=/bin/true
 
 # Used by Host_crashdump.upload
 upload-wrapper=/bin/false
