@@ -3,10 +3,10 @@
 Summary: A simple wizard to configure a XenServer
 Name:    xenserver-install-wizard
 Version: 0.2.38
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xenserver/xenserver-install-wizard
-Source0: https://github.com/xenserver/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0: https://github.com/bobball/%{name}/archive/feba6ec481ca38f2f1caad8b0e386f929659089a/%{name}-%{version}.tar.gz
 Requires: newt
 Requires: python
 Requires: python-argparse
@@ -17,7 +17,7 @@ Requires: util-linux-ng
 A simple wizard to configure a XenServer after install
 
 %prep 
-%setup -q
+%setup -q -n %{name}-feba6ec481ca38f2f1caad8b0e386f929659089a
 
 %build
 
@@ -31,6 +31,9 @@ ln -s /usr/share/xenserver-install-wizard/xenserver-install-wizard.py %{buildroo
 %{_bindir}/xenserver-install-wizard
 
 %changelog
+* Tue Nov 18 2014 bob <bob@bob.bob> - 0.2.38-2
+- Bob test
+
 * Sun Oct 19 2014 David Scott <dave.scott@citrix.com> - 0.2.38-1
 - Update to 0.2.38
 
