@@ -12,6 +12,7 @@ Requires: python
 Requires: python-argparse
 Requires: xapi-python-devel
 Requires: util-linux-ng
+Requires: lvm2
 
 %description
 A simple wizard to configure a XenServer after install
