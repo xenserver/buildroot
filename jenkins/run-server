@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ID=`docker run --privileged --publish-all --detach $1`
+PORT=`docker port $ID 22/tcp | awk -F : '{print $2}'`
+
+echo Container ID: $ID
+echo Connect with: ssh jenkins@localhost -p $PORT
