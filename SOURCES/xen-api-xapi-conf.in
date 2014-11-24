@@ -2,13 +2,15 @@
 # a section for paths to helper utilities; and a timeout tweak section.
 
 # Global policy: #################################################
-search-path=/usr/lib/xapi:/usr/libexec/xapi
 
-# The full list of xenopsd instances to manage. These must all be running.
-xenopsd-queues = org.xen.xcp.xenops.xenlight
+# The location of the inventory file
+# inventory = @ETCDIR@/inventory
+inventory = /etc/xensource-inventory
 
-# The default xenopsd to use for VMs, unless a per-VM override is specified
-xenopsd-default = org.xen.xcp.xenops.xenlight
+# True to use the message switch; false for direct Unix domain socket
+# comms
+# use-switch = true
+use-switch = false
 
 # Configure the logging policy:
 # logconfig = @ETCDIR@/log.conf
@@ -22,6 +24,26 @@ pool_config_file = /etc/xcp/pool.conf
 # to authenticate the slave to the master.
 # pool_secret_path = @ETCDIR@/ptoken
 
+# Database configuration file
+# db-config-file = @ETCDIR@/db.conf
+db-config-file=/etc/xapi/db.conf
+
+# Where to store information about remote databases
+# remote-db-conf-file = @ETCDIR@/remote.db.conf
+
+# Path to server ssl certificate;
+# server-cert-path = @ETCDIR@/xapi-ssl.pem
+
+# Where to cache boot-time CPU info
+# cpu-info-file = @ETCDIR@/boot_time_cpus
+
+# Skeleton config for udhcp
+# udhcpd-skel = @ETCDIR@/udhcpd.skel
+udhcpd-skel=/etc/xcp/udhcpd.skel
+
+# Optional configuration file for udchp
+# udhcpd-conf = @ETCDIR@/udhcpd.conf
+
 # Enable/disable the watchdog
 # nowatchdog = false
 
@@ -32,7 +54,14 @@ pool_config_file = /etc/xcp/pool.conf
 # Disable logging for the following modules
 disable-logging-for = http db_write redo_log api_readonly
 
+# The full list of xenopsd instances to manage. These must all be running.
+xenopsd-queues = org.xen.xcp.xenops.xenlight
+
+# The default xenopsd to use for VMs, unless a per-VM override is specified
+xenopsd-default = org.xen.xcp.xenops.xenlight
+
 # Paths to utilities: ############################################
+search-path=/usr/lib/xapi:/usr/libexec/xapi
 
 # Used to start/restart/stop the stunnel listening for management
 # traffic over HTTPS
@@ -42,6 +71,115 @@ disable-logging-for = http db_write redo_log api_readonly
 # host internal management network.
 # udhcpd = @LIBEXECDIR@/udhcpd
 udhcpd = /bin/true
+
+# Executed during startup when the API/database is online but before storage or
+# networks are fully initialised.
+# startup-script-hook = @LIBEXECDIR@/xapi-startup-script
+
+# Executed when a rolling upgrade is detected starting or stopping
+# rolling-upgrade-script-hook = @LIBEXECDIR@/xapi-rolling-upgrade
+
+# Executed when messages are generated if email feature is disabled
+# xapi-message-script = @LIBEXECDIR@/mail-alarm
+
+# Executed when likewise raises an exception during domain-leave
+# lw-force-domain-leave-script = @LIBEXECDIR@/lw-force-domain-leave
+lw-force-domain-leave-script = /bin/false
+
+# Used by the redo log for block device I/O
+# redo-log-block-device-io = @LIBEXECDIR@/block_device_io
+redo-log-block-device-io = /bin/false
+
+# Path to sparse_dd
+sparse_dd = /usr/lib/xapi/sparse_dd
+
+# Path to vhd-tool
+# vhd-tool = @LIBEXECDIR@/vhd-tool
+
+# Path to fence binary, used for HA host fencing
+# fence = @LIBEXECDIR@/fence
+fence = /bin/false
+
+# Path to host-bugreport-upload
+# host-bugreport-upload = @LIBEXECDIR@/host-bugreport-upload
+host-bugreport-upload=/bin/false
+
+# Path to set-hostname
+# set-hostname = @LIBEXECDIR@/set-hostname
+set-hostname=/bin/false
+
+# Path to xe-syslog-reconfigure
+# xe-syslog-reconfigure = @LIBEXECDIR@/xe-syslog-reconfigure
+xe-syslog-reconfigure=/bin/false
+
+# Used by /get_host_logs_download HTTP handler;
+# logs-download = @LIBEXECDIR@/logs-download
+logs-download=/bin/false
+
+# Executed when changing the management interface
+# update-mh-info-script = @LIBEXECDIR@/update-mh-info
+update-mh-info-script=/bin/true
+
+# Used by Host_crashdump.upload
+# upload-wrapper = @LIBEXECDIR@/upload-wrapper
+upload-wrapper=/bin/false
+
+# Path to host-backup
+# host-backup = @LIBEXECDIR@/host-backup
+host-backup=/bin/false
+
+# Path to host-restore
+# host-restore = @LIBEXECDIR@/host-restore
+host-restore=/bin/false
+
+# Path to the xe CLI binary
+# xe = @BINDIR@/xe
+
+# Path to the xe-toolstack-restart script
+# xe-toolstack-restart = @BINDIR@/xe-toolstack-restart
+xe-toolstack-restart=/bin/false
+
+# Path to xsh binary
+# xsh = @BINDIR@/xsh
+xsh=/bin/false
+
+# Path to static-vdis script
+# static-vdis = @BINDIR@/static-vdis
+static-vdis=/bin/false
+
+# Scripts to execute when transitioning pool role
+# master-scripts-dir = @ETCDIR@/master.d
+
+# Directory containing supplemental pack data
+# packs-dir = @ETCDIR@/installed-repos
+
+# Directory containing SM plugins
+# sm-dir =  @OPTDIR@/sm
+sm-dir =  /usr/lib/xapi/sm
+
+# Directory containing tools ISO
+# tools-sr-dir = @OPTDIR@/packages/iso
+
+# Directory to export fileserver
+# web-dir = @OPTDIR@/www
+
+# Directory containing xhad and HA scripts
+# xha-dir = @XHADIR@
+
+# Root directory for xapi hooks
+# xapi-hooks-root = @HOOKSDIR@
+
+# Optional directory containing XenAPI plugins
+# xapi-plugins-root = @PLUGINDIR@
+
+# Passed as --homedir to gpg commands
+# gpg-homedir = @OPTDIR@/gpg
+
+# Optional directory for configuring static VDIs
+# static-vdis-root = @ETCDIR@/static-vdis
+
+# Directory containing trusted guest provisioning scripts
+# post-install-scripts-dir = @OPTDIR@/packages/post-install-scripts
 
 # Tweak timeouts: ################################################
 
@@ -193,52 +331,4 @@ udhcpd = /bin/true
 # The delay between each attempt to connect to the block device I/O
 # process
 # redo_log_connect_delay = 0.1
-
-# The script executed when likewise domain-leave fails
-lw-force-domain-leave-script = /bin/false
-
-# Used by the redo log for block device IO
-redo-log-block-device-io = /bin/false
-
-# Path to fence binary, used for HA host fencing
-fence = /bin/false
-
-# Path to host-bugreport-upload
-host-bugreport-upload=/bin/false
-
-# Path to set-hostname
-set-hostname=/bin/false
-
-# Path to xe-syslog-reconfigure
-xe-syslog-reconfigure=/bin/false
-
-# Used by /get_host_logs_download HTTP handler
-logs-download=/bin/false
-
-# Executed when changing the management interface
-update-mh-info=/bin/true
-
-# Used by Host_crashdump.upload
-upload-wrapper=/bin/false
-
-# Path to host-backup
-host-backup=/bin/false
-
-# Path to host-restore
-host-restore=/bin/false
-
-# Path to xe-toolstack-restart script
-xe-toolstack-restart=/bin/false
-
-# Path to xsh binary
-xsh=/bin/false
-
-# Path to static-vdis script
-static-vdis=/bin/false
-
-# Database configuration file
-db-config-file=/etc/xapi/db.conf
-
-# DHCP skeleton configuration file
-udhcpd-skel=/etc/xcp/udhcpd.skel
 
