@@ -38,9 +38,9 @@ name=epel
 mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=x86_64
 failovermethod=priority
 
-[xen-c6]
+[Xen4CentOS]
 name=CentOS-$releasever - Xen
-baseurl=http://dev.centos.org/centos/6/xen-c6/$basearch/
+baseurl=http://mirror.centos.org/centos/6/xen4/x86_64/
 gpgcheck=0
 Priority=1
 enabled=1

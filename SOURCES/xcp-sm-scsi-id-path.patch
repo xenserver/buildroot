@@ -1,0 +1,21 @@
+commit cd5af81bee01645be95fbd5b36dbae4f117406b6
+Author: Euan Harris <euan.harris@citrix.com>
+Date:   Fri Nov 1 19:10:26 2013 +0000
+
+    scsiutil: Set path to find scsi_id on Ubuntu
+    
+    Signed-off-by: Euan Harris <euan.harris@citrix.com>
+
+diff --git a/drivers/scsiutil.py b/drivers/scsiutil.py
+index c089f40..d6d6e49 100755
+--- a/drivers/scsiutil.py
++++ b/drivers/scsiutil.py
+@@ -32,6 +32,8 @@ PREFIX_LEN = 4
+ SUFFIX_LEN = 12
+ SECTOR_SHIFT = 9
+ 
++os.environ['PATH'] = ':'.join([os.getenv('PATH'), "/lib/udev"])
++
+ def gen_hash(st, len):
+     hs = 0
+     for i in st:

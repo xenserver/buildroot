@@ -2,15 +2,18 @@
 
 Summary: XCP storage managers
 Name:    xcp-sm
-Version: 0.9.7
-Release: 3%{?dist}
+Version: 0.9.8
+Release: 1%{?dist}
 License: LGPL
 URL:  https://github.com/xapi-project/sm
-Source0: https://github.com/BobBall/sm/archive/%{version}/sm-%{version}.tar.gz
+Source0: https://github.com/xapi-project/sm/archive/creedence-alpha-4/sm-%{version}.tar.gz
 Source1: xcp-mpath-scsidev-rules
 Source2: xcp-mpath-scsidev-script
-Patch0: sm-path-fix.patch
+Patch0: xcp-sm-scsi-id-path.patch
 Patch1: xcp-sm-pylint-fix.patch
+Patch2: xcp-sm-path-fix.patch
+Patch3: xcp-sm-pidof-path.patch
+Patch4: xcp-sm-initiator-name.patch
 BuildRequires: python-devel
 BuildRequires: swig
 BuildRequires: xen-devel
@@ -23,20 +26,20 @@ Requires: xen-runtime
 This package contains storage backends used in XCP
 
 %prep
-%setup -q -n sm-%{version}
+%setup -q -n sm-creedence-alpha-4
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 cp %{SOURCE1} xcp-mpath-scsidev-rules
 cp %{SOURCE2} xcp-mpath-scsidev-script
 
 %build
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/SR.py
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/blktap2.py
-sed -ie "s|@LIBDIR@|%{_libdir}|g" drivers/vhdutil.py
 DESTDIR=$RPM_BUILD_ROOT make
 
 %install
-make PLUGIN_SCRIPT_DEST=%{_libdir}/xapi/plugins/ SM_DEST=%{_libdir}/xapi/sm/ DESTDIR=$RPM_BUILD_ROOT install
+make PLUGIN_SCRIPT_DEST=%{_libdir}/xapi/plugins/ SM_DEST=%{_libdir}/xapi/sm/ BLKTAP_ROOT=%{_libdir}/blktap INVENTORY=/etc/xcp/inventory DESTDIR=$RPM_BUILD_ROOT install
 mkdir -p %{buildroot}/etc/udev/rules.d
 install -m 0644 xcp-mpath-scsidev-rules %{buildroot}/etc/udev/rules.d/55-xs-mpath-scsidev.rules
 mkdir -p %{buildroot}/etc/udev/scripts
@@ -45,8 +48,6 @@ install -m 0755 xcp-mpath-scsidev-script %{buildroot}/etc/udev/scripts/xs-mpath-
 
 %post
 [ ! -x /sbin/chkconfig ] || chkconfig --add mpathroot
-[ ! -x /sbin/chkconfig ] || chkconfig --add sm-multipath
-service sm-multipath start
 
 [ -f /etc/lvm/lvm.conf.orig ] || cp /etc/lvm/lvm.conf /etc/lvm/lvm.conf.orig || exit $?
 [ -d /etc/lvm/master ] || mkdir /etc/lvm/master || exit $?
@@ -64,7 +65,6 @@ fi
 update-alternatives --install /etc/multipath.conf multipath.conf /etc/multipath.xenserver/multipath.conf 90
 
 %preun
-[ ! -x /sbin/chkconfig ] || chkconfig --del sm-multipath
 #only remove in case of erase (but not at upgrade)
 if [ $1 -eq 0 ] ; then
    update-alternatives --remove multipath.conf /etc/multipath.xenserver/multipath.conf
@@ -79,7 +79,6 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
 /etc/rc.d/init.d/mpathroot
-/etc/rc.d/init.d/sm-multipath
 /etc/udev/rules.d/55-xs-mpath-scsidev.rules
 /etc/udev/scripts/xs-mpath-scsidev.sh
 %{_libdir}/xapi/plugins/coalesce-leaf
@@ -90,6 +89,7 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/plugins/testing-hooks
 %{_libdir}/xapi/plugins/vss_control
 %{_libdir}/xapi/plugins/intellicache-clean
+%{_libdir}/xapi/plugins/trim
 /etc/xensource/master.d/02-vhdcleanup
 /opt/xensource/bin/blktap2
 /opt/xensource/bin/tapdisk-cache-stats
@@ -121,17 +121,6 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/sm/ISOSR.py
 %{_libdir}/xapi/sm/ISOSR.pyc
 %{_libdir}/xapi/sm/ISOSR.pyo
-%{_libdir}/xapi/sm/OCFSSR.py
-%{_libdir}/xapi/sm/OCFSSR.pyc
-%{_libdir}/xapi/sm/OCFSSR.pyo
-%{_libdir}/xapi/sm/OCFSoISCSISR
-%{_libdir}/xapi/sm/OCFSoISCSISR.py
-%{_libdir}/xapi/sm/OCFSoISCSISR.pyc
-%{_libdir}/xapi/sm/OCFSoISCSISR.pyo
-%{_libdir}/xapi/sm/OCFSoHBASR
-%{_libdir}/xapi/sm/OCFSoHBASR.py
-%{_libdir}/xapi/sm/OCFSoHBASR.pyc
-%{_libdir}/xapi/sm/OCFSoHBASR.pyo
 %{_libdir}/xapi/sm/LUNperVDI.py
 %{_libdir}/xapi/sm/LUNperVDI.pyc
 %{_libdir}/xapi/sm/LUNperVDI.pyo
@@ -167,6 +156,9 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/sm/blktap2.py
 %{_libdir}/xapi/sm/blktap2.pyc
 %{_libdir}/xapi/sm/blktap2.pyo
+%{_libdir}/xapi/sm/constants.py
+%{_libdir}/xapi/sm/constants.pyc
+%{_libdir}/xapi/sm/constants.pyo
 %{_libdir}/xapi/sm/cleanup.py
 %{_libdir}/xapi/sm/cleanup.pyc
 %{_libdir}/xapi/sm/cleanup.pyo
@@ -248,13 +240,13 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/sm/scsi_host_rescan.py
 %{_libdir}/xapi/sm/scsi_host_rescan.pyc
 %{_libdir}/xapi/sm/scsi_host_rescan.pyo
-/opt/xensource/sm/snapwatchd/snapwatchd
-/opt/xensource/sm/snapwatchd/xslib.py
-/opt/xensource/sm/snapwatchd/xslib.pyc
-/opt/xensource/sm/snapwatchd/xslib.pyo
-/opt/xensource/sm/snapwatchd/snapdebug.py
-/opt/xensource/sm/snapwatchd/snapdebug.pyc
-/opt/xensource/sm/snapwatchd/snapdebug.pyo
+%{_libdir}/xapi/sm/snapwatchd/snapwatchd
+%{_libdir}/xapi/sm/snapwatchd/xslib.py
+%{_libdir}/xapi/sm/snapwatchd/xslib.pyc
+%{_libdir}/xapi/sm/snapwatchd/xslib.pyo
+%{_libdir}/xapi/sm/snapwatchd/snapdebug.py
+%{_libdir}/xapi/sm/snapwatchd/snapdebug.pyc
+%{_libdir}/xapi/sm/snapwatchd/snapdebug.pyo
 %{_libdir}/xapi/sm/sysdevice.py
 %{_libdir}/xapi/sm/sysdevice.pyc
 %{_libdir}/xapi/sm/sysdevice.pyo
@@ -274,15 +266,14 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/sm/vhdutil.py
 %{_libdir}/xapi/sm/vhdutil.pyc
 %{_libdir}/xapi/sm/vhdutil.pyo
+%{_libdir}/xapi/sm/trim_util.py
+%{_libdir}/xapi/sm/trim_util.pyc
+%{_libdir}/xapi/sm/trim_util.pyo
 %{_libdir}/xapi/sm/vss_control
 %{_libdir}/xapi/sm/xs_errors.py
 %{_libdir}/xapi/sm/xs_errors.pyc
 %{_libdir}/xapi/sm/xs_errors.pyo
-%{_libdir}/xapi/sm/wwid_conf.py
-%{_libdir}/xapi/sm/wwid_conf.pyc
-%{_libdir}/xapi/sm/wwid_conf.pyo
 /sbin/mpathutil
-%config /etc/udev/rules.d/40-multipath.rules
 %config /etc/multipath.xenserver/multipath.conf
 
 
@@ -295,6 +286,7 @@ This package adds a new rawhba SR type. This SR type allows utilization of
 Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 
 %files rawhba
+%exclude %{_libdir}/xapi/sm/RawHBASR
 %{_libdir}/xapi/sm/RawHBASR
 %{_libdir}/xapi/sm/RawHBASR.py
 %{_libdir}/xapi/sm/RawHBASR.pyc
@@ -302,8 +294,12 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 %{_libdir}/xapi/sm/B_util.py
 %{_libdir}/xapi/sm/B_util.pyc
 %{_libdir}/xapi/sm/B_util.pyo
+%{_libdir}/xapi/sm/enable-borehamwood
 
 %changelog
+* Tue Sep 30 2014 Bob Ball <bob.ball@citrix.com> - 0.9.8-1
+- Moved patches to spec file rather than custom repository
+
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.7-3
 - Remove xen-missing-headers dependency
 
