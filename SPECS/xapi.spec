@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.57
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -12,6 +12,7 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
+Patch0: xen-api-sm-path-fix.patch
 BuildRequires: ocaml
 BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
@@ -86,13 +87,15 @@ cp %{SOURCE2} xen-api-init
 cp %{SOURCE3} xen-api-xapissl
 cp %{SOURCE4} xen-api-db-conf
 cp %{SOURCE5} xen-api-pam
+%patch0 -p1
 
 
 %build
-./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=/usr/lib/xapi/plugins --optdir=/usr/lib/xapi --disable-tests
+./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=%{_libdir}/xapi/plugins --optdir=%{_libdir}/xapi --disable-tests
 make
 
 sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in > xen-api-xapi-conf
+sed -i -e "s|@LIBDIR@|%{_libdir}|g" xen-api-xapi-conf
 
 %install
  
@@ -164,11 +167,15 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
-* Tue Dec 23 2014 David Scott <dave.scott@citrix.com> - 1.9.57-2
+* Tue Dec 23 2014 David Scott <dave.scott@citrix.com> - 1.9.57-3
 - Add runtime dependency on busybox
 
+* Thu Dec 4 2014 Bob Ball <bob.ball@citrix.com> - 1.9.57-2
+- Update conf file
+- Added patch to fix reading sm-path
+
 * Fri Oct 24 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 1.9.57-1
-- update to 1.9.57
+- Update to 1.9.57
 
 * Fri Oct 17 2014 David Scott <dave.scott@citrix.com> - 1.9.52-5
 - Add fix for Unix domain socket VNC consoles
