@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.57
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -57,6 +57,7 @@ Requires: redhat-lsb-core
 Requires: stunnel
 Requires: vhd-tool
 Requires: libffi
+Requires: busybox
 
 %description
 XCP toolstack.
@@ -163,6 +164,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Tue Dec 23 2014 David Scott <dave.scott@citrix.com> - 1.9.57-2
+- Add runtime dependency on busybox
+
 * Fri Oct 24 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 1.9.57-1
 - update to 1.9.57
 
