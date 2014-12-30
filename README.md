@@ -8,9 +8,15 @@ RPM-based distributions
 
 On RPM-based distributions, the packages are built using `mock`.
 To install it on a 64-bit RHEL/CentOS system then you will need to add the
-[EPEL repositories](http://fedoraproject.org/wiki/EPEL). 
-Here is a useful article for [CentOS](http://www.rackspace.com/knowledge_center/article/installing-rhel-epel-repo-on-centos-5x-or-6x).
+[EPEL repositories](http://fedoraproject.org/wiki/EPEL).   The `epel-release`
+package configures yum to use the EPEL repository.   On CentOS, the package
+is provided by the CentOS Extras repository, which is enabled by default;
+on RHEL, you must enable the 'optional' and 'extras' repositories.   To
+enable EPEL, type the following as root:
 
+```
+yum install -y epel-release
+```
 
 After adding EPEL, install and set up mock:
 
