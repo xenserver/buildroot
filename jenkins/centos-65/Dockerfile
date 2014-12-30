@@ -15,8 +15,6 @@ RUN echo "jenkins:jenkins" |chpasswd
 
 # Set up extra repositories
 RUN yum install -y epel-release
-RUN curl -OL http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-RUN rpm -Uvh remi-release-6*.rpm
 
 # Install bootstrap dependencies
 RUN yum install -y mock redhat-lsb-core rpm-build git augeas sudo
