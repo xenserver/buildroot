@@ -13,10 +13,10 @@ RUN     yum -y install java-1.7.0-openjdk
 RUN useradd jenkins 
 RUN echo "jenkins:jenkins" |chpasswd
 
-# Install EPEL
-RUN curl -OL http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+# Set up extra repositories
+RUN yum install -y epel-release
 RUN curl -OL http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-RUN rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm
+RUN rpm -Uvh remi-release-6*.rpm
 
 # Install bootstrap dependencies
 RUN yum install -y mock redhat-lsb-core rpm-build git augeas sudo
