@@ -13,9 +13,7 @@ install -m 0644 scripts/rpm/xapi.repo /etc/yum.repos.d/xapi.repo
 
 install -m 0644 scripts/rpm/centos-xen-4-4.repo /etc/yum.repos.d/centos-xen-4-4.repo
 
-install -m 0644 scripts/rpm/epel.repo /etc/yum.repos.d/epel.repo
-
-install -m 0644 scripts/rpm/RPM-GPG-KEY-EPEL-6 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+yum -y install epel-release
 
 yum repolist
 yum install -y xenserver-core
