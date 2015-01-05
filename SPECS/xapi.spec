@@ -94,8 +94,7 @@ cp %{SOURCE5} xen-api-pam
 ./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=%{_libdir}/xapi/plugins --optdir=%{_libdir}/xapi --disable-tests
 make
 
-sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in > xen-api-xapi-conf
-sed -i -e "s|@LIBDIR@|%{_libdir}|g" xen-api-xapi-conf
+sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in -e "s|@LIBDIR@|%{_libdir}|g" > xen-api-xapi-conf
 
 %install
  
