@@ -1,0 +1,25 @@
+commit bbde23fc8b2c7b370746c7a6cf908ebdf65fabb8
+Author: Euan Harris <euan.harris@citrix.com>
+Date:   Thu Oct 31 12:11:11 2013 +0000
+
+    iscsilib: Fix get_current_initiator_name to ignore InitiatorName in comments
+    
+    On Debian, the /etc/iscsi/initiatorname.iscsi has comments telling you
+    what to do with the InitiatorName parameter;  the previous code would try
+    to interpret this comment as the InitiatorName setting and fail to parse it.
+    
+    Signed-off-by: Euan Harris <euan.harris@citrix.com>
+
+diff --git a/drivers/iscsilib.py b/drivers/iscsilib.py
+index e3bd890..891e607 100644
+--- a/drivers/iscsilib.py
++++ b/drivers/iscsilib.py
+@@ -248,7 +248,7 @@ def get_current_initiator_name():
+             for line in f.readlines():
+                 if line.strip().startswith("#"):
+                     continue 
+-                if "InitiatorName" in line:
++                if line.strip().startswith("InitiatorName") and "=" in line:
+                     IQN = line.split("=")[1]
+                     currentIQN = IQN.strip()
+                     f.close()

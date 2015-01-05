@@ -1,0 +1,202 @@
+From 71798551b59799d9b71aab64c218509df9275ec0 Mon Sep 17 00:00:00 2001
+From: Thanos Makatos <thanos.makatos@citrix.com>
+Date: Thu, 2 Oct 2014 11:43:55 +0100
+Subject: [PATCH 1/3] CA-147743: option to build without gcopy
+
+Signed-off-by: Thanos Makatos <thanos.makatos@citrix.com>
+---
+ configure.ac     |  8 ++++++++
+ drivers/td-req.c | 61 +++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ drivers/td-req.h |  3 +++
+ 3 files changed, 71 insertions(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 5f70354..94e4249 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -63,6 +63,14 @@ AM_CONDITIONAL([ENABLE_TESTS],
+ 
+ AC_CHECK_FUNCS([eventfd])
+ 
++AC_ARG_ENABLE([gcopy],
++			  [AS_HELP_STRING([--disable-gcopy], [enable grant copy])],
++			  [disable_gcopy=yes],
++			  [])
++
++AS_IF([test "x$disable_gcopy" == "xyes"],
++	  [AC_DEFINE([NOGCOPY], [], [Disable grant copy])],
++	  [])
+ 
+ 
+ # AC_CONFIG_MACRO_DIR([m4])
+diff --git a/drivers/td-req.c b/drivers/td-req.c
+index 6799f61..c409750 100644
+--- a/drivers/td-req.c
++++ b/drivers/td-req.c
+@@ -17,6 +17,10 @@
+  * USA.
+  */
+ 
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
+ #include <xenctrl.h>
+ 
+ #include <stdlib.h>
+@@ -336,6 +340,10 @@ blkif_rq_data(blkif_request_t const * const msg)
+ }
+ 
+ 
++#ifndef NOGCOPY
++/**
++ * Copy to/from the guest using grant-copy.
++ */
+ static int
+ guest_copy2(struct td_xenblkif * const blkif,
+         struct td_xenblkif_req * const tapreq /* TODO rename to req */) {
+@@ -344,7 +352,7 @@ guest_copy2(struct td_xenblkif * const blkif,
+     long err = 0;
+     struct ioctl_gntdev_grant_copy gcopy;
+ 
+-    ASSERT(blkif);
++	ASSERT(blkif);
+     ASSERT(blkif->ctx);
+     ASSERT(tapreq);
+     ASSERT(blkif_rq_data(&tapreq->msg));
+@@ -396,6 +404,57 @@ guest_copy2(struct td_xenblkif * const blkif,
+ out:
+     return err;
+ }
++#else
++/**
++ * Copy to/from the guest using grant-map + memcpy.
++ */
++static int
++guest_copy2(struct td_xenblkif * const blkif,
++		struct td_xenblkif_req * const req) {
++
++    int i = 0;
++    long err = 0;
++	void *src = NULL, *dst = NULL, *raddr = NULL;
++
++    ASSERT(blkif);
++    ASSERT(blkif->ctx);
++    ASSERT(req);
++    ASSERT(blkif_rq_data(&req->msg));
++	ASSERT(req->msg.nr_segments > 0);
++
++	raddr = xc_gnttab_map_domain_grant_refs(blkif->ctx->xcg_handle,
++			req->msg.nr_segments, blkif->domid, req->gref, req->prot);
++	if (unlikely(!raddr)) {
++		err = -errno;
++		ASSERT(err);
++		RING_ERR(blkif, "failed to grant-map request %lu: %s\n", req->msg.id,
++				strerror(-err));
++		goto out;
++	}
++
++	if (blkif_rq_wr(&req->msg))
++		src = raddr, dst = req->vma;
++	else
++		src = req->vma, dst = raddr;
++
++	for (i = 0; i < req->vreq.iovcnt; i++) {
++		unsigned long off = req->vreq.iov[i].base - req->vma;
++		memcpy(dst + off, src + off, req->vreq.iov[i].secs << SECTOR_SHIFT);
++	}
++
++	err = xc_gnttab_munmap(blkif->ctx->xcg_handle, raddr,
++			req->msg.nr_segments);
++	if (unlikely(err)) {
++		err = -errno;
++		ASSERT(err);
++		RING_ERR(blkif, "failed to grant-unmap request %lu: %s\n", req->msg.id,
++				strerror(-err));
++	}
++
++out:
++    return err;
++}
++#endif /* NOGCOPY */
+ 
+ 
+ /**
+diff --git a/drivers/td-req.h b/drivers/td-req.h
+index d7caa46..9d979e0 100644
+--- a/drivers/td-req.h
++++ b/drivers/td-req.h
+@@ -67,10 +67,13 @@ struct td_xenblkif_req {
+     struct td_iovec iov[BLKIF_MAX_SEGMENTS_PER_REQUEST];
+ 
+     grant_ref_t gref[BLKIF_MAX_SEGMENTS_PER_REQUEST];
++
+     int prot;
+ 
++#ifndef NOGCOPY
+ 	struct gntdev_grant_copy_segment
+ 		gcopy_segs[BLKIF_MAX_SEGMENTS_PER_REQUEST];
++#endif
+ };
+ 
+ struct td_xenblkif;
+-- 
+1.9.1
+
+
+From 5de0d6ba0fa047ae9c8b54d77b98df87c9f8b3ff Mon Sep 17 00:00:00 2001
+From: Thanos Makatos <thanos.makatos@citrix.com>
+Date: Fri, 10 Oct 2014 10:32:42 +0100
+Subject: [PATCH 2/3] CA-147743: conditionally include xen/gntdev.h
+
+Signed-off-by: Thanos Makatos <thanos.makatos@citrix.com>
+---
+ drivers/td-req.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/td-req.h b/drivers/td-req.h
+index 9d979e0..892af7f 100644
+--- a/drivers/td-req.h
++++ b/drivers/td-req.h
+@@ -23,7 +23,9 @@
+ #include "tapdisk.h"
+ #include <sys/types.h>
+ #include <xen/io/blkif.h>
++#ifndef NOGCOPY
+ #include <xen/gntdev.h>
++#endif
+ #include "td-blkif.h"
+ 
+ /**
+-- 
+1.9.1
+
+
+From 5c81796c2e67f75b11f271a3b2e51b4fdf6e151f Mon Sep 17 00:00:00 2001
+From: Thanos Makatos <thanos.makatos@citrix.com>
+Date: Fri, 10 Oct 2014 14:13:03 +0100
+Subject: [PATCH 3/3] CA-147743: include config.h in td-blkif.h
+
+Signed-off-by: Thanos Makatos <thanos.makatos@citrix.com>
+---
+ drivers/td-blkif.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/td-blkif.h b/drivers/td-blkif.h
+index e5b0966..3568945 100644
+--- a/drivers/td-blkif.h
++++ b/drivers/td-blkif.h
+@@ -20,6 +20,10 @@
+ #ifndef __TD_BLKIF_H__
+ #define __TD_BLKIF_H__
+ 
++#ifdef HAVE_CONFIG_H
++#include "config.h"
++#endif
++
+ #include <inttypes.h> /* required by xen/event_channel.h */
+ 
+ #include <xen/xen.h>
+-- 
+1.9.1
+
