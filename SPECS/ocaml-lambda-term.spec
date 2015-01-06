@@ -62,12 +62,6 @@ rm -f %{buildroot}/%{_libdir}/ocaml/usr/local/bin/lambda-term-actions
 %{_libdir}/ocaml/lambda-term/*.cmxa
 %{_libdir}/ocaml/lambda-term/*.mli
 
-%files devel
-%{_libdir}/ocaml/lambda-term/*.a
-%{_libdir}/ocaml/lambda-term/*.cmx
-%{_libdir}/ocaml/lambda-term/*.cmxa
-%{_libdir}/ocaml/lambda-term/*.mli
-
 %changelog
 * Sat Jun  7 2014 David Scott <dave.scott@citrix.com> - 1.6-1
 - Update to 1.6
