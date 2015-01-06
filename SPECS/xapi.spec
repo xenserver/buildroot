@@ -61,9 +61,6 @@ Requires: libffi
 Requires: busybox
 
 %description
-XCP toolstack.
-
-%description
 This package contains the xapi toolstack.
 
 %package xe
