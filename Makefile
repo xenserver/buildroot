@@ -86,7 +86,7 @@ srpm_repo: srpms
 # problems with empty, incomplete or corrupt deps.   
 deps: SPECS/*.spec
 	@echo Updating dependencies...
-	@planex-specdep -d $(DIST) --ignore-from ignore SPECS/*.spec > $@ || rm -f $@
+	@planex-specdep -d $(DIST) --ignore-from ignore --topdir . SPECS/*.spec > $@ || rm -f $@
 
 -include deps
 
