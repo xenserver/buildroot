@@ -5,7 +5,8 @@ echo "Configuring RPM-based build"
 
 DEPS="mock rpm-build createrepo python-argparse"
 rpm -q $DEPS >/dev/null 2>&1 || sudo yum install -y $DEPS
-rpm -Uvh https://github.com/xenserver/planex/releases/download/v0.5.0/planex-0.5.0-1.noarch.rpm
+DIST=`rpm --eval %dist`
+sudo rpm -Uvh https://github.com/xenserver/planex/releases/download/v0.6.0pre2/planex-0.6.0pre2-1${DIST}.noarch.rpm
 
 echo -n "Writing mock configuration..."
 mkdir -p mock
