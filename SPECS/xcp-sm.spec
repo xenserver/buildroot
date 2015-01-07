@@ -2,7 +2,7 @@
 
 Summary: XCP storage managers
 Name:    xcp-sm
-Version: 0.9.9
+Version: 0.9.8.7b9e69
 Release: 1%{?dist}
 License: LGPL
 URL:  https://github.com/xapi-project/sm
@@ -314,7 +314,7 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 %{_libdir}/xapi/sm/enable-borehamwood
 
 %changelog
-* Wed Jan 07 2015 Bob Ball <bob.ball@citrix.com> - 0.9.9-1
+* Wed Jan 07 2015 Bob Ball <bob.ball@citrix.com> - 0.9.8.7b9e69-1
 - Updated to master
 
 * Tue Sep 30 2014 Bob Ball <bob.ball@citrix.com> - 0.9.8-1
