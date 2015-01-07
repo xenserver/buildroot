@@ -80,13 +80,13 @@ srpm_repo: srpms
 ############################################################################
 
 # Generate dependency rules linking spec files to tarballs, source
-# packages and binary packages.   specdep.py generates rules suitable
+# packages and binary packages.   planex-depend generates rules suitable
 # for RPM or Debian builds depending on the host distribution.
 # If dependency generation fails, the deps file is deleted to avoid
 # problems with empty, incomplete or corrupt deps.   
 deps: SPECS/*.spec
 	@echo Updating dependencies...
-	@planex-specdep -d $(DIST) --ignore-from ignore --topdir . SPECS/*.spec > $@ || rm -f $@
+	@planex-depend -d $(DIST) --ignore-from ignore --topdir . SPECS/*.spec > $@ || rm -f $@
 
 -include deps
 
