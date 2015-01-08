@@ -1,6 +1,6 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
-Version: 0.9.3
+Version: 0.9.3.fe874d
 Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
@@ -55,7 +55,7 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
-* Mon Dec 8 2014 Bob Ball <bob.ball@citrix.com> - 0.9.3-1
+* Mon Dec 8 2014 Bob Ball <bob.ball@citrix.com> - 0.9.3.fe874d-1
 - Update to Creedence branch without grantcopy
 - Using checkpoint off xs64bit branch until an official release is made
 

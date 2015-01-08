@@ -2,11 +2,11 @@
 
 Summary: XCP storage managers
 Name:    xcp-sm
-Version: 0.9.8
+Version: 0.9.8.7b9e69
 Release: 1%{?dist}
 License: LGPL
 URL:  https://github.com/xapi-project/sm
-Source0: https://github.com/xapi-project/sm/archive/creedence-alpha-4/sm-%{version}.tar.gz
+Source0: https://github.com/xapi-project/sm/archive/7b9e693d3759f053869d641cc10cc0ed4234bbcc/sm-%{version}.tar.gz
 Source1: xcp-mpath-scsidev-rules
 Source2: xcp-mpath-scsidev-script
 Patch0: xcp-sm-scsi-id-path.patch
@@ -27,7 +27,7 @@ Requires: blktap
 This package contains storage backends used in XCP
 
 %prep
-%setup -q -n sm-creedence-alpha-4
+%setup -q -n sm-7b9e693d3759f053869d641cc10cc0ed4234bbcc
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -79,7 +79,9 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %files
 /etc/cron.d/*
 /etc/rc.d/init.d/snapwatchd
+/etc/rc.d/init.d/sm-multipath
 /etc/rc.d/init.d/mpathroot
+/etc/udev/rules.d/40-multipath.rules
 /etc/udev/rules.d/55-xs-mpath-scsidev.rules
 /etc/udev/scripts/xs-mpath-scsidev.sh
 %{_libdir}/xapi/plugins/coalesce-leaf
@@ -141,6 +143,17 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/sm/NFSSR.py
 %{_libdir}/xapi/sm/NFSSR.pyc
 %{_libdir}/xapi/sm/NFSSR.pyo
+%{_libdir}/xapi/sm/OCFSSR.py
+%{_libdir}/xapi/sm/OCFSSR.pyc
+%{_libdir}/xapi/sm/OCFSSR.pyo
+%{_libdir}/xapi/sm/OCFSoHBASR
+%{_libdir}/xapi/sm/OCFSoHBASR.py
+%{_libdir}/xapi/sm/OCFSoHBASR.pyc
+%{_libdir}/xapi/sm/OCFSoHBASR.pyo
+%{_libdir}/xapi/sm/OCFSoISCSISR
+%{_libdir}/xapi/sm/OCFSoISCSISR.py
+%{_libdir}/xapi/sm/OCFSoISCSISR.pyc
+%{_libdir}/xapi/sm/OCFSoISCSISR.pyo
 %{_libdir}/xapi/sm/SHMSR.py
 %{_libdir}/xapi/sm/SHMSR.pyc
 %{_libdir}/xapi/sm/SHMSR.pyo
@@ -271,6 +284,9 @@ cp -f /etc/lvm/lvm.conf.orig /etc/lvm/lvm.conf || exit $?
 %{_libdir}/xapi/sm/trim_util.pyc
 %{_libdir}/xapi/sm/trim_util.pyo
 %{_libdir}/xapi/sm/vss_control
+%{_libdir}/xapi/sm/wwid_conf.py
+%{_libdir}/xapi/sm/wwid_conf.pyc
+%{_libdir}/xapi/sm/wwid_conf.pyo
 %{_libdir}/xapi/sm/xs_errors.py
 %{_libdir}/xapi/sm/xs_errors.pyc
 %{_libdir}/xapi/sm/xs_errors.pyo
@@ -298,6 +314,9 @@ Fiber Channel raw LUNs as separate VDIs (LUN per VDI)
 %{_libdir}/xapi/sm/enable-borehamwood
 
 %changelog
+* Wed Jan 07 2015 Bob Ball <bob.ball@citrix.com> - 0.9.8.7b9e69-1
+- Updated to master
+
 * Tue Sep 30 2014 Bob Ball <bob.ball@citrix.com> - 0.9.8-1
 - Moved patches to spec file rather than custom repository
 
