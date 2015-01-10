@@ -3,7 +3,3 @@ name=CentOS-$releasever - virt-testing
 baseurl=http://cbs.centos.org/repos/virt6-testing/$basearch/os/
 gpgcheck=0
 enabled=1
-
-[centos-ocaml-4.01]
-name=CentOS 6 OCaml 4.01
-baseurl=http://xenbits.xen.org/djs/centos-ocaml-4.01/

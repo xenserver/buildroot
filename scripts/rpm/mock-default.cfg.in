@@ -40,17 +40,20 @@ failovermethod=priority
 
 [Xen4CentOS]
 name=CentOS-$releasever - Xen
-baseurl=http://mirror.centos.org/centos/6/xen4/x86_64/
+baseurl=http://mirror.centos.org/centos/$releasever/xen4/$basearch/
 gpgcheck=0
 Priority=1
 enabled=1
 
-[centos-xen-4-4]
-name=CentOS-$releasever - snapshot of Xen 4.4
-baseurl=http://xenbits.xen.org/djs/centos-xen-4-4/
+[virt-testing]
+name=CentOS-$releasever - virt-testing
+baseurl=http://cbs.centos.org/repos/virt6-testing/$basearch/os/
 gpgcheck=0
-Priority=1
 enabled=1
+
+[ocaml-4.01]
+name=CentOS 6 OCaml 4.01
+baseurl=http://xenbits.xen.org/djs/centos-ocaml-4.01/
 
 [mock]
 name=Mock output
