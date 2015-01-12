@@ -2,11 +2,27 @@
 set -eu
 
 echo "Configuring RPM-based build"
+DISTRIBUTION=`lsb_release -si`
+case "$DISTRIBUTION" in
+    Fedora)
+        DISTNAME="fedora"
+        DISTRELEASE=`rpm --eval %{?fedora}`
+        ;;
 
-DEPS="mock rpm-build createrepo python-argparse"
-rpm -q $DEPS >/dev/null 2>&1 || sudo yum install -y $DEPS
-DIST=`rpm --eval %dist`
-sudo rpm -Uvh https://github.com/xenserver/planex/releases/download/v0.6.0pre2/planex-0.6.0pre2-1${DIST}.noarch.rpm
+    CentOS|RedHatEnterpriseServer)
+        DISTNAME="el"
+        DISTRELEASE=`rpm --eval %{?rhel}`
+        ;;
+
+    *)
+        echo "Unknown distribution: $DISTRIBUTION"
+        exit 1
+        ;;
+esac
+
+PLANEX_REPO_RPM="https://xenserver.github.io/planex-release/rpm/${DISTNAME}/planex-release-${DISTRELEASE}-1.noarch.rpm"
+rpm -q planex-release >/dev/null 2>&1 || sudo yum install -y $PLANEX_REPO_RPM
+sudo yum -y install planex
 
 echo -n "Writing mock configuration..."
 mkdir -p mock
