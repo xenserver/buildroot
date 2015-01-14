@@ -23,11 +23,13 @@ if [ $ARCH == 'armhf' ]; then
     APT_REPOS="$APT_REPOS |deb $MIRROR $DIST restricted universe"
 fi
 
-apt-add-repository ppa:jonathan-ludlam/xsbuild
-apt-get update
-
 dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common > /dev/null 2>&1 || \
-   sudo apt-get install cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common planex
+   sudo apt-get install cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common
+
+sudo apt-add-repository -y ppa:jonathan-ludlam/xsbuild
+sudo apt-get update
+dpkg -l python-planex > /dev/null 2>&1 || sudo apt-get install python-planex
+
 mkdir -p BUILD
 
 echo -n "Writing pbuilder configuration..."
