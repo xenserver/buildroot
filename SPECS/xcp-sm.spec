@@ -57,7 +57,6 @@ sed -i 's/metadata_read_only =.*/metadata_read_only = 0/' /etc/lvm/master/lvm.co
 sed -i 's/archive = .*/archive = 0/' /etc/lvm/master/lvm.conf || exit $?
 sed -i 's/filter \= \[ \"a\/\.\*\/\" \]/filter = \[ \"r\|\/dev\/xvd\.\|\"\, \"r\|\/dev\/VG\_Xen\.\*\/\*\|\"\]/g' /etc/lvm/master/lvm.conf || exit $?
 cp /etc/lvm/master/lvm.conf /etc/lvm/lvm.conf || exit $?
-sed -i 's/metadata_read_only =.*/metadata_read_only = 1/' /etc/lvm/lvm.conf || exit $?
 # We try to be "update-alternatives" ready.
 # If a file exists and it is not a symlink we back it up
 if [ -e /etc/multipath.conf -a ! -h /etc/multipath.conf ]; then
