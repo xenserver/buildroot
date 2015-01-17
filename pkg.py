@@ -154,6 +154,12 @@ class Spec(object):
 
         return sources
 
+    def requires(self):
+        """Return the set of packages needed to install this spec"""
+        requires = flatten([pkg.header['requires'] + [pkg.header['name']]
+                            for pkg in self.spec.packages])
+        return set(flatten([self.map_package_name(r) for r
+                            in requires]))
 
     # RPM build dependencies.   The 'requires' key for the *source* RPM is
     # actually the 'buildrequires' key from the spec

@@ -20,4 +20,4 @@ install -m 0644 scripts/rpm/centos-xen-4-4.repo /etc/yum.repos.d/centos-xen-4-4.
 yum -y install epel-release
 
 yum repolist
-yum install -y xenserver-core
+yum install -y "$@"

@@ -21,5 +21,5 @@ install -m 0644 scripts/deb/xapi.list /etc/apt/sources.list.d/xapi.list
 
 # Install
 apt-get update
-apt-get install -y --force-yes xenserver-core
+apt-get install -y --force-yes "$@"
 
