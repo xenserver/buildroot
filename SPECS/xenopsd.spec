@@ -1,5 +1,5 @@
 Name:           xenopsd
-Version:        0.9.45
+Version:        0.9.46
 Release:        2%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
@@ -36,6 +36,7 @@ BuildRequires:  xen-devel
 BuildRequires:  ocaml-uutf-devel
 BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-backtrace-devel
 Requires:       message-switch
 Requires:       redhat-lsb-core
 Requires:       xenops-cli
@@ -196,6 +197,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Jan 21 2015 David Scott <dave.scott@citrix.com> - 0.9.46-1
+- Update to 0.9.46
+
 * Sun Oct 19 2014 David Scott <dave.scott@citrix.com> - 0.9.45-2
 - Add patch to fix the upstream qemu 4MiB videoram issue
 - Add patch to fix the device id upgrade issue
