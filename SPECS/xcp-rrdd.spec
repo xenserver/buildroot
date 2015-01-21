@@ -1,5 +1,5 @@
 Name:           xcp-rrdd
-Version:        0.9.8
+Version:        0.9.9
 Release:        1%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
@@ -19,6 +19,7 @@ BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
 BuildRequires:  ocaml-xen-api-libs-transitional-devel
 BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-backtrace-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  xen-devel
 Requires:       redhat-lsb-core
@@ -57,6 +58,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Jan 21 2015 David Scott <dave.scott@citrix.com> - 0.9.9-1
+- Update to 0.9.9
+
 * Tue Oct 14 2014 David Scott <dave.scott@citrix.com> - 0.9.8-1
 - Update to 0.9.8
 
