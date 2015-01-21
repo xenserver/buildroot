@@ -63,6 +63,7 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %exclude %{_libdir}/ocaml/xenlight/*.cmxa
 %exclude %{_libdir}/ocaml/xenlight/*.cmx
 %exclude %{_libdir}/ocaml/xenlight/*.mli
+%{_libdir}/ocaml/xentoollog
 %exclude %{_libdir}/ocaml/xentoollog/*.a
 %exclude %{_libdir}/ocaml/xentoollog/*.cmxa
 %exclude %{_libdir}/ocaml/xentoollog/*.cmx
