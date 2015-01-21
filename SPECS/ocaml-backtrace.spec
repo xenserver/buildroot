@@ -25,7 +25,7 @@ The %{name}-devel package contains libraries and signature files for
 developing applications that use %{name}.
 
 %prep
-%setup -q -n backtrace
+%setup -q -n backtrace-%{version}
 
 %build
 if [ -x ./configure ]; then
@@ -46,7 +46,6 @@ ocaml setup.ml -install
 %exclude %{_libdir}/ocaml/xapi-backtrace/*.a
 %exclude %{_libdir}/ocaml/xapi-backtrace/*.cmxa
 %exclude %{_libdir}/ocaml/xapi-backtrace/*.cmx
-%exclude %{_libdir}/ocaml/xapi-backtrace/*.ml
 %exclude %{_libdir}/ocaml/xapi-backtrace/*.mli
 
 
