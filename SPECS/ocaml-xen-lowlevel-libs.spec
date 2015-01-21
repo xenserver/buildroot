@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-lowlevel-libs
-Version:        0.9.25
+Version:        0.9.28
 Release:        4%{?dist}
 Summary:        Xen hypercall bindings for OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/ocaml-xen-lowlevel-libs
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-cmdliner-devel
@@ -63,6 +63,10 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %exclude %{_libdir}/ocaml/xenlight/*.cmxa
 %exclude %{_libdir}/ocaml/xenlight/*.cmx
 %exclude %{_libdir}/ocaml/xenlight/*.mli
+%exclude %{_libdir}/ocaml/xentoollog/*.a
+%exclude %{_libdir}/ocaml/xentoollog/*.cmxa
+%exclude %{_libdir}/ocaml/xentoollog/*.cmx
+%exclude %{_libdir}/ocaml/xentoollog/*.mli
 %{_libdir}/ocaml/stublibs/dllxenlight_stubs.so
 %{_libdir}/ocaml/stublibs/dllxenlight_stubs.so.owner
 %{_libdir}/ocaml/stublibs/dllxentoollog_stubs.so
@@ -77,11 +81,18 @@ make install BINDIR=%{buildroot}/%{_libexecdir}/xenopsd/
 %{_libdir}/ocaml/xenlight/*.cmxa
 %{_libdir}/ocaml/xenlight/*.cmx
 %{_libdir}/ocaml/xenlight/*.mli
+%{_libdir}/ocaml/xentoollog/*.a
+%{_libdir}/ocaml/xentoollog/*.cmxa
+%{_libdir}/ocaml/xentoollog/*.cmx
+%{_libdir}/ocaml/xentoollog/*.mli
 
 %files runtime
 %{_libexecdir}/xenopsd/xenguest
 
 %changelog
+* Wed Jan 21 2015 David Scott <dave.scott@citrix.com> - 0.9.28-1
+- xentoollog is now a top-level package in 0.9.28
+
 * Sun Oct 19 2014 David Scott <dave.scott@citrix.com> - 0.9.25-4
 - xenguest should only be in the runtime package
 
