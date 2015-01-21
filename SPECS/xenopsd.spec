@@ -1,6 +1,6 @@
 Name:           xenopsd
-Version:        0.9.45
-Release:        2%{?dist}
+Version:        0.9.46
+Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -12,8 +12,6 @@ Source4:        xenopsd-xenlight-init
 Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
 Source7:        xenopsd-vncterm-wrapper
-Patch0:         xenopsd.f894d3d2d10aa6b4291902c5bb3d7f3a9cb48252
-Patch1:         xenopsd.958171fc701559903af413b2ae6a4ee6dcfd8266
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-findlib-devel
@@ -36,6 +34,7 @@ BuildRequires:  xen-devel
 BuildRequires:  ocaml-uutf-devel
 BuildRequires:  ocaml-xcp-rrd-devel
 BuildRequires:  ocaml-oclock-devel
+BuildRequires:  ocaml-backtrace-devel
 Requires:       message-switch
 Requires:       redhat-lsb-core
 Requires:       xenops-cli
@@ -81,8 +80,6 @@ Simple VM manager for Xen using libxenlight
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 cp %{SOURCE1} xenopsd-xc-init
 cp %{SOURCE2} xenopsd-simulator-init
 cp %{SOURCE3} xenopsd-libvirt-init
@@ -196,6 +193,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Wed Jan 21 2015 David Scott <dave.scott@citrix.com> - 0.9.46-1
+- Update to 0.9.46
+
 * Sun Oct 19 2014 David Scott <dave.scott@citrix.com> - 0.9.45-2
 - Add patch to fix the upstream qemu 4MiB videoram issue
 - Add patch to fix the device id upgrade issue

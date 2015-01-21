@@ -2,8 +2,8 @@
 
 Summary: Xen toolstack for XCP
 Name:    xapi
-Version: 1.9.57
-Release: 3%{?dist}
+Version: 1.9.58
+Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -52,6 +52,7 @@ BuildRequires: ocaml-xcp-rrd-devel
 BuildRequires: ocaml-tar-devel
 BuildRequires: python2-devel
 BuildRequires: ocaml-rrdd-plugin-devel
+BuildRequires: ocaml-backtrace-devel
 Requires: hwdata
 Requires: ocaml-xcp-inventory
 Requires: redhat-lsb-core
@@ -163,6 +164,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Wed Jan 21 2015 David Scott <dave.scott@citrix.com> - 1.9.58-1
+- Update to 1.9.58
+
 * Tue Dec 23 2014 David Scott <dave.scott@citrix.com> - 1.9.57-3
 - Add runtime dependency on busybox
 
