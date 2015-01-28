@@ -1,0 +1,26 @@
+commit 32a56a1a800fe9d1e917a986734baac695776152
+Author: David Scott <dave.scott@eu.citrix.com>
+Date:   Wed Jan 28 17:38:25 2015 +0000
+
+    CA-159588: use synchronous libxl domain destroy rather than async
+    
+    The async version was failing part of the way through with a timeout,
+    after killing the qemu but before killing the domain.
+    
+    The synchronous version seems to work ok.
+    
+    Signed-off-by: David Scott <dave.scott@eu.citrix.com>
+
+diff --git a/xl/xenops_server_xenlight.ml b/xl/xenops_server_xenlight.ml
+index 6ea302e..30eae69 100644
+--- a/xl/xenops_server_xenlight.ml
++++ b/xl/xenops_server_xenlight.ml
+@@ -1811,7 +1811,7 @@ module VM = struct
+ 			if DB.exists vm.Vm.id then DB.remove vm.Vm.id;
+ 		end;
+ 		debug "Calling Xenlight.domain_destroy domid=%d" domid;
+-		with_ctx (fun ctx -> Xenlight_events.async (Xenlight.Domain.destroy ctx domid)); 
++		with_ctx (fun ctx -> Xenlight.Domain.destroy ctx domid ());
+ 		debug "Call Xenlight.domain_destroy domid=%d completed" domid;
+ 
+ 		let log_exn_continue msg f x = try f x with e -> debug "Safely ignoring exception: %s while %s" (Printexc.to_string e) msg in
