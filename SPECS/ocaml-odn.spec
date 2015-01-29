@@ -22,7 +22,7 @@ like OASIS.
 %package        devel
 Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
-BuildRequires:	ocaml-type-conv%{_isa} >= 108.07.01
+BuildRequires:	ocaml-type-conv%{?_isa} >= 108.07.01
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for
