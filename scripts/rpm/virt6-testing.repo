@@ -1,5 +1,0 @@
-[virt-testing]
-name=CentOS-$releasever - virt-testing
-baseurl=http://cbs.centos.org/repos/virt6-testing/$basearch/os/
-gpgcheck=0
-enabled=1
