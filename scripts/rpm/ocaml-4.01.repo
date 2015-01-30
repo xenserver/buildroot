@@ -1,3 +1,4 @@
 [ocaml-4.01]
 name=CentOS 6 OCaml 4.01
 baseurl=http://xenbits.xen.org/djs/centos-ocaml-4.01/
+gpgcheck=0
