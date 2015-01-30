@@ -23,8 +23,9 @@ if [ $ARCH == 'armhf' ]; then
     APT_REPOS="$APT_REPOS |deb $MIRROR $DIST restricted universe"
 fi
 
-dpkg -l cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common > /dev/null 2>&1 || \
-   sudo apt-get install cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common
+REQUIREMENTS="cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software-properties-common"
+dpkg -l $REQUIREMENTS > /dev/null 2>&1 || \
+   sudo apt-get install $REQUIREMENTS
 
 sudo apt-add-repository -y ppa:jonathan-ludlam/xsbuild
 sudo apt-get update
