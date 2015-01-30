@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-ocplib-endian
-Version:        0.4
-Release:        2%{?dist}
+Version:        0.8
+Release:        1%{?dist}
 Summary:        Optimized functions to read and write int16/32/64 from strings and bigarrays
 License:        LGPL
 URL:            https://github.com/OCamlPro/ocplib-endian
@@ -63,6 +63,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/ocplib-endian/*.mli
 
 %changelog
+* Fri Jan 30 2015 Euan Harris <euan.harris@citrix.com> - 0.8-1
+- Update to 0.8
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.4-2
 - Split files correctly between base and devel packages
 
