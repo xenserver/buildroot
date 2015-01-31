@@ -45,12 +45,9 @@ gpgcheck=0
 Priority=1
 enabled=1
 
-[centos-xen-4-4]
-name=CentOS-$releasever - snapshot of Xen 4.4
-baseurl=http://xenbits.xen.org/djs/centos-xen-4-4/
-gpgcheck=0
-Priority=1
-enabled=1
+[ocaml-4.01]
+name=CentOS 6 OCaml 4.01
+baseurl=http://xenbits.xen.org/djs/centos-ocaml-4.01/
 
 [mock]
 name=Mock output

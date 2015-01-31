@@ -13,9 +13,10 @@ sed \
     -e "s,@XAPISRCBASEURL@,${XAPISRCBASEURL},g" \
     scripts/rpm/xapi.repo.in > scripts/rpm/xapi.repo
 
-install -m 0644 scripts/rpm/xapi.repo /etc/yum.repos.d/xapi.repo
-
-install -m 0644 scripts/rpm/centos-xen-4-4.repo /etc/yum.repos.d/centos-xen-4-4.repo
+for i in xapi Xen4CentOS ocaml-4.01
+do
+    install -m 0644 scripts/rpm/$i.repo /etc/yum.repos.d/$i.repo
+done
 
 yum -y install epel-release
 
