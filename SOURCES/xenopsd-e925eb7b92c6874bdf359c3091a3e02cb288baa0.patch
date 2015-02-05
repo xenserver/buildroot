@@ -1,0 +1,26 @@
+commit e925eb7b92c6874bdf359c3091a3e02cb288baa0
+Author: David Scott <dave.scott@citrix.com>
+Date:   Thu Feb 5 15:30:41 2015 +0000
+
+    libxl: we use 'backend-kind=vbd' to mean 'blkback'
+    
+    We also have
+    
+    - backend-kind=qdisk: qemu qdisk
+    - backend-kind=vbd3: tapdisk3
+    
+    Signed-off-by: David Scott <dave.scott@citrix.com>
+
+diff --git a/xl/xenops_server_xenlight.ml b/xl/xenops_server_xenlight.ml
+index 30eae69..0a20b13 100644
+--- a/xl/xenops_server_xenlight.ml
++++ b/xl/xenops_server_xenlight.ml
+@@ -989,7 +989,7 @@ module VBD = struct
+ 							then format_of_string (List.assoc "format" xd)
+ 							else Xenlight.DISK_FORMAT_QCOW2 in (* FIXME *)
+ 						Xenlight.DISK_BACKEND_QDISK, format, None
+-					| "blkback" ->
++					| "vbd" ->
+ 						Xenlight.DISK_BACKEND_PHY, Xenlight.DISK_FORMAT_RAW, Some !Xl_path.vbd_script
+ 					| x ->
+ 						failwith (Printf.sprintf "libxl doesn't support backend-kind=%s" x)
