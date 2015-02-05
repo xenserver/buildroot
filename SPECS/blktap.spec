@@ -1,11 +1,12 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
 Version: 0.9.3.fe874d
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
 Source0: https://github.com/xapi-project/%{name}/archive/fe874dbc0a4df6392907c35fcbd345e146eefdd7/%{name}-%{version}.tar.gz
 Patch0: blktap-gntcpy.patch
+Patch1: blktap-priu64.patch
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libaio-devel
@@ -20,7 +21,7 @@ Enhanced version of tapdisk with support for storage mirroring.
 %prep 
 %setup -q -n blktap-fe874dbc0a4df6392907c35fcbd345e146eefdd7
 %patch0 -p1
-
+%patch1 -p1
 
 %build
 sh autogen.sh
@@ -55,6 +56,9 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/sbin/*
 
 %changelog
+* Thu Feb 5 2015 David Scott <dave.scott@citrix.com> - 0.9.3.fe874d-2
+- Fix the build on 32-bit machines
+
 * Mon Dec 8 2014 Bob Ball <bob.ball@citrix.com> - 0.9.3.fe874d-1
 - Update to Creedence branch without grantcopy
 - Using checkpoint off xs64bit branch until an official release is made
