@@ -38,7 +38,7 @@ Simple LVM storage adapter for xapi
 
 %build
 cd volume
-for i in SR* Volume*; do ./$i --help > /dev/null; done
+for i in SR* Volume* Plugin*; do ./$i --help > /dev/null; done
 
 %install
 cd volume
