@@ -38,17 +38,6 @@ name=epel
 mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=x86_64
 failovermethod=priority
 
-[Xen4CentOS]
-name=CentOS-$releasever - Xen
-baseurl=http://mirror.centos.org/centos/6/xen4/x86_64/
-gpgcheck=0
-Priority=1
-enabled=1
-
-[ocaml-4.01]
-name=CentOS 6 OCaml 4.01
-baseurl=http://xenbits.xen.org/djs/centos-ocaml-4.01/
-
 [mock]
 name=Mock output
 baseurl=file://@PWD@/RPMS
@@ -56,4 +45,3 @@ gpgcheck=0
 priority=1
 enabled=1
 metadata_expire=0
-"""
