@@ -27,6 +27,12 @@ sudo yum -y install planex
 echo -n "Writing mock configuration..."
 mkdir -p mock
 sed -e "s|@PWD@|$PWD|g" scripts/rpm/mock-default.cfg.in > mock/default.cfg
+for i in Xen4CentOS ocaml-4.01 ; do
+    echo >> mock/default.cfg
+    cat scripts/rpm/$i.repo >> mock/default.cfg
+done
+echo '"""' >> mock/default.cfg
+
 ln -fs /etc/mock/site-defaults.cfg mock/
 ln -fs /etc/mock/logging.ini mock/
 echo " done"
