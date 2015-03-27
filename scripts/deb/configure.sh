@@ -27,9 +27,11 @@ REQUIREMENTS="cowbuilder python-rpm curl ocaml-nox apt-utils gdebi-core software
 dpkg -l $REQUIREMENTS > /dev/null 2>&1 || \
    sudo apt-get install $REQUIREMENTS
 
-sudo apt-add-repository -y ppa:jonathan-ludlam/xsbuild
-sudo apt-get update
-dpkg -l python-planex > /dev/null 2>&1 || sudo apt-get install python-planex
+if [ `which planex-fetch > /dev/null` ]; then
+  sudo apt-add-repository -y ppa:jonathan-ludlam/xsbuild
+  sudo apt-get update
+  sudo apt-get install python-planex
+fi
 
 mkdir -p BUILD
 
