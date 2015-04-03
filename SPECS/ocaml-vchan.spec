@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-vchan
-Version:        1.0.0
+Version:        2.0.2
 Release:        1%{?dist}
 Summary:        OCaml implementation of the Xen Vchan protocol
 License:        ISC
@@ -11,6 +11,7 @@ BuildRequires:  ocaml
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
+BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-cstruct-devel
 BuildRequires:  ocaml-io-page-devel
 BuildRequires:  ocaml-lwt-devel
@@ -22,6 +23,7 @@ BuildRequires:  ocaml-evtchn-devel
 BuildRequires:  ocaml-gnt-devel
 BuildRequires:  ocaml-ipaddr-devel
 BuildRequires:  ocaml-sexplib-devel
+BuildRequires:  ocaml-ounit-devel
 
 %description
 The Xen Vchan protocol allows high-bandwidth private communication channels
@@ -40,6 +42,7 @@ developing applications that use %{name}.
 %setup -q
 
 %build
+./configure
 make
 
 %install
@@ -64,5 +67,8 @@ make install
 %{_libdir}/ocaml/vchan/*.mli
 
 %changelog
+* Fri Apr  3 2015 David Scott <dave.scott@citrix.com> - 2.0.2-1
+- Update to 2.0.2
+
 * Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 1.0.0-1
 - Initial package
