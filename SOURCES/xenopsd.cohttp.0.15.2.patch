@@ -1,0 +1,33 @@
+diff -ur xenopsd-0.9.46.a/lib/xenopsd.ml xenopsd-0.9.46.b/lib/xenopsd.ml
+--- xenopsd-0.9.46.a/lib/xenopsd.ml	2014-11-20 11:58:24.000000000 +0000
++++ xenopsd-0.9.46.b/lib/xenopsd.ml	2015-04-03 14:47:52.962597019 +0000
+@@ -80,7 +80,7 @@
+ 					"User-agent", "xenopsd"
+ 				] in
+ 				let response = Cohttp.Response.make ~version:`HTTP_1_1 ~status:`Not_found ~headers () in
+-				Response.write (fun _ _ -> ()) response this_connection;
++				Response.write (fun _ -> ()) response this_connection;
+ 			end else begin
+ 				let context = {
+ 					Xenops_server.transferred_fd = Some received_fd
+diff -ur xenopsd-0.9.46.a/lib/xenops_server.ml xenopsd-0.9.46.b/lib/xenops_server.ml
+--- xenopsd-0.9.46.a/lib/xenops_server.ml	2014-11-20 11:58:24.000000000 +0000
++++ xenopsd-0.9.46.b/lib/xenops_server.ml	2015-04-03 14:46:46.731599590 +0000
+@@ -1285,7 +1285,7 @@
+ 						]) in
+ 					let request = Cohttp.Request.make ~meth:`PUT ~version:`HTTP_1_1 ~headers memory_url in
+ 
+-					Request.write (fun t _ -> ()) request mfd;
++					Request.write (fun _ -> ()) request mfd;
+ 
+ 					begin match Handshake.recv mfd with
+ 						| Handshake.Success -> ()
+@@ -1802,7 +1802,7 @@
+ 				] in
+ 				let response = Cohttp.Response.make ~version:`HTTP_1_1 
+ 				  ~status:`Not_found ~headers () in
+-				Response.write (fun _ _ -> ()) response s
++				Response.write (fun _ -> ()) response s
+ 		) ()
+ 
+ 	let generate_state_string _ dbg vm =

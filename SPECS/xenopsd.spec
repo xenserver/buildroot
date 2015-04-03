@@ -1,6 +1,6 @@
 Name:           xenopsd
 Version:        0.9.46
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -14,6 +14,7 @@ Source6:        xenopsd-network-conf
 Source7:        xenopsd-vncterm-wrapper
 Patch0:         xenopsd-32a56a1a800fe9d1e917a986734baac695776152
 Patch1:         xenopsd-e925eb7b92c6874bdf359c3091a3e02cb288baa0.patch
+Patch2:         xenopsd.cohttp.0.15.2.patch
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-findlib-devel
@@ -84,6 +85,7 @@ Simple VM manager for Xen using libxenlight
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 cp %{SOURCE1} xenopsd-xc-init
 cp %{SOURCE2} xenopsd-simulator-init
 cp %{SOURCE3} xenopsd-libvirt-init
@@ -197,6 +199,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Fri Apr  3 2015 David Scott <dave.scott@citrix.com> - 0.9.46-4
+- Update to cohttp.0.15.2
+
 * Thu Feb  5 2015 David Scott <dave.scott@citrix.com> - 0.9.46-3
 - Backport libxl blkback fix
 
