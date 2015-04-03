@@ -1,0 +1,23 @@
+diff -ur ocaml-cohttp-0.15.2.a/async/cohttp_async.ml ocaml-cohttp-0.15.2.b/async/cohttp_async.ml
+--- ocaml-cohttp-0.15.2.a/async/cohttp_async.ml	2015-04-03 09:24:22.222151568 +0000
++++ ocaml-cohttp-0.15.2.b/async/cohttp_async.ml	2015-04-03 09:37:35.598642885 +0000
+@@ -17,6 +17,7 @@
+ 
+ open Core.Std
+ open Async.Std
++open Cohttp (* avoid refering to modules within the pack by mistake *)
+ 
+ module IO = Cohttp_async_io
+ 
+diff -ur ocaml-cohttp-0.15.2.a/lwt/string_io_lwt.mli ocaml-cohttp-0.15.2.b/lwt/string_io_lwt.mli
+--- ocaml-cohttp-0.15.2.a/lwt/string_io_lwt.mli	2015-04-03 09:24:22.230155955 +0000
++++ ocaml-cohttp-0.15.2.b/lwt/string_io_lwt.mli	2015-04-03 09:30:51.157523040 +0000
+@@ -22,7 +22,7 @@
+    data into a {!Buffer.t}.  Never actually blocks despite the Lwt
+    use, although a future revision may yield when parsing large
+    strings. *)
+-include S.IO
++include Cohttp.S.IO
+   with type 'a t = 'a Lwt.t
+   and type ic = Cohttp.String_io.buf
+   and type oc = Buffer.t
