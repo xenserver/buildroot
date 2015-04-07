@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-testvmlib
-Version:        0.3
+Version:        0.4
 Release:        1%{?dist}
 Summary:        Mirage test VM library
 License:        ISC
@@ -71,6 +71,9 @@ cp client.native %{buildroot}%{_bindir}/mirage-testvm-cli
 %{_libdir}/ocaml/testvmlib/*.cmxa
 
 %changelog
+* Fri Apr  3 2015 David Scott <dave.scott@citrix.com> - 0.4-1
+- Update to 0.4
+
 * Wed Jul 16 2014 David Scott <dave.scott@citrix.com> - 0.3-1
 - Update to 0.3
 

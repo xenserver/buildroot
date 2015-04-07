@@ -1,0 +1,98 @@
+commit 89a9b461c8b02994abcb51ec38207994ce06aaed
+Author: David Scott <dave.scott@eu.citrix.com>
+Date:   Sat Mar 21 21:17:39 2015 +0000
+
+    Update to cohttp.0.15.0
+    
+    Signed-off-by: David Scott <dave.scott@eu.citrix.com>
+
+diff --git a/lib/cohttp_posix_io.ml b/lib/cohttp_posix_io.ml
+index 3a6da77..76777e9 100644
+--- a/lib/cohttp_posix_io.ml
++++ b/lib/cohttp_posix_io.ml
+@@ -38,6 +38,8 @@ module Unbuffered_IO = struct
+ 
+   type oc = Unix.file_descr
+ 
++  type conn = unit
++
+   let read_http_headers fd =
+     let buf = Buffer.create 128 in
+     (* We can safely read everything up to this marker: *)
+@@ -132,6 +134,7 @@ module Buffered_IO = struct
+ 
+   type ic = in_channel
+   type oc = out_channel
++  type conn = unit
+ 
+   let read_line ic =
+     try
+diff --git a/lib/xcp_client.ml b/lib/xcp_client.ml
+index c9d993a..b8c7bde 100644
+--- a/lib/xcp_client.ml
++++ b/lib/xcp_client.ml
+@@ -51,7 +51,7 @@ let http_rpc string_of_call response_of_string ?(srcstr="unset") ?(dststr="unset
+ 		| Some x ->
+ 			begin match split_colon x with
+ 			| username :: password :: [] ->
+-				Cohttp.Header.add_authorization headers (Cohttp.Auth.Basic (username, password))
++				Cohttp.Header.add_authorization headers (`Basic (username, password))
+ 			| _ -> headers
+ 			end
+ 		| None -> headers in
+@@ -63,14 +63,15 @@ let http_rpc string_of_call response_of_string ?(srcstr="unset") ?(dststr="unset
+ 		(fun fd ->
+ 			let ic = Unix.in_channel_of_descr fd in
+ 			let oc = Unix.out_channel_of_descr fd in
+-			Request.write (fun t oc -> Request.write_body t oc req) http_req oc;
++			Request.write (fun writer -> Request.write_body writer req) http_req oc;
+ 			match Response.read ic with
+ 				| `Eof -> failwith (Printf.sprintf "Failed to read HTTP response from: %s" (url ()))
+ 				| `Invalid x -> failwith (Printf.sprintf "Failed to read HTTP response from: %s (got '%s')" (url ()) x)
+ 				| `Ok t ->
+ 					begin match Cohttp.Response.status t with
+ 						| `OK ->
+-							let body = match Response.read_body_chunk t ic with
++							let reader = Response.make_body_reader t ic in
++							let body = match Response.read_body_chunk reader with
+ 							| Cohttp.Transfer.Chunk body
+ 							| Cohttp.Transfer.Final_chunk body -> body
+ 							| _ -> "" in
+diff --git a/lib/xcp_service.ml b/lib/xcp_service.ml
+index 8fb57bf..156c9dc 100644
+--- a/lib/xcp_service.ml
++++ b/lib/xcp_service.ml
+@@ -406,8 +406,8 @@ let http_handler call_of_string string_of_response process s =
+ 					"user-agent", default_service_name;
+ 					"content-length", string_of_int content_length;
+ 				] in
+-				let response = Cohttp.Response.make ~version:`HTTP_1_1 ~status:`OK ~headers ~encoding:(Cohttp.Transfer.Fixed content_length) () in
+-				Response.write (fun t oc -> Response.write_body t oc response_txt) response oc
++				let response = Cohttp.Response.make ~version:`HTTP_1_1 ~status:`OK ~headers ~encoding:(Cohttp.Transfer.Fixed (Int64.of_int content_length)) () in
++				Response.write (fun t -> Response.write_body t response_txt) response oc
+ 			end
+ 		| _, _ ->
+ 			let content_length = 0 in
+@@ -415,8 +415,8 @@ let http_handler call_of_string string_of_response process s =
+ 				"user-agent", default_service_name;
+ 				"content-length", string_of_int content_length;
+ 			] in
+-			let response = Cohttp.Response.make ~version:`HTTP_1_1 ~status:`Not_found ~headers ~encoding:(Cohttp.Transfer.Fixed content_length) () in
+-			Response.write (fun t oc -> ()) response oc
++			let response = Cohttp.Response.make ~version:`HTTP_1_1 ~status:`Not_found ~headers ~encoding:(Cohttp.Transfer.Fixed (Int64.of_int content_length)) () in
++			Response.write (fun t -> ()) response oc
+ 		end
+ 
+ let ign_thread (t:Thread.t) = ignore t
+diff --git a/opam b/opam
+index 08bb9ee..270252a 100644
+--- a/opam
++++ b/opam
+@@ -14,6 +14,7 @@ depends: [ "uri"
+            "xmlm"
+            "rpc" {> "1.4.0"}
+            "ocamlfind"
++           "cohttp" {>= "0.15.0"}
+            "message-switch"
+            "xapi-stdext"
+ 	   "xapi-rrd"

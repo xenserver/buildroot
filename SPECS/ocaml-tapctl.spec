@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-tapctl
-Version:        0.9.2
+Version:        0.10.0
 Release:        1%{?dist}
 Summary:        Manipulate running tapdisk instances
 License:        LGPL
@@ -59,6 +59,9 @@ make install
 %{_libdir}/ocaml/tapctl/*.mli
 
 %changelog
+* Sat Apr 4 2015 David Scott <dave.scott@citrix.com> - 0.10.0-1
+- Update to 0.10.0
+
 * Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.2-1
 - Update to 0.9.2
 

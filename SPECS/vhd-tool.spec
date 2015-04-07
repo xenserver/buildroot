@@ -2,11 +2,11 @@
 
 Summary: Command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
-Version: 0.7.5
+Version: 0.7.6
 Release: 1%{?dist}
 License: LGPL+linking exception
-URL:  https://github.com/xapi-project/vhd-tool
-Source0: https://github.com/xapi-project/vhd-tool/archive/v%{version}/%{name}-%{version}.tar.gz
+URL:  https://github.com/djs55/vhd-tool
+Source0: https://github.com/djs55/vhd-tool/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1: vhd-tool-sparse_dd-conf
 BuildRequires: ocaml
 BuildRequires: ocaml-findlib
@@ -49,6 +49,9 @@ make install
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
+* Thu Apr 3 2015 David Scott <dave.scott@citrix.com> - 0.7.6-1
+- Update to 0.7.6
+
 * Fri Jun 6 2014 Jonathan Ludlam <jonathan.ludlam@citrix.com> - 0.7.5-1
 - Update to 0.7.5
 
