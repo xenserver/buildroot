@@ -1,12 +1,11 @@
 Summary: Enhanced version of tapdisk
 Name:    blktap
-Version: 0.9.3.fe874d
-Release: 2%{?dist}
+Version: 3.0.50
+Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/xapi-project/blktap
-Source0: https://github.com/xapi-project/%{name}/archive/fe874dbc0a4df6392907c35fcbd345e146eefdd7/%{name}-%{version}.tar.gz
+Source0: https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch0: blktap-gntcpy.patch
-Patch1: blktap-priu64.patch
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libaio-devel
@@ -18,10 +17,17 @@ BuildRequires: openssl-devel
 %description
 Enhanced version of tapdisk with support for storage mirroring.
 
+%package        devel
+Summary:        Development files for %{name}
+Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+The %{name}-devel package contains libraries and signature files for
+developing applications that use %{name}.
+
 %prep 
-%setup -q -n blktap-fe874dbc0a4df6392907c35fcbd345e146eefdd7
+%setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 sh autogen.sh
@@ -41,6 +47,8 @@ mkdir -p %{buildroot}/%{_libdir}/%{name}/etc/udev/rules.d
 
 make install DESTDIR=%{buildroot}
 
+mkdir -p %{buildroot}/usr/include/blktap
+mv %{buildroot}/%{_libdir}/%{name}/include/blktap/blktap3.h %{buildroot}/usr/include/blktap
 
 %files
 %{_libdir}/%{name}/bin/*
@@ -55,7 +63,13 @@ make install DESTDIR=%{buildroot}
 %{_libdir}/%{name}/libexec/*
 %{_libdir}/%{name}/sbin/*
 
+%files devel
+/usr/include/blktap/*
+
 %changelog
+* Tue Apr 7 2015 David Scott <dave.scott@citrix.com> - 3.0.50-1
+- Update to 3.0.50
+
 * Thu Feb 5 2015 David Scott <dave.scott@citrix.com> - 0.9.3.fe874d-2
 - Fix the build on 32-bit machines
 

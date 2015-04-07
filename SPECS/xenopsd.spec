@@ -1,6 +1,6 @@
 Name:           xenopsd
-Version:        0.9.46
-Release:        4%{?dist}
+Version:        0.10.1
+Release:        1%{?dist}
 Summary:        Simple VM manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenopsd
@@ -12,9 +12,6 @@ Source4:        xenopsd-xenlight-init
 Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
 Source7:        xenopsd-vncterm-wrapper
-Patch0:         xenopsd-32a56a1a800fe9d1e917a986734baac695776152
-Patch1:         xenopsd-e925eb7b92c6874bdf359c3091a3e02cb288baa0.patch
-Patch2:         xenopsd.cohttp.0.15.2.patch
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-findlib-devel
@@ -83,9 +80,6 @@ Simple VM manager for Xen using libxenlight
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
 cp %{SOURCE1} xenopsd-xc-init
 cp %{SOURCE2} xenopsd-simulator-init
 cp %{SOURCE3} xenopsd-libvirt-init
@@ -199,6 +193,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Tue Apr  7 2015 David Scott <dave.scott@citrix.com> - 0.10.1-1
+- Update to 0.10.1
+
 * Fri Apr  3 2015 David Scott <dave.scott@citrix.com> - 0.9.46-4
 - Update to cohttp.0.15.2
 
