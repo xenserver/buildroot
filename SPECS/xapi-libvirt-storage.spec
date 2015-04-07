@@ -1,10 +1,10 @@
 Name:           xapi-libvirt-storage
-Version:        0.9.8
+Version:        0.10.0
 Release:        1%{?dist}
 Summary:        Allows the manipulation of libvirt storage pools and volumes via xapi
 License:        LGPL
 URL:            https://github.com/xapi-project/xapi-libvirt-storage/archive/%{version}.tar.gz
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        xapi-libvirt-storage-init
 BuildRequires:  libvirt-devel
 BuildRequires:  ocaml
@@ -49,6 +49,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Tue Apr  7 2015 David Scott <dave.scott@citrix.com> - 0.10.0-1
+- Update to 0.10.0
+
 * Sat Apr 26 2014 David Scott <dave.scott@citrix.com> - 0.9.8-1
 - Update to 0.9.8
 

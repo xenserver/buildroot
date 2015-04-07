@@ -1,12 +1,12 @@
 %define debug_package %{nil}
 
 Name:           ocaml-rrd-transport
-Version:        0.7.2
+Version:        0.8.0
 Release:        1%{?dist}
 Summary:        Shared-memory protocols for transmitting RRD data
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/rrd-transport/
-Source0:        https://github.com/xapi-project/rrd-transport/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/rrd-transport/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-cstruct-devel
@@ -48,40 +48,26 @@ ocaml setup.ml -install
 
 %files
 %doc LICENSE
-%{_libdir}/ocaml/rrd-transport/META
-%{_libdir}/ocaml/rrd-transport/rrd_transport.cma
-%{_libdir}/ocaml/rrd-transport/rrd_io.cmi
-%{_libdir}/ocaml/rrd-transport/rrd_json.cmi
-%{_libdir}/ocaml/rrd-transport/rrd_protocol.cmi
-%{_libdir}/ocaml/rrd-transport/rrd_protocol_v1.cmi
-%{_libdir}/ocaml/rrd-transport/rrd_protocol_v2.cmi
-%{_libdir}/ocaml/rrd-transport/rrd_reader.cmi
-%{_libdir}/ocaml/rrd-transport/rrd_rpc.cmi
-%{_libdir}/ocaml/rrd-transport/rrd_writer.cmi
+%{_libdir}/ocaml/rrd-transport
+%exclude %{_libdir}/ocaml/rrd-transport/*.a
+%exclude %{_libdir}/ocaml/rrd-transport/*.cmxa
+%exclude %{_libdir}/ocaml/rrd-transport/*.cmx
+%exclude %{_libdir}/ocaml/rrd-transport/*.mli
+%exclude %{_libdir}/ocaml/rrd-transport/*.cmt
+%exclude %{_libdir}/ocaml/rrd-transport/*.cmti
+%exclude %{_libdir}/ocaml/rrd-transport/*.annot
 
 %files devel
 %doc ChangeLog README.md
-%{_libdir}/ocaml/rrd-transport/rrd_transport.a
-%{_libdir}/ocaml/rrd-transport/rrd_transport.cmxa
-%{_libdir}/ocaml/rrd-transport/rrd_transport.cmxs
-%{_libdir}/ocaml/rrd-transport/rrd_io.cmx
-%{_libdir}/ocaml/rrd-transport/rrd_io.mli
-%{_libdir}/ocaml/rrd-transport/rrd_json.cmx
-%{_libdir}/ocaml/rrd-transport/rrd_json.mli
-%{_libdir}/ocaml/rrd-transport/rrd_protocol.cmx
-%{_libdir}/ocaml/rrd-transport/rrd_protocol.mli
-%{_libdir}/ocaml/rrd-transport/rrd_protocol_v1.cmx
-%{_libdir}/ocaml/rrd-transport/rrd_protocol_v1.mli
-%{_libdir}/ocaml/rrd-transport/rrd_protocol_v2.cmx
-%{_libdir}/ocaml/rrd-transport/rrd_protocol_v2.mli
-%{_libdir}/ocaml/rrd-transport/rrd_reader.cmx
-%{_libdir}/ocaml/rrd-transport/rrd_reader.mli
-%{_libdir}/ocaml/rrd-transport/rrd_rpc.cmx
-%{_libdir}/ocaml/rrd-transport/rrd_rpc.mli
-%{_libdir}/ocaml/rrd-transport/rrd_writer.cmx
-%{_libdir}/ocaml/rrd-transport/rrd_writer.mli
+%{_libdir}/ocaml/rrd-transport/*.a
+%{_libdir}/ocaml/rrd-transport/*.cmx
+%{_libdir}/ocaml/rrd-transport/*.cmxa
+%{_libdir}/ocaml/rrd-transport/*.mli
 
 %changelog
+* Sat Apr  4 2015 David Scott <dave.scott@citrix.com> - 0.8.0-1
+- Update to 0.8.0
+
 * Fri Oct 24 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.7.2-1
 - Update to 0.7.2
 

@@ -1,13 +1,12 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        0.9.21
-Release:        2%{?dist}
+Version:        0.10.0
+Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
 Source0:        https://github.com/xapi-project/xcp-idl/archive/v%{version}/xcp-idl-%{version}.tar.gz
-Patch0:         xcp-idl.cohttp.0.15.2.patch
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-cmdliner-devel
@@ -45,7 +44,6 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n xcp-idl-%{version}
-%patch0 -p1
 
 %build
 ocaml setup.ml -configure
@@ -75,6 +73,9 @@ make install
 %{_libdir}/ocaml/xcp/*.mli
 
 %changelog
+* Sat Apr  4 2015 David Scott <dave.scott@citrix.com> - 0.10.0-1
+- Update to 0.10.0
+
 * Thu Apr  3 2015 David Scott <dave.scott@citrix.com> - 0.9.21-2
 - Update to cohttp.0.15.2
 
