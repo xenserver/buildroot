@@ -1,0 +1,101 @@
+commit 103b5093e14a262929039bbedf3cbe2b016c1b47
+Author: David Scott <dave.scott@citrix.com>
+Date:   Sun Apr 19 12:45:42 2015 +0000
+
+    HTTP: read the full response payload i.e. more than one chunk
+    
+    Signed-off-by: David Scott <dave.scott@eu.citrix.com>
+    
+    Conflicts:
+    
+    	core/protocol.ml
+    
+    Signed-off-by: David Scott <dave.scott@citrix.com>
+
+diff --git a/core/protocol.ml b/core/protocol.ml
+index f4d77f7..595e308 100644
+--- a/core/protocol.ml
++++ b/core/protocol.ml
+@@ -271,40 +271,48 @@ module type S = sig
+ end
+ 
+ module Connection = functor(IO: Cohttp.S.IO) -> struct
+-	open IO
+-	module Request = Cohttp.Request.Make(IO)
+-	module Response = Cohttp.Response.Make(IO)
+-
+-	let rpc (ic, oc) frame =
+-		let b, meth, uri = In.to_request frame in
+-		let body = match b with None -> "" | Some x -> x in
+-		let headers = In.headers body in
+-		let req = Cohttp.Request.make ~meth ~headers uri in
+-		Request.write (fun writer -> match b with
+-		| Some body ->
+-			Request.write_body writer body
+-		| None -> return ()
+-		) req oc >>= fun () ->
+-
+-		Response.read ic >>= function
+-		| `Ok response ->
+-			if Cohttp.Response.status response <> `OK then begin
+-				Printf.fprintf stderr "Server sent: %s\n%!" (Cohttp.Code.string_of_status (Cohttp.Response.status response));
+-				(* Response.write (fun _ _ -> return ()) response Lwt_io.stderr >>= fun () -> *)
+-				return (`Error Unsuccessful_response)
+-			end else begin
+-				let reader = Response.make_body_reader response ic in
+-				Response.read_body_chunk reader >>= function
+-				| Transfer.Final_chunk x -> return (`Ok x)
+-				| Transfer.Chunk x -> return (`Ok x)
+-				| Transfer.Done -> return (`Ok "")
+-			end
+-		| `Invalid s ->
+-			Printf.fprintf stderr "Invalid response: '%s'\n%!" s;
+-			return (`Error Failed_to_read_response)
+-		| `Eof ->
+-			Printf.fprintf stderr "Empty response\n%!";
+-			return (`Error Failed_to_read_response)
++  open IO
++  module Request = Cohttp.Request.Make(IO)
++  module Response = Cohttp.Response.Make(IO)
++
++  let rpc (ic, oc) frame =
++    let b, meth, uri = In.to_request frame in
++    let body = match b with None -> "" | Some x -> x in
++    let headers = In.headers body in
++    let req = Cohttp.Request.make ~meth ~headers uri in
++    Request.write (fun writer -> match b with
++        | Some body ->
++          Request.write_body writer body
++        | None -> return ()
++      ) req oc >>= fun () ->
++
++    Response.read ic >>= function
++    | `Ok response ->
++      if Cohttp.Response.status response <> `OK then begin
++        Printf.fprintf stderr "Server sent: %s\n%!" (Cohttp.Code.string_of_status (Cohttp.Response.status response));
++        (* Response.write (fun _ _ -> return ()) response Lwt_io.stderr >>= fun () -> *)
++        return (`Error Unsuccessful_response)
++      end else begin
++        let reader = Response.make_body_reader response ic in
++        let results = Buffer.create 128 in
++        let rec read () =
++          Response.read_body_chunk reader >>= function
++          | Transfer.Final_chunk x ->
++            Buffer.add_string results x;
++            return (`Ok (Buffer.contents results))
++          | Transfer.Chunk x ->
++            Buffer.add_string results x;
++            read ()
++          | Transfer.Done ->
++            return (`Ok (Buffer.contents results)) in
++        read ()
++      end
++    | `Invalid s ->
++      Printf.fprintf stderr "Invalid response: '%s'\n%!" s;
++      return (`Error Failed_to_read_response)
++    | `Eof ->
++      Printf.fprintf stderr "Empty response\n%!";
++      return (`Error Failed_to_read_response)
+ end
+ 
+ module Opt = struct
