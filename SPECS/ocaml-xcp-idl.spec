@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        0.10.0
+Version:        0.11.1
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
@@ -73,6 +73,9 @@ make install
 %{_libdir}/ocaml/xcp/*.mli
 
 %changelog
+* Sat Apr 19 2015 David Scott <dave.scott@citrix.com> - 0.11.1-1
+- Update to 0.11.1
+
 * Sat Apr  4 2015 David Scott <dave.scott@citrix.com> - 0.10.0-1
 - Update to 0.10.0
 
