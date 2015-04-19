@@ -1,11 +1,12 @@
 Name:           message-switch
 Version:        0.10.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A store and forward message switch
 License:        FreeBSD
 URL:            https://github.com/djs55/message-switch
 Source0:        https://github.com/djs55/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        message-switch-init
+Patch0:         message-switch.3ebe9c5be287201700ddc28200450aa625e34ce5
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
@@ -25,6 +26,7 @@ A store and forward message switch for OCaml.
 
 %prep
 %setup -q
+%patch0 -p1
 cp %{SOURCE1} message-switch-init
 
 %build
@@ -72,6 +74,9 @@ developing applications that use %{name}.
 %{_libdir}/ocaml/message_switch/*
 
 %changelog
+* Sun Apr 19 2015 David Scott <dave.scott@citrix.com> - 0.10.5.1-2
+- Fix for bug exposed by cohttp upgrade
+
 * Thu Apr  2 2015 David Scott <dave.scott@citrix.com> - 0.10.5.1-1
 - Update to 0.10.5.1
 
