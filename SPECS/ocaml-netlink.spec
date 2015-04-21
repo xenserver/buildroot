@@ -1,4 +1,4 @@
-%define planex_version 0.2.0
+%define planex_version 0.2.1
 %define planex_release 1
 
 Name:           ocaml-netlink
@@ -7,7 +7,7 @@ Release:        %{planex_release}
 Summary:        OCaml bindings to libnl
 License:        LGPL
 URL:            https://github.com/xapi-project/ocaml-netlink
-Source0:        https://github.com/xapi-project/ocaml-netlink/archive/v%{planex_version}.tar.gz
+Source0:        https://github.com/jonludlam/ocaml-netlink/archive/v%{planex_version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires:  libffi-devel
 BuildRequires:  libnl3
