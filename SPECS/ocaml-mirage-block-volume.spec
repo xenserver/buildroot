@@ -24,6 +24,8 @@ BuildRequires:  ocaml-shared-block-ring-devel
 BuildRequires:  ocaml-mirage-block-unix-devel
 BuildRequires:  ocaml-mirage-clock-unix-devel
 BuildRequires:  ocaml-cmdliner-devel
+BuildRequires:  ocaml-camldm-devel
+BuildRequires:  ocaml-rpc-devel
 
 %description
 A Linux-LVM compatible logical volume manager for mirage
