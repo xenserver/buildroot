@@ -11,7 +11,6 @@ BuildRequires:  ocaml
 BuildRequires:  oasis
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-uuidm-devel
