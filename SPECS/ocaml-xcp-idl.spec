@@ -76,7 +76,7 @@ make install
 * Sat Apr  4 2015 David Scott <dave.scott@citrix.com> - 0.10.0-1
 - Update to 0.10.0
 
-* Thu Apr  3 2015 David Scott <dave.scott@citrix.com> - 0.9.21-2
+* Fri Apr  3 2015 David Scott <dave.scott@citrix.com> - 0.9.21-2
 - Update to cohttp.0.15.2
 
 * Wed Jan 21 2015 David Scott <dave.scott@citrix.com> - 0.9.21-1

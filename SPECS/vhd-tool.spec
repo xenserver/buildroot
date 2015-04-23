@@ -49,7 +49,7 @@ make install
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
-* Thu Apr 3 2015 David Scott <dave.scott@citrix.com> - 0.7.6-1
+* Fri Apr 3 2015 David Scott <dave.scott@citrix.com> - 0.7.6-1
 - Update to 0.7.6
 
 * Fri Jun 6 2014 Jonathan Ludlam <jonathan.ludlam@citrix.com> - 0.7.5-1

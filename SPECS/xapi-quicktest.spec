@@ -41,7 +41,7 @@ cp quicktest.native %{buildroot}%{_bindir}
 %{_bindir}/quicktest.native
 
 %changelog
-* Thu Apr  3 2015 David Scott <dave.scott@citrix.com> - 0.1.0-1
+* Fri Apr  3 2015 David Scott <dave.scott@citrix.com> - 0.1.0-1
 - Update to 0.1.0
 
 * Wed Jul 30 2014 Jon Ludlam <euan.harris@citrix.com> - 0.0.0-2
