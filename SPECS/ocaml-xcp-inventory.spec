@@ -10,7 +10,6 @@ Source0:        https://github.com/xapi-project/xcp-inventory/archive/v%{version
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-findlib-devel
-BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-stdext-devel
 BuildRequires:  ocaml-uuidm-devel
 
