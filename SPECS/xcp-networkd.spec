@@ -11,7 +11,6 @@ Source3:        xcp-networkd-network-conf
 Source4:        xcp-networkd-bridge-conf
 BuildRequires:  ocaml
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-obuild
 BuildRequires:  ocaml-rpc-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  forkexecd-devel
