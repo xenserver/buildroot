@@ -1,9 +1,6 @@
-%define planex_version 0.1
-%define planex_release 1
-
 Name:           ocaml-backtrace
-Version:        %{planex_version}
-Release:        %{planex_release}
+Version:        0.1
+Release:        1%{?dist}
 Summary:        Library for processing backtraces across hosts/processes/languages
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/backtrace
