@@ -1,4 +1,4 @@
-%define planex_version 0.2.0
+%define planex_version 0.2.1
 %define planex_release 1
 
 Name:           ocaml-netlink
@@ -14,7 +14,6 @@ BuildRequires:  libnl3
 BuildRequires:  ocaml
 BuildRequires:  ocaml-ctypes-devel
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-obuild
 
 %description
 The Netlink Protocol Library Suite (libnl) provides APIs to the netlink
@@ -57,6 +56,9 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 %{_libdir}/ocaml/netlink/*.cmxa
 
 %changelog
+* Thu Apr 23 2015 Euan Harris <euan.harris@citrix.com> - 0.2.1-1
+- Update to 0.2.1
+
 * Wed Oct 01 2014 David Scott <dave.scott@citrix.com> - 0.2.0-1
 - Update to 0.2.0
 
