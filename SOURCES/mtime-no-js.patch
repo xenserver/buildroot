@@ -1,0 +1,19 @@
+diff -ur mtime-0.8.1.orig/myocamlbuild.ml mtime-0.8.1/myocamlbuild.ml
+--- mtime-0.8.1.orig/myocamlbuild.ml	2015-04-24 00:02:00.804064391 +0000
++++ mtime-0.8.1/myocamlbuild.ml	2015-04-24 00:18:04.087005065 +0000
+@@ -4,13 +4,12 @@
+ 
+ let () =
+   dispatch begin fun d ->
+-    Ocamlbuild_js_of_ocaml.dispatcher d;
+     match d with
+     | After_rules ->
+         flag ["link"; "library"; "ocaml"; "byte"; "use_mtime"]
+-          (S [A "-dllib"; A "-lmtime_stubs";]);
++          (S [A "-dllib"; A "-lmtime_stubs"; A "-dllib"; A "-lrt";]);
+         flag ["link"; "library"; "ocaml"; "native"; "use_mtime"]
+-          (S [A "-cclib"; A "-lmtime_stubs";]);
++          (S [A "-cclib"; A "-lmtime_stubs"; A "-cclib"; A "-lrt";]);
+         flag ["link"; "ocaml"; "link_mtime"]
+           (A "src-os/libmtime_stubs.a");
+         dep ["link"; "ocaml"; "use_mtime"]
