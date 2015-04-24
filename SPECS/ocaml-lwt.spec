@@ -2,7 +2,7 @@
 %define debug_package %{nil}
 
 Name:           ocaml-lwt
-Version:        2.4.5
+Version:        2.4.8
 Release:        1%{?dist}
 Summary:        OCaml lightweight thread library
 
@@ -45,13 +45,13 @@ developing applications that use %{name}.
 
 #%patch0 -p1
 
-mv README README.old
-iconv -f iso-8859-1 -t utf-8 < README.old > README
+mv README.md README.old
+iconv -f iso-8859-1 -t utf-8 < README.old > README.md
 
 
 %build
 export C_INCLUDE_PATH=/usr/include/libev
-./configure --enable-react --enable-text --disable-libev --enable-ssl
+./configure --enable-react --disable-libev --enable-ssl --enable-camlp4 --enable-unix --enable-preemptive
 make
 
 
@@ -71,7 +71,7 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 # This space intentionally left blank
 
 %files devel
-%doc LICENSE COPYING CHANGES README
+%doc LICENSE COPYING CHANGES README.md
 %{_libdir}/ocaml/lwt/*
 %{_libdir}/ocaml/stublibs/*.so
 %{_libdir}/ocaml/stublibs/*.so.owner
