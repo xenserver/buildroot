@@ -1,5 +1,5 @@
 Name:           message-switch
-Version:        0.10.5.1
+Version:        0.11.0
 Release:        1%{?dist}
 Summary:        A store and forward message switch
 License:        FreeBSD
@@ -15,6 +15,8 @@ BuildRequires: ocaml-cmdliner-devel
 BuildRequires: ocaml-re-devel
 BuildRequires: ocaml-rpc-devel
 BuildRequires: ocaml-async-devel
+BuildRequires: ocaml-shared-block-ring-devel
+BuildRequires: ocaml-mtime-devel
 Requires:      redhat-lsb-core
 Requires(post): chkconfig
 Requires(preun): chkconfig
@@ -72,6 +74,12 @@ developing applications that use %{name}.
 %{_libdir}/ocaml/message_switch/*
 
 %changelog
+* Thu Apr 23 2015 David Scott <dave.scott@citrix.com> - 0.11.0-1
+- Update to 0.11.0
+
+* Sun Apr 19 2015 David Scott <dave.scott@citrix.com> - 0.10.5.1-2
+- Fix for bug exposed by cohttp upgrade
+
 * Thu Apr  2 2015 David Scott <dave.scott@citrix.com> - 0.10.5.1-1
 - Update to 0.10.5.1
 

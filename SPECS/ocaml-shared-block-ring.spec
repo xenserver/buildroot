@@ -27,6 +27,9 @@ Summary:        Development files for %{name}
 Requires:       %{name} = %{version}-%{release}
 Requires:       ocaml-cstruct-devel%{?_isa}
 Requires:       ocaml-lwt-devel%{?_isa}
+Requires:       ocaml-mirage-block-unix-devel%{?_isa}
+Requires:       ocaml-mirage-clock-unix-devel%{?_isa}
+Requires:       ocaml-io-page-devel%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and signature files for

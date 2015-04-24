@@ -1,10 +1,10 @@
 Name:           squeezed
-Version:        0.10.6
-Release:        2%{?dist}
+Version:        0.11.0
+Release:        1%{?dist}
 Summary:        Memory ballooning daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/squeezed
-Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        squeezed-init
 Source2:        squeezed-conf
 BuildRequires:  ocaml
@@ -57,6 +57,9 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
+* Fri Apr 24 2015 David Scott <dave.scott@citrix.com> - 0.11.0-1
+- Update to 0.11.0
+
 * Thu Sep 4 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.10.6-2
 - Remove dependency on xen-missing-headers
 
