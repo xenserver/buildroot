@@ -9,7 +9,7 @@ Summary:        Inotify bindings for OCaml.
 Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/whitequark/ocaml-inotify
-Source0:        https://github.com/whitequark/ocaml-inotify/archive/%{version}.tar.gz
+Source0:        https://github.com/whitequark/ocaml-inotify/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
