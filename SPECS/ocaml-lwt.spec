@@ -77,6 +77,9 @@ strip $OCAMLFIND_DESTDIR/stublibs/dll*.so
 %{_libdir}/ocaml/stublibs/*.so.owner
 
 %changelog
+* Mon May 12 2014 David Scott <dave.scott@citrix.com> - 2.4.8-1
+- Update to 2.4.8
+
 * Sun May 11 2014 David Scott <dave.scott@citrix.com> - 2.4.5-1
 - Update to 2.4.5
 
