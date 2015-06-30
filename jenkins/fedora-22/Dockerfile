@@ -1,22 +1,25 @@
-FROM            centos:centos7
+FROM            fedora:22
 MAINTAINER      Euan Harris <euan.harris@citrix.com>
 
+# This fails because of the following problem:
+#   https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=1171928
+
 # Update
-RUN     yum upgrade -y
+RUN     dnf upgrade -y
 
 # Install Jenkins requirements
-RUN     yum -y install openssh-server
+RUN     dnf -y install openssh-server
 RUN     mkdir /var/run/sshd
-RUN     yum -y install java-1.8.0-openjdk-headless
+RUN     dnf -y install java-1.8.0-openjdk-headless
 
 RUN useradd jenkins 
 RUN echo "jenkins:jenkins" |chpasswd
 
 # Install extra repositories
-RUN yum -y install epel-release
+RUN dnf -y install epel-release
 
 # Install bootstrap dependencies
-RUN yum install -y mock redhat-lsb-core rpm-build git augeas sudo
+RUN dnf install -y mock redhat-lsb-core rpm-build git augeas sudo
 
 # Mock won't run as root
 RUN usermod -G mock,wheel -a jenkins

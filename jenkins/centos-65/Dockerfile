@@ -7,8 +7,7 @@ RUN     yum upgrade -y
 # Install Jenkins requirements
 RUN     yum -y install openssh-server
 RUN     mkdir /var/run/sshd
-#RUN     service sshd start
-RUN     yum -y install java-1.7.0-openjdk
+RUN     yum -y install java-1.8.0-openjdk-headless
 
 RUN useradd jenkins 
 RUN echo "jenkins:jenkins" |chpasswd

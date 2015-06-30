@@ -1,5 +1,8 @@
-FROM            centos:centos7
+FROM            fedora:21
 MAINTAINER      Euan Harris <euan.harris@citrix.com>
+
+# This fails because of the following problem:
+#   https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=1171928
 
 # Update
 RUN     yum upgrade -y
