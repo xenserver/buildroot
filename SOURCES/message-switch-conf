@@ -1,0 +1,1 @@
+((path /var/run/message-switch/sock)(daemonize true)(pidfile())(configfile())(statedir (/var/run/message-switch/state)))
