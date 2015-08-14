@@ -1,14 +1,12 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xcp-idl
-Version:        0.11.1
+Version:        0.13.0
 Release:        1%{?dist}
 Summary:        Common interface definitions for XCP services
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-idl
 Source0:        https://github.com/xapi-project/xcp-idl/archive/v%{version}/xcp-idl-%{version}.tar.gz
-Patch0:         xcp-idl.6ea42ebb24663f22da2dd6c4129933427a9e16a5.patch
-Patch1:         xcp-idl.73949ea31abe5cefb9311a22b44beae1ca9f1b16.patch
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-cmdliner-devel
@@ -46,8 +44,6 @@ developing applications that use %{name}.
 
 %prep
 %setup -q -n xcp-idl-%{version}
-%patch0 -p1
-%patch1 -p1
 
 %build
 ocaml setup.ml -configure
@@ -77,6 +73,9 @@ make install
 %{_libdir}/ocaml/xcp/*.mli
 
 %changelog
+* Fri Aug 14 2015 David Scott <dave.scott@citrix.com> - 0.13.0-1
+- Update to 0.13.0
+
 * Fri Apr 24 2015 David Scott <dave.scott@citrix.com> - 0.11.1-1
 - Update to 0.11.1
 - Update to message-switch.0.11.0 API
