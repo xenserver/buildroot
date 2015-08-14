@@ -18,7 +18,6 @@ Requires:       ffs
 Requires:       sm-cli
 Requires:       xcp-sm
 Requires:       xapi-storage-script
-Requires:       ezlvm
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
 Requires:       squeezed
