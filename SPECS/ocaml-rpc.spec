@@ -1,12 +1,12 @@
 %global debug_package %{nil}
 
 Name:           ocaml-rpc
-Version:        1.5.1
+Version:        1.5.5
 Release:        1%{?dist}
 Summary:        An RPC library for OCaml
 License:        LGPL
-URL:            https://github.com/samoht/ocaml-rpc
-Source0:        https://github.com/samoht/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+URL:            https://github.com/mirage/ocaml-rpc
+Source0:        https://github.com/mirage/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
@@ -50,6 +50,9 @@ make install DESTDIR=${buildroot}
 %{_libdir}/ocaml/rpclib/*.cmx
 
 %changelog
+* Fri Aug 14 2015 David Scott <dave.scott@citrix.com> - 1.5.5-1
+- Update to 1.5.5
+
 * Fri May 23 2014 Euan Harris <euan.harris@citrix.com> - 1.5.1-1
 - Update to 1.5.1, removing dependency on js-of-ocaml
 
