@@ -40,6 +40,7 @@ BuildRequires: ocaml-tapctl-devel
 BuildRequires: ocaml-xen-lowlevel-libs-devel
 BuildRequires: ocaml-cmdliner-devel
 BuildRequires: ocaml-opasswd-devel
+BuildRequires: ocaml-pci-devel
 BuildRequires: git
 BuildRequires: ocaml-xcp-inventory-devel
 BuildRequires: ocaml-xenstore-devel
@@ -89,7 +90,7 @@ cp %{SOURCE5} xen-api-pam
 
 
 %build
-./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=%{_libdir}/xapi/plugins --optdir=%{_libdir}/xapi --disable-tests
+./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=%{_libdir}/xapi/plugins --optdir=%{_libdir}/xapi
 make
 
 sed -e "s|@LIBEXECDIR@|%{_libexecdir}|g" xen-api-xapi-conf.in -e "s|@LIBDIR@|%{_libdir}|g" > xen-api-xapi-conf
