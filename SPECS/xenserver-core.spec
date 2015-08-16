@@ -9,7 +9,6 @@ Requires:       xenserver-install-wizard
 Requires:       xapi
 Requires:       xapi-python-devel
 Requires:       xapi-xe
-Requires:       xe-create-templates
 Requires:       xenopsd-simulator
 Requires:       xenopsd-xc
 Requires:       xenopsd-xenlight
