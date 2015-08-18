@@ -1,9 +1,9 @@
-config_opts['root'] = 'epel-6-x86_64'
+config_opts['root'] = 'epel-7-x86_64'
 config_opts['target_arch'] = 'x86_64'
 config_opts['legal_host_arches'] = ('x86_64',)
 config_opts['chroot_setup_cmd'] = 'groupinstall buildsys-build'
-config_opts['releasever'] = '6'
-config_opts['dist'] = 'el6'  # only useful for --resultdir variable subst
+config_opts['releasever'] = '7'
+config_opts['dist'] = 'el7'  # only useful for --resultdir variable subst
 
 config_opts['plugin_conf']['package_state_enable'] = False
 config_opts['plugin_conf']['tmpfs_enable'] = True    
@@ -26,18 +26,18 @@ syslog_device=
 [base]
 name=BaseOS
 enabled=1
-mirrorlist=http://mirrorlist.centos.org/?release=6&arch=x86_64&repo=os
+mirrorlist=http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os
 failovermethod=priority
 
 [updates]
 name=updates
 enabled=1
-mirrorlist=http://mirrorlist.centos.org/?release=6&arch=x86_64&repo=updates
+mirrorlist=http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=updates
 failovermethod=priority
 
 [epel]
 name=epel
-mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=x86_64
+mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=x86_64
 failovermethod=priority
 
 [mock]

@@ -11,7 +11,7 @@ sed \
     -e "s,@XAPISRCBASEURL@,${XAPISRCBASEURL},g" \
     scripts/rpm/xapi.repo.in > scripts/rpm/xapi.repo
 
-for i in xapi Xen4CentOS ocaml-4.01 ; do
+for i in xapi CentOS-Xen ; do
     install -m 0644 scripts/rpm/$i.repo /etc/yum.repos.d/$i.repo
 done
 
