@@ -7,7 +7,6 @@ URL:            https://github.com/xapi-project/xenopsd
 Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        xenopsd-xc-init
 Source2:        xenopsd-simulator-init
-Source3:        xenopsd-libvirt-init
 Source4:        xenopsd-xenlight-init
 Source5:        make-xsc-xenopsd.conf
 Source6:        xenopsd-network-conf
@@ -22,8 +21,6 @@ BuildRequires:  ocaml-cohttp-devel
 BuildRequires:  forkexecd-devel
 BuildRequires:  ocaml-oclock-devel
 BuildRequires:  ocaml-uuidm-devel
-BuildRequires:  libvirt-devel
-BuildRequires:  ocaml-libvirt-devel
 BuildRequires:  ocaml-qmp-devel
 BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-xen-lowlevel-libs-devel
@@ -44,15 +41,6 @@ Requires:       ocaml-xen-lowlevel-libs-runtime
 
 %description
 Simple VM manager for the xapi toolstack.
-
-%package        libvirt
-Summary:        Xenopsd using libvirt
-Requires:       %{name} = %{version}-%{release}
-Requires:       libvirt
-
-%description    libvirt
-Simple VM manager for Xen and KVM using libvirt.
-
 
 %package        xc
 Summary:        Xenopsd using xc
@@ -82,7 +70,6 @@ Simple VM manager for Xen using libxenlight
 %setup -q
 cp %{SOURCE1} xenopsd-xc-init
 cp %{SOURCE2} xenopsd-simulator-init
-cp %{SOURCE3} xenopsd-libvirt-init
 cp %{SOURCE4} xenopsd-xenlight-init
 cp %{SOURCE5} make-xsc-xenopsd.conf
 cp %{SOURCE6} xenopsd-network-conf
@@ -95,7 +82,6 @@ make
 %install
 mkdir -p %{buildroot}/%{_sbindir}
 
-install -D _build/libvirt/xenops_libvirt_main.native     %{buildroot}/%{_sbindir}/xenopsd-libvirt
 install -D _build/simulator/xenops_simulator_main.native %{buildroot}/%{_sbindir}/xenopsd-simulator
 install -D _build/xc/xenops_xc_main.native               %{buildroot}/%{_sbindir}/xenopsd-xc
 install -D _build/xl/xenops_xl_main.native               %{buildroot}/%{_sbindir}/xenopsd-xenlight
@@ -112,7 +98,6 @@ install -D scripts/common.py %{buildroot}/%{_libexecdir}/%{name}/common.py
 install -D scripts/network.conf %{buildroot}/%{_libexecdir}/%{name}/network.conf
 
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
-install -m 0755 xenopsd-libvirt-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-libvirt
 install -m 0755 xenopsd-xc-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-xc
 install -m 0755 xenopsd-simulator-init %{buildroot}/%{_sysconfdir}/init.d/xenopsd-simulator
 
@@ -138,19 +123,6 @@ install -m 0644 xenopsd-network-conf %{buildroot}/etc/xapi/network.conf
 %{_libexecdir}/%{name}/common.pyc
 /etc/xenopsd.conf
 /etc/xapi/network.conf
-
-%files libvirt
-%{_sbindir}/xenopsd-libvirt
-%{_sysconfdir}/init.d/xenopsd-libvirt
-
-%post libvirt
-/sbin/chkconfig --add xenopsd-libvirt
-
-%preun libvirt
-if [ $1 -eq 0 ]; then
-  /sbin/service xenopsd-libvirt stop > /dev/null 2>&1
-  /sbin/chkconfig --del xenopsd-libvirt
-fi
 
 %files xc
 %{_sbindir}/xenopsd-xc

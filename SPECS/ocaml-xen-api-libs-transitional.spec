@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-api-libs-transitional
-Version:        0.9.7
+Version:        0.9.8
 Release:        1%{?dist}
 Summary:        Deprecated standard library extension for OCaml
 License:        LGPL2.1 + OCaml linking exception
@@ -20,6 +20,7 @@ BuildRequires:  ocaml-xenstore-clients-devel
 BuildRequires:  xen-devel
 BuildRequires:  ocaml-xcp-idl-devel
 BuildRequires:  ocaml-backtrace-devel
+BuildRequires:  oasis
 Requires:       xen-libs
 
 %description
@@ -37,7 +38,6 @@ developing applications that use %{name}.
 %setup -q -n xen-api-libs-transitional-%{version}
 
 %build
-./configure
 make
 
 %install
@@ -188,6 +188,9 @@ make install DESTDIR=$OCAMLFIND_DESTDIR
 %{_libdir}/ocaml/xml-light2/*.mli
 
 %changelog
+* Thu Aug 20 2015 David Scott <dave.scott@citrix.com> - 0.9.8-1
+- Update to 0.9.8
+
 * Wed Jan 21 2015 David Scott <dave.scott@citrix.com> - 0.9.7-1
 - Update to 0.9.7
 
