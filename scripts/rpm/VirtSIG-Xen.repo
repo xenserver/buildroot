@@ -10,4 +10,4 @@ enabled=0
 name=VirtSIG-\$releasever - Xen 4.4 Testing
 baseurl=http://cbs.centos.org/repos/virt7-xen-44-testing/\$basearch/os/
 gpgcheck=0
-enabled=0
+enabled=1
