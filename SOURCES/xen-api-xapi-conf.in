@@ -54,6 +54,9 @@ udhcpd-skel=/etc/xcp/udhcpd.skel
 # Disable logging for the following modules
 disable-logging-for = http db_write redo_log api_readonly
 
+# Disable part of the initial database sync
+disable-dbsync-for = sync_gpus
+
 # The full list of xenopsd instances to manage. These must all be running.
 xenopsd-queues = org.xen.xcp.xenops.xenlight
 

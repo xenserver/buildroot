@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.70
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -15,6 +15,7 @@ Source5: xen-api-pam
 Source6: xen-cmdline
 Patch0: xen-api-sm-path-fix.patch
 Patch1: xen-api-b869ed2d8114513f63cd5505baf62162492a9863
+Patch2: xen-api-5072fc9bc4bebdaf1f1705b854ca3ffdbd6b0c4c
 BuildRequires: ocaml
 BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
@@ -90,6 +91,7 @@ cp %{SOURCE5} xen-api-pam
 cp %{SOURCE6} xen-cmdline
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 ./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=%{_libdir}/xapi/plugins --optdir=%{_libdir}/xapi
@@ -171,7 +173,7 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
-* Sat Aug 22 2015 David Scott <dave.scott@citrix.com> - 1.9.70-2
+* Sat Aug 22 2015 David Scott <dave.scott@citrix.com> - 1.9.70-3
 - Backport support for xen-cmdline path in config file
 - Add xen-cmdline tool
 
