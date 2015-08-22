@@ -1,0 +1,83 @@
+commit b869ed2d8114513f63cd5505baf62162492a9863
+Author: David Scott <dave.scott@eu.citrix.com>
+Date:   Sat Aug 22 18:23:41 2015 +0000
+
+    Allow the xen-cmdline path to be set via the config file
+    
+    This will make it easier to run xapi on systems which adhere to the
+    FHS.
+    
+    Signed-off-by: David Scott <dave.scott@eu.citrix.com>
+
+diff --git a/ocaml/xapi/pciops.ml b/ocaml/xapi/pciops.ml
+index f26ec3c..ae9102e 100644
+--- a/ocaml/xapi/pciops.ml
++++ b/ocaml/xapi/pciops.ml
+@@ -115,10 +115,9 @@ let other_pcidevs_of_vm ~__context other_config =
+ 
+ let pci_hiding_key = "xen-pciback.hide"
+ let pci_hiding_key_eq = pci_hiding_key ^ "="
+-let xen_cmdline_path = "/opt/xensource/libexec/xen-cmdline"
+ 
+ let get_pci_hidden_raw_value () =
+-	let cmd = xen_cmdline_path ^ " --get-dom0 " ^ pci_hiding_key in
++	let cmd = !Xapi_globs.xen_cmdline_path ^ " --get-dom0 " ^ pci_hiding_key in
+ 	let raw_kv_string = Helpers.get_process_output cmd in
+ 	(* E.g. "xen-pciback.hide=(0000:00:02.0)(0000:00:02.1)\n" or just "\n" *)
+ 	if String.startswith pci_hiding_key_eq raw_kv_string then
+@@ -160,7 +159,7 @@ let _hide_pci ~__context pci =
+ 		let devs = p::(get_hidden_pcidevs ()) in
+ 		let valstr = List.fold_left (fun acc d -> acc ^ (paren_of d)) "" devs in
+ 		let cmd = Printf.sprintf "%s --set-dom0 %s%s"
+-			xen_cmdline_path pci_hiding_key_eq valstr in
++			!Xapi_globs.xen_cmdline_path pci_hiding_key_eq valstr in
+ 		let _ = Helpers.get_process_output cmd in
+ 		()
+ 	)
+@@ -179,9 +178,9 @@ let _unhide_pci ~__context pci =
+ 		let new_value = String.replace bdf_paren "" raw_value in
+ 		let cmd = match new_value with
+ 			| "" -> Printf.sprintf "%s --delete-dom0 %s"
+-				xen_cmdline_path pci_hiding_key
++				!Xapi_globs.xen_cmdline_path pci_hiding_key
+ 			| _ -> Printf.sprintf "%s --set-dom0 %s%s"
+-				xen_cmdline_path pci_hiding_key_eq new_value
++				!Xapi_globs.xen_cmdline_path pci_hiding_key_eq new_value
+ 		in
+ 		let _ = Helpers.get_process_output cmd in
+ 		()
+diff --git a/ocaml/xapi/xapi_globs.ml b/ocaml/xapi/xapi_globs.ml
+index 4a98112..d611575 100644
+--- a/ocaml/xapi/xapi_globs.ml
++++ b/ocaml/xapi/xapi_globs.ml
+@@ -800,6 +800,8 @@ let web_dir = ref "/opt/xensource/www"
+ let cluster_stack_root = ref "/usr/libexec/xapi/cluster-stack"
+ let cluster_stack_default = ref "xhad"
+ 
++let xen_cmdline_path = ref "/opt/xensource/libexec/xen-cmdline"
++
+ let post_install_scripts_dir = ref "/opt/xensource/packages/post-install-scripts"
+ 
+ let gpg_homedir = ref "/opt/xensource/gpg"
+@@ -1033,6 +1035,7 @@ module Resources = struct
+ 		"tools-sr-dir", tools_sr_dir, "Directory containing tools ISO";
+ 		"web-dir", web_dir, "Directory to export fileserver";
+ 		"cluster-stack-root", cluster_stack_root, "Directory containing collections of HA tools and scripts";
++		"xen-cmdline", xen_cmdline_path, "Path to xen-cmdline binary";
+ 		"gpg-homedir", gpg_homedir, "Passed as --homedir to gpg commands";
+ 		"post-install-scripts-dir", post_install_scripts_dir, "Directory containing trusted guest provisioning scripts";
+ 	]
+diff --git a/scripts/xapi.conf b/scripts/xapi.conf
+index 3f0a320..d663314 100644
+--- a/scripts/xapi.conf
++++ b/scripts/xapi.conf
+@@ -159,6 +159,9 @@ sparse_dd = /usr/libexec/xapi/sparse_dd
+ # Default cluster stack (HA)
+ # cluster-stack-default = xhad
+ 
++# Path to the xen-cmdline binary
++# xen-cmdline = @LIBEXECDIR@/xen-cmdline
++
+ # Root directory for xapi hooks
+ # xapi-hooks-root = @HOOKSDIR@
+ 

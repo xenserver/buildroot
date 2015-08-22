@@ -3,7 +3,7 @@
 Summary: Xen toolstack for XCP
 Name:    xapi
 Version: 1.9.70
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:  http://www.xen.org
 Source0: https://github.com/xapi-project/xen-api/archive/v%{version}/xen-api-%{version}.tar.gz
@@ -13,6 +13,7 @@ Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
 Patch0: xen-api-sm-path-fix.patch
+Patch1: xen-api-b869ed2d8114513f63cd5505baf62162492a9863
 BuildRequires: ocaml
 BuildRequires: ocaml-camlp4-devel
 BuildRequires: ocaml-findlib
@@ -86,7 +87,7 @@ cp %{SOURCE3} xen-api-xapissl
 cp %{SOURCE4} xen-api-db-conf
 cp %{SOURCE5} xen-api-pam
 %patch0 -p1
-
+%patch1 -p1
 
 %build
 ./configure --bindir=%{_bindir} --etcdir=/etc --libexecdir=%{_libexecdir}/xapi --xapiconf=/etc/xapi.conf --hooksdir=/etc/xapi/hook-scripts --sharedir=/usr/share/xapi --plugindir=%{_libdir}/xapi/plugins --optdir=%{_libdir}/xapi
@@ -164,6 +165,9 @@ fi
 %{python_sitelib}/XenAPIPlugin.pyc
 
 %changelog
+* Sat Aug 22 2015 David Scott <dave.scott@citrix.com> - 1.9.70-2
+- Update to 1.9.70
+
 * Fri Aug 14 2015 David Scott <dave.scott@citrix.com> - 1.9.70-1
 - Update to 1.9.70
 
