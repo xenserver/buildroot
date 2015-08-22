@@ -1,0 +1,107 @@
+#!/usr/bin/env python
+# Copyright (c) 2012 Citrix Systems, Inc.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published
+# by the Free Software Foundation; version 2.1 only. with the special
+# exception on linking described in file LICENSE.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+
+import sys
+
+from xcp.bootloader import *
+
+labels = ['xe', 'xe-serial']
+
+def get_xen_args(b, ks):
+    ret = []
+    args = b.menu[b.default].getHypervisorArgs()
+    for k in ks:
+        ret += (filter(lambda x: x.startswith(k+'=') or x == k, args))
+    return ret
+
+def replace_xen_args(b, nv):
+    for m in filter(lambda x: x in labels, b.menu_order):
+        ks = map(lambda x: x.split('=')[0], nv)
+        args = filter(lambda y: False in map(lambda x: y.startswith(x+'=') or y==x, ks), b.menu[m].getHypervisorArgs())
+        b.menu[m].setHypervisorArgs(args + nv)
+
+def delete_xen_args(b, ks):
+    for m in filter(lambda x: x in labels, b.menu_order):
+        args = filter(lambda y: False in map(lambda x: y.startswith(x+'=') or y==x, ks), b.menu[m].getHypervisorArgs())
+        b.menu[m].setHypervisorArgs(args)
+
+def get_dom0_args(b, ks):
+    ret = []
+    args = b.menu[b.default].getKernelArgs()
+    for k in ks:
+        ret += (filter(lambda x: x.startswith(k+'=') or x == k, args))
+    return ret
+
+def replace_dom0_args(b, nv):
+    for m in filter(lambda x: x in labels, b.menu_order):
+        ks = map(lambda x: x.split('=')[0], nv)
+        args = filter(lambda y: False in map(lambda x: y.startswith(x+'=') or y==x, ks), b.menu[m].getKernelArgs())
+        b.menu[m].setKernelArgs(args + nv)
+
+def delete_dom0_args(b, ks):
+    for m in filter(lambda x: x in labels, b.menu_order):
+        args = filter(lambda y: False in map(lambda x: y.startswith(x+'=') or y==x, ks), b.menu[m].getKernelArgs())
+        b.menu[m].setKernelArgs(args)
+
+def list_xen_cpuid_masks(b):
+    return filter(lambda x: x.startswith('cpuid_mask'), b.menu[b.default].getHypervisorArgs())
+
+if __name__ == "__main__":
+    modified = False
+    opt = None
+    args = []
+    operations = []
+
+    b = Bootloader.loadExisting()
+
+    for arg in sys.argv[1:]:
+        if arg.startswith('--') and opt and len(args):
+            operations.append((opt, args))
+            args = []
+
+        if arg == '--list-cpuid-masks':
+            operations.append((arg, None))
+        elif arg in ['--set-cpuid-masks', '--delete-cpuid-masks', '--get-xen', '--get-dom0', 
+                     '--set-xen', '--set-dom0', '--delete-xen', '--delete-dom0']:
+            opt = arg
+        if not arg.startswith('--'):
+            args.append(arg)
+    if opt and len(args):
+        operations.append((opt, args))
+            
+    for op in operations:
+        opt, args = op
+        
+        if opt == '--list-cpuid-masks':
+            print '\n'.join(list_xen_cpuid_masks(b))
+        elif opt == '--get-xen':
+            print '\n'.join((get_xen_args(b, args)))
+        elif opt == '--get-dom0':
+            print '\n'.join((get_dom0_args(b, args)))
+        elif opt in ['--set-cpuid-masks', '--set-xen']:
+            replace_xen_args(b, args)
+            modified = True
+        elif opt in ['--delete-cpuid-masks', '--delete-xen']:
+            delete_xen_args(b, args)
+            modified = True
+        elif opt == '--set-dom0':
+            replace_dom0_args(b, args)
+            modified = True
+        elif opt == '--delete-dom0':
+            delete_dom0_args(b, args)
+            modified = True
+
+    if modified:
+        b.commit()
+
+    sys.exit(0)
