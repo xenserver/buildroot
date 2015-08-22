@@ -5,6 +5,7 @@ Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/ffs
 Source0:        https://github.com/xapi-project/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Requires:       xapi-storage
 
 %description
 Simple flat file storage manager for the xapi toolstack.

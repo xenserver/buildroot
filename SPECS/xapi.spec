@@ -62,7 +62,6 @@ Requires: redhat-lsb-core
 Requires: stunnel
 Requires: vhd-tool
 Requires: libffi
-Requires: busybox
 
 %description
 This package contains the xapi toolstack.

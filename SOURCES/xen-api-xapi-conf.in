@@ -170,7 +170,7 @@ cluster-stack-root = @LIBEXECDIR@/cluster-stack
 # cluster-stack-default = xhad
 
 # Path to the xen-cmdline binary
-xen-cmdline = @LIBEXECDIR@/xen-cmdline
+xen-cmdline = @LIBEXECDIR@/xapi/xen-cmdline
 
 # Root directory for xapi hooks
 # xapi-hooks-root = @HOOKSDIR@
