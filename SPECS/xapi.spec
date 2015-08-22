@@ -12,6 +12,7 @@ Source2: xen-api-init
 Source3: xen-api-xapissl
 Source4: xen-api-db-conf
 Source5: xen-api-pam
+Source6: xen-cmdline
 Patch0: xen-api-sm-path-fix.patch
 Patch1: xen-api-b869ed2d8114513f63cd5505baf62162492a9863
 BuildRequires: ocaml
@@ -61,6 +62,7 @@ Requires: redhat-lsb-core
 Requires: stunnel
 Requires: vhd-tool
 Requires: libffi
+Requires: busybox
 
 %description
 This package contains the xapi toolstack.
@@ -86,6 +88,7 @@ cp %{SOURCE2} xen-api-init
 cp %{SOURCE3} xen-api-xapissl
 cp %{SOURCE4} xen-api-db-conf
 cp %{SOURCE5} xen-api-pam
+cp %{SOURCE6} xen-cmdline
 %patch0 -p1
 %patch1 -p1
 
@@ -104,6 +107,8 @@ install -m 0644 xen-api-pam %{buildroot}/etc/pam.d/xapi
 mkdir -p %{buildroot}%{_sysconfdir}/init.d
 install -m 0755 xen-api-init %{buildroot}%{_sysconfdir}/init.d/xapi
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
+mkdir -p %{buildroot}/%{_libexecdir}/xapi/cluster-stack
+install -m 0755 xen-cmdline %{buildroot}/%{_libexecdir}/xapi/xen-cmdline
 install -m 0755 xen-api-xapissl %{buildroot}/%{_libexecdir}/xapi/xapissl
 install -m 0755 scripts/update-mh-info %{buildroot}/%{_libexecdir}/xapi/update-mh-info
 mkdir -p %{buildroot}/etc/xapi
@@ -143,7 +148,9 @@ fi
 %config(noreplace) /etc/xapi.conf
 %config(noreplace) /etc/xcp/pool.conf
 %config(noreplace) /etc/xcp/udhcpd.skel
+%{_libexecdir}/xapi/cluster-stack
 %{_libexecdir}/xapi/xapissl
+%{_libexecdir}/xapi/xen-cmdline
 %{_libexecdir}/xapi/update-mh-info
 /etc/xapi/db.conf
 /etc/xapi/hook-scripts
@@ -166,7 +173,8 @@ fi
 
 %changelog
 * Sat Aug 22 2015 David Scott <dave.scott@citrix.com> - 1.9.70-2
-- Update to 1.9.70
+- Backport support for xen-cmdline path in config file
+- Add xen-cmdline tool
 
 * Fri Aug 14 2015 David Scott <dave.scott@citrix.com> - 1.9.70-1
 - Update to 1.9.70
