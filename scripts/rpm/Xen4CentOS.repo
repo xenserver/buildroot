@@ -1,6 +1,0 @@
-[Xen4CentOS]
-name=CentOS-$releasever - Xen
-baseurl=http://mirror.centos.org/centos/$releasever/xen4/$basearch/
-gpgcheck=0
-Priority=1
-enabled=1

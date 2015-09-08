@@ -54,6 +54,9 @@ udhcpd-skel=/etc/xcp/udhcpd.skel
 # Disable logging for the following modules
 disable-logging-for = http db_write redo_log api_readonly
 
+# Disable part of the initial database sync
+disable-dbsync-for = sync_gpus
+
 # The full list of xenopsd instances to manage. These must all be running.
 xenopsd-queues = org.xen.xcp.xenops.xenlight
 
@@ -82,9 +85,8 @@ udhcpd = /bin/true
 # Executed when messages are generated if email feature is disabled
 # xapi-message-script = @LIBEXECDIR@/mail-alarm
 
-# Executed when likewise raises an exception during domain-leave
-# lw-force-domain-leave-script = @LIBEXECDIR@/lw-force-domain-leave
-lw-force-domain-leave-script = /bin/false
+# Executed when PBIS raises an exception during domain-leave
+pbis-force-domain-leave-script = /bin/false
 
 # Used by the redo log for block device I/O
 # redo-log-block-device-io = @LIBEXECDIR@/block_device_io
@@ -163,8 +165,15 @@ sm-dir =  @LIBDIR@/xapi/sm
 # Directory to export fileserver
 # web-dir = @OPTDIR@/www
 
-# Directory containing xhad and HA scripts
-# xha-dir = @XHADIR@
+# Directory containing collections of HA tools and scripts
+# cluster-stack-root = @CLUSTER_STACK_ROOT@
+cluster-stack-root = @LIBEXECDIR@/cluster-stack
+
+# Default cluster stack (HA)
+# cluster-stack-default = xhad
+
+# Path to the xen-cmdline binary
+xen-cmdline = @LIBEXECDIR@/xapi/xen-cmdline
 
 # Root directory for xapi hooks
 # xapi-hooks-root = @HOOKSDIR@
@@ -332,4 +341,5 @@ xapi-plugins-root = @LIBDIR@/xapi/plugins
 # The delay between each attempt to connect to the block device I/O
 # process
 # redo_log_connect_delay = 0.1
+busybox=/bin/false
 

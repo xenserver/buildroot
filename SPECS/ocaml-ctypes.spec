@@ -1,6 +1,6 @@
 Name:           ocaml-ctypes
 Version:        0.4.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Library for binding to C libraries using pure OCaml
 License:        MIT
 URL:            https://github.com/ocamllabs/ocaml-ctypes/
@@ -26,17 +26,17 @@ developing applications that use %{name}.
 make
 
 %install
-export DESTDIR=$RPM_BUILD_ROOT
-export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
-export OCAMLFIND_LDCONF=ignore
-rm -rf %{buildroot}
-mkdir -p %{buildroot}/%{_libdir}/ocaml
-export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
+export OCAMLFIND_DESTDIR=%{buildroot}%{_libdir}/ocaml
+mkdir -p $OCAMLFIND_DESTDIR/stublibs
 make install
 
 %files
 %doc README.md LICENSE CHANGES.md
 %{_libdir}/ocaml/ctypes
+%{_libdir}/ocaml/stublibs/dllctypes_stubs.so
+%{_libdir}/ocaml/stublibs/dllctypes_stubs.so.owner
+%{_libdir}/ocaml/stublibs/dllctypes-foreign-base_stubs.so
+%{_libdir}/ocaml/stublibs/dllctypes-foreign-base_stubs.so.owner
 %exclude %{_libdir}/ocaml/ctypes/*.a
 %exclude %{_libdir}/ocaml/ctypes/*.cmxa
 %exclude %{_libdir}/ocaml/ctypes/*.cmx
@@ -49,6 +49,9 @@ make install
 %{_libdir}/ocaml/ctypes/*.mli
 
 %changelog
+* Fri May  1 2015 Si Beaumont <simon.beaumont@citrix.com> - 0.4.1-2
+- Package shared libaries in the right place
+
 * Thu Apr 16 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.4.1-1
 - New upstream release
 

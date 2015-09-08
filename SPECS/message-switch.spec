@@ -1,11 +1,14 @@
 Name:           message-switch
-Version:        0.11.0
+Version:        0.12.0
 Release:        1%{?dist}
 Summary:        A store and forward message switch
 License:        FreeBSD
 URL:            https://github.com/djs55/message-switch
 Source0:        https://github.com/djs55/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        message-switch-init
+Source2:        message-switch-conf
+Source3:        message-switch-bugtool1.xml
+Source4:        message-switch-bugtool2.xml
 BuildRequires:  ocaml
 BuildRequires:  ocaml-camlp4-devel
 BuildRequires:  ocaml-findlib
@@ -17,7 +20,8 @@ BuildRequires: ocaml-rpc-devel
 BuildRequires: ocaml-async-devel
 BuildRequires: ocaml-shared-block-ring-devel
 BuildRequires: ocaml-mtime-devel
-Requires:      redhat-lsb-core
+# Not available in the build chroot
+#Requires:      redhat-lsb-core
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
@@ -28,6 +32,9 @@ A store and forward message switch for OCaml.
 %prep
 %setup -q
 cp %{SOURCE1} message-switch-init
+cp %{SOURCE2} message-switch-conf
+cp %{SOURCE3} message-switch.xml
+cp %{SOURCE4} stuff.xml
 
 %build
 ocaml setup.ml -configure
@@ -42,12 +49,18 @@ install switch_main.native %{buildroot}/%{_sbindir}/message-switch
 install main.native %{buildroot}/%{_sbindir}/message-cli
 mkdir -p %{buildroot}/%{_sysconfdir}/init.d
 install -m 0755 message-switch-init %{buildroot}%{_sysconfdir}/init.d/message-switch
-
+install -m 0644 message-switch-conf %{buildroot}/etc/message-switch.conf
+mkdir -p %{buildroot}/etc/xensource/bugtool/message-switch
+install -m 0644 message-switch.xml %{buildroot}/etc/xensource/bugtool/message-switch.xml
+install -m 0644 stuff.xml %{buildroot}/etc/xensource/bugtool/message-switch/stuff.xml
 
 %files
 %{_sbindir}/message-switch
 %{_sbindir}/message-cli
 %{_sysconfdir}/init.d/message-switch
+%config(noreplace) /etc/message-switch.conf
+/etc/xensource/bugtool/message-switch/stuff.xml
+/etc/xensource/bugtool/message-switch.xml
 
 %post
 /sbin/chkconfig --add message-switch
@@ -74,6 +87,16 @@ developing applications that use %{name}.
 %{_libdir}/ocaml/message_switch/*
 
 %changelog
+* Thu Jul 16 2015 David Scott <dave.scott@citrix.com> - 0.12.0-1
+- Add bugtool collection
+- Several bugfixes
+
+* Mon Jun 15 2015 David Scott <dave.scott@citrix.com> - 0.11.0-3
+- Add blocking fix.
+
+* Fri Jun 12 2015 David Scott <dave.scott@citrix.com> - 0.11.0-2
+- Add tail-recursion fix
+
 * Thu Apr 23 2015 David Scott <dave.scott@citrix.com> - 0.11.0-1
 - Update to 0.11.0
 

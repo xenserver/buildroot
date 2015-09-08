@@ -1,0 +1,13 @@
+# VirtSIG-Xen.repo
+
+[virt-xen-44-candidate]
+name=VirtSIG-\$releasever - Xen 4.4 Candidate
+baseurl=http://cbs.centos.org/repos/virt7-xen-44-candidate/\$basearch/os/
+gpgcheck=0
+enabled=0
+
+[virt-xen-44-testing]
+name=VirtSIG-\$releasever - Xen 4.4 Testing
+baseurl=http://cbs.centos.org/repos/virt7-xen-44-testing/\$basearch/os/
+gpgcheck=0
+enabled=1

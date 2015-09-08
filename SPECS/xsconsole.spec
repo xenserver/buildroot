@@ -24,8 +24,8 @@ make install-base DESTDIR=%{buildroot} LIBDIR=%{buildroot}/%{_libdir}
 
 %files
 %{_libdir}/xsconsole/*.py
-%{_libdir}/xsconsole/*.pyc
-%{_libdir}/xsconsole/*.pyo
+#%{_libdir}/xsconsole/*.pyc
+#%{_libdir}/xsconsole/*.pyo
 %{_libdir}/xsconsole/plugins-base
 #%{_libdir}/xsconsole/plugins-oem
 #%{_libdir}/xsconsole/plugins-extras

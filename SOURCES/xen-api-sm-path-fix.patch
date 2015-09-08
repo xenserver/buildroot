@@ -1,34 +1,26 @@
-commit f31a523d371d1d23ef38c8e39ab66f50e87e0a98
-Author: Bob Ball <bob.ball@citrix.com>
-Date:   Thu Dec 4 17:52:37 2014 +0000
-
-    Ensure all paths are read from the config file
-    
-    Signed-off-by: Bob Ball <bob.ball@citrix.com>
-
 diff --git a/ocaml/xapi/xapi_globs.ml b/ocaml/xapi/xapi_globs.ml
-index eb82372..fd41d8f 100644
+index 63b5c41..1015553 100644
 --- a/ocaml/xapi/xapi_globs.ml
 +++ b/ocaml/xapi/xapi_globs.ml
-@@ -942,11 +942,6 @@ module Resources = struct
+@@ -1019,11 +1019,6 @@ module Resources = struct
  	]
  	let essential_dirs = [
  		"sm-dir", sm_dir, "Directory containing SM plugins";
 -		"tools-sr-dir", tools_sr_dir, "Directory containing tools ISO";
 -		"web-dir", web_dir, "Directory to export fileserver";
--		"xha-dir", xha_dir, "Directory containing xhad and HA scripts";
+-		"cluster-stack-root", cluster_stack_root, "Directory containing collections of HA tools and scripts";
 -		"gpg-homedir", gpg_homedir, "Passed as --homedir to gpg commands";
 -		"post-install-scripts-dir", post_install_scripts_dir, "Directory containing trusted guest provisioning scripts";
  	]
  	let nonessential_dirs = [
  		"master-scripts-dir", master_scripts_dir, "Scripts to execute when transitioning pool role";
-@@ -954,6 +949,11 @@ module Resources = struct
+@@ -1031,6 +1026,11 @@ module Resources = struct
  		"xapi-hooks-root", xapi_hooks_root, "Root directory for xapi hooks";
  		"xapi-plugins-root", xapi_plugins_root, "Optional directory containing XenAPI plugins";
  		"static-vdis-root", static_vdis_dir, "Optional directory for configuring static VDIs";
 +		"tools-sr-dir", tools_sr_dir, "Directory containing tools ISO";
 +		"web-dir", web_dir, "Directory to export fileserver";
-+		"xha-dir", xha_dir, "Directory containing xhad and HA scripts";
++		"cluster-stack-root", cluster_stack_root, "Directory containing collections of HA tools and scripts";
 +		"gpg-homedir", gpg_homedir, "Passed as --homedir to gpg commands";
 +		"post-install-scripts-dir", post_install_scripts_dir, "Directory containing trusted guest provisioning scripts";
  	]

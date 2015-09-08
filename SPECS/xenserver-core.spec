@@ -9,7 +9,6 @@ Requires:       xenserver-install-wizard
 Requires:       xapi
 Requires:       xapi-python-devel
 Requires:       xapi-xe
-Requires:       xe-create-templates
 Requires:       xenopsd-simulator
 Requires:       xenopsd-xc
 Requires:       xenopsd-xenlight
@@ -18,7 +17,6 @@ Requires:       ffs
 Requires:       sm-cli
 Requires:       xcp-sm
 Requires:       xapi-storage-script
-Requires:       ezlvm
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
 Requires:       squeezed

@@ -2,7 +2,7 @@
 
 Summary: Xapi storage script plugin server
 Name:    xapi-storage-script
-Version: 0.3.0
+Version: 0.11.0
 Release: 1%{?dist}
 License: LGPL+linking exception
 URL:     https://github.com/xapi-project/xapi-storage-script
@@ -67,6 +67,36 @@ fi
 %{_mandir}/man2/xapi-storage-script.1.gz
 
 %changelog
+* Fri Aug  7 2015 David Scott <dave.scott@citrix.com> - 0.11.0-1
+- Update to 0.11.0
+
+* Tue Aug  5 2015 David Scott <dave.scott@citrix.com> - 0.10.0-1
+- Update to 0.10.0
+
+* Mon Jul 20 2015 David Scott <dave.scott@citrix.com> - 0.9.0-2
+- Backport robustness patch
+
+* Thu Jul 15 2015 David Scott <dave.scott@citrix.com> - 0.9.0-1
+- Update to 0.9.0
+
+* Thu Jul 15 2015 David Scott <dave.scott@citrix.com> - 0.8.0-2
+- Backport clone-on-boot fix
+
+* Wed Jul 15 2015 David Scott <dave.scott@citrix.com> - 0.8.0-1
+- Update to 0.8.0
+
+* Thu Jul 9 2015 David Scott <dave.scott@citrix.com> - 0.7.0-1
+- Update to 0.7.0
+
+* Wed Jul 8 2015 David Scott <dave.scott@citrix.com> - 0.6.0-1
+- Update to 0.6.0
+
+* Tue Jul 7 2015 David Scott <dave.scott@citrix.com> - 0.5.0-1
+- Update to 0.5.0
+
+* Tue Apr 28 2015 David Scott <dave.scott@citrix.com> - 0.4.0-1
+- Update to 0.4.0
+
 * Fri Apr 24 2015 David Scott <dave.scott@citrix.com> - 0.3.0-1
 - Update to 0.3.0
 
