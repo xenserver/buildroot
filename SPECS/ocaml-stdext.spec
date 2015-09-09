@@ -2,7 +2,7 @@
 
 Name:           ocaml-stdext
 Version:        0.13.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Deprecated misc library functions for OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/stdext
@@ -57,6 +57,9 @@ make install DESTDIR=${buildroot}
 %{_libdir}/ocaml/stdext/*.mli
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.13.0-2
+- Bump release for rebuild
+
 * Wed Jan 21 2015 David Scott <dave.scott@citrix.com> - 0.13.0-1
 - Update to 0.13.0
 

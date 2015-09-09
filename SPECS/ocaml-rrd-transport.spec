@@ -2,7 +2,7 @@
 
 Name:           ocaml-rrd-transport
 Version:        0.9.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Shared-memory protocols for transmitting RRD data
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/rrd-transport/
@@ -65,6 +65,9 @@ ocaml setup.ml -install
 %{_libdir}/ocaml/rrd-transport/*.mli
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.0-2
+- Bump release
+
 * Thu Apr 20 2015 David Scott <dave.scott@citrix.com> - 0.9.0-1
 - Update to 0.9.0
 

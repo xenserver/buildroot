@@ -1,6 +1,6 @@
 Name:           ocaml-rrdd-plugin
 Version:        0.7.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Plugin library for the XenServer RRD daemon
 License:        LGPL2.1 + OCaml linking exception
 Group:          Development/Other
@@ -69,6 +69,9 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/rrdd-plugin/*.mli
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.7.1-2
+- Bump release
+
 * Thu Aug 20 2015 David Scott <dave.scott@citrix.com> - 0.7.1-1
 - Update to 0.7.1
 
