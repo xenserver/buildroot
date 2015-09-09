@@ -1,9 +1,9 @@
 Summary:       Xapi storage interface
 Name:          xapi-storage
-Version:       0.6
+Version:       0.7
 Release:       1%{?dist}
-URL:           https://github.com/djs55/xapi-storage
-Source0:       https://github.com/djs55/xapi-storage/archive/v%{version}/%{name}-%{version}.tar.gz
+URL:           https://github.com/xapi-project/xapi-storage
+Source0:       https://github.com/xapi-project/xapi-storage/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch0:        xapi-storage.patch
 License:       LGPL+linking exception
 BuildRequires: python-devel
@@ -81,6 +81,9 @@ cp __init__.py datapath.py volume.py plugin.py %{buildroot}%{python_sitelib}/xap
 %{_libdir}/ocaml/xapi-storage/*.ml
 
 %changelog
+* Wed Sep  9 2015 David Scott <dave.scott@citrix.com> - 0.7-1
+- Update to 0.7
+
 * Tue Aug  5 2015 David Scott <dave.scott@citrix.com> - 0.6-1
 - Update to 0.6
 

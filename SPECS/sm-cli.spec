@@ -1,5 +1,5 @@
 Name:           sm-cli
-Version:        0.9.5
+Version:        0.9.7
 Release:        1%{?dist}
 Summary:        CLI for xapi toolstack storage managers
 License:        LGPL
@@ -32,6 +32,9 @@ install dist/build/sm-cli/sm-cli %{buildroot}/%{_sbindir}/sm-cli
 %{_sbindir}/sm-cli
 
 %changelog
+* Wed Sep 9 2015 David Scott <dave.scott@citrix.com> - 0.9.7-1
+- Update to 0.9.7
+
 * Fri Aug 14 2015 David Scott <dave.scott@citrix.com> - 0.9.5-1
 - Update to 0.9.5
 
