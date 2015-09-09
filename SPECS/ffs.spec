@@ -1,6 +1,6 @@
 Name:           ffs
 Version:        0.26
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/ffs
@@ -32,6 +32,9 @@ DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/us
 /etc/xapi.d/plugins/ffs
 
 %changelog
+* Wed Sep 09 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.26-2
+- Fix duplicate packaging of xapi python library
+
 * Wed Sep 09 2015 David Scott <dave.scott@citrix.com> - 0.26-1
 - Update to 0.26
 
