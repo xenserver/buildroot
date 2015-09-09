@@ -1,6 +1,6 @@
 Name:           xenops-cli
 Version:        0.10.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        CLI for xenopsd, the xapi toolstack domain manager
 License:        LGPL
 URL:            https://github.com/xapi-project/xenops-cli
@@ -31,6 +31,9 @@ install main.native %{buildroot}/%{_sbindir}/xenops-cli
 %{_sbindir}/xenops-cli
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.10.0-1
+- Bump release
+
 * Thu Aug 20 2015 David Scott <dave.scott@citrix.com> - 0.10.0-1
 - Update to 0.10.0
 

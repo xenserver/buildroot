@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-api-client
 Version:        0.9.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        XenServer XenAPI Client Library for OCaml
 License:        LGPLv2
 URL:            https://github.com/xapi-project/xen-api-client
@@ -73,6 +73,9 @@ make install
 %{_libdir}/ocaml/xen-api-client/*.mli
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.9-2
+- Upgrade to 0.9.9
+
 * Thu Apr  2 2015 David Scott <dave.scott@citrix.com> - 0.9.8-1
 - Update to 0.9.8
 

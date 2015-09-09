@@ -2,7 +2,7 @@
 
 Name:           ocaml-xcp-rrd
 Version:        0.10.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Round-Robin Datasources in OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrd
@@ -57,6 +57,9 @@ make install
 %{_libdir}/ocaml/rrd/*.cmx
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.10.1-2
+- Bump release
+
 * Sat Apr  4 2015 David Scott <dave.scott@citrix.com> - 0.10.1-1
 - Update to 0.10.1-1
 

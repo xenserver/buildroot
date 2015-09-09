@@ -2,7 +2,7 @@
 
 Name:           ocaml-xenops
 Version:        0.9.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Low-level xen control operations OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/xenops
@@ -72,6 +72,9 @@ make install BINDIR=%{buildroot}/%{_bindir}
 %{_bindir}/list_domains
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.6-2
+- Bump release
+
 * Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.6-1
 - Update to 0.9.6
 

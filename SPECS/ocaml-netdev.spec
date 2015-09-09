@@ -2,7 +2,7 @@
 
 Name:           ocaml-netdev
 Version:        0.9.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Manipulate Linux bridges, network devices and openvswitch instances in OCaml
 License:        LGPL
 URL:            https://github.com/xapi-project/netdev
@@ -59,6 +59,9 @@ make install
 %{_libdir}/ocaml/netdev/*.mli
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.1-2
+- Bump release
+
 * Fri Jun 6 2014 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.1-1
 - Update to 0.9.1
 

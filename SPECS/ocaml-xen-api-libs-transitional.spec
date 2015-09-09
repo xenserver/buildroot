@@ -2,7 +2,7 @@
 
 Name:           ocaml-xen-api-libs-transitional
 Version:        0.9.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Deprecated standard library extension for OCaml
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/xen-api-libs-transitional
@@ -188,6 +188,9 @@ make install DESTDIR=$OCAMLFIND_DESTDIR
 %{_libdir}/ocaml/xml-light2/*.mli
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.8-2
+- Bump release
+
 * Thu Aug 20 2015 David Scott <dave.scott@citrix.com> - 0.9.8-1
 - Update to 0.9.8
 

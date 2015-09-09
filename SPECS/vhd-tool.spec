@@ -3,7 +3,7 @@
 Summary: Command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
 Version: 0.7.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/djs55/vhd-tool
 Source0: https://github.com/djs55/vhd-tool/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -49,6 +49,9 @@ make install
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
+* Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.7.6-2
+- Bump release
+
 * Fri Apr 3 2015 David Scott <dave.scott@citrix.com> - 0.7.6-1
 - Update to 0.7.6
 
