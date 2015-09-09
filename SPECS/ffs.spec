@@ -20,9 +20,9 @@ DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/us
 
 %files
 %doc README.md LICENSE MAINTAINERS
-%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ffs/*
-%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.btrfs/*
-%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.rawnfs/*
+%{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.ffs/*
+%{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.btrfs/*
+%{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.rawnfs/*
 %{_libexecdir}/xapi-storage-script/datapath/raw+file
 %{_libexecdir}/xapi-storage-script/datapath/vhd+file
 %{_libexecdir}/xapi-storage-script/datapath/loop+blkback/*
