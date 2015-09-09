@@ -16,7 +16,7 @@ Simple flat file storage manager for the xapi toolstack.
 %build
 
 %install
-DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/usr/lib/python2.7/site-packages/xapi make install
+DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/usr/lib/python2.7/site-packages/ffs make install
 
 %files
 %doc README.md LICENSE MAINTAINERS
@@ -27,7 +27,7 @@ DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/us
 %{_libexecdir}/xapi-storage-script/datapath/vhd+file
 %{_libexecdir}/xapi-storage-script/datapath/loop+blkback/*
 %{_libexecdir}/xapi-storage-script/datapath/tapdisk/*
-/usr/lib/python2.7/site-packages/xapi/*.py*
+/usr/lib/python2.7/site-packages/ffs/*.py*
 /etc/xapi.d/plugins/ffs
 
 %changelog
