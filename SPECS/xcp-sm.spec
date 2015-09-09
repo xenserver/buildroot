@@ -22,6 +22,7 @@ Requires: iscsi-initiator-utils
 Requires: sg3_utils
 Requires: xen-runtime
 Requires: blktap
+Requires: nfs-utils
 
 %description
 This package contains storage backends used in XCP
