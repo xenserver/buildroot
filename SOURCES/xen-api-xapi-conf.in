@@ -58,10 +58,10 @@ disable-logging-for = http db_write redo_log api_readonly
 disable-dbsync-for = sync_gpus
 
 # The full list of xenopsd instances to manage. These must all be running.
-xenopsd-queues = org.xen.xcp.xenops.xenlight
+xenopsd-queues = org.xen.xapi.xenops.xenlight
 
 # The default xenopsd to use for VMs, unless a per-VM override is specified
-xenopsd-default = org.xen.xcp.xenops.xenlight
+xenopsd-default = org.xen.xapi.xenops.xenlight
 
 # Paths to utilities: ############################################
 search-path=/usr/lib/xapi:/usr/libexec/xapi

@@ -1,5 +1,5 @@
 Name:           ffs
-Version:        0.25
+Version:        0.26
 Release:        1%{?dist}
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
@@ -20,10 +20,9 @@ DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/us
 
 %files
 %doc README.md LICENSE MAINTAINERS
-%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ffs/*
-%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.btrfs/*
-%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.rawnfs/*
-%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.gfs2/*
+%{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.ffs/*
+%{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.btrfs/*
+%{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.rawnfs/*
 %{_libexecdir}/xapi-storage-script/datapath/raw+file
 %{_libexecdir}/xapi-storage-script/datapath/vhd+file
 %{_libexecdir}/xapi-storage-script/datapath/loop+blkback/*
@@ -32,6 +31,9 @@ DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/us
 /etc/xapi.d/plugins/ffs
 
 %changelog
+* Wed Sep 09 2015 David Scott <dave.scott@citrix.com> - 0.26-1
+- Update to 0.26
+
 * Wed Aug 05 2015 David Scott <dave.scott@citrix.com> - 0.25-1
 - Update to 0.25
 

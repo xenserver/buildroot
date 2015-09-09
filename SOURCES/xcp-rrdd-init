@@ -41,7 +41,7 @@ start() {
 	umask 077
 
         echo -n $"Starting xcp-rrdd: "
-        start_daemon -p "$PIDFILE" $exec -pidfile "$PIDFILE" -daemon true $XCP_RRDD_OPTIONS
+        start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --daemon true $XCP_RRDD_OPTIONS
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch $lockfile
