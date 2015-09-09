@@ -1,6 +1,6 @@
 Name:           xcp-rrdd
 Version:        0.12.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Statistics gathering daemon for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-rrdd
@@ -58,7 +58,7 @@ if [ $1 -eq 0 ]; then
 fi
 
 %changelog
-* Wed Sep 9 2015 David Scott <dave.scott@citrix.com> - 0.12.0-1
+* Wed Sep 9 2015 David Scott <dave.scott@citrix.com> - 0.12.0-2
 - Update to 0.12.0
 
 * Fri Aug 14 2015 David Scott <dave.scott@citrix.com> - 0.11.0-1
