@@ -1,22 +1,24 @@
 diff --git a/ocaml/xapi/xapi_globs.ml b/ocaml/xapi/xapi_globs.ml
-index 63b5c41..1015553 100644
+index f536848..a996ba1 100644
 --- a/ocaml/xapi/xapi_globs.ml
 +++ b/ocaml/xapi/xapi_globs.ml
-@@ -1019,11 +1019,6 @@ module Resources = struct
+@@ -1060,12 +1060,8 @@ module Resources = struct
  	]
  	let essential_dirs = [
  		"sm-dir", sm_dir, "Directory containing SM plugins";
 -		"tools-sr-dir", tools_sr_dir, "Directory containing tools ISO";
 -		"web-dir", web_dir, "Directory to export fileserver";
 -		"cluster-stack-root", cluster_stack_root, "Directory containing collections of HA tools and scripts";
+ 		"xen-cmdline", xen_cmdline_path, "Path to xen-cmdline binary";
 -		"gpg-homedir", gpg_homedir, "Passed as --homedir to gpg commands";
 -		"post-install-scripts-dir", post_install_scripts_dir, "Directory containing trusted guest provisioning scripts";
++
  	]
  	let nonessential_dirs = [
  		"master-scripts-dir", master_scripts_dir, "Scripts to execute when transitioning pool role";
-@@ -1031,6 +1026,11 @@ module Resources = struct
- 		"xapi-hooks-root", xapi_hooks_root, "Root directory for xapi hooks";
+@@ -1074,6 +1070,11 @@ module Resources = struct
  		"xapi-plugins-root", xapi_plugins_root, "Optional directory containing XenAPI plugins";
+ 		"xapi-extensions-root", xapi_extensions_root, "Optional directory containing XenAPI extensions";
  		"static-vdis-root", static_vdis_dir, "Optional directory for configuring static VDIs";
 +		"tools-sr-dir", tools_sr_dir, "Directory containing tools ISO";
 +		"web-dir", web_dir, "Directory to export fileserver";
