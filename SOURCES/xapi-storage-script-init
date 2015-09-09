@@ -42,6 +42,7 @@ start() {
 
         echo -n $"Starting xapi-storage-script: "
         export OCAMLRUNPARAM=b
+        mkdir -p /var/run/xapi-storage-script
         start_daemon -p "$PIDFILE" $exec --pidfile "$PIDFILE" --daemon true $XAPI_STORAGE_SCRIPT_OPTIONS
         RETVAL=$?
         echo

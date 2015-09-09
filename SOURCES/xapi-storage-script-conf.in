@@ -1,2 +1,3 @@
 # Place to look for plugins
 root = @LIBEXECDIR@/xapi-storage-script
+state = /var/run/xapi-storage-script/state.db
