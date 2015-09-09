@@ -18,6 +18,7 @@ BuildRequires: ocaml-async-inotify-devel
 BuildRequires: message-switch-devel
 BuildRequires: ocaml-rpc-devel
 BuildRequires: xapi-storage-devel
+BuildRequires: ocaml-xcp-rrd-devel
 
 %description
 Allows script-based Xapi storage adapters.
