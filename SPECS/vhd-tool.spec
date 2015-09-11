@@ -2,8 +2,8 @@
 
 Summary: Command-line tools for manipulating and streaming .vhd format files
 Name:    vhd-tool
-Version: 0.7.6
-Release: 2%{?dist}
+Version: 0.7.8
+Release: 1%{?dist}
 License: LGPL+linking exception
 URL:  https://github.com/djs55/vhd-tool
 Source0: https://github.com/djs55/vhd-tool/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -36,12 +36,13 @@ cp %{SOURCE1} vhd-tool-sparse_dd-conf
 make
 
 %install
- 
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
 mkdir -p %{buildroot}/etc
 make install
-
+# The make install misses these
+install -m 755 sparse_dd.native %{buildroot}/%{_libexecdir}/xapi/sparse_dd
+install -m 644 src/sparse_dd.conf %{buildroot}/etc/sparse_dd.conf
 
 %files
 %{_bindir}/vhd-tool
@@ -49,6 +50,9 @@ make install
 %{_libexecdir}/xapi/sparse_dd
 
 %changelog
+* Fri Sep 11 2015 David Scott <dave.scott@citrix.com> - 0.7.8-1
+- Update to 0.7.8
+
 * Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.7.6-2
 - Bump release
 
