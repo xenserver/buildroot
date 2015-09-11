@@ -36,12 +36,13 @@ cp %{SOURCE1} vhd-tool-sparse_dd-conf
 make
 
 %install
-./configure --bindir %{buildroot}/%{_bindir} --libexecdir %{buildroot}/%{_libexecdir}/xapi --etcdir %{buildroot}/etc
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/%{_libexecdir}/xapi
 mkdir -p %{buildroot}/etc
 make install
-
+# The make install misses these
+install -m 755 sparse_dd.native %{buildroot}/%{_libexecdir}/xapi/sparse_dd
+install -m 644 src/sparse_dd.conf %{buildroot}/etc/sparse_dd.conf
 
 %files
 %{_bindir}/vhd-tool
