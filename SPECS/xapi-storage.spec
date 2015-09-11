@@ -1,6 +1,6 @@
 Summary:       Xapi storage interface
 Name:          xapi-storage
-Version:       0.7
+Version:       0.8
 Release:       1%{?dist}
 URL:           https://github.com/xapi-project/xapi-storage
 Source0:       https://github.com/xapi-project/xapi-storage/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -59,9 +59,9 @@ export DESTDIR=$RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
-cd ../python/xapi
-mkdir -p %{buildroot}%{python_sitelib}/xapi
-cp __init__.py datapath.py volume.py plugin.py %{buildroot}%{python_sitelib}/xapi
+cd ../python/xapi/storage/api
+mkdir -p %{buildroot}%{python_sitelib}/xapi/storage/api
+cp __init__.py datapath.py volume.py plugin.py %{buildroot}%{python_sitelib}/xapi/storage/api
 
 %files
 %defattr(-,root,root,-)
@@ -69,10 +69,10 @@ cp __init__.py datapath.py volume.py plugin.py %{buildroot}%{python_sitelib}/xap
 %exclude %{_libdir}/ocaml/xapi-storage/*.a
 %exclude %{_libdir}/ocaml/xapi-storage/*.cmxa
 %exclude %{_libdir}/ocaml/xapi-storage/*.ml
-%{python_sitelib}/xapi/datapath.py*
-%{python_sitelib}/xapi/volume.py*
-%{python_sitelib}/xapi/plugin.py*
-%{python_sitelib}/xapi/__init__.py*
+%{python_sitelib}/xapi/storage/api/datapath.py*
+%{python_sitelib}/xapi/storage/api/volume.py*
+%{python_sitelib}/xapi/storage/api/plugin.py*
+%{python_sitelib}/xapi/storage/api/__init__.py*
 
 %files devel
 %defattr(-,root,root,-)
@@ -81,6 +81,9 @@ cp __init__.py datapath.py volume.py plugin.py %{buildroot}%{python_sitelib}/xap
 %{_libdir}/ocaml/xapi-storage/*.ml
 
 %changelog
+* Fri Sep 11 2015 David Scott <dave.scott@citrix.com> - 0.8-1
+- Update to 0.8
+
 * Wed Sep  9 2015 David Scott <dave.scott@citrix.com> - 0.7-1
 - Update to 0.7
 

@@ -1,6 +1,6 @@
 Name:           ffs
-Version:        0.26
-Release:        2%{?dist}
+Version:        0.27
+Release:        1%{?dist}
 Summary:        Simple flat file storage manager for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/ffs
@@ -16,22 +16,20 @@ Simple flat file storage manager for the xapi toolstack.
 %build
 
 %install
-DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/usr/lib/python2.7/site-packages/ffs make install
-(cd %{buildroot}/%{_libexecdir}/xapi-storage-script/datapath; rm -f raw+file; ln -s loop+blkback raw+file)
+DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/usr/lib/python2.7/site-packages/xapi/storage/ffs make install
 
 %files
 %doc README.md LICENSE MAINTAINERS
 %{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.ffs/*
 %{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.btrfs/*
 %{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.rawnfs/*
-%{_libexecdir}/xapi-storage-script/datapath/raw+file
-%{_libexecdir}/xapi-storage-script/datapath/vhd+file
-%{_libexecdir}/xapi-storage-script/datapath/loop+blkback/*
-%{_libexecdir}/xapi-storage-script/datapath/tapdisk/*
-/usr/lib/python2.7/site-packages/ffs/*.py*
+/usr/lib/python2.7/site-packages/xapi/storage/ffs/*.py*
 /etc/xapi.d/plugins/ffs
 
 %changelog
+* Fri Sep 11 2015 David Scott <dave.scott@citrix.com> - 0.27-1
+- Update to 0.27
+
 * Wed Sep 09 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.26-2
 - Fix duplicate packaging of xapi python library
 
