@@ -2,8 +2,8 @@
 
 Summary: Simple LVM storage adapter for xapi
 Name:    ezlvm
-Version: 0.5
-Release: 1%{?dist}
+Version: 0.5.1
+Release: 2%{?dist}
 License: LGPL
 URL:     https://github.com/xapi-project/ezlvm
 Source0: https://github.com/xapi-project/ezlvm/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -29,6 +29,7 @@ Requires: ocaml-cmdliner-devel
 Requires: ocaml-uri-devel
 Requires: ocamlscript
 Requires: ocaml-ounit-devel
+Requires: xapi-storage-datapath-plugins
 
 %description
 Simple LVM storage adapter for xapi
@@ -53,8 +54,9 @@ done
 %{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.ezlvm/*
 
 %changelog
-* Tue Sep 15 2015 David Scott <dave.scott@citrix.com> - 0.5-1
-- Update to 0.5
+* Tue Sep 15 2015 David Scott <dave.scott@citrix.com> - 0.5.1-2
+- Update to 0.5.1
+- Add dependency on xapi-storage-datapath-plugins
 
 * Fri Feb  6 2015 David Scott <dave.scott@citrix.com> - 0.4-1
 - Update to 0.4
