@@ -2,7 +2,7 @@
 
 Summary: Simple LVM storage adapter for xapi
 Name:    ezlvm
-Version: 0.4
+Version: 0.5
 Release: 1%{?dist}
 License: LGPL
 URL:     https://github.com/xapi-project/ezlvm
@@ -37,25 +37,25 @@ Simple LVM storage adapter for xapi
 %setup -q -n %{name}-%{version}
 
 %build
-cd volume
+cd src
 for i in SR* Volume* Plugin*; do ./$i --help > /dev/null; done
 
 %install
-cd volume
-DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ezlvm make install
+DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script make install
 echo Now installing compiled files
+cd src
 for i in *.exe; do
   echo Installing $i
-  install -m 0755 $i %{buildroot}%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ezlvm/$i
+  install -m 0755 $i %{buildroot}%{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.ezlvm/$i
 done
-cd ../datapath
-DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/datapath/block make install
 
 %files
-%{_libexecdir}/xapi-storage-script/volume/org.xen.xcp.storage.ezlvm/*
-%{_libexecdir}/xapi-storage-script/datapath/block/*
+%{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.ezlvm/*
 
 %changelog
+* Tue Sep 15 2015 David Scott <dave.scott@citrix.com> - 0.5-1
+- Update to 0.5
+
 * Fri Feb  6 2015 David Scott <dave.scott@citrix.com> - 0.4-1
 - Update to 0.4
 
