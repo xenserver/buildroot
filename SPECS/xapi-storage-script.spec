@@ -3,7 +3,7 @@
 Summary: Xapi storage script plugin server
 Name:    xapi-storage-script
 Version: 0.12.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPL+linking exception
 URL:     https://github.com/xapi-project/xapi-storage-script
 Source0: https://github.com/xapi-project/xapi-storage-script/archive/v%{version}/%{name}-%{version}.tar.gz
@@ -68,6 +68,9 @@ fi
 %{_mandir}/man2/xapi-storage-script.1.gz
 
 %changelog
+* Tue Sep 15 2015 David Scott <dave.scott@citrix.com> - 0.12.0-2
+- Bump release
+
 * Wed Sep  9 2015 David Scott <dave.scott@citrix.com> - 0.12.0-1
 - Update to 0.12.0
 
