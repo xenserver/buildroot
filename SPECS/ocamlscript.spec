@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 
 Name:           ocamlscript
-Version:        2.0.3
+Version:        2.0.4
 Release:        1%{?dist}
 Summary:        OCamlscript is a tool which compiles OCaml scripts into native code, thus combining mthe flexibility of scripts and the speed provided by ocamlopt.
 License:        Boost
@@ -32,7 +32,7 @@ ocamlfind install ocamlscript META ocamlscript.cmi ocamlscript.cmo ocamlscript.c
 
 %files
 %doc Changes
-%doc README
+%doc README.md
 %{_bindir}/ocamlscript
 %{_libdir}/ocaml/ocamlscript
 %{_libdir}/ocaml/ocamlscript/META
@@ -42,5 +42,8 @@ ocamlfind install ocamlscript META ocamlscript.cmi ocamlscript.cmo ocamlscript.c
 %{_libdir}/ocaml/ocamlscript/ocamlscript.o
 
 %changelog
+* Tue Sep 15 2015 David Scott <dave.scott@citrix.com> - 2.0.4-1
+- Update to 2.0.4
+
 * Sun Jul 20 2014 David Scott <dave.scott@citrix.com> - 2.0.3-1
 - Initial package
