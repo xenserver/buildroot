@@ -18,6 +18,7 @@ Requires:       sm-cli
 Requires:       xcp-sm
 Requires:       xapi-storage-script
 Requires:       xapi-storage-datapath-plugins
+Requires:       ezlvm
 Requires:       xcp-networkd
 Requires:       xcp-rrdd
 Requires:       squeezed
