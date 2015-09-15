@@ -2,7 +2,7 @@
 
 Summary: Simple LVM storage adapter for xapi
 Name:    ezlvm
-Version: 0.5.2
+Version: 0.5.3
 Release: 1%{?dist}
 License: LGPL
 URL:     https://github.com/xapi-project/ezlvm
@@ -54,8 +54,8 @@ done
 %{_libexecdir}/xapi-storage-script/volume/org.xen.xapi.storage.ezlvm/*
 
 %changelog
-* Tue Sep 15 2015 David Scott <dave.scott@citrix.com> - 0.5.2-1
-- Update to 0.5.2
+* Tue Sep 15 2015 David Scott <dave.scott@citrix.com> - 0.5.3-1
+- Update to 0.5.3
 - Add dependency on xapi-storage-datapath-plugins
 
 * Fri Feb  6 2015 David Scott <dave.scott@citrix.com> - 0.4-1
