@@ -1,7 +1,7 @@
 Summary:       Xapi storage interface
 Name:          xapi-storage
 Version:       0.8
-Release:       1%{?dist}
+Release:       3%{?dist}
 URL:           https://github.com/xapi-project/xapi-storage
 Source0:       https://github.com/xapi-project/xapi-storage/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch0:        xapi-storage.patch
@@ -59,9 +59,13 @@ export DESTDIR=$RPM_BUILD_ROOT
 export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
 ocaml setup.ml -install
-cd ../python/xapi/storage/api
+cd ../python/xapi
+mkdir -p %{buildroot}%{python_sitelib}/xapi
+cp __init__.py  %{buildroot}%{python_sitelib}/xapi/
+mkdir -p %{buildroot}%{python_sitelib}/xapi/storage
+cp storage/__init__.py storage/log.py storage/common.py %{buildroot}%{python_sitelib}/xapi/storage
 mkdir -p %{buildroot}%{python_sitelib}/xapi/storage/api
-cp __init__.py datapath.py volume.py plugin.py %{buildroot}%{python_sitelib}/xapi/storage/api
+cp storage/api/__init__.py storage/api/datapath.py storage/api/volume.py storage/api/plugin.py %{buildroot}%{python_sitelib}/xapi/storage/api
 
 %files
 %defattr(-,root,root,-)
@@ -69,6 +73,10 @@ cp __init__.py datapath.py volume.py plugin.py %{buildroot}%{python_sitelib}/xap
 %exclude %{_libdir}/ocaml/xapi-storage/*.a
 %exclude %{_libdir}/ocaml/xapi-storage/*.cmxa
 %exclude %{_libdir}/ocaml/xapi-storage/*.ml
+%{python_sitelib}/xapi/__init__.py*
+%{python_sitelib}/xapi/storage/__init__.py*
+%{python_sitelib}/xapi/storage/common.py*
+%{python_sitelib}/xapi/storage/log.py*
 %{python_sitelib}/xapi/storage/api/datapath.py*
 %{python_sitelib}/xapi/storage/api/volume.py*
 %{python_sitelib}/xapi/storage/api/plugin.py*
@@ -81,7 +89,7 @@ cp __init__.py datapath.py volume.py plugin.py %{buildroot}%{python_sitelib}/xap
 %{_libdir}/ocaml/xapi-storage/*.ml
 
 %changelog
-* Fri Sep 11 2015 David Scott <dave.scott@citrix.com> - 0.8-1
+* Fri Sep 11 2015 David Scott <dave.scott@citrix.com> - 0.8-3
 - Update to 0.8
 
 * Wed Sep  9 2015 David Scott <dave.scott@citrix.com> - 0.7-1
