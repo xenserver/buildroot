@@ -1,5 +1,5 @@
 Name:           xapi-storage-datapath-plugins
-Version:        0.1
+Version:        0.2
 Release:        1%{?dist}
 Summary:        Storage datapath plugins for the xapi toolstack
 License:        LGPL
@@ -25,9 +25,13 @@ DESTDIR=%{buildroot} SCRIPTDIR=%{_libexecdir}/xapi-storage-script/ PYTHONDIR=/us
 %{_libexecdir}/xapi-storage-script/datapath/vhd+file
 %{_libexecdir}/xapi-storage-script/datapath/loop+blkback/*
 %{_libexecdir}/xapi-storage-script/datapath/tapdisk/*
+%{_libexecdir}/xapi-storage-script/datapath/raw+block/*
 /usr/lib/python2.7/site-packages/xapi/storage/datapath/*.py*
 
 %changelog
+* Tue Sep 15 2015 David Scott <dave.scott@citrix.com> - 0.2-1
+- Update to 0.2
+
 * Fri Sep 11 2015 David Scott <dave.scott@citrix.com> - 0.1-1
 - Initial package
 
