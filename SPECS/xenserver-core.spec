@@ -24,7 +24,7 @@ Requires:       xcp-rrdd
 Requires:       squeezed
 Requires:       linux-guest-loader
 Requires:       xen
-
+Requires:       busybox
 %description
 A virtual package which installs the xapi toolstack.
 
