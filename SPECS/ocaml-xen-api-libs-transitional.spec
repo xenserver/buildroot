@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-xen-api-libs-transitional
-Version:        0.9.8
-Release:        2%{?dist}
+Version:        0.9.9
+Release:        1%{?dist}
 Summary:        Deprecated standard library extension for OCaml
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/xen-api-libs-transitional
@@ -50,14 +50,6 @@ make install DESTDIR=$OCAMLFIND_DESTDIR
 %doc ChangeLog 
 %doc LICENSE
 %doc README.md 
-
-%{_libdir}/ocaml/cpuid
-%exclude %{_libdir}/ocaml/cpuid/*.a
-%exclude %{_libdir}/ocaml/cpuid/*.cmxa
-%exclude %{_libdir}/ocaml/cpuid/*.cmx
-%exclude %{_libdir}/ocaml/cpuid/*.mli
-%{_libdir}/ocaml/stublibs/dllcpuid_stubs.so
-%{_libdir}/ocaml/stublibs/dllcpuid_stubs.so.owner
 
 %{_libdir}/ocaml/gzip
 %exclude %{_libdir}/ocaml/gzip/*.a
@@ -114,12 +106,6 @@ make install DESTDIR=$OCAMLFIND_DESTDIR
 %exclude %{_libdir}/ocaml/xenstore-compat/*.cmxa
 %exclude %{_libdir}/ocaml/xenstore-compat/*.cmx
 
-%{_libdir}/ocaml/xen-utils
-%exclude %{_libdir}/ocaml/xen-utils/*.a
-%exclude %{_libdir}/ocaml/xen-utils/*.cmxa
-%exclude %{_libdir}/ocaml/xen-utils/*.cmx
-%exclude %{_libdir}/ocaml/xen-utils/*.mli
-
 %{_libdir}/ocaml/xml-light2
 %exclude %{_libdir}/ocaml/xml-light2/*.a
 %exclude %{_libdir}/ocaml/xml-light2/*.cmxa
@@ -128,11 +114,6 @@ make install DESTDIR=$OCAMLFIND_DESTDIR
 
 
 %files devel
-%{_libdir}/ocaml/cpuid/*.a
-%{_libdir}/ocaml/cpuid/*.cmxa
-%{_libdir}/ocaml/cpuid/*.cmx
-%{_libdir}/ocaml/cpuid/*.mli
-
 %{_libdir}/ocaml/gzip/*.a
 %{_libdir}/ocaml/gzip/*.cmxa
 %{_libdir}/ocaml/gzip/*.cmx
@@ -177,17 +158,16 @@ make install DESTDIR=$OCAMLFIND_DESTDIR
 %{_libdir}/ocaml/xenstore-compat/*.cmxa
 %{_libdir}/ocaml/xenstore-compat/*.cmx
 
-%{_libdir}/ocaml/xen-utils/*.a
-%{_libdir}/ocaml/xen-utils/*.cmxa
-%{_libdir}/ocaml/xen-utils/*.cmx
-%{_libdir}/ocaml/xen-utils/*.mli
-
 %{_libdir}/ocaml/xml-light2/*.a
 %{_libdir}/ocaml/xml-light2/*.cmxa
 %{_libdir}/ocaml/xml-light2/*.cmx
 %{_libdir}/ocaml/xml-light2/*.mli
 
 %changelog
+* Fri Dec 11 2015 Euan Harris <euan.harris@citrix.com> - 0.9.9-1
+- Remove cpuid
+- Remove xen-utils
+
 * Wed Sep 9 2015 Jon Ludlam <jonathan.ludlam@citrix.com> - 0.9.8-2
 - Bump release
 
