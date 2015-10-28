@@ -1,8 +1,8 @@
 %global debug_package %{nil}
 
 Name:           ocaml-qmp
-Version:        0.9.2
-Release:        2%{?dist}
+Version:        0.9.3
+Release:        1%{?dist}
 Summary:        Pure OCaml implementation of the Qemu Message Protocol (QMP)
 License:        LGPL2.1 + OCaml linking exception
 URL:            https://github.com/xapi-project/ocaml-qmp
@@ -10,7 +10,7 @@ Source0:        https://github.com/xapi-project/%{name}/archive/%{version}/%{nam
 BuildRequires:  ocaml
 BuildRequires:  ocaml-cmdliner-devel
 BuildRequires:  ocaml-findlib
-BuildRequires:  ocaml-obuild
+BuildRequires:  oasis
 BuildRequires:  ocaml-ounit-devel
 BuildRequires:  ocaml-yojson-devel
 
@@ -54,6 +54,9 @@ make install DESTDIR=%{buildroot}/%{_libdir}/ocaml
 %{_libdir}/ocaml/qmp/*.cmxa
 
 %changelog
+* Wed Oct 28 2015 Si Beaumont <simon.beaumont@citrix.com> - 0.9.3-1
+- Package is now built using Oasis.
+
 * Fri May 30 2014 Euan Harris <euan.harris@citrix.com> - 0.9.2-2
 - Split files correctly between base and devel packages
 
