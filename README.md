@@ -33,7 +33,7 @@ run mock as. Type the following as root:
 useradd <user> -G mock
 passwd <user>
 
-su - <user>
+su --login <user>
 ```
 
 You are now ready to clone the buildroot repository and build the packages:
