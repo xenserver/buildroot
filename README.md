@@ -18,10 +18,10 @@ enable EPEL, type the following as root:
 yum install -y epel-release
 ```
 
-After adding EPEL, install and set up mock:
+After adding EPEL, install a couple of prerequisites:
 
 ```
-yum install -y mock redhat-lsb-core
+yum install -y mock redhat-lsb-core centos-release-xen
 ```
 
 Mock will refuse to run as root. You must choose a non-privileged user to
@@ -33,7 +33,7 @@ run mock as. Type the following as root:
 useradd <user> -G mock
 passwd <user>
 
-su - <user>
+su --login <user>
 ```
 
 You are now ready to clone the buildroot repository and build the packages:
@@ -84,7 +84,7 @@ Some distros get more attention that others and are likely to work better, on av
 Here are the distros which are being actively used:
 
 - Ubuntu-14.04: @djs55
-- CentOS 6.5: @euanh
+- CentOS 7: @euanh
 
 If you are actively using a distro and feel able to fix bugs in it, please add yourself
 to the list.
