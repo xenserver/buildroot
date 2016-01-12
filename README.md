@@ -18,10 +18,10 @@ enable EPEL, type the following as root:
 yum install -y epel-release
 ```
 
-After adding EPEL, install and set up mock:
+After adding EPEL, install a couple of prerequisites:
 
 ```
-yum install -y mock redhat-lsb-core
+yum install -y mock redhat-lsb-core centos-release-xen
 ```
 
 Mock will refuse to run as root. You must choose a non-privileged user to
